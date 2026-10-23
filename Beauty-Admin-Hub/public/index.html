@@ -139,25 +139,35 @@
 
       <section class="system-health">
 
-        <div class="health-card">
+        <div class="health-card" id="nakkaHealthCard" aria-busy="false">
 
           <span class="label">
             NAKKA API
           </span>
 
-          <div class="health-status">
+          <div class="health-status" role="status" aria-live="polite" aria-atomic="true">
             <span
               id="nakkaHealthDot"
               class="health-dot waiting">
             </span>
 
             <strong id="nakkaHealthText">
-              NOT CONNECTED
+              NOT CHECKED
             </strong>
           </div>
 
           <p id="nakkaHealthMessage">
             Health check waiting
+          </p>
+
+          <div class="health-actions">
+            <time id="nakkaHealthTimestamp">No check completed</time>
+            <button id="nakkaHealthRefresh" type="button">REFRESH</button>
+          </div>
+
+          <p class="health-note">
+            League read access only. Refreshes every 5 minutes while visible;
+            results may be cached for 60 seconds.
           </p>
 
         </div>
@@ -194,6 +204,7 @@
 
 
   <script src="js/app.js"></script>
+  <script src="js/nakka-health.js"></script>
 
 </body>
 </html>

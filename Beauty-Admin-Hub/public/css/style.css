@@ -557,6 +557,49 @@ button {
 .health-dot.problem {
   background: var(--red);
 }
+
+.health-dot.degraded {
+  background: var(--gold);
+}
+
+.health-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.health-actions time {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.health-actions button {
+  padding: 7px 12px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: var(--panel-light);
+  color: var(--white);
+  font-size: 12px;
+}
+
+.health-actions button:hover:not(:disabled),
+.health-actions button:focus-visible {
+  border-color: var(--gold);
+}
+
+.health-actions button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.health-card .health-note {
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.5;
+}
 /* ======================================================
    HEADER RIGHT
    ====================================================== */

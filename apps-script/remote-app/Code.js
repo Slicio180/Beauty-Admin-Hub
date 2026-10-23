@@ -176,6 +176,13 @@ function doGet(e) {
         ).toLowerCase()
       : '';
 
+  // Independent, read-only check. Never enters a registration/status flow.
+  if (requestedPage === 'nakkahealth') {
+    return ContentService
+      .createTextOutput(JSON.stringify(getNakkaHealth_()))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
 
   /*
   ========================================================
@@ -3610,5 +3617,162 @@ function updateBeautyHubPlayerStatus(
     success: true,
     player: cleanName,
     status: cleanStatus
+  };
+}
+
+
+/*
+NAKKA HEALTH — READ ONLY
+
+One fixed league GET, no retries and no Sheets/Form access.
+Cache all outcomes for 60 seconds across Hub clients. Only health
+checks take this lock; they never wait for another check to finish.
+*/
+function getNakkaHealth_() {
+  let lock;
+  let locked = false;
+
+  try {
+    const cache = CacheService.getScriptCache();
+    const cacheKey = 'beauty:nakka-health:v1';
+    const cached = cache.get(cacheKey);
+
+    if (cached) {
+      return JSON.parse(cached);
+    }
+
+    lock = LockService.getScriptLock();
+    locked = lock.tryLock(0);
+
+    if (!locked) {
+      return nakkaHealthResult_(
+        'DEGRADED',
+        'A Nakka check is already running. Refresh shortly.'
+      );
+    }
+
+    // Another health check may have completed before we acquired the lock.
+    const latest = cache.get(cacheKey);
+    if (latest) {
+      return JSON.parse(latest);
+    }
+
+    const health = checkNakkaLeagueHealth_();
+
+    try {
+      cache.put(cacheKey, JSON.stringify(health), 60);
+    } catch (error) {
+      // A cache write failure must not discard the observed health result.
+    }
+
+    return health;
+  } catch (error) {
+    // Never return exception text: it may contain request/authentication data.
+    return nakkaHealthResult_(
+      'UNAVAILABLE',
+      'The Nakka health check could not be completed.'
+    );
+  } finally {
+    if (locked) {
+      try {
+        lock.releaseLock();
+      } catch (error) {
+        // The health response must also survive a lock-service failure.
+      }
+    }
+  }
+}
+
+function checkNakkaLeagueHealth_() {
+  const properties = PropertiesService.getScriptProperties();
+  const apiUser = properties.getProperty('N01_API_USER');
+  const apiPassword = properties.getProperty('N01_API_PASSWORD');
+
+  if (!apiUser || !apiPassword) {
+    return nakkaHealthResult_(
+      'UNAVAILABLE',
+      'Nakka API credentials are not configured.'
+    );
+  }
+
+  let response;
+
+  try {
+    response = UrlFetchApp.fetch(
+      'https://push.n01darts.com/api/v1/league/entry/list?lgid=lg_tM2v_3523',
+      {
+        method: 'get',
+        headers: {
+          Authorization: 'Basic ' + Utilities.base64Encode(apiUser + ':' + apiPassword)
+        },
+        muteHttpExceptions: true,
+        followRedirects: false
+      }
+    );
+  } catch (error) {
+    // UrlFetchApp has no configurable request timeout. Catch its native errors;
+    // the Hub separately bounds how long it waits for this endpoint.
+    const timedOut = /timeout|timed\s*out|deadline/i.test(
+      String(error && error.message ? error.message : error)
+    );
+
+    return nakkaHealthResult_(
+      'UNAVAILABLE',
+      timedOut
+        ? 'The Nakka request timed out. Try again later.'
+        : 'Nakka could not be reached. Try again later.'
+    );
+  }
+
+  const code = response.getResponseCode();
+
+  if (code === 401 || code === 403) {
+    return nakkaHealthResult_(
+      'UNAVAILABLE',
+      'Nakka authentication failed (HTTP ' + code + ').'
+    );
+  }
+
+  if (code === 408 || code === 504) {
+    return nakkaHealthResult_(
+      'UNAVAILABLE',
+      'The Nakka request timed out (HTTP ' + code + ').'
+    );
+  }
+
+  if (code !== 200) {
+    return nakkaHealthResult_(
+      'DEGRADED',
+      code === 429
+        ? 'Nakka is limiting requests. Try again later.'
+        : 'Nakka league access failed (HTTP ' + code + ').'
+    );
+  }
+
+  let data;
+  try {
+    data = JSON.parse(response.getContentText());
+  } catch (error) {
+    return nakkaHealthResult_(
+      'DEGRADED',
+      'Nakka returned an unreadable league response.'
+    );
+  }
+
+  if (!data || data.result !== 0 || !Array.isArray(data.list)) {
+    return nakkaHealthResult_(
+      'DEGRADED',
+      'Nakka did not confirm access to the expected league.'
+    );
+  }
+
+  return nakkaHealthResult_('OK', 'Nakka is reachable and the expected league is readable.');
+}
+
+function nakkaHealthResult_(status, message) {
+  return {
+    status: status,
+    message: message,
+    timestamp: new Date().toISOString()
   };
 }
