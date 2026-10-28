@@ -16,6 +16,20 @@ function beautyHubTransferError_(code) { const e=new Error(code);e.name='HubTran
 function beautyHubTransferHash_(value) {
   return Utilities.base64EncodeWebSafe(Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256,JSON.stringify(value))).replace(/=+$/,'');
 }
+// A staff review confirms current presence, not attribution of an old uncertain POST.
+// Keep the ATTEMPTED journal byte-for-byte; never make missing-entry retries eligible.
+function beautyHubTransferReviewMatch_(prior,state) {
+  if(!prior||!state.existing)return false;
+  try{
+    const old=JSON.parse(prior),props=PropertiesService.getScriptProperties();
+    const text=props.getProperty('BEAUTY_NAKKA_REVIEW_'+state.event.id+'_'+state.identity.lpid),r=JSON.parse(text||'null');
+    return old.state==='ATTEMPTED'&&old.event?.id===state.event.id&&old.event?.date===state.event.date&&old.identity?.name===state.identity.name&&old.identity?.lpid===state.identity.lpid&&
+      r?.kind==='STAFF_REVIEWED_CURRENT_ENTRY'&&r.journalHash===beautyHubTransferHash_(prior)&&r.event?.id===state.event.id&&r.event?.date===state.event.date&&
+      r.identity?.name===state.identity.name&&r.identity?.lpid===state.identity.lpid&&r.tpid===state.existing.tpid&&state.existing.name===state.identity.name&&
+      (!state.existing.lpid||state.existing.lpid===state.identity.lpid)&&typeof r.uid==='string'&&!!r.uid&&typeof r.reviewedUTC==='string'&&Number.isFinite(Date.parse(r.reviewedUTC))&&
+      typeof r.auditKey==='string'&&/^BEAUTY_NAKKA_REVIEW_HISTORY_[a-f0-9]{32}$/.test(r.auditKey)&&props.getProperty(r.auditKey)===text;
+  }catch(e){return false;}
+}
 function beautyHubTransferFetch_(path,authorization,payload) {
   const options={method:payload?'post':'get',headers:{Authorization:authorization},muteHttpExceptions:true,followRedirects:false};
   if(payload){options.contentType='application/json';options.payload=JSON.stringify(payload);}
@@ -88,7 +102,7 @@ function beautyHubNakkaTransferRun_(action,input) {
      (action==='save'&&(input.confirmed!=='true'||!/^[a-f0-9]{32}$/.test(input.ticket))))return fail('INVALID_TRANSFER');
   if(BEAUTY_HUB_NAKKA_TRANSFER_ENABLED_!==true||BEAUTY_IDENTITY_WRITES_ENABLED_!==true)return fail('TRANSFER_DISABLED');
   const lock=LockService.getScriptLock();if(!lock.tryLock(5000))return fail('TRANSFER_BUSY');
-  let attempted=false,journal=null;
+  let attempted=false,reviewWriting=false,journal=null;
   try{
     const account=beautyHubNakkaAuthorize_(input.player),props=PropertiesService.getScriptProperties();
     const user=props.getProperty('N01_API_USER'),password=props.getProperty('N01_API_PASSWORD');
@@ -104,6 +118,7 @@ function beautyHubNakkaTransferRun_(action,input) {
     }
     const state=beautyHubTransferState_(input.player,authorization);
     journal='BEAUTY_NAKKA_TRANSFER_'+BEAUTY_HUB_NAKKA_TEST_EVENT_+'_'+state.identity.lpid;
+    if(action==='save'&&reviewed.intent==='REVIEW_EXISTING'&&reviewed.version!==beautyHubTransferHash_({state,prior:props.getProperty(journal)}))return fail('STALE_TRANSFER');
     const creation=props.getProperty('BEAUTY_NAKKA_LEAGUE_CREATE_lg_tM2v_3523_'+beautyHubTransferHash_(input.player.normalize('NFC').trim().replace(/\s+/g,' ').toLocaleLowerCase('sv-SE')));
     if(creation){let old;try{old=JSON.parse(creation);}catch(e){}if(old?.state!=='VERIFIED'||old.name!==input.player||old.lpid!==state.identity.lpid)return fail('LEAGUE_CREATION_REVIEW_REQUIRED');}
     let prior=props.getProperty(journal);
@@ -122,6 +137,10 @@ function beautyHubNakkaTransferRun_(action,input) {
         // Read-only reconciliation of an old uncertain attempt. Presence is
         // independent of attributing the POST or proving an unexposed LPID.
         const existing=state.existing;
+        const manual=beautyHubTransferReviewMatch_(prior,state);
+        if(manual)return {success:true,status:'CURRENT_ENTRY_REVIEWED',changed:false,readbackVerified:true,identityVerified:existing.lpid===state.identity.lpid,
+          operationVerified:false,event:state.event,identity:state.identity,tpid:existing.tpid,journal,
+          message:'The existing event entry has been reviewed. No player was added. The original uncertain attempt is retained; this does not prove what saved that earlier entry.'};
         if(existing&&old.event?.id===state.event.id&&old.event?.date===state.event.date&&
            old.identity?.name===state.identity.name&&old.identity?.lpid===state.identity.lpid&&
            Number.isInteger(old.beforeCount)&&old.beforeCount>=0&&state.entries.length===old.beforeCount+1&&
@@ -130,6 +149,35 @@ function beautyHubNakkaTransferRun_(action,input) {
           return {success:true,status:'PRESENT_AFTER_ATTEMPT',changed:false,readbackVerified:true,identityVerified:linked,
             operationVerified:false,event:state.event,identity:state.identity,tpid:existing.tpid,journal,
             message:linked?'The player is present with the reviewed league link. Previous entries match the saved fingerprint. No new add was sent; the original attempt record is retained.':'The player is present in the TEST event and previous entries match the saved fingerprint. No new add was sent. The API does not expose the league link, so its exact ID remains unverified; the original attempt record is retained.'};
+        }
+        // Only an authenticated organiser can acknowledge a current existing entry.
+        // Public registration contexts cannot create or confirm these review tickets.
+        if(existing&&beautyHubPlayerContext_===null&&old.event?.id===state.event.id&&old.event?.date===state.event.date&&
+           old.identity?.name===state.identity.name&&old.identity?.lpid===state.identity.lpid){
+          beautyHubAuthRequire_(beautyHubRequestToken_);
+          const version=beautyHubTransferHash_({state,prior});
+          if(action==='preview'){
+            const ticket=Utilities.getUuid().replace(/-/g,''),expires=Date.now()+300000;
+            cache.put('beauty-nakka-preview:'+ticket,JSON.stringify({uid:account.uid,session,player:input.player,version,expires,intent:'REVIEW_EXISTING'}),300);
+            return {success:true,status:'REVIEW_EXISTING',event:state.event,identity:state.identity,player:input.player,tpid:existing.tpid,journal,ticket,expires,
+              identityVerified:existing.lpid===state.identity.lpid,operationVerified:false,
+              message:'This player is already in the TEST event. Review the exact entry ID below. Confirmation records your review only: no Nakka add, deletion or Sheet change. The original uncertain transfer record is retained.'};
+          }
+          if(reviewed.intent!=='REVIEW_EXISTING'||reviewed.version!==version)return fail('STALE_TRANSFER');
+          const fresh=beautyHubTransferState_(input.player,authorization);
+          if(beautyHubTransferHash_({state:fresh,prior:props.getProperty(journal)})!==version)return fail('STALE_TRANSFER');
+          beautyHubAuthRequire_(beautyHubRequestToken_);
+          const r={kind:'STAFF_REVIEWED_CURRENT_ENTRY',reviewedUTC:new Date().toISOString(),uid:account.uid,event:state.event,identity:state.identity,tpid:existing.tpid,
+            journal,journalHash:beautyHubTransferHash_(prior),operationVerified:false,identityVerified:existing.lpid===state.identity.lpid,auditKey:'BEAUTY_NAKKA_REVIEW_HISTORY_'+input.ticket};
+          const text=JSON.stringify(r),key='BEAUTY_NAKKA_REVIEW_'+state.event.id+'_'+state.identity.lpid;
+          if(props.getProperty(r.auditKey))return fail('STALE_TRANSFER');
+          reviewWriting=true;props.setProperty(r.auditKey,text);
+          if(props.getProperty(r.auditKey)!==text)throw Error('review archive');
+          props.setProperty(key,text);
+          if(!beautyHubTransferReviewMatch_(prior,state)||props.getProperty(journal)!==prior)throw Error('review verification');
+          return {success:true,status:'CURRENT_ENTRY_REVIEWED',changed:false,readbackVerified:true,identityVerified:r.identityVerified,operationVerified:false,
+            event:state.event,identity:state.identity,tpid:existing.tpid,journal,review:r.auditKey,
+            message:r.identityVerified?'Current entry and league link reviewed. No player was added; the original uncertain transfer journal is retained.':'Current event entry reviewed. No player was added; the original uncertain transfer journal is retained. The API does not expose the saved league link, so its exact ID remains unverified here.'};
         }
         return fail('TRANSFER_REVIEW_REQUIRED',journal);
       }
@@ -140,6 +188,7 @@ function beautyHubNakkaTransferRun_(action,input) {
     if(state.existing)return {success:true,status:'ALREADY_PRESENT',changed:false,readbackVerified:true,event:state.event,identity:state.identity,
       identityVerified:state.existing.lpid===state.identity.lpid,
       message:state.existing.lpid===state.identity.lpid?'Already in this TEST event with the same league link. Nothing added.':'Already present in this TEST event. Nothing added. The API does not expose the league link, so its exact ID is not verified here.'};
+    if(action==='save'&&reviewed.intent==='REVIEW_EXISTING')return fail('STALE_TRANSFER');
     const version=beautyHubTransferHash_(state);
     if(action==='preview'){
       const ticket=Utilities.getUuid().replace(/-/g,''),expires=Date.now()+300000;
@@ -175,6 +224,7 @@ function beautyHubNakkaTransferRun_(action,input) {
     return {success:true,status:linked?'TRANSFERRED':'ENTRY_VERIFIED_LINK_UNEXPOSED',changed:true,readbackVerified:true,identityVerified:linked,event:state.event,identity:state.identity,tpid,journal,
       message:linked?'Added to the Nakka TEST event. New entry and existing league link verified; previous entries preserved.':'Added to the Nakka TEST event and the new entry is confirmed; previous entries are preserved. The reviewed league ID was sent, but the API does not expose the saved link for exact-ID verification. Do not add this player again.'};
   }catch(e){
+    if(reviewWriting)return {success:false,code:'REVIEW_SAVE_UNCERTAIN',journal,error:'The review record could not be fully verified. No Nakka add or deletion was sent. Check the saved attention state before reviewing again.'};
     if(e.name==='HubAuthError'&&!attempted)return {success:false,code:'AUTH_REQUIRED',error:'Sign in to continue.'};
     return fail(attempted?'TRANSFER_UNCERTAIN':e.name==='HubTransferError'?e.message:'TRANSFER_FAILED',journal);
   }finally{lock.releaseLock();}

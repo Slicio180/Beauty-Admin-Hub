@@ -10,7 +10,7 @@ function beautyHubAttentionRemember_(name,date,result) {
   try {
     beautyHubTestGuard_();
     if(typeof name!=='string'||!name.trim()||name.length>120||!/^20\d\d-\d\d-\d\d$/.test(date))return false;
-    const confirmed=result?.entryConfirmed===true||(result?.success===true&&result.readbackVerified===true&&['ALREADY_PRESENT','TRANSFERRED','ENTRY_VERIFIED_LINK_UNEXPOSED','PRESENT_AFTER_ATTEMPT','REMOVED'].includes(result.status));
+    const confirmed=result?.entryConfirmed===true||(result?.success===true&&result.readbackVerified===true&&['ALREADY_PRESENT','TRANSFERRED','ENTRY_VERIFIED_LINK_UNEXPOSED','PRESENT_AFTER_ATTEMPT','CURRENT_ENTRY_REVIEWED','REMOVED'].includes(result.status));
     const record={name,date,state:confirmed?'CLEAR':'ATTENTION',code:confirmed?'ENTRY_CONFIRMED':String(result?.code||'ENTRY_UNCONFIRMED').replace(/[^A-Z_]/g,'').slice(0,60),checkedAt:new Date().toISOString()};
     const props=PropertiesService.getScriptProperties(),key=beautyHubAttentionKey_(date,name),text=JSON.stringify(record);
     props.setProperty(key,text);return props.getProperty(key)===text;
@@ -75,7 +75,8 @@ function beautyHubAttentionRefresh_(input) {
           const t=JSON.parse(transfer);
           if(t.event?.id!==BEAUTY_HUB_NAKKA_TEST_EVENT_||t.event?.date!==date||t.identity?.name!==name||t.identity?.lpid!==l[0].lpid)code='TRANSFER_REVIEW_REQUIRED';
           else if(t.state==='ATTEMPTED'){
-            if(!Number.isInteger(t.beforeCount)||entries.length!==t.beforeCount+1||beautyHubTransferHash_(entries.filter(r=>r.tpid!==e[0].tpid))!==t.beforeHash)code='TRANSFER_REVIEW_REQUIRED';
+            if((!Number.isInteger(t.beforeCount)||entries.length!==t.beforeCount+1||beautyHubTransferHash_(entries.filter(r=>r.tpid!==e[0].tpid))!==t.beforeHash)&&
+              !beautyHubTransferReviewMatch_(transfer,{event:{id:BEAUTY_HUB_NAKKA_TEST_EVENT_,date},identity:{name,lpid:l[0].lpid},existing:e[0]}))code='TRANSFER_REVIEW_REQUIRED';
           }else if(!['VERIFIED','ENTRY_VERIFIED_LINK_UNEXPOSED'].includes(t.state)||t.tpid!==e[0].tpid)code='TRANSFER_REVIEW_REQUIRED';
         }
       }

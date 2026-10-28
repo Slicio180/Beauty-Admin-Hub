@@ -265,5 +265,13 @@
     "evidenceLabel": "LOCAL TESTS",
     "source": "Owner 28 October 2026: Hub and Nakka event removal, AIK Siffror, orange STANDBY",
     "acceptance": "Authenticated one-use preview bound to event, session and snapshot; exact event tpid; pre-start and no bracket placement; immutable backup and durable attempt marker; verify Nakka before clearing registration; no automatic retry; league/master profiles retained; native review pending."
+  },
+  {
+    "id": "HUB-REVIEW-001",
+    "requirement": "Explicit staff review may acknowledge a current existing entry after uncertain historical transfer without provider mutation or journal replacement",
+    "priority": "Critical",
+    "evidenceLabel": "LOCAL TESTS",
+    "source": "Owner Adam Pettersson ATTEMPTED record and native current entry, 28 October 2026",
+    "acceptance": "Exact current event/player/league/tpid preview, expiring session-bound one-use confirmation, immutable staff review receipt bound to original journal hash, no Nakka POST or Sheet change, retain ATTEMPTED record, never enable retry if entry disappears."
   }
 ]

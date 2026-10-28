@@ -4857,28 +4857,31 @@ if (typeof module !== 'undefined') module.exports = BeautyEventDateGuard;
         const result=await request('nakkatransferpreview',{player:select.value});
         if(ticket!==generation||!dialog)return;
         output.replaceChildren();output.append(make('p',result.error||result.message||'Preview unavailable.'));
-        if(!result.success||result.status!=='PREVIEW')return;
+        if(!result.success||!['PREVIEW','REVIEW_EXISTING'].includes(result.status))return;
+        const existingReview=result.status==='REVIEW_EXISTING';
         prepared=result;
         output.append(make('p','Event: '+result.event.title+' · '+result.event.date+' · '+result.event.id));
         output.append(make('p','Hub player: '+result.player));
         output.append(make('p','Existing league player: '+result.identity.name+' · LPID: '+result.identity.lpid));
+        if(existingReview)output.append(make('p','Current Nakka event entry ID: '+result.tpid));
         const ackLabel=make('label');ack=make('input');ack.type='checkbox';
-        ackLabel.append(ack,make('span','I have checked that this is the correct league player and TEST event.'));
-        confirm=make('button','ADD THIS PLAYER TO TEST EVENT');confirm.type='button';confirm.disabled=true;
+        ackLabel.append(ack,make('span',existingReview?'I have checked this existing event entry and league player. Record my review without adding or removing anyone.':'I have checked that this is the correct league player and TEST event.'));
+        confirm=make('button',existingReview?'CONFIRM EXISTING ENTRY':'ADD THIS PLAYER TO TEST EVENT');confirm.type='button';confirm.disabled=true;
         ack.addEventListener('change',()=>{confirm.disabled=!ack.checked||!prepared;});
         confirm.addEventListener('click',async()=>{
           if(!prepared||!ack.checked||saving||signature()!==original)return;
           if(Date.now()>=prepared.expires){invalidate();output.textContent='Preview expired. Review again.';return;}
           const preview=prepared,saveTicket=++generation;prepared=null;saving=true;
           closeTile.disabled=close.disabled=select.disabled=review.disabled=ack.disabled=confirm.disabled=true;
-          output.append(make('p','Saving once. Do not retry or edit Nakka while this request is running.'));
+          output.append(make('p',existingReview?'Recording your review. No Nakka add or deletion will be sent.':'Saving once. Do not retry or edit Nakka while this request is running.'));
           try{
             const result=await request('nakkatransfersave',{player:preview.player,ticket:preview.ticket,confirmed:'true'});
             if(saveTicket!==generation||!dialog)return;
             output.replaceChildren();output.append(make('p',result.error||result.message||'No verified result. Inspect the TEST event before trying again.'));
-            if(result.journal)output.append(make('p','Journal: '+result.journal));
+            if(result.journal)output.append(make('p','Original journal retained: '+result.journal));
+            if(result.review)output.append(make('p','Review reference: '+result.review));
             if(result.status==='TRANSFERRED'&&(result.readbackVerified!==true||result.identityVerified!==true))output.append(make('p','Verification incomplete. Do not repeat this request.'));
-          }catch(e){if(saveTicket===generation&&dialog){output.textContent='No verified response. The player may have been added. Do not retry; inspect the Nakka TEST event and journal.';}}
+          }catch(e){if(saveTicket===generation&&dialog){output.textContent=existingReview?'Review result unavailable. This action does not add or delete Nakka players. Check the attention state before reviewing again.':'No verified response. The player may have been added. Do not retry; inspect the Nakka TEST event and journal.';}}
           finally{if(dialog===active){saving=false;closeTile.disabled=close.disabled=false;}observer.disconnect();}
         });
         output.append(ackLabel,confirm);

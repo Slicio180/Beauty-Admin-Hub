@@ -1,0 +1,62 @@
+[
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "0924dcd6ae323f11fa1f01776839245e1ecbc600b1a9c71c40588cae3f2df55e",
+    "after": "022efccc651cde67a5702ea6c2636268f7e39f8d25ee8413bfde6dd1d7f62708"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTestAttention.gs",
+    "before": "11f46a582176a36f672e7eabe6936bb4e1a52055dd35f203d77331d38d60e62c",
+    "after": "169ced3e2fb640287a83835d7271ceb4109eae3aa920b7867ce99ce4820ba457"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTestNakkaTransfer.gs",
+    "before": "6ed8b3b869bf94db6cfd9542d639ea03674fbd06aa518658bca2fb8d9b74ade5",
+    "after": "8a0babcbf7704d5cf1da22f19d425ea97b22ff7d520c1a33543d504f807c447a"
+  },
+  {
+    "path": "docs/handoff/current-entry-review-20261028.md",
+    "before": null,
+    "after": "21f926b5423c0479a01fc2df1207f3ee0d0ef0865dfd0c410cd5dd89bd07b82a"
+  },
+  {
+    "path": "docs/handoff/requirements.json",
+    "before": "729c173bd4926448a610849b92686cdb928b4135d5c075636183f149febbb9ab",
+    "after": "01257f7b59f5c6e2fa4b5c3b6275eaae45cd42f16c2a2f31c1b65afcb3038074"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "f30748cffb2ba9bad3f796829daf83a4fd9c7267c9a48a6d9fe412fa3c946043",
+    "after": "e42bc75200784d1753f0e50c93fb9312231944ee9b0d4b4f2a943cbd4527e283"
+  },
+  {
+    "path": "evidence/current-entry-review-20261028/inventory.txt",
+    "before": null,
+    "after": "497f5a87378f44d1942de4261e286eb4a7b30652e8158668aca47cacace13bee"
+  },
+  {
+    "path": "evidence/current-entry-review-20261028/tests.tap",
+    "before": null,
+    "after": "6d9f792b3d5583b1149da9d339253457da5cf16ef0cdb9e802079d5489b6afff"
+  },
+  {
+    "path": "public/js/hub-nakka-transfer.js",
+    "before": "6cfca1a05f66baab6425ade133cb235ec0c925e2addd47794eab7f7cc1d3e3cb",
+    "after": "a5c63f4c586e398beec759ee24eb294940262ec42815716bcc1be35662feccef"
+  },
+  {
+    "path": "tests/hub-nakka-transfer-ui.test.cjs",
+    "before": "6f5074ea5692a46e064f66c979c040db3c0a8e428a8bd3bf436646c23e5abec6",
+    "after": "8d2bbc872d649c8990ee65487691296e792d9cbbc3d9ff160dc014ae77e310ff"
+  },
+  {
+    "path": "tests/hub-nakka-transfer.test.cjs",
+    "before": "bef057e59951c0979bca93b4a4cd7f366fbf734e7b94e8f331bf4f5c7fe87f18",
+    "after": "5dc600fb085cb0ca1466b64c1fa894e99fa07770dd3c82b11a104fafce774707"
+  },
+  {
+    "path": "tests/transfer-current-entry-review.test.cjs",
+    "before": null,
+    "after": "bf433cf352e5d7c3c67e28a31aaae093fafb17153735d25c99ebb75b0686f6ef"
+  }
+]
