@@ -1,0 +1,42 @@
+[
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "9e3ab847ca5d28003d91027310f069c7f7a4f22f9d1f2d16ce537614d772cea9",
+    "after": "6f03b3891bcafb4e886f8a987fa6e730a462edc75afcf95eb8238ecf9d59ed53"
+  },
+  {
+    "path": "docs/handoff/pool-display-fix-20261028.md",
+    "before": null,
+    "after": "fbf6ec0c87d720ce6be9c75193389e59e95a29bf1a74c874c8b72b4bddb4e9b3"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "1d43d9a0a1cdae0b173690e627ec59011b665dc0eaf1b9cbd7b24acf10b3e18c",
+    "after": "549c86e4576e2dcac4bc99b839884e96fca6d4bd62fb30d0922fdaf35ed9c8a8"
+  },
+  {
+    "path": "evidence/pool-display-fix-20261028/all-tests.txt",
+    "before": null,
+    "after": "50f8359a099070ce639ba833fc435dbda009ba648291221e46a92ad8f7d84fec"
+  },
+  {
+    "path": "evidence/pool-display-fix-20261028/inventory.txt",
+    "before": null,
+    "after": "923e35e9623064def8f4639786aabf196f46974bb594624023b021ceb1471d01"
+  },
+  {
+    "path": "evidence/pool-display-fix-20261028/ui-tests.tap",
+    "before": null,
+    "after": "137698c74c08c46285eebd2d9cd0537c70d0255e179aff4bcf5f0bab9bae9258"
+  },
+  {
+    "path": "public/js/pool-planner-seeded.js",
+    "before": "ecaebe2fa944240080b58a5fbb1970b7b22e9661bb799a87acba51d89fae6439",
+    "after": "dc6bffb59bf129e45b0ed95e9f4d57fccb7e2b368d9576a2ad29cb8d797324cd"
+  },
+  {
+    "path": "tests/pool-planner-seeded-ui.test.cjs",
+    "before": "18fbbe94b7a1171df039ce27759cd333e425b4f3f725c1b139575669267c1aef",
+    "after": "4ad5ea02aa1733ca0166ec596e3c62614f73d042cfe4a8d2906936abbb61cc85"
+  }
+]

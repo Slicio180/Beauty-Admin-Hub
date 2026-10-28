@@ -1,0 +1,76 @@
+TAP version 13
+# Subtest: pool UI reviews mappings, renders frozen means and coverage, and does not send during generation
+ok 1 - pool UI reviews mappings, renders frozen means and coverage, and does not send during generation
+  ---
+  duration_ms: 16.356382
+  type: 'test'
+  ...
+# Subtest: pool UI manual swaps request server adjustment and retain no old approval
+ok 2 - pool UI manual swaps request server adjustment and retain no old approval
+  ---
+  duration_ms: 7.163893
+  type: 'test'
+  ...
+# Subtest: pool UI only sends after final approval and cannot double click while saving
+ok 3 - pool UI only sends after final approval and cannot double click while saving
+  ---
+  duration_ms: 6.175319
+  type: 'test'
+  ...
+# Subtest: pool UI withdrawals invalidate review and preserve visible frozen draw without silently redrawing
+ok 4 - pool UI withdrawals invalidate review and preserve visible frozen draw without silently redrawing
+  ---
+  duration_ms: 4.215779
+  type: 'test'
+  ...
+# Subtest: pool UI lock drops late response and clears identities and previews
+ok 5 - pool UI lock drops late response and clears identities and previews
+  ---
+  duration_ms: 2.962761
+  type: 'test'
+  ...
+# Subtest: pool UI provider timeout blocks repeat send and retains inspect-before-retry guidance
+ok 6 - pool UI provider timeout blocks repeat send and retains inspect-before-retry guidance
+  ---
+  duration_ms: 4.551494
+  type: 'test'
+  ...
+# Subtest: pool UI automatic refresh runs only while visible and invalidates expired frozen approval
+ok 7 - pool UI automatic refresh runs only while visible and invalidates expired frozen approval
+  ---
+  duration_ms: 4.777194
+  type: 'test'
+  ...
+# Subtest: pool TEST transport routes authenticated exact payloads and rejects target or extra-key injection
+ok 8 - pool TEST transport routes authenticated exact payloads and rejects target or extra-key injection
+  ---
+  duration_ms: 2.035896
+  type: 'test'
+  ...
+# Subtest: pool UI closing and reopening drops an old handoff approval while retaining the frozen reference
+ok 9 - pool UI closing and reopening drops an old handoff approval while retaining the frozen reference
+  ---
+  duration_ms: 2.955791
+  type: 'test'
+  ...
+# Subtest: pool UI renders omitted and null RPC averages as Unseeded and keeps measured zero numeric
+ok 10 - pool UI renders omitted and null RPC averages as Unseeded and keeps measured zero numeric
+  ---
+  duration_ms: 2.427966
+  type: 'test'
+  ...
+# Subtest: pool UI normalizes omitted frozen averages before pool means colours and manual review
+ok 11 - pool UI normalizes omitted frozen averages before pool means colours and manual review
+  ---
+  duration_ms: 2.060583
+  type: 'test'
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 145.842927

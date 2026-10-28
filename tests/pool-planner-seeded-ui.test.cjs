@@ -4,7 +4,7 @@ const clone=x=>JSON.parse(JSON.stringify(x));
 class Node{
  constructor(tag,owner){this.tag=tag;this.owner=owner;this.children=[];this.dataset={};this.events={};this.value='';this.disabled=false;this.checked=false;this.open=false;this._text='';}
  set textContent(t){this._text=String(t);this.children=[];}get textContent(){return this._text+this.children.map(c=>c.textContent).join(' ');}
- appendChild(n){n.parent=this;this.children.push(n);if(this.tag==='select'&&this.children.length===1)this._selected=0;return n;}
+ appendChild(n){n.parentElement=this;this.children.push(n);if(this.tag==='select'&&this.children.length===1)this._selected=0;return n;}
  append(...nodes){nodes.forEach(n=>this.appendChild(n));}replaceChildren(...nodes){this._text='';this.children=[];this.append(...nodes);}
  set value(v){this._value=String(v);}get value(){if(this.tag==='select'&&!this._value)return this.children[0]?.value||'';return this._value||'';}
  setAttribute(k,v){this[k]=v;}addEventListener(k,fn){(this.events[k]??=[]).push(fn);}
@@ -67,4 +67,15 @@ test('pool TEST transport routes authenticated exact payloads and rejects target
 });
 test('pool UI closing and reopening drops an old handoff approval while retaining the frozen reference',async()=>{
  const f=fixture();await f.load();await f.generate();await f.prepare();f.host.close();f.host.showModal();assert.equal(f.find('SEND APPROVED TEST POOLS'),undefined);assert.match(f.host.textContent,/REVIEW INVALIDATED/);assert.match(f.host.textContent,/Frozen/);assert.equal(f.requests.length,3);
+});
+
+test('pool UI renders omitted and null RPC averages as Unseeded and keeps measured zero numeric',async()=>{
+ const f=fixture();delete f.source.mappings[0].average;f.source.mappings[1].average=null;f.source.mappings[2].average=0;
+ await f.load();assert.match(f.host.textContent,/Unseeded/);assert.match(f.host.textContent,/0.00/);assert.ok(f.find('GENERATE SEEDED PREVIEW'));assert.doesNotMatch(f.notice(),/toFixed/);
+ const row=f.host.querySelectorAll('[data-binding]')[0];row.querySelector('[data-lpid]').value='L0';await row.querySelector('[data-lpid]').fire('change');assert.equal(f.host.querySelector('[data-mapping-reviewed]').checked,false);
+});
+test('pool UI normalizes omitted frozen averages before pool means colours and manual review',async()=>{
+ const f=fixture();await f.load();f.host.querySelector('[data-mapping-reviewed]').checked=true;
+ await f.find('GENERATE SEEDED PREVIEW').fire('click');const draw=clone(f.draw);for(const p of draw.roster)if(p.average===null)delete p.average;for(const g of draw.pools)for(const p of g.players)if(p.average===null)delete p.average;
+ f.queue.shift().resolve({success:true,ticket:'draw',draw});await f.tick();assert.match(f.host.textContent,/Coverage 2\/3/);assert.match(f.host.textContent,/Unseeded/);assert.ok(f.find('REVIEW NAKKA HANDOFF — TEST'));assert.doesNotMatch(f.notice(),/toFixed/);
 });

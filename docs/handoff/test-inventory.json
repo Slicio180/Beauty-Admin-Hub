@@ -6456,5 +6456,31 @@
     "origin": "Owner Pool Planner To Do, 28 October 2026",
     "evidence": "evidence/seeded-pools-20261028/focused-tests.tap",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
+  },
+  {
+    "id": "POOL-DISPLAY-FIX-1",
+    "file": "tests/pool-planner-seeded-ui.test.cjs",
+    "name": "pool UI renders omitted and null RPC averages as Unseeded and keeps measured zero numeric",
+    "requirement": "POOL-SEEDED-001",
+    "kind": "Executable synthetic service or DOM behavior",
+    "purpose": "Seeded draw, frozen statistics and guarded fixed TEST handoff",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
+    "origin": "Owner Pool Planner To Do, 28 October 2026",
+    "evidence": "evidence/pool-display-fix-20261028/ui-tests.tap",
+    "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
+  },
+  {
+    "id": "POOL-DISPLAY-FIX-2",
+    "file": "tests/pool-planner-seeded-ui.test.cjs",
+    "name": "pool UI normalizes omitted frozen averages before pool means colours and manual review",
+    "requirement": "POOL-SEEDED-001",
+    "kind": "Executable synthetic service or DOM behavior",
+    "purpose": "Seeded draw, frozen statistics and guarded fixed TEST handoff",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
+    "origin": "Owner Pool Planner To Do, 28 October 2026",
+    "evidence": "evidence/pool-display-fix-20261028/ui-tests.tap",
+    "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   }
 ]
