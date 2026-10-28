@@ -1,0 +1,76 @@
+TAP version 13
+# Subtest: status gate rejects non-boolean approval undefined
+ok 1 - status gate rejects non-boolean approval undefined
+  ---
+  duration_ms: 2.4749
+  type: 'test'
+  ...
+# Subtest: status gate rejects non-boolean approval null
+ok 2 - status gate rejects non-boolean approval null
+  ---
+  duration_ms: 0.977744
+  type: 'test'
+  ...
+# Subtest: status gate rejects non-boolean approval false
+ok 3 - status gate rejects non-boolean approval false
+  ---
+  duration_ms: 1.122071
+  type: 'test'
+  ...
+# Subtest: status gate rejects non-boolean approval 0
+ok 4 - status gate rejects non-boolean approval 0
+  ---
+  duration_ms: 0.679264
+  type: 'test'
+  ...
+# Subtest: status gate rejects non-boolean approval 1
+ok 5 - status gate rejects non-boolean approval 1
+  ---
+  duration_ms: 0.800692
+  type: 'test'
+  ...
+# Subtest: status gate rejects non-boolean approval true
+ok 6 - status gate rejects non-boolean approval true
+  ---
+  duration_ms: 0.932926
+  type: 'test'
+  ...
+# Subtest: status rejects wrong sheetId before accessing client
+ok 7 - status rejects wrong sheetId before accessing client
+  ---
+  duration_ms: 0.826694
+  type: 'test'
+  ...
+# Subtest: status rejects wrong title before accessing client
+ok 8 - status rejects wrong title before accessing client
+  ---
+  duration_ms: 0.835902
+  type: 'test'
+  ...
+# Subtest: status rejects wrong locale before accessing client
+ok 9 - status rejects wrong locale before accessing client
+  ---
+  duration_ms: 1.148023
+  type: 'test'
+  ...
+# Subtest: status rejects wrong timeZone before accessing client
+ok 10 - status rejects wrong timeZone before accessing client
+  ---
+  duration_ms: 2.019879
+  type: 'test'
+  ...
+# Subtest: all TEST RPCs reject a different script project before service access
+ok 11 - all TEST RPCs reject a different script project before service access
+  ---
+  duration_ms: 1.0932
+  type: 'test'
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 139.913061

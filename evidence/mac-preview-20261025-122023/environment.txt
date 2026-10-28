@@ -1,0 +1,29 @@
+Started: 2026-10-25 12:20:23 CET
+/Users/alessiotampella/Library/Mobile Documents/com~apple~CloudDocs/Beauty Master Folder/01-Current-Project/Beauty-Admin-Hub
+v22.23.2
+142f55bc0490091aa4734d7f54213c030637219c
+ M docs/handoff/architecture.md
+ M docs/handoff/audit-register.md
+ M docs/handoff/coverage.md
+ M docs/handoff/known-issues.md
+ M docs/handoff/requirements.json
+ M docs/handoff/test-inventory.json
+ M docs/handoff/test-inventory.md
+ M package.json
+ M public/css/style.css
+ M public/index.html
+ M public/js/app.js
+ M public/js/nakka-health.js
+ M tests/nakka-health-ui.test.cjs
+?? .DS_Store
+?? apps-script/.DS_Store
+?? backups/Beauty-Hub-integration-source-20261025.zip
+?? backups/local-preview-before-2026-10-25T11-19-26-184Z/
+?? docs/testing/LOCAL-PREVIEW-2026-10-25.md
+?? evidence/local-preview-2026-10-25/
+?? evidence/mac-preview-20261025-122023/
+?? public/assets/fonts/
+?? public/js/hub-services.js
+?? public/preview.html
+?? scripts/serve-preview.cjs
+?? tests/hub-preview.test.cjs

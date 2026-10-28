@@ -1,0 +1,23 @@
+{
+  "recordedUTC": "2026-10-25T22:43:56.540Z",
+  "sourceCommit": "80c3b4b17c84570c609c227c14db15bada66fe94",
+  "screenshots": [
+    {
+      "name": "Screenshot 2026-10-25 at 23.26.48.png",
+      "bytes": 147214,
+      "sha256": "bbbffd3241635c2bde672cef48b5d25635ffcc59cf17b5d80bd6bb3de39d8959"
+    },
+    {
+      "name": "Screenshot 2026-10-25 at 23.27.51.png",
+      "bytes": 140672,
+      "sha256": "6a205b40c61b1e09335b81ae301576792e19c6e24c73632fa84c7776e3ef8dfb"
+    }
+  ],
+  "testUpload": "User confirmed HubTest.html saved in TEST Apps Script",
+  "headings": "PASS: larger white headings visible",
+  "standbyFit": "PASS: STANDBY text and dropdown arrow visible",
+  "scrolling": "Screenshots support retained controls and sticky headings; continuous scrolling not independently verified",
+  "browserZoom": "Not independently verified",
+  "qualification": "Screenshot review only; no backend behaviour retested",
+  "evidenceImport": "Initial Mac lookup failed; older same-name ZIP extracted separately. Correct distinct ZIP subsequently imported. No older-package installer execution confirmed."
+}

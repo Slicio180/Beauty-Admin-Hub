@@ -1,0 +1,8 @@
+{
+  "startedUTC": "2026-10-26T10:25:40.828Z",
+  "stockholm": "2026-10-26 11:25:40",
+  "baseline": "9f43d5c4a5e6d0261922b7efd17d93e9c0a7eb6e",
+  "node": "v22.23.2",
+  "branch": "recovery/2026-10-24",
+  "backup": "backups/pool-tab-login-before-2026-10-26T10-25-40-828Z"
+}

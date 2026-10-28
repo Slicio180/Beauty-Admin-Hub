@@ -1,0 +1,94 @@
+TAP version 13
+# Subtest: Automatic Hub registration saves once then sends one fixed TEST add without a manual transfer step
+ok 1 - Automatic Hub registration saves once then sends one fixed TEST add without a manual transfer step
+  ---
+  duration_ms: 21.895469
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration preserves Sheet success when Nakka cannot be read and never resubmits
+ok 2 - Automatic Hub registration preserves Sheet success when Nakka cannot be read and never resubmits
+  ---
+  duration_ms: 1.930162
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration handles missing LPID readback as entry confirmed with identity explicitly unverified
+ok 3 - Automatic Hub registration handles missing LPID readback as entry confirmed with identity explicitly unverified
+  ---
+  duration_ms: 3.234284
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration existing Nakka entries are reused without a duplicate add
+ok 4 - Automatic Hub registration existing Nakka entries are reused without a duplicate add
+  ---
+  duration_ms: 1.5825
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration target mismatch ambiguous league and OUT state retain registration and refuse transfer
+ok 5 - Automatic Hub registration target mismatch ambiguous league and OUT state retain registration and refuse transfer
+  ---
+  duration_ms: 4.92084
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration new-player and different-person nickname identities create verified league members
+ok 6 - Automatic Hub registration new-player and different-person nickname identities create verified league members
+  ---
+  duration_ms: 7.431426
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration conflict cancellation and stale dates never start a transfer or append
+ok 7 - Automatic Hub registration conflict cancellation and stale dates never start a transfer or append
+  ---
+  duration_ms: 4.030241
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration rechecks selected day immediately before actual append
+ok 8 - Automatic Hub registration rechecks selected day immediately before actual append
+  ---
+  duration_ms: 1.42282
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration request rejects spoofed source internal metadata and targets
+ok 9 - Automatic Hub registration request rejects spoofed source internal metadata and targets
+  ---
+  duration_ms: 4.449873
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration timeout after POST keeps Sheet entry and durable retry barrier
+ok 10 - Automatic Hub registration timeout after POST keeps Sheet entry and durable retry barrier
+  ---
+  duration_ms: 3.018509
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration confirms existing identity choice through the established name-conflict flow
+ok 11 - Automatic Hub registration confirms existing identity choice through the established name-conflict flow
+  ---
+  duration_ms: 9.0159
+  type: 'test'
+  ...
+# Subtest: Automatic registration date check uses Sweden calendar day and never fabricates submission dates
+ok 12 - Automatic registration date check uses Sweden calendar day and never fabricates submission dates
+  ---
+  duration_ms: 1.40286
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration disabled auto gate preserves registration without any provider request
+ok 13 - Automatic Hub registration disabled auto gate preserves registration without any provider request
+  ---
+  duration_ms: 2.807372
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration expired session after Sheet commit reports saved registration without another write
+ok 14 - Automatic Hub registration expired session after Sheet commit reports saved registration without another write
+  ---
+  duration_ms: 1.694899
+  type: 'test'
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 195.720915

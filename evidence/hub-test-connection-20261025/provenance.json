@@ -1,0 +1,16 @@
+{
+  "sourceCheckpoint": "23a0b93",
+  "recordedAt": "2026-10-25T17:12:10.340457+00:00",
+  "node": "v24.22.1",
+  "baseline": {
+    "pass": 175,
+    "fail": 0
+  },
+  "newCases": 12,
+  "full": {
+    "pass": 187,
+    "fail": 0
+  },
+  "inventory": "PASS: 187 cases across 10 files",
+  "qualification": "Local automated checks only. Google upload, browser rendering and real Hub registrations pending. No live requests, writes or deployment."
+}

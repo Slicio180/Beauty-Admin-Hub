@@ -1,0 +1,16 @@
+{
+  "recordedUTC": "2026-10-26T12:31:59.020538+00:00",
+  "baseline": "c5d10b7",
+  "tests": 294,
+  "pass": 294,
+  "fail": 0,
+  "inventory": "PASS",
+  "newAuthCases": 26,
+  "firebaseProject": "beauty-admin-hub-test",
+  "providerSetup": "User screenshot confirms Email/Password enabled; account UID supplied by owner",
+  "qualification": "Local fake-service behavior only",
+  "googleUpload": "PENDING",
+  "realLoginLogoutReset": "PENDING",
+  "browserReview": "PENDING",
+  "production": "UNTOUCHED"
+}

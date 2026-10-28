@@ -1,0 +1,26 @@
+.event-inspection { width: min(760px, calc(100vw - 40px)); max-height: 85vh; overflow-y: auto; padding-top: 35px; }
+.event-inspection h2 { font-family: 'AIK Display', Arial, sans-serif; font-weight: 700; }
+.event-inspection p, .event-inspection label { font-family: 'AIK Display', Arial, sans-serif; font-weight: 400; font-size: 18px; line-height: 1.4; }
+.event-inspection input { display: block; margin: 10px 0; padding: 10px; background: #111; color: #fff; border: 1px solid #ffdf32; font: inherit; color-scheme: dark; }
+.event-inspection button:not(.message-popup-close) { margin: 12px 12px 0 0; padding: 10px 16px; border: 0; background: #ffdf32; color: #000; font-family: 'AIK Condensed', Arial, sans-serif; font-size: 20px; }
+.event-inspection button:disabled { opacity: .45; cursor: not-allowed; }
+.event-inspection label { display: block; margin: 16px 0; }
+.event-inspection .event-acknowledgement { display: flex; gap: 12px; align-items: flex-start; }
+.event-inspection .event-acknowledgement input { display: inline-block; margin-top: 4px; width: 22px; height: 22px; flex-shrink: 0; }
+
+/* beauty-fixed-player-rows-20261025 */
+
+/* TEST Hub: independently scrolling players, with both control rows retained. */
+.players-workspace { display: flex; flex-direction: column; min-height: 0; max-height: calc(100vh - 60px); }
+.players-workspace > .workspace-header { flex: 0 0 auto; background: #111; border-radius: 9px 9px 0 0; }
+.players-workspace > .players-table-wrap { flex: 1 1 auto; min-height: 0; max-height: 60vh; overflow: auto; border-radius: 0 0 9px 9px; }
+.players-workspace .players-table { border-collapse: separate; border-spacing: 0; }
+.players-workspace .players-table th { position: -webkit-sticky; position: sticky; top: 0; z-index: 2; background: #0c0c0c; color: #fff; font-size: 24px; line-height: 1.25; letter-spacing: 1px; overflow-wrap: normal; word-break: normal; }
+
+/* Compact operational rows: preserve readable names and allow long values to wrap. */
+.players-workspace .players-table td { padding: 6px 16px; line-height: 1.2; }
+.players-workspace .players-table th { padding: 8px 16px; }
+.players-workspace .status-select { min-height: 34px; height: auto; padding: 4px 10px; line-height: 1.2; }
+.players-workspace .consent-badge,
+.players-workspace .message-read-button { min-height: 32px; padding: 4px 10px; line-height: 1.2; }
+.players-workspace > .workspace-header { padding: 14px 20px; }

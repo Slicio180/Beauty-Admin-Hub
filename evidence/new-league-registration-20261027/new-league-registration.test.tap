@@ -1,0 +1,88 @@
+TAP version 13
+# Subtest: HUB new registration creates one league identity then links one TEST event entry
+ok 1 - HUB new registration creates one league identity then links one TEST event entry
+  ---
+  duration_ms: 32.812356
+  type: 'test'
+  ...
+# Subtest: MOBIL new registration creates one league identity then links one TEST event entry
+ok 2 - MOBIL new registration creates one league identity then links one TEST event entry
+  ---
+  duration_ms: 6.002167
+  type: 'test'
+  ...
+# Subtest: KIOSK new registration creates one league identity then links one TEST event entry
+ok 3 - KIOSK new registration creates one league identity then links one TEST event entry
+  ---
+  duration_ms: 3.563339
+  type: 'test'
+  ...
+# Subtest: Different-person nickname creates its own league member without changing the base player
+ok 4 - Different-person nickname creates its own league member without changing the base player
+  ---
+  duration_ms: 3.812934
+  type: 'test'
+  ...
+# Subtest: A new Beauty identity reuses a unique existing league member without another league add
+ok 5 - A new Beauty identity reuses a unique existing league member without another league add
+  ---
+  duration_ms: 3.474266
+  type: 'test'
+  ...
+# Subtest: New league creation fails closed for wrong target started event duplicate name oversized list and unlinked event entry
+ok 6 - New league creation fails closed for wrong target started event duplicate name oversized list and unlinked event entry
+  ---
+  duration_ms: 13.197397
+  type: 'test'
+  ...
+# Subtest: Uncertain league creation retains registration blocks event add and is never retried
+ok 7 - Uncertain league creation retains registration blocks event add and is never retried
+  ---
+  duration_ms: 15.030374
+  type: 'test'
+  ...
+# Subtest: Verified league creation is reusable read-only while mismatched journals block
+ok 8 - Verified league creation is reusable read-only while mismatched journals block
+  ---
+  duration_ms: 4.506276
+  type: 'test'
+  ...
+# Subtest: Creation journal failure and stale date or source state prevent the league POST
+ok 9 - Creation journal failure and stale date or source state prevent the league POST
+  ---
+  duration_ms: 6.718294
+  type: 'test'
+  ...
+# Subtest: League identity swaps after creation cannot substitute a different player ID in the event add
+ok 10 - League identity swaps after creation cannot substitute a different player ID in the event add
+  ---
+  duration_ms: 3.861898
+  type: 'test'
+  ...
+# Subtest: Event timeout after verified creation does not repeat either mutation
+ok 11 - Event timeout after verified creation does not repeat either mutation
+  ---
+  duration_ms: 4.036901
+  type: 'test'
+  ...
+# Subtest: Creation helper requires enabled gates canonical saved input current day and valid authority
+ok 12 - Creation helper requires enabled gates canonical saved input current day and valid authority
+  ---
+  duration_ms: 10.549756
+  type: 'test'
+  ...
+# Subtest: Existing Beauty master player absent from Nakka is created and entered using the same guarded flow
+ok 13 - Existing Beauty master player absent from Nakka is created and entered using the same guarded flow
+  ---
+  duration_ms: 3.074874
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 223.88893

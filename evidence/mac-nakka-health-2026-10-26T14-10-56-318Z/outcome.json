@@ -1,0 +1,34 @@
+{
+  "finishedUTC": "2026-10-26T14:11:58.569Z",
+  "builds": [
+    {
+      "exit": 0,
+      "signal": null,
+      "error": null
+    },
+    {
+      "exit": 0,
+      "signal": null,
+      "error": null
+    }
+  ],
+  "tests": {
+    "exit": 0,
+    "signal": null,
+    "error": null
+  },
+  "inventory": {
+    "exit": 0,
+    "signal": null,
+    "error": null
+  },
+  "generatedHTMLUnchanged": true,
+  "generatedHashes": {
+    "apps-script/registration-identity-test/remote-app/HubTest.html": "33b3503961abfd540fded86d6132fabe940f55e764ccd106f26469d3b6e864b0",
+    "apps-script/registration-identity-test/remote-app/BeautyLiveTest.html": "52dd7b863f4b481f1e24cc1fa1eea19d78903d9770f07f9e020b3fcc0b296f17"
+  },
+  "result": "PASS",
+  "googleUpload": "PENDING",
+  "browserReview": "PENDING",
+  "nakka": "READ-ONLY HEALTH WIRED; NATIVE CHECK PENDING"
+}

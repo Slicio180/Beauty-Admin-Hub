@@ -1,0 +1,38 @@
+{
+  "dateStockholm": "2026-10-26",
+  "baseline": "2ed561f",
+  "review": "Screenshots confirm compact layout, sidebar dots, and event date 25 October; response row 162 records Jonathan on 26 October, absent from Tonight list. Date-change confirmation remains disabled in this historical browser baseline. Long message browser behavior not yet qualified.",
+  "scope": "New date-save upload, runtime, backups, reset and browser acceptance remain PENDING. Nakka not connected.",
+  "files": [
+    {
+      "name": "Screenshot 2026-10-26 at 09.16.19.png",
+      "bytes": 169069,
+      "sha256": "af3e55fb8481527bf29975f7bacbd5afdec437cc8b1fb6af738dc8cccb05e70f"
+    },
+    {
+      "name": "Screenshot 2026-10-26 at 09.18.31.png",
+      "bytes": 69350,
+      "sha256": "9f958cba3a3c442ec227de7ab072484c187d7f8d6a093edd2061c80e7c5e5694"
+    },
+    {
+      "name": "Screenshot 2026-10-26 at 09.18.46.png",
+      "bytes": 58930,
+      "sha256": "8f94c74798022ae9931735902977ddb8e79ae2e6645d012fd22e269eecfeb1af"
+    },
+    {
+      "name": "Screenshot 2026-10-26 at 09.19.07.png",
+      "bytes": 133399,
+      "sha256": "ec3048ae0359431abbc6243302291ce8f2564f76d60bf42878cd5f0e1eb00ad6"
+    },
+    {
+      "name": "Screenshot 2026-10-26 at 09.19.53.png",
+      "bytes": 63026,
+      "sha256": "0e4e077f2e69f3da73be7aac1b5853b497ab1a48157d48485396cd3530a3d41d"
+    },
+    {
+      "name": "Screenshot 2026-10-26 at 09.20.46.png",
+      "bytes": 59383,
+      "sha256": "a0b24794c56d3c76d109518a5db24696a2b8c654760f6491739ff464014b7011"
+    }
+  ]
+}

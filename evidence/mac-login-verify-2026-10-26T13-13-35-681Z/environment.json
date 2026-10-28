@@ -1,0 +1,8 @@
+{
+  "startedUTC": "2026-10-26T13:13:35.681Z",
+  "stockholm": "2026-10-26 14:13:35",
+  "baseline": "105e42e569c8bbcac8f452a11790a3d08df9a09c",
+  "node": "v22.23.2",
+  "branch": "recovery/2026-10-24",
+  "backup": "backups/login-verify-before-2026-10-26T13-13-35-681Z"
+}

@@ -1,0 +1,24 @@
+{
+  "recordedAt": "2026-10-25T18:14:13.458Z",
+  "sourceCheckpoint": "1ad8faf",
+  "images": [
+    {
+      "name": "20261025-190541.png",
+      "originalName": "Screenshot 2026-10-25 at 19.05.41.png",
+      "bytes": 74525,
+      "sha256": "f692e31a684f34186a5839783cb96f4cee5b8bda6499b7ee7abc564357514481"
+    },
+    {
+      "name": "20261025-191007.png",
+      "originalName": "Screenshot 2026-10-25 at 19.10.07.png",
+      "bytes": 30151,
+      "sha256": "41bb3903108361c617a9080118421d868d53c47184a344d9e63968a73ef1f03a"
+    },
+    {
+      "name": "20261025-191045.png",
+      "originalName": "Screenshot 2026-10-25 at 19.10.45.png",
+      "bytes": 63953,
+      "sha256": "19c039d5f69c12a7c0a2dfe5a4cc94139d21e2bd6f90177b4d27f74feeb89604"
+    }
+  ]
+}

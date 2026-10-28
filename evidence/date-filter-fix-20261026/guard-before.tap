@@ -1,0 +1,108 @@
+TAP version 13
+# Subtest: event save: prepare is read-only and counts target-day registration before reset
+ok 1 - event save: prepare is read-only and counts target-day registration before reset
+  ---
+  duration_ms: 14.889267
+  type: 'test'
+  ...
+# Subtest: event save: complete transition backs up first, preserves target message and correction names
+ok 2 - event save: complete transition backs up first, preserves target message and correction names
+  ---
+  duration_ms: 34.774117
+  type: 'test'
+  ...
+# Subtest: event save: wrong identities, disabled gate and busy lock never mutate event sheets
+ok 3 - event save: wrong identities, disabled gate and busy lock never mutate event sheets
+  ---
+  duration_ms: 5.933507
+  type: 'test'
+  ...
+# Subtest: event save: impossible dates, missing confirmation and client sheet selection are rejected
+ok 4 - event save: impossible dates, missing confirmation and client sheet selection are rejected
+  ---
+  duration_ms: 6.252008
+  type: 'test'
+  ...
+# Subtest: event save: changed registration invalidates reviewed version before backup or reset
+ok 5 - event save: changed registration invalidates reviewed version before backup or reset
+  ---
+  duration_ms: 11.29269
+  type: 'test'
+  ...
+# Subtest: event save: backup failures and drift during backup prevent reset
+ok 6 - event save: backup failures and drift during backup prevent reset
+  ---
+  duration_ms: 33.340995
+  type: 'test'
+  ...
+# Subtest: event save: failed mutation returns uncertainty and backup without retry
+ok 7 - event save: failed mutation returns uncertainty and backup without retry
+  ---
+  duration_ms: 13.612499
+  type: 'test'
+  ...
+# Subtest: event save: duplicate target names and status formulas block the transition
+ok 8 - event save: duplicate target names and status formulas block the transition
+  ---
+  duration_ms: 14.003523
+  type: 'test'
+  ...
+# Subtest: event save: formula-like messages remain literal and retain exact content
+ok 9 - event save: formula-like messages remain literal and retain exact content
+  ---
+  duration_ms: 32.160092
+  type: 'test'
+  ...
+# Subtest: event save: transport permits only bounded TEST prepare and save inputs
+ok 10 - event save: transport permits only bounded TEST prepare and save inputs
+  ---
+  duration_ms: 2.368541
+  type: 'test'
+  ...
+# Subtest: event save: calendar-day selection follows the TEST sheet timezone at midnight
+ok 11 - event save: calendar-day selection follows the TEST sheet timezone at midnight
+  ---
+  duration_ms: 21.920321
+  type: 'test'
+  ...
+# Subtest: event save: mismatched Hub readback fails closed after the backed-up transition
+ok 12 - event save: mismatched Hub readback fails closed after the backed-up transition
+  ---
+  duration_ms: 19.914229
+  type: 'test'
+  ...
+# Subtest: event save: real legacy reset-time formula is blocked during review before any write
+not ok 13 - event save: real legacy reset-time formula is blocked during review before any write
+  ---
+  duration_ms: 5.823481
+  type: 'test'
+  location: '/workspace/scratch/d22120bec644/beauty-source/tests/event-save.test.cjs:71:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    true !== false
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/workspace/scratch/d22120bec644/beauty-source/tests/event-save.test.cjs:71:162)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 12
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 375.17466

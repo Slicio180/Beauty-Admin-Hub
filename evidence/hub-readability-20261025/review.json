@@ -1,0 +1,23 @@
+{
+  "sourceCheckpoint": "565d11f",
+  "screenshot": {
+    "name": "20261025-224028.png",
+    "bytes": 127721,
+    "sha256": "2da1be931e9602427cf149043e6331e96bac2c818c91079a3dc7fbb95bcce6e3"
+  },
+  "observed": "User screenshot shows full TEST dashboard with large EVENT HUB title, original logos and compact event row; operational sidebar/table text visibly small. User requested larger Hub text.",
+  "sizesPx": {
+    "sidebar": 20,
+    "playerTableCells": 22,
+    "tableHeadings": 17,
+    "statusAndConsent": 20,
+    "mainActionButtons": 20,
+    "sectionHeading": 28,
+    "eventDate": 32,
+    "smallLabels": 16,
+    "healthText": 18
+  },
+  "preserved": "Original AIK fonts/logos, title, player tile, sidebar dot, backend and stored data.",
+  "narrowWindowBehavior": "Table min-width 1050px within existing horizontal scroll wrapper; long entries wrap.",
+  "qualification": "227-case local regression/inventory only. Revised browser readability, wrapping, control fit and scrolling review pending; no backend operation."
+}

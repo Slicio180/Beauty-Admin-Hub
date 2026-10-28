@@ -1,0 +1,34 @@
+✔ Hub auth client: password goes only to Firebase and approved server session opens Hub (3.972676ms)
+✔ Hub auth client: server denial or Firebase failure cannot unlock Hub (2.043574ms)
+✔ Hub auth client: logout hides Hub immediately, clears private UI and invalidates generations (1.631682ms)
+✔ Hub auth client: failed server logout stays locked and offers bounded explicit retry (1.35143ms)
+✔ Hub auth client: polling without user activity cannot keep session alive (1.023695ms)
+✔ Hub auth client: only visible user activity sends a throttled session touch (1.7557ms)
+✔ Hub auth client: returning from browser history locks cached page and reset reports actual request (1.059169ms)
+✔ Hub auth client: transport ignores pre-logout responses and refuses unsigned RPCs (7.790192ms)
+✔ Hub auth client: generated entry is locked before scripts and contains no server UID allowlist (3.662958ms)
+✔ Hub auth client: queued pre-logout writes cannot borrow a new login session (3.981234ms)
+✔ Hub auth: missing session blocks every Hub action before reads or writes (2.958725ms)
+✔ Hub auth: exact TEST identity and missing account approval fail closed (2.194763ms)
+✔ Hub auth: malformed tokens and wrong issuer audience times or tenant never contact Firebase (1.390058ms)
+✔ Hub auth: decoded approved UID is insufficient without Firebase acceptance (6.064593ms)
+✔ Hub auth: valid Firebase login creates opaque expiring session without stored ID token (1.673135ms)
+✔ Hub auth: unapproved accounts and spoofed client roles never grant entry (0.865346ms)
+✔ Hub auth: logout revokes session idempotently and captured token cannot read again (1.110306ms)
+✔ Hub auth: refresh polling does not extend inactivity and touch cannot revive expired sessions (0.977235ms)
+✔ Hub auth: real activity renews idle limit but absolute token expiry still wins (1.081923ms)
+✔ Hub auth: removing approval and cache eviction revoke existing sessions (1.76914ms)
+✔ Hub auth: locked touch cannot resurrect a logged-out session (0.785015ms)
+✔ Hub auth: signing out revokes other sessions for the same account (1.317368ms)
+✔ Hub auth: old direct data RPC requires a session and admin maintenance RPCs are private (1.225229ms)
+✔ Hub auth: public registration cannot claim HUB source while Remote stays available (0.956373ms)
+✔ Hub auth: status and event handlers recheck session inside their write lock (2.893576ms)
+✔ Hub auth: TEST manifest adds only external HTTPS requests and retains owner-only access (0.373684ms)
+ℹ tests 26
+ℹ suites 0
+ℹ pass 26
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 146.452098

@@ -1,0 +1,8 @@
+{
+  "startedUTC": "2026-10-26T07:51:57.252Z",
+  "stockholm": "2026-10-26 08:51:57",
+  "baseline": "e28dd0d618dd1bb995ee4de573c868aa96343620",
+  "node": "v22.23.2",
+  "branch": "recovery/2026-10-24",
+  "backup": "backups/pool-download-fix-before-2026-10-26T07-51-57-252Z"
+}

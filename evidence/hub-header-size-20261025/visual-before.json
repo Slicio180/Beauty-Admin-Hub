@@ -1,0 +1,11 @@
+{
+  "sourceCheckpoint": "64976db",
+  "image": {
+    "name": "20261025-221749.png",
+    "bytes": 96860,
+    "sha256": "7cb1a4f18d634517099782673fec545797beca600d34e272fb9403cebeedf9d1"
+  },
+  "observed": "Full TEST dashboard: separate AIK Dart logo and EVENT HUB title, M\u00e5ndagsdartarna/GoDartsPro between date and event button, player tile at right, sidebar Beauty Live directly below Dashboard, no duplicate player/event-control navigation, Event Control Details and grey System Status dot present. Seven players shown.",
+  "userRequestedRefinement": "Larger AIK logo and EVENT HUB title; slightly larger M\u00e5ndagsdartarna logo more centred between date and button.",
+  "qualification": "Original layout and sidebar visibly reviewed; refined layout visual review pending. No runtime write proof."
+}

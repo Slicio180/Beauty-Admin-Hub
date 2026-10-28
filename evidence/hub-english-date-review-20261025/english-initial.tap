@@ -1,0 +1,100 @@
+TAP version 13
+# Subtest: Date review accepts real calendar dates and rejects impossible or malformed dates
+ok 1 - Date review accepts real calendar dates and rejects impossible or malformed dates
+  ---
+  duration_ms: 2.456966
+  type: 'test'
+  ...
+# Subtest: Date review requires loaded unblocked baseline checkbox and exact typed date
+ok 2 - Date review requires loaded unblocked baseline checkbox and exact typed date
+  ---
+  duration_ms: 0.367162
+  type: 'test'
+  ...
+# Subtest: Date review cannot proceed for unchanged event date
+ok 3 - Date review cannot proceed for unchanged event date
+  ---
+  duration_ms: 0.129254
+  type: 'test'
+  ...
+# Subtest: English Event Control starts with review disabled and requires both confirmation steps
+ok 4 - English Event Control starts with review disabled and requires both confirmation steps
+  ---
+  duration_ms: 2.891169
+  type: 'test'
+  ...
+# Subtest: Changing the proposed date clears checkbox typed confirmation and previous review
+ok 5 - Changing the proposed date clears checkbox typed confirmation and previous review
+  ---
+  duration_ms: 2.821764
+  type: 'test'
+  ...
+# Subtest: Final date review cannot save and BACK requires confirmation again
+ok 6 - Final date review cannot save and BACK requires confirmation again
+  ---
+  duration_ms: 1.256881
+  type: 'test'
+  ...
+# Subtest: Closing and reopening Event Control clears all date-change confirmation state
+ok 7 - Closing and reopening Event Control clears all date-change confirmation state
+  ---
+  duration_ms: 1.996333
+  type: 'test'
+  ...
+# Subtest: Event Details sidebar holds technical reset information outside the main control form
+ok 8 - Event Details sidebar holds technical reset information outside the main control form
+  ---
+  duration_ms: 2.015591
+  type: 'test'
+  ...
+# Subtest: Unresolved Event Details blockers prevent date review
+ok 9 - Unresolved Event Details blockers prevent date review
+  ---
+  duration_ms: 1.258764
+  type: 'test'
+  ...
+# Subtest: English Hub identity files reproduce from Swedish originals without changing identity decisions
+ok 10 - English Hub identity files reproduce from Swedish originals without changing identity decisions
+  ---
+  duration_ms: 89.33577
+  type: 'test'
+  ...
+# Subtest: Hub consent badges display YES and NO while canonical Swedish data remains unchanged
+ok 11 - Hub consent badges display YES and NO while canonical Swedish data remains unchanged
+  ---
+  duration_ms: 1.430041
+  type: 'test'
+  ...
+# Subtest: English Hub transport localizes structured backend errors but preserves player-authored data
+ok 12 - English Hub transport localizes structured backend errors but preserves player-authored data
+  ---
+  duration_ms: 2.031836
+  type: 'test'
+  ...
+# Subtest: Remote kiosk and qualified status sources remain byte-for-byte unchanged
+ok 13 - Remote kiosk and qualified status sources remain byte-for-byte unchanged
+  ---
+  duration_ms: 2.838229
+  type: 'test'
+  ...
+# Subtest: All Hub entrypoints select English and expose Event Details with English consent and registration controls
+ok 14 - All Hub entrypoints select English and expose Event Details with English consent and registration controls
+  ---
+  duration_ms: 0.343076
+  type: 'test'
+  ...
+# Subtest: Offline English Event Control inspection is fictional read-only data with no player mutation
+ok 15 - Offline English Event Control inspection is fictional read-only data with no player mutation
+  ---
+  duration_ms: 1.497342
+  type: 'test'
+  ...
+1..15
+# tests 15
+# suites 0
+# pass 15
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 223.735815

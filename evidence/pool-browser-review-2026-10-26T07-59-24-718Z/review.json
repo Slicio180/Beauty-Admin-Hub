@@ -1,0 +1,27 @@
+{
+  "sourceCheckpoint": "a9264899fc70c29e2bd5a3a8b876a8ca226ecf22",
+  "environment": "Identity TEST",
+  "reviewDateStockholm": "2026-10-26",
+  "countCheck": "PASS: initial screenshot shows 6 IN players; final screenshot shows 4 IN players. User confirmed moving one player to STANDBY and one to OUT.",
+  "download": "PASS — user-reported after refresh. Prior failure screenshots retained; latest failure screenshot was reported by user to precede refresh. Downloaded file not independently opened or hashed.",
+  "layout": "Panel, selected event date and count visible in supplied screenshots.",
+  "limits": "Screenshot/user report only. No independent Google browser automation or full event-data comparison. Production not qualified. Four-player calculation not exercised in final screenshot (board input blank).",
+  "screenshots": [
+    {
+      "file": "Screenshot 2026-10-26 at 08.43.48.png",
+      "bytes": 90946,
+      "sha256": "2bfb45b37e39c72deca375bacd83cf78c626ef6b5e92a672c04de6b9e5fa3c4b"
+    },
+    {
+      "file": "Screenshot 2026-10-26 at 08.47.07.png",
+      "bytes": 54371,
+      "sha256": "708532881bf6b91d89141ebed6004b12a3ba697f3fa5336f86a9427108a20710"
+    },
+    {
+      "file": "Screenshot 2026-10-26 at 08.56.47.png",
+      "bytes": 67702,
+      "sha256": "d8ee6b2e859d5ff792a57d980379cb7963a8753f1f41a78a4ef6e21bfa361415"
+    }
+  ],
+  "recordedUTC": "2026-10-26T07:59:24.718Z"
+}

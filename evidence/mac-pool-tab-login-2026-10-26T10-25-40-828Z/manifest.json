@@ -1,0 +1,87 @@
+[
+  {
+    "path": "public/js/pool-planner.js",
+    "before": "dedc27414f7bb13922ec3ce085030ddb20d2c61bc71346e02d99145864a0ccac",
+    "after": "dc2cd18e697cc61b64781390efbcf9d4f0a97e63cb8c9261d270fe229ff09956"
+  },
+  {
+    "path": "scripts/build-hub-test.cjs",
+    "before": "20e9cd50591459a77f18536f172c6fe11b3bd5ed7894f86ddf00c7528e3ba35b",
+    "after": "4ae4d3ab0699fd7245fe1f2877518a471f097f831d6a6486d57d2b76b9b03c28"
+  },
+  {
+    "path": "tests/pool-planner.test.cjs",
+    "before": "4d4ff820d977b326227d6c7bd113288d554ae8e567fc59ac2d129d4debdbe20f",
+    "after": "0cb397cf34323ce4ef3a031d46809b153ab6656ec21859813190c57dc5ef095d"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "5dcaeff289ab130cd1e3e390155609f97f5887af2e5417a6160652f2009b1c9f",
+    "after": "2bbadc43708fbbe1b53f3b5a870a07045e781bfa5004cb53a7ca9f314ad73ef7"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "ea3e2506bd8077a9eee3244a9f34c9b118e16eb267fa7a90c5c86338ce95ff83",
+    "after": "b521ad5cc164b3f169280b79868253739675aa6f5cdc0cc9e6f42131a22a778a"
+  },
+  {
+    "path": "scripts/build-pool-scheme.cjs",
+    "before": null,
+    "after": "33a611ecf2432ffa5e005a0f12aad4ef07d59518bfb3d7ec3c90d2027645a7fa"
+  },
+  {
+    "path": "public/assets/pool-scheme.html",
+    "before": null,
+    "after": "516b5c62182836ef1333047ff9fb650c9a47444d7c14b1a2ab6e79c87d305765"
+  },
+  {
+    "path": "public/login.html",
+    "before": null,
+    "after": "514150e6021c027954aacb8d3a53c5cef4cd645937c578fe13a6489d3cbf5474"
+  },
+  {
+    "path": "public/css/login.css",
+    "before": null,
+    "after": "6f350f78094ed73725e9cda41a66b6fe134a2b0effd22ac4b13a58e5b14dc906"
+  },
+  {
+    "path": "public/js/login.js",
+    "before": null,
+    "after": "db853103a7928d39730affaea320709d907d354e9d9aca6c275f4660f993c654"
+  },
+  {
+    "path": "tests/login-page.test.cjs",
+    "before": null,
+    "after": "f82039c6fc67787b890aa2753fc2a7ecf0a31babfc03f7d8cdf0ee731fd2db31"
+  },
+  {
+    "path": "docs/handoff/POOL-TAB-LOGIN-20261026.md",
+    "before": null,
+    "after": "2d26bb752a4206189a27f4e2269887049d24c07c564ddcdd617c82358f0bbd67"
+  },
+  {
+    "path": "evidence/pool-tab-login-20261026/build-hub.txt",
+    "before": null,
+    "after": "e554d377617479721caec3dc45ea0b25c83f4b467d7c67cfaf5c93b31ffc1e53"
+  },
+  {
+    "path": "evidence/pool-tab-login-20261026/build-live.txt",
+    "before": null,
+    "after": "ff886a75abfe907fc8204c2a6286fa83ac78f17f7364f3c8e47e4f1561ef244c"
+  },
+  {
+    "path": "evidence/pool-tab-login-20261026/inventory.txt",
+    "before": null,
+    "after": "d80f61cdf8b681a8de2dc696acd7997c827442270ca3689c69ea1dedc66f14cd"
+  },
+  {
+    "path": "evidence/pool-tab-login-20261026/outcome.json",
+    "before": null,
+    "after": "9cbaf877852a58dbbd7b621a59e2c2ca62f1829b1e8e2dea3bce59b37a276a8b"
+  },
+  {
+    "path": "evidence/pool-tab-login-20261026/tests.tap",
+    "before": null,
+    "after": "079dbb5686489f5aabb6ef646228e91fdacda10d44128c9a33c4ea09bd7e315e"
+  }
+]

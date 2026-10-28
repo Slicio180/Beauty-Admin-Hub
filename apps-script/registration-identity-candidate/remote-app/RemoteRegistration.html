@@ -1,0 +1,1894 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+  <base target="_top">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#000000">
+
+  <link rel="icon" type="image/png"
+        href="https://aik-dart-kiosk-icon.alessiotampella.workers.dev/">
+
+  <link rel="apple-touch-icon"
+        href="https://aik-dart-kiosk-icon.alessiotampella.workers.dev/">
+
+  <style>
+
+    /* =====================================================
+       AIK FONTS
+       ===================================================== */
+
+    @font-face {
+      font-family: 'AIK Display';
+      src: url('https://aik-dart-fonts.alessiotampella.workers.dev/AIKDisplay-Bold.woff2%20copy')
+           format('woff2');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'AIK Display Light';
+      src: url('https://aik-dart-fonts.alessiotampella.workers.dev/AIKDisplay-Light.woff2%20copy')
+           format('woff2');
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'AIK Condensed';
+      src: url('https://aik-dart-fonts.alessiotampella.workers.dev/AIKDisplay-CondensedBold.woff2%20copy')
+           format('woff2');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --black: #000000;
+      --gold: #FFD700;
+      --white: #FFFFFF;
+      --grey: #777777;
+      --light-grey: #BDBDBD;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
+      background: var(--black);
+      color: var(--white);
+      font-family: 'AIK Display Light', sans-serif;
+      font-weight: 300;
+    }
+
+    body {
+      min-height: 100vh;
+    }
+
+    /* =====================================================
+       PAGE
+       ===================================================== */
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+      padding: 12px 20px 40px;
+      background: var(--black);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    /* =====================================================
+       BRANDING
+       ===================================================== */
+
+    .branding {
+      width: 100%;
+      padding: 0 20px 18px;
+      text-align: center;
+      background: var(--black);
+    }
+
+    .brand-image {
+      display: block;
+      width: 100%;
+      max-width: 650px;
+      height: auto;
+      margin: 0 auto;
+      object-fit: contain;
+      background: var(--black);
+    }
+
+    .registration-title {
+      margin: 8px 0 6px;
+      color: var(--gold);
+      font-family: 'AIK Condensed', sans-serif;
+      font-size: 52px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    .intro {
+      max-width: 620px;
+      margin: 10px auto 4px;
+      color: var(--white);
+      font-family: 'AIK Display Light', sans-serif;
+      font-size: 19px;
+      line-height: 1.35;
+      font-weight: 300;
+    }
+/* =====================================================
+   BEAUTY 1.8 — TONIGHT'S PLAYERS
+   ===================================================== */
+
+.tonight-players-area {
+  width: 100%;
+  margin: 18px 0 22px;
+  text-align: center;
+}
+
+.tonight-players-button {
+  width: 100%;
+  min-height: 78px;
+  padding: 18px 22px;
+  border: 2px solid var(--gold);
+  border-radius: 10px;
+  background: var(--gold);
+  color: var(--black);
+  font-family: 'AIK Display', sans-serif;
+  font-size: 50px;
+  line-height: 1;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.tonight-players-button:hover {
+  background: var(--black);
+  color: var(--gold);
+}
+
+.tonight-players-button:active {
+  transform: scale(.985);
+}
+/* =====================================================
+   BEAUTY 1.8 — TONIGHT'S PLAYERS POPUP
+   ===================================================== */
+
+.tonight-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  padding: 20px;
+  background: rgba(0, 0, 0, .88);
+  align-items: center;
+  justify-content: center;
+}
+
+.tonight-modal.open {
+  display: flex;
+}
+
+.tonight-modal-card {
+  width: 100%;
+  max-width: 620px;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 30px 24px 24px;
+  background: var(--black);
+  border: 2px solid var(--gold);
+  border-radius: 18px;
+  box-shadow: 0 15px 55px rgba(0, 0, 0, .75);
+}
+
+.tonight-modal-header {
+  margin-bottom: 24px;
+  color: var(--gold);
+  font-family: 'AIK Display', sans-serif;
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 700;
+  text-align: center;
+}
+
+.tonight-loading {
+  padding: 20px 10px;
+  color: var(--white);
+  font-family: 'AIK Display Light', sans-serif;
+  font-size: 21px;
+  text-align: center;
+}
+
+.tonight-players-list {
+  margin-bottom: 26px;
+}
+
+.tonight-player-name {
+  padding: 12px 8px;
+  border-bottom: 1px solid #333333;
+  color: var(--white);
+  font-family: 'AIK Condensed', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.tonight-player-name:last-child {
+  border-bottom: 0;
+}
+
+.tonight-empty {
+  padding: 22px 10px;
+  color: var(--white);
+  font-family: 'AIK Display Light', sans-serif;
+  font-size: 20px;
+  text-align: center;
+}
+
+.tonight-close-button {
+  width: 100%;
+  min-height: 60px;
+  padding: 13px 20px;
+  border: 2px solid var(--gold);
+  border-radius: 10px;
+  background: var(--gold);
+  color: var(--black);
+  font-family: 'AIK Display', sans-serif;
+  font-size: 27px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.tonight-close-button:active {
+  transform: scale(.985);
+}
+    /* =====================================================
+       FORM CARD
+       ===================================================== */
+
+    .card {
+      width: 100%;
+      padding: 26px 38px;
+      background: var(--white);
+      color: var(--black);
+      border: 2px solid var(--gold);
+      border-radius: 18px;
+      box-shadow: 0 14px 45px rgba(0,0,0,.60);
+    }
+
+    .field {
+      margin-bottom: 26px;
+    }
+
+    /* =====================================================
+       LABELS
+       ===================================================== */
+
+    .label {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 7px 14px 6px;
+      background: var(--black);
+      color: var(--white);
+      border-radius: 7px;
+      font-family: 'AIK Display', sans-serif;
+      font-size: 25px;
+      line-height: 1;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .required {
+      color: var(--gold);
+      font-family: 'AIK Display', sans-serif;
+      font-weight: 700;
+    }
+
+    /* =====================================================
+       SEARCHABLE PLAYER DROPDOWN
+       ===================================================== */
+
+    .player-dropdown {
+      position: relative;
+      width: 100%;
+    }
+
+    .player-dropdown-button {
+      width: 100%;
+      min-height: 58px;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 2px solid var(--gold);
+      border-radius: 10px;
+      background: var(--black);
+      color: var(--gold);
+      font-family: 'AIK Condensed', sans-serif !important;
+      font-size: 24px;
+      font-weight: 700;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .player-dropdown-button:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(255,215,0,.22);
+    }
+
+    .player-dropdown-arrow {
+      margin-left: 15px;
+      font-size: 16px;
+    }
+
+    .player-dropdown-menu {
+      display: none;
+      width: 100%;
+      max-height: 360px;
+      overflow-y: auto;
+      margin-top: 6px;
+      padding: 10px;
+      border: 2px solid var(--gold);
+      border-radius: 10px;
+      background: var(--black);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+
+    .player-dropdown-menu.open {
+      display: block;
+    }
+
+    .player-option {
+      width: 100%;
+      padding: 12px 14px;
+      border: 0;
+      border-bottom: 1px solid #333333;
+      background: var(--black);
+      color: var(--gold);
+      font-family: 'AIK Condensed', sans-serif !important;
+      font-size: 22px;
+      font-weight: 700;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .player-option:last-child {
+      border-bottom: 0;
+    }
+
+    .player-option:hover {
+      background: #181818;
+    }
+
+    .player-option.new-player-option {
+      margin-bottom: 8px;
+      border: 2px solid var(--gold);
+      border-radius: 7px;
+      color: var(--white);
+    }
+
+    .player-search {
+      width: 100%;
+      min-height: 58px;
+      margin-bottom: 12px;
+      padding: 12px 18px;
+      border: 2px solid var(--gold);
+      border-radius: 10px;
+      background: var(--black);
+      color: var(--gold);
+      font-family: 'AIK Condensed', sans-serif !important;
+      font-size: 23px;
+      font-weight: 700;
+    }
+
+    .player-search:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(255,215,0,.22);
+    }
+
+    .player-search::placeholder {
+      color: var(--light-grey);
+      font-family: 'AIK Display Light', sans-serif !important;
+      font-size: 19px;
+      font-weight: 300;
+      opacity: 1;
+    }
+
+    .new-player-help {
+      margin: 8px 0 14px;
+      color: #333333;
+      font-family: 'AIK Display Light', sans-serif !important;
+      font-size: 18px;
+      line-height: 1.35;
+      font-weight: 300;
+    }
+
+    /* =====================================================
+       NEW PLAYER
+       ===================================================== */
+
+    #newPlayerArea {
+      display: none;
+      margin-top: 18px;
+      padding: 18px;
+      background: #F3F3F3;
+      border-left: 5px solid var(--gold);
+      border-radius: 10px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      min-height: 58px;
+      padding: 12px 18px;
+      border: 2px solid var(--black);
+      border-radius: 10px;
+      background: var(--white);
+      color: var(--black);
+      font-family: 'AIK Condensed', sans-serif !important;
+      font-size: 23px;
+      font-weight: 700;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(255,215,0,.22);
+    }
+
+    input[type="text"]::placeholder {
+      color: var(--grey);
+      font-family: 'AIK Display Light', sans-serif;
+      font-size: 19px;
+      font-weight: 300;
+    }
+
+    /* =====================================================
+       CONSENT
+       ===================================================== */
+
+    .consent-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .consent-option input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .consent-option label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 58px;
+      padding: 11px 12px;
+      border: 2px solid var(--gold);
+      border-radius: 10px;
+      background: var(--black);
+      color: var(--gold);
+      text-align: center;
+      font-family: 'AIK Condensed', sans-serif !important;
+      font-size: 23px;
+      line-height: 1;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .consent-option input:checked + label {
+      background: var(--gold);
+      color: var(--black);
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(255,215,0,.20);
+    }
+
+    .help {
+      margin-top: 10px;
+      color: #333333;
+      font-family: 'AIK Display Light', sans-serif !important;
+      font-size: 17px;
+      line-height: 1.35;
+      font-weight: 300;
+    }
+
+    /* =====================================================
+       MESSAGE
+       ===================================================== */
+
+    textarea {
+      width: 100%;
+      min-height: 105px;
+      padding: 14px 18px;
+      border: 2px solid var(--light-grey);
+      border-radius: 10px;
+      background: var(--white);
+      color: var(--black);
+      font-family: 'AIK Display Light', sans-serif !important;
+      font-size: 21px;
+      font-weight: 300;
+      resize: vertical;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(255,215,0,.22);
+    }
+
+    textarea::placeholder {
+      color: var(--grey);
+      font-family: 'AIK Display Light', sans-serif !important;
+      font-size: 19px;
+      font-weight: 300;
+    }
+
+    /* =====================================================
+       SUBMIT
+       ===================================================== */
+
+    .submit-button {
+      width: 100%;
+      min-height: 64px;
+      padding: 14px 20px;
+      border: 2px solid var(--gold);
+      border-radius: 10px;
+      background: var(--black);
+      color: var(--gold);
+      font-family: 'AIK Display', sans-serif !important;
+      font-size: 30px;
+      line-height: 1;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .submit-button:hover {
+      background: var(--gold);
+      color: var(--black);
+    }
+
+    .submit-button:active {
+      transform: scale(.985);
+    }
+
+    .submit-button:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    /* =====================================================
+       LOADING + ERROR
+       ===================================================== */
+
+    #loading {
+      padding: 40px 20px;
+      color: var(--black);
+      text-align: center;
+      font-family: 'AIK Display Light', sans-serif;
+      font-size: 21px;
+    }
+
+    #errorBox {
+      display: none;
+      margin-bottom: 24px;
+      padding: 16px;
+      background: var(--black);
+      color: var(--gold);
+      border: 2px solid var(--gold);
+      border-radius: 10px;
+      font-family: 'AIK Display Light', sans-serif;
+      font-size: 17px;
+      line-height: 1.35;
+    }
+
+    /* =====================================================
+       SUCCESS
+       ===================================================== */
+
+    #successScreen {
+      display: none;
+      min-height: 100vh;
+      background: var(--black);
+    }
+
+    .success-wrapper {
+      width: 100%;
+      max-width: 820px;
+      min-height: calc(100vh - 24px);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .success-card {
+      width: 100%;
+      padding: 42px 38px;
+      background: var(--black);
+      color: var(--white);
+      border: 2px solid var(--gold);
+      border-radius: 18px;
+      text-align: center;
+      box-shadow: 0 15px 55px rgba(0,0,0,.65);
+    }
+
+    .success-brand {
+      display: block;
+      width: 100%;
+      max-width: 560px;
+      height: auto;
+      margin: 0 auto 26px;
+      object-fit: contain;
+      background: var(--black);
+    }
+
+    .success-check {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 74px;
+      height: 74px;
+      margin: 0 auto 22px;
+      border: 3px solid var(--gold);
+      border-radius: 50%;
+      color: var(--gold);
+      font-family: 'AIK Display', sans-serif;
+      font-size: 40px;
+      font-weight: 700;
+    }
+
+    .success-card h2 {
+      margin: 0 0 14px;
+      color: var(--gold);
+      font-family: 'AIK Display', sans-serif !important;
+      font-size: 42px;
+      line-height: 1;
+      font-weight: 700;
+    }
+
+    .success-card p {
+      margin: 0 0 32px;
+      color: var(--white);
+      font-family: 'AIK Display Light', sans-serif !important;
+      font-size: 22px;
+      line-height: 1.35;
+      font-weight: 300;
+    }
+
+    #registeredPlayer {
+      color: var(--gold);
+      font-family: 'AIK Condensed', sans-serif !important;
+      font-size: 26px;
+      font-weight: 700;
+    }
+
+    .next-button {
+      width: 100%;
+      min-height: 70px;
+      padding: 16px 20px;
+      border: 2px solid var(--gold);
+      border-radius: 10px;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'AIK Display', sans-serif !important;
+      font-size: 31px;
+      line-height: 1;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .next-button:hover {
+      background: var(--white);
+    }
+
+    .next-button:active {
+      transform: scale(.985);
+    }
+
+    /* =====================================================
+       MOBILE — KEEP AT 1000PX
+       ===================================================== */
+
+    @media (max-width: 1000px) {
+
+      html,
+      body {
+        width: 100%;
+        min-width: 100%;
+        overflow-x: hidden;
+      }
+
+      .page {
+        width: 100%;
+        padding: 8px 10px 30px;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+      }
+
+      .branding {
+        width: 100%;
+        padding: 0 4px 20px;
+      }
+
+      .brand-image {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+      }
+
+      .registration-title {
+        margin-top: 12px;
+        font-size: 52px;
+        line-height: 1.05;
+        letter-spacing: 2px;
+      }
+
+      .intro {
+        max-width: 100%;
+        padding: 0 10px;
+        font-size: 27px;
+        line-height: 1.3;
+      }
+
+      .card {
+        width: 100%;
+        padding: 60px 22px;
+        border-radius: 16px;
+      }
+
+      .field {
+        margin-bottom: 34px;
+      }
+
+      .label {
+        margin-bottom: 14px;
+        padding: 10px 15px 9px;
+        font-size: 34px;
+      }
+.message-label {
+  font-size: 31px !important;
+}
+      .new-player-help {
+        font-size: 24px;
+        line-height: 1.4;
+      }
+
+      .player-dropdown-button {
+        min-height: 82px;
+        padding: 14px 18px;
+        font-size: 34px;
+        border-radius: 12px;
+      }
+
+      .player-dropdown-menu {
+        max-height: 480px;
+        padding: 12px;
+      }
+
+      .player-search {
+        min-height: 82px;
+        padding: 14px 18px;
+        font-size: 33px;
+      }
+
+      .player-search::placeholder {
+        font-size: 26px;
+      }
+
+      .player-option {
+        padding: 17px 14px;
+        font-size: 31px;
+      }
+
+      #newPlayerArea {
+        margin-top: 22px;
+        padding: 20px;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        min-height: 82px;
+        padding: 14px 18px;
+        font-size: 33px;
+      }
+
+      input[type="text"]::placeholder {
+        font-size: 26px;
+      }
+
+      .consent-options {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .consent-option label {
+        min-height: 82px;
+        padding: 14px;
+        font-size: 32px;
+      }
+
+      .help {
+        margin-top: 14px;
+        font-size: 24px;
+        line-height: 1.4;
+      }
+
+      textarea {
+        width: 100%;
+        min-height: 150px;
+        padding: 18px;
+        font-size: 29px;
+      }
+
+      textarea::placeholder {
+        font-size: 26px;
+      }
+
+      .submit-button {
+        width: 100%;
+        min-height: 88px;
+        padding: 16px 20px;
+        font-size: 41px;
+        border-radius: 12px;
+      }
+
+      .success-wrapper {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .success-card {
+        width: 100%;
+        padding: 40px 22px;
+        border-radius: 16px;
+      }
+
+      .success-brand {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .success-check {
+        width: 84px;
+        height: 84px;
+        font-size: 46px;
+      }
+
+      .success-card h2 {
+        font-size: 47px;
+      }
+
+      .success-card p {
+        font-size: 28px;
+      }
+
+      #registeredPlayer {
+        font-size: 35px;
+      }
+
+      .next-button {
+        min-height: 88px;
+        font-size: 39px;
+      }
+        /* BEAUTY 1.9 — MOBILE TEXT SIZE UPGRADE */
+
+  .registration-title {
+    font-size: 52px;
+  }
+
+  .intro {
+    font-size: 25px;
+    line-height: 1.4;
+  }
+
+  .tonight-players-button {
+    min-height: 84px;
+    font-size: 50px;
+  }
+
+  .label {
+    font-size: 32px;
+  }
+
+  .player-dropdown-button {
+    font-size: 31px;
+  }
+
+  .player-option {
+    font-size: 29px;
+  }
+
+  .player-search {
+    font-size: 29px;
+  }
+
+  input[type="text"] {
+    font-size: 30px;
+  }
+
+  .consent-option label {
+    font-size: 30px;
+  }
+
+  .help,
+  .new-player-help {
+    font-size: 22px;
+  }
+
+  textarea {
+    font-size: 27px;
+  }
+
+  .submit-button {
+    font-size: 39px;
+  }
+    }
+
+  </style>
+
+<style>
+:root { --identity-body-font: 'AIK Display Light'; --identity-body-weight: 300; }
+.identity-overlay { position: fixed; inset: 0; z-index: 11000; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(0,0,0,.8); }
+.identity-dialog { position: relative; width: min(620px,100%); max-height: 90vh; overflow: auto; padding: 32px; border: 2px solid #ffd700; border-radius: 14px; background: #111; color: #fff; font-family: var(--identity-body-font, 'AIK Display'), Arial, sans-serif; font-weight: var(--identity-body-weight, 400); font-size: 18px; line-height: 1.5; }
+.identity-dialog h2, .identity-name { font-family: 'AIK Display', Arial, sans-serif; font-weight: 700; color: #ffd700; overflow-wrap: anywhere; }
+.identity-close { position: absolute; top: 8px; right: 12px; background: transparent; color: #ffd700; border: 0; font-size: 32px; cursor: pointer; }
+.identity-action, .identity-cancel { display: block; width: 100%; padding: 12px; margin-top: 12px; border: 2px solid #ffd700; border-radius: 7px; font-family: 'AIK Condensed', 'AIK Display', Arial, sans-serif; font-weight: 700; font-size: 22px; line-height: 1.2; cursor: pointer; }
+.identity-action { background: #ffd700; color: #000; } .identity-cancel { background: #111; color: #fff; }
+.identity-detail { display: block; width: 100%; box-sizing: border-box; margin-top: 8px; padding: 12px; background: #fff; color: #111; border: 2px solid #ffd700; border-radius: 7px; font: inherit; }
+.identity-detail-area { margin-top: 20px; } .identity-detail-area[hidden] { display: none; }
+.identity-preview, .identity-info { overflow-wrap: anywhere; color: #ffd700; }
+.identity-dialog button:focus-visible, .identity-detail:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+</style>
+<script>
+/* Shared, pure name-conflict rules. No service access and no writes. */
+var BeautyNameResolution = (() => {
+  const NEW = 'MITT NAMN FINNS INTE I LISTAN';
+  const clean = value => String(value || '').normalize('NFC').trim().replace(/\s+/g, ' ');
+  const key = value => clean(value).toLocaleLowerCase('sv-SE');
+  const error = (code, message) => ({ success: false, code, error: message });
+  function resolve(input, master, tonight) {
+    const selected = clean(input.selectedName);
+    const entered = clean(selected === NEW ? input.newName : selected);
+    if (!entered || entered.length > 120 || /^[=+@-]/.test(entered) || /[\x00-\x1f\x7f]/.test(entered)) {
+      return error('INVALID_NAME', 'Skriv ett giltigt fullständigt namn.');
+    }
+    const matches = master.filter(name => key(name) === key(entered));
+    if (matches.length > 1) return error('AMBIGUOUS_NAME', 'Flera spelarposter har samma namn. Be arrangören om hjälp.');
+    const existing = matches[0] === undefined ? null : clean(matches[0]);
+    if (selected !== NEW && !existing) return error('UNKNOWN_PLAYER', 'Välj ditt namn i listan eller lägg till en ny spelare.');
+    const alreadyIn = name => tonight.some(player => key(player) === key(name));
+    const choice = input.identityChoice || '';
+    if (choice && !['existing', 'different'].includes(choice)) return error('INVALID_CHOICE', 'Välj vem du är.');
+    const conflict = existing && (selected === NEW || alreadyIn(existing));
+    if (choice && (!conflict || key(input.identityBase) !== key(existing))) {
+      return error('STALE_IDENTITY', 'Namnvalet har ändrats. Börja om med ditt namn.');
+    }
+    if (conflict && !choice) return { ...error('NAME_CONFLICT', 'Det här namnet finns redan i listan.'),
+      baseName: existing, alreadyRegistered: alreadyIn(existing) };
+    if (choice === 'different') {
+      const detail = clean(input.identityDetail);
+      if (!detail || detail.length > 60 || /[()<>\x00-\x1f\x7f]/.test(detail) || /^[=+@-]/.test(detail)) {
+        return { ...error('INVALID_DETAIL', 'Skriv ditt mellannamn, smeknamn eller en annan uppgift.'), baseName: existing };
+      }
+      // Parentheses preserve the entered full name without guessing which word is a surname.
+      const candidate = existing + ' (' + detail + ')';
+      if (candidate.length > 120) return { ...error('INVALID_DETAIL', 'Namnet och tillägget är för långt.'), baseName: existing };
+      if (master.some(name => key(name) === key(candidate))) return { ...error('DETAIL_IN_USE',
+        'Det namnet med tillägg finns redan. Välj det i spelarlistan om det är du, eller ange ett annat tillägg.'), baseName: existing };
+      if (clean(input.identityConfirmedName) !== candidate) return { ...error('CONFIRM_NAME', 'Bekräfta hur ditt namn ska visas.'), baseName: existing, proposedName: candidate };
+      return { success: true, player: candidate, isNew: true };
+    }
+    if (existing && alreadyIn(existing)) return error('ALREADY_REGISTERED', 'Du är redan anmäld till den här spelkvällen.');
+    return { success: true, player: existing || entered, isNew: !existing };
+  }
+  return Object.freeze({ clean, key, resolve, newPlayerOption: NEW });
+})();
+if (typeof module !== 'undefined' && module.exports) module.exports = BeautyNameResolution;
+
+/* One accessible conflict/confirmation dialog shared by Hub, remote and kiosk. */
+var BeautyIdentityDialog = (() => {
+  function open(conflict) {
+    return new Promise(resolve => {
+      const previousFocus = document.activeElement;
+      const make = (tag, cls, text) => {
+        const el = document.createElement(tag); el.className = cls;
+        if (text !== undefined) el.textContent = text;
+        return el;
+      };
+      const overlay = make('div', 'identity-overlay');
+      const dialog = make('section', 'identity-dialog');
+      dialog.setAttribute('role', 'dialog'); dialog.setAttribute('aria-modal', 'true');
+      dialog.setAttribute('aria-label', 'Namnet finns redan');
+      const close = make('button', 'identity-close', '×');
+      close.type = 'button'; close.setAttribute('aria-label', 'Stäng');
+      const title = make('h2', '', 'Namnet finns redan');
+      const name = make('p', 'identity-name', conflict.baseName);
+      const help = make('p', '', 'Det här namnet finns redan i listan. Om det är du, välj DET ÄR JAG. Om du är en annan person, ange ditt mellannamn, smeknamn eller en annan uppgift så att vi kan skilja er åt.');
+      const me = make('button', 'identity-action', 'DET ÄR JAG'); me.type = 'button';
+      const other = make('button', 'identity-action', 'JAG ÄR EN ANNAN PERSON'); other.type = 'button';
+      const area = make('div', 'identity-detail-area'); area.hidden = true;
+      const label = make('label', '', 'Mellannamn, smeknamn eller annan uppgift');
+      const input = make('input', 'identity-detail'); input.type = 'text'; input.maxLength = 60;
+      input.setAttribute('aria-label', 'Mellannamn, smeknamn eller annan uppgift');
+      label.appendChild(input);
+      const info = make('p', 'identity-info'); info.setAttribute('role', 'status');
+      if (conflict.code !== 'NAME_CONFLICT') info.textContent = conflict.error || '';
+      const preview = make('p', 'identity-preview');
+      const proceed = make('button', 'identity-action', 'FORTSÄTT'); proceed.type = 'button';
+      const cancel = make('button', 'identity-cancel', 'AVBRYT'); cancel.type = 'button';
+      let proposed = '', finished = false;
+      const finish = value => {
+        if (finished) return; finished = true;
+        document.removeEventListener('keydown', onKey);
+        overlay.remove(); previousFocus?.focus?.(); resolve(value);
+      };
+      const onKey = event => {
+        if (event.key === 'Escape') { event.preventDefault(); finish(null); }
+        if (event.key === 'Tab') {
+          const buttons = [close, me, other, ...(area.hidden ? [] : [input, proceed]), cancel];
+          const first = buttons[0], last = buttons[buttons.length - 1];
+          if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+          else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+        }
+      };
+      close.addEventListener('click', () => finish(null)); cancel.addEventListener('click', () => finish(null));
+      overlay.addEventListener('click', event => { if (event.target === overlay) finish(null); });
+      me.addEventListener('click', () => finish({ identityChoice: 'existing', identityBase: conflict.baseName }));
+      other.addEventListener('click', () => { area.hidden = false; input.focus(); });
+      input.addEventListener('input', () => { proposed = ''; preview.textContent = ''; proceed.textContent = 'FORTSÄTT'; info.textContent = ''; });
+      proceed.addEventListener('click', () => {
+        const detail = BeautyNameResolution.clean(input.value);
+        const result = BeautyNameResolution.resolve({ selectedName: BeautyNameResolution.newPlayerOption,
+          newName: conflict.baseName, identityChoice: 'different', identityBase: conflict.baseName,
+          identityDetail: detail }, [conflict.baseName], []);
+        if (result.code !== 'CONFIRM_NAME') { info.textContent = result.error; return; }
+        if (proposed !== result.proposedName) {
+          proposed = result.proposedName; preview.textContent = 'Du registreras som: ' + proposed;
+          info.textContent = 'Kontrollera namnet och tryck BEKRÄFTA.'; proceed.textContent = 'BEKRÄFTA'; return;
+        }
+        finish({ identityChoice: 'different', identityBase: conflict.baseName,
+          identityDetail: detail, identityConfirmedName: proposed });
+      });
+      area.appendChild(label); area.appendChild(preview); area.appendChild(proceed);
+      for (const el of [close, title, name, help, me, other, area, info, cancel]) dialog.appendChild(el);
+      overlay.appendChild(dialog); document.body.appendChild(overlay);
+      document.addEventListener('keydown', onKey); close.focus();
+    });
+  }
+  async function submit(send, initial) {
+    let data = { ...initial };
+    for (;;) {
+      // Only explicit user choices can resubmit. Transport errors are never retried.
+      const result = await send(data);
+      if (!result || !['NAME_CONFLICT', 'INVALID_DETAIL', 'DETAIL_IN_USE', 'CONFIRM_NAME'].includes(result.code)) return result;
+      const choice = await open(result);
+      if (!choice) return { success: false, code: 'CANCELLED' };
+      data = { ...initial, ...choice };
+    }
+  }
+  return Object.freeze({ open, submit });
+})();
+
+</script>
+</head>
+
+<body>
+
+  <!-- REGISTRATION -->
+
+  <div id="registrationScreen" class="page">
+
+    <div class="container">
+
+      <div class="branding">
+
+        <img
+          class="brand-image"
+          src="https://aik-dart-header.alessiotampella.workers.dev/aik-dart-header.webp"
+          alt="AIK Dart Måndagsdartarna">
+
+        <div class="registration-title">
+          ANMÄL DIG TILL KVÄLLENS SPEL
+        </div>
+
+        <div class="intro">
+          Registrera dig i förväg eller meddela oss att du är på väg.
+        </div>
+
+      </div>
+<!-- BEAUTY 1.8 — TONIGHT'S PLAYERS -->
+<div class="tonight-players-area">
+  <button
+    type="button"
+    class="tonight-players-button"
+    onclick="openTonightsPlayers()"
+  >
+    👥 KVÄLLENS SPELARE
+  </button>
+</div>
+      <div class="card">
+
+        <div id="loading">
+          LADDAR SPELARLISTA...
+        </div>
+
+        <div id="formArea" style="display:none;">
+
+          <div id="errorBox"></div>
+
+          <!-- PLAYER -->
+
+          <div class="field">
+
+            <label class="label">
+              VÄLJ DITT NAMN
+              <span class="required">*</span>
+            </label>
+
+            <div class="new-player-help">
+              Hittar du inte ditt namn? Välj
+              <strong>MITT NAMN FINNS INTE I LISTAN</strong>
+              och skriv sedan ditt fullständiga namn.
+            </div>
+
+            <div class="player-dropdown">
+
+              <button
+                type="button"
+                id="playerDropdownButton"
+                class="player-dropdown-button"
+                onclick="togglePlayerDropdown()">
+
+                <span id="playerDropdownText">Välj...</span>
+                <span class="player-dropdown-arrow">▼</span>
+
+              </button>
+
+              <div
+                id="playerDropdownMenu"
+                class="player-dropdown-menu">
+
+                <input
+                  type="text"
+                  id="playerSearch"
+                  class="player-search"
+                  autocomplete="off"
+                  placeholder="Sök ditt namn..."
+                  oninput="filterPlayers()">
+
+                <div id="playerOptions"></div>
+
+              </div>
+
+              <input
+                type="hidden"
+                id="playerName"
+                value="">
+
+            </div>
+
+            <div id="newPlayerArea">
+
+              <label class="label" for="newPlayerName">
+                SKRIV DITT FULLSTÄNDIGA NAMN
+                <span class="required">*</span>
+              </label>
+
+              <input
+                type="text"
+                id="newPlayerName"
+                autocomplete="off"
+                placeholder="Förnamn Efternamn">
+
+            </div>
+
+          </div>
+
+          <!-- PHOTO / VIDEO -->
+
+          <div class="field">
+
+            <div class="label">
+              FOTO OCH VIDEO
+              <span class="required">*</span>
+            </div>
+
+            <div class="consent-options">
+
+              <div class="consent-option">
+
+                <input
+                  type="radio"
+                  id="consentYes"
+                  name="consent"
+                  value="JA, JAG GODKÄNNER">
+
+                <label for="consentYes">
+                  JA, JAG GODKÄNNER
+                </label>
+
+              </div>
+
+              <div class="consent-option">
+
+                <input
+                  type="radio"
+                  id="consentNo"
+                  name="consent"
+                  value="NEJ, JAG GODKÄNNER INTE">
+
+                <label for="consentNo">
+                  NEJ, JAG GODKÄNNER INTE
+                </label>
+
+              </div>
+
+            </div>
+
+            <div class="help">
+              Ditt svar används för att ange om AIK Dartförening får använda foto och video där du medverkar.
+            </div>
+
+          </div>
+
+          <!-- MESSAGE -->
+
+          <div class="field">
+
+            <label class="label message-label" for="message">
+  MEDDELANDE
+</label>
+
+            <textarea
+              id="message"
+              placeholder="Valfritt – t.ex. Jag blir cirka 15 minuter sen."></textarea>
+
+          </div>
+
+          <!-- SUBMIT -->
+
+          <button
+            id="submitButton"
+            class="submit-button"
+            onclick="submitForm()">
+
+            ANMÄL MIG
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- SUCCESS -->
+
+  <div id="successScreen" class="page">
+
+    <div class="success-wrapper">
+
+      <div class="success-card">
+
+        <img
+          class="success-brand"
+          src="https://aik-dart-header.alessiotampella.workers.dev/aik-dart-header.webp"
+          alt="AIK Dart Måndagsdartarna">
+
+        <div class="success-check">
+          ✓
+        </div>
+
+        <h2>
+          TACK FÖR DIN ANMÄLAN!
+        </h2>
+
+        <p>
+          <span id="registeredPlayer"></span>
+          är nu registrerad till kvällens Måndagsdartarna.
+        </p>
+
+        <button
+          class="next-button"
+          onclick="nextPlayer()">
+
+          NÄSTA SPELARE
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    const NEW_PLAYER_OPTION =
+      'MITT NAMN FINNS INTE I LISTAN';
+
+    let allPlayers = [];
+
+    window.addEventListener('load', loadPlayers);
+
+    /* =====================================================
+       LOAD PLAYERS
+       ===================================================== */
+
+    function loadPlayers() {
+
+      document.getElementById('loading').style.display = 'block';
+      document.getElementById('formArea').style.display = 'none';
+
+      google.script.run
+
+        .withSuccessHandler(function(players) {
+
+          buildPlayerList(players);
+
+          document.getElementById('loading').style.display = 'none';
+          document.getElementById('formArea').style.display = 'block';
+
+        })
+
+        .withFailureHandler(function(error) {
+
+          document.getElementById('loading').innerText =
+            'KUNDE INTE LADDA SPELARLISTAN';
+
+          showError(
+            error && error.message
+              ? error.message
+              : 'Ett fel uppstod.'
+          );
+
+        })
+
+        .getPlayerNames();
+    }
+
+    function buildPlayerList(players) {
+
+      allPlayers = players.slice();
+
+      renderPlayerList(allPlayers);
+    }
+
+    function renderPlayerList(players) {
+
+      const options =
+        document.getElementById('playerOptions');
+
+      options.innerHTML = '';
+
+      /* NEW PLAYER ALWAYS FIRST */
+
+      const newPlayerButton =
+        document.createElement('button');
+
+      newPlayerButton.type = 'button';
+
+      newPlayerButton.className =
+        'player-option new-player-option';
+
+      newPlayerButton.textContent =
+        NEW_PLAYER_OPTION;
+
+      newPlayerButton.onclick = function() {
+        selectPlayer(NEW_PLAYER_OPTION);
+      };
+
+      options.appendChild(newPlayerButton);
+
+      /* NORMAL PLAYERS */
+
+      players.forEach(function(player) {
+
+        if (player === NEW_PLAYER_OPTION) {
+          return;
+        }
+
+        const button =
+          document.createElement('button');
+
+        button.type = 'button';
+        button.className = 'player-option';
+        button.textContent = player;
+
+        button.onclick = function() {
+          selectPlayer(player);
+        };
+
+        options.appendChild(button);
+
+      });
+    }
+
+    /* =====================================================
+       DROPDOWN
+       ===================================================== */
+
+    function togglePlayerDropdown() {
+
+      const menu =
+        document.getElementById('playerDropdownMenu');
+
+      menu.classList.toggle('open');
+
+      if (menu.classList.contains('open')) {
+
+        setTimeout(function() {
+
+          document
+            .getElementById('playerSearch')
+            .focus();
+
+        }, 100);
+      }
+    }
+
+    function selectPlayer(player) {
+
+      document
+        .getElementById('playerName')
+        .value = player;
+
+      document
+        .getElementById('playerDropdownText')
+        .textContent = player;
+
+      document
+        .getElementById('playerDropdownMenu')
+        .classList.remove('open');
+
+      document
+        .getElementById('playerSearch')
+        .value = '';
+
+      renderPlayerList(allPlayers);
+
+      playerChanged();
+    }
+
+    function filterPlayers() {
+
+      const search =
+        document
+          .getElementById('playerSearch')
+          .value
+          .trim()
+          .toLowerCase();
+
+      const filteredPlayers =
+        allPlayers.filter(function(player) {
+
+          if (player === NEW_PLAYER_OPTION) {
+            return false;
+          }
+
+          return player
+            .toLowerCase()
+            .includes(search);
+
+        });
+
+      renderPlayerList(filteredPlayers);
+    }
+
+    /* =====================================================
+       NEW PLAYER
+       ===================================================== */
+
+    function playerChanged() {
+
+      const selected =
+        document
+          .getElementById('playerName')
+          .value;
+
+      const newPlayerArea =
+        document
+          .getElementById('newPlayerArea');
+
+      if (selected === NEW_PLAYER_OPTION) {
+
+        newPlayerArea.style.display =
+          'block';
+
+        setTimeout(function() {
+
+          document
+            .getElementById('newPlayerName')
+            .focus();
+
+        }, 100);
+
+      } else {
+
+        newPlayerArea.style.display =
+          'none';
+
+        document
+          .getElementById('newPlayerName')
+          .value = '';
+      }
+    }
+
+    /* =====================================================
+       SUBMIT
+       ===================================================== */
+
+    async function submitForm() {
+
+      hideError();
+
+      const selectedName =
+        document
+          .getElementById('playerName')
+          .value;
+
+      const newName =
+        document
+          .getElementById('newPlayerName')
+          .value
+          .trim();
+
+      const consentElement =
+        document.querySelector(
+          'input[name="consent"]:checked'
+        );
+
+      const consent =
+        consentElement
+          ? consentElement.value
+          : '';
+
+      const message =
+        document
+          .getElementById('message')
+          .value
+          .trim();
+
+      if (!selectedName) {
+
+        showError(
+          'Välj ditt namn.'
+        );
+
+        return;
+      }
+
+      if (
+        selectedName === NEW_PLAYER_OPTION &&
+        !newName
+      ) {
+
+        showError(
+          'Skriv ditt fullständiga namn.'
+        );
+
+        return;
+      }
+
+      if (!consent) {
+
+        showError(
+          'Välj JA eller NEJ för foto och video.'
+        );
+
+        return;
+      }
+
+      const button =
+        document.getElementById(
+          'submitButton'
+        );
+
+      button.disabled = true;
+
+      button.innerText =
+        'REGISTRERAR...';
+
+      const data = {
+
+  selectedName:
+    selectedName,
+
+  newName:
+    newName,
+
+  consent:
+    consent,
+
+  message:
+    message,
+
+  source:
+    'MOBIL'
+
+};
+
+      try {
+        const result = await BeautyIdentityDialog.submit(payload => new Promise((resolve, reject) => {
+          google.script.run.withSuccessHandler(resolve).withFailureHandler(reject).submitRegistration(payload);
+        }), data);
+        if (result?.code === 'CANCELLED') return;
+        if (result?.success) showSuccess(result.player);
+        else showError(result?.error || 'Registreringen kunde inte sparas.');
+      } catch (error) {
+        showError('Registreringen kunde inte bekräftas. Kontrollera med arrangören innan du försöker igen.');
+      } finally {
+        button.disabled = false; button.innerText = 'ANMÄL MIG';
+      }
+    }
+
+    /* =====================================================
+       SUCCESS + 5 SECOND AUTO RETURN
+       ===================================================== */
+
+    function showSuccess(player) {
+
+      document
+        .getElementById('registeredPlayer')
+        .textContent = player;
+
+      document
+        .getElementById('registrationScreen')
+        .style.display = 'none';
+
+      document
+        .getElementById('successScreen')
+        .style.display = 'block';
+
+      window.scrollTo(0, 0);
+
+      setTimeout(nextPlayer, 5000);
+    }
+
+    /* =====================================================
+       NEXT PLAYER
+       ===================================================== */
+
+    function nextPlayer() {
+
+      document
+        .getElementById('playerName')
+        .value = '';
+
+      document
+        .getElementById('playerSearch')
+        .value = '';
+
+      document
+        .getElementById('newPlayerName')
+        .value = '';
+
+      document
+        .getElementById('playerDropdownText')
+        .textContent = 'Välj...';
+
+      document
+        .getElementById('playerDropdownMenu')
+        .classList.remove('open');
+
+      renderPlayerList(allPlayers);
+
+      document
+        .getElementById('newPlayerArea')
+        .style.display = 'none';
+
+      document
+        .querySelectorAll(
+          'input[name="consent"]'
+        )
+        .forEach(function(radio) {
+
+          radio.checked = false;
+
+        });
+
+      document
+        .getElementById('message')
+        .value = '';
+
+      hideError();
+
+      document
+        .getElementById('successScreen')
+        .style.display = 'none';
+
+      document
+        .getElementById('registrationScreen')
+        .style.display = 'block';
+
+      loadPlayers();
+
+      window.scrollTo(0, 0);
+    }
+
+    /* =====================================================
+       ERROR
+       ===================================================== */
+
+    function showError(message) {
+
+      const errorBox =
+        document.getElementById(
+          'errorBox'
+        );
+
+      errorBox.textContent =
+        message;
+
+      errorBox.style.display =
+        'block';
+
+      errorBox.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }
+
+    function hideError() {
+
+      const errorBox =
+        document.getElementById(
+          'errorBox'
+        );
+
+      errorBox.style.display =
+        'none';
+
+      errorBox.textContent =
+        '';
+    }
+/* =====================================================
+   BEAUTY 1.8 — TONIGHT'S PLAYERS POPUP
+   ===================================================== */
+
+function openTonightsPlayers() {
+
+  const modal =
+    document.getElementById(
+      'tonightPlayersModal'
+    );
+
+  const loading =
+    document.getElementById(
+      'tonightPlayersLoading'
+    );
+
+  const list =
+    document.getElementById(
+      'tonightPlayersList'
+    );
+
+  modal.classList.add('open');
+
+  loading.style.display = 'block';
+  loading.textContent = 'Hämtar spelare...';
+
+  list.innerHTML = '';
+
+  google.script.run
+
+    .withSuccessHandler(
+      function(names) {
+
+        loading.style.display = 'none';
+        list.innerHTML = '';
+
+        if (
+          !names ||
+          names.length === 0
+        ) {
+
+          list.innerHTML =
+            '<div class="tonight-empty">' +
+            'Ingen är anmäld ännu.' +
+            '</div>';
+
+          return;
+        }
+
+        names.forEach(
+          function(name) {
+
+            const player =
+              document.createElement(
+                'div'
+              );
+
+            player.className =
+              'tonight-player-name';
+
+            player.textContent =
+              name;
+
+            list.appendChild(
+              player
+            );
+          }
+        );
+      }
+    )
+
+    .withFailureHandler(
+      function(error) {
+
+        loading.style.display =
+          'block';
+
+        loading.textContent =
+          'Kunde inte hämta spelarlistan.';
+
+        console.error(error);
+      }
+    )
+
+    .getTonightsPlayerNames();
+}
+
+
+function closeTonightsPlayers() {
+
+  document
+    .getElementById(
+      'tonightPlayersModal'
+    )
+    .classList.remove(
+      'open'
+    );
+}
+  </script>
+<!-- =====================================================
+     BEAUTY 1.8 — TONIGHT'S PLAYERS POPUP
+     ===================================================== -->
+
+<div id="tonightPlayersModal" class="tonight-modal">
+  <div class="tonight-modal-card">
+
+    <div class="tonight-modal-header">
+      KVÄLLENS SPELARE
+    </div>
+
+    <div id="tonightPlayersLoading" class="tonight-loading">
+      Hämtar spelare...
+    </div>
+
+    <div id="tonightPlayersList" class="tonight-players-list"></div>
+
+    <button
+      type="button"
+      class="tonight-close-button"
+      onclick="closeTonightsPlayers()"
+    >
+      STÄNG
+    </button>
+
+  </div>
+</div>
+</body>
+</html>

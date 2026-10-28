@@ -1,0 +1,10 @@
+.identity-overlay { position: fixed; inset: 0; z-index: 11000; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(0,0,0,.8); }
+.identity-dialog { position: relative; width: min(620px,100%); max-height: 90vh; overflow: auto; padding: 32px; border: 2px solid #ffd700; border-radius: 14px; background: #111; color: #fff; font-family: var(--identity-body-font, 'AIK Display'), Arial, sans-serif; font-weight: var(--identity-body-weight, 400); font-size: 18px; line-height: 1.5; }
+.identity-dialog h2, .identity-name { font-family: 'AIK Display', Arial, sans-serif; font-weight: 700; color: #ffd700; overflow-wrap: anywhere; }
+.identity-close { position: absolute; top: 8px; right: 12px; background: transparent; color: #ffd700; border: 0; font-size: 32px; cursor: pointer; }
+.identity-action, .identity-cancel { display: block; width: 100%; padding: 12px; margin-top: 12px; border: 2px solid #ffd700; border-radius: 7px; font-family: 'AIK Condensed', 'AIK Display', Arial, sans-serif; font-weight: 700; font-size: 22px; line-height: 1.2; cursor: pointer; }
+.identity-action { background: #ffd700; color: #000; } .identity-cancel { background: #111; color: #fff; }
+.identity-detail { display: block; width: 100%; box-sizing: border-box; margin-top: 8px; padding: 12px; background: #fff; color: #111; border: 2px solid #ffd700; border-radius: 7px; font: inherit; }
+.identity-detail-area { margin-top: 20px; } .identity-detail-area[hidden] { display: none; }
+.identity-preview, .identity-info { overflow-wrap: anywhere; color: #ffd700; }
+.identity-dialog button:focus-visible, .identity-detail:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }

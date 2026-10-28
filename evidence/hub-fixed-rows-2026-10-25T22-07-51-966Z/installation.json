@@ -1,0 +1,16 @@
+{
+  "changeId": "HUB-FIXED-ROWS-20261025",
+  "timestampUTC": "2026-10-25T22:07:51.966Z",
+  "timestampStockholm": "2026-10-25 23:07:51",
+  "branch": "recovery/2026-10-24",
+  "baselineCommit": "25c5a7a8064f9e5e691b6262c084e207674c8af4",
+  "target": "apps-script/registration-identity-test/remote-app/HubTest.html",
+  "backup": "backups/hub-fixed-rows-before-2026-10-25T22-07-51-966Z",
+  "beforeSHA256": "9f8dc2cbefbb58b2aba7315b7d92990a0461ea827c8e81ad12954e7f4b0fc8cb",
+  "afterSHA256": "efde7ea1e0ac3d3a2e3c3f00d0ba95db327197912383856834c83f451fbc90a0",
+  "installation": "PASS",
+  "automatedSuite": "NOT RUN",
+  "inventory": "NOT RUN",
+  "browserVisualReview": "PENDING",
+  "production": "No deployment or production changes performed"
+}

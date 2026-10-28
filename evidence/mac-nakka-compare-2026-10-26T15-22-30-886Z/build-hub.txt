@@ -1,0 +1,1 @@
+Generated HubTest.html from shared Hub UI, AIK assets and TEST bridge.

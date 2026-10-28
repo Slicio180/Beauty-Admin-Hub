@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Beauty Hub — Sign in</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/login.css"></head>
+<body class="login-page"><main class="login-card">
+<img src="assets/logo/aik-dart-yellow.png" alt="AIK Dart" class="login-logo">
+<p class="login-brand">BEAUTY EVENT HUB</p>
+<section id="signInView"><h1>Sign in</h1><p class="login-intro">Your event starts here.</p>
+<form id="loginForm">
+<label for="loginEmail">Email address</label><input id="loginEmail" type="email" autocomplete="username" required maxlength="254">
+<label for="loginPassword">Password</label><div class="password-field"><input id="loginPassword" type="password" autocomplete="current-password" required maxlength="256"><button id="showPassword" type="button" aria-controls="loginPassword" aria-pressed="false">Show</button></div>
+<button class="login-primary" id="signInButton" type="submit">Sign in</button>
+</form><button class="login-link" id="forgotPassword" type="button">Forgot password?</button>
+<p class="login-note">Shared computer: sign out when you finish. Do not save your password in the browser.</p></section>
+<section id="resetView" hidden><h1>Reset password</h1><p class="login-intro">Enter your account email address.</p>
+<form id="resetForm"><label for="resetEmail">Email address</label><input id="resetEmail" type="email" autocomplete="email" required maxlength="254"><button class="login-primary" id="sendReset" type="submit">Send reset link</button></form>
+<button class="login-link" id="backToSignIn" type="button">Back to sign in</button></section>
+<section id="sessionView" hidden><h1>Signed in</h1><p id="signedInEmail"></p><button class="login-primary" id="openHub" type="button">Open Hub</button><button class="login-secondary" id="signOut" type="button">Sign out</button></section>
+<p id="loginMessage" role="status" aria-live="polite"></p>
+<p class="login-setup">PAGE PREVIEW · Secure account connection is not configured yet. Sign-in stays blocked until it is connected. Use test details only.</p>
+</main><script src="js/login.js"></script></body></html>

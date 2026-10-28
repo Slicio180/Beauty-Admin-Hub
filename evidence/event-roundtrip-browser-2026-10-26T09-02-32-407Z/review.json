@@ -1,0 +1,42 @@
+{
+  "sourceCheckpoint": "7e01e9b0a96f35270e571972849c89c8a8f52077",
+  "dateStockholm": "2026-10-26",
+  "scope": "Owner-operated Identity TEST event-date round trip and long-message browser acceptance",
+  "results": {
+    "26_to_27": "PASS: native save success message and empty 27 October Hub screenshot.",
+    "27_to_26": "PASS: owner confirmed and screenshot shows 26 October and Jonathan IN/YES; native readback verifies IN/JA/original message/HUB.",
+    "messagePopup": "PASS: supplied 09.54.33 screenshot shows original 101-character message wrapping in popup, keeping player row compact. Message still exact in native readback after return.",
+    "preservation": "PASS: full bounded master/history reads unchanged; three name corrections retained; both date changes have five sheet copies plus SNAPSHOT backup tab.",
+    "layout": "Compact header/rows, sidebar-only health details, status dots and main registration button present in 09.54.18 screenshot. Opening/closing both health detail dialogs was not separately confirmed."
+  },
+  "priorFailure": "Original 25-to-26 SAVE_UNCERTAIN and bounded repair remain recorded separately under AUD-075; not relabelled as PASS.",
+  "limitations": "Sequential owner TEST only. Native backup restoration, concurrent kiosk use, large-event limits and production release remain pending. Screenshot confirmation does not prove the uploaded source hash.",
+  "screenshots": [
+    {
+      "name": "Screenshot 2026-10-26 at 09.54.18.png",
+      "bytes": 134602,
+      "sha256": "47df79fa902d90472eff48cf579f836f3c5ab79e5692725560b0ef7cc6fa5a70"
+    },
+    {
+      "name": "Screenshot 2026-10-26 at 09.54.33.png",
+      "bytes": 46081,
+      "sha256": "875deb23da7f56a1c0fd734f59348ff3955e808c3bac9bb9b95791ba14df7316"
+    },
+    {
+      "name": "Screenshot 2026-10-26 at 09.56.31.png",
+      "bytes": 43650,
+      "sha256": "33311dd140a8b5a1c168d43d2b2317b834c5989988f5aa758b783642960c23cd"
+    },
+    {
+      "name": "Screenshot 2026-10-26 at 09.56.55.png",
+      "bytes": 82096,
+      "sha256": "5a7f8f88764d6730a34aa6beb1be97018489eb117361b34c3f3b9736146348a0"
+    },
+    {
+      "name": "Screenshot 2026-10-26 at 09.58.51.png",
+      "bytes": 49824,
+      "sha256": "6fd2796300a248c45e798266ad18bceff81f2cd8b18866c463373bb2ebfba52e"
+    }
+  ],
+  "recordedUTC": "2026-10-26T09:02:32.407Z"
+}

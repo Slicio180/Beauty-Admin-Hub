@@ -1,0 +1,11 @@
+{
+  "recordedAt": "2026-10-25T11:56:34.790922+00:00",
+  "runtime": "Node v24.22.1, assistant environment",
+  "scope": "Offline Hub preview and staged remote/kiosk candidate source only",
+  "liveSources": "Original remote-app/automatic-nakka snapshots unchanged",
+  "macRetest": "PENDING",
+  "realAppsScriptRetest": "PENDING",
+  "candidateRegistrationWritesEnabled": false,
+  "tests": 175,
+  "files": 9
+}

@@ -1,0 +1,30 @@
+{
+  "recordedAt": "2026-10-25T12:37:35.436Z",
+  "images": [
+    {
+      "name": "Screenshot 2026-10-25 at 13.10.15.png",
+      "bytes": 47019,
+      "sha256": "2b0bf452599239c7ad715d658ce7b018f3ea5f39c85e3cd857a27ad80a37d140"
+    },
+    {
+      "name": "Screenshot 2026-10-25 at 13.12.16.png",
+      "bytes": 57857,
+      "sha256": "46af166ff10b1267e502fb4ecac7205b70eb9c5c255fcbfe4638d0fbae099043"
+    },
+    {
+      "name": "Screenshot 2026-10-25 at 13.13.12.png",
+      "bytes": 123034,
+      "sha256": "efc72fbc0c528f401289cd87ca0a21865d2499619f71294aff15f01433b96b60"
+    },
+    {
+      "name": "Screenshot 2026-10-25 at 13.14.34.png",
+      "bytes": 26892,
+      "sha256": "fa915cfda7fa6eb54cde6f90356ed96f1d00a1f82735bebebbeb4bc92b4f55b8"
+    },
+    {
+      "name": "Screenshot 2026-10-25 at 13.15.21.png",
+      "bytes": 123878,
+      "sha256": "8bc04c189fb3f087e249275bf6d30b4f79d24c1e8630da430742086b5611acfa"
+    }
+  ]
+}

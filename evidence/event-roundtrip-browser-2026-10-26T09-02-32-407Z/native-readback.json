@@ -1,0 +1,70 @@
+{
+  "spreadsheetId": "1SIj4F8_WfWaeDVsdagRw8AoLsz0XsjhtdIn_OOxoDnU",
+  "verifiedUTC": "2026-10-26T09:00:28.590Z",
+  "control": [
+    [
+      "START DATE",
+      "LAST RESET"
+    ],
+    [
+      "26/10/2026",
+      "26/10/2026 09:58"
+    ]
+  ],
+  "tonight": [
+    [
+      "PLAYERS",
+      "NEW PLAYERS",
+      "STATUS",
+      "FOTO&VIDEO",
+      "MEDDELANDE",
+      "WHERE FROM"
+    ],
+    [
+      "Jonathan Niemi",
+      null,
+      "IN",
+      "JA",
+      "kjkjlsdnsdpiouiobåwu¨cwut9¨woppo ü¨w. uqadnknovkavnä ääjgjkdkfjj ko ksnk haoiäahfvns'kioarg. aiohioy.",
+      "HUB"
+    ]
+  ],
+  "statusStore": [
+    [
+      "PLAYER",
+      "OLD NAME",
+      "STATUS",
+      "FOTO&VIDEO",
+      "MEDDELANDE",
+      "WHERE FROM"
+    ],
+    [
+      "Max Henriksson",
+      "Max Henrikson"
+    ],
+    [
+      "Alexander Felldin",
+      "Alexanderfelldin"
+    ],
+    [
+      "Ronny Johansson",
+      "Ronny johansson"
+    ],
+    [
+      "Jonathan Niemi",
+      null,
+      "IN",
+      "JA",
+      "kjkjlsdnsdpiouiobåwu¨cwut9¨woppo ü¨w. uqadnknovkavnä ääjgjkdkfjj ko ksnk haoiäahfvns'kioarg. aiohioy.",
+      "HUB"
+    ]
+  ],
+  "masterUnchanged": true,
+  "responseHistoryUnchanged": true,
+  "backupPrefixes": [
+    "BKP-20261026-095603-442ec2a3",
+    "BKP-20261026-095812-a735a411"
+  ],
+  "verification": "Read-only connector checks after owner operated Hub. Master A1:A990 and responses A1:F162 compare equal to pre-repair values already verified against initial backup.",
+  "limitations": "Sequential Identity TEST only. Does not qualify production, simultaneous kiosk writers, restore-from-backup execution or a large-player event."
+}

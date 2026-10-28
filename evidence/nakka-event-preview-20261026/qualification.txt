@@ -1,0 +1,1 @@
+Native event lookup pending. Read-only local fixture qualification; no actual Nakka event data fetched in this environment. Expected owner-supplied event: t_qJH9_0995 on 2026-10-26.

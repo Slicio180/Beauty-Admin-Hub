@@ -1,0 +1,9 @@
+{
+  "recordedAt": "2026-10-25T11:01:01.592940+00:00",
+  "sourceCheckpoint": "142f55b (reported Mac commit)",
+  "sourceArchiveSHA256": "328c2db5c9da60233ab8c466ae0090efd97a9c713dec2f39298065ecd1b2676d",
+  "runtime": "Node v24.22.1, assistant Linux environment",
+  "testExecution": "Local Node, fake service/DOM and loopback HTTP only",
+  "browser": "NOT RUN: Chromium executable missing; see browser-check.txt",
+  "macRetest": "PENDING"
+}

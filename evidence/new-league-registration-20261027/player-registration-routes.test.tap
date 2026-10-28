@@ -1,0 +1,106 @@
+TAP version 13
+# Subtest: MOBIL TEST registration saves and transfers with stamped source and no Hub staff session
+ok 1 - MOBIL TEST registration saves and transfers with stamped source and no Hub staff session
+  ---
+  duration_ms: 23.088112
+  type: 'test'
+  ...
+# Subtest: MOBIL TEST registration retains Sheet success on timeout and blocks duplicate across sources
+ok 2 - MOBIL TEST registration retains Sheet success on timeout and blocks duplicate across sources
+  ---
+  duration_ms: 3.095785
+  type: 'test'
+  ...
+# Subtest: MOBIL TEST registration rejects target source context token and actor spoofing before writes
+ok 3 - MOBIL TEST registration rejects target source context token and actor spoofing before writes
+  ---
+  duration_ms: 9.605335
+  type: 'test'
+  ...
+# Subtest: MOBIL TEST registration preserves nickname conflict and creates the resolved new league identity
+ok 4 - MOBIL TEST registration preserves nickname conflict and creates the resolved new league identity
+  ---
+  duration_ms: 7.184075
+  type: 'test'
+  ...
+# Subtest: MOBIL TEST registration stale day busy and invalid input cannot append or transfer
+ok 5 - MOBIL TEST registration stale day busy and invalid input cannot append or transfer
+  ---
+  duration_ms: 4.932648
+  type: 'test'
+  ...
+# Subtest: KIOSK TEST registration saves and transfers with stamped source and no Hub staff session
+ok 6 - KIOSK TEST registration saves and transfers with stamped source and no Hub staff session
+  ---
+  duration_ms: 2.741202
+  type: 'test'
+  ...
+# Subtest: KIOSK TEST registration retains Sheet success on timeout and blocks duplicate across sources
+ok 7 - KIOSK TEST registration retains Sheet success on timeout and blocks duplicate across sources
+  ---
+  duration_ms: 2.399669
+  type: 'test'
+  ...
+# Subtest: KIOSK TEST registration rejects target source context token and actor spoofing before writes
+ok 8 - KIOSK TEST registration rejects target source context token and actor spoofing before writes
+  ---
+  duration_ms: 7.051786
+  type: 'test'
+  ...
+# Subtest: KIOSK TEST registration preserves nickname conflict and creates the resolved new league identity
+ok 9 - KIOSK TEST registration preserves nickname conflict and creates the resolved new league identity
+  ---
+  duration_ms: 3.773225
+  type: 'test'
+  ...
+# Subtest: KIOSK TEST registration stale day busy and invalid input cannot append or transfer
+ok 10 - KIOSK TEST registration stale day busy and invalid input cannot append or transfer
+  ---
+  duration_ms: 4.36829
+  type: 'test'
+  ...
+# Subtest: Player registration context returns only bounded names date and availability without staff access
+ok 11 - Player registration context returns only bounded names date and availability without staff access
+  ---
+  duration_ms: 2.027589
+  type: 'test'
+  ...
+# Subtest: Player context cannot call transfers for a different player or unlock a Hub staff route
+ok 12 - Player context cannot call transfers for a different player or unlock a Hub staff route
+  ---
+  duration_ms: 1.386625
+  type: 'test'
+  ...
+# Subtest: Player registration context always clears on core error and never becomes a reusable public credential
+ok 13 - Player registration context always clears on core error and never becomes a reusable public credential
+  ---
+  duration_ms: 1.180845
+  type: 'test'
+  ...
+# Subtest: Central TEST kiosk route uses owner-only existing project and rejects configuration injection
+ok 14 - Central TEST kiosk route uses owner-only existing project and rejects configuration injection
+  ---
+  duration_ms: 1.381558
+  type: 'test'
+  ...
+# Subtest: Player registrations reuse existing Nakka entry and truthful unavailable league-ID state
+ok 15 - Player registrations reuse existing Nakka entry and truthful unavailable league-ID state
+  ---
+  duration_ms: 3.755899
+  type: 'test'
+  ...
+# Subtest: Player registration project and write gates block service access and leave context empty
+ok 16 - Player registration project and write gates block service access and leave context empty
+  ---
+  duration_ms: 4.349111
+  type: 'test'
+  ...
+1..16
+# tests 16
+# suites 0
+# pass 16
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 181.479687

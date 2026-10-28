@@ -1,0 +1,124 @@
+{
+  "audit": "AUD-101 PREPARED — owner Mac commit not yet made",
+  "recordType": "Bulk browser review and session closeout",
+  "sessionDates": "27–28 October 2026 Europe/Stockholm",
+  "baseline": "2781600 / AUD-100",
+  "applicationTests": {
+    "tests": 401,
+    "pass": 401,
+    "fail": 0,
+    "finishedUTC": "2026-10-27T22:29:07.640Z",
+    "builds": "both PASS",
+    "inventory": "PASS",
+    "generatedHTMLUnchanged": true,
+    "rerunForCloseout": false
+  },
+  "ownerEvidence": "evidence/mac-new-league-2026-10-27T22-28-44-852Z",
+  "ownerBackup": "backups/new-league-before-2026-10-27T22-28-44-852Z",
+  "google": "Owner confirmed saving both HubTestNakkaTransfer.gs and HubTestAutoRegister.gs in Beauty — Remote Identity TEST. No deployment/scope change.",
+  "checks": [
+    {
+      "id": "BULK-101-01",
+      "test": "New identities reach TEST event with league association",
+      "expected": "Canonical Hub/mobile/kiosk new names reach league then TEST event",
+      "actual": "Hub Beauty Test New 01 visible with HUB source; native Nakka event list shows Beauty Test New 01, Beauty Test New 01 Remote, Beauty Test New 01 (Kiosk), each League badge. Source of each latter registration inferred from name and guided owner flow, not raw RPC tracing. Exact returned creation LPID/journal not independently inspected.",
+      "result": "PASS — native presence/association; exact ID proof pending",
+      "evidence": [
+        "Screenshot 2026-10-27 at 23.38.52.png",
+        "Screenshot 2026-10-27 at 23.42.01.png"
+      ]
+    },
+    {
+      "id": "BULK-101-02",
+      "test": "Same-name prompt",
+      "expected": "Prompt rather than silently treating matching name as another person",
+      "actual": "Namnet finns redan dialog for Beauty Test New 01, with DET ÄR JAG / JAG ÄR EN ANNAN PERSON. Completion/no-duplicate result not independently traced.",
+      "result": "PASS — prompt display only",
+      "evidence": [
+        "Screenshot 2026-10-27 at 23.41.05.png"
+      ]
+    },
+    {
+      "id": "BULK-101-03",
+      "test": "Large Live list",
+      "expected": "Four columns and automatic scrolling above60",
+      "actual": "63 SPELARE, four columns and Automatisk rullning visible; all names not simultaneously visible at scrolled snapshot. Owner finds type too small. Actual scrolling continuity/final63rd row not separately measured.",
+      "result": "PARTIAL — mode/count shown; typography OPEN",
+      "evidence": [
+        "Screenshot 2026-10-27 at 23.42.51.png"
+      ]
+    },
+    {
+      "id": "BULK-101-04",
+      "test": "Duplicate league identities block guessing",
+      "expected": "No arbitrary member selected from two matching names",
+      "actual": "Sandra preview reports no unique existing identity. Native league shows Sandra twice and Emanuel twice. Duplicate cause unknown; owner reports Emanuel played once via Beauty and suspects Nakka. No provider defect or single cause established.",
+      "result": "PASS — ambiguity guard observed",
+      "evidence": [
+        "Screenshot 2026-10-27 at 23.47.28.png",
+        "Screenshot 2026-10-27 at 23.48.38.png",
+        "Screenshot 2026-10-27 at 23.49.08.png"
+      ]
+    },
+    {
+      "id": "BULK-101-05",
+      "test": "Manual recovery after owner cleanup",
+      "expected": "Unique remaining league entry can be reviewed and added to TEST event",
+      "actual": "Owner says duplicates removed; assistant did not delete or approve a specific historical record. Sandra preview identifies MpQ4. Emanuel save confirms event addition with previous entries preserved; journal suffix3AH2, exact saved event link unexposed. Native list shows Sandra and Emanuel League badges.",
+      "result": "PASS — reviewed event presence; exact saved link unverified",
+      "evidence": [
+        "Screenshot 2026-10-27 at 23.54.17.png",
+        "Screenshot 2026-10-27 at 23.56.04.png",
+        "Screenshot 2026-10-27 at 23.56.30.png"
+      ]
+    },
+    {
+      "id": "BULK-101-06",
+      "test": "Final comparison",
+      "expected": "Hub and Nakka counts reconcile with known earlier pending identities",
+      "actual": "Snapshot28Oct00:01:07 Europe/Stockholm: Hub65/Nakka59/same59/HubOnly6/NakkaOnly0/duplicate-name groups0. Expanded six: Frida Persdotter (kok), Stefan Jansson (pippo), Test Player Hub, Test Player Kiosk, Test Player Remote, Test Player Remote (Remigio). Owner confirms all six were registered before/during code fix and accepts leaving them pending. No backfill/delete/re-registration requested.",
+      "result": "PASS — scoped name comparison, not full identity proof",
+      "evidence": [
+        "Screenshot 2026-10-28 at 00.01.16.png",
+        "Screenshot 2026-10-28 at 00.02.42.png",
+        "Owner clarification after Frida review"
+      ]
+    },
+    {
+      "id": "BULK-101-07",
+      "test": "Earlier nickname review",
+      "expected": "Manual transfer only proceeds for a unique existing league identity",
+      "actual": "Frida (kok) preview says no unique existing identity. Owner clarifies created while code fix was in progress; not an established regression of new flow. Exact absence vs duplicate league entry not inspected.",
+      "result": "RECORDED — earlier pending entry",
+      "evidence": [
+        "Screenshot 2026-10-28 at 00.03.35.png"
+      ]
+    },
+    {
+      "id": "BULK-101-08",
+      "test": "Mobile temporary error",
+      "expected": "Understand temporary registration error without assuming save or failure",
+      "actual": "Mobile showed Försök igen om en stund. Owner was bulk registering. Busy request suspected but exact input/result/root cause and duplicate retry behavior untraced.",
+      "result": "OPEN — cause unconfirmed",
+      "evidence": [
+        "Screenshot 2026-10-27 at 23.40.44.png",
+        "Owner identifies mobile and bulk-registration activity"
+      ]
+    }
+  ],
+  "next": [
+    "Persistent staff attention queue/count/review action for blocked or uncertain Nakka registrations, surviving reload; keep health dot independent; do not autochoose duplicate ID or add mutation retries",
+    "Beauty Live larger readable type with real NAME | RANK | POINTS; shared league stats integration still not connected; test long names and 15/16,30/31,45/46,60/61 at venue dimensions",
+    "Run prepared evidence-only AUD-101 recorder next session before another implementation package; actual owner baseline remains2781600 until run"
+  ],
+  "limits": [
+    "No production/JDC changes or launch certification",
+    "Native exact LPID evidence missing where provider omits saved event link",
+    "No hidden retry or deletion of durable journals",
+    "Existing six pending registrations intentionally left intact",
+    "Weekly selected current-day workflow retained; simultaneous events deferred",
+    "Now28Oct; TEST event last known27Oct. Current-day new registration requires deliberate date alignment next session. Do not move dates or re-register65 implicitly",
+    "Idle/max expiry, original date-save sign-out, simultaneous public route load and full recovery rehearsal remain pending"
+  ],
+  "storage": "Screenshot text references only; images not copied into this report. Actual owner Git audit newer than uploaded audit snapshot; recorder prepared separately."
+}

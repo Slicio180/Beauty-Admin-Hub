@@ -1,0 +1,16 @@
+{
+  "recordedUTC": "2026-10-26T13:11:31.437182+00:00",
+  "baseline": "105e42e",
+  "nativeLogin": "FAIL: server verification error reported twice; Google permission run did not resolve it",
+  "password": "Not requested or inspected",
+  "screenshot": "Screenshot 2026-10-26 at 14.02.54.png",
+  "screenshotSHA256": "c5da06a7af140020a2778feacd302d5d5463d0dbf92ffc0f09d6d292bf823910",
+  "decoderCorrection": "Strict local decoder failed before; passed after padding normalization",
+  "nativeCause": "UNCONFIRMED",
+  "nativeLoginAfterPatch": "PENDING",
+  "tests": 298,
+  "pass": 298,
+  "fail": 0,
+  "inventory": "PASS",
+  "production": "UNTOUCHED"
+}

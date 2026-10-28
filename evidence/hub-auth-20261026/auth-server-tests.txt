@@ -1,0 +1,23 @@
+✔ Hub auth: missing session blocks every Hub action before reads or writes (3.526133ms)
+✔ Hub auth: exact TEST identity and missing account approval fail closed (2.837584ms)
+✔ Hub auth: malformed tokens and wrong issuer audience times or tenant never contact Firebase (1.431521ms)
+✔ Hub auth: decoded approved UID is insufficient without Firebase acceptance (7.505991ms)
+✔ Hub auth: valid Firebase login creates opaque expiring session without stored ID token (2.078949ms)
+✔ Hub auth: unapproved accounts and spoofed client roles never grant entry (1.016084ms)
+✔ Hub auth: logout revokes session idempotently and captured token cannot read again (0.822822ms)
+✔ Hub auth: refresh polling does not extend inactivity and touch cannot revive expired sessions (1.238199ms)
+✔ Hub auth: real activity renews idle limit but absolute token expiry still wins (1.358571ms)
+✔ Hub auth: removing approval and cache eviction revoke existing sessions (1.951556ms)
+✔ Hub auth: locked touch cannot resurrect a logged-out session (1.078288ms)
+✔ Hub auth: old direct data RPC requires a session and admin maintenance RPCs are private (4.008921ms)
+✔ Hub auth: public registration cannot claim HUB source while Remote stays available (0.989443ms)
+✔ Hub auth: status and event handlers recheck session inside their write lock (3.990434ms)
+✔ Hub auth: TEST manifest adds only external HTTPS requests and retains owner-only access (0.286632ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 149.74217

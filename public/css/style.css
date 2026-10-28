@@ -1,0 +1,1750 @@
+@font-face {
+  font-family: "AIK Display";
+  src: url("../assets/fonts/AIK-FONTS/AIKDisplay-Light.woff2") format("woff2");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "AIK Display";
+  src: url("../assets/fonts/AIK-FONTS/AIKDisplay-Bold.woff2") format("woff2");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "AIK Condensed";
+  src: url("../assets/fonts/AIK-FONTS/AIKDisplay-Condensed-Bold.woff2") format("woff2");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "AIK Siffror";
+  src: url("../assets/fonts/AIK-FONTS/AIKSiffror-Regular.woff2") format("woff2");
+  font-weight: 400;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --black: #080808;
+  --panel: #111111;
+  --panel-light: #181818;
+  --border: #303030;
+  --gold: #ffd700;
+  --white: #ffffff;
+  --muted: #999999;
+  --green: #35d07f;
+  --red: #ff5252;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--black);
+  color: var(--white);
+  font-family: "AIK Display", Arial, Helvetica, sans-serif;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+
+/* ======================================================
+   TOP BAR
+   ====================================================== */
+
+.topbar {
+  height: 220px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 32px;
+
+  background: #000;
+  border-bottom: 1px solid var(--border);
+}
+
+/* LEFT BRANDING AREA */
+
+.brand-area {
+  height: 220px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 28px;
+}
+
+/* ORIGINAL AIK MÃ…NDAGSDARTARNA LOGO */
+
+.brand-logo {
+  display: block;
+
+  width: 500px;
+  height: auto;
+
+  /*
+    Slight upward adjustment because the original PNG
+    contains transparent space around the artwork.
+  */
+  transform: translateY(-7px);
+}
+
+/* DIVIDER BETWEEN LOGO AND HUB */
+
+.hub-divider {
+  width: 1px;
+  height: 82px;
+
+  background: #444;
+}
+
+/* HUB */
+
+.hub-title {
+  color: var(--gold);
+
+  font-family: "AIK Display", sans-serif;
+  font-size: 85px;
+  font-weight: 700;
+  line-height: 1;
+
+  letter-spacing: 3px;
+}
+
+/* SYSTEM STATUS */
+
+.system-status {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  color: var(--muted);
+
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+.status-dot {
+  width: 11px;
+  height: 11px;
+
+  border-radius: 50%;
+
+  background: var(--muted);
+}
+
+/* ======================================================
+   MAIN LAYOUT
+   ====================================================== */
+
+.hub-layout {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  min-height: calc(100vh - 220px);
+}
+
+/* ======================================================
+   SIDEBAR
+   ====================================================== */
+
+.sidebar {
+  padding: 25px 15px;
+
+  background: #0c0c0c;
+
+  border-right: 1px solid var(--border);
+}
+
+.sidebar button {
+  width: 100%;
+
+  display: block;
+
+  padding: 14px 16px;
+  margin-bottom: 7px;
+
+  border: 0;
+  border-radius: 6px;
+
+  background: transparent;
+  color: #bdbdbd;
+
+  text-align: left;
+  font-weight: 600;
+}
+
+.sidebar button:hover {
+  background: var(--panel-light);
+  color: var(--white);
+}
+
+.sidebar button.active {
+  background: var(--gold);
+  color: #000;
+}
+
+/* ======================================================
+   MAIN CONTENT
+   ====================================================== */
+
+.main-content {
+  padding: 30px;
+  overflow: auto;
+}
+
+.label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: var(--muted);
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+/* ======================================================
+   EVENT HEADER
+   ====================================================== */
+
+.event-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 25px;
+}
+
+.event-header h2 {
+  margin: 0 0 5px;
+
+  font-size: 25px;
+}
+
+.event-header p {
+  margin: 0;
+
+  color: var(--muted);
+}
+
+.event-button,
+.workspace-header button {
+  padding: 11px 17px;
+
+  border: 0;
+  border-radius: 5px;
+
+  background: var(--gold);
+  color: #000;
+
+  font-weight: 800;
+}
+
+/* ======================================================
+   STATUS CARDS
+   ====================================================== */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+
+  margin-bottom: 24px;
+}
+
+.card {
+  min-height: 135px;
+
+  padding: 20px;
+
+  background: var(--panel);
+
+  border: 1px solid var(--border);
+  border-radius: 9px;
+}
+
+.card strong {
+  display: block;
+
+  margin: 13px 0 8px;
+
+  color: var(--gold);
+
+  font-size: 27px;
+}
+
+.card strong.pending {
+  color: var(--muted);
+
+  font-size: 17px;
+}
+
+.card p {
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 13px;
+}
+
+/* ======================================================
+   TONIGHT'S PLAYERS
+   ====================================================== */
+
+.workspace {
+  min-height: 380px;
+
+  background: var(--panel);
+
+  border: 1px solid var(--border);
+  border-radius: 9px;
+}
+
+.workspace-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 20px 22px;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.workspace-header h2 {
+  margin: 0;
+
+  font-size: 20px;
+}
+
+.empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 300px;
+
+  color: #666;
+}
+
+/* ======================================================
+   RESPONSIVE
+   ====================================================== */
+
+@media (max-width: 1000px) {
+  .topbar {
+    grid-template-columns: 1fr 400px 1fr;
+  }
+
+  .brand {
+    width: 400px;
+  }
+
+  .brand-logo {
+    width: 320px;
+  }
+}
+
+@media (max-width: 900px) {
+  .hub-layout {
+    grid-template-columns: 180px 1fr;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .main-content {
+    padding: 20px;
+  }
+}
+/* ======================================================
+   PLAYER SUMMARY
+   ====================================================== */
+
+.player-summary {
+  margin-bottom: 20px;
+}
+
+.player-count-tile {
+  width: 130px;
+  height: 110px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--panel);
+
+  border: 1px solid var(--border);
+  border-radius: 9px;
+}
+
+.player-count-tile strong {
+  color: var(--gold);
+
+  font-family: "AIK Siffror", "AIK Display", sans-serif;
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.player-count-tile span {
+  margin-top: 9px;
+
+  color: var(--white);
+
+  font-family: "AIK Condensed", "AIK Display", sans-serif;
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+
+/* ======================================================
+   PLAYERS TABLE
+   ====================================================== */
+
+.players-workspace {
+  margin-bottom: 22px;
+}
+
+.players-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.players-table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  table-layout: fixed;
+}
+
+.players-table th {
+  padding: 14px 16px;
+
+  background: #0c0c0c;
+  color: var(--muted);
+
+  border-bottom: 1px solid var(--border);
+
+  text-align: left;
+
+  font-family: "AIK Condensed", "AIK Display", sans-serif;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+}
+
+.players-table td {
+  padding: 15px 16px;
+
+  color: var(--white);
+
+  border-bottom: 1px solid #252525;
+
+  font-size: 15px;
+
+  vertical-align: middle;
+}
+
+.players-table th:nth-child(1),
+.players-table td:nth-child(1) {
+  width: 22%;
+}
+
+.players-table th:nth-child(2),
+.players-table td:nth-child(2) {
+  width: 18%;
+}
+
+.players-table th:nth-child(3),
+.players-table td:nth-child(3) {
+  width: 16%;
+}
+
+.players-table th:nth-child(4),
+.players-table td:nth-child(4) {
+  width: 16%;
+}
+
+.players-table th:nth-child(5),
+.players-table td:nth-child(5) {
+  width: 18%;
+}
+
+.players-table th:nth-child(6),
+.players-table td:nth-child(6) {
+  width: 10%;
+}
+
+.empty-table-row td {
+  height: 150px;
+
+  color: #666;
+
+  text-align: center;
+}
+
+
+/* ======================================================
+   SYSTEM HEALTH
+   ====================================================== */
+
+.system-health {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 18px;
+
+  margin-bottom: 30px;
+}
+
+.health-card {
+  padding: 18px 20px;
+
+  background: var(--panel);
+
+  border: 1px solid var(--border);
+  border-radius: 9px;
+}
+
+.health-status {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  margin: 10px 0 5px;
+}
+
+.health-status strong {
+  color: var(--muted);
+
+  font-size: 16px;
+}
+
+.health-card p {
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 13px;
+}
+
+.health-dot {
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+}
+
+.health-dot.waiting {
+  background: var(--muted);
+}
+
+.health-dot.ok {
+  background: var(--green);
+}
+
+.health-dot.problem {
+  background: var(--red);
+}
+
+.health-dot.degraded {
+  background: var(--gold);
+}
+
+.health-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.health-actions time {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.health-actions button {
+  padding: 7px 12px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: var(--panel-light);
+  color: var(--white);
+  font-size: 12px;
+}
+
+.health-actions button:hover:not(:disabled),
+.health-actions button:focus-visible {
+  border-color: var(--gold);
+}
+
+.health-actions button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.health-card .health-note {
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+/* ======================================================
+   HEADER RIGHT
+   ====================================================== */
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+
+.header-player-count {
+  width: 145px;
+  height: 125px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--panel);
+
+  border: 1px solid var(--border);
+  border-radius: 9px;
+}
+
+.header-player-count strong {
+  color: var(--gold);
+
+  font-family: "AIK Siffror", "AIK Display", sans-serif;
+  font-size: 58px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.header-player-count span {
+  margin-top: 10px;
+
+  color: var(--white);
+
+  font-family: "AIK Condensed", "AIK Display", sans-serif;
+  font-size: 15px;
+  letter-spacing: 2px;
+}
+
+.system-status {
+  font-size: 15px;
+}
+
+.status-dot {
+  width: 11px;
+  height: 11px;
+}
+/* =====================================================
+   BEAUTY HUB - STATUS DROPDOWN
+   ===================================================== */
+
+.status-select {
+  width: 105px;
+  padding: 8px 10px;
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+
+  font-family: "AIK Display", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+  outline: none;
+
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+
+/* IN */
+
+.status-select.status-in {
+  background: #16833b;
+  color: #ffffff;
+  border-color: #16833b;
+}
+
+
+/* OUT */
+
+.status-select.status-out {
+  background: #b92727;
+  color: #ffffff;
+  border-color: #b92727;
+}
+
+
+/* STANDBY */
+
+.status-select.status-standby {
+  background: #d97900;
+  color: #ffffff;
+  border-color: #d97900;
+}
+
+
+/* WHILE SAVING */
+
+.status-select:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+/* =====================================================
+   BEAUTY HUB - FOTO & VIDEO CONSENT
+   ===================================================== */
+
+.consent-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 54px;
+  padding: 8px 10px;
+
+  border-radius: 6px;
+
+  font-family: "AIK Display", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+
+/* JA */
+
+.consent-badge.consent-yes {
+  background: #16833b;
+  color: #ffffff;
+}
+
+
+/* NEJ */
+
+.consent-badge.consent-no {
+  background: #b92727;
+  color: #ffffff;
+}
+
+
+/* NO ANSWER / UNKNOWN */
+
+.consent-badge.consent-unknown {
+  background: #444444;
+  color: #ffffff;
+}
+
+/* =====================================================
+   BEAUTY HUB - MESSAGE BUTTON
+   ===================================================== */
+
+.message-read-button {
+  padding: 7px 14px;
+
+  background: #ffd700;
+  color: #000000;
+
+  border: none;
+  border-radius: 6px;
+
+  font-family: "AIK Display", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.message-read-button:hover {
+  opacity: 0.85;
+}
+
+
+/* =====================================================
+   BEAUTY HUB - MESSAGE POPUP
+   ===================================================== */
+
+.message-popup-overlay {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+
+  background: rgba(0, 0, 0, 0.78);
+
+  z-index: 9999;
+}
+
+
+.message-popup {
+  position: relative;
+
+  width: min(560px, 90vw);
+  max-height: 75vh;
+
+  overflow-y: auto;
+
+  padding: 34px;
+
+  background: #111111;
+  color: #ffffff;
+
+  border: 1px solid #333333;
+  border-radius: 12px;
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.65);
+}
+
+
+.message-popup-label {
+  margin-bottom: 8px;
+
+  color: #ffd700;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+}
+
+
+.message-popup h2 {
+  margin:
+    0
+    45px
+    22px
+    0;
+
+  color: #ffffff;
+
+  font-family: "AIK Display", sans-serif;
+  font-size: 28px;
+}
+
+
+.message-popup-text {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+
+.message-popup-close {
+  position: absolute;
+
+  top: 14px;
+  right: 16px;
+
+  width: 38px;
+  height: 38px;
+
+  padding: 0;
+
+  background: transparent;
+  color: #ffd700;
+
+  border: none;
+
+  font-size: 32px;
+  line-height: 38px;
+
+  cursor: pointer;
+}
+
+
+.message-popup-close:hover {
+  color: #ffffff;
+}
+
+/* ======================================================
+   REGISTER PLAYER POPUP
+   ====================================================== */
+
+.register-popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  background: rgba(0, 0, 0, 0.78);
+}
+
+.register-popup {
+  position: relative;
+
+  width: 100%;
+  max-width: 520px;
+
+  padding: 32px;
+
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 10px;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+}
+
+.register-popup-close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+
+  padding: 0;
+
+  background: transparent;
+  border: 0;
+
+  color: #fff;
+
+  font-size: 30px;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+.register-popup-label {
+  margin-bottom: 8px;
+
+  color: var(--yellow);
+  font-family: "AIK Condensed", "AIK Display", sans-serif;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+}
+
+.register-popup h2 {
+  margin: 0 0 8px;
+
+  color: #fff;
+
+  font-family: "AIK Display", sans-serif;
+  font-size: 30px;
+}
+
+.register-popup-description {
+  margin: 0 0 26px;
+
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.register-popup label {
+  display: block;
+
+  margin: 18px 0 7px;
+
+  color: var(--muted);
+
+  font-family: "AIK Condensed", "AIK Display", sans-serif;
+  font-size: 12px;
+  letter-spacing: 1.2px;
+}
+
+.register-popup select,
+.register-popup textarea {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 13px 14px;
+
+  background: #1a1a1a;
+  color: #fff;
+
+  border: 1px solid #333;
+  border-radius: 5px;
+
+  font: inherit;
+}
+
+.register-popup textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.register-popup-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+  margin-top: 26px;
+}
+
+.register-popup-cancel,
+.register-popup-submit {
+  padding: 12px 18px;
+
+  border: 0;
+  border-radius: 4px;
+
+  font-family: "AIK Condensed", "AIK Display", sans-serif;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.register-popup-cancel {
+  background: #292929;
+  color: #fff;
+}
+
+.register-popup-submit {
+  background: var(--yellow);
+  color: #000;
+}
+/* ======================================================
+   HUB PLAYER SEARCH DROPDOWN
+   ====================================================== */
+
+.hub-player-dropdown {
+  width: 100%;
+  margin-top: 6px;
+}
+
+.hub-player-search {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 14px 16px;
+
+  background: #fff;
+  color: #111;
+
+  border: 2px solid var(--yellow);
+  border-radius: 5px;
+
+  font-family: "AIK Display", sans-serif;
+  font-size: 16px;
+}
+
+.hub-new-player-option,
+.hub-player-option {
+  display: block;
+  width: 100%;
+
+  padding: 13px 16px;
+
+  background: #050505;
+  color: var(--yellow);
+
+  border: 0;
+  border-bottom: 1px solid #292929;
+
+  text-align: left;
+  font-family: "AIK Display", sans-serif;
+
+  cursor: pointer;
+}
+
+.hub-new-player-option {
+  margin-top: 8px;
+
+  border: 1px solid var(--yellow);
+  border-radius: 4px;
+
+  font-weight: 700;
+}
+
+.hub-player-list {
+  max-height: 280px;
+  overflow-y: auto;
+
+  background: #050505;
+}
+
+
+/* ======================================================
+   BEAUTY HUB - KIOSK MATCHED REGISTER PLAYER
+   ====================================================== */
+
+.kiosk-register-popup {
+  width: min(760px, 94vw);
+  max-width: 760px;
+  max-height: 92vh;
+  overflow-y: auto;
+
+  padding: 32px 34px;
+
+  background: #111111;
+  border: 2px solid #FFD700;
+  border-radius: 16px;
+}
+
+.kiosk-register-popup .register-popup-label {
+  color: #FFD700;
+}
+
+.kiosk-register-popup .register-popup-close {
+  color: #FFFFFF;
+}
+
+.kiosk-register-popup .register-popup-close:hover {
+  color: #FFD700;
+}
+
+.hub-register-error {
+  margin: 0 0 22px;
+  padding: 14px 16px;
+
+  background: #000000;
+  color: #FFD700;
+
+  border: 2px solid #FFD700;
+  border-radius: 10px;
+
+  font-family: "AIK Display", sans-serif;
+  font-size: 15px;
+}
+
+.hub-kiosk-field {
+  margin-top: 26px;
+}
+
+.hub-kiosk-label {
+  display: inline-block;
+
+  margin-bottom: 10px;
+  padding: 7px 14px 6px;
+
+  background: #000000;
+  color: #FFFFFF;
+
+  border-radius: 7px;
+
+  font-family: "AIK Display", sans-serif;
+  font-size: 22px;
+  line-height: 1;
+  font-weight: 700;
+
+  text-transform: uppercase;
+}
+
+.hub-kiosk-label span {
+  color: #FFD700;
+}
+
+.hub-kiosk-help {
+  margin: 8px 0 14px;
+
+  color: #C8C8C8;
+
+  font-family: "AIK Display", sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.hub-kiosk-player-dropdown {
+  position: relative;
+  width: 100%;
+}
+
+.hub-kiosk-player-trigger {
+  width: 100%;
+  min-height: 58px;
+
+  padding: 12px 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border: 2px solid #FFD700;
+  border-radius: 10px;
+
+  background: #000000;
+  color: #FFD700;
+
+  font-family: "AIK Condensed", "AIK Display", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+
+  text-align: left;
+}
+
+.hub-kiosk-player-trigger:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, .22);
+}
+
+.hub-kiosk-player-arrow {
+  margin-left: 15px;
+  font-size: 16px;
+}
+
+.hub-kiosk-player-menu {
+  display: none;
+
+  width: 100%;
+  max-height: 360px;
+  overflow-y: auto;
+
+  margin-top: 6px;
+  padding: 10px;
+
+  border: 2px solid #FFD700;
+  border-radius: 10px;
+
+  background: #000000;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .45);
+}
+
+.hub-kiosk-player-menu.open {
+  display: block;
+}
+
+.hub-kiosk-player-search {
+  width: 100%;
+  min-height: 58px;
+
+  margin-bottom: 12px;
+  padding: 12px 18px;
+
+  border: 2px solid #FFD700;
+  border-radius: 10px;
+
+  background: #FFFFFF;
+  color: #000000;
+
+  font-family: "AIK Condensed", "AIK Display", sans-serif;
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.hub-kiosk-player-search:focus {
+  outline: none;
+  border-color: #FFD700;
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, .22);
+}
+
+.hub-kiosk-player-search::placeholder {
+  color: #777777;
+
+  font-family: "AIK Display", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.hub-kiosk-player-list {
+  max-height: 210px;
+  overflow-y: auto;
+
+  background: #000000;
+}
+
+.hub-kiosk-player-option {
+  display: block;
+  width: 100%;
+
+  padding: 14px 16px;
+
+  border: 0;
+  border-bottom: 1px solid #333333;
+
+  background: #000000;
+  color: #FFD700;
+
+  font-family: "AIK Condensed", "AIK Display", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+
+  text-align: left;
+}
+
+.hub-kiosk-player-option:hover {
+  background: #181818;
+}
+
+.hub-kiosk-new-player {
+  margin-bottom: 8px;
+
+  border: 2px solid #FFD700;
+  border-radius: 7px;
+
+  color: #FFFFFF;
+}
+
+.hub-kiosk-new-player-area {
+  margin-top: 18px;
+  padding: 18px;
+
+  background: #1A1A1A;
+
+  border-left: 5px solid #FFD700;
+  border-radius: 10px;
+}
+
+.hub-kiosk-new-name {
+  width: 100%;
+  min-height: 58px;
+
+  padding: 12px 18px;
+
+  border: 2px solid #FFD700;
+  border-radius: 10px;
+
+  background: #FFFFFF;
+  color: #000000;
+
+  font-family: "AIK Condensed", "AIK Display", sans-serif;
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.hub-kiosk-consent-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.hub-kiosk-consent-button {
+  min-height: 58px;
+  padding: 11px 12px;
+
+  border: 2px solid #FFD700;
+  border-radius: 10px;
+
+  background: #000000;
+  color: #FFD700;
+
+  font-family: "AIK Condensed", "AIK Display", sans-serif;
+  font-size: 23px;
+  line-height: 1;
+  font-weight: 700;
+
+  text-align: center;
+}
+
+.hub-kiosk-consent-button:hover {
+  background: #111111;
+}
+
+.hub-kiosk-consent-button.selected {
+  background: #FFD700;
+  color: #000000;
+
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, .20);
+}
+
+.hub-kiosk-message {
+  width: 100%;
+  min-height: 105px;
+
+  padding: 14px 18px;
+
+  border: 2px solid #BDBDBD;
+  border-radius: 10px;
+
+  background: #FFFFFF !important;
+  color: #000000 !important;
+
+  font-family: "AIK Display", sans-serif !important;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.hub-kiosk-message:focus {
+  outline: none;
+  border-color: #FFD700;
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, .22);
+}
+
+.hub-kiosk-message::placeholder {
+  color: #777777;
+}
+
+.hub-kiosk-actions {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+
+  margin-top: 28px;
+}
+
+.hub-kiosk-cancel {
+  min-height: 58px;
+  padding: 12px 18px;
+
+  border: 1px solid #333333;
+  border-radius: 8px;
+
+  background: #292929;
+  color: #FFFFFF;
+
+  font-family: "AIK Condensed", "AIK Display", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.hub-kiosk-submit {
+  width: 100%;
+  min-height: 64px;
+
+  padding: 14px 20px;
+
+  border: 2px solid #FFD700;
+  border-radius: 10px;
+
+  background: #000000;
+  color: #FFD700;
+
+  font-family: "AIK Display", sans-serif;
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.hub-kiosk-submit:hover {
+  background: #FFD700;
+  color: #000000;
+}
+
+@media (max-width: 700px) {
+  .kiosk-register-popup {
+    padding: 26px 18px;
+  }
+
+  .hub-kiosk-label {
+    font-size: 20px;
+  }
+
+  .hub-kiosk-consent-options {
+    grid-template-columns: 1fr;
+    gap: 11px;
+  }
+
+  .hub-kiosk-consent-button {
+    font-size: 21px;
+  }
+
+  .hub-kiosk-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ======================================================
+   BEAUTY HUB - REGISTER PLAYER FINAL VISUAL OVERRIDES
+   ====================================================== */
+
+/* Header cleanup */
+.kiosk-register-popup .register-popup-label,
+.kiosk-register-popup .register-popup-description {
+  display: none !important;
+}
+
+.kiosk-register-popup h2 {
+  margin: 0 0 24px;
+
+  color: #FFFFFF;
+
+  font-family: "AIK Display", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+/* Keep the player area dark */
+.hub-kiosk-player-field {
+  margin-top: 20px;
+  padding: 0;
+
+  background: transparent;
+}
+
+/* White cards for FOTO O VIDEO and MEDDELANDE */
+.hub-kiosk-white-field {
+  margin-top: 24px;
+  padding: 18px;
+
+  background: #FFFFFF;
+  border-radius: 12px;
+}
+
+/* Bigger section headings */
+.hub-kiosk-label {
+  display: inline-block;
+
+  margin-bottom: 12px;
+  padding: 8px 14px 7px;
+
+  background: #000000;
+  color: #FFFFFF;
+
+  border-radius: 7px;
+
+  font-family: "AIK Display", sans-serif;
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 700;
+
+  text-transform: uppercase;
+}
+
+.hub-kiosk-label span {
+  color: #FFD700;
+}
+
+/* Player helper text stays visible on dark background */
+.hub-kiosk-player-field .hub-kiosk-help {
+  color: #C8C8C8;
+}
+
+/* Help text inside white cards becomes black */
+.hub-kiosk-white-field .hub-kiosk-help {
+  color: #111111;
+
+  font-family: "AIK Display", sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+/* Consent: black boxes with gold writing */
+.hub-kiosk-consent-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.hub-kiosk-consent-button {
+  min-height: 60px;
+  padding: 12px 14px;
+
+  border: 2px solid #FFD700;
+  border-radius: 10px;
+
+  background: #000000;
+  color: #FFD700;
+
+  font-family: "AIK Condensed", "AIK Display", sans-serif;
+  font-size: 23px;
+  line-height: 1;
+  font-weight: 700;
+
+  text-align: center;
+}
+
+.hub-kiosk-consent-button:hover {
+  background: #111111;
+}
+
+.hub-kiosk-consent-button.selected {
+  background: #FFD700;
+  color: #000000;
+
+  border-color: #FFD700;
+
+  box-shadow:
+    0 0 0 3px rgba(255, 215, 0, .18);
+}
+
+/* White message box with black writing */
+.hub-kiosk-message {
+  width: 100%;
+  min-height: 120px;
+
+  padding: 14px 18px;
+
+  border: 2px solid #BDBDBD;
+  border-radius: 10px;
+
+  background: #FFFFFF !important;
+  color: #000000 !important;
+
+  font-family: "AIK Display", sans-serif !important;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.hub-kiosk-message:focus {
+  outline: none;
+  border-color: #FFD700;
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, .22);
+}
+
+.hub-kiosk-message::placeholder {
+  color: #777777 !important;
+  opacity: 1;
+}
+
+/* Keep player trigger matching Beauty */
+.hub-kiosk-player-trigger {
+  background: #000000;
+  color: #FFD700;
+  border: 2px solid #FFD700;
+}
+
+/* Submit remains Beauty black/gold */
+.hub-kiosk-submit {
+  background: #000000;
+  color: #FFD700;
+  border: 2px solid #FFD700;
+}
+
+.hub-kiosk-submit:hover {
+  background: #FFD700;
+  color: #000000;
+}
+
+@media (max-width: 700px) {
+  .hub-kiosk-consent-options {
+    grid-template-columns: 1fr;
+  }
+
+  .hub-kiosk-label {
+    font-size: 22px;
+  }
+}
+
+/* Always visible environment identity for the desktop Hub. */
+.environment-banner {
+  padding: 14px 24px; background: #ffd700; color: #080808;
+  font: 700 16px/1.4 Arial, sans-serif; text-align: center;
+}
+.environment-banner a { color: #080808; text-decoration: underline; }
+
+/* Event Hub branding: original PNGs, layout-only framing of transparent space. */
+.topbar { height: auto; min-height: 144px; padding: 18px 32px; gap: 24px; flex-wrap: wrap; }
+.brand-area { height: auto; min-height: 96px; gap: 24px; min-width: 0; }
+.brand-logo { width: clamp(220px, 25vw, 320px); height: 96px; object-fit: cover; object-position: center; transform: none; flex-shrink: 0; }
+.hub-divider { height: 64px; flex-shrink: 0; }
+.hub-title { font-size: clamp(36px, 4.5vw, 64px); letter-spacing: 2px; white-space: nowrap; }
+.event-header { gap: 24px; }
+.event-header > div { flex: 1 1 180px; min-width: 0; }
+.event-brand-logo { display: block; width: clamp(220px, 25vw, 340px); height: auto; flex: 0 1 auto; max-width: 100%; }
+.event-header .event-button { flex-shrink: 0; }
+@media (max-width: 900px) {
+  .topbar { padding: 16px 20px; gap: 16px; }
+  .brand-area { gap: 16px; flex-wrap: wrap; }
+  .event-header { gap: 16px; flex-wrap: wrap; }
+  .event-brand-logo { width: 240px; }
+}
+@media (max-width: 600px) {
+  .brand-logo { width: 220px; height: 76px; }
+  .hub-title { font-size: 36px; }
+  .event-header > div { flex-basis: 100%; }
+  .event-brand-logo { width: 220px; }
+}
+
+/* Keep system health beside its navigation entry; grey means not checked. */
+.sidebar .system-status-nav { display: flex; align-items: center; gap: 12px; }
+/* Sidebar indicators share the live state of their detail panels. */
+.sidebar .health-nav { display:flex; align-items:center; gap:12px; }
+.sidebar .health-nav::after { content:""; width:12px; height:12px; flex:0 0 12px; border-radius:50%; background:var(--muted); }
+.sidebar .health-nav[data-health="ok"]::after { background:#45b36b; }
+.sidebar .health-nav[data-health="problem"]::after { background:#ef4444; }
+.sidebar .health-nav[data-health="degraded"]::after { background:#f59e0b; }
+.hub-health-panel { background:#111; color:#fff; border:2px solid #ffd700; border-radius:14px; padding:28px; width:min(760px,90vw); max-height:85vh; overflow:auto; font:inherit; font-size:22px; }
+.hub-health-panel::backdrop { background:rgba(0,0,0,.75); }
+.hub-health-panel h2 { color:#ffd700; margin-top:0; }
+.hub-health-panel .health-card { clear:both; margin-top:18px; }
+.health-panel-close { float:right; background:#ffd700; color:#000; border:0; font:inherit; font-size:28px; padding:2px 14px; cursor:pointer; }
+.hub-health-panel :focus-visible { outline:3px solid #ffd700; outline-offset:3px; }
+.header-right { margin-left: auto; flex-shrink: 0; justify-content: flex-end; }
+.header-player-count { width: 168px; height: 128px; }
+.header-player-count strong { font-size: 72px; }
+.header-player-count span { font-size: 24px; margin-top: 8px; letter-spacing: 2px; }
+@media (max-width: 600px) {
+  .header-player-count { width: 132px; height: 112px; }
+  .header-player-count strong { font-size: 62px; }
+  .header-player-count span { font-size: 22px; }
+}
+
+/* Larger Event Hub branding and equal spacing around the event artwork. */
+.topbar { min-height: 220px; }
+.brand-area { min-height: 140px; gap: 20px; }
+.brand-logo { width: clamp(280px, 32vw, 460px); height: 138px; }
+.hub-title { font-size: clamp(58px, 6vw, 85px); }
+.hub-divider { height: 82px; }
+.event-header { display: grid; grid-template-columns: max-content minmax(0, 1fr) max-content; gap: 20px; }
+.event-brand-logo { width: min(340px, 100%); justify-self: center; transform: translateY(-9.4%); }
+@media (max-width: 900px) {
+  .brand-area { gap: 16px; }
+  .brand-logo { width: 260px; height: 110px; }
+  .hub-title { font-size: 58px; }
+}
+@media (max-width: 700px) {
+  .brand-area { flex-wrap: wrap; }
+  .brand-logo { width: 240px; height: 100px; }
+  .hub-title { font-size: 48px; }
+  .event-header { grid-template-columns: minmax(0, 1fr) max-content; }
+  .event-header > div { grid-column: 1; grid-row: 1; }
+  .event-header .event-button { grid-column: 2; grid-row: 1; }
+  .event-brand-logo { grid-column: 1 / -1; grid-row: 2; width: min(320px, 100%); }
+}
+
+/* EVENT HUB is the primary page title. */
+.hub-title { font-size: clamp(68px, 8vw, 110px); line-height: 1; }
+@media (max-width: 900px) {
+  .brand-area { gap: 12px; }
+  .hub-title { font-size: 68px; }
+}
+@media (max-width: 700px) {
+  .hub-title { font-size: 58px; }
+}
+
+/* Fit the event row around the complete artwork, without editing the PNG. */
+.event-header { margin-bottom: 16px; }
+.event-brand-logo {
+  aspect-ratio: 1920 / 710;
+  height: auto;
+  object-fit: cover;
+  object-position: center 77.3%;
+  transform: none;
+}
+
+/* Readable event-operation text, retaining the original AIK font families. */
+.sidebar button { font-size: 20px; line-height: 1.25; padding: 15px 16px; }
+.label { font-size: 16px; line-height: 1.3; color: #bdbdbd; letter-spacing: 1px; }
+.event-header h2 { font-size: 32px; line-height: 1.2; }
+.event-header p { font-size: 20px; line-height: 1.35; color: #bdbdbd; }
+.workspace-header h2 { font-size: 28px; line-height: 1.2; }
+.event-button, .workspace-header button { font-size: 20px; line-height: 1.2; min-height: 48px; }
+.players-table { min-width: 1050px; }
+.players-table th { font-size: 17px; line-height: 1.3; letter-spacing: 1px; color: #bdbdbd; overflow-wrap: anywhere; }
+.players-table td { font-size: 22px; line-height: 1.35; padding: 16px; overflow-wrap: anywhere; }
+.status-select { font-size: 20px; min-height: 46px; width: 100%; max-width: 145px; }
+.consent-badge { font-size: 20px; min-height: 44px; }
+.message-read-button { font-size: 20px; min-height: 44px; }
+.health-status strong { font-size: 22px; }
+.health-card p { font-size: 18px; line-height: 1.4; }
+.health-actions, .health-actions button, .health-actions time { font-size: 18px; }
+.message-popup-label, .register-popup-label { font-size: 18px; }
+.message-popup-text { font-size: 22px; }
+
+/* Compact top bar: remove spare vertical space without shrinking the branding. */
+.topbar { min-height: 0; padding: 8px 24px; }
+.brand-area { min-height: 0; }
+@media (max-width: 900px) {
+  .topbar { padding: 8px 20px; }
+}

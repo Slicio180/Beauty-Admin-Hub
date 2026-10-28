@@ -1,0 +1,32 @@
+{
+  "images": [
+    {
+      "name": "screenshots/20261025-215935.png",
+      "bytes": 64331,
+      "width": 778,
+      "height": 471,
+      "sha256": "702ba935342b07b456024cc770d03c48c8fcbd65232ec623316bd1ab20417876"
+    },
+    {
+      "name": "screenshots/20261025-220058.png",
+      "bytes": 58044,
+      "width": 803,
+      "height": 554,
+      "sha256": "1a73295d8bbe58c4a5a870d3c436cb56e36cd3b82f6d9de95b7dc8e768723ffe"
+    },
+    {
+      "name": "screenshots/20261025-220123.png",
+      "bytes": 57798,
+      "width": 787,
+      "height": 564,
+      "sha256": "585c81c390fe16d78bf1f092e22da66db4135634377531a6ea1ac372b214a491"
+    },
+    {
+      "name": "screenshots/20261025-220210.png",
+      "bytes": 80389,
+      "width": 789,
+      "height": 668,
+      "sha256": "4c8fd4babc89c4a5b0ceaf0a177e322be7077c07e0c2080dbc5eda4cefc0dfd5"
+    }
+  ]
+}

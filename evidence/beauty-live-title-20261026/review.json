@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-26",
+  "scope": "Original event logo left, centred Swedish title, enlarged right count tile",
+  "logoSHA256": "1e8b727623ce805a05e500e72de4011002e178c93014ce153cac091e864e851c",
+  "originalArtwork": "User upload equals existing aik-mandagsdartarna.png byte-for-byte; embedded unchanged",
+  "tests": 237,
+  "passed": 237,
+  "inventory": "PASS",
+  "browserReview": "PENDING",
+  "googleUpload": "PENDING",
+  "priorUploadMapping": "Local BeautyLiveTest.gs is named BeautyLiveServer.gs in Google TEST; HTML name unchanged"
+}

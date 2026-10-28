@@ -1,0 +1,8 @@
+{
+  "recordedAt": "2026-10-25T17:16:58.341Z",
+  "node": "v22.23.2",
+  "platform": "darwin",
+  "sourceCheckpoint": "23a0b93",
+  "backup": "backups/hub-test-before-2026-10-25T17-16-58-341Z",
+  "qualification": "Local automated checks only; no Google action"
+}

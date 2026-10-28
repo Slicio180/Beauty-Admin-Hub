@@ -1,0 +1,14 @@
+{
+  "recordedUTC": "2026-10-26T10:15:48.121488+00:00",
+  "baseline": "9f43d5c",
+  "tests": 268,
+  "pass": 268,
+  "fail": 0,
+  "inventory": "PASS",
+  "googleUpload": "PENDING",
+  "poolTabGoogleBrowser": "PENDING",
+  "loginUI": "LOCAL TESTS PASS",
+  "realAuthentication": "NOT CONFIGURED",
+  "firebaseConsole": "GOOGLE SIGN-IN REQUIRED",
+  "production": "UNTOUCHED"
+}

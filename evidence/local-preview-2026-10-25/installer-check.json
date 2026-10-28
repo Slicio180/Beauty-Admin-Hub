@@ -1,0 +1,7 @@
+{
+  "checkedAt": "2026-10-25T11:02:51.844504+00:00",
+  "freshInstall": "PASS: all 31 supplied files installed and hash verified",
+  "repeatInstall": "PASS: no-op",
+  "changedMaster": "PASS: rejected without writing",
+  "liveAppsScript": "PASS: identical to uploaded source after install"
+}

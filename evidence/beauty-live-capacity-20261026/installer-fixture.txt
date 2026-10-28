@@ -1,0 +1,44 @@
+PASS: isolated installer rehearsal. Baseline commit substituted only in fixture copy; shipped installer requires 08cc9f2.
+# tests 237
+# pass 237
+# fail 0
+# cancelled 0
+# skipped 0
+{
+  "finishedUTC": "2026-10-25T23:37:47.537Z",
+  "builds": [
+    {
+      "exit": 0,
+      "signal": null,
+      "error": null
+    },
+    {
+      "exit": 0,
+      "signal": null,
+      "error": null
+    }
+  ],
+  "tests": {
+    "exit": 0,
+    "signal": null,
+    "error": null
+  },
+  "inventory": {
+    "exit": 0,
+    "signal": null,
+    "error": null
+  },
+  "generatedHTMLUnchanged": true,
+  "generatedHashes": {
+    "apps-script/registration-identity-test/remote-app/HubTest.html": "bd2697106e40e9aa76b0981ed6cb72e07aa3c7921506f378a0bb838f4ace18f1",
+    "apps-script/registration-identity-test/remote-app/BeautyLiveTest.html": "3926d4aeb1aaf2fda39c05b0f9f1eb7905b68d5cc9c7e217c6239a3a4de2167c"
+  },
+  "result": "PASS",
+  "googleUpload": "PENDING",
+  "browserReview": "PENDING",
+  "nakka": "NOT CONNECTED"
+}
+Backup: backups/beauty-live-capacity-before-2026-10-25T23-37-42-286Z
+Evidence: evidence/mac-beauty-live-capacity-2026-10-25T23-37-42-286Z
+Git checkpoint: 1a7db2c Fit numbered Beauty Live list to sixty players and record AUD-067
+Local block complete. Google TEST upload and browser review remain pending.

@@ -1,0 +1,341 @@
+TAP version 13
+# node:fs:483
+#     return binding.readFileUtf8(path, stringToFlags(options.flag));
+#                    ^
+# Error: ENOENT: no such file or directory, open '/workspace/scratch/b223a1a31ce3/work/Beauty-Admin-Hub/Beauty-Admin-Hub/public/js/nakka-health.js'
+#     at Object.readFileSync (node:fs:483:20)
+#     at Object.<anonymous> (/workspace/scratch/b223a1a31ce3/work/Beauty-Admin-Hub/tests/nakka-health-ui.test.cjs:7:19)
+#     at Module._compile (node:internal/modules/cjs/loader:1929:14)
+#     at Object..js (node:internal/modules/cjs/loader:2060:10)
+#     at Module.load (node:internal/modules/cjs/loader:1651:32)
+#     at Module._load (node:internal/modules/cjs/loader:1443:12)
+#     at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+#     at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+#     at node:internal/main/run_main_module:33:47 {
+#   errno: -2,
+#   code: 'ENOENT',
+#   syscall: 'open',
+#   path: '/workspace/scratch/b223a1a31ce3/work/Beauty-Admin-Hub/Beauty-Admin-Hub/public/js/nakka-health.js'
+# }
+# Node.js v24.22.1
+# Subtest: tests/nakka-health-ui.test.cjs
+not ok 1 - tests/nakka-health-ui.test.cjs
+  ---
+  duration_ms: 232.704682
+  type: 'test'
+  location: '/workspace/scratch/b223a1a31ce3/work/Beauty-Admin-Hub/tests/nakka-health-ui.test.cjs:1:1'
+  failureType: 'testCodeFailure'
+  exitCode: 1
+  signal: ~
+  error: 'test failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+# Subtest: health route returns JSON and uses only one authenticated league GET
+ok 2 - health route returns JSON and uses only one authenticated league GET
+  ---
+  duration_ms: 8.418454
+  type: 'test'
+  ...
+# Subtest: league health handles empty readable league
+ok 3 - league health handles empty readable league
+  ---
+  duration_ms: 1.1914
+  type: 'test'
+  ...
+# Subtest: league health handles populated readable league
+ok 4 - league health handles populated readable league
+  ---
+  duration_ms: 0.858674
+  type: 'test'
+  ...
+# Subtest: league health handles missing credentials
+ok 5 - league health handles missing credentials
+  ---
+  duration_ms: 0.73329
+  type: 'test'
+  ...
+# Subtest: league health handles HTTP 401
+ok 6 - league health handles HTTP 401
+  ---
+  duration_ms: 1.427499
+  type: 'test'
+  ...
+# Subtest: league health handles HTTP 403
+ok 7 - league health handles HTTP 403
+  ---
+  duration_ms: 1.991014
+  type: 'test'
+  ...
+# Subtest: league health handles HTTP 500
+ok 8 - league health handles HTTP 500
+  ---
+  duration_ms: 2.427579
+  type: 'test'
+  ...
+# Subtest: league health handles HTTP 429
+ok 9 - league health handles HTTP 429
+  ---
+  duration_ms: 0.871247
+  type: 'test'
+  ...
+# Subtest: league health handles HTTP 408
+ok 10 - league health handles HTTP 408
+  ---
+  duration_ms: 0.865459
+  type: 'test'
+  ...
+# Subtest: league health handles HTTP 504
+ok 11 - league health handles HTTP 504
+  ---
+  duration_ms: 2.416428
+  type: 'test'
+  ...
+# Subtest: league health handles invalid JSON
+ok 12 - league health handles invalid JSON
+  ---
+  duration_ms: 2.276226
+  type: 'test'
+  ...
+# Subtest: league health handles API rejection
+ok 13 - league health handles API rejection
+  ---
+  duration_ms: 1.035207
+  type: 'test'
+  ...
+# Subtest: league health handles missing API result
+ok 14 - league health handles missing API result
+  ---
+  duration_ms: 0.972329
+  type: 'test'
+  ...
+# Subtest: league health handles missing list
+ok 15 - league health handles missing list
+  ---
+  duration_ms: 1.161142
+  type: 'test'
+  ...
+# Subtest: league health handles non-array list
+ok 16 - league health handles non-array list
+  ---
+  duration_ms: 0.954914
+  type: 'test'
+  ...
+# Subtest: league health handles null API response
+ok 17 - league health handles null API response
+  ---
+  duration_ms: 5.91421
+  type: 'test'
+  ...
+# Subtest: league health handles address unavailable
+ok 18 - league health handles address unavailable
+  ---
+  duration_ms: 2.982102
+  type: 'test'
+  ...
+# Subtest: league health handles network error
+ok 19 - league health handles network error
+  ---
+  duration_ms: 2.242393
+  type: 'test'
+  ...
+# Subtest: league health handles native fetch timeout
+ok 20 - league health handles native fetch timeout
+  ---
+  duration_ms: 1.961614
+  type: 'test'
+  ...
+# Subtest: health response is cached for 60 seconds across requests
+ok 21 - health response is cached for 60 seconds across requests
+  ---
+  duration_ms: 2.138691
+  type: 'test'
+  ...
+# Subtest: cached degraded result is returned without another Nakka request
+ok 22 - cached degraded result is returned without another Nakka request
+  ---
+  duration_ms: 2.155402
+  type: 'test'
+  ...
+# Subtest: an in-flight health probe does not block or trigger a second request
+ok 23 - an in-flight health probe does not block or trigger a second request
+  ---
+  duration_ms: 2.342119
+  type: 'test'
+  ...
+# Subtest: cache failure prevents an unthrottled upstream probe
+ok 24 - cache failure prevents an unthrottled upstream probe
+  ---
+  duration_ms: 2.098115
+  type: 'test'
+  ...
+# Subtest: cache write failure preserves a successful result and releases the lock
+ok 25 - cache write failure preserves a successful result and releases the lock
+  ---
+  duration_ms: 2.045954
+  type: 'test'
+  ...
+# Subtest: failed upstream request also releases the health lock
+ok 26 - failed upstream request also releases the health lock
+  ---
+  duration_ms: 2.210382
+  type: 'test'
+  ...
+# Subtest: qualified Adapter hash is exact
+ok 27 - qualified Adapter hash is exact
+  ---
+  duration_ms: 2.936782
+  type: 'test'
+  ...
+# Subtest: original recovered Drive Hub remains preserved exactly
+ok 28 - original recovered Drive Hub remains preserved exactly
+  ---
+  duration_ms: 0.716066
+  type: 'test'
+  ...
+# Subtest: current TEST Hub contains the read-only Hub data bridge
+ok 29 - current TEST Hub contains the read-only Hub data bridge
+  ---
+  duration_ms: 1.995734
+  type: 'test'
+  ...
+# Subtest: DateEncoding hash matches recovered script body
+ok 30 - DateEncoding hash matches recovered script body
+  ---
+  duration_ms: 0.278427
+  type: 'test'
+  ...
+# Subtest: DateEncoding round-trips supported dates
+ok 31 - DateEncoding round-trips supported dates
+  ---
+  duration_ms: 1.928251
+  type: 'test'
+  ...
+# Subtest: DateEncoding rejects impossible and fractional dates
+ok 32 - DateEncoding rejects impossible and fractional dates
+  ---
+  duration_ms: 1.22861
+  type: 'test'
+  ...
+# Subtest: TEST route is pinned and write gate is closed
+ok 33 - TEST route is pinned and write gate is closed
+  ---
+  duration_ms: 0.32931
+  type: 'test'
+  ...
+# Subtest: TEST manifest remains owner-only and Sheets v4
+ok 34 - TEST manifest remains owner-only and Sheets v4
+  ---
+  duration_ms: 0.890641
+  type: 'test'
+  ...
+# Subtest: Preflight remains pinned to TEST identity and bounded reads
+ok 35 - Preflight remains pinned to TEST identity and bounded reads
+  ---
+  duration_ms: 0.383284
+  type: 'test'
+  ...
+# Subtest: Adapter retains all stale diagnostics and no automatic retry
+ok 36 - Adapter retains all stale diagnostics and no automatic retry
+  ---
+  duration_ms: 0.379147
+  type: 'test'
+  ...
+# Subtest: Recovered TEST Hub clearly identifies isolated view
+ok 37 - Recovered TEST Hub clearly identifies isolated view
+  ---
+  duration_ms: 2.827418
+  type: 'test'
+  ...
+# Subtest: TEST Hub data adapter is pinned to isolated sheet
+ok 38 - TEST Hub data adapter is pinned to isolated sheet
+  ---
+  duration_ms: 4.339808
+  type: 'test'
+  ...
+# Subtest: TEST Hub data adapter contains no write API
+ok 39 - TEST Hub data adapter contains no write API
+  ---
+  duration_ms: 0.663868
+  type: 'test'
+  ...
+# Subtest: TEST Hub data adapter reads bounded ranges only
+ok 40 - TEST Hub data adapter reads bounded ranges only
+  ---
+  duration_ms: 0.431041
+  type: 'test'
+  ...
+# Subtest: Route exposes read-only TEST Hub RPC
+ok 41 - Route exposes read-only TEST Hub RPC
+  ---
+  duration_ms: 0.521748
+  type: 'test'
+  ...
+# Subtest: Hub routes hubdata through TEST RPC
+ok 42 - Hub routes hubdata through TEST RPC
+  ---
+  duration_ms: 8.132625
+  type: 'test'
+  ...
+# Subtest: TEST status dropdown remains disabled
+ok 43 - TEST status dropdown remains disabled
+  ---
+  duration_ms: 1.950451
+  type: 'test'
+  ...
+# Subtest: Event Control write gate remains closed
+ok 44 - Event Control write gate remains closed
+  ---
+  duration_ms: 0.48902
+  type: 'test'
+  ...
+# Subtest: status write gate is false by default
+ok 45 - status write gate is false by default
+  ---
+  duration_ms: 1.62177
+  type: 'test'
+  ...
+# Subtest: Event Control write gate remains false
+ok 46 - Event Control write gate remains false
+  ---
+  duration_ms: 0.334605
+  type: 'test'
+  ...
+# Subtest: status adapter is pinned to TEST identity
+ok 47 - status adapter is pinned to TEST identity
+  ---
+  duration_ms: 0.477482
+  type: 'test'
+  ...
+# Subtest: status adapter only accepts IN OUT STANDBY
+ok 48 - status adapter only accepts IN OUT STANDBY
+  ---
+  duration_ms: 3.371891
+  type: 'test'
+  ...
+# Subtest: closed gate prevents client access entirely
+ok 49 - closed gate prevents client access entirely
+  ---
+  duration_ms: 1.794663
+  type: 'test'
+  ...
+# Subtest: Route exposes dedicated TEST status RPC
+ok 50 - Route exposes dedicated TEST status RPC
+  ---
+  duration_ms: 0.371573
+  type: 'test'
+  ...
+# Subtest: Hub has TEST status bridge but dropdown stays disabled while gated
+ok 51 - Hub has TEST status bridge but dropdown stays disabled while gated
+  ---
+  duration_ms: 2.575651
+  type: 'test'
+  ...
+1..51
+# tests 51
+# suites 0
+# pass 50
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 256.692924

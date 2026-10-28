@@ -1,0 +1,67 @@
+[
+  {
+    "path": "scripts/build-hub-test.cjs",
+    "before": "929d2903cc22996b294358d9e1320f9d3de6a9921a2d9e765fb5034bfd49f3b9",
+    "after": "d8bc261048774787669d07ea30055a7904080622f184973a5985d62ff8c3057e"
+  },
+  {
+    "path": "public/js/hub-test-services.js",
+    "before": "a864be9e3dfc345414fde6c36de1085c8f490aee8691ba9948cd4499a24dfecc",
+    "after": "aa82dffc21fd50bc4cedca8f4ed0b9c49b869a1edd3bd34a43ac6f365ab59d13"
+  },
+  {
+    "path": "public/js/hub-nakka-event.js",
+    "before": null,
+    "after": "303c7ef547d0a84db02e787f2ac358b49e18c9f73a6d6e967e16ab6cb61b454f"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTestBridge.gs",
+    "before": "8dbd58dfca20a02f96923c0d6877d725ae372c6363782d9df477a89d5ac0adf0",
+    "after": "2f41f099b5092d69846ca3d0ec87c7b94b0299ce727ec7d0b7044b1017de2eec"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTestNakkaEvent.gs",
+    "before": null,
+    "after": "184eda489129e20b8509fe57a8ffd851a0647dd8dd5da2f951464b32545a74cf"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "33b3503961abfd540fded86d6132fabe940f55e764ccd106f26469d3b6e864b0",
+    "after": "7930212ed4b2faf08bd1a9f024142e298ddb789d74092d9e7ed6f0a7b7cb9e89"
+  },
+  {
+    "path": "tests/hub-auth.test.cjs",
+    "before": "5d59567eccb031e8bd5d806f5bc1c19db0035d3092e8c812879c9bbdaa4b22ce",
+    "after": "ca7be08eb7a5ab20c64fa895a6c39587e4f5ddbe60f3c88eb64299534388683d"
+  },
+  {
+    "path": "tests/hub-test-connection.test.cjs",
+    "before": "42b743704c04bc5e2c04ea415200f91c5784d7ac9d36ff01cf9c0cd0950e17b4",
+    "after": "3b2e161e21fbcaf37db012fd2c1dfd6c0412c1294437658c9dab57da68794ca7"
+  },
+  {
+    "path": "tests/hub-nakka-event.test.cjs",
+    "before": null,
+    "after": "ecd77c695c65a712db973d32d445e2922319c44acb752fd99cf1e3940798bc51"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "cb6ca366edd6ed92b663ab036e8b7d9c2016d6a5591a863e0b51b8b9a194e033",
+    "after": "19a7fa4e05fa0d463cd7f05c6db8248dcb7e04e8432f23b54d845542e6650a69"
+  },
+  {
+    "path": "evidence/nakka-event-preview-20261026/scope.md",
+    "before": null,
+    "after": "0fa5deefc928f7efe9a33351c9b66ac7f739809766ab0a3512b96280d44c33b9"
+  },
+  {
+    "path": "evidence/nakka-event-preview-20261026/qualification.txt",
+    "before": null,
+    "after": "973df7c4abd31dca7c0f01de4476ccac1634c3f79b760e99289a53386170b046"
+  },
+  {
+    "path": "evidence/nakka-event-preview-20261026/tests.txt",
+    "before": null,
+    "after": "60e1f02cb336bef2f7651ba468de22bbe615969bcd22117b91fcffb8ae8b514d"
+  }
+]

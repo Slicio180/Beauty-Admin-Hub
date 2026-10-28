@@ -1,0 +1,1 @@
+Initial full run: 226 PASS / 1 FAIL. Existing read-only popup test still searched for the previous disabled SAVE label after the UI changed to CONFIRM DATE CHANGE — NOT ENABLED. Updated that assertion; no server or write behavior changed. Red output preserved in initial-regression.txt. Exploratory reads used an incorrect working directory; corrected, no mutation resulted.

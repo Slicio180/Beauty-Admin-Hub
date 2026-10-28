@@ -1,0 +1,97 @@
+{
+  "preparedAt": "2026-10-25T17:43:00.160947+00:00",
+  "sourceCheckpoint": "dfb35df",
+  "sourceBuild": "e3dbd16",
+  "sourceHashes": {
+    "apps-script/registration-identity-test/remote-app/Code.js": "5df507b98a1f6a0447d6889f500a6a7b73036c5c0deda5be8cb84818721f5809",
+    "apps-script/registration-identity-test/remote-app/HubTestBridge.gs": "0844c8bf10701de69f8bc06c948cb0af3b81daa4606e423f3801c1d7e23c545a",
+    "apps-script/registration-identity-test/remote-app/HubTest.html": "f88106110f253c5704e77e84a43057f5fd590f4a5de78e6255e6274e547828c9",
+    "apps-script/registration-identity-test/remote-app/PROVISIONING.json": "36ef14adda75f3aeabacbcfae402d7afb261ab5cecc535eb44cf8d51bddfddad"
+  },
+  "images": [
+    {
+      "name": "20261025-182230.png",
+      "originalName": "Screenshot 2026-10-25 at 18.22.30.png",
+      "bytes": 179077,
+      "sha256": "e45b81ab4f241e2e10bebb8e7f9c2046991247f1e3c81a24ba3fe74ae8d33d1f"
+    },
+    {
+      "name": "20261025-182611.png",
+      "originalName": "Screenshot 2026-10-25 at 18.26.11.png",
+      "bytes": 131153,
+      "sha256": "ebab43c35ddaec7b17ccdb0689b6f4e71c125438063833bd7f1fa47bdb7966f4"
+    },
+    {
+      "name": "20261025-182628.png",
+      "originalName": "Screenshot 2026-10-25 at 18.26.28.png",
+      "bytes": 85711,
+      "sha256": "f1cc88580786ecc842c9c78662e977a3400e685975ae2908b6007e7bad3549d9"
+    },
+    {
+      "name": "20261025-182908.png",
+      "originalName": "Screenshot 2026-10-25 at 18.29.08.png",
+      "bytes": 91950,
+      "sha256": "04266e602fc9ace0ce54c434511b9028fc75ae87712bfb8f06ddc3ddf018bccd"
+    },
+    {
+      "name": "20261025-182955.png",
+      "originalName": "Screenshot 2026-10-25 at 18.29.55.png",
+      "bytes": 56093,
+      "sha256": "3b1bd4a38fa56d8109a132432ed5000c670e27b0a07dbe27f18b577ea7f17535"
+    },
+    {
+      "name": "20261025-183145.png",
+      "originalName": "Screenshot 2026-10-25 at 18.31.45.png",
+      "bytes": 26654,
+      "sha256": "ed9b3add196083a20328a5ce9c24d30ba32403b50a063e5613ea3b8976b1c8e2"
+    },
+    {
+      "name": "20261025-183229.png",
+      "originalName": "Screenshot 2026-10-25 at 18.32.29.png",
+      "bytes": 66216,
+      "sha256": "63f95c5fa0671a76bd69cadc7ab7a66a33117b928f0ba7df8ff4b236fa23573c"
+    },
+    {
+      "name": "20261025-183334.png",
+      "originalName": "Screenshot 2026-10-25 at 18.33.34.png",
+      "bytes": 51275,
+      "sha256": "1ee6beb8052f4d81101504ba4666864783941c89608dde6b4bc6f090a2e37bf8"
+    },
+    {
+      "name": "20261025-183659.png",
+      "originalName": "Screenshot 2026-10-25 at 18.36.59.png",
+      "bytes": 65936,
+      "sha256": "cd2b53d404f461860303c09816b2a164d4189ce07c8dc4c608edc294ae9ff36f"
+    },
+    {
+      "name": "20261025-183749.png",
+      "originalName": "Screenshot 2026-10-25 at 18.37.49.png",
+      "bytes": 57160,
+      "sha256": "12fc996e60dbc0214cd7a58b7a56d447ba675012597de693d13cfeba0901fb8f"
+    },
+    {
+      "name": "20261025-183805.png",
+      "originalName": "Screenshot 2026-10-25 at 18.38.05.png",
+      "bytes": 65701,
+      "sha256": "d5d506ad9b28e6d1e7cde4da34a380ab67567e990bfbd76c32f9490f5b512eaa"
+    },
+    {
+      "name": "20261025-183818.png",
+      "originalName": "Screenshot 2026-10-25 at 18.38.18.png",
+      "bytes": 81451,
+      "sha256": "e9754e519348663e336e6463ffb7bbd7097adeadf4bd4b19ce2c398738c8c267"
+    },
+    {
+      "name": "20261025-184008.png",
+      "originalName": "Screenshot 2026-10-25 at 18.40.08.png",
+      "bytes": 133891,
+      "sha256": "1ff0f7c3b8186d047c06c627fb7f81d2d9a5a28c78de04bc3f78a03a4700b4f1"
+    },
+    {
+      "name": "20261025-184022.png",
+      "originalName": "Screenshot 2026-10-25 at 18.40.22.png",
+      "bytes": 110868,
+      "sha256": "96d0e53693772fc6ee416acbcff6f4ce8ed5f422ca94802ab4687f3009518378"
+    }
+  ]
+}

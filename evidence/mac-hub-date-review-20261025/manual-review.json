@@ -1,0 +1,33 @@
+{
+  "sourceCheckpoint": "8de8e42",
+  "environment": "User screenshots of Google Remote Identity TEST Hub",
+  "checks": [
+    {
+      "id": "DATE-POPUP-001",
+      "result": "PASS, screenshot observed",
+      "actual": "21.59.35: confirmation popup names 2026-10-25 and 2026-10-26, warns of event reset, confirmation visibly disabled."
+    },
+    {
+      "id": "DATE-CANCEL-001",
+      "result": "PASS, screenshot observed after requested cancellation",
+      "actual": "22.00.58: proposed date 2026-10-26 retained, acknowledgement unchecked and Review Change visibly disabled."
+    },
+    {
+      "id": "DATE-REOPEN-001",
+      "result": "PASS, screenshot observed after requested reopening",
+      "actual": "22.01.23: new date restored to actual 2026-10-25, acknowledgement unchecked and Review Change visibly disabled."
+    },
+    {
+      "id": "EVENT-DETAILS-001",
+      "result": "PASS, screenshot observed",
+      "actual": "22.02.10: English Event Control Details panel; Identity TEST sheet, Europe/Berlin, en_GB, current date 2026-10-25, last reset 24/10/2026 20:23, 7 players, response row 161; legacy reset effects 7 delete, 3 retain, 9 C:E clear; retained F caveat on 2 rows."
+    }
+  ],
+  "limitations": [
+    "Screenshots establish observed UI states, not a full workbook before/after comparison.",
+    "Full sidebar order is obscured by the panels; not independently visually verified.",
+    "No date reset executed; event saving remains disabled.",
+    "Legacy F retention warning remains unresolved before reset implementation.",
+    "Production, concurrency, login security and Beauty Live functionality are not qualified."
+  ]
+}

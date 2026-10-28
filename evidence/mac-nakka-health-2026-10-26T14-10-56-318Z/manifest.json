@@ -1,0 +1,42 @@
+[
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTestBridge.gs",
+    "before": "0b4882dc7ea37db2151bae476c3b947fdd4b6e73710df594e65bbcdd15758459",
+    "after": "8dbd58dfca20a02f96923c0d6877d725ae372c6363782d9df477a89d5ac0adf0"
+  },
+  {
+    "path": "public/js/hub-test-services.js",
+    "before": "e764d4f680f46e912cc7e9fc86f2116f3b2a7148523c9f2898a84aa8f0899d5e",
+    "after": "a864be9e3dfc345414fde6c36de1085c8f490aee8691ba9948cd4499a24dfecc"
+  },
+  {
+    "path": "tests/hub-test-connection.test.cjs",
+    "before": "8acd09299583d3ac0204cd028f461f6e4df7cb101c32c463e690333d4efe989c",
+    "after": "42b743704c04bc5e2c04ea415200f91c5784d7ac9d36ff01cf9c0cd0950e17b4"
+  },
+  {
+    "path": "tests/hub-auth.test.cjs",
+    "before": "99e56ef1b6cc732b10a39bc01c259b12c5dade014878955ba99ad7af9cd58232",
+    "after": "5d59567eccb031e8bd5d806f5bc1c19db0035d3092e8c812879c9bbdaa4b22ce"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "4683168232f0df0972acbc553ca9ae1c6df7aac5f5357806da719da1fba12dc2",
+    "after": "cb6ca366edd6ed92b663ab036e8b7d9c2016d6a5591a863e0b51b8b9a194e033"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "bf0583598a8d66a853861bd8a8d7c285e02a1adf25ff9dfa3f893e962479e62f",
+    "after": "33b3503961abfd540fded86d6132fabe940f55e764ccd106f26469d3b6e864b0"
+  },
+  {
+    "path": "evidence/nakka-health-identity-20261026/scope.md",
+    "before": null,
+    "after": "8abfe93bf8235c353cdfcf38fa3f6459875a3c49363e5c6f60afb8d0aaab4cb3"
+  },
+  {
+    "path": "evidence/nakka-health-identity-20261026/tests.txt",
+    "before": null,
+    "after": "ee46e10807d6641a62113113f762e1f718c976a3d8b5b48755673f4267e04b88"
+  }
+]

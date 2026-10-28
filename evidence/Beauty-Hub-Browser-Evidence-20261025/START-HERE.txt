@@ -1,0 +1,6 @@
+Beauty Hub browser evidence — 2026-10-25
+
+Extract this ZIP in Downloads. From your Beauty-Admin-Hub VS Code terminal run:
+node "/Users/alessiotampella/Downloads/Beauty-Hub-Browser-Evidence-20261025/apply-hub-evidence.cjs"
+
+The installer checks checkpoint dfb35df and local TEST source hashes, backs up audit/configuration, preserves 14 screenshots and hashes in evidence/mac-hub-browser-20261025/screenshots, records AUD-039–040, updates TEST provisioning status, and commits only the evidence/audit/status paths. AUD-037–038 and the earlier manual review stay unchanged. No new runtime testing or Google operation. Review observations and limitations in same-name-review.json.

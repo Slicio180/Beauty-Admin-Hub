@@ -1,0 +1,365 @@
+TAP version 13
+# Subtest: preview defaults to blocked and never falls back to network
+ok 1 - preview defaults to blocked and never falls back to network
+  ---
+  duration_ms: 3.248653
+  type: 'test'
+  ...
+# Subtest: preview rejects mock mode on non-loopback hosts
+ok 2 - preview rejects mock mode on non-loopback hosts
+  ---
+  duration_ms: 0.818984
+  type: 'test'
+  ...
+# Subtest: preview refuses unknown mode and external endpoint configuration
+ok 3 - preview refuses unknown mode and external endpoint configuration
+  ---
+  duration_ms: 1.595063
+  type: 'test'
+  ...
+# Subtest: preview returns fictional player data and defensive response copies
+ok 4 - preview returns fictional player data and defensive response copies
+  ---
+  duration_ms: 1.258646
+  type: 'test'
+  ...
+# Subtest: preview status mutation persists only in its in-memory instance
+ok 5 - preview status mutation persists only in its in-memory instance
+  ---
+  duration_ms: 2.605935
+  type: 'test'
+  ...
+# Subtest: preview rejects unknown players and invalid statuses without mutation
+ok 6 - preview rejects unknown players and invalid statuses without mutation
+  ---
+  duration_ms: 1.079746
+  type: 'test'
+  ...
+# Subtest: preview registers existing master player with consent and message
+ok 7 - preview registers existing master player with consent and message
+  ---
+  duration_ms: 1.371616
+  type: 'test'
+  ...
+# Subtest: preview registers a new fictional name and adds it to mock master
+ok 8 - preview registers a new fictional name and adds it to mock master
+  ---
+  duration_ms: 1.092586
+  type: 'test'
+  ...
+# Subtest: preview normalizes duplicate names through the new-player route
+ok 9 - preview normalizes duplicate names through the new-player route
+  ---
+  duration_ms: 1.085225
+  type: 'test'
+  ...
+# Subtest: preview requires a valid name and explicit consent before registration
+ok 10 - preview requires a valid name and explicit consent before registration
+  ---
+  duration_ms: 1.330905
+  type: 'test'
+  ...
+# Subtest: preview reports Nakka as uncontacted and unavailable
+ok 11 - preview reports Nakka as uncontacted and unavailable
+  ---
+  duration_ms: 1.207028
+  type: 'test'
+  ...
+# Subtest: preview rejects remote URLs and non-GET methods
+ok 12 - preview rejects remote URLs and non-GET methods
+  ---
+  duration_ms: 0.691892
+  type: 'test'
+  ...
+# Subtest: preview rejects unknown routes and duplicate query keys
+ok 13 - preview rejects unknown routes and duplicate query keys
+  ---
+  duration_ms: 0.810581
+  type: 'test'
+  ...
+# Subtest: preview respects aborted requests before mock mutation
+ok 14 - preview respects aborted requests before mock mutation
+  ---
+  duration_ms: 0.841076
+  type: 'test'
+  ...
+# Subtest: desktop entrypoints load closed service boundary before application scripts
+ok 15 - desktop entrypoints load closed service boundary before application scripts
+  ---
+  duration_ms: 0.43803
+  type: 'test'
+  ...
+# Subtest: preview server serves mock entry with network-blocking policy
+ok 16 - preview server serves mock entry with network-blocking policy
+  ---
+  duration_ms: 33.904168
+  type: 'test'
+  ...
+# Hub registration error: Error: Du är redan anmäld till den här spelkvällen.
+#     at Object.click (evalmachine.<anonymous>:1676:15)
+#     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+#     at async Element.emit (/workspace/scratch/56d57aa0b8ff/integration-work/tests/hub-preview.test.cjs:154:24)
+#     at async TestContext.<anonymous> (/workspace/scratch/56d57aa0b8ff/integration-work/tests/hub-preview.test.cjs:208:3)
+#     at async Test.run (node:internal/test_runner/test:1409:7)
+#     at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+# Subtest: preview server denies private source paths and write methods
+ok 17 - preview server denies private source paths and write methods
+  ---
+  duration_ms: 12.511866
+  type: 'test'
+  ...
+# Subtest: actual dashboard renders mock data and identifies backend as demo
+ok 18 - actual dashboard renders mock data and identifies backend as demo
+  ---
+  duration_ms: 3.06736
+  type: 'test'
+  ...
+# Subtest: actual registration form sends long consent labels through mock boundary
+ok 19 - actual registration form sends long consent labels through mock boundary
+  ---
+  duration_ms: 2.852556
+  type: 'test'
+  ...
+# Subtest: actual registration errors open dismissible message popup and preserve the form
+ok 20 - actual registration errors open dismissible message popup and preserve the form
+  ---
+  duration_ms: 2.837775
+  type: 'test'
+  ...
+# Subtest: actual Hub form and identity dialog create a distinct mock player after confirmation
+ok 21 - actual Hub form and identity dialog create a distinct mock player after confirmation
+  ---
+  duration_ms: 4.164151
+  type: 'test'
+  ...
+# Subtest: identity conflict requires a choice before resolving an existing typed name
+ok 22 - identity conflict requires a choice before resolving an existing typed name
+  ---
+  duration_ms: 1.519598
+  type: 'test'
+  ...
+# Subtest: identity comparison normalizes case whitespace and Unicode accents
+ok 23 - identity comparison normalizes case whitespace and Unicode accents
+  ---
+  duration_ms: 0.203556
+  type: 'test'
+  ...
+# Subtest: new unique name needs no identifying detail
+ok 24 - new unique name needs no identifying detail
+  ---
+  duration_ms: 0.702298
+  type: 'test'
+  ...
+# Subtest: existing player not registered tonight can be selected without extra prompt
+ok 25 - existing player not registered tonight can be selected without extra prompt
+  ---
+  duration_ms: 0.121954
+  type: 'test'
+  ...
+# Subtest: already registered selected player receives the same identity popup contract
+ok 26 - already registered selected player receives the same identity popup contract
+  ---
+  duration_ms: 0.121493
+  type: 'test'
+  ...
+# Subtest: thats me reuses existing player and never creates a second master identity
+ok 27 - thats me reuses existing player and never creates a second master identity
+  ---
+  duration_ms: 0.167603
+  type: 'test'
+  ...
+# Subtest: thats me blocks a second registration tonight
+ok 28 - thats me blocks a second registration tonight
+  ---
+  duration_ms: 0.162374
+  type: 'test'
+  ...
+# Subtest: different person gets a distinct confirmed display name
+ok 29 - different person gets a distinct confirmed display name
+  ---
+  duration_ms: 0.282666
+  type: 'test'
+  ...
+# Subtest: different person must confirm the exact proposed display name
+ok 30 - different person must confirm the exact proposed display name
+  ---
+  duration_ms: 0.294694
+  type: 'test'
+  ...
+# Subtest: blank excessive or unsafe detail is rejected
+ok 31 - blank excessive or unsafe detail is rejected
+  ---
+  duration_ms: 0.387224
+  type: 'test'
+  ...
+# Subtest: reused identifying detail is rejected even with case differences
+ok 32 - reused identifying detail is rejected even with case differences
+  ---
+  duration_ms: 0.166791
+  type: 'test'
+  ...
+# Subtest: stale or forged conflict bases are rejected
+ok 33 - stale or forged conflict bases are rejected
+  ---
+  duration_ms: 0.169074
+  type: 'test'
+  ...
+# Subtest: ambiguous identical master rows require organiser help
+ok 34 - ambiguous identical master rows require organiser help
+  ---
+  duration_ms: 0.122434
+  type: 'test'
+  ...
+# Subtest: unknown selections and invalid identity choices cannot create players
+ok 35 - unknown selections and invalid identity choices cannot create players
+  ---
+  duration_ms: 0.1191
+  type: 'test'
+  ...
+# Subtest: identity dialog reveals detail only after choosing a different person
+ok 36 - identity dialog reveals detail only after choosing a different person
+  ---
+  duration_ms: 2.328628
+  type: 'test'
+  ...
+# Subtest: identity dialog requires review then explicit confirmation before sending detail
+ok 37 - identity dialog requires review then explicit confirmation before sending detail
+  ---
+  duration_ms: 1.662253
+  type: 'test'
+  ...
+# Subtest: editing the detail after review requires confirmation again
+ok 38 - editing the detail after review requires confirmation again
+  ---
+  duration_ms: 1.054869
+  type: 'test'
+  ...
+# Subtest: identity dialog thats me returns the existing choice with canonical base
+ok 39 - identity dialog thats me returns the existing choice with canonical base
+  ---
+  duration_ms: 0.996901
+  type: 'test'
+  ...
+# Subtest: identity dialog cancel cancels without resubmission
+ok 40 - identity dialog cancel cancels without resubmission
+  ---
+  duration_ms: 1.045655
+  type: 'test'
+  ...
+# Subtest: identity dialog close cancels without resubmission
+ok 41 - identity dialog close cancels without resubmission
+  ---
+  duration_ms: 0.679583
+  type: 'test'
+  ...
+# Subtest: identity dialog escape cancels without resubmission
+ok 42 - identity dialog escape cancels without resubmission
+  ---
+  duration_ms: 0.900316
+  type: 'test'
+  ...
+# Subtest: identity dialog backdrop cancels without resubmission
+ok 43 - identity dialog backdrop cancels without resubmission
+  ---
+  duration_ms: 0.655287
+  type: 'test'
+  ...
+# Subtest: identity submission never retries a transport failure
+ok 44 - identity submission never retries a transport failure
+  ---
+  duration_ms: 1.209942
+  type: 'test'
+  ...
+# Subtest: identity dialog restores focus and traps keyboard tabbing
+ok 45 - identity dialog restores focus and traps keyboard tabbing
+  ---
+  duration_ms: 0.719383
+  type: 'test'
+  ...
+# Subtest: remote-app candidate gate blocks registration before any service access
+ok 46 - remote-app candidate gate blocks registration before any service access
+  ---
+  duration_ms: 1.773361
+  type: 'test'
+  ...
+# Subtest: remote-app candidate conflict preflight performs no mutation
+ok 47 - remote-app candidate conflict preflight performs no mutation
+  ---
+  duration_ms: 2.659506
+  type: 'test'
+  ...
+# Subtest: remote-app candidate thats me blocks duplicate without mutation
+ok 48 - remote-app candidate thats me blocks duplicate without mutation
+  ---
+  duration_ms: 0.63049
+  type: 'test'
+  ...
+# Subtest: remote-app candidate saves only distinct confirmed name preserving original identity
+ok 49 - remote-app candidate saves only distinct confirmed name preserving original identity
+  ---
+  duration_ms: 0.92904
+  type: 'test'
+  ...
+# Subtest: remote-app candidate invalid confirmation cannot mutate Sheets
+ok 50 - remote-app candidate invalid confirmation cannot mutate Sheets
+  ---
+  duration_ms: 0.937322
+  type: 'test'
+  ...
+# Subtest: automatic-nakka candidate gate blocks registration before any service access
+ok 51 - automatic-nakka candidate gate blocks registration before any service access
+  ---
+  duration_ms: 1.382813
+  type: 'test'
+  ...
+# Subtest: automatic-nakka candidate conflict preflight performs no mutation
+ok 52 - automatic-nakka candidate conflict preflight performs no mutation
+  ---
+  duration_ms: 1.100208
+  type: 'test'
+  ...
+# Subtest: automatic-nakka candidate thats me blocks duplicate without mutation
+ok 53 - automatic-nakka candidate thats me blocks duplicate without mutation
+  ---
+  duration_ms: 0.731041
+  type: 'test'
+  ...
+# Subtest: automatic-nakka candidate saves only distinct confirmed name preserving original identity
+ok 54 - automatic-nakka candidate saves only distinct confirmed name preserving original identity
+  ---
+  duration_ms: 0.898633
+  type: 'test'
+  ...
+# Subtest: automatic-nakka candidate invalid confirmation cannot mutate Sheets
+ok 55 - automatic-nakka candidate invalid confirmation cannot mutate Sheets
+  ---
+  duration_ms: 0.722788
+  type: 'test'
+  ...
+# Subtest: remote-app/RemoteRegistration.html actual submit handler resolves collision before candidate save
+ok 56 - remote-app/RemoteRegistration.html actual submit handler resolves collision before candidate save
+  ---
+  duration_ms: 2.845175
+  type: 'test'
+  ...
+# Subtest: automatic-nakka/Kiosk.html actual submit handler resolves collision before candidate save
+ok 57 - automatic-nakka/Kiosk.html actual submit handler resolves collision before candidate save
+  ---
+  duration_ms: 2.527226
+  type: 'test'
+  ...
+# Subtest: automatic-nakka/RemoteRegistration.html actual submit handler resolves collision before candidate save
+ok 58 - automatic-nakka/RemoteRegistration.html actual submit handler resolves collision before candidate save
+  ---
+  duration_ms: 2.659956
+  type: 'test'
+  ...
+1..58
+# tests 58
+# suites 0
+# pass 58
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 191.437528

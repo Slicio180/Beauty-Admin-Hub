@@ -1,0 +1,47 @@
+[
+  {
+    "path": "tests/pool-planner.test.cjs",
+    "before": "6fb5823b6e9dd06e66a47c8e5353c99b3ff4192c00e653a03fa74e6d85b32a34",
+    "after": "4d4ff820d977b326227d6c7bd113288d554ae8e567fc59ac2d129d4debdbe20f"
+  },
+  {
+    "path": "scripts/build-hub-test.cjs",
+    "before": "60a876909f2ebd3cafadc5bff553220c43396d32e1897ee44778fc6ea672ade2",
+    "after": "ed8ba19a12b18b82bc7c9a10a052a6ed5c47c9ecb7958c65e14bd3d57503b18b"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "6ae0f9830b14c673c18310dffc78c6543729ff41460c225094264b7d1f85cae4",
+    "after": "0009d0742b37e032e72c8c6a1c88586fdc44c0303923a7578a0b09a9ec0e80ae"
+  },
+  {
+    "path": "evidence/pool-download-fix-20261026/regression.tap",
+    "before": null,
+    "after": "b5c1fe524f229ed18c95b544149621ef35a6e147da5c8ae846a8056be144111f"
+  },
+  {
+    "path": "evidence/pool-download-fix-20261026/inventory.txt",
+    "before": null,
+    "after": "e5d8b3d6a617802602bc67f8ab217072156a62366a6738172cc8a3b539745fda"
+  },
+  {
+    "path": "evidence/pool-download-fix-20261026/regression-final.tap",
+    "before": null,
+    "after": "b5f973262c15e1f2f4c1d068bab016c4803aa854ec867c3199007c2355040cb9"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "27d971bd9eb868975d410704ca4c5af36ab13b22f95f12dc4fd9bc5f70aeb860",
+    "after": "6853958d86feb8c34325d6db9cdf188849703124858fb8e08125d29a58759884"
+  },
+  {
+    "path": "docs/handoff/POOL-PLANNER-20261026.md",
+    "before": "9b6f5cfdd51138a988653a1a7c053e7bb67f5bc8df1075e1df7765e2d513684f",
+    "after": "866f112d50185b5392183c467bcf33341ad76b2b1a80a6a0bcbf181f09daf595"
+  },
+  {
+    "path": "public/js/pool-planner.js",
+    "before": "b76e20007a4216b0692185359757692551d5e84da9cfec00523c5c4562ebbefa",
+    "after": "dedc27414f7bb13922ec3ce085030ddb20d2c61bc71346e02d99145864a0ccac"
+  }
+]

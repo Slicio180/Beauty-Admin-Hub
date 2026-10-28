@@ -1,0 +1,36 @@
+{
+  "audit": "AUD-082",
+  "recordedUTC": "2026-10-26T13:53:52.099Z",
+  "stockholm": "2026-10-26 14:53:52",
+  "baseline": "e492393747a4c0b1b8ccbc330ed33895933f0105",
+  "environment": "Identity TEST only",
+  "source": "Owner confirmations in chat on 2026-10-26; incorrect-password screenshot reviewed",
+  "results": {
+    "login": "PASS",
+    "signOutHidesHub": "PASS",
+    "signedOutRefreshKeepsHubHidden": "PASS",
+    "reLoginLoadsPlayers": "PASS",
+    "sidebarEmailAndSignOutBelowInstructions": "PASS",
+    "compactHeader": "PASS",
+    "incorrectPasswordRejected": "PASS",
+    "resetEmailDelivery": "PASS — arrived in Spam",
+    "existingPasswordAfterResetRequest": "PASS",
+    "authenticatedPlayerStatusRoundTrip": "PASS — IN to STANDBY, saved, then IN, saved"
+  },
+  "limits": [
+    "Completed password-reset flow not tested; reset link not opened and password unchanged",
+    "Native 15-minute idle timeout and browser Back restoration still pending",
+    "Other-account authorization rejection and full shared-computer qualification remain pending",
+    "Nakka remains unconnected in this TEST project; no production rollout"
+  ],
+  "automatedBaseline": {
+    "tests": 298,
+    "pass": 298,
+    "fail": 0,
+    "source": "AUD-081 Mac result 2026-10-26T13:42:48.244Z",
+    "rerun": false,
+    "reason": "Evidence-only change; application unchanged"
+  },
+  "rootCause": "Native Firebase verification blocked by missing Google external_request consent; user granted permission, then real login succeeded. Both native Base64 decoding probes passed. JWT padding was not the observed native cause.",
+  "secrets": "No password, Firebase ID token, Hub session token or reset link recorded"
+}

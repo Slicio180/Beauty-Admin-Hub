@@ -1,0 +1,10 @@
+{
+  "startedUTC": "2026-10-25T22:13:03.689Z",
+  "finishedUTC": "2026-10-25T22:13:13.178Z",
+  "node": "v22.23.2",
+  "testsExit": 1,
+  "testsError": "spawnSync /usr/local/bin/node ENOBUFS",
+  "inventoryExit": 0,
+  "inventoryError": null,
+  "browserReview": "PENDING"
+}

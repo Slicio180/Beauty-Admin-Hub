@@ -1,0 +1,39 @@
+Started: 2026-10-25 13:02:32 CET
+v22.23.2
+142f55bc0490091aa4734d7f54213c030637219c
+ M docs/handoff/architecture.md
+ M docs/handoff/audit-register.md
+ M docs/handoff/coverage.md
+ M docs/handoff/known-issues.md
+ M docs/handoff/requirements.json
+ M docs/handoff/test-inventory.json
+ M docs/handoff/test-inventory.md
+ M package.json
+ M public/css/style.css
+ M public/index.html
+ M public/js/app.js
+ M public/js/nakka-health.js
+ M tests/nakka-health-ui.test.cjs
+?? .DS_Store
+?? apps-script/.DS_Store
+?? apps-script/registration-identity-candidate/
+?? backups/Beauty-Hub-integration-source-20261025.zip
+?? backups/local-preview-before-2026-10-25T11-19-26-184Z/
+?? backups/name-flow-before-2026-10-25T12-01-44-654Z/
+?? docs/testing/IDENTITY-FLOW-2026-10-25.md
+?? docs/testing/LOCAL-PREVIEW-2026-10-25.md
+?? docs/testing/REGISTRATION-POPUP-2026-10-25.md
+?? evidence/identity-flow-2026-10-25/
+?? evidence/local-preview-2026-10-25/
+?? evidence/mac-name-flow-20261025-130232/
+?? evidence/mac-preview-20261025-122023/
+?? evidence/registration-popup-2026-10-25/
+?? public/assets/fonts/
+?? public/css/identity-dialog.css
+?? public/js/hub-services.js
+?? public/js/identity-dialog.js
+?? public/js/name-resolution.js
+?? public/preview.html
+?? scripts/serve-preview.cjs
+?? tests/hub-preview.test.cjs
+?? tests/registration-identity.test.cjs

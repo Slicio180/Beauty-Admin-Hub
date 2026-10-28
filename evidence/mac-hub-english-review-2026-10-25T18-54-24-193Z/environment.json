@@ -1,0 +1,8 @@
+{
+  "recordedAt": "2026-10-25T18:54:24.193Z",
+  "node": "v22.23.2",
+  "platform": "darwin",
+  "sourceCheckpoint": "db42730",
+  "backup": "backups/hub-english-review-before-2026-10-25T18-54-24-193Z",
+  "qualification": "Local automated tests only; no Google operation"
+}

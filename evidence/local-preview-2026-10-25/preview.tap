@@ -1,0 +1,124 @@
+TAP version 13
+# Subtest: preview defaults to blocked and never falls back to network
+ok 1 - preview defaults to blocked and never falls back to network
+  ---
+  duration_ms: 2.701066
+  type: 'test'
+  ...
+# Subtest: preview rejects mock mode on non-loopback hosts
+ok 2 - preview rejects mock mode on non-loopback hosts
+  ---
+  duration_ms: 0.669648
+  type: 'test'
+  ...
+# Subtest: preview refuses unknown mode and external endpoint configuration
+ok 3 - preview refuses unknown mode and external endpoint configuration
+  ---
+  duration_ms: 1.173777
+  type: 'test'
+  ...
+# Subtest: preview returns fictional player data and defensive response copies
+ok 4 - preview returns fictional player data and defensive response copies
+  ---
+  duration_ms: 1.185244
+  type: 'test'
+  ...
+# Subtest: preview status mutation persists only in its in-memory instance
+ok 5 - preview status mutation persists only in its in-memory instance
+  ---
+  duration_ms: 1.597334
+  type: 'test'
+  ...
+# Subtest: preview rejects unknown players and invalid statuses without mutation
+ok 6 - preview rejects unknown players and invalid statuses without mutation
+  ---
+  duration_ms: 1.794131
+  type: 'test'
+  ...
+# Subtest: preview registers existing master player with consent and message
+ok 7 - preview registers existing master player with consent and message
+  ---
+  duration_ms: 1.026765
+  type: 'test'
+  ...
+# Subtest: preview registers a new fictional name and adds it to mock master
+ok 8 - preview registers a new fictional name and adds it to mock master
+  ---
+  duration_ms: 0.806013
+  type: 'test'
+  ...
+# Subtest: preview normalizes duplicate names through the new-player route
+ok 9 - preview normalizes duplicate names through the new-player route
+  ---
+  duration_ms: 0.868638
+  type: 'test'
+  ...
+# Subtest: preview requires a valid name and explicit consent before registration
+ok 10 - preview requires a valid name and explicit consent before registration
+  ---
+  duration_ms: 1.160537
+  type: 'test'
+  ...
+# Subtest: preview reports Nakka as uncontacted and unavailable
+ok 11 - preview reports Nakka as uncontacted and unavailable
+  ---
+  duration_ms: 1.180067
+  type: 'test'
+  ...
+# Subtest: preview rejects remote URLs and non-GET methods
+ok 12 - preview rejects remote URLs and non-GET methods
+  ---
+  duration_ms: 0.575707
+  type: 'test'
+  ...
+# Subtest: preview rejects unknown routes and duplicate query keys
+ok 13 - preview rejects unknown routes and duplicate query keys
+  ---
+  duration_ms: 0.57077
+  type: 'test'
+  ...
+# Subtest: preview respects aborted requests before mock mutation
+ok 14 - preview respects aborted requests before mock mutation
+  ---
+  duration_ms: 0.797921
+  type: 'test'
+  ...
+# Subtest: desktop entrypoints load closed service boundary before application scripts
+ok 15 - desktop entrypoints load closed service boundary before application scripts
+  ---
+  duration_ms: 0.5311
+  type: 'test'
+  ...
+# Subtest: preview server serves mock entry with network-blocking policy
+ok 16 - preview server serves mock entry with network-blocking policy
+  ---
+  duration_ms: 49.48966
+  type: 'test'
+  ...
+# Subtest: preview server denies private source paths and write methods
+ok 17 - preview server denies private source paths and write methods
+  ---
+  duration_ms: 11.717909
+  type: 'test'
+  ...
+# Subtest: actual dashboard renders mock data and identifies backend as demo
+ok 18 - actual dashboard renders mock data and identifies backend as demo
+  ---
+  duration_ms: 2.092069
+  type: 'test'
+  ...
+# Subtest: actual registration form sends long consent labels through mock boundary
+ok 19 - actual registration form sends long consent labels through mock boundary
+  ---
+  duration_ms: 1.933581
+  type: 'test'
+  ...
+1..19
+# tests 19
+# suites 0
+# pass 19
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 188.561148

@@ -1,0 +1,97 @@
+[
+  {
+    "path": "tests/hub-english-date-review.test.cjs",
+    "before": "2b3051e12095c180b1e30e153d50e00394961500d64cde2f957c23b355232efa",
+    "after": "d3e6179a75cc152743d1bbc52ce46a23667896e94bf13c3daed5a74b620058da"
+  },
+  {
+    "path": "tests/hub-test-connection.test.cjs",
+    "before": "95d47a9080bb0bc134c62f1e75e362dbdad9a6dfa3fbd0450e10b7fc36063157",
+    "after": "fc6a48b589ca4330b07bbd978ef47e3fdb315879218cf29c9f72ebf5b607f4a1"
+  },
+  {
+    "path": "tests/health-menu.test.cjs",
+    "before": null,
+    "after": "e0601cb33293c50833107761451fcec9406a894eab5910230e8355d3ed3027cf"
+  },
+  {
+    "path": "tests/nakka-health-ui.test.cjs",
+    "before": "cc5fbd0729111d7731c42f94fedc7da1c66f29efb6cc31d219fcf6eb82babf22",
+    "after": "ded7c89548d5923cceec1536cded47153ac85cd697b7476cd7ae476c918b786a"
+  },
+  {
+    "path": "public/index.html",
+    "before": "7710a9f89ffac726a75340c9b44e3dbd6bcb33086bff97db903a32565e3c53eb",
+    "after": "e4a46a6f1d7dc7ba8cd9b9953a7f0e38e54c9da0826c8972311a0c4199351cc8"
+  },
+  {
+    "path": "public/preview.html",
+    "before": "1c8172e49abea6b06324f80339fe2e968bc92a477c88f35bd21232577710e0a3",
+    "after": "54714e84e6ae0972c78c0586faa43f0d2ce16815440fd582eff2372e690f982e"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "0009d0742b37e032e72c8c6a1c88586fdc44c0303923a7578a0b09a9ec0e80ae",
+    "after": "6d801f7b05c88981a15ed10956af7f3f847f9b5066ca5c5b3238c20fbc7e5f48"
+  },
+  {
+    "path": "evidence/health-menu-20261026/regression.tap",
+    "before": null,
+    "after": "e2a89fa043a408b35fbef874ce2089631504a49ab623ff54b80aa4f96e1902bf"
+  },
+  {
+    "path": "evidence/health-menu-20261026/inventory.txt",
+    "before": null,
+    "after": "3d196672e1e9558c59a42d2b76adb81febc3288cc041c5c4137f94748c23877d"
+  },
+  {
+    "path": "evidence/health-menu-20261026/regression-final.tap",
+    "before": null,
+    "after": "340bf94def17d732539211b734abfe7a171b253d46b0de11ef66c8a988750ac8"
+  },
+  {
+    "path": "evidence/health-menu-20261026/initial.tap",
+    "before": null,
+    "after": "52cfbd612f2fca7a5201c5b12a58d5330c975484ca266c7f6570d1471b12996e"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "6853958d86feb8c34325d6db9cdf188849703124858fb8e08125d29a58759884",
+    "after": "29bc201b3d5f1ce664cc4be268971847660354ed9d81d2683f617079aab62631"
+  },
+  {
+    "path": "docs/handoff/coverage.md",
+    "before": "8c1f461bd5e884e268409b210899f87746aa814784ed6e4bfe08853fa98a7c32",
+    "after": "ea190665e1fe907db348765678e2150e9db347a7f068ddb606a4e3ab78223a76"
+  },
+  {
+    "path": "docs/handoff/HEALTH-MENU-20261026.md",
+    "before": null,
+    "after": "a8d86dd223053b869c9814035ea32d358bff7dbfc837b7362def55a4738bbc05"
+  },
+  {
+    "path": "public/js/nakka-health.js",
+    "before": "88312613e3d84af81643951c46ec3106f13ba0a0c8f27d01e7d300b77feeea66",
+    "after": "6ce0380fb58df9f9a1a2b0daf6d9c2827f6b0ef61536b9c94b925b0faa570a7a"
+  },
+  {
+    "path": "public/js/health-panels.js",
+    "before": null,
+    "after": "0a7737f413038ccc3d58ae6c55a238fdba512b8d359cad708d7ed3fd836f7928"
+  },
+  {
+    "path": "public/js/app.js",
+    "before": "cacc297c41596e780c7e5c922fe616e5713f529a17e271e710d69010d5c079f6",
+    "after": "df86d6fb8141e50062fa92ee17261bf38684985ae4d166cb0f99543979796f33"
+  },
+  {
+    "path": "public/css/style.css",
+    "before": "03378057e2e2454475e1659826bc1f4338176acf76e8461151c7d62b8a11b25f",
+    "after": "20c06d3b7040a5618d9c3363a1c3ce0d90f85fb8ec0bdebb8b710ad643d6ec0f"
+  },
+  {
+    "path": "public/css/hub-test-event-control.css",
+    "before": "95a7fd7673fff3546c9b58d37abe897ac029d378679d0660cc788fd9f00af482",
+    "after": "9d18a3bf5f1ce0d3fc5a4b58be5fc8b3e2f8c2df7e015c8f1df01749d7a8d485"
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "audit": "AUD-094",
+  "recordedUTC": "2026-10-27T19:43:35.606414+00:00",
+  "expectedOwnerCheckpoint": "0bf5dfe",
+  "tests": 343,
+  "pass": 343,
+  "fail": 0,
+  "inventory": "PASS: 343 cases across 24 files",
+  "builders": "Hub and Live PASS",
+  "googleUpload": "PENDING",
+  "browserReview": "PENDING",
+  "apiWritesDuringDevelopment": "NONE",
+  "nativeReconciliation": "PENDING; read-only Adam preview only",
+  "identityProof": "Not claimed when API LPID omitted",
+  "generatedHashes": {
+    "HubTest.html": "62bdd307a349622e0632e6975e968614dcfcca4e18fd93b995dd61b097f54c6b",
+    "BeautyLiveTest.html": "52dd7b863f4b481f1e24cc1fa1eea19d78903d9770f07f9e020b3fcc0b296f17"
+  }
+}

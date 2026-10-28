@@ -1,0 +1,36 @@
+{
+  "sourceCheckpoint": "dfb35df",
+  "sourceBuild": "e3dbd16",
+  "environment": "Mac browser; dedicated Identity TEST spreadsheet and Remote TEST Apps Script",
+  "expected": "Confirmed distinct same-name registration creates one response, one distinct master name and a separate event player, preserving the original.",
+  "actual": {
+    "result": "PASS for observed sequential TEST storage and display",
+    "responseRow": 161,
+    "timestamp": "25/10/2026 18:36:34",
+    "selection": "MITT NAMN FINNS INTE I LISTAN",
+    "player": "Albert Lindblad (Hubtest)",
+    "consent": "JA, JAG GODKÄNNER",
+    "message": "TEST-HUB-002.",
+    "source": "HUB",
+    "eventStatus": "IN",
+    "playerCount": 7,
+    "masterRows": {
+      "3": "Albert Lindblad",
+      "4": "Albert Lindblad (Hubtest)"
+    },
+    "original": "Row 160: Albert Lindblad, NEJ, TEST-HUB-001, HUB. Event status IN unchanged."
+  },
+  "reloadCheck": "Screenshots 18.40.08 and 18.40.22 supplied in response to the requested reload check show seven players and both distinct Alberts. No separate textual confirmation of the reload action was supplied. Earlier original-player reloads were explicitly confirmed by the user.",
+  "relatedAudits": [
+    "AUD-037",
+    "AUD-038"
+  ],
+  "evidence": "screenshot-manifest.json lists preserved files and original names. Includes initial Hub connection, first registration, duplicate rejection, raw response/master/event readbacks and final seven-player display.",
+  "limitations": [
+    "Dedicated sequential TEST only; no production qualification.",
+    "No complete workbook before/after comparison.",
+    "Status write behavior and shared-computer login/session/roles not qualified.",
+    "Hub/Remote share one project lock; kiosk uses another, so cross-project concurrency remains unresolved.",
+    "No new Google operation or application source change by this evidence installer."
+  ]
+}

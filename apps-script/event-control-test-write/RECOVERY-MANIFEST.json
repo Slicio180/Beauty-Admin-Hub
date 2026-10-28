@@ -1,0 +1,42 @@
+{
+  "status": "RECOVERED_FROM_SURVIVING_SOURCES",
+  "files": {
+    "Adapter.gs": {
+      "bytes": 12692,
+      "sha256": "cedbba88cc6df4906d3ede28971bf07d4dc6e967438165dd9ea7d03ce5f7f309"
+    },
+    "DateEncoding.gs": {
+      "bytes": 2962,
+      "sha256": "f78a76c407cac558eddd1de25df80624973454b57437a34e4785931d322c8634"
+    },
+    "Hub.html": {
+      "bytes": 357204,
+      "sha256": "4f91f27c627801b936721e4265a7f166d22a37b9957ff1c4552abe2f54593a41"
+    },
+    "Preflight.gs": {
+      "bytes": 10053,
+      "sha256": "538dd3cdd9f5b07669aad9d16c752f2d55a148910c1383b3f6ed815cafb35929"
+    },
+    "Route.gs": {
+      "bytes": 3140,
+      "sha256": "597c0401bcd2c1cbdf7f7e31c558da6c3fe72e863d637c0c792c20267f6e28d2"
+    },
+    "appsscript.json": {
+      "bytes": 379,
+      "sha256": "ed09ccd525b754da671ae7ba31739c3ef70340290d4593e9ce56da31da9d7d16"
+    }
+  },
+  "verification": {
+    "Adapter.gs": "QUALIFIED HASH MATCH",
+    "DateEncoding.gs": "MATCHES SURVIVING DRIVE HUB SCRIPT BODY",
+    "Hub.html": "AUTHORITATIVE SURVIVING DRIVE COPY",
+    "Route.gs": "RECOVERED FROM CURRENT TEST APPS SCRIPT SOURCE PROVIDED BY OWNER",
+    "Preflight.gs": "RECOVERED FROM CURRENT TEST APPS SCRIPT SOURCE PROVIDED BY OWNER",
+    "appsscript.json": "RECOVERED FROM CURRENT TEST APPS SCRIPT MANIFEST PROVIDED BY OWNER"
+  },
+  "safety": {
+    "BEAUTY_TEST_WRITES_APPROVED_": false,
+    "production_cleared": false,
+    "no_google_writes_performed_by_recovery": true
+  }
+}

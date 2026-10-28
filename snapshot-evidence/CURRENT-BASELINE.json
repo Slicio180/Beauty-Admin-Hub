@@ -1,0 +1,16 @@
+{
+  "ownerCheckpoint": "2781600",
+  "audit": "AUD-100",
+  "tests": 401,
+  "builds": "PASS",
+  "inventory": "PASS",
+  "source": "Owner initial source plus verified overlay payloads through AUD-100; no new app edits at closeout",
+  "auditLimit": "Uploaded audit-register preserves historical088; actual later Mac audit remains on owner computer. See continuation and collected browser acceptance; do not overwrite Mac audit.",
+  "exclusions": [
+    "Git objects/history",
+    "bulk owner backups except existing required recovery fixture",
+    "browser screenshots",
+    "rehearsal commits and temporary library helpers"
+  ],
+  "production": "Preserved original source; not redeployed or modified by TEST work"
+}

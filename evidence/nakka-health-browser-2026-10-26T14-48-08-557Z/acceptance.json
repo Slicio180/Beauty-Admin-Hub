@@ -1,0 +1,29 @@
+{
+  "audit": "AUD-084",
+  "recordedUTC": "2026-10-26T14:48:08.557Z",
+  "stockholm": "2026-10-26 15:48:08",
+  "baseline": "4184b9b90a4ad1850f456e0f9be9261b1a5cf1f0",
+  "environment": "Identity TEST only",
+  "result": "PASS",
+  "nativeStatus": "OK",
+  "nativeMessage": "Nakka is reachable and the expected league is readable.",
+  "nativeCheckTime": "26/10/2026, 15:39:10",
+  "sidebarDot": "PASS — green in owner screenshot 15.42.22",
+  "priorResults": [
+    "Initial generic request failure; cause not confirmed",
+    "Subsequent health check reported credentials not configured",
+    "Owner configured actual API credentials in TEST Script Properties; values not inspected",
+    "Refresh then returned OK"
+  ],
+  "scope": "Read-only connectivity and expected league access. Ranking and event synchronization not verified or enabled by this feature.",
+  "automatedBaseline": {
+    "tests": 298,
+    "pass": 298,
+    "fail": 0,
+    "source": "AUD-083 Mac result 2026-10-26T14:11:58.569Z",
+    "rerun": false,
+    "reason": "Evidence-only checkpoint; no application changes"
+  },
+  "secrets": "No API credential values or account secrets recorded",
+  "production": "UNCHANGED"
+}

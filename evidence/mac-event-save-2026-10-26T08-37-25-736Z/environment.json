@@ -1,0 +1,8 @@
+{
+  "startedUTC": "2026-10-26T08:37:25.736Z",
+  "stockholm": "2026-10-26 09:37:25",
+  "baseline": "2ed561fd8e406907b3f205b42b4c34966010f1b4",
+  "node": "v22.23.2",
+  "branch": "recovery/2026-10-24",
+  "backup": "backups/event-save-before-2026-10-26T08-37-25-736Z"
+}

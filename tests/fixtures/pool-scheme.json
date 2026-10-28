@@ -1,0 +1,1457 @@
+[
+  {
+    "n": 5,
+    "3": {
+      "three": 0,
+      "four": 0,
+      "five": 1,
+      "pools": 1
+    },
+    "4": {
+      "three": 0,
+      "four": 0,
+      "five": 1,
+      "pools": 1
+    }
+  },
+  {
+    "n": 54,
+    "3": {
+      "three": 18,
+      "four": 0,
+      "five": 0,
+      "pools": 18
+    },
+    "4": {
+      "three": 2,
+      "four": 12,
+      "five": 0,
+      "pools": 14
+    }
+  },
+  {
+    "n": 6,
+    "3": {
+      "three": 2,
+      "four": 0,
+      "five": 0,
+      "pools": 2
+    },
+    "4": {
+      "three": 2,
+      "four": 0,
+      "five": 0,
+      "pools": 2
+    }
+  },
+  {
+    "n": 55,
+    "3": {
+      "three": 17,
+      "four": 1,
+      "five": 0,
+      "pools": 18
+    },
+    "4": {
+      "three": 1,
+      "four": 13,
+      "five": 0,
+      "pools": 14
+    }
+  },
+  {
+    "n": 7,
+    "3": {
+      "three": 1,
+      "four": 1,
+      "five": 0,
+      "pools": 2
+    },
+    "4": {
+      "three": 1,
+      "four": 1,
+      "five": 0,
+      "pools": 2
+    }
+  },
+  {
+    "n": 56,
+    "3": {
+      "three": 16,
+      "four": 2,
+      "five": 0,
+      "pools": 18
+    },
+    "4": {
+      "three": 0,
+      "four": 14,
+      "five": 0,
+      "pools": 14
+    }
+  },
+  {
+    "n": 8,
+    "3": {
+      "three": 0,
+      "four": 2,
+      "five": 0,
+      "pools": 2
+    },
+    "4": {
+      "three": 0,
+      "four": 2,
+      "five": 0,
+      "pools": 2
+    }
+  },
+  {
+    "n": 57,
+    "3": {
+      "three": 19,
+      "four": 0,
+      "five": 0,
+      "pools": 19
+    },
+    "4": {
+      "three": 3,
+      "four": 12,
+      "five": 0,
+      "pools": 15
+    }
+  },
+  {
+    "n": 9,
+    "3": {
+      "three": 3,
+      "four": 0,
+      "five": 0,
+      "pools": 3
+    },
+    "4": {
+      "three": 3,
+      "four": 0,
+      "five": 0,
+      "pools": 3
+    }
+  },
+  {
+    "n": 58,
+    "3": {
+      "three": 18,
+      "four": 1,
+      "five": 0,
+      "pools": 19
+    },
+    "4": {
+      "three": 2,
+      "four": 13,
+      "five": 0,
+      "pools": 15
+    }
+  },
+  {
+    "n": 10,
+    "3": {
+      "three": 2,
+      "four": 1,
+      "five": 0,
+      "pools": 3
+    },
+    "4": {
+      "three": 2,
+      "four": 1,
+      "five": 0,
+      "pools": 3
+    }
+  },
+  {
+    "n": 59,
+    "3": {
+      "three": 17,
+      "four": 2,
+      "five": 0,
+      "pools": 19
+    },
+    "4": {
+      "three": 1,
+      "four": 14,
+      "five": 0,
+      "pools": 15
+    }
+  },
+  {
+    "n": 11,
+    "3": {
+      "three": 1,
+      "four": 2,
+      "five": 0,
+      "pools": 3
+    },
+    "4": {
+      "three": 1,
+      "four": 2,
+      "five": 0,
+      "pools": 3
+    }
+  },
+  {
+    "n": 60,
+    "3": {
+      "three": 20,
+      "four": 0,
+      "five": 0,
+      "pools": 20
+    },
+    "4": {
+      "three": 0,
+      "four": 15,
+      "five": 0,
+      "pools": 15
+    }
+  },
+  {
+    "n": 12,
+    "3": {
+      "three": 4,
+      "four": 0,
+      "five": 0,
+      "pools": 4
+    },
+    "4": {
+      "three": 0,
+      "four": 3,
+      "five": 0,
+      "pools": 3
+    }
+  },
+  {
+    "n": 61,
+    "3": {
+      "three": 19,
+      "four": 1,
+      "five": 0,
+      "pools": 20
+    },
+    "4": {
+      "three": 3,
+      "four": 13,
+      "five": 0,
+      "pools": 16
+    }
+  },
+  {
+    "n": 13,
+    "3": {
+      "three": 3,
+      "four": 1,
+      "five": 0,
+      "pools": 4
+    },
+    "4": {
+      "three": 3,
+      "four": 1,
+      "five": 0,
+      "pools": 4
+    }
+  },
+  {
+    "n": 62,
+    "3": {
+      "three": 18,
+      "four": 2,
+      "five": 0,
+      "pools": 20
+    },
+    "4": {
+      "three": 2,
+      "four": 14,
+      "five": 0,
+      "pools": 16
+    }
+  },
+  {
+    "n": 14,
+    "3": {
+      "three": 2,
+      "four": 2,
+      "five": 0,
+      "pools": 4
+    },
+    "4": {
+      "three": 2,
+      "four": 2,
+      "five": 0,
+      "pools": 4
+    }
+  },
+  {
+    "n": 63,
+    "3": {
+      "three": 21,
+      "four": 0,
+      "five": 0,
+      "pools": 21
+    },
+    "4": {
+      "three": 1,
+      "four": 15,
+      "five": 0,
+      "pools": 16
+    }
+  },
+  {
+    "n": 15,
+    "3": {
+      "three": 5,
+      "four": 0,
+      "five": 0,
+      "pools": 5
+    },
+    "4": {
+      "three": 1,
+      "four": 3,
+      "five": 0,
+      "pools": 4
+    }
+  },
+  {
+    "n": 64,
+    "3": {
+      "three": 20,
+      "four": 1,
+      "five": 0,
+      "pools": 21
+    },
+    "4": {
+      "three": 0,
+      "four": 16,
+      "five": 0,
+      "pools": 16
+    }
+  },
+  {
+    "n": 16,
+    "3": {
+      "three": 4,
+      "four": 1,
+      "five": 0,
+      "pools": 5
+    },
+    "4": {
+      "three": 0,
+      "four": 4,
+      "five": 0,
+      "pools": 4
+    }
+  },
+  {
+    "n": 65,
+    "3": {
+      "three": 19,
+      "four": 2,
+      "five": 0,
+      "pools": 21
+    },
+    "4": {
+      "three": 3,
+      "four": 14,
+      "five": 0,
+      "pools": 17
+    }
+  },
+  {
+    "n": 17,
+    "3": {
+      "three": 3,
+      "four": 2,
+      "five": 0,
+      "pools": 5
+    },
+    "4": {
+      "three": 3,
+      "four": 2,
+      "five": 0,
+      "pools": 5
+    }
+  },
+  {
+    "n": 66,
+    "3": {
+      "three": 22,
+      "four": 0,
+      "five": 0,
+      "pools": 22
+    },
+    "4": {
+      "three": 2,
+      "four": 15,
+      "five": 0,
+      "pools": 17
+    }
+  },
+  {
+    "n": 18,
+    "3": {
+      "three": 6,
+      "four": 0,
+      "five": 0,
+      "pools": 6
+    },
+    "4": {
+      "three": 2,
+      "four": 3,
+      "five": 0,
+      "pools": 5
+    }
+  },
+  {
+    "n": 67,
+    "3": {
+      "three": 21,
+      "four": 1,
+      "five": 0,
+      "pools": 22
+    },
+    "4": {
+      "three": 1,
+      "four": 16,
+      "five": 0,
+      "pools": 17
+    }
+  },
+  {
+    "n": 19,
+    "3": {
+      "three": 5,
+      "four": 1,
+      "five": 0,
+      "pools": 6
+    },
+    "4": {
+      "three": 1,
+      "four": 4,
+      "five": 0,
+      "pools": 5
+    }
+  },
+  {
+    "n": 68,
+    "3": {
+      "three": 20,
+      "four": 2,
+      "five": 0,
+      "pools": 22
+    },
+    "4": {
+      "three": 0,
+      "four": 17,
+      "five": 0,
+      "pools": 17
+    }
+  },
+  {
+    "n": 20,
+    "3": {
+      "three": 4,
+      "four": 2,
+      "five": 0,
+      "pools": 6
+    },
+    "4": {
+      "three": 0,
+      "four": 5,
+      "five": 0,
+      "pools": 5
+    }
+  },
+  {
+    "n": 69,
+    "3": {
+      "three": 23,
+      "four": 0,
+      "five": 0,
+      "pools": 23
+    },
+    "4": {
+      "three": 3,
+      "four": 15,
+      "five": 0,
+      "pools": 18
+    }
+  },
+  {
+    "n": 21,
+    "3": {
+      "three": 7,
+      "four": 0,
+      "five": 0,
+      "pools": 7
+    },
+    "4": {
+      "three": 3,
+      "four": 3,
+      "five": 0,
+      "pools": 6
+    }
+  },
+  {
+    "n": 70,
+    "3": {
+      "three": 22,
+      "four": 1,
+      "five": 0,
+      "pools": 23
+    },
+    "4": {
+      "three": 2,
+      "four": 16,
+      "five": 0,
+      "pools": 18
+    }
+  },
+  {
+    "n": 22,
+    "3": {
+      "three": 6,
+      "four": 1,
+      "five": 0,
+      "pools": 7
+    },
+    "4": {
+      "three": 2,
+      "four": 4,
+      "five": 0,
+      "pools": 6
+    }
+  },
+  {
+    "n": 71,
+    "3": {
+      "three": 21,
+      "four": 2,
+      "five": 0,
+      "pools": 23
+    },
+    "4": {
+      "three": 1,
+      "four": 17,
+      "five": 0,
+      "pools": 18
+    }
+  },
+  {
+    "n": 23,
+    "3": {
+      "three": 5,
+      "four": 2,
+      "five": 0,
+      "pools": 7
+    },
+    "4": {
+      "three": 1,
+      "four": 5,
+      "five": 0,
+      "pools": 6
+    }
+  },
+  {
+    "n": 72,
+    "3": {
+      "three": 24,
+      "four": 0,
+      "five": 0,
+      "pools": 24
+    },
+    "4": {
+      "three": 0,
+      "four": 18,
+      "five": 0,
+      "pools": 18
+    }
+  },
+  {
+    "n": 24,
+    "3": {
+      "three": 8,
+      "four": 0,
+      "five": 0,
+      "pools": 8
+    },
+    "4": {
+      "three": 0,
+      "four": 6,
+      "five": 0,
+      "pools": 6
+    }
+  },
+  {
+    "n": 73,
+    "3": {
+      "three": 23,
+      "four": 1,
+      "five": 0,
+      "pools": 24
+    },
+    "4": {
+      "three": 3,
+      "four": 16,
+      "five": 0,
+      "pools": 19
+    }
+  },
+  {
+    "n": 25,
+    "3": {
+      "three": 7,
+      "four": 1,
+      "five": 0,
+      "pools": 8
+    },
+    "4": {
+      "three": 3,
+      "four": 4,
+      "five": 0,
+      "pools": 7
+    }
+  },
+  {
+    "n": 74,
+    "3": {
+      "three": 22,
+      "four": 2,
+      "five": 0,
+      "pools": 24
+    },
+    "4": {
+      "three": 2,
+      "four": 17,
+      "five": 0,
+      "pools": 19
+    }
+  },
+  {
+    "n": 26,
+    "3": {
+      "three": 6,
+      "four": 2,
+      "five": 0,
+      "pools": 8
+    },
+    "4": {
+      "three": 2,
+      "four": 5,
+      "five": 0,
+      "pools": 7
+    }
+  },
+  {
+    "n": 75,
+    "3": {
+      "three": 25,
+      "four": 0,
+      "five": 0,
+      "pools": 25
+    },
+    "4": {
+      "three": 1,
+      "four": 18,
+      "five": 0,
+      "pools": 19
+    }
+  },
+  {
+    "n": 27,
+    "3": {
+      "three": 9,
+      "four": 0,
+      "five": 0,
+      "pools": 9
+    },
+    "4": {
+      "three": 1,
+      "four": 6,
+      "five": 0,
+      "pools": 7
+    }
+  },
+  {
+    "n": 76,
+    "3": {
+      "three": 24,
+      "four": 1,
+      "five": 0,
+      "pools": 25
+    },
+    "4": {
+      "three": 0,
+      "four": 19,
+      "five": 0,
+      "pools": 19
+    }
+  },
+  {
+    "n": 28,
+    "3": {
+      "three": 8,
+      "four": 1,
+      "five": 0,
+      "pools": 9
+    },
+    "4": {
+      "three": 0,
+      "four": 7,
+      "five": 0,
+      "pools": 7
+    }
+  },
+  {
+    "n": 77,
+    "3": {
+      "three": 23,
+      "four": 2,
+      "five": 0,
+      "pools": 25
+    },
+    "4": {
+      "three": 3,
+      "four": 17,
+      "five": 0,
+      "pools": 20
+    }
+  },
+  {
+    "n": 29,
+    "3": {
+      "three": 7,
+      "four": 2,
+      "five": 0,
+      "pools": 9
+    },
+    "4": {
+      "three": 3,
+      "four": 5,
+      "five": 0,
+      "pools": 8
+    }
+  },
+  {
+    "n": 78,
+    "3": {
+      "three": 26,
+      "four": 0,
+      "five": 0,
+      "pools": 26
+    },
+    "4": {
+      "three": 2,
+      "four": 18,
+      "five": 0,
+      "pools": 20
+    }
+  },
+  {
+    "n": 30,
+    "3": {
+      "three": 10,
+      "four": 0,
+      "five": 0,
+      "pools": 10
+    },
+    "4": {
+      "three": 2,
+      "four": 6,
+      "five": 0,
+      "pools": 8
+    }
+  },
+  {
+    "n": 79,
+    "3": {
+      "three": 25,
+      "four": 1,
+      "five": 0,
+      "pools": 26
+    },
+    "4": {
+      "three": 1,
+      "four": 19,
+      "five": 0,
+      "pools": 20
+    }
+  },
+  {
+    "n": 31,
+    "3": {
+      "three": 9,
+      "four": 1,
+      "five": 0,
+      "pools": 10
+    },
+    "4": {
+      "three": 1,
+      "four": 7,
+      "five": 0,
+      "pools": 8
+    }
+  },
+  {
+    "n": 80,
+    "3": {
+      "three": 24,
+      "four": 2,
+      "five": 0,
+      "pools": 26
+    },
+    "4": {
+      "three": 0,
+      "four": 20,
+      "five": 0,
+      "pools": 20
+    }
+  },
+  {
+    "n": 32,
+    "3": {
+      "three": 8,
+      "four": 2,
+      "five": 0,
+      "pools": 10
+    },
+    "4": {
+      "three": 0,
+      "four": 8,
+      "five": 0,
+      "pools": 8
+    }
+  },
+  {
+    "n": 81,
+    "3": {
+      "three": 27,
+      "four": 0,
+      "five": 0,
+      "pools": 27
+    },
+    "4": {
+      "three": 3,
+      "four": 18,
+      "five": 0,
+      "pools": 21
+    }
+  },
+  {
+    "n": 33,
+    "3": {
+      "three": 11,
+      "four": 0,
+      "five": 0,
+      "pools": 11
+    },
+    "4": {
+      "three": 3,
+      "four": 6,
+      "five": 0,
+      "pools": 9
+    }
+  },
+  {
+    "n": 82,
+    "3": {
+      "three": 26,
+      "four": 1,
+      "five": 0,
+      "pools": 27
+    },
+    "4": {
+      "three": 2,
+      "four": 19,
+      "five": 0,
+      "pools": 21
+    }
+  },
+  {
+    "n": 34,
+    "3": {
+      "three": 10,
+      "four": 1,
+      "five": 0,
+      "pools": 11
+    },
+    "4": {
+      "three": 2,
+      "four": 7,
+      "five": 0,
+      "pools": 9
+    }
+  },
+  {
+    "n": 83,
+    "3": {
+      "three": 25,
+      "four": 2,
+      "five": 0,
+      "pools": 27
+    },
+    "4": {
+      "three": 1,
+      "four": 20,
+      "five": 0,
+      "pools": 21
+    }
+  },
+  {
+    "n": 35,
+    "3": {
+      "three": 9,
+      "four": 2,
+      "five": 0,
+      "pools": 11
+    },
+    "4": {
+      "three": 1,
+      "four": 8,
+      "five": 0,
+      "pools": 9
+    }
+  },
+  {
+    "n": 84,
+    "3": {
+      "three": 28,
+      "four": 0,
+      "five": 0,
+      "pools": 28
+    },
+    "4": {
+      "three": 0,
+      "four": 21,
+      "five": 0,
+      "pools": 21
+    }
+  },
+  {
+    "n": 36,
+    "3": {
+      "three": 12,
+      "four": 0,
+      "five": 0,
+      "pools": 12
+    },
+    "4": {
+      "three": 0,
+      "four": 9,
+      "five": 0,
+      "pools": 9
+    }
+  },
+  {
+    "n": 85,
+    "3": {
+      "three": 27,
+      "four": 1,
+      "five": 0,
+      "pools": 28
+    },
+    "4": {
+      "three": 3,
+      "four": 19,
+      "five": 0,
+      "pools": 22
+    }
+  },
+  {
+    "n": 37,
+    "3": {
+      "three": 11,
+      "four": 1,
+      "five": 0,
+      "pools": 12
+    },
+    "4": {
+      "three": 3,
+      "four": 7,
+      "five": 0,
+      "pools": 10
+    }
+  },
+  {
+    "n": 86,
+    "3": {
+      "three": 26,
+      "four": 2,
+      "five": 0,
+      "pools": 28
+    },
+    "4": {
+      "three": 2,
+      "four": 20,
+      "five": 0,
+      "pools": 22
+    }
+  },
+  {
+    "n": 38,
+    "3": {
+      "three": 10,
+      "four": 2,
+      "five": 0,
+      "pools": 12
+    },
+    "4": {
+      "three": 2,
+      "four": 8,
+      "five": 0,
+      "pools": 10
+    }
+  },
+  {
+    "n": 87,
+    "3": {
+      "three": 29,
+      "four": 0,
+      "five": 0,
+      "pools": 29
+    },
+    "4": {
+      "three": 1,
+      "four": 21,
+      "five": 0,
+      "pools": 22
+    }
+  },
+  {
+    "n": 39,
+    "3": {
+      "three": 13,
+      "four": 0,
+      "five": 0,
+      "pools": 13
+    },
+    "4": {
+      "three": 1,
+      "four": 9,
+      "five": 0,
+      "pools": 10
+    }
+  },
+  {
+    "n": 88,
+    "3": {
+      "three": 28,
+      "four": 1,
+      "five": 0,
+      "pools": 29
+    },
+    "4": {
+      "three": 0,
+      "four": 22,
+      "five": 0,
+      "pools": 22
+    }
+  },
+  {
+    "n": 40,
+    "3": {
+      "three": 12,
+      "four": 1,
+      "five": 0,
+      "pools": 13
+    },
+    "4": {
+      "three": 0,
+      "four": 10,
+      "five": 0,
+      "pools": 10
+    }
+  },
+  {
+    "n": 89,
+    "3": {
+      "three": 27,
+      "four": 2,
+      "five": 0,
+      "pools": 29
+    },
+    "4": {
+      "three": 3,
+      "four": 20,
+      "five": 0,
+      "pools": 23
+    }
+  },
+  {
+    "n": 41,
+    "3": {
+      "three": 11,
+      "four": 2,
+      "five": 0,
+      "pools": 13
+    },
+    "4": {
+      "three": 3,
+      "four": 8,
+      "five": 0,
+      "pools": 11
+    }
+  },
+  {
+    "n": 90,
+    "3": {
+      "three": 30,
+      "four": 0,
+      "five": 0,
+      "pools": 30
+    },
+    "4": {
+      "three": 2,
+      "four": 21,
+      "five": 0,
+      "pools": 23
+    }
+  },
+  {
+    "n": 42,
+    "3": {
+      "three": 14,
+      "four": 0,
+      "five": 0,
+      "pools": 14
+    },
+    "4": {
+      "three": 2,
+      "four": 9,
+      "five": 0,
+      "pools": 11
+    }
+  },
+  {
+    "n": 91,
+    "3": {
+      "three": 29,
+      "four": 1,
+      "five": 0,
+      "pools": 30
+    },
+    "4": {
+      "three": 1,
+      "four": 22,
+      "five": 0,
+      "pools": 23
+    }
+  },
+  {
+    "n": 43,
+    "3": {
+      "three": 13,
+      "four": 1,
+      "five": 0,
+      "pools": 14
+    },
+    "4": {
+      "three": 1,
+      "four": 10,
+      "five": 0,
+      "pools": 11
+    }
+  },
+  {
+    "n": 92,
+    "3": {
+      "three": 28,
+      "four": 2,
+      "five": 0,
+      "pools": 30
+    },
+    "4": {
+      "three": 0,
+      "four": 23,
+      "five": 0,
+      "pools": 23
+    }
+  },
+  {
+    "n": 44,
+    "3": {
+      "three": 12,
+      "four": 2,
+      "five": 0,
+      "pools": 14
+    },
+    "4": {
+      "three": 0,
+      "four": 11,
+      "five": 0,
+      "pools": 11
+    }
+  },
+  {
+    "n": 93,
+    "3": {
+      "three": 31,
+      "four": 0,
+      "five": 0,
+      "pools": 31
+    },
+    "4": {
+      "three": 3,
+      "four": 21,
+      "five": 0,
+      "pools": 24
+    }
+  },
+  {
+    "n": 45,
+    "3": {
+      "three": 15,
+      "four": 0,
+      "five": 0,
+      "pools": 15
+    },
+    "4": {
+      "three": 3,
+      "four": 9,
+      "five": 0,
+      "pools": 12
+    }
+  },
+  {
+    "n": 94,
+    "3": {
+      "three": 30,
+      "four": 1,
+      "five": 0,
+      "pools": 31
+    },
+    "4": {
+      "three": 2,
+      "four": 22,
+      "five": 0,
+      "pools": 24
+    }
+  },
+  {
+    "n": 46,
+    "3": {
+      "three": 14,
+      "four": 1,
+      "five": 0,
+      "pools": 15
+    },
+    "4": {
+      "three": 2,
+      "four": 10,
+      "five": 0,
+      "pools": 12
+    }
+  },
+  {
+    "n": 95,
+    "3": {
+      "three": 29,
+      "four": 2,
+      "five": 0,
+      "pools": 31
+    },
+    "4": {
+      "three": 1,
+      "four": 23,
+      "five": 0,
+      "pools": 24
+    }
+  },
+  {
+    "n": 47,
+    "3": {
+      "three": 13,
+      "four": 2,
+      "five": 0,
+      "pools": 15
+    },
+    "4": {
+      "three": 1,
+      "four": 11,
+      "five": 0,
+      "pools": 12
+    }
+  },
+  {
+    "n": 96,
+    "3": {
+      "three": 32,
+      "four": 0,
+      "five": 0,
+      "pools": 32
+    },
+    "4": {
+      "three": 0,
+      "four": 24,
+      "five": 0,
+      "pools": 24
+    }
+  },
+  {
+    "n": 48,
+    "3": {
+      "three": 16,
+      "four": 0,
+      "five": 0,
+      "pools": 16
+    },
+    "4": {
+      "three": 0,
+      "four": 12,
+      "five": 0,
+      "pools": 12
+    }
+  },
+  {
+    "n": 97,
+    "3": {
+      "three": 31,
+      "four": 1,
+      "five": 0,
+      "pools": 32
+    },
+    "4": {
+      "three": 3,
+      "four": 22,
+      "five": 0,
+      "pools": 25
+    }
+  },
+  {
+    "n": 49,
+    "3": {
+      "three": 15,
+      "four": 1,
+      "five": 0,
+      "pools": 16
+    },
+    "4": {
+      "three": 3,
+      "four": 10,
+      "five": 0,
+      "pools": 13
+    }
+  },
+  {
+    "n": 98,
+    "3": {
+      "three": 30,
+      "four": 2,
+      "five": 0,
+      "pools": 32
+    },
+    "4": {
+      "three": 2,
+      "four": 23,
+      "five": 0,
+      "pools": 25
+    }
+  },
+  {
+    "n": 50,
+    "3": {
+      "three": 14,
+      "four": 2,
+      "five": 0,
+      "pools": 16
+    },
+    "4": {
+      "three": 2,
+      "four": 11,
+      "five": 0,
+      "pools": 13
+    }
+  },
+  {
+    "n": 99,
+    "3": {
+      "three": 33,
+      "four": 0,
+      "five": 0,
+      "pools": 33
+    },
+    "4": {
+      "three": 1,
+      "four": 24,
+      "five": 0,
+      "pools": 25
+    }
+  },
+  {
+    "n": 51,
+    "3": {
+      "three": 17,
+      "four": 0,
+      "five": 0,
+      "pools": 17
+    },
+    "4": {
+      "three": 1,
+      "four": 12,
+      "five": 0,
+      "pools": 13
+    }
+  },
+  {
+    "n": 100,
+    "3": {
+      "three": 32,
+      "four": 1,
+      "five": 0,
+      "pools": 33
+    },
+    "4": {
+      "three": 0,
+      "four": 25,
+      "five": 0,
+      "pools": 25
+    }
+  },
+  {
+    "n": 52,
+    "3": {
+      "three": 16,
+      "four": 1,
+      "five": 0,
+      "pools": 17
+    },
+    "4": {
+      "three": 0,
+      "four": 13,
+      "five": 0,
+      "pools": 13
+    }
+  },
+  {
+    "n": 101,
+    "3": {
+      "three": 31,
+      "four": 2,
+      "five": 0,
+      "pools": 33
+    },
+    "4": {
+      "three": 3,
+      "four": 23,
+      "five": 0,
+      "pools": 26
+    }
+  },
+  {
+    "n": 53,
+    "3": {
+      "three": 15,
+      "four": 2,
+      "five": 0,
+      "pools": 17
+    },
+    "4": {
+      "three": 3,
+      "four": 11,
+      "five": 0,
+      "pools": 14
+    }
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "startedUTC": "2026-10-26T15:22:30.886Z",
+  "stockholm": "2026-10-26 16:22:30",
+  "baseline": "28012086f7a38e9391e941ea8f883394e116279c",
+  "node": "v22.23.2",
+  "branch": "recovery/2026-10-24",
+  "backup": "backups/nakka-compare-before-2026-10-26T15-22-30-886Z"
+}

@@ -1,0 +1,23 @@
+{
+  "recordedAt": "2026-10-25T18:14:13.458Z",
+  "sourceCheckpoint": "1ad8faf",
+  "scope": "Sequential dedicated Identity TEST Hub status cycle, not production",
+  "player": "Albert Lindblad (Hubtest)",
+  "expected": "IN -> STANDBY -> OUT -> IN survives waits and manual reloads; consent/message/source and other players unchanged. Both stored statuses end IN.",
+  "actual": {
+    "result": "PASS for observed checks",
+    "standby": "Screenshot 19.05.41 shows STANDBY and seven players; user explicitly confirmed a 30-second wait, manual reload and no flashback.",
+    "outAndReturnToIn": "User confirmed both follow-up checks behaved as expected after instructions to wait 30 seconds and manually reload for each. OUT has no separate screenshot; those intermediate observations are user-reported.",
+    "finalStorage": "Provided status-storage screenshot row 11: Albert Lindblad (Hubtest), IN, JA, TEST-HUB-002., HUB.",
+    "finalEvent": "TONIGHT'S PLAYERS row 4: Albert Lindblad (Hubtest), IN, JA, TEST-HUB-002., HUB. Seven event players visible.",
+    "originalAlbert": "Storage row 10 and event row 3: Albert Lindblad, IN, NEJ, TEST-HUB-001, HUB, unchanged."
+  },
+  "evidence": "Three screenshots with original names, sizes and SHA-256 hashes in screenshot-manifest.json.",
+  "limitations": [
+    "No separate screenshot of OUT or intermediate stored status values.",
+    "Wait/reload observations are user-reported; exact timing not independently measured.",
+    "No complete workbook comparison; Form responses 2 row count was not rechecked during this status cycle.",
+    "Event Control, cross-project concurrency, shared-computer login/session protection and production qualification remain pending.",
+    "This installer performs no Google operation, application change or new runtime test."
+  ]
+}

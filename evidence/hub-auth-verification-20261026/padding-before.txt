@@ -1,0 +1,48 @@
+✔ Hub auth: missing session blocks every Hub action before reads or writes (3.53226ms)
+✔ Hub auth: exact TEST identity and missing account approval fail closed (2.229524ms)
+✔ Hub auth: malformed tokens and wrong issuer audience times or tenant never contact Firebase (1.341484ms)
+✔ Hub auth: decoded approved UID is insufficient without Firebase acceptance (6.046173ms)
+✔ Hub auth: valid Firebase login creates opaque expiring session without stored ID token (2.068502ms)
+✔ Hub auth: unapproved accounts and spoofed client roles never grant entry (0.677432ms)
+✔ Hub auth: logout revokes session idempotently and captured token cannot read again (0.884925ms)
+✔ Hub auth: refresh polling does not extend inactivity and touch cannot revive expired sessions (4.308081ms)
+✔ Hub auth: real activity renews idle limit but absolute token expiry still wins (0.957264ms)
+✔ Hub auth: removing approval and cache eviction revoke existing sessions (5.628254ms)
+✔ Hub auth: locked touch cannot resurrect a logged-out session (0.767668ms)
+✔ Hub auth: signing out revokes other sessions for the same account (1.064156ms)
+✔ Hub auth: old direct data RPC requires a session and admin maintenance RPCs are private (1.184458ms)
+✔ Hub auth: public registration cannot claim HUB source while Remote stays available (0.890424ms)
+✔ Hub auth: status and event handlers recheck session inside their write lock (2.893196ms)
+✔ Hub auth: TEST manifest adds only external HTTPS requests and retains owner-only access (0.352512ms)
+✖ Hub auth: unpadded Firebase JWT works with a strict native Base64 decoder (2.727266ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 16
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 147.827651
+
+✖ failing tests:
+
+test at tests/hub-auth.test.cjs:82:1
+✖ Hub auth: unpadded Firebase JWT works with a strict native Base64 decoder (2.727266ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/scratch/d22120bec644/beauty-source/tests/hub-auth.test.cjs:83:46)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

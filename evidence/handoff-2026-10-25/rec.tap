@@ -1,0 +1,76 @@
+TAP version 13
+# Subtest: qualified Adapter hash is exact
+ok 1 - qualified Adapter hash is exact
+  ---
+  duration_ms: 1.315482
+  type: 'test'
+  ...
+# Subtest: original recovered Drive Hub remains preserved exactly
+ok 2 - original recovered Drive Hub remains preserved exactly
+  ---
+  duration_ms: 0.828151
+  type: 'test'
+  ...
+# Subtest: current TEST Hub contains the read-only Hub data bridge
+ok 3 - current TEST Hub contains the read-only Hub data bridge
+  ---
+  duration_ms: 1.371555
+  type: 'test'
+  ...
+# Subtest: DateEncoding hash matches recovered script body
+ok 4 - DateEncoding hash matches recovered script body
+  ---
+  duration_ms: 0.254994
+  type: 'test'
+  ...
+# Subtest: DateEncoding round-trips supported dates
+ok 5 - DateEncoding round-trips supported dates
+  ---
+  duration_ms: 3.037014
+  type: 'test'
+  ...
+# Subtest: DateEncoding rejects impossible and fractional dates
+ok 6 - DateEncoding rejects impossible and fractional dates
+  ---
+  duration_ms: 2.62398
+  type: 'test'
+  ...
+# Subtest: TEST route is pinned and write gate is closed
+ok 7 - TEST route is pinned and write gate is closed
+  ---
+  duration_ms: 0.418413
+  type: 'test'
+  ...
+# Subtest: TEST manifest remains owner-only and Sheets v4
+ok 8 - TEST manifest remains owner-only and Sheets v4
+  ---
+  duration_ms: 1.967163
+  type: 'test'
+  ...
+# Subtest: Preflight remains pinned to TEST identity and bounded reads
+ok 9 - Preflight remains pinned to TEST identity and bounded reads
+  ---
+  duration_ms: 0.812816
+  type: 'test'
+  ...
+# Subtest: Adapter retains all stale diagnostics and no automatic retry
+ok 10 - Adapter retains all stale diagnostics and no automatic retry
+  ---
+  duration_ms: 3.66986
+  type: 'test'
+  ...
+# Subtest: Recovered TEST Hub clearly identifies isolated view
+ok 11 - Recovered TEST Hub clearly identifies isolated view
+  ---
+  duration_ms: 1.023207
+  type: 'test'
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 142.190253

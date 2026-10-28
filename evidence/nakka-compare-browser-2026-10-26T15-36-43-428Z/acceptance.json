@@ -1,0 +1,46 @@
+{
+  "audit": "AUD-088",
+  "recordedUTC": "2026-10-26T15:36:43.428Z",
+  "stockholm": "2026-10-26 16:36:43",
+  "baseline": "2654fafd21e9e017d39d5a6d914a0fe748bf1617",
+  "environment": "Identity TEST only",
+  "result": "PASS",
+  "hubDate": "2026-10-26",
+  "matchedEventId": "t_qJH9_0995",
+  "initial": {
+    "snapshot": "26/10/2026 16:29:22",
+    "hubCount": 1,
+    "nakkaCount": 1,
+    "both": 0,
+    "hubOnly": 1,
+    "nakkaOnly": 1,
+    "duplicates": 0,
+    "inspection": "Owner screenshots 16.29.43 and 16.31.17: Jonathan Niemi IN Hub-only; Natnael Girmay Nakka-only"
+  },
+  "afterTestHubRegistration": {
+    "snapshot": "26/10/2026 16:33:07",
+    "hubCount": 2,
+    "nakkaCount": 1,
+    "both": 1,
+    "hubOnly": 1,
+    "nakkaOnly": 0,
+    "duplicates": 0,
+    "inspection": "Owner screenshot 16.33.18: Natnael Girmay IN on both; Jonathan Niemi IN remains Hub-only"
+  },
+  "scope": "Read-only name comparison; no Nakka player writes. TEST Hub registration changed only TEST data. Equal names do not establish permanent identity.",
+  "automatedBaseline": {
+    "tests": 316,
+    "pass": 316,
+    "fail": 0,
+    "source": "AUD-087 Mac result 2026-10-26T15:23:40.090Z",
+    "rerun": false,
+    "reason": "Evidence-only checkpoint"
+  },
+  "limitations": [
+    "Native duplicate-name comparison and in-flight stale-response cases not exercised; isolated fixtures passed",
+    "Permanent Beauty/Nakka identity mapping and controlled player synchronization pending",
+    "Native idle timeout and completed password reset pending"
+  ],
+  "production": "UNCHANGED",
+  "secrets": "No credentials, session tokens or private player messages recorded"
+}

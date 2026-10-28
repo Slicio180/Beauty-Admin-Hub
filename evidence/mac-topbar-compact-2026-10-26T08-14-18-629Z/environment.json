@@ -1,0 +1,8 @@
+{
+  "startedUTC": "2026-10-26T08:14:18.629Z",
+  "stockholm": "2026-10-26 09:14:18",
+  "baseline": "46ba1b52307eaa636a9ca77d208d53ba7e7ffe86",
+  "node": "v22.23.2",
+  "branch": "recovery/2026-10-24",
+  "backup": "backups/topbar-compact-before-2026-10-26T08-14-18-629Z"
+}

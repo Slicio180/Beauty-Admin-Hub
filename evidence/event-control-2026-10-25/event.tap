@@ -1,0 +1,220 @@
+TAP version 13
+# Subtest: event load returns exact date/version with gate closed and no mutation
+ok 1 - event load returns exact date/version with gate closed and no mutation
+  ---
+  duration_ms: 9.572149
+  type: 'test'
+  ...
+# Subtest: event save denies non-boolean approval false before I/O
+ok 2 - event save denies non-boolean approval false before I/O
+  ---
+  duration_ms: 4.024053
+  type: 'test'
+  ...
+# Subtest: event save denies non-boolean approval 1 before I/O
+ok 3 - event save denies non-boolean approval 1 before I/O
+  ---
+  duration_ms: 1.639043
+  type: 'test'
+  ...
+# Subtest: event save denies non-boolean approval true before I/O
+ok 4 - event save denies non-boolean approval true before I/O
+  ---
+  duration_ms: 2.485856
+  type: 'test'
+  ...
+# Subtest: event config rejects extra property before lock or reads
+ok 5 - event config rejects extra property before lock or reads
+  ---
+  duration_ms: 1.547283
+  type: 'test'
+  ...
+# Subtest: event rejects missing confirmation before I/O
+ok 6 - event rejects missing confirmation before I/O
+  ---
+  duration_ms: 1.306338
+  type: 'test'
+  ...
+# Subtest: event rejects impossible date before I/O
+ok 7 - event rejects impossible date before I/O
+  ---
+  duration_ms: 5.496705
+  type: 'test'
+  ...
+# Subtest: event rejects noncanonical version before I/O
+ok 8 - event rejects noncanonical version before I/O
+  ---
+  duration_ms: 1.154108
+  type: 'test'
+  ...
+# Subtest: event rejects version date mismatch before I/O
+ok 9 - event rejects version date mismatch before I/O
+  ---
+  duration_ms: 1.21403
+  type: 'test'
+  ...
+# Subtest: event rejects unexpected field before I/O
+ok 10 - event rejects unexpected field before I/O
+  ---
+  duration_ms: 1.483648
+  type: 'test'
+  ...
+# Subtest: event lock contention returns BUSY without reading or releasing another lock
+ok 11 - event lock contention returns BUSY without reading or releasing another lock
+  ---
+  duration_ms: 1.921199
+  type: 'test'
+  ...
+# Subtest: event stale baseline date releases lock without write
+ok 12 - event stale baseline date releases lock without write
+  ---
+  duration_ms: 2.604702
+  type: 'test'
+  ...
+# Subtest: event B2 token drift rejects stale caller without write
+ok 13 - event B2 token drift rejects stale caller without write
+  ---
+  duration_ms: 2.089944
+  type: 'test'
+  ...
+# Subtest: event same date is no-op with no clock or write call
+ok 14 - event same date is no-op with no clock or write call
+  ---
+  duration_ms: 1.869085
+  type: 'test'
+  ...
+# Subtest: event capture rejects wrong spreadsheetId before mutation
+ok 15 - event capture rejects wrong spreadsheetId before mutation
+  ---
+  duration_ms: 1.531849
+  type: 'test'
+  ...
+# Subtest: event capture rejects wrong title before mutation
+ok 16 - event capture rejects wrong title before mutation
+  ---
+  duration_ms: 1.649424
+  type: 'test'
+  ...
+# Subtest: event capture rejects wrong locale before mutation
+ok 17 - event capture rejects wrong locale before mutation
+  ---
+  duration_ms: 1.617554
+  type: 'test'
+  ...
+# Subtest: event capture rejects wrong timeZone before mutation
+ok 18 - event capture rejects wrong timeZone before mutation
+  ---
+  duration_ms: 1.565955
+  type: 'test'
+  ...
+# Subtest: event rejects external formula reference before mutation
+ok 19 - event rejects external formula reference before mutation
+  ---
+  duration_ms: 1.915594
+  type: 'test'
+  ...
+# Subtest: event rejects over-limit preflight before cell read
+ok 20 - event rejects over-limit preflight before cell read
+  ---
+  duration_ms: 1.600679
+  type: 'test'
+  ...
+# Subtest: event successful fake reset emits exact bounded requests and preserves unrelated data
+ok 21 - event successful fake reset emits exact bounded requests and preserves unrelated data
+  ---
+  duration_ms: 30.426793
+  type: 'test'
+  ...
+# Subtest: event canonical comparison accepts reordered object keys through all readbacks
+ok 22 - event canonical comparison accepts reordered object keys through all readbacks
+  ---
+  duration_ms: 31.267484
+  type: 'test'
+  ...
+# Subtest: event prewrite snapshot detects primitive type difference
+ok 23 - event prewrite snapshot detects primitive type difference
+  ---
+  duration_ms: 3.718533
+  type: 'test'
+  ...
+# Subtest: event prewrite snapshot detects array order difference
+ok 24 - event prewrite snapshot detects array order difference
+  ---
+  duration_ms: 3.551219
+  type: 'test'
+  ...
+# Subtest: event prewrite snapshot detects explicit undefined difference
+ok 25 - event prewrite snapshot detects explicit undefined difference
+  ---
+  duration_ms: 2.634998
+  type: 'test'
+  ...
+# Subtest: event prewrite snapshot detects sparse array slot difference
+ok 26 - event prewrite snapshot detects sparse array slot difference
+  ---
+  duration_ms: 2.909717
+  type: 'test'
+  ...
+# Subtest: event prewrite snapshot detects negative zero difference
+ok 27 - event prewrite snapshot detects negative zero difference
+  ---
+  duration_ms: 3.512186
+  type: 'test'
+  ...
+# Subtest: event prewrite snapshot detects array length difference
+ok 28 - event prewrite snapshot detects array length difference
+  ---
+  duration_ms: 3.901558
+  type: 'test'
+  ...
+# Subtest: event prewrite detects unrelated validation drift without mutation
+ok 29 - event prewrite detects unrelated validation drift without mutation
+  ---
+  duration_ms: 4.716103
+  type: 'test'
+  ...
+# Subtest: event thrown writer returns SAVE_UNCERTAIN once and releases lock
+ok 30 - event thrown writer returns SAVE_UNCERTAIN once and releases lock
+  ---
+  duration_ms: 3.91731
+  type: 'test'
+  ...
+# Subtest: event readback detects changed control value and never retries
+ok 31 - event readback detects changed control value and never retries
+  ---
+  duration_ms: 5.373174
+  type: 'test'
+  ...
+# Subtest: event readback detects changed unrelated formula and never retries
+ok 32 - event readback detects changed unrelated formula and never retries
+  ---
+  duration_ms: 5.195402
+  type: 'test'
+  ...
+# Subtest: event readback detects changed validation and never retries
+ok 33 - event readback detects changed validation and never retries
+  ---
+  duration_ms: 5.561188
+  type: 'test'
+  ...
+# Subtest: event readback detects changed grid size and never retries
+ok 34 - event readback detects changed grid size and never retries
+  ---
+  duration_ms: 3.738789
+  type: 'test'
+  ...
+# Subtest: event unstable second readback returns SAVE_UNCERTAIN without retry
+ok 35 - event unstable second readback returns SAVE_UNCERTAIN without retry
+  ---
+  duration_ms: 21.589863
+  type: 'test'
+  ...
+1..35
+# tests 35
+# suites 0
+# pass 35
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 377.109368

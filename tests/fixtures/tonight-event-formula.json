@@ -1,0 +1,5 @@
+{
+  "before": "=IFERROR(SORT(UNIQUE(FILTER({IF('Form responses 2'!B2:B=\"MITT NAMN FINNS INTE I LISTAN\",'Form responses 2'!C2:C,'Form responses 2'!B2:B),IF('Form responses 2'!B2:B=\"MITT NAMN FINNS INTE I LISTAN\",'Form responses 2'!C2:C,\"\")},IF('Form responses 2'!B2:B=\"MITT NAMN FINNS INTE I LISTAN\",'Form responses 2'!C2:C,'Form responses 2'!B2:B)<>\"\",'Form responses 2'!A2:A>=Control!B2,'Form responses 2'!A2:A<Control!A2+1)),1,TRUE),\"\")",
+  "after": "=IFERROR(SORT(UNIQUE(FILTER({IF('Form responses 2'!B2:B=\"MITT NAMN FINNS INTE I LISTAN\",'Form responses 2'!C2:C,'Form responses 2'!B2:B),IF('Form responses 2'!B2:B=\"MITT NAMN FINNS INTE I LISTAN\",'Form responses 2'!C2:C,\"\")},IF('Form responses 2'!B2:B=\"MITT NAMN FINNS INTE I LISTAN\",'Form responses 2'!C2:C,'Form responses 2'!B2:B)<>\"\",'Form responses 2'!A2:A>=Control!A2,'Form responses 2'!A2:A<Control!A2+1)),1,TRUE),\"\")"
+}
+

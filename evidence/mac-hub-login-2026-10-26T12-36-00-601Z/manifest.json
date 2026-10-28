@@ -1,0 +1,167 @@
+[
+  {
+    "path": "public/css/login.css",
+    "before": "6f350f78094ed73725e9cda41a66b6fe134a2b0effd22ac4b13a58e5b14dc906",
+    "after": "1d20421ca254b2de81bb2ab1b4f3f95a8bfebd90a2fe98858f9124374d2209ce"
+  },
+  {
+    "path": "public/js/hub-auth.js",
+    "before": null,
+    "after": "5391db4994d180317d03005bf6f8a8fbd74e7c164e65de09319f397c20ff6423"
+  },
+  {
+    "path": "public/js/hub-test-event-control.js",
+    "before": "a7e9f9c61d58cac92f6a00b59ebb6974b229e8d9e35ef4b53068fd571b581407",
+    "after": "10daa46e2d0aa5b93d122dc902af9786eb97909a68d8c46ee12c9f538781c45a"
+  },
+  {
+    "path": "public/js/hub-test-services.js",
+    "before": "7d9215ec8cdddadb046cb4206cb99d964c988214bf9c4ccf667fed98f78a5dec",
+    "after": "e764d4f680f46e912cc7e9fc86f2116f3b2a7148523c9f2898a84aa8f0899d5e"
+  },
+  {
+    "path": "public/js/login.js",
+    "before": "db853103a7928d39730affaea320709d907d354e9d9aca6c275f4660f993c654",
+    "after": "a0edef022c64d3a7a2ac1c3ed8b1da49a5005857e3c9b6c29717b4a0d1e3b627"
+  },
+  {
+    "path": "scripts/build-hub-test.cjs",
+    "before": "4ae4d3ab0699fd7245fe1f2877518a471f097f831d6a6486d57d2b76b9b03c28",
+    "after": "50ee7cbcc63c6eb8c503cbb5ca5943411c412ce40242288b2fb5fb11726eb818"
+  },
+  {
+    "path": "tests/beauty-live.test.cjs",
+    "before": "c3c7e9386e8ef75bcf0dac7e44f36074d24ab6fdb66b9846db4020a43a77806d",
+    "after": "2fe6f08881a8c9ccf1500d63629d3b6922c573bb322641acdabbe6bf2f0bd3ae"
+  },
+  {
+    "path": "tests/event-save.test.cjs",
+    "before": "b39b026ddf243646d8b88892d70a10b7fd0f160f2be39243f0ff5697f6b32271",
+    "after": "eb576c917f5f7ba9b0a13b417ce949e1c90f4fccda4f7ea63229c88898d503f6"
+  },
+  {
+    "path": "tests/hub-auth-client.test.cjs",
+    "before": null,
+    "after": "e5b411f2e2b1116371a207aac744f59fd80c6bfbe1d3e583d608e8221902073c"
+  },
+  {
+    "path": "tests/hub-auth.test.cjs",
+    "before": null,
+    "after": "07061882c06ffc6b8725460dd055662297ba9a6930a9453e57a42a1ee2c3ea90"
+  },
+  {
+    "path": "tests/hub-english-date-review.test.cjs",
+    "before": "d299b5ef2bc076f2a79f5fcc5763ff429bcbd938b353aef69b719cc5d2044f10",
+    "after": "663d502231facc49128675ec842afcc7543a988bde0cace3ca2d08618d0ea084"
+  },
+  {
+    "path": "tests/hub-event-preview.test.cjs",
+    "before": "24a5e4b2a390c15f12e3537dea85507a10ea3ab74410949acf4d47d832259d5e",
+    "after": "b99f97753535b1e49a4669074e5f7471988ceb6b37e9e8d2b35fae4f638a10f0"
+  },
+  {
+    "path": "tests/hub-test-connection.test.cjs",
+    "before": "fc6a48b589ca4330b07bbd978ef47e3fdb315879218cf29c9f72ebf5b607f4a1",
+    "after": "8acd09299583d3ac0204cd028f461f6e4df7cb101c32c463e690333d4efe989c"
+  },
+  {
+    "path": "tests/hub-test-status.test.cjs",
+    "before": "efa63f2cfef7e0764098a4222014c6a8a80172082d5983de68b1c54a677be6a7",
+    "after": "a80ab5d95a3ec9d1e46277015c383e46bc58f7b481ea7b8f5589d64621932950"
+  },
+  {
+    "path": "docs/handoff/HUB-LOGIN-TEST-20261026.md",
+    "before": null,
+    "after": "e4ccd442a7d561f43c41edebdee2eb04ba07b82ebc8e9dfe8fb32969d94b6c77"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "2bbadc43708fbbe1b53f3b5a870a07045e781bfa5004cb53a7ca9f314ad73ef7",
+    "after": "d1db94ab03e95232b22d60f6a8a02ed6bbe7a8b96eb5708a950ee652e24bd350"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/BeautyLiveTest.gs",
+    "before": "493f2bdfe31ecd40f2b71ae57e509a8230feb6bc1025be2fd2f5b2d0c1f30bb6",
+    "after": "ab15cd9698b4c2fa238f951546314f3ad3a42ae9b93736609ad820bfeda0fd0e"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/Code.js",
+    "before": "eed3b4d17132627b40ebbb830c212e7e26c54b5915844131eb73faaf8ad2947d",
+    "after": "11c43d1518046b936b9bea24497071883112426bd3a51a9ed2a189d053fe2eda"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "b521ad5cc164b3f169280b79868253739675aa6f5cdc0cc9e6f42131a22a778a",
+    "after": "0e4f62ddf66e651f839fabb54151e75dbbaef75af9a50c88fcfa82feb3ff0b9e"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTestAuth.gs",
+    "before": null,
+    "after": "6247d6c6146fde1ef30272f772e331d12e46e75dd89dc0277e68abef86339554"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTestBridge.gs",
+    "before": "8bccd2d2d26309918ab047255913b7b6d2ed3f56c2e066e328219b661e84a5c7",
+    "after": "0b4882dc7ea37db2151bae476c3b947fdd4b6e73710df594e65bbcdd15758459"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTestEventSave.gs",
+    "before": "ec98f73260122b8b84ca0b571bff81ef6418e2c6611a036e7f6d629f5df29995",
+    "after": "7ee30e2636d275be0bcddc0197a5442f6ab039d893117faff94a2d050189347a"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTestStatus.gs",
+    "before": "14a07d45b75b775bd33299777afaf845fd604ed0ae8e01abb9638ab10ae86906",
+    "after": "77d9ce35d5abc6f0b885c32c55da99ee60bac8b919b13c3e5b23e3ce1372655e"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/appsscript.json",
+    "before": "79be7290ba2429617d5b5fbdef27b4e828cbb35acb8ccaa424dec796bc7ea0f5",
+    "after": "82e07b697b1cef71249c8732a5750d0de271f7356302320e206757a15a5fc8ce"
+  },
+  {
+    "path": "evidence/hub-auth-20261026/auth-server-tests.txt",
+    "before": null,
+    "after": "caca0d002b65879cd79435ab0216793ec433ae427e9da4a0c458662e42054c68"
+  },
+  {
+    "path": "evidence/hub-auth-20261026/auth-tests.txt",
+    "before": null,
+    "after": "122eecf78de6fcb5a21ec7ac26b4b97800f1316a7e82afe478b39c4962c120a5"
+  },
+  {
+    "path": "evidence/hub-auth-20261026/build-hub.txt",
+    "before": null,
+    "after": "e554d377617479721caec3dc45ea0b25c83f4b467d7c67cfaf5c93b31ffc1e53"
+  },
+  {
+    "path": "evidence/hub-auth-20261026/build-live.txt",
+    "before": null,
+    "after": "ff886a75abfe907fc8204c2a6286fa83ac78f17f7364f3c8e47e4f1561ef244c"
+  },
+  {
+    "path": "evidence/hub-auth-20261026/google-paste-incident.json",
+    "before": null,
+    "after": "fd4615a51de720bf75448dd0ee0d6632d0f9da0742baa6b85835316ed89f3938"
+  },
+  {
+    "path": "evidence/hub-auth-20261026/in-progress-tests.txt",
+    "before": null,
+    "after": "b1fad1b1bffe1f91adc570cefcb873be1668c09495d5204d177608d07aec2f94"
+  },
+  {
+    "path": "evidence/hub-auth-20261026/inventory.txt",
+    "before": null,
+    "after": "0546b854102696147fc1c4b8259c8283dc8025f2887f5b6bb8626b92685c039c"
+  },
+  {
+    "path": "evidence/hub-auth-20261026/outcome.json",
+    "before": null,
+    "after": "76e1c46d4dd4cdc6adc6c1a93ae5acd7337c64bc8ff07a55717139938cba31c4"
+  },
+  {
+    "path": "evidence/hub-auth-20261026/tests.tap",
+    "before": null,
+    "after": "9e0b2126bdb029b3e76b14e887d7a8d120f8f392ff109d0ae0f4f2f5ab5d9770"
+  }
+]

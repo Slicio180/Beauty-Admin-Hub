@@ -1,0 +1,14 @@
+{
+  "recordedAt": "2026-10-25T16:38:07.154Z",
+  "scriptId": "1m4H1l36CL4YFl8GwcZ2tC3pbrkefol9Zg8gJvhyzcQA49xbAWmljaPSN",
+  "sheetId": "1SIj4F8_WfWaeDVsdagRw8AoLsz0XsjhtdIn_OOxoDnU",
+  "writesEnabled": true,
+  "hashes": {
+    "Code.js": "361e5973a7e7bf613bab7e60e765d3ce11a8d4db5d06969d3ec9e846baafd278",
+    "Kiosk.html": "220d3b8a047194b308fc65fe63c31317124131aaba1981177d3b40923d82c848",
+    "RemoteRegistration.html": "e75be92048f18abe7d6b012666c35da3f09e9a188fd0b879346fc0b2fc398824",
+    "appsscript.json": "79be7290ba2429617d5b5fbdef27b4e828cbb35acb8ccaa424dec796bc7ea0f5"
+  },
+  "status": "Sequential kiosk TEST observations recorded in AUD-031 through AUD-034; runtime limits remain in manual-review.json.",
+  "updatedAt": "2026-10-25T17:03:35.093Z"
+}

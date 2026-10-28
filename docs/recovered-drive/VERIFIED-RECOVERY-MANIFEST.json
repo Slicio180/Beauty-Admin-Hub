@@ -1,0 +1,37 @@
+{
+  "source": {
+    "drive_file_title": "Hub.html",
+    "drive_file_id": "14648PmRPGrVHM_wdMqbby22MRCeyiswH",
+    "mime_type": "text/html",
+    "created_time": "2026-10-24T15:04:29.805Z",
+    "modified_time": "2026-10-24T15:04:29.805Z",
+    "revision_id": "0BzSw9aSNsOGwK3FHcm56QkdVWU9PN3RnNHNWQ0hSc3Z3ZUw0PQ",
+    "revision_count_observed": 1,
+    "size_bytes": 357204,
+    "sha256": "4f91f27c627801b936721e4265a7f166d22a37b9957ff1c4552abe2f54593a41",
+    "last_modifying_user": "Alessio Tampella"
+  },
+  "extracted_exact_script_bodies": {
+    "DateEncoding.recovered-from-Hub.js": {
+      "sha256": "f78a76c407cac558eddd1de25df80624973454b57437a34e4785931d322c8634",
+      "bytes": 2962
+    },
+    "event-control-test-services.recovered-from-Hub.js": {
+      "sha256": "a3a75980227290d5a4a1c11408fcf543e1064208572cc6fead78b1de8ece47aa",
+      "bytes": 2136
+    },
+    "event-control.recovered-from-Hub.js": {
+      "sha256": "0dd39f610b38310814c14dc4b790e7ba0e2bac9a0c45186dcd37da39a4f067d4",
+      "bytes": 5959
+    }
+  },
+  "integrity_note": "These extracted JS files are exact <script> bodies from the surviving Drive Hub.html. They are NOT asserted to be byte-for-byte copies of the lost repository files with the same conceptual names.",
+  "not_recovered": {
+    "qualified_Adapter.js": {
+      "status": "NOT FOUND",
+      "expected_size_bytes": 12692,
+      "expected_sha256": "cedbba88cc6df4906d3ede28971bf07d4dc6e967438165dd9ea7d03ce5f7f309"
+    },
+    "lost_git_commits": "GitHub API returned no commit for the recorded Oct 24 SHAs checked."
+  }
+}

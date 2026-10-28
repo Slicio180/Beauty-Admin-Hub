@@ -1,0 +1,24 @@
+{
+  "result": "PASS",
+  "browser": "Chromium 145 headless",
+  "syntheticOnly": true,
+  "providerRequests": 0,
+  "errors": [],
+  "checks": [
+    "AIK font and exact original logo assets",
+    "centred desktop masthead and Nakka title from service",
+    "one sidebar Event Control with prior date-review and details controls",
+    "exclusive nav active marker and return on close",
+    "date acknowledgement resets when returning from details",
+    "390/320 Hub widths without page overflow",
+    "exact generated Hub with synthetic auth/RPC",
+    "remote390px and kiosk1024px styles",
+    "black/yellow defaults and selected consent state",
+    "remote65-player count and reachable close after scrolling",
+    "identity dialog close tile",
+    "real public form handlers send correct RPC/date/consent once and reset after success"
+  ],
+  "ownerInstallation": "PENDING",
+  "googleUpload": "PENDING",
+  "nativeNakka": "NOT CALLED"
+}

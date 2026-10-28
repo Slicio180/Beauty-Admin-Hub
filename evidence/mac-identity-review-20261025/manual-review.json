@@ -1,0 +1,36 @@
+{
+  "recordedAt": "2026-10-25T12:16:20.623Z",
+  "environment": "Alessio's Mac browser; offline Hub preview",
+  "checks": [
+    {
+      "id": "FONT-VIS-001",
+      "result": "PASS",
+      "actual": "AIK fonts visually reviewed in conflict and confirmation popups."
+    },
+    {
+      "id": "NAME-MAN-001",
+      "result": "PASS",
+      "actual": "Confirmed Demo Anna (Karla) added separately; original Demo Anna retained; count 4."
+    },
+    {
+      "id": "NAME-MAN-002",
+      "result": "PASS",
+      "actual": "DET ÄR JAG returned already-registered message; count remained 4 with no extra row."
+    }
+  ],
+  "screenshots": [
+    "Screenshot 2026-10-25 at 13.10.15.png",
+    "Screenshot 2026-10-25 at 13.12.16.png",
+    "Screenshot 2026-10-25 at 13.13.12.png",
+    "Screenshot 2026-10-25 at 13.14.34.png",
+    "Screenshot 2026-10-25 at 13.15.21.png"
+  ],
+  "evidenceLocation": "Screenshots reviewed in chat; copies in master folder pending.",
+  "sourceHashes": {
+    "public/js/app.js": "54f7bf9643740d3973600e460ccf9a7ba5b3caddb6537b61f634c803553bbee3",
+    "public/js/name-resolution.js": "5ea87cc16ae24f3073e54ab0c9663aab6aa8ea961354ea99d5f32696452a3346",
+    "public/js/identity-dialog.js": "2f3e511787f0f39b13a407684603b26e9cdd8d0302e349c8b4c3b40438da06f2",
+    "public/css/identity-dialog.css": "19585433b229aa1696e4773acf1b8d94c8b328218645392e9ba9499f614846b0"
+  },
+  "limitation": "Offline Hub only. Live Sheets, remote and kiosk runtime behavior not verified."
+}

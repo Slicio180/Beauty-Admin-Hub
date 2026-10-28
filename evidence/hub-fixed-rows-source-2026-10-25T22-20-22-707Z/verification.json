@@ -1,0 +1,20 @@
+{
+  "startedUTC": "2026-10-25T22:21:17.829Z",
+  "finishedUTC": "2026-10-25T22:21:29.120Z",
+  "node": "v22.23.2",
+  "tests": {
+    "exit": 0,
+    "signal": null,
+    "error": null
+  },
+  "inventory": {
+    "exit": 0,
+    "signal": null,
+    "error": null
+  },
+  "beforeSHA256": "1f0d6b0b9b3000a74b1ff97c3e3c112539d55485de383b23d0f6c572c5df1ac0",
+  "afterSHA256": "1f0d6b0b9b3000a74b1ff97c3e3c112539d55485de383b23d0f6c572c5df1ac0",
+  "generatedHTMLUnchanged": true,
+  "fixedRowsMarkerPresent": true,
+  "browserReview": "PENDING"
+}

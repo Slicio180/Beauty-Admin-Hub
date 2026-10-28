@@ -1,0 +1,11 @@
+{
+  "sourceCheckpoint": "6db0dc1",
+  "screenshot": {
+    "name": "20261025-223217.png",
+    "bytes": 44602,
+    "sha256": "37ff4af8b6e4fbe5f5b5d860c2b9c0f161788405420b236d60d6926cce0b5a02"
+  },
+  "request": "Reduce event-date row height to fit the complete M\u00e5ndagsdartarna/GoDartsPro artwork; larger EVENT HUB title remains requested.",
+  "change": "CSS aspect-ratio and object positioning remove transparent image margins from row layout. Original PNG unchanged, complete visible artwork bounding box retained with approximately 20/18 original-image pixels above/below. Row bottom margin 16px. Combined with pending primary-title enlargement.",
+  "qualification": "CSS geometry and 227-case local regression only. Browser visual review pending."
+}

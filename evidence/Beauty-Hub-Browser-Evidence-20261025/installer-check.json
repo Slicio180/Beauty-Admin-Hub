@@ -1,0 +1,11 @@
+{
+  "environment": "Disposable Git fixture reconstructed from uploaded archive and prepared source package; short HEAD lookup substituted with dfb35df, other Git operations real. No user Mac/Google operation.",
+  "checks": {
+    "syntax": "PASS",
+    "wrongCheckpointRefusesBeforeMutation": "PASS",
+    "successfulCopyHashVerificationAndScopedCommit": "PASS",
+    "previousAuditsAndManualReviewPreserved": "PASS",
+    "fourteenScreenshotsSaved": "PASS",
+    "repeatRefuses": "PASS"
+  }
+}

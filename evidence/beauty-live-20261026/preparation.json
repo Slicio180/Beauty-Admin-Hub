@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-26",
+  "baseline": "8f230ff",
+  "node": "v24.22.1",
+  "tests": 236,
+  "pass": 236,
+  "fail": 0,
+  "inventory": "PASS",
+  "initialFailure": "Historical source hash rejected additive live route; exact reviewed route normalized only, original historical baseline retained; regression/inventory failed logs preserved.",
+  "visualReview": "PENDING: browser executable unavailable",
+  "googleUpload": "PENDING",
+  "nakka": "NOT CONNECTED; ranking and points disabled",
+  "production": "No production changes"
+}

@@ -1,0 +1,8 @@
+{
+  "recordedAt": "2026-10-25T12:08:19.519586+00:00",
+  "runtime": "Node v24.22.1, assistant environment",
+  "reason": "User screenshot shows font-family fallback in identity popup",
+  "automatedResult": "175 PASS / 0 FAIL; inventory 175 cases across 9 files",
+  "visualRetest": "PENDING on Mac",
+  "scope": "Hub stylesheet and embedded candidate popup CSS only"
+}

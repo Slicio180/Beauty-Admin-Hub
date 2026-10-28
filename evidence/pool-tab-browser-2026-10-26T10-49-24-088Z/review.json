@@ -1,0 +1,20 @@
+{
+  "recordedUTC": "2026-10-26T10:49:24.088Z",
+  "checkpoint": "4fba33c",
+  "implementationAudit": "AUD-077",
+  "screenshot": "Screenshot 2026-10-26 at 11.35.42.png",
+  "screenshotSHA256": "6cd43fc7840657e4d30451e015b12e90dc8bc6ac2085bf8694e9daecf7e869b8",
+  "visualReview": "PASS: readable pool scheme, both preference groups, explicit download button",
+  "download": "PASS: user explicitly confirmed download worked",
+  "qualification": "User browser acceptance and supplied screenshot; no independent downloaded-file inspection",
+  "macEvidenceCheckpoint": "PENDING",
+  "realLoginLogout": "NOT CONNECTED",
+  "screenshots": [
+    {
+      "name": "pool-scheme-browser.png",
+      "bytes": 93828,
+      "sha256": "6cd43fc7840657e4d30451e015b12e90dc8bc6ac2085bf8694e9daecf7e869b8"
+    }
+  ],
+  "sourceCheckpoint": "4fba33c3e29ffcaa32010a47533767695d57ba95"
+}

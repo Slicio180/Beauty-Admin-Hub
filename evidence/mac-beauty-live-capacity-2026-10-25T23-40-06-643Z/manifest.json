@@ -1,0 +1,62 @@
+[
+  {
+    "path": "apps-script/registration-identity-test/remote-app/BeautyLiveTest.html",
+    "before": "d68538c08d57174ab0810586c3d76d7cc0e22fcf55e2855707dca3e3c787a92a",
+    "after": "3926d4aeb1aaf2fda39c05b0f9f1eb7905b68d5cc9c7e217c6239a3a4de2167c"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "3453aa3f773a2ff1d624a5e0381bf65f6ce33795ac1a09fc974f3c48fcb6f156",
+    "after": "3eb4e099eac964e34f37fce705482cec040e2f7bbc5722255f40e2200c4a88f5"
+  },
+  {
+    "path": "docs/testing/BEAUTY-LIVE-20261026.md",
+    "before": "b8afaade102669017b2868e693eeaac63fdb12528ca273a4fdb317669261ab66",
+    "after": "7b213cc5d12cfea16a72920685724dbd6b70c42b66154f3251c2d3f61c44b0ac"
+  },
+  {
+    "path": "evidence/beauty-live-capacity-20261026/before-capacity-003028.png",
+    "before": null,
+    "after": "ade55888c50f67364f4c0292bcd789c92fad3a5951815b939153cdee27ba2785"
+  },
+  {
+    "path": "evidence/beauty-live-capacity-20261026/full-regression.tap",
+    "before": null,
+    "after": "271dfcc073d3360f19fc60e3706ca265bdcd152c9c4ca4fcf5f6a1e822d5a395"
+  },
+  {
+    "path": "evidence/beauty-live-capacity-20261026/inventory.txt",
+    "before": null,
+    "after": "192363a3cad2e4e93158b196969f334da8c74893e881b23db7b03e4092c11353"
+  },
+  {
+    "path": "evidence/beauty-live-capacity-20261026/new-tests.tap",
+    "before": null,
+    "after": "f5fa139af6d4a9ed9590a45fa1d7dc55cc24cbd0a309ef9a0f9ba9d955d5fc72"
+  },
+  {
+    "path": "public/beauty-live.html",
+    "before": "1a2d90c5cdbab9fc1a53684f61e1a9beeb861447660a73274a5cd6cc2420bfc5",
+    "after": "bd0e9bf973f461e67aba2135fb7bcbe13491b3cd387e08094580668ea31f5ca6"
+  },
+  {
+    "path": "public/css/beauty-live.css",
+    "before": "a3b594141b97e7beeea6d095041e5c3e99d71a3224b329c1665986a370016479",
+    "after": "74573962cde2bd19c30fdbc1b1b11dabeceef460167f1d56eb0af123a39e28f9"
+  },
+  {
+    "path": "public/js/beauty-live.js",
+    "before": "f6b06e2316429f352a1efcf8fd2cc1ff24a084ce35d7f19523b48e6a3521d60a",
+    "after": "ab36b8cfe412617bc09b93edf7d59a753883918522852878b1ecfd71bc02f8b2"
+  },
+  {
+    "path": "tests/beauty-live.test.cjs",
+    "before": "075ad44da635ed6be74217cee805c299796ac130fd263f3da61bf81320d7a312",
+    "after": "c3c7e9386e8ef75bcf0dac7e44f36074d24ab6fdb66b9846db4020a43a77806d"
+  },
+  {
+    "path": "evidence/beauty-live-capacity-20261026/installer-fixture.txt",
+    "before": null,
+    "after": "03c36498f5fbd5752d10dfb719aec74e31ba70a00f566e1c9a7765e6644a5e45"
+  }
+]

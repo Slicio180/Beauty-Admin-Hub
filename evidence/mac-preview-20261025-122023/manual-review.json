@@ -1,0 +1,24 @@
+{
+  "recordedAt": "2026-10-25T11:29:10.967Z",
+  "environment": "Mac browser, offline preview",
+  "sourceHash": "9fa2e7d40c985df25090354fad489bbba22feb3ff27925508ed9edc336e91365",
+  "checks": [
+    {
+      "id": "VIS-001",
+      "result": "PASS",
+      "actual": "Screenshots show demo banner, three fictional players, backend DEMO and Nakka UNAVAILABLE."
+    },
+    {
+      "id": "VIS-002",
+      "result": "PASS at normal working width",
+      "actual": "Wider screenshot and user confirmation resolve the initial spacing concern. No layout change requested."
+    },
+    {
+      "id": "MAN-STATUS-001",
+      "result": "PASS, user reported",
+      "expected": "Demo Anna remains STANDBY for 10 seconds without reload.",
+      "actual": "User confirmed it stays."
+    }
+  ],
+  "limitation": "Offline preview only; reload persistence and live status writes not verified."
+}

@@ -1,0 +1,38 @@
+{
+  "recordedAt": "2026-10-25T17:03:35.093Z",
+  "environment": "User-operated Mac browser; dedicated Apps Script TEST projects and Identity TEST spreadsheet",
+  "checks": [
+    {
+      "id": "SOURCE-DISCREPANCY-001",
+      "result": "FAIL observed; bounded retest PASS",
+      "actual": "Row 157 at 17:45:44, Alessio Tampella (kiosk), saved MOBIL. Preserved. Suspected registration-tab mix-up is an inference; root cause not proven."
+    },
+    {
+      "id": "KIOSK-SOURCE-001",
+      "result": "PASS user-supplied response row",
+      "actual": "Adam Pettersson; 25/10/2026 17:52:15; NEJ; TEST-KIOSK-SOURCE-001; KIOSK. Event-list screenshot independently shows the message, consent and source."
+    },
+    {
+      "id": "KIOSK-DUP-001",
+      "result": "PASS observed bounded check",
+      "actual": "Already-registered message shown at 17:54:22. Final response rows advance from Adam at 158 to one distinct-person response at 159; original event entry retains IN, NEJ and TEST-REMOTE-001."
+    },
+    {
+      "id": "KIOSK-DISTINCT-001",
+      "result": "PASS observed storage and display",
+      "actual": "Row 159 at 17:55:16: Alessio Tampella (tablet), JA, TEST-KIOSK-003, KIOSK. Distinct master name and event row shown; earlier rows retained."
+    },
+    {
+      "id": "KIOSK-RETURN-001",
+      "result": "Form reset observed; automatic timing unverified",
+      "actual": "Screenshot at 17:55:27 shows reset kiosk form. Earlier user report of automatic return preceded discovery of the MOBIL-labelled attempt and cannot alone qualify current kiosk timing."
+    }
+  ],
+  "limitations": [
+    "Sequential manual TEST checks only.",
+    "No concurrent registration qualification.",
+    "No new Nakka or production verification.",
+    "No complete before/after workbook comparison.",
+    "No kiosk cancel or repeated-detail TEST check included."
+  ]
+}

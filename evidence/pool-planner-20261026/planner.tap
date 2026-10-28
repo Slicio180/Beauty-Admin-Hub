@@ -1,0 +1,52 @@
+TAP version 13
+# Subtest: pool planner: 37 players prefer three with ten boards
+ok 1 - pool planner: 37 players prefer three with ten boards
+  ---
+  duration_ms: 2.653616
+  type: 'test'
+  ...
+# Subtest: pool planner: 34 players with seven boards cannot fit one pool per board
+ok 2 - pool planner: 34 players with seven boards cannot fit one pool per board
+  ---
+  duration_ms: 0.75935
+  type: 'test'
+  ...
+# Subtest: pool planner: supplied 5–101 schemes match both preferences
+ok 3 - pool planner: supplied 5–101 schemes match both preferences
+  ---
+  duration_ms: 5.357983
+  type: 'test'
+  ...
+# Subtest: pool planner: every arrangement preserves players and board limits
+ok 4 - pool planner: every arrangement preserves players and board limits
+  ---
+  duration_ms: 24.022693
+  type: 'test'
+  ...
+# Subtest: pool planner: rejects invalid inputs and marks counts beyond source scheme
+ok 5 - pool planner: rejects invalid inputs and marks counts beyond source scheme
+  ---
+  duration_ms: 0.372826
+  type: 'test'
+  ...
+# Subtest: pool planner: event count excludes OUT and STANDBY and rejects unknown snapshots
+ok 6 - pool planner: event count excludes OUT and STANDBY and rejects unknown snapshots
+  ---
+  duration_ms: 0.221971
+  type: 'test'
+  ...
+# Subtest: pool planner: real panel reacts to verified event refresh, controls and outages
+ok 7 - pool planner: real panel reacts to verified event refresh, controls and outages
+  ---
+  duration_ms: 7.862785
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 215.836073

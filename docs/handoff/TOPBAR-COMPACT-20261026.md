@@ -1,0 +1,3 @@
+# Compact Hub top bar — TEST
+
+Requested 26 October 2026, screenshot 09.11.04. Remove excess vertical space in AIK DART / EVENT HUB top header. Override minimum top-bar/brand-area heights with zero, reduce top/bottom padding to 8px, retain original logo dimensions, title font sizes and player counter. Natural flex wrapping remains for narrow screens. Approximate single-row desktop height 154px instead of 220px; actual browser fit must be reviewed. Existing player rows and sidebar refinements retained. 248 local regression cases and inventory PASS. No backend/production change. Install from 46ba1b5 and upload only HubTest.html to separate TEST; AUD-073 records local change block.

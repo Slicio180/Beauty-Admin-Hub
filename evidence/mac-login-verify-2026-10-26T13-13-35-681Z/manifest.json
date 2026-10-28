@@ -1,0 +1,62 @@
+[
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTestAuth.gs",
+    "before": "6247d6c6146fde1ef30272f772e331d12e46e75dd89dc0277e68abef86339554",
+    "after": "908a8a6c59828402b9afd9378c97f0cf19df4dcc1f2b413021f73fa1727b7d06"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "0e4f62ddf66e651f839fabb54151e75dbbaef75af9a50c88fcfa82feb3ff0b9e",
+    "after": "6949640af30b896fa8f40cd9ec49fdafa452577d2af27c9f56004140ae393a89"
+  },
+  {
+    "path": "public/js/hub-auth.js",
+    "before": "5391db4994d180317d03005bf6f8a8fbd74e7c164e65de09319f397c20ff6423",
+    "after": "59bdf393318a1d65f0ba96ac228bde05490d044df71371399269701177e1ed96"
+  },
+  {
+    "path": "tests/hub-auth.test.cjs",
+    "before": "07061882c06ffc6b8725460dd055662297ba9a6930a9453e57a42a1ee2c3ea90",
+    "after": "263a2930d5e4339292abbb93772308130879b6f8c0c894cc3ce8434822539c72"
+  },
+  {
+    "path": "tests/hub-auth-client.test.cjs",
+    "before": "e5b411f2e2b1116371a207aac744f59fd80c6bfbe1d3e583d608e8221902073c",
+    "after": "a3d437cd54fc3fa2fcc99cdfdce6b21efc74415dad438c4db809e5c039128584"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "d1db94ab03e95232b22d60f6a8a02ed6bbe7a8b96eb5708a950ee652e24bd350",
+    "after": "4683168232f0df0972acbc553ca9ae1c6df7aac5f5357806da719da1fba12dc2"
+  },
+  {
+    "path": "docs/handoff/HUB-LOGIN-VERIFY-20261026.md",
+    "before": null,
+    "after": "d635bf8e97cbd9c0818e26ab627777f27bca04b24c479e398b3c79302191302e"
+  },
+  {
+    "path": "evidence/hub-auth-verification-20261026/build-hub.txt",
+    "before": null,
+    "after": "e554d377617479721caec3dc45ea0b25c83f4b467d7c67cfaf5c93b31ffc1e53"
+  },
+  {
+    "path": "evidence/hub-auth-verification-20261026/inventory.txt",
+    "before": null,
+    "after": "89f11cc16864c3142d56b7ceaab63dc58317f7fd92b36dc1c9b2c4bbb352cf9e"
+  },
+  {
+    "path": "evidence/hub-auth-verification-20261026/outcome.json",
+    "before": null,
+    "after": "6633bc49f6b8061e132f8fd4d2e73f79cf009e35b0f037ee134fc06f56317010"
+  },
+  {
+    "path": "evidence/hub-auth-verification-20261026/padding-before.txt",
+    "before": null,
+    "after": "d50135ecab45fcd624c33dff4e59f0e4758fe7184e00c23ad59e7afd99208e6a"
+  },
+  {
+    "path": "evidence/hub-auth-verification-20261026/tests.tap",
+    "before": null,
+    "after": "d1a595d68a42080913db8e8aaa6376a43bf5b363939ae9f7bf609d86e8db49dd"
+  }
+]

@@ -1,0 +1,52 @@
+TAP version 13
+# Subtest: status write gate is false by default
+ok 1 - status write gate is false by default
+  ---
+  duration_ms: 1.359462
+  type: 'test'
+  ...
+# Subtest: Event Control write gate remains false
+ok 2 - Event Control write gate remains false
+  ---
+  duration_ms: 0.393588
+  type: 'test'
+  ...
+# Subtest: status adapter is pinned to TEST identity
+ok 3 - status adapter is pinned to TEST identity
+  ---
+  duration_ms: 0.242534
+  type: 'test'
+  ...
+# Subtest: status adapter only accepts IN OUT STANDBY
+ok 4 - status adapter only accepts IN OUT STANDBY
+  ---
+  duration_ms: 2.729103
+  type: 'test'
+  ...
+# Subtest: closed gate prevents client access entirely
+ok 5 - closed gate prevents client access entirely
+  ---
+  duration_ms: 1.214449
+  type: 'test'
+  ...
+# Subtest: Route exposes dedicated TEST status RPC
+ok 6 - Route exposes dedicated TEST status RPC
+  ---
+  duration_ms: 0.951461
+  type: 'test'
+  ...
+# Subtest: Hub has TEST status bridge but dropdown stays disabled while gated
+ok 7 - Hub has TEST status bridge but dropdown stays disabled while gated
+  ---
+  duration_ms: 2.228988
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 154.893389

@@ -1,0 +1,10 @@
+{
+  "checkedAt": "2026-10-25T11:59:02.741773+00:00",
+  "from133Preview": "PASS",
+  "from134PopupUpdate": "PASS",
+  "preserveExistingAudit": "PASS",
+  "repeatInstall": "PASS, no-op",
+  "rejectLaterMasterEditWithoutWrites": "PASS",
+  "originalAppsScriptSnapshotsUnchanged": "PASS",
+  "limitations": "Installer checks in assistant environment; Mac install and browser review pending"
+}

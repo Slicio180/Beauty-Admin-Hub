@@ -1,0 +1,70 @@
+TAP version 13
+# Subtest: Live Swedish order strips private fields without mutating input
+ok 1 - Live Swedish order strips private fields without mutating input
+  ---
+  duration_ms: 4.693448
+  type: 'test'
+  ...
+# Subtest: Live timestamps sort earliest first with missing values last
+ok 2 - Live timestamps sort earliest first with missing values last
+  ---
+  duration_ms: 0.244716
+  type: 'test'
+  ...
+# Subtest: Live ranking projection places unranked last and preserves zero points
+ok 3 - Live ranking projection places unranked last and preserves zero points
+  ---
+  duration_ms: 0.209503
+  type: 'test'
+  ...
+# Subtest: Live feed exposes only public fields and earliest same-event registration
+ok 4 - Live feed exposes only public fields and earliest same-event registration
+  ---
+  duration_ms: 3.39845
+  type: 'test'
+  ...
+# Subtest: Live guard rejects feed and URL before service access
+ok 5 - Live guard rejects feed and URL before service access
+  ---
+  duration_ms: 2.556426
+  type: 'test'
+  ...
+# Subtest: Live build reproduces and scripts parse with original AIK fonts
+ok 6 - Live build reproduces and scripts parse with original AIK fonts
+  ---
+  duration_ms: 89.10854
+  type: 'test'
+  ...
+# Subtest: Live refresh updates count safely and retains names on connection failure
+ok 7 - Live refresh updates count safely and retains names on connection failure
+  ---
+  duration_ms: 17.821662
+  type: 'test'
+  ...
+# Subtest: Live empty state and numbered sixty-player columns fit without pagination
+ok 8 - Live empty state and numbered sixty-player columns fit without pagination
+  ---
+  duration_ms: 3.943286
+  type: 'test'
+  ...
+# Subtest: Live sixty-first player continues below sixty and auto-scroll survives refresh
+ok 9 - Live sixty-first player continues below sixty and auto-scroll survives refresh
+  ---
+  duration_ms: 2.422406
+  type: 'test'
+  ...
+# Subtest: Live route is additive guarded TEST HTML and rejects configuration injection
+ok 10 - Live route is additive guarded TEST HTML and rejects configuration injection
+  ---
+  duration_ms: 1.878775
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 258.869761

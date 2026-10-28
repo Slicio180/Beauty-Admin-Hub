@@ -1,0 +1,101 @@
+{
+  "baseline": "6d57f21 / AUD-099; central routes AUD-098 installed",
+  "observationDate": "2026-10-27",
+  "screenshotTimeZone": "Europe/Stockholm",
+  "verification": "Owner supplied native screenshots; assistant visual inspection; not independent browser or raw Sheet tracing",
+  "checks": [
+    {
+      "id": "NATIVE-098-01",
+      "name": "Remote existing-player outcome",
+      "expected": "Beauty saved and Nakka entry confirmed",
+      "actual": "Emilia Dåderman success screen shows both confirmations",
+      "evidence": [
+        "Screenshot 2026-10-27 at 22.34.40.png"
+      ],
+      "result": "PASS"
+    },
+    {
+      "id": "NATIVE-098-02",
+      "name": "Central kiosk existing-player outcome",
+      "expected": "Beauty saved and Nakka entry confirmed",
+      "actual": "Joel Larsson success screen shows both confirmations",
+      "evidence": [
+        "Screenshot 2026-10-27 at 22.42.01.png"
+      ],
+      "result": "PASS"
+    },
+    {
+      "id": "NATIVE-099-01",
+      "name": "Mobile list total tile",
+      "expected": "Count matches then-current event total17",
+      "actual": "Visible 17 SPELARE tile above Tonight list; closed/reopened result not separately confirmed",
+      "evidence": [
+        "Screenshot 2026-10-27 at 22.58.31.png"
+      ],
+      "result": "PASS — visible count only"
+    },
+    {
+      "id": "NATIVE-098-03",
+      "name": "Sources and canonical nickname display",
+      "expected": "Hub shows each route and separate nickname identity",
+      "actual": "HUB/KIOSK/MOBILE source rows and Test Player Remote (Remigio) visible",
+      "evidence": [
+        "Screenshot 2026-10-27 at 22.50.25.png",
+        "Screenshot 2026-10-27 at 23.12.20.png"
+      ],
+      "result": "PASS — display only"
+    },
+    {
+      "id": "NATIVE-099-02",
+      "name": "Long message popup",
+      "expected": "Message wraps and can scroll to final line",
+      "actual": "Andreas Olsson message shown at top and scrolled to last line",
+      "evidence": [
+        "Screenshot 2026-10-27 at 23.05.01.png",
+        "Screenshot 2026-10-27 at 23.05.13.png"
+      ],
+      "result": "PASS"
+    },
+    {
+      "id": "NATIVE-099-03",
+      "name": "Larger Live column geometry",
+      "expected": "All32 names fit three numbered columns",
+      "actual": "32 SPELARE; numbered columns 1–11,12–22,23–32, full names visible",
+      "evidence": [
+        "Screenshot 2026-10-27 at 23.11.41.png"
+      ],
+      "result": "PASS — geometry only; text size OPEN"
+    },
+    {
+      "id": "NATIVE-098-04",
+      "name": "New identities retained Beauty-only before restoration",
+      "expected": "28 matching league players plus four Beauty-only identities",
+      "actual": "Snapshot27Oct23:15:08 Hub32/Nakka28/same28/HubOnly4/NakkaOnly0/duplicates0; expanded Test Player Hub, Test Player Kiosk, Test Player Remote, Test Player Remote (Remigio) all IN",
+      "evidence": [
+        "Screenshot 2026-10-27 at 23.15.48.png",
+        "Screenshot 2026-10-27 at 23.16.00.png"
+      ],
+      "result": "PASS — expected pre-restoration behavior; parity gap addressed in AUD-100"
+    },
+    {
+      "id": "NATIVE-098-05",
+      "name": "Health recovers after busy check",
+      "expected": "Busy check can be followed by successful read",
+      "actual": "Earlier23:11 busy health result; later comparison panel health OK/green",
+      "evidence": [
+        "Screenshot 2026-10-27 at 23.14.36.png",
+        "Screenshot 2026-10-27 at 23.16.00.png"
+      ],
+      "result": "PASS — recovery observed; cause/timing not traced"
+    }
+  ],
+  "pending": [
+    "Native AUD-100 new league creation and exact LPID receipt",
+    "Mobile close/reopen",
+    "Cross-route simultaneous and duplicate native raw tracing",
+    "Beauty Live larger type with actual rank/points",
+    "Idle/max session expiry and original date-save sign-out",
+    "New fake identities removal/backfill not authorized by this record"
+  ],
+  "scope": "Collected together in implementation evidence; not a separate evidence-only per-screenshot installer."
+}

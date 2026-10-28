@@ -1,0 +1,261 @@
+[
+  {
+    "id": "SAFE-001",
+    "requirement": "Event Control gate stays false; no external configuration or production fallback",
+    "priority": "Critical",
+    "evidenceLabel": "RECONSTRUCTED",
+    "source": "Restart instruction 2026-10-25; existing source for concrete contracts",
+    "acceptance": "See coverage.md and suite-design.md; no completion implied"
+  },
+  {
+    "id": "SAFE-002",
+    "requirement": "Status gate requires boolean true and approved TEST identities",
+    "priority": "Critical",
+    "evidenceLabel": "RECONSTRUCTED",
+    "source": "Restart instruction 2026-10-25; existing source for concrete contracts",
+    "acceptance": "See coverage.md and suite-design.md; no completion implied"
+  },
+  {
+    "id": "ENV-001",
+    "requirement": "Project, sheet, locale, timezone and owner-only deployment separation",
+    "priority": "Critical",
+    "evidenceLabel": "RECONSTRUCTED",
+    "source": "Restart instruction 2026-10-25; existing source for concrete contracts",
+    "acceptance": "See coverage.md and suite-design.md; no completion implied"
+  },
+  {
+    "id": "EVT-001",
+    "requirement": "Date encoding rejects invalid values and preserves supported calendar dates",
+    "priority": "High",
+    "evidenceLabel": "RECONSTRUCTED",
+    "source": "Restart instruction 2026-10-25; existing source for concrete contracts",
+    "acceptance": "See coverage.md and suite-design.md; no completion implied"
+  },
+  {
+    "id": "EVT-002",
+    "requirement": "Event change requires stale detection, exact bounded mutation, snapshot comparison and verified readback",
+    "priority": "Critical",
+    "evidenceLabel": "RECONSTRUCTED",
+    "source": "Restart instruction 2026-10-25; existing source for concrete contracts",
+    "acceptance": "See coverage.md and suite-design.md; no completion implied"
+  },
+  {
+    "id": "HUB-001",
+    "requirement": "Bounded TEST dashboard reads, identity checks and correct field mapping",
+    "priority": "High",
+    "evidenceLabel": "RECONSTRUCTED",
+    "source": "Restart instruction 2026-10-25; existing source for concrete contracts",
+    "acceptance": "See coverage.md and suite-design.md; no completion implied"
+  },
+  {
+    "id": "STA-001",
+    "requirement": "Status validation, unique player resolution, bounded write and independent readback",
+    "priority": "Critical",
+    "evidenceLabel": "RECONSTRUCTED",
+    "source": "Restart instruction 2026-10-25; existing source for concrete contracts",
+    "acceptance": "See coverage.md and suite-design.md; no completion implied"
+  },
+  {
+    "id": "NAK-001",
+    "requirement": "Sanitized authenticated read-only Nakka health with cache and concurrency limits",
+    "priority": "High",
+    "evidenceLabel": "RECONSTRUCTED",
+    "source": "Restart instruction 2026-10-25; existing source for concrete contracts",
+    "acceptance": "See coverage.md and suite-design.md; no completion implied"
+  },
+  {
+    "id": "NAK-002",
+    "requirement": "Health UI handles errors, timeout, polling, visibility and refresh throttling",
+    "priority": "High",
+    "evidenceLabel": "RECONSTRUCTED",
+    "source": "Restart instruction 2026-10-25; existing source for concrete contracts",
+    "acceptance": "See coverage.md and suite-design.md; no completion implied"
+  },
+  {
+    "id": "REG-001",
+    "requirement": "Registration, name normalization, duplicate prevention and consent",
+    "priority": "Critical",
+    "evidenceLabel": "RECONSTRUCTED",
+    "source": "Restart instruction 2026-10-25; existing source for concrete contracts",
+    "acceptance": "See coverage.md and suite-design.md; no completion implied"
+  },
+  {
+    "id": "DATA-001",
+    "requirement": "Master players, permanent identity, event pools and attendance data integrity",
+    "priority": "High",
+    "evidenceLabel": "RECONSTRUCTED",
+    "source": "Restart instruction 2026-10-25; existing source for concrete contracts",
+    "acceptance": "See coverage.md and suite-design.md; no completion implied"
+  },
+  {
+    "id": "LIVE-001",
+    "requirement": "Live cast, ranking, points, refresh and selectable Hub sorting",
+    "priority": "High",
+    "evidenceLabel": "RECONSTRUCTED",
+    "source": "Restart instruction 2026-10-25; existing source for concrete contracts",
+    "acceptance": "See coverage.md and suite-design.md; no completion implied"
+  },
+  {
+    "id": "SEC-001",
+    "requirement": "Authentication, authorization, sessions, privacy and tenant/event isolation",
+    "priority": "Critical",
+    "evidenceLabel": "RECONSTRUCTED",
+    "source": "Restart instruction 2026-10-25; existing source for concrete contracts",
+    "acceptance": "See coverage.md and suite-design.md; no completion implied"
+  },
+  {
+    "id": "OPS-001",
+    "requirement": "Install, deploy, rollback, backups, triggers and operator error visibility",
+    "priority": "Critical",
+    "evidenceLabel": "RECONSTRUCTED",
+    "source": "Restart instruction 2026-10-25; existing source for concrete contracts",
+    "acceptance": "See coverage.md and suite-design.md; no completion implied"
+  },
+  {
+    "id": "I18N-001",
+    "requirement": "Swedish default and consistent multilingual UI/messages",
+    "priority": "Medium",
+    "evidenceLabel": "RECONSTRUCTED",
+    "source": "Restart instruction 2026-10-25; existing source for concrete contracts",
+    "acceptance": "See coverage.md and suite-design.md; no completion implied"
+  },
+  {
+    "id": "PROV-001",
+    "requirement": "Preserve recovered bytes and distinguish historical from runnable evidence",
+    "priority": "High",
+    "evidenceLabel": "RECONSTRUCTED",
+    "source": "Restart instruction 2026-10-25; existing source for concrete contracts",
+    "acceptance": "See coverage.md and suite-design.md; no completion implied"
+  },
+  {
+    "id": "QUAL-001",
+    "requirement": "Every real TEST write follows approval, backup, snapshot, bounded delta, independent readback, diff, evidence, gate closure, audit and commit",
+    "priority": "Critical",
+    "evidenceLabel": "RECONSTRUCTED",
+    "source": "Restart instruction 2026-10-25; existing source for concrete contracts",
+    "acceptance": "See coverage.md and suite-design.md; no completion implied"
+  },
+  {
+    "id": "HAND-001",
+    "requirement": "Another programmer can discover, run, trace and inspect tests and release evidence",
+    "priority": "High",
+    "evidenceLabel": "RECONSTRUCTED",
+    "source": "Restart instruction 2026-10-25; existing source for concrete contracts",
+    "acceptance": "See coverage.md and suite-design.md; no completion implied"
+  },
+  {
+    "id": "PREVIEW-001",
+    "requirement": "Desktop Hub preview uses loopback-only in-memory fixtures and blocks remote requests by default",
+    "priority": "Critical",
+    "evidenceLabel": "VERIFIED local automated behavior",
+    "source": "Beauty Hub integration preparation, 2026-10-25",
+    "acceptance": "Preview route, closed default, fictional data, mock mutations, isolated server and actual form boundary tests pass; browser and Mac confirmation separately required"
+  },
+  {
+    "id": "NAME-001",
+    "requirement": "Conditional same-name popup across Hub, remote and kiosk; existing-player choice or identifying detail, explicit name confirmation and cancellation before save",
+    "priority": "High",
+    "evidenceLabel": "APPROVED; locally implemented; remote qualification pending",
+    "source": "User approval in Beauty conversation, 2026-10-25",
+    "acceptance": "Same-name detection must precede mutation; preserve existing identity, require unique confirmed display label, and keep live deployment unchanged until separately tested"
+  },
+  {
+    "id": "HUBTEST-001",
+    "requirement": "Owner-only Identity TEST Hub uses pinned RPC read and registration bridge; server stamps HUB; status edits and Nakka requests disabled; production and offline preview preserved.",
+    "priority": "High",
+    "evidenceLabel": "VERIFIED local automated behavior; Google runtime pending",
+    "source": "Source checkpoint 23a0b93, 2026-10-25",
+    "acceptance": "Pinned read/register RPC passes validation and source/gate/lock checks; browser readback and actual writes must be verified separately."
+  },
+  {
+    "id": "HUBSTATUS-001",
+    "requirement": "Identity TEST status RPC changes exactly two existing C cells after project/sheet/date/previous-status/unique-player/formula checks; verifies readback; preserves other fields; serial client transport and pending UI prevent older responses replacing pending values.",
+    "priority": "High",
+    "evidenceLabel": "VERIFIED local fake-service tests; Mac/Google browser qualification pending",
+    "source": "Checkpoint 9ac46d4, 2026-10-25",
+    "acceptance": "Wrong identities, gates, stale inputs, ambiguity and formulas block writes. Both status cells and Hub data verify before success. Partial failures are uncertain and never automatically retried. Sequential Google status cycle and reload persistence require separate manual evidence."
+  },
+  {
+    "id": "EVENTINSPECT-001",
+    "requirement": "Owner-only Identity TEST Event Control opens a read-only popup showing current event/reset token display and legacy reset-effect counts. It has no save action, rejects routing overrides, flags layout/date/formula/size issues and cannot mutate sheets on open/edit/cancel.",
+    "priority": "High",
+    "evidenceLabel": "VERIFIED locally with fake services/UI; Google inspection pending",
+    "source": "Checkpoint 8ddc4ef, 2026-10-25",
+    "acceptance": "Pinned project and sheet, bounded reads, explicit inspectionOnly and writesEnabled false; calculated retain/delete effects and source-column caveat; no save RPC. Actual TEST summary and cancel require browser evidence before preparing event writes."
+  },
+  {
+    "id": "HUBENGLISH-001",
+    "requirement": "Entire Hub interface defaults to English while remote/kiosk remain Swedish. Canonical stored names/consent/source values remain compatible. Event Control separates diagnostics into Event Control Details and requires a checkbox and a confirmation popup naming old and new dates before any future date save.",
+    "priority": "High",
+    "evidenceLabel": "USER REQUEST; locally implemented and tested; Google/browser review pending",
+    "source": "User clarification 2026-10-25: the hub all in English, the remote and kiosk in swedish is ok",
+    "acceptance": "English Hub pages/forms/identity/errors/status/consent/source labels; byte-identical Swedish remote/kiosk sources. Calendar validation and all confirmation prerequisites tested; changes/back/reopen reset confirmations. No date-save API exists yet. Future server-backed date save must enforce confirmation/version/authorization. Password reauthentication belongs to pending Hub login."
+  },
+  {
+    "id": "LIVE-001",
+    "requirement": "Swedish read-only TEST casting tab with automatic names/count refresh, sorting and privacy projection",
+    "priority": "High",
+    "evidenceLabel": "TESTING",
+    "source": "Beauty Live requirements confirmed 2026-10-26",
+    "acceptance": "Automated local behaviour plus pending actual Apps Script and landscape browser review; Nakka integration pending"
+  },
+  {
+    "id": "POOL-001",
+    "requirement": "Read-only event Pool Planner using IN count, preferred size and board capacity, with original scheme download",
+    "priority": "Normal",
+    "acceptance": "Exact supplied 5\u2013101 arrangements; explain board sharing and one-pool-per-board alternatives; no backend writes; stale event data blocks recommendations."
+  },
+  {
+    "id": "NAKKATRANSFER-001",
+    "requirement": "Explicitly confirmed one-IN-player transfer using reviewed existing league LPID into the fixed Identity TEST event only, with one-use preview, stale checks, durable retry barrier and verified readback.",
+    "priority": "High",
+    "evidenceLabel": "LOCAL ONLY; Google/native API qualification pending",
+    "acceptance": "No production/league/Sheet mutation, no duplicate add, no automatic retry; native transfer and LPID projection must be reviewed separately."
+  },
+  {
+    "id": "HUBAUTO-001",
+    "requirement": "Weekly current-day Identity TEST Hub registration automatically adds uniquely mapped existing league players to the fixed TEST event and reports Sheet success separately from Nakka outcome; no manual transfer step in happy path.",
+    "priority": "High",
+    "evidenceLabel": "LOCAL ONLY; native bulk qualification pending",
+    "acceptance": "Keep identity/target/duplicate/journal/session guards. No new league identity creation, forged timestamp, automatic retry, or false registration failure after Sheet commit. Respect generation-bound private feedback."
+  },
+  {
+    "id": "PLAYERAUTO-001",
+    "requirement": "Central owner-only TEST remote/kiosk forms use same locked registration and guarded Nakka transfer as Hub without a Hub staff session, preserving private staff access and Swedish identity workflow.",
+    "priority": "High",
+    "evidenceLabel": "LOCAL ONLY; bulk native review pending",
+    "acceptance": "Server-stamped source, bounded context/nonce, no staff privilege, shared retry/duplicate guards and honest independent outcomes; no access widening, new league identity or production rollout."
+  },
+  {
+    "id": "DISPLAY-099",
+    "requirement": "Remote TEST tonight list shows its total player count; qualify Beauty Live column boundaries and long-message preservation across TEST routes",
+    "priority": "High",
+    "evidenceLabel": "LOCAL VERIFIED; NATIVE PENDING",
+    "source": "Owner request 27 October 2026 after larger registration batch",
+    "acceptance": "Count equals displayed event names, zero/loading/failure/reopen safe; wide and narrow column slot checks; long message Sheet and popup preservation. Native batch screen review pending."
+  },
+  {
+    "id": "NEWLEAGUE-100",
+    "requirement": "Restore canonical new-player or missing-league registration from central TEST Hub mobile and kiosk into the permanent league then fixed TEST event",
+    "priority": "High",
+    "source": "Owner 27 October 2026: live Beauty already creates new league entries; restore equivalent TEST path",
+    "evidenceLabel": "LOCAL VERIFIED; NATIVE PENDING",
+    "acceptance": "Unique canonical identity, fixed league/event/day/IN guards, write-ahead journal and verified LPID receipt/readback before event add, no mutation retries, saved Beauty registration retained after external failure. Manual native creation qualification pending."
+  },
+  {
+    "id": "DASHBOARD-102",
+    "requirement": "AIK black/yellow dashboard, matching Hub submenus and durable named player attention",
+    "priority": "High",
+    "source": "Owner approved mockup 28 October 2026, corrected banner to dark with thin red outline",
+    "evidenceLabel": "LOCAL VERIFIED; OWNER INSTALL/GOOGLE/NATIVE PENDING",
+    "acceptance": "One numbered player table with SOURCE heading; three summary cards; white zero/red active count; conditional thin red outline banner; durable date-scoped staff queue across all registration routes; GET-only review check; duplicate league identity detection; no uncertain identity guessing or mutation retry; consistent 44px guarded closes; production and JDC untouched."
+  },
+  {
+    "id": "BRANDING-102",
+    "requirement": "Approved AIK masthead, Nakka event title, real sidebar Event Control and active-state navigation; matching remote and kiosk styling",
+    "priority": "High",
+    "source": "Owner code approval 28 October 2026 after supplying exact SVG and sponsor-free PNG",
+    "evidenceLabel": "LOCAL VERIFIED; OWNER INSTALL/GOOGLE/NATIVE PENDING",
+    "acceptance": "Use original logos and AIK font, bind title to selected Nakka event through authenticated read, reject stale/missing matches, one moving nav indicator, retain existing guarded event controls/details, preserve public form RPC/source/date/identity/consent and return behavior, consistent fine yellow controls and reachable closes. No production/API write or permission change."
+  }
+]

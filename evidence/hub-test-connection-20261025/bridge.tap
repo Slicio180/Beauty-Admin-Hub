@@ -1,0 +1,82 @@
+TAP version 13
+# Subtest: Hub TEST rejects wrong running script before backend access
+ok 1 - Hub TEST rejects wrong running script before backend access
+  ---
+  duration_ms: 2.857368
+  type: 'test'
+  ...
+# Subtest: Hub TEST rejects wrong configured project and spreadsheet before backend access
+ok 2 - Hub TEST rejects wrong configured project and spreadsheet before backend access
+  ---
+  duration_ms: 2.102038
+  type: 'test'
+  ...
+# Subtest: Hub TEST returns adapter data and TEST marker without registration
+ok 3 - Hub TEST returns adapter data and TEST marker without registration
+  ---
+  duration_ms: 2.056149
+  type: 'test'
+  ...
+# Subtest: Hub TEST rejects status, spoofed source and malformed input before I/O
+ok 4 - Hub TEST rejects status, spoofed source and malformed input before I/O
+  ---
+  duration_ms: 1.07858
+  type: 'test'
+  ...
+# Subtest: Hub TEST preserves confirmed identity and stamps HUB server-side
+ok 5 - Hub TEST preserves confirmed identity and stamps HUB server-side
+  ---
+  duration_ms: 5.513815
+  type: 'test'
+  ...
+# Subtest: Hub TEST registration reuses Remote gate and lock with guaranteed release
+ok 6 - Hub TEST registration reuses Remote gate and lock with guaranteed release
+  ---
+  duration_ms: 4.497162
+  type: 'test'
+  ...
+# Subtest: Hub TEST client reads and registers through RPC
+ok 7 - Hub TEST client reads and registers through RPC
+  ---
+  duration_ms: 2.46249
+  type: 'test'
+  ...
+# Subtest: Hub TEST client blocks status, foreign URLs, duplicate keys and source spoofing
+ok 8 - Hub TEST client blocks status, foreign URLs, duplicate keys and source spoofing
+  ---
+  duration_ms: 1.162236
+  type: 'test'
+  ...
+# Subtest: Hub TEST RPC failure is sanitized and registration is never retried automatically
+ok 9 - Hub TEST RPC failure is sanitized and registration is never retried automatically
+  ---
+  duration_ms: 1.194886
+  type: 'test'
+  ...
+# Subtest: Hub TEST Nakka unavailable result makes no RPC
+ok 10 - Hub TEST Nakka unavailable result makes no RPC
+  ---
+  duration_ms: 1.490339
+  type: 'test'
+  ...
+# Subtest: Hub TEST HTML is reproducible with parseable scripts and original AIK assets
+ok 11 - Hub TEST HTML is reproducible with parseable scripts and original AIK assets
+  ---
+  duration_ms: 74.17896
+  type: 'test'
+  ...
+# Subtest: Hub TEST route is additive and manifest stays owner-only with legacy status RPC private
+ok 12 - Hub TEST route is additive and manifest stays owner-only with legacy status RPC private
+  ---
+  duration_ms: 1.526243
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 207.15654

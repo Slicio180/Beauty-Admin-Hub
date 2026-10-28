@@ -1,0 +1,100 @@
+TAP version 13
+# Subtest: Hub status rejects wrong project and non-boolean write gates before Sheets access
+ok 1 - Hub status rejects wrong project and non-boolean write gates before Sheets access
+  ---
+  duration_ms: 6.11786
+  type: 'test'
+  ...
+# Subtest: Hub status rejects malformed input and extra routing keys without I/O
+ok 2 - Hub status rejects malformed input and extra routing keys without I/O
+  ---
+  duration_ms: 0.995437
+  type: 'test'
+  ...
+# Subtest: Hub status busy lock performs no read or write
+ok 3 - Hub status busy lock performs no read or write
+  ---
+  duration_ms: 1.138332
+  type: 'test'
+  ...
+# Subtest: Hub status refuses wrong spreadsheet and stale event with no mutation
+ok 4 - Hub status refuses wrong spreadsheet and stale event with no mutation
+  ---
+  duration_ms: 1.720698
+  type: 'test'
+  ...
+# Subtest: Hub status refuses missing or ambiguous player rows in either sheet
+ok 5 - Hub status refuses missing or ambiguous player rows in either sheet
+  ---
+  duration_ms: 3.016857
+  type: 'test'
+  ...
+# Subtest: Hub status refuses changed previous status before any write
+ok 6 - Hub status refuses changed previous status before any write
+  ---
+  duration_ms: 0.687264
+  type: 'test'
+  ...
+# Subtest: Hub status refuses formulas, incompatible headers and oversized layouts
+ok 7 - Hub status refuses formulas, incompatible headers and oversized layouts
+  ---
+  duration_ms: 1.740087
+  type: 'test'
+  ...
+# Subtest: Hub status changes exactly two C cells and preserves consent messages sources and other players
+ok 8 - Hub status changes exactly two C cells and preserves consent messages sources and other players
+  ---
+  duration_ms: 0.989698
+  type: 'test'
+  ...
+# Subtest: Hub status supports sequential IN OUT STANDBY transitions with matching readback
+ok 9 - Hub status supports sequential IN OUT STANDBY transitions with matching readback
+  ---
+  duration_ms: 1.019793
+  type: 'test'
+  ...
+# Subtest: Hub status identical current status verifies without rewriting cells
+ok 10 - Hub status identical current status verifies without rewriting cells
+  ---
+  duration_ms: 0.778942
+  type: 'test'
+  ...
+# Subtest: Hub status partial write failure is uncertain, releases lock and never retries
+ok 11 - Hub status partial write failure is uncertain, releases lock and never retries
+  ---
+  duration_ms: 0.681715
+  type: 'test'
+  ...
+# Subtest: Hub status mismatch in either cell or Hub readback cannot report success
+ok 12 - Hub status mismatch in either cell or Hub readback cannot report success
+  ---
+  duration_ms: 1.344391
+  type: 'test'
+  ...
+# Subtest: Hub status UI holds pending value through refresh and clears only after verified response
+ok 13 - Hub status UI holds pending value through refresh and clears only after verified response
+  ---
+  duration_ms: 1.427406
+  type: 'test'
+  ...
+# Subtest: Hub status UI failure shows popup, clears pending, reloads truth and never retries write
+ok 14 - Hub status UI failure shows popup, clears pending, reloads truth and never retries write
+  ---
+  duration_ms: 0.861746
+  type: 'test'
+  ...
+# Subtest: Hub TEST client serializes read and status RPCs and continues after failure
+ok 15 - Hub TEST client serializes read and status RPCs and continues after failure
+  ---
+  duration_ms: 1.945496
+  type: 'test'
+  ...
+1..15
+# tests 15
+# suites 0
+# pass 15
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 108.517259

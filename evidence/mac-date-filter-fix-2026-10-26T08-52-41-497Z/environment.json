@@ -1,0 +1,8 @@
+{
+  "startedUTC": "2026-10-26T08:52:41.497Z",
+  "stockholm": "2026-10-26 09:52:41",
+  "baseline": "335369dc1f1d3b5fa9d80ccdf2241c7cab765239",
+  "node": "v22.23.2",
+  "branch": "recovery/2026-10-24",
+  "backup": "backups/date-filter-fix-before-2026-10-26T08-52-41-497Z"
+}

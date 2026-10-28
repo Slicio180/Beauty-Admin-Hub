@@ -1,0 +1,34 @@
+{
+  "recordedAt": "2026-10-25T17:35:05.631Z",
+  "sourceCheckpoint": "e3dbd16",
+  "environment": "Mac browser, dedicated Identity TEST",
+  "registration": {
+    "result": "PASS",
+    "responseRow": 160,
+    "timestamp": "25/10/2026 18:28:42",
+    "player": "Albert Lindblad",
+    "consent": "NEJ",
+    "message": "TEST-HUB-001",
+    "source": "HUB",
+    "playerCount": 6,
+    "reloadPersistence": "Confirmed by user"
+  },
+  "duplicate": {
+    "result": "PASS",
+    "rejection": "Du är redan anmäld till den här spelkvällen.",
+    "lastResponseRow": 160,
+    "playerCount": 6,
+    "originalDetails": "IN, NEJ, TEST-HUB-001, HUB unchanged"
+  },
+  "screenshots": [
+    "Screenshot 2026-10-25 at 18.26.11.png",
+    "Screenshot 2026-10-25 at 18.26.28.png",
+    "Screenshot 2026-10-25 at 18.29.08.png",
+    "Screenshot 2026-10-25 at 18.29.55.png",
+    "Screenshot 2026-10-25 at 18.31.45.png",
+    "Screenshot 2026-10-25 at 18.32.29.png",
+    "Screenshot 2026-10-25 at 18.33.34.png"
+  ],
+  "evidenceLocation": "Reviewed in chat; screenshot copies in project pending.",
+  "limitations": "Dedicated TEST only. No full workbook comparison. Hub distinct-person flow, concurrency, status writes and production readiness not qualified."
+}

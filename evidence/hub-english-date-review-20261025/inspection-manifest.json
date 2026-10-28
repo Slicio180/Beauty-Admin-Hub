@@ -1,0 +1,31 @@
+{
+  "sourceCheckpoint": "db42730",
+  "observedLocalScreenshotDate": "2026-10-25",
+  "images": [
+    {
+      "name": "20261025-193515.png",
+      "originalName": "Screenshot 2026-10-25 at 19.35.15.png",
+      "bytes": 75061,
+      "sha256": "3e758c40598cf31f638482a01d36c9e13013c027bf4dcad72dc23166f6bc8fa1"
+    },
+    {
+      "name": "20261025-193527.png",
+      "originalName": "Screenshot 2026-10-25 at 19.35.27.png",
+      "bytes": 35452,
+      "sha256": "b725f9c4411a1d652b976432027f42119c8ba85be2c9726053444782a9439610"
+    }
+  ],
+  "observed": {
+    "eventDate": "25/10/2026",
+    "lastReset": "24/10/2026 20:23",
+    "timeZone": "Europe/Berlin",
+    "players": 7,
+    "lastResponseRow": 161,
+    "deleteStatusRows": 7,
+    "retainCorrectionRows": 3,
+    "clearCellsCE": 9,
+    "retainedSourceRows": 2,
+    "saveDisabled": true
+  },
+  "limitations": "Observed prior Swedish inspection popup only; no cancel, reset or complete before/after comparison performed."
+}

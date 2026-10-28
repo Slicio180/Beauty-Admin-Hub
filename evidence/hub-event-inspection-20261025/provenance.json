@@ -1,0 +1,13 @@
+{
+  "sourceCheckpoint": "8ddc4ef",
+  "preparedAt": "2026-10-25T18:22:42.064408+00:00",
+  "node": "v24.22.1",
+  "newCases": 10,
+  "full": {
+    "pass": 212,
+    "fail": 0,
+    "skipped": 0
+  },
+  "inventory": "PASS: 212 cases across 12 files",
+  "qualification": "Local fake sheets/DOM and generated HTML only. Google inspection/cancel review pending. No event save handler or event writes."
+}

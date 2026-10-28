@@ -1,0 +1,8 @@
+{
+  "startedUTC": "2026-10-26T08:08:41.642Z",
+  "stockholm": "2026-10-26 09:08:41",
+  "baseline": "1ed7a93a7ef05ddbd7e236504f1d5cdc030dfbf2",
+  "node": "v22.23.2",
+  "branch": "recovery/2026-10-24",
+  "backup": "backups/health-menu-before-2026-10-26T08-08-41-642Z"
+}

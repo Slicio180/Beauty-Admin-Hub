@@ -1,0 +1,30 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),cp=require('node:child_process'),crypto=require('node:crypto');
+const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
+const git=args=>cp.execFileSync('git',args,{encoding:'utf8'}).trim();
+const root=process.cwd(),bundle=__dirname,m=JSON.parse(fs.readFileSync(path.join(bundle,'manifest.json')));
+const audit='docs/handoff/audit-register.md',folder='evidence/mac-hub-browser-20261025',configFile='apps-script/registration-identity-test/remote-app/PROVISIONING.json';
+if(git(['rev-parse','--show-toplevel'])!==root||git(['rev-parse','--short=7','HEAD'])!==m.sourceCheckpoint)throw Error('Run from the project root at checkpoint dfb35df. Nothing changed.');
+if(git(['diff','--name-only'])||git(['diff','--cached','--name-only']))throw Error('Tracked changes or staging found. Nothing changed.');
+const before=fs.readFileSync(audit,'utf8');
+if(!before.includes('### AUD-037')||!before.includes('### AUD-038')||/### AUD-0(?:39|40)\b/.test(before))throw Error('Audit checkpoint differs. Nothing changed.');
+const priorReview=JSON.parse(fs.readFileSync(folder+'/manual-review.json'));
+if(priorReview.sourceCheckpoint!=='e3dbd16')throw Error('Earlier browser evidence differs. Nothing changed.');
+for(const [file,expected] of Object.entries(m.sourceHashes))if(hash(fs.readFileSync(file))!==expected)throw Error('TEST source changed: '+file+'. Nothing changed.');
+const config=JSON.parse(fs.readFileSync(configFile));
+if(config.scriptId!=='1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N'||config.sheetId!=='1SIj4F8_WfWaeDVsdagRw8AoLsz0XsjhtdIn_OOxoDnU'||config.writesEnabled!==true)throw Error('TEST identity configuration differs. Nothing changed.');
+for(const file of ['screenshots','screenshot-manifest.json','same-name-review.json'])if(fs.existsSync(folder+'/'+file))throw Error('Evidence target already exists. Nothing changed.');
+const review=JSON.parse(fs.readFileSync(path.join(bundle,'manual-review.json'),'utf8'));
+if(m.images.length!==14)throw Error('Unexpected screenshot count.');
+for(const i of m.images){if(!/^20261025-\d{6}\.png$/.test(i.name))throw Error('Unexpected screenshot path.');const b=fs.readFileSync(path.join(bundle,'screenshots',i.name));if(b.subarray(0,8).toString('hex')!=='89504e470d0a1a0a'||b.length!==i.bytes||hash(b)!==i.sha256)throw Error('Screenshot verification failed: '+i.name);}
+const now=new Date().toISOString(),backup='backups/hub-browser-evidence-before-'+now.replace(/[:.]/g,'-');
+fs.mkdirSync(backup,{recursive:true});fs.copyFileSync(audit,backup+'/audit-register.md');fs.copyFileSync(configFile,backup+'/PROVISIONING.json');
+fs.mkdirSync(folder+'/screenshots');for(const i of m.images){const dst=folder+'/screenshots/'+i.name;fs.copyFileSync(path.join(bundle,'screenshots',i.name),dst);if(hash(fs.readFileSync(dst))!==i.sha256)throw Error('Copied image hash mismatch. Backup: '+backup);}
+fs.writeFileSync(folder+'/screenshot-manifest.json',JSON.stringify({recordedAt:now,sourceCheckpoint:m.sourceCheckpoint,images:m.images},null,2)+'\n',{flag:'wx'});
+fs.writeFileSync(folder+'/same-name-review.json',JSON.stringify({recordedAt:now,...review},null,2)+'\n',{flag:'wx'});
+config.updatedAt=now;config.status='Hub TEST registration and duplicate checks recorded in AUD-037–038; distinct-person raw/master/event readbacks and final seven-player display recorded in AUD-039. Fourteen screenshots preserved in AUD-040. Sequential TEST observations only; remaining qualification limits documented.';
+fs.writeFileSync(configFile,JSON.stringify(config,null,2)+'\n');
+fs.appendFileSync(audit,`\n### AUD-039\nRecorded: ${now}.\nSource build: e3dbd16; evidence checkpoint: dfb35df.\nScope: Hub TEST confirmed distinct-person registration with same-name detail.\nExpected: one separate response/master/event player; preserve original.\nActual: PASS for observed sequential TEST storage and display. Response row 161,\n25/10/2026 18:36:34: Albert Lindblad (Hubtest), JA, TEST-HUB-002., HUB.\nMaster rows 3/4 store original and distinct names separately; event list has seven\nplayers. Original Albert remains IN, NEJ, TEST-HUB-001, HUB; row 160 unchanged.\nFinal screenshots supplied after requested reload check show seven players and both\nAlberts. Reload action was not separately confirmed in text for this check.\nEvidence: ${folder}/same-name-review.json and screenshot-manifest.json.\nQualification: dedicated TEST observations only; no full workbook comparison,\nconcurrency, status-write, shared-computer login or production qualification.\n\n### AUD-040\nRecorded: ${now}.\nScope: preserve fourteen screenshots supporting Hub TEST connection and AUD-037–039.\nActual: 14 files present; PNG signatures, byte sizes and SHA-256 hashes checked.\nOriginal names mapped to stored names in ${folder}/screenshot-manifest.json.\nPrior AUD-037–038 screenshot-copy requirement resolved. Earlier manual-review.json\npreserved unchanged; this entry supersedes its historical pending-copy note.\nBackup: ${backup}.\nNo application source change, new runtime test, Google operation or deployment\nperformed by this evidence installer. TEST provisioning status metadata updated only.\n`);
+git(['add','--',audit,configFile,folder+'/screenshots',folder+'/screenshot-manifest.json',folder+'/same-name-review.json']);
+cp.execFileSync('git',['commit','-m','Preserve Hub TEST screenshots and record distinct-person registration'],{stdio:'inherit'});
+console.log('14 screenshots verified and saved; AUD-039–040 recorded and committed.');console.log('Backup: '+backup);console.log('Application source and Google apps unchanged.');

@@ -1,0 +1,29 @@
+{
+  "audit": "AUD-086",
+  "recordedUTC": "2026-10-26T15:15:10.080Z",
+  "stockholm": "2026-10-26 16:15:10",
+  "baseline": "c2d395bc36b26043dd52b4ae5cd474ed80e0e4b5",
+  "environment": "Identity TEST only",
+  "result": "PASS",
+  "hubDate": "2026-10-26",
+  "matchedEventId": "t_qJH9_0995",
+  "matchedTitle": "AIK MÅNDAGSDARTARNA 2026-10-26",
+  "dateMatch": "PASS — screenshot 16.10.49",
+  "eventLink": "PASS — owner confirmation and screenshot 16.12.25 show expected tournament, competition date 26/10/2026 19:00",
+  "scope": "Read-only matching and event link only. No Nakka players changed or synchronized.",
+  "automatedBaseline": {
+    "tests": 307,
+    "pass": 307,
+    "fail": 0,
+    "source": "AUD-085 Mac result 2026-10-26T15:00:43.218Z",
+    "rerun": false,
+    "reason": "Evidence-only checkpoint"
+  },
+  "limitations": [
+    "Native no-match and multiple-match UI cases not exercised; covered locally",
+    "Player-list comparison and synchronization remain pending",
+    "Native idle timeout and completed password reset remain pending"
+  ],
+  "secrets": "No credential, session token or join password recorded",
+  "production": "UNCHANGED"
+}

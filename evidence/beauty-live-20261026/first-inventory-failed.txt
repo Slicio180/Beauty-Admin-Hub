@@ -1,0 +1,149 @@
+node:assert:152
+  throw new AssertionError(obj);
+  ^
+
+AssertionError [ERR_ASSERTION]: tests/hub-english-date-review.test.cjs
+TAP version 13
+# Subtest: Date review accepts real calendar dates and rejects impossible or malformed dates
+ok 1 - Date review accepts real calendar dates and rejects impossible or malformed dates
+  ---
+  duration_ms: 1.692645
+  type: 'test'
+  ...
+# Subtest: Date review requires loaded unblocked baseline and acknowledgement checkbox
+ok 2 - Date review requires loaded unblocked baseline and acknowledgement checkbox
+  ---
+  duration_ms: 0.233278
+  type: 'test'
+  ...
+# Subtest: Date review cannot proceed for unchanged event date
+ok 3 - Date review cannot proceed for unchanged event date
+  ---
+  duration_ms: 0.182475
+  type: 'test'
+  ...
+# Subtest: English Event Control requires a changed date and checkbox without typed confirmation
+ok 4 - English Event Control requires a changed date and checkbox without typed confirmation
+  ---
+  duration_ms: 4.07739
+  type: 'test'
+  ...
+# Subtest: Changing the proposed date clears checkbox and previous popup review
+ok 5 - Changing the proposed date clears checkbox and previous popup review
+  ---
+  duration_ms: 2.710808
+  type: 'test'
+  ...
+# Subtest: Final confirmation popup cannot save and cancellation requires acknowledgement again
+ok 6 - Final confirmation popup cannot save and cancellation requires acknowledgement again
+  ---
+  duration_ms: 1.689409
+  type: 'test'
+  ...
+# Subtest: Closing and reopening Event Control clears all date-change confirmation state
+ok 7 - Closing and reopening Event Control clears all date-change confirmation state
+  ---
+  duration_ms: 1.61978
+  type: 'test'
+  ...
+# Subtest: Event Control Details sidebar holds technical reset information outside the main control form
+ok 8 - Event Control Details sidebar holds technical reset information outside the main control form
+  ---
+  duration_ms: 2.552839
+  type: 'test'
+  ...
+# Subtest: Unresolved Event Control Details blockers prevent date review
+ok 9 - Unresolved Event Control Details blockers prevent date review
+  ---
+  duration_ms: 1.159636
+  type: 'test'
+  ...
+# Subtest: English Hub identity files reproduce from Swedish originals without changing identity decisions
+ok 10 - English Hub identity files reproduce from Swedish originals without changing identity decisions
+  ---
+  duration_ms: 91.865919
+  type: 'test'
+  ...
+# Subtest: Hub consent badges display YES and NO while canonical Swedish data remains unchanged
+ok 11 - Hub consent badges display YES and NO while canonical Swedish data remains unchanged
+  ---
+  duration_ms: 3.565813
+  type: 'test'
+  ...
+# Subtest: English Hub transport localizes structured backend errors but preserves player-authored data
+ok 12 - English Hub transport localizes structured backend errors but preserves player-authored data
+  ---
+  duration_ms: 2.17337
+  type: 'test'
+  ...
+# Subtest: Remote kiosk and qualified status sources remain byte-for-byte unchanged
+not ok 13 - Remote kiosk and qualified status sources remain byte-for-byte unchanged
+  ---
+  duration_ms: 3.038124
+  type: 'test'
+  location: '/workspace/scratch/d22120bec644/beauty-source/tests/hub-english-date-review.test.cjs:29:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    apps-script/registration-identity-test/remote-app/Code.js
+    + actual - expected
+    
+    + 'eed3b4d17132627b40ebbb830c212e7e26c54b5915844131eb73faaf8ad2947d'
+    - '5df507b98a1f6a0447d6889f500a6a7b73036c5c0deda5be8cb84818721f5809'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '5df507b98a1f6a0447d6889f500a6a7b73036c5c0deda5be8cb84818721f5809'
+  actual: 'eed3b4d17132627b40ebbb830c212e7e26c54b5915844131eb73faaf8ad2947d'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/workspace/scratch/d22120bec644/beauty-source/tests/hub-english-date-review.test.cjs:29:280)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: All Hub entrypoints select English and expose Event Control Details with English consent and registration controls
+ok 14 - All Hub entrypoints select English and expose Event Control Details with English consent and registration controls
+  ---
+  duration_ms: 0.679481
+  type: 'test'
+  ...
+# Subtest: Offline English Event Control inspection is fictional read-only data with no player mutation
+ok 15 - Offline English Event Control inspection is fictional read-only data with no player mutation
+  ---
+  duration_ms: 1.869514
+  type: 'test'
+  ...
+1..15
+# tests 15
+# suites 0
+# pass 14
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 246.270705
+
+
+
+1 !== 0
+
+    at Object.<anonymous> (/workspace/scratch/d22120bec644/beauty-source/scripts/check-test-inventory.cjs:26:10)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.22.1

@@ -1,0 +1,8 @@
+{
+  "startedUTC": "2026-10-25T23:48:29.652Z",
+  "stockholm": "2026-10-26 00:48:29",
+  "baseline": "03730ee61b5ce0e318bf1f4d00b3bcfd45d08b09",
+  "node": "v22.23.2",
+  "branch": "recovery/2026-10-24",
+  "backup": "backups/beauty-live-header-before-2026-10-25T23-48-29-652Z"
+}

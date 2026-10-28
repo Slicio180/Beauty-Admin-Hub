@@ -1,0 +1,37 @@
+[
+  {
+    "path": "scripts/build-hub-test.cjs",
+    "before": "50ee7cbcc63c6eb8c503cbb5ca5943411c412ce40242288b2fb5fb11726eb818",
+    "after": "929d2903cc22996b294358d9e1320f9d3de6a9921a2d9e765fb5034bfd49f3b9"
+  },
+  {
+    "path": "public/css/login.css",
+    "before": "1d20421ca254b2de81bb2ab1b4f3f95a8bfebd90a2fe98858f9124374d2209ce",
+    "after": "cb95c804b8b955c6b8b028138633ecf416b038161bc1805ee4a51e7dce3697a1"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "6949640af30b896fa8f40cd9ec49fdafa452577d2af27c9f56004140ae393a89",
+    "after": "bf0583598a8d66a853861bd8a8d7c285e02a1adf25ff9dfa3f893e962479e62f"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTestAuth.gs",
+    "before": "908a8a6c59828402b9afd9378c97f0cf19df4dcc1f2b413021f73fa1727b7d06",
+    "after": "fb17ce7e13d2e5db190022e097d09f097e1cd2c177369a6bb4fddd0d283ac890"
+  },
+  {
+    "path": "tests/hub-auth.test.cjs",
+    "before": "263a2930d5e4339292abbb93772308130879b6f8c0c894cc3ce8434822539c72",
+    "after": "99e56ef1b6cc732b10a39bc01c259b12c5dade014878955ba99ad7af9cd58232"
+  },
+  {
+    "path": "evidence/hub-sidebar-20261026/tests.txt",
+    "before": null,
+    "after": "97f025cc50280ecce0a09f89fbb4ec74ce6c63acf400c39f91607d859e44e0d6"
+  },
+  {
+    "path": "evidence/hub-sidebar-20261026/acceptance.md",
+    "before": null,
+    "after": "6efaf78c4c6271d31ae4192483b573fe5ca392e5c0efb65fedeab1509f3612c7"
+  }
+]

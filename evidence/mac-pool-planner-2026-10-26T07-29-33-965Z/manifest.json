@@ -1,0 +1,102 @@
+[
+  {
+    "path": "tests/pool-planner.test.cjs",
+    "before": null,
+    "after": "6fb5823b6e9dd06e66a47c8e5353c99b3ff4192c00e653a03fa74e6d85b32a34"
+  },
+  {
+    "path": "tests/hub-english-date-review.test.cjs",
+    "before": "4c311ff0693fefca55deead47ea09e00b144e929dc6045a26d1007f4b48a6f83",
+    "after": "2b3051e12095c180b1e30e153d50e00394961500d64cde2f957c23b355232efa"
+  },
+  {
+    "path": "tests/hub-test-connection.test.cjs",
+    "before": "9c1520464cbba03f1b6c396c27756e1739b81f34ab2fc7d402eff6e42fd186cd",
+    "after": "95d47a9080bb0bc134c62f1e75e362dbdad9a6dfa3fbd0450e10b7fc36063157"
+  },
+  {
+    "path": "scripts/build-hub-test.cjs",
+    "before": "440cb995914c3f2e9b576075a6d47b8c3d355d1fddb58c76a8ea851832b71619",
+    "after": "60a876909f2ebd3cafadc5bff553220c43396d32e1897ee44778fc6ea672ade2"
+  },
+  {
+    "path": "public/index.html",
+    "before": "82b063ea2aee96510e318c85e84924da7dc0aecdcaa6b0ec22b0934376a4c025",
+    "after": "7710a9f89ffac726a75340c9b44e3dbd6bcb33086bff97db903a32565e3c53eb"
+  },
+  {
+    "path": "public/preview.html",
+    "before": "27c22bd918e3b16f70b1a4459e5cac2a3f1295813fc38a91bc8d60e77625b266",
+    "after": "1c8172e49abea6b06324f80339fe2e968bc92a477c88f35bd21232577710e0a3"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "bd2697106e40e9aa76b0981ed6cb72e07aa3c7921506f378a0bb838f4ace18f1",
+    "after": "6ae0f9830b14c673c18310dffc78c6543729ff41460c225094264b7d1f85cae4"
+  },
+  {
+    "path": "evidence/pool-planner-20261026/planner.tap",
+    "before": null,
+    "after": "7d751209ad2c07d1e3b55fcccecf53f64c404861abccbca522bf412a8e489058"
+  },
+  {
+    "path": "evidence/pool-planner-20261026/regression.tap",
+    "before": null,
+    "after": "765c40fd54deccf270d9578987ede76af278b0e53b7a79327fe71cadeaf1a12b"
+  },
+  {
+    "path": "evidence/pool-planner-20261026/inventory.txt",
+    "before": null,
+    "after": "13f982b3e7310561c6e39f25cd598b4038fdc003f609ade3b9ce77483de87c4c"
+  },
+  {
+    "path": "evidence/pool-planner-20261026/regression-final.tap",
+    "before": null,
+    "after": "526e70ec5e0970019ca229d4728074f7f5601223b56caf18d7ce8185bb78b3bc"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "3eb4e099eac964e34f37fce705482cec040e2f7bbc5722255f40e2200c4a88f5",
+    "after": "27d971bd9eb868975d410704ca4c5af36ab13b22f95f12dc4fd9bc5f70aeb860"
+  },
+  {
+    "path": "docs/handoff/coverage.md",
+    "before": "d5910561f1c761571de7f2d21dbb2333d5f649ecefe0ed97febde36c3002c863",
+    "after": "8c1f461bd5e884e268409b210899f87746aa814784ed6e4bfe08853fa98a7c32"
+  },
+  {
+    "path": "docs/handoff/POOL-PLANNER-20261026.md",
+    "before": null,
+    "after": "9b6f5cfdd51138a988653a1a7c053e7bb67f5bc8df1075e1df7765e2d513684f"
+  },
+  {
+    "path": "docs/handoff/requirements.json",
+    "before": "0e4ef677e8a3a7daae5e467bcc289f837964d5b58da7ce1a4f821b76a29cc9b8",
+    "after": "164db06fda4ed78b3d62be67e3a7ab74de26cb098052ae045e1cdff19fa5c405"
+  },
+  {
+    "path": "tests/fixtures/pool-scheme.json",
+    "before": null,
+    "after": "1975a564ef026a481e03ee47fc53ab3373a3bc96416c6b0b4d34bf187e946f3f"
+  },
+  {
+    "path": "public/js/pool-planner.js",
+    "before": null,
+    "after": "b76e20007a4216b0692185359757692551d5e84da9cfec00523c5c4562ebbefa"
+  },
+  {
+    "path": "public/js/app.js",
+    "before": "4946791e9391e5934f09e72f1c8fab7d3b8ed0ec02e1669ca2ad29f212903ded",
+    "after": "cacc297c41596e780c7e5c922fe616e5713f529a17e271e710d69010d5c079f6"
+  },
+  {
+    "path": "public/assets/pool-scheme.xlsx",
+    "before": null,
+    "after": "2e15093ec3c87973331225d4086298c58456fe0c447a4c9edc53b7a7e8081b55"
+  },
+  {
+    "path": "public/css/pool-planner.css",
+    "before": null,
+    "after": "c1e4b1ea354f57d615e23d56fd5833f8c2b7d499e78ffb7ad63dd8beb8c41835"
+  }
+]

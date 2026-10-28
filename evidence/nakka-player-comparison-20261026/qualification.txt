@@ -1,0 +1,1 @@
+Read-only comparison; isolated fixtures only. Native player list response pending. Name equality is not permanent identity proof.

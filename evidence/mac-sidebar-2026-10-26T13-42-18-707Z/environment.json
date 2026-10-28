@@ -1,0 +1,8 @@
+{
+  "startedUTC": "2026-10-26T13:42:18.707Z",
+  "stockholm": "2026-10-26 14:42:18",
+  "baseline": "b513ae29edbc0804d5da292e56e4b7ecd68c1c21",
+  "node": "v22.23.2",
+  "branch": "recovery/2026-10-24",
+  "backup": "backups/sidebar-before-2026-10-26T13-42-18-707Z"
+}

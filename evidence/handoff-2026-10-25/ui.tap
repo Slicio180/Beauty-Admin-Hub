@@ -1,0 +1,118 @@
+TAP version 13
+# Subtest: initial UI check calls only the read-only endpoint with an abort signal
+ok 1 - initial UI check calls only the read-only endpoint with an abort signal
+  ---
+  duration_ms: 22.936713
+  type: 'test'
+  ...
+# Subtest: UI renders OK with a clear indicator and checked time
+ok 2 - UI renders OK with a clear indicator and checked time
+  ---
+  duration_ms: 2.056853
+  type: 'test'
+  ...
+# Subtest: UI renders DEGRADED with a clear indicator and checked time
+ok 3 - UI renders DEGRADED with a clear indicator and checked time
+  ---
+  duration_ms: 1.597999
+  type: 'test'
+  ...
+# Subtest: UI renders UNAVAILABLE with a clear indicator and checked time
+ok 4 - UI renders UNAVAILABLE with a clear indicator and checked time
+  ---
+  duration_ms: 1.114392
+  type: 'test'
+  ...
+# Subtest: UI handles HTTP failure without exposing raw errors
+ok 5 - UI handles HTTP failure without exposing raw errors
+  ---
+  duration_ms: 1.644504
+  type: 'test'
+  ...
+# Subtest: UI handles network failure without exposing raw errors
+ok 6 - UI handles network failure without exposing raw errors
+  ---
+  duration_ms: 1.135926
+  type: 'test'
+  ...
+# Subtest: UI handles invalid JSON without exposing raw errors
+ok 7 - UI handles invalid JSON without exposing raw errors
+  ---
+  duration_ms: 2.197376
+  type: 'test'
+  ...
+# Subtest: UI handles null response without exposing raw errors
+ok 8 - UI handles null response without exposing raw errors
+  ---
+  duration_ms: 1.895681
+  type: 'test'
+  ...
+# Subtest: UI handles unknown status without exposing raw errors
+ok 9 - UI handles unknown status without exposing raw errors
+  ---
+  duration_ms: 1.397162
+  type: 'test'
+  ...
+# Subtest: UI handles blank message without exposing raw errors
+ok 10 - UI handles blank message without exposing raw errors
+  ---
+  duration_ms: 1.264013
+  type: 'test'
+  ...
+# Subtest: UI handles invalid timestamp without exposing raw errors
+ok 11 - UI handles invalid timestamp without exposing raw errors
+  ---
+  duration_ms: 1.212179
+  type: 'test'
+  ...
+# Subtest: UI aborts after 15 seconds and can recover on a later manual refresh
+ok 12 - UI aborts after 15 seconds and can recover on a later manual refresh
+  ---
+  duration_ms: 1.677431
+  type: 'test'
+  ...
+# Subtest: manual refresh is limited to once per minute and resets the old OK indicator
+ok 13 - manual refresh is limited to once per minute and resets the old OK indicator
+  ---
+  duration_ms: 2.361735
+  type: 'test'
+  ...
+# Subtest: automatic refresh uses five minutes, independent of Beauty polling
+ok 14 - automatic refresh uses five minutes, independent of Beauty polling
+  ---
+  duration_ms: 2.651067
+  type: 'test'
+  ...
+# Subtest: an unresolved request does not overlap manual or scheduled requests
+ok 15 - an unresolved request does not overlap manual or scheduled requests
+  ---
+  duration_ms: 1.142835
+  type: 'test'
+  ...
+# Subtest: hidden tabs skip polling and check overdue health when visible again
+ok 16 - hidden tabs skip polling and check overdue health when visible again
+  ---
+  duration_ms: 3.482374
+  type: 'test'
+  ...
+# Subtest: a tab initially hidden waits until it becomes visible
+ok 17 - a tab initially hidden waits until it becomes visible
+  ---
+  duration_ms: 1.045974
+  type: 'test'
+  ...
+# Subtest: missing health markup does not affect the rest of the Hub
+ok 18 - missing health markup does not affect the rest of the Hub
+  ---
+  duration_ms: 0.981289
+  type: 'test'
+  ...
+1..18
+# tests 18
+# suites 0
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 183.712435

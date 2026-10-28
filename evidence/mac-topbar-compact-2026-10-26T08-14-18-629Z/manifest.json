@@ -1,0 +1,27 @@
+[
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "6d801f7b05c88981a15ed10956af7f3f847f9b5066ca5c5b3238c20fbc7e5f48",
+    "after": "ead7096f2bde7c0ae4cc84610bc5d6accb617460ba0aa48becb4bb03f932f730"
+  },
+  {
+    "path": "evidence/topbar-compact-20261026/regression.tap",
+    "before": null,
+    "after": "704ff628addc13b7c53975f106669f2e1b9ad3032481ad1f0e6746df0e19a968"
+  },
+  {
+    "path": "evidence/topbar-compact-20261026/inventory.txt",
+    "before": null,
+    "after": "3d196672e1e9558c59a42d2b76adb81febc3288cc041c5c4137f94748c23877d"
+  },
+  {
+    "path": "docs/handoff/TOPBAR-COMPACT-20261026.md",
+    "before": null,
+    "after": "58adf892a1e3e01071504df6bdf578dbc785d806f4203779976d24cbc3070479"
+  },
+  {
+    "path": "public/css/style.css",
+    "before": "20c06d3b7040a5618d9c3363a1c3ce0d90f85fb8ec0bdebb8b710ad643d6ec0f",
+    "after": "0f6e9145dcfd6d0d8674ecd05543443a9d6bb2ebb2b859432c99998ba893f494"
+  }
+]

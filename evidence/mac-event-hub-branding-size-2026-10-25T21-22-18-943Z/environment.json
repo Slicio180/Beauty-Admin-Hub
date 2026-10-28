@@ -1,0 +1,8 @@
+{
+  "recordedAt": "2026-10-25T21:22:18.943Z",
+  "node": "v22.23.2",
+  "platform": "darwin",
+  "sourceCheckpoint": "64976db",
+  "backup": "backups/event-hub-branding-size-before-2026-10-25T21-22-18-943Z",
+  "qualification": "Local automated tests only; no Google operation"
+}

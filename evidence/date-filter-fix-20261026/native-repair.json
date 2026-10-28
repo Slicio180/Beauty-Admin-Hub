@@ -1,0 +1,56 @@
+{
+  "recordedUTC": "2026-10-26T08:47:57.179Z",
+  "scope": "Identity TEST only",
+  "sourceCheckpoint": "335369d",
+  "backupPrefix": "BKP-20261026-094215-63fa2fcb",
+  "originalOutcome": "SAVE_UNCERTAIN after Control date/reset and status-store writes; target membership absent",
+  "rootCause": "TONIGHT'S PLAYERS A2 filtered timestamps >= Control B2 (last reset), excluding a pre-registered target-day player",
+  "beforeFormula": "=IFERROR(SORT(UNIQUE(FILTER({IF('Form responses 2'!B2:B=\"MITT NAMN FINNS INTE I LISTAN\",'Form responses 2'!C2:C,'Form responses 2'!B2:B),IF('Form responses 2'!B2:B=\"MITT NAMN FINNS INTE I LISTAN\",'Form responses 2'!C2:C,\"\")},IF('Form responses 2'!B2:B=\"MITT NAMN FINNS INTE I LISTAN\",'Form responses 2'!C2:C,'Form responses 2'!B2:B)<>\"\",'Form responses 2'!A2:A>=Control!B2,'Form responses 2'!A2:A<Control!A2+1)),1,TRUE),\"\")",
+  "afterFormula": "=IFERROR(SORT(UNIQUE(FILTER({IF('Form responses 2'!B2:B=\"MITT NAMN FINNS INTE I LISTAN\",'Form responses 2'!C2:C,'Form responses 2'!B2:B),IF('Form responses 2'!B2:B=\"MITT NAMN FINNS INTE I LISTAN\",'Form responses 2'!C2:C,\"\")},IF('Form responses 2'!B2:B=\"MITT NAMN FINNS INTE I LISTAN\",'Form responses 2'!C2:C,'Form responses 2'!B2:B)<>\"\",'Form responses 2'!A2:A>=Control!A2,'Form responses 2'!A2:A<Control!A2+1)),1,TRUE),\"\")",
+  "nativeRepair": {
+    "spreadsheetId": "1SIj4F8_WfWaeDVsdagRw8AoLsz0XsjhtdIn_OOxoDnU",
+    "sheetId": 727917158,
+    "changes": [
+      "A2 lower bound Control!B2 -> Control!A2",
+      "C2 set IN for sole verified target registration"
+    ],
+    "result": "APPLIED"
+  },
+  "preservation": {
+    "masterMatchesBackup": true,
+    "registrationHistoryMatchesBackup": true,
+    "controlDateAndResetUnchangedByRepair": true
+  },
+  "readback": {
+    "tonight": [
+      [
+        "PLAYERS",
+        "NEW PLAYERS",
+        "STATUS",
+        "FOTO&VIDEO",
+        "MEDDELANDE",
+        "WHERE FROM"
+      ],
+      [
+        "Jonathan Niemi",
+        null,
+        "IN",
+        "JA",
+        "kjkjlsdnsdpiouiobåwu¨cwut9¨woppo ü¨w. uqadnknovkavnä ääjgjkdkfjj ko ksnk haoiäahfvns'kioarg. aiohioy.",
+        "HUB"
+      ]
+    ],
+    "control": [
+      [
+        "START DATE",
+        "LAST RESET"
+      ],
+      [
+        "26/10/2026",
+        "26/10/2026 09:42"
+      ]
+    ]
+  },
+  "limitations": "Native data readback verified; owner Hub screenshot and subsequent date-change acceptance pending. Original failed save remains failed; this is a separate bounded repair, not a retry or full release qualification."
+}
+

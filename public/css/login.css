@@ -1,0 +1,17 @@
+.login-page{display:grid;place-items:center;padding:28px 16px;min-height:100dvh;background:radial-gradient(ellipse at top,#292617,#080808 65%)}
+.login-card{width:100%;max-width:460px;background:#111;border:1px solid #38352b;border-top:3px solid #ffd700;border-radius:14px;padding:30px 36px;box-shadow:0 24px 70px #0008}
+.login-logo{display:block;width:80px;height:80px;object-fit:contain;margin:0 auto 16px}.login-brand{text-align:center;font-weight:700;letter-spacing:2px;color:#ffd700;font-size:17px;margin:12px 0 28px}
+.login-card h1{font-size:34px;margin:0 0 8px}.login-intro{color:#bbb;margin:0 0 24px;font-size:19px}.login-card label{display:block;margin:18px 0 8px;font-size:19px}.login-card input{width:100%;min-height:48px;border:1px solid #626262;border-radius:6px;padding:10px 12px;background:#080808;color:white;font:20px Arial,sans-serif}
+.password-field{display:flex;gap:8px}.password-field input{min-width:0}.password-field button{padding:8px 12px;background:#222;color:#ffd700;border:1px solid #626262;border-radius:6px;min-width:64px}
+.login-card button{cursor:pointer}.login-card button:disabled{opacity:.6;cursor:wait}.login-card :focus-visible{outline:3px solid #ffd700;outline-offset:3px}
+.login-primary,.login-secondary{display:block;width:100%;padding:13px 16px;min-height:48px;border:0;border-radius:6px;font-size:21px;font-weight:700;margin-top:24px}.login-primary{background:#ffd700;color:#080808}.login-secondary{background:#292929;color:white;border:1px solid #666}.login-link{padding:12px 0;margin-top:8px;background:transparent;color:#ffd700;border:0;font-size:18px;text-decoration:underline}
+.login-note,.login-setup{font:14px/1.5 Arial,sans-serif;color:#aaa}.login-setup{padding-top:18px;border-top:1px solid #333;font-size:12px}.login-card [hidden]{display:none!important}#loginMessage{font:16px/1.5 Arial,sans-serif;overflow-wrap:anywhere;color:#ffd700}.login-card input:disabled{opacity:.6}@media(max-width:480px){.login-card{padding:24px}.login-card h1{font-size:30px}}
+
+/* The login is present before scripts run, so an unsigned Hub never flashes. */
+body.beauty-auth-locked{display:grid;place-items:center;padding:24px 16px;min-height:100dvh}
+body.beauty-auth-locked> :not(#beautyAuthSurface){display:none!important}
+#beautyAuthSurface{display:none}
+body.beauty-auth-locked>#beautyAuthSurface{display:block}
+.hub-account-controls{display:flex;flex-direction:column;align-items:stretch;gap:10px;margin-top:12px;padding:16px;border-top:1px solid #303030;font-size:16px;min-width:0}
+.hub-account-controls span{font:14px/1.4 Arial,sans-serif;color:#bbb;overflow-wrap:anywhere}
+#hubSignOut{border:1px solid #ffd700;border-radius:5px;background:#111;color:#ffd700;padding:8px 12px;font-size:17px}

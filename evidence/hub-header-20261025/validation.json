@@ -1,0 +1,17 @@
+{
+  "sourceCheckpoint": "b8fde18",
+  "originalLogoHashes": {
+    "aik-dart-yellow.png": "4902c2deadea2aba8bbef766f825264ac54a6211854dc9fec1a2150a1a3785cc",
+    "aik-mandagsdartarna.png": "1e8b727623ce805a05e500e72de4011002e178c93014ce153cac091e864e851c"
+  },
+  "checks": {
+    "bothEntrypointsHeaderAndEventRowOrder": "PASS",
+    "systemDotMovedToSidebarAndLabelledNotChecked": "PASS",
+    "playerCountRightAlignmentAndLargerType": "CSS verified; browser rendering pending",
+    "bothOriginalLogosEmbeddedInGeneratedTestHTML": "PASS",
+    "suppliedEventLogoMatchesExistingAssetByteForByte": "PASS",
+    "fullRegression": "227 PASS / 0 FAIL / 0 skipped",
+    "inventory": "PASS"
+  },
+  "limitations": "Source structure and local regression only. Mac execution and browser visual review pending. No backend changes or Google operations."
+}

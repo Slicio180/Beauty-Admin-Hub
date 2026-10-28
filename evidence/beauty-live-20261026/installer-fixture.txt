@@ -1,0 +1,44 @@
+Isolated fixture rehearsal PASS. Fixture baseline commit substituted only in temporary installer copy; production package still requires 8f230ff.
+# tests 236
+# pass 236
+# fail 0
+# cancelled 0
+# skipped 0
+{
+  "finishedUTC": "2026-10-25T23:15:32.661Z",
+  "builds": [
+    {
+      "exit": 0,
+      "signal": null,
+      "error": null
+    },
+    {
+      "exit": 0,
+      "signal": null,
+      "error": null
+    }
+  ],
+  "tests": {
+    "exit": 0,
+    "signal": null,
+    "error": null
+  },
+  "inventory": {
+    "exit": 0,
+    "signal": null,
+    "error": null
+  },
+  "generatedHTMLUnchanged": true,
+  "generatedHashes": {
+    "apps-script/registration-identity-test/remote-app/HubTest.html": "bd2697106e40e9aa76b0981ed6cb72e07aa3c7921506f378a0bb838f4ace18f1",
+    "apps-script/registration-identity-test/remote-app/BeautyLiveTest.html": "d68538c08d57174ab0810586c3d76d7cc0e22fcf55e2855707dca3e3c787a92a"
+  },
+  "result": "PASS",
+  "googleUpload": "PENDING",
+  "browserReview": "PENDING",
+  "nakka": "NOT CONNECTED"
+}
+Backup: backups/beauty-live-before-2026-10-25T23-15-23-028Z
+Evidence: evidence/mac-beauty-live-2026-10-25T23-15-23-028Z
+Git checkpoint: edc533d Add Swedish Beauty Live TEST screen and AUD-066
+Local block complete. Google TEST upload and browser review remain pending.

@@ -1,0 +1,8 @@
+{
+  "startedUTC": "2026-10-26T07:29:33.965Z",
+  "stockholm": "2026-10-26 08:29:33",
+  "baseline": "3d5269e8a4ff48d07d043b31cc06d504e82073cd",
+  "node": "v22.23.2",
+  "branch": "recovery/2026-10-24",
+  "backup": "backups/pool-planner-before-2026-10-26T07-29-33-965Z"
+}

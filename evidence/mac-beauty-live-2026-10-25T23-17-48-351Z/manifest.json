@@ -1,0 +1,112 @@
+[
+  {
+    "path": "apps-script/registration-identity-test/remote-app/BeautyLiveTest.gs",
+    "before": null,
+    "after": "493f2bdfe31ecd40f2b71ae57e509a8230feb6bc1025be2fd2f5b2d0c1f30bb6"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/BeautyLiveTest.html",
+    "before": null,
+    "after": "d68538c08d57174ab0810586c3d76d7cc0e22fcf55e2855707dca3e3c787a92a"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/Code.js",
+    "before": "5df507b98a1f6a0447d6889f500a6a7b73036c5c0deda5be8cb84818721f5809",
+    "after": "eed3b4d17132627b40ebbb830c212e7e26c54b5915844131eb73faaf8ad2947d"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "1f0d6b0b9b3000a74b1ff97c3e3c112539d55485de383b23d0f6c572c5df1ac0",
+    "after": "bd2697106e40e9aa76b0981ed6cb72e07aa3c7921506f378a0bb838f4ace18f1"
+  },
+  {
+    "path": "docs/handoff/requirements.json",
+    "before": "75fe873e905e9e63c5422373e90cfcc57bec4f6e7c76f583909bcbc4aa635a82",
+    "after": "0e4ef677e8a3a7daae5e467bcc289f837964d5b58da7ce1a4f821b76a29cc9b8"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "a589092b65d79f1cee9ea06c0b35769848bbca7e295c4e1eaae9d87a0a18a405",
+    "after": "3453aa3f773a2ff1d624a5e0381bf65f6ce33795ac1a09fc974f3c48fcb6f156"
+  },
+  {
+    "path": "docs/testing/BEAUTY-LIVE-20261026.md",
+    "before": null,
+    "after": "b8afaade102669017b2868e693eeaac63fdb12528ca273a4fdb317669261ab66"
+  },
+  {
+    "path": "evidence/beauty-live-20261026/first-inventory-failed.txt",
+    "before": null,
+    "after": "fa82e9b20baac9f53f4993cf7ce81f5236582c67516e4599e05b77c90e0c8b1e"
+  },
+  {
+    "path": "evidence/beauty-live-20261026/first-regression-failed.tap",
+    "before": null,
+    "after": "ce4d9682b2796eb0fb969ea23c308e4cf58e4280f5023c6ad5122ce61be878ab"
+  },
+  {
+    "path": "evidence/beauty-live-20261026/full-regression.tap",
+    "before": null,
+    "after": "150fca1fa66d6fe13bdf0cf57a8e93a47945e8826d8a27fa811423294c271659"
+  },
+  {
+    "path": "evidence/beauty-live-20261026/inventory.txt",
+    "before": null,
+    "after": "5c2557c905ae9c65b919249a2deaaefd6823f4316ff5b0459e24b954622640cc"
+  },
+  {
+    "path": "evidence/beauty-live-20261026/new-tests.tap",
+    "before": null,
+    "after": "6f49a13cceb66cb265109020cddaca957e73df41efa3769b045432c416448277"
+  },
+  {
+    "path": "evidence/beauty-live-20261026/preparation.json",
+    "before": null,
+    "after": "346f802294eca80519f57e1b1f459f67a5dca28412af96411ce6dd0c1b7ce59b"
+  },
+  {
+    "path": "public/beauty-live.html",
+    "before": null,
+    "after": "1a2d90c5cdbab9fc1a53684f61e1a9beeb861447660a73274a5cd6cc2420bfc5"
+  },
+  {
+    "path": "public/css/beauty-live.css",
+    "before": null,
+    "after": "a3b594141b97e7beeea6d095041e5c3e99d71a3224b329c1665986a370016479"
+  },
+  {
+    "path": "public/js/beauty-live-model.js",
+    "before": null,
+    "after": "40e043c785ad602715e133a8b3a27366c0ed24455a6c37f44c1f65180bcc3b44"
+  },
+  {
+    "path": "public/js/beauty-live.js",
+    "before": null,
+    "after": "f6b06e2316429f352a1efcf8fd2cc1ff24a084ce35d7f19523b48e6a3521d60a"
+  },
+  {
+    "path": "public/js/hub-test-services.js",
+    "before": "8ce6f4e188f4c7c8e3d299c72c0f77f5cddac435d1e939f3563f7e36d73e892a",
+    "after": "3321028a6bc27d369894bf1d6c025a860c9f65eadde7aa3969f4f746d4630f1e"
+  },
+  {
+    "path": "scripts/build-beauty-live.cjs",
+    "before": null,
+    "after": "6336c175b095cd0b89fbc1867f29a5e1c1be6acda7919513933054eddc0b53c0"
+  },
+  {
+    "path": "tests/beauty-live.test.cjs",
+    "before": null,
+    "after": "075ad44da635ed6be74217cee805c299796ac130fd263f3da61bf81320d7a312"
+  },
+  {
+    "path": "tests/hub-english-date-review.test.cjs",
+    "before": "5da49e087180846a0bb2ac644aab98fe955d6fdfb13c66436eeac09c9529fac5",
+    "after": "4c311ff0693fefca55deead47ea09e00b144e929dc6045a26d1007f4b48a6f83"
+  },
+  {
+    "path": "evidence/beauty-live-20261026/installer-fixture.txt",
+    "before": null,
+    "after": "f527a3d3d6b703ba9e929d29918f89aa6d81ce7944b2e3dc4e1e81894d89d762"
+  }
+]

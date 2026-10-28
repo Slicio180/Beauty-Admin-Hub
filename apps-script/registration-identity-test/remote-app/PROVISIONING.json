@@ -1,0 +1,19 @@
+{
+  "recordedAt": "2026-10-25T15:37:13.177Z",
+  "scriptId": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "sheetId": "1SIj4F8_WfWaeDVsdagRw8AoLsz0XsjhtdIn_OOxoDnU",
+  "writesEnabled": true,
+  "hashes": {
+    "Code.js": "5df507b98a1f6a0447d6889f500a6a7b73036c5c0deda5be8cb84818721f5809",
+    "RemoteRegistration.html": "66669c0021a21bd1da2e3d701f2d2394631ed4f105b74c8560f14e32039cab6f",
+    "appsscript.json": "79be7290ba2429617d5b5fbdef27b4e828cbb35acb8ccaa424dec796bc7ea0f5",
+    "HubTestBridge.gs": "795f6aa39b6f4db20ebe4d0999aaa19e0766a5b396a7754e78719c443c1a95ca",
+    "HubTest.html": "9f8dc2cbefbb58b2aba7315b7d92990a0461ea827c8e81ad12954e7f4b0fc8cb",
+    "HubTestStatus.gs": "14a07d45b75b775bd33299777afaf845fd604ed0ae8e01abb9638ab10ae86906",
+    "HubTestEventPreview.gs": "105af71cdac3fb4c70594942ccabcae4a3d6c47d39c4272a2a198e6c4c4371d6"
+  },
+  "status": "Larger operational Hub text prepared locally from 565d11f; original AIK fonts/assets and backend unchanged. Google HTML upload and browser readability review pending.",
+  "updatedAt": "2026-10-25T21:44:40.448Z",
+  "statusWritesEnabled": true,
+  "eventWritesEnabled": false
+}

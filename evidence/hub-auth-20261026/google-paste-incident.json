@@ -1,0 +1,12 @@
+{
+  "symptom": "JavaScript tail displayed below Hub",
+  "testedHTMLSHA256": "b521ad5cc164b3f169280b79868253739675aa6f5cdc0cc9e6f42131a22a778a",
+  "googleMalformedSource": {
+    "file": "Pasted text(20261026-104449).txt",
+    "sha256": "dadc2508f04ed80f233f425b52ea5b5045f0e277e4089d218a7e8420bcf16bd0"
+  },
+  "diagnosis": "Duplicated HTML plus trailing JavaScript after closing html",
+  "resolution": "User confirmed fixed after emptying Google editor and replacing complete tested HTML",
+  "applicationChanges": "NONE",
+  "nativeSavedSourceReadback": "Not independently obtained after repair"
+}

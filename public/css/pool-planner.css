@@ -1,0 +1,8 @@
+.pool-planner{background:#111;color:#fff;border:2px solid #ffd700;border-radius:14px;width:min(760px,90vw);max-height:85vh;overflow:auto;padding:28px;font:inherit;font-size:22px}
+.pool-planner::backdrop{background:rgba(0,0,0,.75)}
+.pool-planner h2,.pool-planner h3,.pool-planner a{color:#ffd700}
+.pool-planner h2{margin-top:0}.pool-planner h3{font-size:24px;margin-bottom:8px}
+.pool-planner label{display:inline-flex;flex-direction:column;gap:8px;margin:12px 20px 12px 0}
+.pool-planner input,.pool-planner select{font:inherit;background:#222;color:#fff;border:1px solid #aaa;padding:10px;width:200px;max-width:100%;box-sizing:border-box}
+.pool-planner .pool-close{float:right;background:#ffd700;color:#000;font:inherit;font-size:28px;border:0;padding:2px 14px;cursor:pointer}
+.pool-planner p{line-height:1.4}.pool-planner :focus-visible{outline:3px solid #ffd700;outline-offset:3px}

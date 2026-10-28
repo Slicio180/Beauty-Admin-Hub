@@ -1,0 +1,72 @@
+[
+  {
+    "path": "tests/event-save.test.cjs",
+    "before": "f961be0f31cc3180c8927752377ba461c1ea2d21e29548f4f0d11afcc85da45b",
+    "after": "b39b026ddf243646d8b88892d70a10b7fd0f160f2be39243f0ff5697f6b32271"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTestEventSave.gs",
+    "before": "23d35fe890ef9853cf899440fbfe4cb116fb419034d083683f5df65314457af5",
+    "after": "ec98f73260122b8b84ca0b571bff81ef6418e2c6611a036e7f6d629f5df29995"
+  },
+  {
+    "path": "evidence/date-filter-fix-20261026/native-repair.json",
+    "before": null,
+    "after": "bfe350a92f9cc5fb859dc0d0853e0a6746fce9b6cb93d8ac4581f7cb289f0e84"
+  },
+  {
+    "path": "evidence/date-filter-fix-20261026/guard-before.tap",
+    "before": null,
+    "after": "ca51628285e0c32ac0cabb500499146faa339287ce36e70cbc517096bcc7e057"
+  },
+  {
+    "path": "evidence/date-filter-fix-20261026/inventory.txt",
+    "before": null,
+    "after": "bb031c53c1de60940482e6f2221952da66774ef9e2aaa49cb9e843156c1d8714"
+  },
+  {
+    "path": "evidence/date-filter-fix-20261026/regression-final.tap",
+    "before": null,
+    "after": "e5a9f7c9e0c11cc88baf5db79519e84e6975b14065e305426743f01c7dabd02c"
+  },
+  {
+    "path": "evidence/date-filter-fix-20261026/screenshot-manifest.json",
+    "before": null,
+    "after": "acd6b5530419c13d532c77176c3f3dfb58b0e3f3ae8667b5d27b2d298107ab76"
+  },
+  {
+    "path": "evidence/date-filter-fix-20261026/screenshots/Screenshot 2026-10-26 at 09.42.37.png",
+    "before": null,
+    "after": "5b1621e2ebf5377fd6fdc63049b08d849c51233e3b12700bbc46bcfd7b510c96"
+  },
+  {
+    "path": "evidence/date-filter-fix-20261026/screenshots/Screenshot 2026-10-26 at 09.43.27.png",
+    "before": null,
+    "after": "c60592210b9b177be4e1da36977f5da14b977b3e494f8f42fa60dddceeee7be2"
+  },
+  {
+    "path": "evidence/date-filter-fix-20261026/screenshots/Screenshot 2026-10-26 at 09.41.28.png",
+    "before": null,
+    "after": "f3de9625ace9fe720eab8c9d2ad64e0ad2d575db03d23bf2954e125150ab2737"
+  },
+  {
+    "path": "docs/handoff/DATE-FILTER-REPAIR-20261026.md",
+    "before": null,
+    "after": "058d6a0177d207a162fad8e017222e09ded1e933ada77dd404b7b18ee6a3dad3"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "5474e2cfe24fcf022b274bad0fb10948ee8868e28abf3d53e59cbba4dfdad67d",
+    "after": "5dcaeff289ab130cd1e3e390155609f97f5887af2e5417a6160652f2009b1c9f"
+  },
+  {
+    "path": "docs/handoff/coverage.md",
+    "before": "5248d22903da90894ae76fc2e8f7735d94ea0cdba09b1edda5057066304d377c",
+    "after": "4eb68958be4879098b9bcfde4e1dc3a3ea6c8f4a345230183b6895da802da4eb"
+  },
+  {
+    "path": "tests/fixtures/tonight-event-formula.json",
+    "before": null,
+    "after": "6b95590e24a7d005726ee2c3d747342e1f6e4bb31e058e74ff7f0b3a444dddc5"
+  }
+]

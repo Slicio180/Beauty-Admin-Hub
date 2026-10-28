@@ -1,0 +1,52 @@
+TAP version 13
+# Subtest: TEST Hub data adapter is pinned to isolated sheet
+ok 1 - TEST Hub data adapter is pinned to isolated sheet
+  ---
+  duration_ms: 2.048097
+  type: 'test'
+  ...
+# Subtest: TEST Hub data adapter contains no write API
+ok 2 - TEST Hub data adapter contains no write API
+  ---
+  duration_ms: 0.625611
+  type: 'test'
+  ...
+# Subtest: TEST Hub data adapter reads bounded ranges only
+ok 3 - TEST Hub data adapter reads bounded ranges only
+  ---
+  duration_ms: 0.714235
+  type: 'test'
+  ...
+# Subtest: Route exposes read-only TEST Hub RPC
+ok 4 - Route exposes read-only TEST Hub RPC
+  ---
+  duration_ms: 0.197056
+  type: 'test'
+  ...
+# Subtest: Hub routes hubdata through TEST RPC
+ok 5 - Hub routes hubdata through TEST RPC
+  ---
+  duration_ms: 1.691593
+  type: 'test'
+  ...
+# Subtest: TEST status dropdown remains disabled
+ok 6 - TEST status dropdown remains disabled
+  ---
+  duration_ms: 2.485304
+  type: 'test'
+  ...
+# Subtest: Event Control write gate remains closed
+ok 7 - Event Control write gate remains closed
+  ---
+  duration_ms: 0.450618
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 138.870185

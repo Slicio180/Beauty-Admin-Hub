@@ -1,0 +1,117 @@
+[
+  {
+    "path": "tests/event-save.test.cjs",
+    "before": null,
+    "after": "f961be0f31cc3180c8927752377ba461c1ea2d21e29548f4f0d11afcc85da45b"
+  },
+  {
+    "path": "tests/hub-english-date-review.test.cjs",
+    "before": "d3e6179a75cc152743d1bbc52ce46a23667896e94bf13c3daed5a74b620058da",
+    "after": "d299b5ef2bc076f2a79f5fcc5763ff429bcbd938b353aef69b719cc5d2044f10"
+  },
+  {
+    "path": "scripts/build-hub-test.cjs",
+    "before": "ed8ba19a12b18b82bc7c9a10a052a6ed5c47c9ecb7958c65e14bd3d57503b18b",
+    "after": "20e9cd50591459a77f18536f172c6fe11b3bd5ed7894f86ddf00c7528e3ba35b"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTestEventSave.gs",
+    "before": null,
+    "after": "23d35fe890ef9853cf899440fbfe4cb116fb419034d083683f5df65314457af5"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "ead7096f2bde7c0ae4cc84610bc5d6accb617460ba0aa48becb4bb03f932f730",
+    "after": "ea3e2506bd8077a9eee3244a9f34c9b118e16eb267fa7a90c5c86338ce95ff83"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTestBridge.gs",
+    "before": "795f6aa39b6f4db20ebe4d0999aaa19e0766a5b396a7754e78719c443c1a95ca",
+    "after": "8bccd2d2d26309918ab047255913b7b6d2ed3f56c2e066e328219b661e84a5c7"
+  },
+  {
+    "path": "evidence/event-save-20261026/regression.tap",
+    "before": null,
+    "after": "26f5437a58f50b55cfd5221b02373b8a92d16f7f455aff1fba84f7837d7d6fa9"
+  },
+  {
+    "path": "evidence/event-save-20261026/inventory.txt",
+    "before": null,
+    "after": "9fd0004387da721eed30f68a6178e7070083ea7d5998864711afe4380c12cfec"
+  },
+  {
+    "path": "evidence/event-save-20261026/regression-final.tap",
+    "before": null,
+    "after": "019abe1f0c7dbead84fe3861a75ff9bc167fb430e58b4a85ee2284cb03e52d29"
+  },
+  {
+    "path": "evidence/event-save-20261026/initial.tap",
+    "before": null,
+    "after": "2ac136a74f5ba014c196a10188c5ebcb9749883f4b0e67ee65cc972bfdec340d"
+  },
+  {
+    "path": "evidence/event-save-20261026/browser-context.json",
+    "before": null,
+    "after": "78293caa86aae8121e396ef46faee04431a2696a386b608edeec4bec87eaef8a"
+  },
+  {
+    "path": "evidence/event-save-20261026/event.tap",
+    "before": null,
+    "after": "dee86d1c827c2d81ecaf36908b9b0491f8907cde023a12b520c2f0e5ea5e0c11"
+  },
+  {
+    "path": "evidence/event-save-20261026/before-browser/Screenshot 2026-10-26 at 09.19.07.png",
+    "before": null,
+    "after": "ec3048ae0359431abbc6243302291ce8f2564f76d60bf42878cd5f0e1eb00ad6"
+  },
+  {
+    "path": "evidence/event-save-20261026/before-browser/Screenshot 2026-10-26 at 09.18.46.png",
+    "before": null,
+    "after": "8f94c74798022ae9931735902977ddb8e79ae2e6645d012fd22e269eecfeb1af"
+  },
+  {
+    "path": "evidence/event-save-20261026/before-browser/Screenshot 2026-10-26 at 09.18.31.png",
+    "before": null,
+    "after": "9f958cba3a3c442ec227de7ab072484c187d7f8d6a093edd2061c80e7c5e5694"
+  },
+  {
+    "path": "evidence/event-save-20261026/before-browser/Screenshot 2026-10-26 at 09.19.53.png",
+    "before": null,
+    "after": "0e4e077f2e69f3da73be7aac1b5853b497ab1a48157d48485396cd3530a3d41d"
+  },
+  {
+    "path": "evidence/event-save-20261026/before-browser/Screenshot 2026-10-26 at 09.16.19.png",
+    "before": null,
+    "after": "af3e55fb8481527bf29975f7bacbd5afdec437cc8b1fb6af738dc8cccb05e70f"
+  },
+  {
+    "path": "evidence/event-save-20261026/before-browser/Screenshot 2026-10-26 at 09.20.46.png",
+    "before": null,
+    "after": "a0b24794c56d3c76d109518a5db24696a2b8c654760f6491739ff464014b7011"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "29bc201b3d5f1ce664cc4be268971847660354ed9d81d2683f617079aab62631",
+    "after": "5474e2cfe24fcf022b274bad0fb10948ee8868e28abf3d53e59cbba4dfdad67d"
+  },
+  {
+    "path": "docs/handoff/coverage.md",
+    "before": "ea190665e1fe907db348765678e2150e9db347a7f068ddb606a4e3ab78223a76",
+    "after": "5248d22903da90894ae76fc2e8f7735d94ea0cdba09b1edda5057066304d377c"
+  },
+  {
+    "path": "docs/handoff/EVENT-SAVE-20261026.md",
+    "before": null,
+    "after": "baf519bd20774c04633c3c99636650e1df68eb21c358bbc5fccc7d80b54490f9"
+  },
+  {
+    "path": "public/js/hub-test-services.js",
+    "before": "3321028a6bc27d369894bf1d6c025a860c9f65eadde7aa3969f4f746d4630f1e",
+    "after": "7d9215ec8cdddadb046cb4206cb99d964c988214bf9c4ccf667fed98f78a5dec"
+  },
+  {
+    "path": "public/js/hub-test-event-control.js",
+    "before": "1838bb4a106a9f81d69f24b0c2a495f22aae192ef544a57872e34b39cb95ff9a",
+    "after": "a7e9f9c61d58cac92f6a00b59ebb6974b229e8d9e35ef4b53068fd571b581407"
+  }
+]

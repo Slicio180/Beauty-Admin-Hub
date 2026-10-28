@@ -1,0 +1,72 @@
+[
+  {
+    "path": "scripts/build-hub-test.cjs",
+    "before": "d8bc261048774787669d07ea30055a7904080622f184973a5985d62ff8c3057e",
+    "after": "ab1cffe8628bc8d810c61d333ca0f1cac65bdcb2edbdf4b6d39fa8c93e4a0925"
+  },
+  {
+    "path": "public/js/hub-test-services.js",
+    "before": "aa82dffc21fd50bc4cedca8f4ed0b9c49b869a1edd3bd34a43ac6f365ab59d13",
+    "after": "abd1a8754cabde44dfa06b401dc14d6235fb2889ecb0ea2c767af766cc93eadc"
+  },
+  {
+    "path": "public/js/hub-nakka-event.js",
+    "before": "303c7ef547d0a84db02e787f2ac358b49e18c9f73a6d6e967e16ab6cb61b454f",
+    "after": "e3a40068487956fd151aa917dd20cbb7718518b4d5408f56e64efd174741199b"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTestBridge.gs",
+    "before": "2f41f099b5092d69846ca3d0ec87c7b94b0299ce727ec7d0b7044b1017de2eec",
+    "after": "958075fd44402acd230061b4b17575e9a7b4190dcb5c4a6daae9acd23cf00cfc"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTestNakkaEvent.gs",
+    "before": "184eda489129e20b8509fe57a8ffd851a0647dd8dd5da2f951464b32545a74cf",
+    "after": "86b444b0a1d1a83524edafc3ae695f1a361e4fb5f02f84b41a43c1a10b1301f1"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "7930212ed4b2faf08bd1a9f024142e298ddb789d74092d9e7ed6f0a7b7cb9e89",
+    "after": "f1d781b5ecdb30f65a1c3827bfdc949e7e745b29cea8c78bc327e428bab268cd"
+  },
+  {
+    "path": "tests/hub-auth.test.cjs",
+    "before": "ca7be08eb7a5ab20c64fa895a6c39587e4f5ddbe60f3c88eb64299534388683d",
+    "after": "3e7d93e0028fcd63ac271c83c9b573b6ce5463ccf2a5e67db0d8dbf32099309e"
+  },
+  {
+    "path": "tests/hub-nakka-event.test.cjs",
+    "before": "ecd77c695c65a712db973d32d445e2922319c44acb752fd99cf1e3940798bc51",
+    "after": "d7ddb61c97bacd4132192b7eb7c21ca693ed5940232de928010847b84f52422c"
+  },
+  {
+    "path": "tests/hub-nakka-compare.test.cjs",
+    "before": null,
+    "after": "de689a47cabf1c1675ce5155dcace085b8cf689abee7e3a78d9c9c38f98ac485"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "19a7fa4e05fa0d463cd7f05c6db8248dcb7e04e8432f23b54d845542e6650a69",
+    "after": "d2c2a74d2bf5036da440714aa261b40ab6927012bb7798d95ea1f25eda1d15db"
+  },
+  {
+    "path": "evidence/nakka-player-comparison-20261026/scope.md",
+    "before": null,
+    "after": "2335f555d113dcf3111e9f4132c215d645095e655942c8b15f46599c11481945"
+  },
+  {
+    "path": "evidence/nakka-player-comparison-20261026/qualification.txt",
+    "before": null,
+    "after": "e9805d23422870a16244c5a326f02b167f3968ccaeb7c416276bd0754d51e907"
+  },
+  {
+    "path": "evidence/nakka-player-comparison-20261026/initial-tests.txt",
+    "before": null,
+    "after": "26bab8c4715128952b2549552b06c9ba482bf2958f44c730bbbb76f53fc58243"
+  },
+  {
+    "path": "evidence/nakka-player-comparison-20261026/tests.txt",
+    "before": null,
+    "after": "a416d8a5ce5718ae2540a6220d49ea5c00b5c1c2782fe83017eb463d4a0526b7"
+  }
+]
