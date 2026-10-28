@@ -1,0 +1,81 @@
+{
+  "owner_baseline": "72d0b68",
+  "provider_mutations": 0,
+  "files": [
+    {
+      "path": "apps-script/registration-identity-test/remote-app/BeautyLiveTest.gs",
+      "sha256": "ab15cd9698b4c2fa238f951546314f3ad3a42ae9b93736609ad820bfeda0fd0e",
+      "byte_identical": true
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/Code.js",
+      "sha256": "9c346b687f8bbc9637162eb6ad797275cddbdf6b1e5ca5808fc1fda3f0280861",
+      "byte_identical": true
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTestAttention.gs",
+      "sha256": "169ced3e2fb640287a83835d7271ceb4109eae3aa920b7867ce99ce4820ba457",
+      "byte_identical": true
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTestAuth.gs",
+      "sha256": "fb17ce7e13d2e5db190022e097d09f097e1cd2c177369a6bb4fddd0d283ac890",
+      "byte_identical": true
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTestAutoRegister.gs",
+      "sha256": "1fae6e76d11624573886cb0292159dcc701918025cbd12d9a9160ed3fd593931",
+      "byte_identical": true
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTestBridge.gs",
+      "sha256": "88369f696f86b164f4340437c58276a6f1d9611d8e7eb05ba44a92c804534f2c",
+      "byte_identical": true
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTestEventPreview.gs",
+      "sha256": "105af71cdac3fb4c70594942ccabcae4a3d6c47d39c4272a2a198e6c4c4371d6",
+      "byte_identical": true
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTestEventSave.gs",
+      "sha256": "7ee30e2636d275be0bcddc0197a5442f6ab039d893117faff94a2d050189347a",
+      "byte_identical": true
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTestNakkaEvent.gs",
+      "sha256": "0a14b31047442f9b7277345412099fb47656e3ae4116da30573593661f37813d",
+      "byte_identical": true
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTestNakkaTransfer.gs",
+      "sha256": "8a0babcbf7704d5cf1da22f19d425ea97b22ff7d520c1a33543d504f807c447a",
+      "byte_identical": true
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTestPools.gs",
+      "sha256": "2eeef515cf758aaf034b7eded2151b74fb738f92a3319e5338e71accc4c133d6",
+      "byte_identical": true
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTestRemove.gs",
+      "sha256": "a2496bfa0d4504f4e7ba250cbc0ad4c07d46f7947be28de3014d5ed294ac22e6",
+      "byte_identical": true
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTestStatus.gs",
+      "sha256": "77d9ce35d5abc6f0b885c32c55da99ee60bac8b919b13c3e5b23e3ce1372655e",
+      "byte_identical": true
+    },
+    {
+      "path": "public/js/pool-seeding.js",
+      "sha256": "b3a3ef13a20c9fa4b4348a97897dd32b8ccfe946184ab6d4b479b7a569a2870a",
+      "byte_identical": true
+    },
+    {
+      "path": "server/pool-service.js",
+      "sha256": "54a5c342a62d61f27c3980d81d55b4b94b1bac8c5c7813db882d2516fd3b9d80",
+      "byte_identical": true
+    }
+  ]
+}

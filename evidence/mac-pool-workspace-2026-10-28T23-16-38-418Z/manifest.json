@@ -1,0 +1,67 @@
+[
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "6f03b3891bcafb4e886f8a987fa6e730a462edc75afcf95eb8238ecf9d59ed53",
+    "after": "d54152cbf59ab54a8a19d8f3eac7355f129d3a587b30de5423d8599c0e30f4a3"
+  },
+  {
+    "path": "docs/handoff/pool-workspace-20261028.md",
+    "before": null,
+    "after": "5971fffe92adad89e96bca178c453625ecbc9b05291d766a53e5e4e85513fb43"
+  },
+  {
+    "path": "docs/handoff/requirements.json",
+    "before": "102d01a8010cbd2e9d6206c255030519c39bea148a141832a5827af2873f6848",
+    "after": "1740bd8bd743212a51581bdf234b8dd8909b5cfe809038c41969aadfff39a8f3"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "549c86e4576e2dcac4bc99b839884e96fca6d4bd62fb30d0922fdaf35ed9c8a8",
+    "after": "9829cc7995402a3bc8421d585c2c88f344c7af3de6181a6a9929c93a000e945c"
+  },
+  {
+    "path": "evidence/pool-workspace-20261028/all-tests.txt",
+    "before": null,
+    "after": "b1c9579c341fc254f3d653375dd8593f4ba53abebf28263af0a9bdb69353380c"
+  },
+  {
+    "path": "evidence/pool-workspace-20261028/engine-preservation.json",
+    "before": null,
+    "after": "990324e5e9df27a82a77d3ca8efbbdadc2aec8c0078453fe2d9348d92d2cbee0"
+  },
+  {
+    "path": "evidence/pool-workspace-20261028/inventory.txt",
+    "before": null,
+    "after": "4a5e58de89ab16657303b110b35092b77c2b2cbb02c0619836011c0dbd54ba26"
+  },
+  {
+    "path": "evidence/pool-workspace-20261028/ui-tests.tap",
+    "before": null,
+    "after": "91891792d945e047c30d3d0f884f341ae1d5684868953465392fd51bac4d463c"
+  },
+  {
+    "path": "public/css/beauty-dashboard.css",
+    "before": "f0a9d6a75eba7ba5aad4eccdfa39f904e71c4a5feb168a0fcc605419662b84a8",
+    "after": "1abd31f61832af0ab234725bb1e00459ad7e4f7b15bbc237875cf8d5ffc73087"
+  },
+  {
+    "path": "public/js/pool-planner-seeded.js",
+    "before": "dc6bffb59bf129e45b0ed95e9f4d57fccb7e2b368d9576a2ad29cb8d797324cd",
+    "after": "776cb13cbcb08fa8339a82352eab80fdcaee7c4646c4d5c201f2066562a38054"
+  },
+  {
+    "path": "public/js/pool-planner.js",
+    "before": "684eb4af047b426de728f9627f3c2db18dd6e0b9241600b55723e7f078614964",
+    "after": "93acb6d63602904546d5e8a9e012854d89653f3354a4344e7701e9cbf670a4be"
+  },
+  {
+    "path": "scripts/build-hub-test.cjs",
+    "before": "7e505e294511cf2c141849ba9f4ce94678dcc87683d968900efa50ce0e88305b",
+    "after": "a04e25fdea68eb78d51ac34abde1428c484f3db1a390b8c26a7ddd3e2df28766"
+  },
+  {
+    "path": "tests/pool-planner-seeded-ui.test.cjs",
+    "before": "4ad5ea02aa1733ca0166ec596e3c62614f73d042cfe4a8d2906936abbb61cc85",
+    "after": "1fdd877ff8ba25503fc64a9f0fc627a6da25801c8c158557dfad425aa87e81ee"
+  }
+]

@@ -57,6 +57,6 @@ html = html.replace(/<script src="js\/([^"]+)"[^>]*><\/script>/g, (_, file) => {
   }
   return '<script>\n' + js.replace(/<\/script/gi, '<\\/script') + '\n</script>';
 });
-html = html.replace('assets/pool-scheme.html', 'data:text/html;base64,' + fs.readFileSync(path.join(root, 'public/assets/pool-scheme.html')).toString('base64'));
+html = html.replaceAll('assets/pool-scheme.html', 'data:text/html;base64,' + fs.readFileSync(path.join(root, 'public/assets/pool-scheme.html')).toString('base64'));
 fs.writeFileSync(path.join(root, 'apps-script/registration-identity-test/remote-app/HubTest.html'), html);
 console.log('Generated HubTest.html from shared Hub UI, AIK assets and TEST bridge.');

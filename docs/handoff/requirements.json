@@ -281,5 +281,13 @@
     "source": "Existing Pool Planner To Do; owner approved evenly spreading unknown averages on 28 October 2026",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "acceptance": "Original 5–101 scheme, overall score/darts weighted three-dart average by reviewed LPID, separate points, retained last-good/stale state, no invented zero, exact membership/capacity, expiring session-bound frozen draw, manual swaps and strength coverage, roster invalidation, fixed pre-start TEST only, full settings/entries preservation, CAS group update, native round-robin fixture generation, durable audit before POST, full readback, no automatic retries after uncertain send. Production and JDC untouched."
+  },
+  {
+    "id": "POOL-WORKSPACE-001",
+    "requirement": "Approved professional full-page Pool Planner layout with practical setup/review/preview/handoff workflow",
+    "priority": "High",
+    "source": "Owner approved AIK Event Hub pool planner mockup28Oct2026",
+    "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
+    "acceptance": "Main-page sidebar workspace, 3/4 preference, board layout/count/batches, advanced hypothetical estimate and original scheme, grouped freshness and identity review, fixed separate name/average columns with wrapping, frozen pool mean/coverage, optional editable bands, isolated swaps and explicit Nakka approval. Preserve backend/core/fonts and guard stale settings/roster/session."
   }
 ]

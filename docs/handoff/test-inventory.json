@@ -6482,5 +6482,83 @@
     "origin": "Owner Pool Planner To Do, 28 October 2026",
     "evidence": "evidence/pool-display-fix-20261028/ui-tests.tap",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
+  },
+  {
+    "id": "POOL-WORKSPACE-001",
+    "file": "tests/pool-planner-seeded-ui.test.cjs",
+    "name": "pool approved workspace opens as one main-page section and sidebar navigation closes it without RPC",
+    "requirement": "POOL-WORKSPACE-001",
+    "kind": "Executable DOM/service interaction",
+    "purpose": "Approved full-page pool workspace preserves reviewed engine flow and session/identity guards",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL TESTS; NATIVE VISUAL REVIEW PENDING",
+    "origin": "Owner approved mockup28Oct2026",
+    "evidence": "evidence/pool-workspace-20261028/ui-tests.tap",
+    "limitations": "Synthetic DOM has no layout engine. Native viewport/typography checks remain pending."
+  },
+  {
+    "id": "POOL-WORKSPACE-002",
+    "file": "tests/pool-planner-seeded-ui.test.cjs",
+    "name": "pool workspace board and size changes invalidate an approved frozen draw without silently redrawing",
+    "requirement": "POOL-WORKSPACE-001",
+    "kind": "Executable DOM/service interaction",
+    "purpose": "Approved full-page pool workspace preserves reviewed engine flow and session/identity guards",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL TESTS; NATIVE VISUAL REVIEW PENDING",
+    "origin": "Owner approved mockup28Oct2026",
+    "evidence": "evidence/pool-workspace-20261028/ui-tests.tap",
+    "limitations": "Synthetic DOM has no layout engine. Native viewport/typography checks remain pending."
+  },
+  {
+    "id": "POOL-WORKSPACE-003",
+    "file": "tests/pool-planner-seeded-ui.test.cjs",
+    "name": "pool workspace advanced hypothetical count is isolated from actual roster and handoff approval",
+    "requirement": "POOL-WORKSPACE-001",
+    "kind": "Executable DOM/service interaction",
+    "purpose": "Approved full-page pool workspace preserves reviewed engine flow and session/identity guards",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL TESTS; NATIVE VISUAL REVIEW PENDING",
+    "origin": "Owner approved mockup28Oct2026",
+    "evidence": "evidence/pool-workspace-20261028/ui-tests.tap",
+    "limitations": "Synthetic DOM has no layout engine. Native viewport/typography checks remain pending."
+  },
+  {
+    "id": "POOL-WORKSPACE-004",
+    "file": "tests/pool-planner-seeded-ui.test.cjs",
+    "name": "pool workspace disables Nakka handoff for unresolved identities but preserves planning and swap controls",
+    "requirement": "POOL-WORKSPACE-001",
+    "kind": "Executable DOM/service interaction",
+    "purpose": "Approved full-page pool workspace preserves reviewed engine flow and session/identity guards",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL TESTS; NATIVE VISUAL REVIEW PENDING",
+    "origin": "Owner approved mockup28Oct2026",
+    "evidence": "evidence/pool-workspace-20261028/ui-tests.tap",
+    "limitations": "Synthetic DOM has no layout engine. Native viewport/typography checks remain pending."
+  },
+  {
+    "id": "POOL-WORKSPACE-005",
+    "file": "tests/pool-planner-seeded-ui.test.cjs",
+    "name": "pool workspace colour bands only alter preview presentation and retain frozen values without RPC",
+    "requirement": "POOL-WORKSPACE-001",
+    "kind": "Executable DOM/service interaction",
+    "purpose": "Approved full-page pool workspace preserves reviewed engine flow and session/identity guards",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL TESTS; NATIVE VISUAL REVIEW PENDING",
+    "origin": "Owner approved mockup28Oct2026",
+    "evidence": "evidence/pool-workspace-20261028/ui-tests.tap",
+    "limitations": "Synthetic DOM has no layout engine. Native viewport/typography checks remain pending."
+  },
+  {
+    "id": "POOL-WORKSPACE-006",
+    "file": "tests/pool-planner-seeded-ui.test.cjs",
+    "name": "pool workspace unavailable Hub data blocks generating and clears handoff approval until a new draw",
+    "requirement": "POOL-WORKSPACE-001",
+    "kind": "Executable DOM/service interaction",
+    "purpose": "Approved full-page pool workspace preserves reviewed engine flow and session/identity guards",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL TESTS; NATIVE VISUAL REVIEW PENDING",
+    "origin": "Owner approved mockup28Oct2026",
+    "evidence": "evidence/pool-workspace-20261028/ui-tests.tap",
+    "limitations": "Synthetic DOM has no layout engine. Native viewport/typography checks remain pending."
   }
 ]

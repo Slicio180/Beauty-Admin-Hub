@@ -57,6 +57,7 @@
   document.addEventListener('DOMContentLoaded',()=>{
     const button=document.getElementById('poolPlannerButton');if(!button)return;
     button.addEventListener('click',()=>{
+      if(root.BeautySeededPoolUI?.open?.(button))return;
       if(dialog){dialog.showModal();root.BeautyHubNavigation?.activate(button);render();return;}
       dialog=el('dialog');dialog.className='pool-planner';dialog.setAttribute('aria-labelledby','poolPlannerTitle');
       const close=el('button','×');close.className='pool-close';close.setAttribute('aria-label','Close Pool Planner');close.addEventListener('click',()=>{if(!root.BeautySeededPoolUI?.isBusy())dialog.close();});
