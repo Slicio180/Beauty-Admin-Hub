@@ -17,6 +17,7 @@ function beautyHubTest(action, input, token) {
   if (action === 'eventload') return Object.assign({}, beautyHubTestEventPreview_(input), {
     eventSavingEnabled: typeof BEAUTY_HUB_EVENT_WRITES_ENABLED_ !== 'undefined' && BEAUTY_HUB_EVENT_WRITES_ENABLED_ === true
   });
+  if (action === 'removepreview' || action === 'removesave') return beautyHubRemove_(action === 'removepreview' ? 'preview' : 'save', input);
   if (action === 'attentionrefresh') return beautyHubAttentionRefresh_(input);
   if (action === 'nakkacompare') return beautyHubNakkaCompare_(input);
   if (action === 'nakkatransferpreview' || action === 'nakkatransfersave') return beautyHubNakkaTransfer_(action === 'nakkatransferpreview' ? 'preview' : 'save', input);

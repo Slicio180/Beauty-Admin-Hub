@@ -203,7 +203,7 @@
     "id": "POOL-001",
     "requirement": "Read-only event Pool Planner using IN count, preferred size and board capacity, with original scheme download",
     "priority": "Normal",
-    "acceptance": "Exact supplied 5\u2013101 arrangements; explain board sharing and one-pool-per-board alternatives; no backend writes; stale event data blocks recommendations."
+    "acceptance": "Exact supplied 5–101 arrangements; explain board sharing and one-pool-per-board alternatives; no backend writes; stale event data blocks recommendations."
   },
   {
     "id": "NAKKATRANSFER-001",
@@ -257,5 +257,13 @@
     "source": "Owner code approval 28 October 2026 after supplying exact SVG and sponsor-free PNG",
     "evidenceLabel": "LOCAL VERIFIED; OWNER INSTALL/GOOGLE/NATIVE PENDING",
     "acceptance": "Use original logos and AIK font, bind title to selected Nakka event through authenticated read, reject stale/missing matches, one moving nav indicator, retain existing guarded event controls/details, preserve public form RPC/source/date/identity/consent and return behavior, consistent fine yellow controls and reachable closes. No production/API write or permission change."
+  },
+  {
+    "id": "HUB-REMOVE-001",
+    "requirement": "Owner-only TEST reviewed player removal preserves league identity and other registrations; AIK numeric typography and status colours",
+    "priority": "Critical",
+    "evidenceLabel": "LOCAL TESTS",
+    "source": "Owner 28 October 2026: Hub and Nakka event removal, AIK Siffror, orange STANDBY",
+    "acceptance": "Authenticated one-use preview bound to event, session and snapshot; exact event tpid; pre-start and no bracket placement; immutable backup and durable attempt marker; verify Nakka before clearing registration; no automatic retry; league/master profiles retained; native review pending."
   }
 ]

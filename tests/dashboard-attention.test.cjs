@@ -13,6 +13,15 @@ function fixture(o={}){
  h.context.beautyHubNakkaEvent_=()=>({status:'MATCHED',eventDate:h.state.date,event:{id:h.state.event.tdid,title:h.state.event.title}});
  return {...h,refresh:()=>h.context.beautyHubAttentionRefresh_({}),read:()=>h.context.beautyHubAttentionRead_({eventDate:h.state.date,players:h.state.hub.map(p=>({player:p.name,status:p.status}))})};
 }
+test('Verified removal clears its existing attention record without deleting provider journals',()=>{
+ const h=fixture();h.context.beautyHubAttentionRemember_('Anna',h.state.date,{code:'MISSING_EVENT_ENTRY'});
+ h.context.beautyHubAttentionRemember_('Anna',h.state.date,{success:true,readbackVerified:true,status:'REMOVED'});
+ assert.equal(h.read().items.length,0);assert.equal(h.posts().length,0);
+});
+test('Uncertain removal retains organiser attention through read-only refresh even when event entry is present',()=>{
+ const h=fixture({state:{entries:[{name:'Anna',tpid:'b123',lpid:'a123'}]}});h.context.beautyHubAttentionRemember_('Anna',h.state.date,{code:'REMOVE_UNCERTAIN'});
+ const r=h.refresh();assert.equal(r.success,true);assert.equal(r.attention.items[0].code,'REMOVE_REVIEW_REQUIRED');assert.equal(h.posts().length,0);
+});
 test('Attention persists across server invocations and isolates dates without leaking credentials',()=>{
  const h=fixture();assert.equal(h.context.beautyHubAttentionRemember_('Anna',h.state.date,{code:'TRANSFER_BUSY'}),true);
  const copy=fixture();for(const [k,v]of h.props)copy.props.set(k,v);

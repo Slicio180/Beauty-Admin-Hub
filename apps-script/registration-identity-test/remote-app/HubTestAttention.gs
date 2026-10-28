@@ -10,7 +10,7 @@ function beautyHubAttentionRemember_(name,date,result) {
   try {
     beautyHubTestGuard_();
     if(typeof name!=='string'||!name.trim()||name.length>120||!/^20\d\d-\d\d-\d\d$/.test(date))return false;
-    const confirmed=result?.entryConfirmed===true||(result?.success===true&&result.readbackVerified===true&&['ALREADY_PRESENT','TRANSFERRED','ENTRY_VERIFIED_LINK_UNEXPOSED','PRESENT_AFTER_ATTEMPT'].includes(result.status));
+    const confirmed=result?.entryConfirmed===true||(result?.success===true&&result.readbackVerified===true&&['ALREADY_PRESENT','TRANSFERRED','ENTRY_VERIFIED_LINK_UNEXPOSED','PRESENT_AFTER_ATTEMPT','REMOVED'].includes(result.status));
     const record={name,date,state:confirmed?'CLEAR':'ATTENTION',code:confirmed?'ENTRY_CONFIRMED':String(result?.code||'ENTRY_UNCONFIRMED').replace(/[^A-Z_]/g,'').slice(0,60),checkedAt:new Date().toISOString()};
     const props=PropertiesService.getScriptProperties(),key=beautyHubAttentionKey_(date,name),text=JSON.stringify(record);
     props.setProperty(key,text);return props.getProperty(key)===text;
@@ -79,6 +79,7 @@ function beautyHubAttentionRefresh_(input) {
           }else if(!['VERIFIED','ENTRY_VERIFIED_LINK_UNEXPOSED'].includes(t.state)||t.tpid!==e[0].tpid)code='TRANSFER_REVIEW_REQUIRED';
         }
       }
+      if(retained.items.some(item=>normalize(item.name)===key&&['REMOVE_UNCERTAIN','REMOVE_REVIEW_REQUIRED'].includes(item.code)))code='REMOVE_REVIEW_REQUIRED';
       decisions.push({name,code});
     }
     beautyHubAuthRequire_(beautyHubRequestToken_);

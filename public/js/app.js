@@ -248,6 +248,15 @@ addCell(
   row,
   player.whereFrom === 'MOBIL' ? 'MOBILE' : player.whereFrom
 );
+      if (BeautyHubServices.mode === 'test' && window.BeautyPlayerRemoval) {
+        const sourceCell = row.lastElementChild;
+        const remove = document.createElement('button');
+        remove.type = 'button'; remove.className = 'remove-player-button'; remove.textContent = 'REMOVE';
+        remove.setAttribute('aria-label', 'Remove ' + (player.player || player.newPlayer) + ' from this event');
+        remove.addEventListener('click', () => window.BeautyPlayerRemoval.open(player, remove));
+        sourceCell.appendChild(remove);
+      }
+
 
       tableBody.appendChild(row);
     }

@@ -19,6 +19,7 @@ html=html.replace('</body>','<script src="js/login.js"></script></body>');
 html=html.replace('<h2 id="nakkaPanelTitle">Nakka</h2>', '<h2 id="nakkaPanelTitle">Nakka</h2><section class="health-card"><h3>Event connection</h3><p>Check the Hub date against Nakka. Read only; no player sync.</p><button id="nakkaEventCheck" type="button">CHECK EVENT</button> <button id="nakkaCompare" type="button">COMPARE PLAYERS</button><div id="nakkaEventResult" role="status" aria-live="polite"></div></section>');
 html=html.replace('</body>','<script src="js/hub-nakka-event.js"></script></body>');
 html=html.replace('</body>','<script src="js/hub-nakka-transfer.js"></script></body>');
+html=html.replace('</body>','<script src="js/hub-player-removal.js"></script></body>');
 html=html.replace('</head>','<style>#nakkaTransferOpen{background:#ffd700;color:#080808;border:0;border-radius:5px;font:inherit;font-size:20px;padding:10px 16px;margin:16px 0 4px;min-height:44px}</style></head>');
 
 

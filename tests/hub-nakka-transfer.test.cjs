@@ -35,3 +35,14 @@ test('Nakka transfer reconciliation fails closed for changed old data malformed 
  }
  const h=harness(),saved=h.save(h.preview());assert.equal(saved.status,'TRANSFERRED');h.state.entries[0].tpid='z123';assert.equal(h.preview().code,'TRANSFER_REVIEW_REQUIRED');assert.equal(h.posts().length,1);
 });
+
+test('a new registration can add again only with matching verified removal proof retaining the previous transfer',()=>{
+ const h=harness(),first=h.save(h.preview()),prior=h.props.get(first.journal);h.state.entries=[];
+ assert.equal(h.preview().code,'TRANSFER_REVIEW_REQUIRED');
+ const proof={state:'VERIFIED',event:first.event,identity:first.identity,tpid:first.tpid,priorTransfer:prior};
+ const key='BEAUTY_NAKKA_REMOVED_ENTRY_'+first.event.id+'_'+first.tpid;
+ for(const bad of [{...proof,state:'ATTEMPTED'},{...proof,priorTransfer:'wrong'},{...proof,identity:{...proof.identity,lpid:'z123'}}]){
+  h.props.set(key,JSON.stringify(bad));assert.equal(h.preview().code,'TRANSFER_REVIEW_REQUIRED');
+ }
+ h.props.set(key,JSON.stringify(proof));const preview=h.preview();assert.equal(preview.status,'PREVIEW');assert.equal(h.save(preview).success,true);assert.equal(h.posts().length,2);assert.equal(JSON.parse(h.props.get(key)).priorTransfer,prior);
+});

@@ -1,0 +1,97 @@
+[
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "30bb3567f1c2a1561fe62fa9cdfce17d3c2d5a352c85822cfaa39c2050eb7e2b",
+    "after": "0924dcd6ae323f11fa1f01776839245e1ecbc600b1a9c71c40588cae3f2df55e"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTestAttention.gs",
+    "before": "cc0a19c5850f3fe51bf01f93c79eb81674475c314e450a704f08f6cfef0c0691",
+    "after": "11f46a582176a36f672e7eabe6936bb4e1a52055dd35f203d77331d38d60e62c"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTestBridge.gs",
+    "before": "58da7b2e363872ff8ae5327ff2e0957ac05cf58fc9e7f2238116faa5bee2b691",
+    "after": "4fe1f3aac51144dcc73199e903e7e884d151cc4fe9b1e7fee2897be3b810a037"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTestNakkaTransfer.gs",
+    "before": "515c60eca900c944cb1840fe15b3db8be097e0d4f24dbebd1144e7f542436c18",
+    "after": "6ed8b3b869bf94db6cfd9542d639ea03674fbd06aa518658bca2fb8d9b74ade5"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTestRemove.gs",
+    "before": null,
+    "after": "a2496bfa0d4504f4e7ba250cbc0ad4c07d46f7947be28de3014d5ed294ac22e6"
+  },
+  {
+    "path": "docs/handoff/player-actions-20261028.md",
+    "before": null,
+    "after": "20486897384d882ebf22d9cce47cf89a7bc93c31b3fdb477f4da340a9801b9aa"
+  },
+  {
+    "path": "docs/handoff/requirements.json",
+    "before": "0c5d9f2aaa398cbb143a6dd4502fce1ed0d6d95eddeeb4be4afe41a6bc3c4a5d",
+    "after": "729c173bd4926448a610849b92686cdb928b4135d5c075636183f149febbb9ab"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "7783361f0ce4b80b52e199ce9997c8b8f54cfc31146c1ead05d152a3ab7e7636",
+    "after": "f30748cffb2ba9bad3f796829daf83a4fd9c7267c9a48a6d9fe412fa3c946043"
+  },
+  {
+    "path": "evidence/player-actions-20261028/inventory.txt",
+    "before": null,
+    "after": "6a468f9996bba41179a2d33231f75ca7e4280ba819880a65e2c8def6630fbe3f"
+  },
+  {
+    "path": "evidence/player-actions-20261028/tests.tap",
+    "before": null,
+    "after": "53f2734ed7eb3690ed9c31ac4b5dabb91c7033b19429b9ccd04c0069b0ba25c0"
+  },
+  {
+    "path": "public/css/beauty-dashboard.css",
+    "before": "ac33de6900146d4a75650a2492af57b53ad5348ea16f520a7816422572e6f698",
+    "after": "91197d0ad698a15c9bb7f52a18afde4ed865b5189cdfe5d55b1dd2d3c2d99f04"
+  },
+  {
+    "path": "public/js/app.js",
+    "before": "bfab30f22218ca94272a2a6838de9ec21b171dab7383124f766c7395607b1d1f",
+    "after": "ce805aa8298b375728e730fbae6ea33d8453cdd9009fa2442d7bf8b5f8cb6ab9"
+  },
+  {
+    "path": "public/js/hub-player-removal.js",
+    "before": null,
+    "after": "960034f173a1a621a757f70bb59c51854304b4603da8f63fe2385bdac60881a9"
+  },
+  {
+    "path": "public/js/hub-test-services.js",
+    "before": "28419f3a1af7f33da4b66ccae125ce108decd0cde495de9317eade8a4d48545e",
+    "after": "63d539535e6e9be07e4ffb451f3842961c96f4aab739b58099cf2a098e9793bc"
+  },
+  {
+    "path": "scripts/build-hub-test.cjs",
+    "before": "8ac43486d7e677cd4f48589bc8d210a91175195e4c8602b1ef0fdc4d001c31b0",
+    "after": "f0de8024f759dc1b5c6d8c8cb73eb3d4eb539e73baca64e50ef879c1415c70b6"
+  },
+  {
+    "path": "tests/dashboard-attention.test.cjs",
+    "before": "c8d944794d455a3c14ea4a5e671a06ed81f1567dd2e3cbb8506839cf13c1d9fe",
+    "after": "8bb4a8ef7a140e868100b8a7053f21d5fd628e225a6d7160766db8df5a64aa5a"
+  },
+  {
+    "path": "tests/hub-nakka-transfer.test.cjs",
+    "before": "17250c2199a0ea21bd7d34b459aa05ed0e50811373dc93af8a0877497fd971ed",
+    "after": "bef057e59951c0979bca93b4a4cd7f366fbf734e7b94e8f331bf4f5c7fe87f18"
+  },
+  {
+    "path": "tests/hub-player-removal.test.cjs",
+    "before": null,
+    "after": "88432c460110578be3c416fb80a28bccf8f3e20b300eff36d050df1c18b0b232"
+  },
+  {
+    "path": "tests/hub-test-connection.test.cjs",
+    "before": "79d0b0372fe3e8f93ff06e6c4bdba6331b7686ab4610f5e49f59940515e5e168",
+    "after": "b17c1379d59df9f3b9d9bcc6d6f17d523128a9ca19037c2f6bdc106215762db6"
+  }
+]

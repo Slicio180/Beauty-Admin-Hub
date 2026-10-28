@@ -106,7 +106,16 @@ function beautyHubNakkaTransferRun_(action,input) {
     journal='BEAUTY_NAKKA_TRANSFER_'+BEAUTY_HUB_NAKKA_TEST_EVENT_+'_'+state.identity.lpid;
     const creation=props.getProperty('BEAUTY_NAKKA_LEAGUE_CREATE_lg_tM2v_3523_'+beautyHubTransferHash_(input.player.normalize('NFC').trim().replace(/\s+/g,' ').toLocaleLowerCase('sv-SE')));
     if(creation){let old;try{old=JSON.parse(creation);}catch(e){}if(old?.state!=='VERIFIED'||old.name!==input.player||old.lpid!==state.identity.lpid)return fail('LEAGUE_CREATION_REVIEW_REQUIRED');}
-    const prior=props.getProperty(journal);
+    let prior=props.getProperty(journal);
+    if(prior&&!state.existing){
+      let previous,proof;try{previous=JSON.parse(prior);proof=JSON.parse(props.getProperty('BEAUTY_NAKKA_REMOVED_ENTRY_'+state.event.id+'_'+previous.tpid)||'null');}catch(e){}
+      // A new registration may add again only after a separately verified removal.
+      // The removal proof retains the complete old transfer journal for audit.
+      if(['VERIFIED','ENTRY_VERIFIED_LINK_UNEXPOSED'].includes(previous?.state)&&proof?.state==='VERIFIED'&&proof.priorTransfer===prior&&
+        proof.tpid===previous.tpid&&proof.event?.id===state.event.id&&proof.event?.date===state.event.date&&
+        proof.identity?.name===state.identity.name&&proof.identity?.lpid===state.identity.lpid)prior=null;
+    }
+
     if(prior){
       let old;try{old=JSON.parse(prior);}catch(e){}
       if(old?.state==='ATTEMPTED'){
