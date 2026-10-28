@@ -93,7 +93,7 @@
       'Needs attention opens named player issues. CHECK AGAIN reads Nakka; it does not send or repeat transfers.',
       'Use Nakka to inspect comparisons and review a single transfer. Close any Nakka editing page before confirming a transfer.',
       'System Status shows the Sheets connection. Nakka health is separate from player attention.',
-      'Pool Planner currently previews group sizes. Seeded draws are a separate pending update.']){
+      'Pool Planner retains the original 5–101 group-size scheme. In TEST, load league statistics, review identities, generate a seeded preview and adjust pools before explicitly approving the Nakka handoff. Missing averages stay Unseeded. OUT and STANDBY are excluded.']){
       const p=document.createElement('p');p.textContent=text;help.append(p);
     }
     help.addEventListener('close',()=>{window.BeautyHubNavigation?.dashboard();instructions.focus();});document.body.append(help);help.showModal();window.BeautyHubNavigation?.activate(instructions);

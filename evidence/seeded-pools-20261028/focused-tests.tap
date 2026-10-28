@@ -1,0 +1,244 @@
+TAP version 13
+# Subtest: pool UI reviews mappings, renders frozen means and coverage, and does not send during generation
+ok 1 - pool UI reviews mappings, renders frozen means and coverage, and does not send during generation
+  ---
+  duration_ms: 15.913971
+  type: 'test'
+  ...
+# Subtest: pool UI manual swaps request server adjustment and retain no old approval
+ok 2 - pool UI manual swaps request server adjustment and retain no old approval
+  ---
+  duration_ms: 9.015264
+  type: 'test'
+  ...
+# Subtest: pool UI only sends after final approval and cannot double click while saving
+ok 3 - pool UI only sends after final approval and cannot double click while saving
+  ---
+  duration_ms: 7.288312
+  type: 'test'
+  ...
+# Subtest: pool UI withdrawals invalidate review and preserve visible frozen draw without silently redrawing
+ok 4 - pool UI withdrawals invalidate review and preserve visible frozen draw without silently redrawing
+  ---
+  duration_ms: 6.56903
+  type: 'test'
+  ...
+# Subtest: pool UI lock drops late response and clears identities and previews
+ok 5 - pool UI lock drops late response and clears identities and previews
+  ---
+  duration_ms: 3.888435
+  type: 'test'
+  ...
+# Subtest: pool UI provider timeout blocks repeat send and retains inspect-before-retry guidance
+ok 6 - pool UI provider timeout blocks repeat send and retains inspect-before-retry guidance
+  ---
+  duration_ms: 7.366761
+  type: 'test'
+  ...
+# Subtest: pool UI automatic refresh runs only while visible and invalidates expired frozen approval
+ok 7 - pool UI automatic refresh runs only while visible and invalidates expired frozen approval
+  ---
+  duration_ms: 6.589651
+  type: 'test'
+  ...
+# Subtest: pool TEST transport routes authenticated exact payloads and rejects target or extra-key injection
+ok 8 - pool TEST transport routes authenticated exact payloads and rejects target or extra-key injection
+  ---
+  duration_ms: 2.788929
+  type: 'test'
+  ...
+# Subtest: pool UI closing and reopening drops an old handoff approval while retaining the frozen reference
+ok 9 - pool UI closing and reopening drops an old handoff approval while retaining the frozen reference
+  ---
+  duration_ms: 4.355588
+  type: 'test'
+  ...
+# Subtest: mixed capacities spread first seeds and improve pool means without clustering the strongest
+ok 10 - mixed capacities spread first seeds and improve pool means without clustering the strongest
+  ---
+  duration_ms: 3.966432
+  type: 'test'
+  ...
+# Subtest: unseeded allocation remains even for all valid 3/4 pool schemes and boundary missing counts
+ok 11 - unseeded allocation remains even for all valid 3/4 pool schemes and boundary missing counts
+  ---
+  duration_ms: 2846.366756
+  type: 'test'
+  ...
+# Subtest: 101-player boundary respects capacities and even unseeded quotas
+ok 12 - 101-player boundary respects capacities and even unseeded quotas
+  ---
+  duration_ms: 5.137847
+  type: 'test'
+  ...
+# Subtest: missing average is null while genuine measured zero remains a known average
+ok 13 - missing average is null while genuine measured zero remains a known average
+  ---
+  duration_ms: 0.594164
+  type: 'test'
+  ...
+# Subtest: deterministic tie shuffle uses the recorded seed and ignores incoming roster order
+ok 14 - deterministic tie shuffle uses the recorded seed and ignores incoming roster order
+  ---
+  duration_ms: 0.796639
+  type: 'test'
+  ...
+# Subtest: frozen draw is independent of future source roster and average changes and excludes private fields
+ok 15 - frozen draw is independent of future source roster and average changes and excludes private fields
+  ---
+  duration_ms: 0.585041
+  type: 'test'
+  ...
+# Subtest: IN-only membership signature changes on withdrawal arrival or rename but not averages or messages
+ok 16 - IN-only membership signature changes on withdrawal arrival or rename but not averages or messages
+  ---
+  duration_ms: 0.666053
+  type: 'test'
+  ...
+# Subtest: manual swaps retain frozen values capacities membership and source draw
+ok 17 - manual swaps retain frozen values capacities membership and source draw
+  ---
+  duration_ms: 0.808337
+  type: 'test'
+  ...
+# Subtest: manual changes warn about clustered first seeds or uneven unseeded counts without inventing averages
+ok 18 - manual changes warn about clustered first seeds or uneven unseeded counts without inventing averages
+  ---
+  duration_ms: 0.66396
+  type: 'test'
+  ...
+# Subtest: invalid moves ambiguous identities unknown statuses string averages and altered snapshots are refused
+ok 19 - invalid moves ambiguous identities unknown statuses string averages and altered snapshots are refused
+  ---
+  duration_ms: 1.315662
+  type: 'test'
+  ...
+# Subtest: adjustable bands use exact non-overlapping boundaries and keep unseeded separate
+ok 20 - adjustable bands use exact non-overlapping boundaries and keep unseeded separate
+  ---
+  duration_ms: 0.737261
+  type: 'test'
+  ...
+# Subtest: invalid pool schemes limits dates and missing statistics provenance cannot produce an approved-looking draw
+ok 21 - invalid pool schemes limits dates and missing statistics provenance cannot produce an approved-looking draw
+  ---
+  duration_ms: 0.713885
+  type: 'test'
+  ...
+# Subtest: pool stats qualify score/darts keyed by LPID; points stay separate and unknown is not zero
+ok 22 - pool stats qualify score/darts keyed by LPID; points stay separate and unknown is not zero
+  ---
+  duration_ms: 15.627499
+  type: 'test'
+  ...
+# Subtest: pool stats retain durable last-good on outage and block fresh draw after refresh failure
+ok 23 - pool stats retain durable last-good on outage and block fresh draw after refresh failure
+  ---
+  duration_ms: 6.752617
+  type: 'test'
+  ...
+# Subtest: pool stats reject inconsistent points and invalid numeric totals without replacing last-good
+ok 24 - pool stats reject inconsistent points and invalid numeric totals without replacing last-good
+  ---
+  duration_ms: 8.178152
+  type: 'test'
+  ...
+# Subtest: pool league profiles paginate and reject repeated IDs or a truncated over-limit list
+ok 25 - pool league profiles paginate and reject repeated IDs or a truncated over-limit list
+  ---
+  duration_ms: 2.043097
+  type: 'test'
+  ...
+# Subtest: pool mappings expose ambiguity and missing entry without silently choosing a league identity
+ok 26 - pool mappings expose ambiguity and missing entry without silently choosing a league identity
+  ---
+  duration_ms: 5.159308
+  type: 'test'
+  ...
+# Subtest: pool handoff verifies all groups and cards, preserves settings and inactive entries, and blocks duplicate send
+ok 27 - pool handoff verifies all groups and cards, preserves settings and inactive entries, and blocks duplicate send
+  ---
+  duration_ms: 15.290351
+  type: 'test'
+  ...
+# Subtest: pool manual swap is server-owned, consumes old ticket, preserves frozen averages and invalidates approval
+ok 28 - pool manual swap is server-owned, consumes old ticket, preserves frozen averages and invalidates approval
+  ---
+  duration_ms: 6.005988
+  type: 'test'
+  ...
+# Subtest: pool source additions withdrawals renames and date changes invalidate a reviewed draw
+ok 29 - pool source additions withdrawals renames and date changes invalidate a reviewed draw
+  ---
+  duration_ms: 13.540096
+  type: 'test'
+  ...
+# Subtest: pool tickets expire and are bound to staff session; unconfirmed sends never mutate
+ok 30 - pool tickets expire and are bound to staff session; unconfirmed sends never mutate
+  ---
+  duration_ms: 17.503734
+  type: 'test'
+  ...
+# Subtest: pool existing groups results cards started events and unsupported formats block handoff
+ok 31 - pool existing groups results cards started events and unsupported formats block handoff
+  ---
+  duration_ms: 16.749869
+  type: 'test'
+  ...
+# Subtest: pool event concurrency or league identity changes after approval block every provider write
+ok 32 - pool event concurrency or league identity changes after approval block every provider write
+  ---
+  duration_ms: 14.623147
+  type: 'test'
+  ...
+# Subtest: pool failures in either provider phase retain attempted journal and block retry without leaking errors
+ok 33 - pool failures in either provider phase retain attempted journal and block retry without leaking errors
+  ---
+  duration_ms: 9.437609
+  type: 'test'
+  ...
+# Subtest: pool unexpected setting changes or missing duplicate foreign pairings fail full readback
+ok 34 - pool unexpected setting changes or missing duplicate foreign pairings fail full readback
+  ---
+  duration_ms: 26.803686
+  type: 'test'
+  ...
+# Subtest: pool audit failure occurs before Nakka mutation and cannot report successful send
+ok 35 - pool audit failure occurs before Nakka mutation and cannot report successful send
+  ---
+  duration_ms: 3.707833
+  type: 'test'
+  ...
+# Subtest: pool structural comparison ignores JSON object order while preserving array order
+ok 36 - pool structural comparison ignores JSON object order while preserving array order
+  ---
+  duration_ms: 1.064543
+  type: 'test'
+  ...
+# Subtest: pool routes require exact inputs, staff authentication and the write gate
+ok 37 - pool routes require exact inputs, staff authentication and the write gate
+  ---
+  duration_ms: 4.245903
+  type: 'test'
+  ...
+# Subtest: pool five-player exception and mixed 4/3 divisions generate the exact rectangular table and pair coverage
+ok 38 - pool five-player exception and mixed 4/3 divisions generate the exact rectangular table and pair coverage
+  ---
+  duration_ms: 20.874349
+  type: 'test'
+  ...
+# Subtest: pool event started between group save and fixture generation blocks the second mutation and records uncertainty
+ok 39 - pool event started between group save and fixture generation blocks the second mutation and records uncertainty
+  ---
+  duration_ms: 5.939622
+  type: 'test'
+  ...
+1..39
+# tests 39
+# suites 0
+# pass 39
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2970.488425

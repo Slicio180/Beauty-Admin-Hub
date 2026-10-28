@@ -3,6 +3,7 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 require('./build-hub-english.cjs').build();
 require('./build-pool-scheme.cjs');
+require('./build-pool-service.cjs');
 require('./build-player-test.cjs').build();
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 let html = read('public/preview.html');
@@ -44,6 +45,7 @@ for (const asset of ['aik-dart-yellow.png', 'aik-mandagsdartarna.png', 'aik-cres
 }
 html = html.replace(/<script src="js\/([^"]+)"[^>]*><\/script>/g, (_, file) => {
   let js = read('public/js/' + (file === 'hub-services.js' ? 'hub-test-services.js' : file));
+  if (file === 'pool-planner.js') js = read('public/js/pool-seeding.js')+'\n'+js+'\n'+read('public/js/pool-planner-seeded.js');
   if (file === 'app.js') {
     const start = js.indexOf('function addStatusCell(');
     const end = js.indexOf('function setStatusClass(', start);

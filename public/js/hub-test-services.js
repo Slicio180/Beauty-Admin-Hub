@@ -46,7 +46,7 @@ const BeautyHubServices = (() => {
     if (options.signal?.aborted) throw new Error('Aborted');
     const url = new URL(raw);
     const page = url.searchParams.get('page');
-    const keys = { removepreview:['page','player','eventDate'], removesave:['page','player','eventDate','ticket','confirmed'], hubdata: ['page'], attentionrefresh: ['page'], eventcontrol: ['page'], eventprepare: ['page','date','expectedDate'], eventsave: ['page','date','expectedDate','version','confirmed'], nakkahealth: ['page'], nakkaevent: ['page'], nakkacompare: ['page'], nakkatransferpreview:['page','player'], nakkatransfersave:['page','player','ticket','confirmed'], hubregister: ['page', ...allowed], hubstatus: ['page', 'player', 'status', 'expectedStatus', 'eventDate'] }[page];
+    const keys = { poolload:['page','refresh'],pooldraw:['page','bindings','reviewed','sizes'],pooladjust:['page','ticket','change'],poolprepare:['page','ticket'],poolsave:['page','ticket','confirmed'], removepreview:['page','player','eventDate'], removesave:['page','player','eventDate','ticket','confirmed'], hubdata: ['page'], attentionrefresh: ['page'], eventcontrol: ['page'], eventprepare: ['page','date','expectedDate'], eventsave: ['page','date','expectedDate','version','confirmed'], nakkahealth: ['page'], nakkaevent: ['page'], nakkacompare: ['page'], nakkatransferpreview:['page','player'], nakkatransfersave:['page','player','ticket','confirmed'], hubregister: ['page', ...allowed], hubstatus: ['page', 'player', 'status', 'expectedStatus', 'eventDate'] }[page];
     if (url.origin !== 'https://beauty.invalid' || url.pathname !== '/hub' ||
         url.username || url.password || url.hash || (options.method && options.method !== 'GET') ||
         !keys || [...url.searchParams.keys()].some(key => !keys.includes(key) || url.searchParams.getAll(key).length !== 1)) {
@@ -62,7 +62,7 @@ const BeautyHubServices = (() => {
       if(data?.code==='REGISTRATION_DAY_MISMATCH')return {ok:true,json:async()=>({...data,error:'Set the Hub event date to today before using this weekly TEST registration. No registration was saved.'})};
       return response(data);
     }
-    if (['nakkatransferpreview','nakkatransfersave','removepreview','removesave'].includes(page)) {
+    if (['poolload','pooldraw','pooladjust','poolprepare','poolsave','nakkatransferpreview','nakkatransfersave','removepreview','removesave'].includes(page)) {
       // Server messages in this route are fixed strings; raw provider errors
       // never enter the response. Preserve the uncertain-operation guidance.
       const data=await rpc(page,input);

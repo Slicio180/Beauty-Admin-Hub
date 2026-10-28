@@ -273,5 +273,13 @@
     "evidenceLabel": "LOCAL TESTS",
     "source": "Owner Adam Pettersson ATTEMPTED record and native current entry, 28 October 2026",
     "acceptance": "Exact current event/player/league/tpid preview, expiring session-bound one-use confirmation, immutable staff review receipt bound to original journal hash, no Nakka POST or Sheet change, retain ATTEMPTED record, never enable retry if entry disappears."
+  },
+  {
+    "id": "POOL-SEEDED-001",
+    "requirement": "IN-only league-average seeded pools, even Unseeded distribution, frozen preview, manual swaps, optional bands and approved fixed TEST Nakka groups plus match cards",
+    "priority": "Critical",
+    "source": "Existing Pool Planner To Do; owner approved evenly spreading unknown averages on 28 October 2026",
+    "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
+    "acceptance": "Original 5–101 scheme, overall score/darts weighted three-dart average by reviewed LPID, separate points, retained last-good/stale state, no invented zero, exact membership/capacity, expiring session-bound frozen draw, manual swaps and strength coverage, roster invalidation, fixed pre-start TEST only, full settings/entries preservation, CAS group update, native round-robin fixture generation, durable audit before POST, full readback, no automatic retries after uncertain send. Production and JDC untouched."
   }
 ]

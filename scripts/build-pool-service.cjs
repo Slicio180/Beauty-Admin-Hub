@@ -1,0 +1,8 @@
+const fs=require('node:fs'),path=require('node:path');
+const root=path.resolve(__dirname,'..');
+let core=fs.readFileSync(path.join(root,'public/js/pool-seeding.js'),'utf8');
+core=core.replace('(function(root){','var BeautyPoolSeeding=(function(){');
+const end=core.indexOf("  if(typeof module!=='undefined'&&module.exports)");
+if(end<0)throw Error('Pool core export boundary changed.');
+core=core.slice(0,end)+'  return Object.freeze(api);\n})();\n';
+fs.writeFileSync(path.join(root,'apps-script/registration-identity-test/remote-app/HubTestPools.gs'),'/* Generated shared pool core and staff service. Edit public/js/pool-seeding.js and server/pool-service.js. */\n'+core+'\n'+fs.readFileSync(path.join(root,'server/pool-service.js'),'utf8'));

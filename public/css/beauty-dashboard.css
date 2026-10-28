@@ -155,3 +155,20 @@ body .remove-player-button:hover,body .remove-player-button:active { background:
 .remove-player-dialog input { margin-right:10px; }
 body .remove-player-close { float:right; width:44px; height:44px; padding:0; font:28px Arial,sans-serif; }
 body .remove-player-confirm { border-color:var(--gold) !important; }
+
+/* Seeded Pool Planner; numeric values use the original AIK Siffror face. */
+.pool-planner{width:min(1200px,94vw);max-height:90vh;overflow:auto}
+.seeded-pool-planner{border-top:1px solid #ffd700;margin-top:24px;padding-top:20px}
+.seeded-pool-planner button{margin:6px 10px 6px 0;min-height:44px}
+.seeded-pool-planner label{display:block;margin:12px 0}
+.seeded-pool-planner input[type=number]{width:90px;margin:4px}
+.seeded-pool-planner input[type=checkbox]{width:20px;height:20px;vertical-align:middle}
+.seeded-pool-planner select{max-width:100%;min-height:44px;background:#191919;color:white;border:1px solid #999;padding:6px;font:inherit}
+.seeded-pool-planner table{width:100%;font-size:17px}.seeded-pool-planner td{padding:8px}.seeded-pool-planner small{display:block;font-family:'AIK Light',serif;font-size:14px}
+.pool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:20px 0}
+.pool-card,.pool-approval{border:1px solid #ffd700;border-radius:10px;padding:16px;background:#101112}
+.pool-card h4{margin:0 0 8px;color:#ffd700;font-size:24px}.pool-card ol{padding-left:24px}.pool-card li{padding:8px 6px;border-bottom:1px solid #333}
+.pool-card li span:last-child{float:right}.pool-number{font-family:'AIK Siffror',serif;font-variant-numeric:normal}
+.pool-card .pool-band-0{border-left:4px solid #aaa}.pool-card .pool-band-1{border-left:4px solid #5da9f6}.pool-card .pool-band-2{border-left:4px solid #ed982f}.pool-card .pool-band-3{border-left:4px solid #6ac56a}.pool-card .pool-band-UNSEEDED{border-left:4px dashed white}
+.seeded-pool-planner pre{white-space:pre-wrap;font:16px monospace}.seeded-pool-planner fieldset{border:1px solid #777;padding:12px}
+@media(max-width:700px){.seeded-pool-planner details{overflow-x:auto}.seeded-pool-planner td{min-width:140px}.pool-grid{grid-template-columns:1fr}}

@@ -1980,6 +1980,23 @@ body .remove-player-button:hover,body .remove-player-button:active { background:
 .remove-player-dialog input { margin-right:10px; }
 body .remove-player-close { float:right; width:44px; height:44px; padding:0; font:28px Arial,sans-serif; }
 body .remove-player-confirm { border-color:var(--gold) !important; }
+
+/* Seeded Pool Planner; numeric values use the original AIK Siffror face. */
+.pool-planner{width:min(1200px,94vw);max-height:90vh;overflow:auto}
+.seeded-pool-planner{border-top:1px solid #ffd700;margin-top:24px;padding-top:20px}
+.seeded-pool-planner button{margin:6px 10px 6px 0;min-height:44px}
+.seeded-pool-planner label{display:block;margin:12px 0}
+.seeded-pool-planner input[type=number]{width:90px;margin:4px}
+.seeded-pool-planner input[type=checkbox]{width:20px;height:20px;vertical-align:middle}
+.seeded-pool-planner select{max-width:100%;min-height:44px;background:#191919;color:white;border:1px solid #999;padding:6px;font:inherit}
+.seeded-pool-planner table{width:100%;font-size:17px}.seeded-pool-planner td{padding:8px}.seeded-pool-planner small{display:block;font-family:'AIK Light',serif;font-size:14px}
+.pool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:20px 0}
+.pool-card,.pool-approval{border:1px solid #ffd700;border-radius:10px;padding:16px;background:#101112}
+.pool-card h4{margin:0 0 8px;color:#ffd700;font-size:24px}.pool-card ol{padding-left:24px}.pool-card li{padding:8px 6px;border-bottom:1px solid #333}
+.pool-card li span:last-child{float:right}.pool-number{font-family:'AIK Siffror',serif;font-variant-numeric:normal}
+.pool-card .pool-band-0{border-left:4px solid #aaa}.pool-card .pool-band-1{border-left:4px solid #5da9f6}.pool-card .pool-band-2{border-left:4px solid #ed982f}.pool-card .pool-band-3{border-left:4px solid #6ac56a}.pool-card .pool-band-UNSEEDED{border-left:4px dashed white}
+.seeded-pool-planner pre{white-space:pre-wrap;font:16px monospace}.seeded-pool-planner fieldset{border:1px solid #777;padding:12px}
+@media(max-width:700px){.seeded-pool-planner details{overflow-x:auto}.seeded-pool-planner td{min-width:140px}.pool-grid{grid-template-columns:1fr}}
 </style></head>
 
 <body class="beauty-auth-locked"><section id="beautyAuthSurface" class="login-card">
@@ -2454,7 +2471,7 @@ const BeautyHubServices = (() => {
     if (options.signal?.aborted) throw new Error('Aborted');
     const url = new URL(raw);
     const page = url.searchParams.get('page');
-    const keys = { removepreview:['page','player','eventDate'], removesave:['page','player','eventDate','ticket','confirmed'], hubdata: ['page'], attentionrefresh: ['page'], eventcontrol: ['page'], eventprepare: ['page','date','expectedDate'], eventsave: ['page','date','expectedDate','version','confirmed'], nakkahealth: ['page'], nakkaevent: ['page'], nakkacompare: ['page'], nakkatransferpreview:['page','player'], nakkatransfersave:['page','player','ticket','confirmed'], hubregister: ['page', ...allowed], hubstatus: ['page', 'player', 'status', 'expectedStatus', 'eventDate'] }[page];
+    const keys = { poolload:['page','refresh'],pooldraw:['page','bindings','reviewed','sizes'],pooladjust:['page','ticket','change'],poolprepare:['page','ticket'],poolsave:['page','ticket','confirmed'], removepreview:['page','player','eventDate'], removesave:['page','player','eventDate','ticket','confirmed'], hubdata: ['page'], attentionrefresh: ['page'], eventcontrol: ['page'], eventprepare: ['page','date','expectedDate'], eventsave: ['page','date','expectedDate','version','confirmed'], nakkahealth: ['page'], nakkaevent: ['page'], nakkacompare: ['page'], nakkatransferpreview:['page','player'], nakkatransfersave:['page','player','ticket','confirmed'], hubregister: ['page', ...allowed], hubstatus: ['page', 'player', 'status', 'expectedStatus', 'eventDate'] }[page];
     if (url.origin !== 'https://beauty.invalid' || url.pathname !== '/hub' ||
         url.username || url.password || url.hash || (options.method && options.method !== 'GET') ||
         !keys || [...url.searchParams.keys()].some(key => !keys.includes(key) || url.searchParams.getAll(key).length !== 1)) {
@@ -2470,7 +2487,7 @@ const BeautyHubServices = (() => {
       if(data?.code==='REGISTRATION_DAY_MISMATCH')return {ok:true,json:async()=>({...data,error:'Set the Hub event date to today before using this weekly TEST registration. No registration was saved.'})};
       return response(data);
     }
-    if (['nakkatransferpreview','nakkatransfersave','removepreview','removesave'].includes(page)) {
+    if (['poolload','pooldraw','pooladjust','poolprepare','poolsave','nakkatransferpreview','nakkatransfersave','removepreview','removesave'].includes(page)) {
       // Server messages in this route are fixed strings; raw provider errors
       // never enter the response. Preserve the uncertain-operation guidance.
       const data=await rpc(page,input);
@@ -2497,6 +2514,138 @@ if (typeof document !== 'undefined') document.addEventListener('DOMContentLoaded
 
 </script>
   <script>
+/* Pure draw planning. No services, storage, timers, credentials or provider writes. */
+(function(root){
+  'use strict';
+  const fail=message=>{throw Error(message);};
+  const copy=value=>JSON.parse(JSON.stringify(value));
+  function validatePlayers(players){
+    if(!Array.isArray(players)||players.length>1000)fail('Invalid event roster.');
+    const ids=new Set();
+    return players.map(p=>{
+      if(!p||typeof p.id!=='string'||!p.id||p.id.length>120||ids.has(p.id)||typeof p.name!=='string'||!p.name.trim()||p.name.length>120||!['IN','OUT','STANDBY'].includes(p.status))fail('Missing or ambiguous player identity or status.');
+      ids.add(p.id);
+      if(p.average!==null&&(typeof p.average!=='number'||!Number.isFinite(p.average)||p.average<0||p.average>180))fail('An average must be a verified number or explicitly missing.');
+      return {id:p.id,name:p.name,status:p.status,average:p.average};
+    });
+  }
+  const compareId=(a,b)=>a.id<b.id?-1:a.id>b.id?1:0;
+  function rosterSignature(players){return JSON.stringify(validatePlayers(players).filter(p=>p.status==='IN').sort(compareId).map(p=>[p.id,p.name]));}
+  function sizesFromPlan(plan){
+    if(!plan||!['three','four','five','pools'].every(k=>Number.isInteger(plan[k])&&plan[k]>=0)||plan.pools!==plan.three+plan.four+plan.five||plan.five&&plan.pools!==1||plan.five>1)fail('Invalid pool-size scheme.');
+    return [...Array(plan.four).fill(4),...Array(plan.three).fill(3),...Array(plan.five).fill(5)];
+  }
+  function shuffled(players,seed){
+    let state=seed>>>0;
+    const random=()=>{state=(state+0x6D2B79F5)>>>0;let n=state;n=Math.imul(n^(n>>>15),n|1);n^=n+Math.imul(n^(n>>>7),n|61);return ((n^(n>>>14))>>>0)/4294967296;};
+    const result=players.slice().sort(compareId);
+    for(let i=result.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[result[i],result[j]]=[result[j],result[i]];}
+    return result;
+  }
+  function groupName(index){let name='';for(let n=index+1;n>0;n=Math.floor((n-1)/26))name=String.fromCharCode(65+(n-1)%26)+name;return name;}
+  function summary(group){
+    const known=group.players.filter(p=>p.average!==null);
+    return {players:group.players.length,capacity:group.capacity,known:known.length,unseeded:group.players.length-known.length,
+      knownAverage:known.length?known.reduce((sum,p)=>sum+p.average,0)/known.length:null};
+  }
+  function check(draw){
+    if(!draw||!Array.isArray(draw.pools)||!Array.isArray(draw.roster))fail('Invalid draw.');
+    const roster=validatePlayers(draw.roster);if(roster.some(p=>p.status!=='IN'))fail('Draw includes an excluded player.');
+    const expected=new Map(draw.roster.map(p=>[p.id,p])),seen=new Set();
+    if(draw.pools.some(g=>![3,4,5].includes(g.capacity))||draw.pools.some(g=>g.capacity===5)&&draw.pools.length!==1)fail('Unsupported pool capacities.');
+    for(const [index,group] of draw.pools.entries()){
+      if(group.id!==index||group.name!==groupName(index))fail('Pool identity changed.');
+      if(group.players.length!==group.capacity)fail('Every pool must match its chosen capacity.');
+      for(const p of group.players){
+        if(seen.has(p.id)||!expected.has(p.id)||JSON.stringify(p)!==JSON.stringify(expected.get(p.id)))fail('Draw changed, repeated or omitted a player.');
+        seen.add(p.id);
+      }
+    }
+    if(seen.size!==expected.size)fail('Draw omitted a player.');
+    return true;
+  }
+  function warnings(draw){
+    const counts=draw.pools.map(g=>summary(g).unseeded),messages=[];
+    if(Math.max(...counts)-Math.min(...counts)>1)messages.push('Manual changes have made the unseeded distribution uneven.');
+    const first=new Set(draw.firstSeeds),repeated=draw.pools.some(g=>g.players.filter(p=>first.has(p.id)).length>1);
+    if(repeated)messages.push('Manual changes have put first-round seeds together.');
+    if(draw.roster.some(p=>p.average===null))messages.push('Pool strength uses known averages only; unseeded players are not treated as zero.');
+    return messages;
+  }
+  function draw(options){
+    const all=validatePlayers(options?.players),roster=all.filter(p=>p.status==='IN');
+    if(roster.length<5||roster.length>101)fail('Seeded draws support 5–101 IN players.');
+    const sizes=options.sizes;
+    if(!Array.isArray(sizes)||!sizes.length||sizes.some(n=>![3,4,5].includes(n))||sizes.includes(5)&&(sizes.length!==1||sizes[0]!==5)||sizes.reduce((a,b)=>a+b,0)!==roster.length)fail('Pool capacities must match the selected IN list and scheme.');
+    if(!Number.isInteger(options.seed)||options.seed<0||options.seed>0xFFFFFFFF)fail('A recorded unsigned 32-bit draw seed is required.');
+    if(typeof options.eventDate!=='string'||!/^20\d\d-\d\d-\d\d$/.test(options.eventDate)||!Number.isFinite(Date.parse(options.eventDate+'T12:00:00Z'))||new Date(options.eventDate+'T12:00:00Z').toISOString().slice(0,10)!==options.eventDate||typeof options.frozenAt!=='string'||!Number.isFinite(Date.parse(options.frozenAt))||
+      !options.source||typeof options.source.leagueId!=='string'||!options.source.leagueId||typeof options.source.fetchedAt!=='string'||!Number.isFinite(Date.parse(options.source.fetchedAt)))fail('Record the event, league and frozen statistics time.');
+    const order=shuffled(roster,options.seed),known=order.filter(p=>p.average!==null).sort((a,b)=>b.average-a.average),unknown=order.filter(p=>p.average===null);
+    const pools=sizes.map((capacity,i)=>({id:i,name:groupName(i),capacity,players:[],unseededQuota:0}));
+    // Water-fill counts, favouring larger pools for remainder slots. Counts differ by at most one.
+    for(let i=0;i<unknown.length;i++){
+      const group=pools.filter(g=>g.unseededQuota<g.capacity).sort((a,b)=>a.unseededQuota-b.unseededQuota||b.capacity-a.capacity||a.id-b.id)[0];
+      group.unseededQuota++;
+    }
+    const seededCapacity=pools.map(g=>g.capacity-g.unseededQuota),firstSeeds=[];
+    let placed=0,round=0;
+    while(placed<known.length){
+      const indices=pools.map((_,i)=>i);if(round%2)indices.reverse();
+      for(const i of indices){
+        if(pools[i].players.length>=seededCapacity[i]||placed>=known.length)continue;
+        if(round===0)firstSeeds.push(known[placed].id);
+        pools[i].players.push(known[placed++]);
+      }
+      round++;
+    }
+    // Improve comparable known-player means without moving first-round seeds or unknown quotas.
+    const protectedIds=new Set(firstSeeds),target=known.length?known.reduce((s,p)=>s+p.average,0)/known.length:0;
+    const means=pools.map(g=>({sum:g.players.reduce((s,p)=>s+p.average,0),count:g.players.length}));
+    const cost=(sum,count)=>count?Math.pow(sum/count-target,2):0;
+    for(let pass=0;pass<100;pass++){
+      let best=null,improvement=1e-9;
+      for(let a=0;a<pools.length;a++)for(let b=a+1;b<pools.length;b++){
+        const left=means[a],right=means[b];if(!left.count||!right.count)continue;
+        const before=cost(left.sum,left.count)+cost(right.sum,right.count);
+        for(let x=0;x<pools[a].players.length;x++)for(let y=0;y<pools[b].players.length;y++){
+          const p=pools[a].players[x],q=pools[b].players[y];if(protectedIds.has(p.id)||protectedIds.has(q.id))continue;
+          const delta=q.average-p.average,gain=before-cost(left.sum+delta,left.count)-cost(right.sum-delta,right.count);
+          if(gain>improvement){improvement=gain;best={a,b,x,y,delta};}
+        }
+      }
+      if(!best)break;
+      const {a,b,x,y,delta}=best;[pools[a].players[x],pools[b].players[y]]=[pools[b].players[y],pools[a].players[x]];means[a].sum+=delta;means[b].sum-=delta;
+    }
+    let index=0;for(const group of pools)for(let i=0;i<group.unseededQuota;i++)group.players.push(unknown[index++]);
+    const result={version:1,eventDate:options.eventDate,frozenAt:options.frozenAt,source:{leagueId:options.source.leagueId,fetchedAt:options.source.fetchedAt},seed:options.seed,
+      method:'seeded snake with protected first-round seeds and bounded mean balancing',unseededPolicy:'even counts, no invented averages',
+      roster:roster.slice().sort(compareId).map(copy),rosterSignature:rosterSignature(all),firstSeeds,pools:pools.map(g=>({id:g.id,name:g.name,capacity:g.capacity,players:g.players.map(copy)})),manualChanges:[]};
+    check(result);return result;
+  }
+  function adjust(current,change){
+    check(current);const result=copy(current);
+    const origin=result.pools.find(g=>g.players.some(p=>p.id===change.playerId)),target=result.pools.find(g=>g.id===change.targetPool);
+    if(!origin||!target||origin===target)fail('Choose a player and another pool.');
+    const from=origin.players.findIndex(p=>p.id===change.playerId);
+    if(target.players.length>=target.capacity){
+      const other=target.players.findIndex(p=>p.id===change.swapWith);
+      if(other<0)fail('The destination is full. Choose a player to swap.');
+      [origin.players[from],target.players[other]]=[target.players[other],origin.players[from]];
+    }else{target.players.push(origin.players.splice(from,1)[0]);}
+    result.manualChanges.push({playerId:change.playerId,from:origin.id,to:target.id,swapWith:change.swapWith||null});
+    check(result);return result;
+  }
+  function band(average,thresholds=[50,55,60]){
+    if(!Array.isArray(thresholds)||thresholds.length!==3||thresholds.some((n,i)=>typeof n!=='number'||!Number.isFinite(n)||n<0||n>180||i&&n<=thresholds[i-1]))fail('Average-band boundaries must increase without overlap.');
+    if(average===null)return 'UNSEEDED';
+    if(typeof average!=='number'||!Number.isFinite(average)||average<0||average>180)fail('Invalid average.');
+    return thresholds.filter(n=>average>=n).length;
+  }
+  const api={draw,adjust,check,summary,warnings,band,rosterSignature,sizesFromPlan};
+  if(typeof module!=='undefined'&&module.exports)module.exports=api;
+  else root.BeautyPoolSeeding=Object.freeze(api);
+})(typeof window==='undefined'?globalThis:window);
+
 /* Read-only planning. No registration, status or Nakka writes. */
 (function (root) {
   'use strict';
@@ -2548,17 +2697,17 @@ if (typeof document !== 'undefined') document.addEventListener('DOMContentLoaded
     out.appendChild(el('h3','One pool per dartboard'));
     out.appendChild(el('p',result.perBoard?description(result.perBoard):'Not possible with only 3- and 4-player pools on the available boards. Use shared boards or staggered starts, or make more boards available.'));
     if(result.beyondScheme)out.appendChild(el('p','Above the supplied 101-player scheme: calculated using the same 3-/4-player rules.'));
-    out.appendChild(el('p','IN players only; OUT and STANDBY excluded. Recommendations update after verified Hub refreshes. This does not draw players or create Nakka pools.'));
+    out.appendChild(el('p','IN players only; OUT and STANDBY excluded. Recommendations update after verified Hub refreshes. '+(root.BeautySeededPoolUI?'Use the seeded TEST controls below to draw and review a Nakka handoff.':'This does not draw players or create Nakka pools.')));
   }
-  api.update=data=>{snapshot=data;stale=false;render();};
-  api.unavailable=()=>{stale=true;render();};
+  api.update=data=>{snapshot=data;stale=false;root.BeautySeededPoolUI?.update(data);render();};
+  api.unavailable=()=>{stale=true;root.BeautySeededPoolUI?.unavailable();render();};
   root.BeautyPoolPlanner=api;
   document.addEventListener('DOMContentLoaded',()=>{
     const button=document.getElementById('poolPlannerButton');if(!button)return;
     button.addEventListener('click',()=>{
       if(dialog){dialog.showModal();root.BeautyHubNavigation?.activate(button);render();return;}
       dialog=el('dialog');dialog.className='pool-planner';dialog.setAttribute('aria-labelledby','poolPlannerTitle');
-      const close=el('button','×');close.className='pool-close';close.setAttribute('aria-label','Close Pool Planner');close.addEventListener('click',()=>dialog.close());
+      const close=el('button','×');close.className='pool-close';close.setAttribute('aria-label','Close Pool Planner');close.addEventListener('click',()=>{if(!root.BeautySeededPoolUI?.isBusy())dialog.close();});
       const title=el('h2','Pool Planner');title.id='poolPlannerTitle';dialog.append(close,title);
       const count=el('p');count.dataset.count='';dialog.appendChild(count);
       const label=el('label','Preferred players per pool '),size=el('select');size.dataset.size='';
@@ -2578,10 +2727,84 @@ if (typeof document !== 'undefined') document.addEventListener('DOMContentLoaded
       const note=el('p','Original supplied file: two preferences covering 5–101 players.');dialog.appendChild(note);
       boards.addEventListener('input',render);size.addEventListener('change',render);
       dialog.addEventListener('close',()=>{root.BeautyHubNavigation?.dashboard();button.focus();});
-      document.body.appendChild(dialog);dialog.showModal();root.BeautyHubNavigation?.activate(button);render();
+      document.body.appendChild(dialog);root.BeautySeededPoolUI?.mount(dialog);dialog.showModal();root.BeautyHubNavigation?.activate(button);render();
     });
   });
 })(typeof window!=='undefined'?window:globalThis);
+
+/* Identity TEST seeded Pool Planner. Approval and draws are server-owned. */
+(function(root){
+ 'use strict';
+ let panel,host,state=null,frozen=null,approval=null,busy=false,epoch=0,invalid=true,lastRoster='';
+ const el=(tag,text,parent)=>{const n=document.createElement(tag);if(text!=null)n.textContent=text;parent?.appendChild(n);return n;};
+ const button=(text,parent,fn)=>{const b=el('button',text,parent);b.type='button';b.addEventListener('click',fn);return b;};
+ function message(text){panel.querySelector('[data-pool-message]').textContent=text;}
+ function fingerprint(data){return data?.success&&Array.isArray(data.players)?JSON.stringify([data.eventDate,data.players.filter(p=>p.status==='IN').map(p=>p.player||p.newPlayer).sort()]):'';}
+ function invalidate(text){invalid=true;approval=null;if(panel){message(text);renderDraw();}}
+ async function request(page,input){
+  const url=new URL(BeautyHubServices.endpoint);url.search='';url.searchParams.set('page',page);for(const [k,v]of Object.entries(input))url.searchParams.set(k,v);
+  const data=await(await BeautyHubServices.request(url.toString())).json();if(!data.success)throw Error((data.error||'Pool request failed.')+(data.audit?' Audit: '+data.audit:''));return data;
+ }
+ async function run(job){
+  if(busy)return;busy=true;const generation=BeautyHubAuth.generation(),revision=epoch;
+  const valid=()=>revision===epoch&&BeautyHubAuth.isCurrent(generation)&&host?.open;
+  const send=async(page,input)=>{const r=await request(page,input);if(!valid())throw Error('Session or panel changed. Reopen the planner.');return r;};
+  disable();try{await job(send);}catch(e){if(valid())message(e.message);}finally{busy=false;disable();}
+ }
+ function disable(){if(panel)panel.querySelectorAll('button,input,select').forEach(n=>{n.disabled=busy||n.dataset.blocked==='true';});}
+ function bindings(){return [...panel.querySelectorAll('[data-binding]')].map(row=>({id:row.dataset.binding,lpid:row.querySelector('[data-lpid]').value,tpid:row.querySelector('[data-tpid]').value}));}
+ function select(parent,key,candidates,field,value){const s=el('select',null,parent);s.dataset[key]='';el('option','Unresolved / Unseeded',s).value='';for(const p of candidates)el('option',p.name+' · '+p[field],s).value=p[field];s.value=value;s.addEventListener('change',()=>{frozen=null;approval=null;invalid=true;const row=parent.parent,p=state.mappings.find(p=>p.id===row.dataset.binding),selected=p?.leagueCandidates.find(p=>p.lpid===row.querySelector('[data-lpid]').value);const cell=row.querySelector('.pool-number');if(cell)cell.textContent=selected?.average==null?'Unseeded':selected.average.toFixed(2);panel.querySelector('[data-mapping-reviewed]').checked=false;renderDraw();});return s;}
+ function renderSource(){
+  const box=panel.querySelector('[data-pool-source]');box.replaceChildren();if(!state)return;const stats=state.stats;
+  el('p',(stats.fresh?'CURRENT':'STALE / UNAVAILABLE')+' · Last successful statistics: '+(stats.fetchedAt||'None')+' · '+(stats.title||'AIK league'),box);
+  el('p',stats.message||'Overall three-dart average = 3 × total score / total darts. Display uses two decimals; seeding keeps full precision. Ranking points are separate.',box);if(state.journal)el('p',state.journal,box);
+  const details=el('details',null,box);el('summary','Review '+state.mappings.length+' IN players and league / event identities',details);
+  el('p','Names propose matches. Check the LPID and event entry ID in Nakka. If Nakka does not expose the saved league link, this records your review; it does not prove that hidden link. Missing averages remain Unseeded.',details);
+  const table=el('table',null,details),head=el('tr',null,el('thead',null,table));['Player','League identity (LPID)','Event entry (TPID)','Overall average'].forEach(t=>el('th',t,head));const body=el('tbody',null,table);
+  for(const p of state.mappings){const row=el('tr',null,body);row.dataset.binding=p.id;el('td',p.name,row);select(el('td',null,row),'lpid',p.leagueCandidates,'lpid',p.lpid);select(el('td',null,row),'tpid',p.eventCandidates,'tpid',p.tpid);const avg=el('td',p.average===null?'Unseeded':p.average.toFixed(2),row);avg.className='pool-number';if(p.reason)el('small',p.reason,avg);}
+  const label=el('label',null,box),review=el('input',null,label);review.type='checkbox';review.dataset.mappingReviewed='';label.appendChild(document.createTextNode(' I reviewed all proposed identities. Unresolved players may be planned as Unseeded; sending requires every league identity and event entry.'));
+  const choice=el('label','Pool-size arrangement ',box),scheme=el('select',null,choice);scheme.dataset.drawScheme='';for(const [v,t]of [['preferredPlan','Preferred format'],['perBoard','One pool per dartboard']])el('option',t,scheme).value=v;
+  const draw=button('GENERATE SEEDED PREVIEW',box,()=>run(async send=>{
+   if(!review.checked)throw Error('Review and tick the player identity acknowledgement first.');
+   const p=BeautyPoolPlanner.plan(BeautyPoolPlanner.eventCount(root.beautyHubData),Number(host.querySelector('[data-size]').value),Number(host.querySelector('[data-boards]').value));
+   if(p.error||!p[scheme.value])throw Error(p.error||'That arrangement cannot fit the boards. Choose the preferred format or add boards.');
+   frozen=await send('pooldraw',{bindings:JSON.stringify(bindings()),sizes:JSON.stringify(BeautyPoolSeeding.sizesFromPlan(p[scheme.value])),reviewed:'true'});approval=null;invalid=false;lastRoster=fingerprint(root.beautyHubData);message('Averages are frozen. Review pool balance and make any manual swaps before approving.');renderDraw();
+  }));draw.dataset.blocked=String(!stats.fresh);
+ }
+ function renderDraw(){
+  const box=panel?.querySelector('[data-pool-draw]');if(!box)return;box.replaceChildren();if(!frozen)return;const draw=frozen.draw;
+  el('h3','Seeded pool preview',box);el('p','Frozen '+draw.frozenAt+' · Statistics '+draw.source.fetchedAt+' · Draw seed '+draw.seed,box);
+  if(invalid)el('p','REVIEW INVALIDATED — source expired, unavailable or changed. Generate a new draw before sending.',box);BeautyPoolSeeding.warnings(draw).forEach(t=>el('p',t,box));
+  const settings=el('div',null,box),label=el('label',null,settings),colours=el('input',null,label);colours.type='checkbox';colours.checked=!!root.beautyPoolColours;label.appendChild(document.createTextNode(' Show seeding colours'));
+  const bounds=el('label','Band boundaries (three increasing values) ',settings),inputs=[50,55,60].map((v,i)=>{const n=el('input',null,bounds);n.type='number';n.min='0';n.max='180';n.step='0.01';n.value=String(root.beautyPoolBands?.[i]??v);return n;});
+  const legend=el('p',null,settings),grid=el('div',null,box);grid.className='pool-grid';
+  function paint(){const thresholds=inputs.map(n=>Number(n.value));try{BeautyPoolSeeding.band(null,thresholds);}catch(e){legend.textContent=e.message;return;}root.beautyPoolBands=thresholds;root.beautyPoolColours=colours.checked;legend.textContent='Bands: below '+thresholds[0]+'; '+thresholds[0]+'–<'+thresholds[1]+'; '+thresholds[1]+'–<'+thresholds[2]+'; '+thresholds[2]+'+. Unseeded is separate.';grid.replaceChildren();
+   for(const pool of draw.pools){const card=el('section',null,grid);card.className='pool-card';const s=BeautyPoolSeeding.summary(pool);const heading=el('h4','Pool '+pool.name+' · ',card);el('span',s.players+'/'+s.capacity,heading).className='pool-number';el('p','Known average: '+(s.knownAverage===null?'—':s.knownAverage.toFixed(2))+' · Coverage '+s.known+'/'+s.players+' · Unseeded '+s.unseeded,card);const list=el('ol',null,card);
+    for(const p of pool.players){const li=el('li',null,list);if(colours.checked)li.className='pool-band-'+BeautyPoolSeeding.band(p.average,thresholds);el('span',p.name,li);el('span',p.average===null?'Unseeded':p.average.toFixed(2),li).className='pool-number';}}
+  }colours.addEventListener('change',paint);inputs.forEach(n=>n.addEventListener('change',paint));paint();if(invalid){disable();return;}
+  const swap=el('fieldset',null,box);el('legend','Manual swap',swap);const left=el('select',null,swap),right=el('select',null,swap);for(const pool of draw.pools)for(const p of pool.players)for(const s of [left,right])el('option','Pool '+pool.name+' · '+p.name,s).value=p.id;
+  button('SWAP PLAYERS',swap,()=>run(async send=>{const target=draw.pools.find(g=>g.players.some(p=>p.id===right.value));frozen=await send('pooladjust',{ticket:frozen.ticket,change:JSON.stringify({playerId:left.value,targetPool:target.id,swapWith:right.value})});approval=null;message('Swap saved in preview. Review the new pool balance.');renderDraw();}));
+  button('REVIEW NAKKA HANDOFF — TEST',box,()=>run(async send=>{approval=await send('poolprepare',{ticket:frozen.ticket});frozen.ticket=approval.ticket;message('Handoff checked. Close Nakka editing pages, then confirm these TEST pools.');renderDraw();}));
+  if(approval){const review=el('section',null,box);review.className='pool-approval';el('h3','Approve TEST pool handoff',review);el('p',approval.event.title+' · '+approval.event.date+' · '+draw.roster.length+' IN players · '+draw.pools.length+' pools · '+approval.expectedCards+' round-robin match cards.',review);
+   el('p','Only pool assignments, division count and maximum pool size change. Existing players and other event settings are retained. Sending uses two Nakka operations: groups, then match cards. If either cannot be verified, inspect the audit before another action.',review);
+   const details=el('details',null,review);el('summary','Review preserved game settings',details);el('pre',JSON.stringify(approval.setting,null,2),details);
+   const label=el('label',null,review),check=el('input',null,label);check.type='checkbox';label.appendChild(document.createTextNode(' I approve these identities, frozen pools and match cards for the named TEST event. Nakka editing pages are closed.'));
+   const save=button('SEND APPROVED TEST POOLS',review,()=>run(async send=>{if(!check.checked)throw Error('Tick the final approval first.');const ticket=approval.ticket;approval=null;invalid=true;message('Sending once. Waiting for group and match-card readback…');try{const r=await send('poolsave',{ticket,confirmed:'true'});frozen=null;message(r.message+' Audit: '+r.audit+' · Receipt: '+r.receipt);renderDraw();}catch(e){renderDraw();throw Error(e.message+' Do not repeat a send until the event and audit have been inspected.');}}));save.dataset.blocked='true';save.disabled=true;check.addEventListener('change',()=>{save.dataset.blocked=String(!check.checked);disable();});
+  }disable();
+ }
+ async function load(send,refresh){state=await send('poolload',{refresh:String(refresh)});approval=null;if(frozen)invalid=true;renderSource();renderDraw();message('Review player mappings before generating a draw. '+(state.stats.message||''));}
+ function mount(dialog){
+  if(BeautyHubServices.mode!=='test')return;host=dialog;panel=el('section',null,dialog);panel.className='seeded-pool-planner';el('h3','Seeded pools — TEST',panel);el('p','IN players only. Overall three-dart averages balance strength; players without an average are spread evenly as Unseeded. Manual swaps keep each chosen pool size.',panel);
+  const tools=el('div',null,panel);button('LOAD / REFRESH LEAGUE STATS',tools,()=>run(send=>load(send,true)));
+  const manual=el('label','Planning count (recommendations only) ',tools),count=el('input',null,manual);count.type='number';count.min='5';count.max='101';const estimate=el('p',null,tools);
+  count.addEventListener('input',()=>{const p=BeautyPoolPlanner.plan(Number(count.value),Number(host.querySelector('[data-size]').value),Number(host.querySelector('[data-boards]').value));estimate.textContent=Number(count.value)>101?'The supplied scheme covers 5–101.':p.error||p.preferredPlan.pools+' pools: '+p.preferredPlan.three+' × 3, '+p.preferredPlan.four+' × 4, '+p.preferredPlan.five+' × 5. Draws always use the verified IN list.';});
+  const notice=el('p','Load league statistics to review identities and generate a draw.',panel);notice.dataset.poolMessage='';notice.setAttribute('role','status');notice.setAttribute('aria-live','polite');el('div',null,panel).dataset.poolSource='';el('div',null,panel).dataset.poolDraw='';
+  dialog.addEventListener('cancel',e=>{if(busy)e.preventDefault();});dialog.addEventListener('close',()=>{epoch++;approval=null;invalid=true;renderDraw();});
+  root.setInterval(()=>{if(host?.open&&!document.hidden&&!busy&&state)run(send=>load(send,false));},300000);
+ }
+ document.addEventListener('beauty-hub-locked',()=>{epoch++;busy=false;state=null;frozen=null;approval=null;invalid=true;host?.close();panel?.querySelector('[data-pool-source]')?.replaceChildren();panel?.querySelector('[data-pool-draw]')?.replaceChildren();if(panel)message('Sign in, then reload league statistics.');});
+ root.BeautySeededPoolUI={mount,update(data){if(frozen&&fingerprint(data)!==lastRoster)invalidate('The IN roster or event date changed. The frozen preview is retained for reference; generate a new draw.');},unavailable(){if(frozen)invalidate('Hub data unavailable. Wait for a verified refresh, then generate a new draw.');},isBusy:()=>busy};
+})(window);
 
 </script>
   <script>
@@ -4377,7 +4600,7 @@ setInterval(
       'Needs attention opens named player issues. CHECK AGAIN reads Nakka; it does not send or repeat transfers.',
       'Use Nakka to inspect comparisons and review a single transfer. Close any Nakka editing page before confirming a transfer.',
       'System Status shows the Sheets connection. Nakka health is separate from player attention.',
-      'Pool Planner currently previews group sizes. Seeded draws are a separate pending update.']){
+      'Pool Planner retains the original 5–101 group-size scheme. In TEST, load league statistics, review identities, generate a seeded preview and adjust pools before explicitly approving the Nakka handoff. Missing averages stay Unseeded. OUT and STANDBY are excluded.']){
       const p=document.createElement('p');p.textContent=text;help.append(p);
     }
     help.addEventListener('close',()=>{window.BeautyHubNavigation?.dashboard();instructions.focus();});document.body.append(help);help.showModal();window.BeautyHubNavigation?.activate(instructions);

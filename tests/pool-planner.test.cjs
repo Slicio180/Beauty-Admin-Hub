@@ -40,12 +40,12 @@ test('pool planner: real panel reacts to verified event refresh, controls and ou
   showModal(){this.open=true;}close(){this.open=false;}
  }
  const button=new Node('button'),body=new Node('body');let ready;
- const document={body,createElement:t=>new Node(t),getElementById:()=>button,addEventListener:(n,f)=>{ready=f;}};
- const window={document};let capturedBlob;
+ const document={body,createElement:t=>new Node(t),getElementById:()=>button,addEventListener:(n,f)=>{if(n==='DOMContentLoaded')ready=f;}};
+ const window={document};const BeautyHubServices={mode:'mock'};let capturedBlob;
  const generated=fs.readFileSync('apps-script/registration-identity-test/remote-app/HubTest.html','utf8');
  const source=[...generated.matchAll(/<script>\n([\s\S]*?)<\/script>/g)].map(m=>m[1]).find(s=>s.includes('Read-only planning.'));
  assert.ok(source);
- vm.runInNewContext(source,{window,document,atob:s=>Buffer.from(s,'base64').toString('binary'),
+ vm.runInNewContext(source,{window,document,BeautyHubServices,atob:s=>Buffer.from(s,'base64').toString('binary'),
   Blob:class {constructor(parts,options){this.parts=parts;this.type=options.type;}},
   URL:{createObjectURL:blob=>{capturedBlob=blob;return 'blob:test-pool-download';}}});
  ready();button.handlers.click();const d=body.children[0];

@@ -1,0 +1,117 @@
+[
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "022efccc651cde67a5702ea6c2636268f7e39f8d25ee8413bfde6dd1d7f62708",
+    "after": "9e3ab847ca5d28003d91027310f069c7f7a4f22f9d1f2d16ce537614d772cea9"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTestBridge.gs",
+    "before": "4fe1f3aac51144dcc73199e903e7e884d151cc4fe9b1e7fee2897be3b810a037",
+    "after": "88369f696f86b164f4340437c58276a6f1d9611d8e7eb05ba44a92c804534f2c"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTestPools.gs",
+    "before": null,
+    "after": "2eeef515cf758aaf034b7eded2151b74fb738f92a3319e5338e71accc4c133d6"
+  },
+  {
+    "path": "docs/handoff/requirements.json",
+    "before": "01257f7b59f5c6e2fa4b5c3b6275eaae45cd42f16c2a2f31c1b65afcb3038074",
+    "after": "102d01a8010cbd2e9d6206c255030519c39bea148a141832a5827af2873f6848"
+  },
+  {
+    "path": "docs/handoff/seeded-pools-20261028.md",
+    "before": null,
+    "after": "0d57732c95a8bb7c29ca43b0d92941c10f92d88d95bd30e3394cc753e46322c3"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "e42bc75200784d1753f0e50c93fb9312231944ee9b0d4b4f2a943cbd4527e283",
+    "after": "1d43d9a0a1cdae0b173690e627ec59011b665dc0eaf1b9cbd7b24acf10b3e18c"
+  },
+  {
+    "path": "evidence/seeded-pools-20261028/all-tests.txt",
+    "before": null,
+    "after": "91aec3803fe2fe455726b2b5072337a270f60a14a86dee5d1f35b922d8050a28"
+  },
+  {
+    "path": "evidence/seeded-pools-20261028/focused-tests.tap",
+    "before": null,
+    "after": "b42ea7f4dcc2ff99efc56c78f25eff3030a61516b34138fcc70f3978dfda2cbf"
+  },
+  {
+    "path": "evidence/seeded-pools-20261028/inventory.txt",
+    "before": null,
+    "after": "36fc91f3cc3c4f3304edc975ed3449d850f1955fa1d67a9fd6921e4d2eb58f4f"
+  },
+  {
+    "path": "evidence/seeded-pools-20261028/schema-qualification.json",
+    "before": null,
+    "after": "e784edc3d8444f781bc2fa044534a7e452a2b37fafaa37be7d82c956e4f15ecb"
+  },
+  {
+    "path": "public/css/beauty-dashboard.css",
+    "before": "91197d0ad698a15c9bb7f52a18afde4ed865b5189cdfe5d55b1dd2d3c2d99f04",
+    "after": "f0a9d6a75eba7ba5aad4eccdfa39f904e71c4a5feb168a0fcc605419662b84a8"
+  },
+  {
+    "path": "public/js/hub-dashboard.js",
+    "before": "8f0e1178f8a7c0a375043974aaa2c215a3ceef15f281ad40774bb861cb428d44",
+    "after": "1bd2ca143a740e1c107708f7361bcd1722a815728756ff4619705f0e18606651"
+  },
+  {
+    "path": "public/js/hub-test-services.js",
+    "before": "63d539535e6e9be07e4ffb451f3842961c96f4aab739b58099cf2a098e9793bc",
+    "after": "a65e5edf2af1fcedd38fba2d82383652ee5652100e7918da37a4584275f9e22b"
+  },
+  {
+    "path": "public/js/pool-planner-seeded.js",
+    "before": null,
+    "after": "ecaebe2fa944240080b58a5fbb1970b7b22e9661bb799a87acba51d89fae6439"
+  },
+  {
+    "path": "public/js/pool-planner.js",
+    "before": "32cfed1e6e4def6d387d973ad2613e10bb5d4fa93b18f817c26660704cd5b3f3",
+    "after": "684eb4af047b426de728f9627f3c2db18dd6e0b9241600b55723e7f078614964"
+  },
+  {
+    "path": "public/js/pool-seeding.js",
+    "before": null,
+    "after": "b3a3ef13a20c9fa4b4348a97897dd32b8ccfe946184ab6d4b479b7a569a2870a"
+  },
+  {
+    "path": "scripts/build-hub-test.cjs",
+    "before": "f0de8024f759dc1b5c6d8c8cb73eb3d4eb539e73baca64e50ef879c1415c70b6",
+    "after": "7e505e294511cf2c141849ba9f4ce94678dcc87683d968900efa50ce0e88305b"
+  },
+  {
+    "path": "scripts/build-pool-service.cjs",
+    "before": null,
+    "after": "612276012f671b9304ea6cab51d43e7372439493737c70aee18217a5c8813a35"
+  },
+  {
+    "path": "server/pool-service.js",
+    "before": null,
+    "after": "54a5c342a62d61f27c3980d81d55b4b94b1bac8c5c7813db882d2516fd3b9d80"
+  },
+  {
+    "path": "tests/pool-planner-seeded-ui.test.cjs",
+    "before": null,
+    "after": "18fbbe94b7a1171df039ce27759cd333e425b4f3f725c1b139575669267c1aef"
+  },
+  {
+    "path": "tests/pool-planner.test.cjs",
+    "before": "0cb397cf34323ce4ef3a031d46809b153ab6656ec21859813190c57dc5ef095d",
+    "after": "00f27155ffb7eba4964cd1e871b4b8655e838e2951eb751fa3529a10a20cd4e3"
+  },
+  {
+    "path": "tests/pool-seeding.test.cjs",
+    "before": null,
+    "after": "9677f8d5a7a3a8287531e782fc540f258458c772f039c1fdc3ad2aab76759ffa"
+  },
+  {
+    "path": "tests/pool-service.test.cjs",
+    "before": null,
+    "after": "a80a75634c2649a1b36d57a6b68fa03a64ce3cfee4b6745a7640e22a4f9cb777"
+  }
+]

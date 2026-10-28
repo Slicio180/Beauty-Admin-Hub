@@ -49,17 +49,17 @@
     out.appendChild(el('h3','One pool per dartboard'));
     out.appendChild(el('p',result.perBoard?description(result.perBoard):'Not possible with only 3- and 4-player pools on the available boards. Use shared boards or staggered starts, or make more boards available.'));
     if(result.beyondScheme)out.appendChild(el('p','Above the supplied 101-player scheme: calculated using the same 3-/4-player rules.'));
-    out.appendChild(el('p','IN players only; OUT and STANDBY excluded. Recommendations update after verified Hub refreshes. This does not draw players or create Nakka pools.'));
+    out.appendChild(el('p','IN players only; OUT and STANDBY excluded. Recommendations update after verified Hub refreshes. '+(root.BeautySeededPoolUI?'Use the seeded TEST controls below to draw and review a Nakka handoff.':'This does not draw players or create Nakka pools.')));
   }
-  api.update=data=>{snapshot=data;stale=false;render();};
-  api.unavailable=()=>{stale=true;render();};
+  api.update=data=>{snapshot=data;stale=false;root.BeautySeededPoolUI?.update(data);render();};
+  api.unavailable=()=>{stale=true;root.BeautySeededPoolUI?.unavailable();render();};
   root.BeautyPoolPlanner=api;
   document.addEventListener('DOMContentLoaded',()=>{
     const button=document.getElementById('poolPlannerButton');if(!button)return;
     button.addEventListener('click',()=>{
       if(dialog){dialog.showModal();root.BeautyHubNavigation?.activate(button);render();return;}
       dialog=el('dialog');dialog.className='pool-planner';dialog.setAttribute('aria-labelledby','poolPlannerTitle');
-      const close=el('button','×');close.className='pool-close';close.setAttribute('aria-label','Close Pool Planner');close.addEventListener('click',()=>dialog.close());
+      const close=el('button','×');close.className='pool-close';close.setAttribute('aria-label','Close Pool Planner');close.addEventListener('click',()=>{if(!root.BeautySeededPoolUI?.isBusy())dialog.close();});
       const title=el('h2','Pool Planner');title.id='poolPlannerTitle';dialog.append(close,title);
       const count=el('p');count.dataset.count='';dialog.appendChild(count);
       const label=el('label','Preferred players per pool '),size=el('select');size.dataset.size='';
@@ -79,7 +79,7 @@
       const note=el('p','Original supplied file: two preferences covering 5–101 players.');dialog.appendChild(note);
       boards.addEventListener('input',render);size.addEventListener('change',render);
       dialog.addEventListener('close',()=>{root.BeautyHubNavigation?.dashboard();button.focus();});
-      document.body.appendChild(dialog);dialog.showModal();root.BeautyHubNavigation?.activate(button);render();
+      document.body.appendChild(dialog);root.BeautySeededPoolUI?.mount(dialog);dialog.showModal();root.BeautyHubNavigation?.activate(button);render();
     });
   });
 })(typeof window!=='undefined'?window:globalThis);
