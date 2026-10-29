@@ -15,3 +15,18 @@ body.beauty-auth-locked>#beautyAuthSurface{display:block}
 .hub-account-controls{display:flex;flex-direction:column;align-items:stretch;gap:10px;margin-top:12px;padding:16px;border-top:1px solid #303030;font-size:16px;min-width:0}
 .hub-account-controls span{font:14px/1.4 Arial,sans-serif;color:#bbb;overflow-wrap:anywhere}
 #hubSignOut{border:1px solid #ffd700;border-radius:5px;background:#111;color:#ffd700;padding:8px 12px;font-size:17px}
+
+/* Approved sign-in composition, 29 October 2026. TEST notice stays truthful. */
+.login-card{max-width:560px;padding:32px 36px;border:1px solid #ffd700;font-family:'AIK Display',serif}
+.login-masthead{display:flex;align-items:center;justify-content:center;gap:16px;color:#ffd700;font:700 clamp(36px,8vw,54px)/1 'AIK Display',serif}
+.login-masthead .login-logo{width:68px;height:88px;flex:0 0 68px;margin:0;object-fit:contain}
+.login-brand{font:700 30px/1.2 'AIK Display',serif;letter-spacing:0;margin:20px 0 24px}
+.login-tagline{font:700 30px/1.3 'AIK Display',serif;text-align:center;margin:0 0 30px;color:#fff}
+.login-card h1{font:700 26px/1.2 'AIK Display',serif;text-align:center;margin:0 0 22px}
+.login-card label{font:700 20px/1.3 'AIK Condensed',serif;color:#fff}
+.login-card input{font:400 20px/1.4 'AIK Display',serif}
+.login-card button{font-family:'AIK Display',serif;font-size:18px}
+.login-primary,.login-secondary,.password-field button{background:#080808;color:#ffd700;border:1px solid #ffd700}
+.login-link{display:block;margin:8px 0 0 auto;padding:12px 8px;min-height:44px}
+.login-note,.login-setup{font:400 16px/1.5 'AIK Display',serif}
+@media(max-width:480px){.login-card{padding:24px 20px}.login-tagline{font-size:26px}.login-masthead{gap:10px}.login-masthead .login-logo{width:52px;height:70px;flex-basis:52px}}

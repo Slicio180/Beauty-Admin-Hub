@@ -5,7 +5,7 @@ process.chdir(require('node:path').resolve(__dirname,'..'));
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),cp=require('node:child_process');
 const model=require('../public/js/beauty-live-model.js'),base='apps-script/registration-identity-test/remote-app/';
 const feed=players=>({success:true,players});
-test('Live Swedish order strips private fields without mutating input',()=>{const input=feed([{name:'Östen',message:'PRIVATE',status:'OUT'},{name:'Åsa'},{name:'Adam'},{name:'Ägir'}]);const out=model.project(input,'alphabetical');assert.deepEqual(out.map(p=>p.name),['Adam','Åsa','Ägir','Östen']);assert.deepEqual(Object.keys(out[0]),['name','registeredAt','rank','points']);assert.equal(input.players[0].name,'Östen');});
+test('Live Swedish order strips private fields without mutating input',()=>{const input=feed([{name:'Östen',message:'PRIVATE',status:'OUT'},{name:'Åsa'},{name:'Adam'},{name:'Ägir'}]);const out=model.project(input,'alphabetical');assert.deepEqual(out.map(p=>p.name),['Adam','Åsa','Ägir','Östen']);assert.deepEqual(Object.keys(out[0]),['name','registeredAt','rank','points','average']);assert.equal(input.players[0].name,'Östen');});
 test('Live timestamps sort earliest first with missing values last',()=>{assert.deepEqual(model.project(feed([{name:'C'},{name:'B',registeredAt:2},{name:'A',registeredAt:1}]),'registration').map(p=>p.name),['A','B','C']);});
 test('Live ranking projection places unranked last and preserves zero points',()=>{const out=model.project(feed([{name:'C',rank:0},{name:'B',rank:2,points:25},{name:'A',rank:1,points:0}]),'ranking');assert.deepEqual(out.map(p=>p.name),['A','B','C']);assert.equal(out[0].points,0);});
 function server(blocked=false){let reads=0;const rows=[[new Date('2026-10-25T12:00:00Z'),'Adam',''],[new Date('2026-10-25T11:00:00Z'),'Adam',''],[new Date('2026-10-24T12:00:00Z'),'Adam',''],[new Date('2026-10-25T13:00:00Z'),'MITT NAMN FINNS INTE I LISTAN','Bea']];const c=vm.createContext({...authFixture,Date,beautyHubTestGuard_:()=>{if(blocked)throw Error('blocked');},getBeautyHubData_:()=>({success:true,eventDate:'2026-10-25',masterPlayers:['PRIVATE'],players:[{player:'Adam',consent:'NO',message:'PRIVATE',status:'OUT'},{newPlayer:'Bea'},{player:'Unknown'}]}),SHEET_ID:'TEST',SpreadsheetApp:{openById:id=>{reads++;assert.equal(id,'TEST');return {getSheetByName:n=>{assert.equal(n,'Form responses 2');return {getLastRow:()=>rows.length+1,getRange:(...a)=>{assert.deepEqual(a,[2,1,rows.length,3]);return {getValues:()=>rows};}};}};}},Utilities:{formatDate:d=>d.toISOString().slice(0,10)},Session:{getScriptTimeZone:()=>'Europe/Stockholm'},ScriptApp:{getService:()=>({getUrl:()=> 'https://script.google.com/test/dev'})}});vm.runInContext(fs.readFileSync(base+'BeautyLiveTest.gs','utf8'),c);return {c,reads:()=>reads};}
@@ -14,17 +14,44 @@ test('Live guard rejects feed and URL before service access',()=>{const s=server
 test('Live build reproduces and scripts parse with original AIK fonts',()=>{const file=base+'BeautyLiveTest.html',before=fs.readFileSync(file,'utf8');cp.execFileSync(process.execPath,['scripts/build-beauty-live.cjs']);assert.equal(fs.readFileSync(file,'utf8'),before);for(const m of before.matchAll(/<script>\n([\s\S]*?)<\/script>/g))new vm.Script(m[1]);assert.match(before,/lang="sv"/);assert.match(before,/KVÄLLENS SPELARE/);assert.match(before,/#ffd700/);assert.match(before,/data:font\/woff2;base64/);});
 function client(width=1440){const nodes={};function node(){return {style:{setProperty(k,v){this[k]=v;}},scrollTop:0,scrollHeight:1000,clientHeight:500,textContent:'',dataset:{},children:[],value:'alphabetical',checked:false,disabled:false,events:{},replaceChildren(){this.children=[];},append(n){this.children.push(n);},addEventListener(e,fn){this.events[e]=fn;}};}for(const id of ['liveScroll','liveNames','liveCount','liveStatus','liveSort','liveStats','livePage','rankingOrder','liveFullscreen'])nodes[id]=node();const timeouts=[],intervals=[];let success,failure;const runner={withSuccessHandler(fn){success=fn;return this;},withFailureHandler(fn){failure=fn;return this;},beautyLiveTestData(){}};const c=vm.createContext({...authFixture,Date,Intl,innerHeight:900,innerWidth:width,document:{getElementById:id=>nodes[id],createElement:node},window:{addEventListener(){}},setTimeout:(fn,ms)=>{timeouts.push({fn,ms});return timeouts.length;},clearTimeout(){},setInterval:(fn,ms)=>intervals.push({fn,ms}),google:{script:{run:runner}}});vm.runInContext(fs.readFileSync('public/js/beauty-live-model.js','utf8')+'\n'+fs.readFileSync('public/js/beauty-live.js','utf8'),c);return {nodes,timeouts,intervals,ok:d=>success(d),fail:()=>failure()};}
 test('Live refresh updates count safely and retains names on connection failure',()=>{const c=client();c.ok(feed([{name:'<img onerror=bad>'}]));assert.equal(c.nodes.liveCount.textContent,'1');assert.equal(c.nodes.liveNames.children[0].children[0].children[1].textContent,'<img onerror=bad>');assert.equal(c.nodes.liveStats.disabled,true);assert.equal(c.timeouts.at(-1).ms,15000);c.timeouts.at(-1).fn();c.ok(feed([{name:'A'},{name:'B'}]));assert.equal(c.nodes.liveCount.textContent,'2');c.timeouts.at(-1).fn();c.fail();assert.equal(c.nodes.liveCount.textContent,'2');assert.equal(c.nodes.liveStatus.dataset.state,'error');});
-test('Live empty state and numbered sixty-player columns fit without pagination',()=>{const c=client();c.ok(feed([]));assert.equal(c.nodes.liveCount.textContent,'0');assert.match(c.nodes.liveNames.children[0].textContent,/Inga spelare/);c.timeouts.at(-1).fn();c.ok(feed(Array.from({length:60},(_,i)=>({name:'Player '+i}))));const rows=c.nodes.liveNames.children;assert.equal(rows.length,60);assert.equal(rows[0].children[0].children[0].textContent,'1');assert.equal(rows[14].style.gridColumn,'1');assert.equal(rows[14].style.gridRow,'15');assert.equal(rows[15].style.gridColumn,'2');assert.equal(rows[59].style.gridColumn,'4');assert.equal(rows[59].style.gridRow,'15');assert.equal(c.nodes.livePage.textContent,'');c.intervals[0].fn();assert.equal(c.nodes.liveScroll.scrollTop,0);});
-test('Live sixty-first player continues below sixty and auto-scroll survives refresh',()=>{const c=client();const data=feed(Array.from({length:61},(_,i)=>({name:'Player '+i})));c.ok(data);assert.equal(c.nodes.liveNames.children[60].style.gridRow,'16');assert.equal(c.nodes.liveNames.children[60].children[0].children[0].textContent,'61');c.intervals[0].fn();assert.equal(c.nodes.liveScroll.scrollTop,1);assert.match(c.nodes.livePage.textContent,/Automatisk rullning/);c.timeouts.at(-1).fn();c.ok(data);assert.equal(c.nodes.liveScroll.scrollTop,1);});
+test('Live thirty-player pages rotate with stable numbering and retain page on unchanged refresh',()=>{
+ const c=client(),data=feed(Array.from({length:65},(_,i)=>({name:'Player '+String(i).padStart(3,'0')})));
+ c.ok(data);assert.equal(c.nodes.liveNames.children.length,30);assert.match(c.nodes.livePage.textContent,/Sida 1 \/ 3/);
+ c.intervals[0].fn();assert.equal(c.nodes.liveNames.children[0].children[0].children[0].textContent,'31');assert.match(c.nodes.livePage.textContent,/31–60/);
+ c.timeouts.at(-1).fn();c.ok(data);assert.match(c.nodes.livePage.textContent,/Sida 2/);
+ c.intervals[0].fn();assert.equal(c.nodes.liveNames.children.length,5);assert.match(c.nodes.livePage.textContent,/61–65/);
+ c.intervals[0].fn();assert.match(c.nodes.livePage.textContent,/Sida 1/);
+});
+test('Live empty and single page do not rotate or scroll',()=>{
+ const c=client();c.ok(feed([]));assert.match(c.nodes.liveNames.children[0].textContent,/Inga spelare/);
+ c.timeouts.at(-1).fn();c.ok(feed([{name:'Adam'}]));c.intervals[0].fn();assert.match(c.nodes.livePage.textContent,/Sida 1 \/ 1/);assert.equal(c.nodes.liveScroll.scrollTop,0);
+});
 
 test('Live route is additive guarded TEST HTML and rejects configuration injection',()=>{const route=fs.readFileSync(base+'Code.js','utf8').split('/* CANDIDATE')[0];let guard=0;const c=vm.createContext({...authFixture,BEAUTY_IDENTITY_APPROVED_SCRIPT_:'TEST',ScriptApp:{getScriptId:()=> 'TEST'},beautyHubTestGuard_:()=>guard++,HtmlService:{createHtmlOutputFromFile:file=>({file,setTitle(){return this;}})}});vm.runInContext(route,c);assert.equal(c.doGet({parameter:{page:'live'}}).file,'BeautyLiveTest');assert.equal(guard,1);assert.equal(c.doGet({parameter:{page:'hub'}}).file,'HubTest');assert.equal(c.doGet({parameter:{}}).file,'RemoteRegistration');assert.throws(()=>c.doGet({parameter:{page:'live',sheet:'other'}}));});
 
-test('Live column boundaries keep every player in one numbered slot on wide and narrow screens',()=>{
- for(const width of [1440,390])for(const n of [0,1,15,16,30,31,45,46,60,61,90]){
+test('Live thirty-player slot boundaries fit wide and narrow screens without duplicates',()=>{
+ for(const width of [1440,390])for(const n of [1,15,16,30,31,60,65,90]){
   const c=client(width);c.ok(feed(Array.from({length:n},(_,i)=>({name:'Player '+String(i).padStart(3,'0')}))));
-  assert.equal(c.nodes.liveCount.textContent,String(n));if(!n)continue;
-  const cols=Number(c.nodes.liveNames.style['--live-columns']);assert.equal(cols,width<700?2:Math.min(4,Math.ceil(n/15)));
-  const slots=new Set(c.nodes.liveNames.children.map(item=>item.style.gridColumn+':'+item.style.gridRow));assert.equal(slots.size,n);
-  c.nodes.liveNames.children.forEach((item,i)=>{assert.equal(item.children[0].children[0].textContent,String(i+1));assert.ok(Number(item.style.gridColumn)<=cols);});
+  const cols=width<700?2:3,rows=width<700?15:10;assert.equal(Number(c.nodes.liveNames.style['--live-columns']),cols);
+  assert.equal(c.nodes.liveNames.children.length,Math.min(n,30));
+  const slots=new Set(c.nodes.liveNames.children.map(item=>item.style.gridColumn+':'+item.style.gridRow));assert.equal(slots.size,Math.min(n,30));
+  c.nodes.liveNames.children.forEach((item,i)=>{assert.equal(item.children[0].children[0].textContent,String(i+1));assert.ok(Number(item.style.gridColumn)<=cols);assert.ok(Number(item.style.gridRow)<=rows);});
  }
+});
+test('Live real ranking values and ties survive paging; statistics force ranking order when available',()=>{
+ const c=client();c.ok({success:true,rankingAvailable:true,statsAvailable:true,players:[{name:'Z',rank:7,points:0,average:0},{name:'A',rank:2,points:40,average:54.123},{name:'B',rank:2,points:40},{name:'C'}]});
+ c.nodes.liveStats.checked=true;c.nodes.liveStats.events.change();
+ assert.equal(c.nodes.liveNames.children[0].children[0].children[0].textContent,'2');assert.equal(c.nodes.liveNames.children[1].children[0].children[0].textContent,'2');
+ assert.equal(c.nodes.liveNames.children[2].children[0].children[0].textContent,'7');assert.match(c.nodes.liveNames.children[2].children[1].textContent,/0 poäng · Snitt 0.00/);
+ assert.equal(c.nodes.liveNames.children[3].children[0].children[0].textContent,'—');
+});
+test('Live cached public statistics reject stale failed and ambiguous identity matches',()=>{
+ const s=server();const now=new Date().toISOString();
+ s.c.beautyPoolKey_=v=>v.toLowerCase();s.c.PropertiesService={getScriptProperties:()=>({getProperty:()=>null})};
+ let snapshot={leagueId:'lg_tM2v_3523',fetchedAt:now,profiles:[{name:'Adam',average:40.83,points:25,secret:'PRIVATE'}]};
+ s.c.beautyPoolLastGood_=()=>snapshot;
+ let out=JSON.parse(JSON.stringify(s.c.beautyLiveTestData()));assert.equal(out.statsAvailable,true);assert.equal(out.rankingAvailable,false);assert.equal(out.players[0].average,40.83);assert.equal(out.players[0].points,25);assert.doesNotMatch(JSON.stringify(out),/PRIVATE/);
+ snapshot.profiles.push({name:'Adam',average:60,points:50});out=s.c.beautyLiveTestData();assert.equal(out.players[0].average,null);
+ snapshot.fetchedAt='2020-01-01T00:00:00Z';assert.equal(s.c.beautyLiveTestData().statsAvailable,false);
+ snapshot.fetchedAt=now;s.c.PropertiesService={getScriptProperties:()=>({getProperty:()=>String(Date.now()+1)})};assert.equal(s.c.beautyLiveTestData().statsAvailable,false);
 });

@@ -14,6 +14,9 @@ function fixture(options={}){
  const props={getProperty:k=>values.has(k)?values.get(k):null,setProperty(k,v){values.set(k,v);},deleteProperty:k=>values.delete(k)};
  const account={uid:'staff',sessionBinding:'session'};
  const context=vm.createContext({console,Set,Map,Date:class extends Date{constructor(...args){super(...args.length?args:[now]);}static now(){return now;}},
+  // Existing synthetic provider-path tests explicitly qualify unassigned entries;
+  // real deployment has no qualification flag and remains blocked.
+  BEAUTY_POOL_UNASSIGNED_ENTRIES_VERIFIED_:options.unassignedVerified!==false,
   BEAUTY_IDENTITY_WRITES_ENABLED_:true,SHEET_ID:'test-sheet',beautyHubRequestToken_:'token',
   beautyHubTestGuard_(){if(options.guard)throw Error('guard');},beautyHubAuthRequire_(){if(options.auth)throw Error('auth');return account;},
   beautyHubTransferHash_:v=>crypto.createHash('sha256').update(JSON.stringify(v)).digest('base64url'),
@@ -134,4 +137,9 @@ test('pool status25 still refuses existing groups brackets results ranks and mat
 test('pool active finished unknown and string states cannot load or prepare despite status25 support',()=>{
  for(const status of [30,40,0,26,'25']){const f=fixture();f.event.status=status;assert.equal(f.load().success,false);assert.equal(f.calls.filter(c=>c.payload).length,0);}
  const f=fixture();f.event.status=25;const {p}=f.prepare();f.event.status=30;assert.equal(f.call('poolsave',{ticket:p.ticket,confirmed:'true'}).success,false);assert.equal(f.calls.filter(c=>c.payload).length,0);
+});
+
+test('pool unqualified excluded event entries block every write and retain explicit review list',()=>{
+ const f=fixture({unassignedVerified:false}),{p}=f.prepare();assert.equal(p.unassignedEntries.length,2);assert.equal(p.unassignedEntries[0].name,'Player 6');
+ const r=f.call('poolsave',{ticket:p.ticket,confirmed:'true'});assert.equal(r.success,false);assert.match(r.error,/Unassigned Nakka entries/);assert.equal(f.calls.filter(c=>c.payload).length,0);assert.equal(f.audits.length,0);
 });

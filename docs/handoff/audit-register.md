@@ -956,3 +956,38 @@ Evidence: evidence/nakka-compare-browser-2026-10-26T15-36-43-428Z/acceptance.jso
 Automated baseline: AUD-087, 316/316 PASS; no rerun for evidence-only checkpoint.
 Scope: read-only name comparison; no Nakka player writes. Native duplicate/race cases, permanent identity linking and controlled synchronization remain pending. Production and JDC unchanged.
 No application edits, deployment, account changes, external requests or git push.
+
+
+### PREP-COMPVIEW-20261029
+Recorded UTC: 2026-10-29T10:44:51.422825+00:00. Applied owner baseline d40d0a4; candidate only.
+Read-only stage screen controls, safe renderer and bounded schema diagnostic prepared at owner request.
+Expected: correct supplied values, explicit TEST loading, stale board protection, no mutations.
+Actual: 12 new executable offline checks PASS; full-suite/inventory evidence is stored in evidence/competition-screen-20261029.
+Verification: LOCAL ONLY. Native/provider-schema/visual/CORS and release checks PENDING; worksheet in docs/handoff/native-review-20261029.md.
+No Google/Nakka writes, production/JDC changes or GitHub push. Earlier audit records retained.
+
+
+### PREP-STAGEFOCUS-20261029
+Recorded UTC: 2026-10-29T11:15:13.858414+00:00. Owner screenshot clarification.
+Expected: independent stage collapse, two-round navigation and view stability during refresh.
+Actual: four new executable offline checks PASS; full547-case evidence/inventory in evidence/stage-focus-20261029.
+Verification: LOCAL ONLY; native provider/viewport checks PENDING. No Nakka/Google writes or new casting system.
+
+
+### PREP-KIOSK-INDEPENDENT-20261029
+Recorded UTC: 2026-10-29T11:57:01.941392+00:00.
+Expected: shared AIK visual identity; original independent kiosk dimensions; no kiosk player list; remote unchanged.
+Actual: kiosk colour-only theme and separate builder selection; original base rules/scripts preserved; regression check PASS.
+Full548-case evidence: evidence/kiosk-independent-20261029. Native tablet/mobile acceptance PENDING.
+No Google/Nakka writes, production changes or GitHub push.
+
+
+### PREP-INTEGRATION-20261029
+Recorded UTC: 2026-10-29T13:00:14.000083+00:00. Morning548 checkpoint retained; candidate only.
+Expected: guarded selected-date stage opener, documented matrices/third-place projection, honest formats and closed release profiles; no external writes.
+Actual: 15 new executable cases PASS;563 total/46 files and inventory evidence in evidence/integration-20261029.
+Official mapping reference: https://push.n01darts.com/api/v1/n01_api_manual_en.html sections2,4.2,4.5,6. Real API JSON was inaccessible through browsing; native qualification remains PENDING.
+Production runtime guards unchanged; no GitHub push or Google/Nakka writes.
+
+
+PREP-OUTSTANDING-20261029:575 offline tests, board plan export, closed memo engine, durable local retry journal, native ordinal ranking contract and remaining-play focus. Native qualification and production readiness PENDING.

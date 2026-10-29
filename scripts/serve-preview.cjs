@@ -12,6 +12,7 @@ function createPreviewServer() {
     if (!['GET', 'HEAD'].includes(req.method)) { res.writeHead(405); res.end(); return; }
     try {
       const pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
+      if (pathname === '/competition-preview.html') res.setHeader('Content-Security-Policy', csp.replace("connect-src 'none'", "connect-src https://api.n01darts.com"));
       const file = fs.realpathSync(path.join(root, pathname === '/' ? 'preview.html' : pathname));
       if (!file.startsWith(root + path.sep) || !fs.statSync(file).isFile()) throw new Error('Outside public');
       const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8',

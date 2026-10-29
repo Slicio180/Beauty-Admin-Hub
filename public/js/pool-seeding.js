@@ -26,7 +26,7 @@
     for(let i=result.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[result[i],result[j]]=[result[j],result[i]];}
     return result;
   }
-  function groupName(index){let name='';for(let n=index+1;n>0;n=Math.floor((n-1)/26))name=String.fromCharCode(65+(n-1)%26)+name;return name;}
+  function groupName(index){return String(index+1);}
   function summary(group){
     const known=group.players.filter(p=>p.average!==null);
     return {players:group.players.length,capacity:group.capacity,known:known.length,unseeded:group.players.length-known.length,

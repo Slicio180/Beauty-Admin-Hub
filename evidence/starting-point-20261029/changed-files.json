@@ -1,0 +1,81 @@
+{
+  "ownerBaseline": "d40d0a4",
+  "status": "development starting point, not installer",
+  "files": [
+    {
+      "path": "tests/pool-board-allocation.test.cjs",
+      "before": null,
+      "after": "0ad4a5bbd6cbc76a62ea70fdd0181f7de96b7f6e6ec9fbebdd02c8c415fd3762"
+    },
+    {
+      "path": "tests/login-page.test.cjs",
+      "before": "f82039c6fc67787b890aa2753fc2a7ecf0a31babfc03f7d8cdf0ee731fd2db31",
+      "after": "f0a8868375382a3cd6f679db67d1d5ef8593062e4bfcfda2aaac4d48bdf7a336"
+    },
+    {
+      "path": "public/login.html",
+      "before": "514150e6021c027954aacb8d3a53c5cef4cd645937c578fe13a6489d3cbf5474",
+      "after": "328f2b7ed1d28230d53f2fb1100c0a50c8f6934d41fd1fe4025a935026458db2"
+    },
+    {
+      "path": "docs/handoff/requirements.json",
+      "before": "49dc42221b466c5685a24c96e610d82037291d3a098e0ade84b2dbcc8a89c2b1",
+      "after": "005356c2c20596e9a0376ab3818604a1ad5573beb3620188720c502b90cdce44"
+    },
+    {
+      "path": "docs/handoff/starting-point-20261029.md",
+      "before": null,
+      "after": "5a5ca3713c67f93a6ad23abe26c76fcf43e83d86dbb455f6dc84aaf60f766abd"
+    },
+    {
+      "path": "docs/handoff/test-inventory.json",
+      "before": "7cdeaa858e9de4b706a6911572fe7855cf2cf5ec2342ea2857ccaeb7adbc0f07",
+      "after": "e26fc02d7e8a5f5cbd2956e75af1c00ae9f134a5b36f5ef16d996403582db47b"
+    },
+    {
+      "path": "evidence/starting-point-20261029/all-tests.txt",
+      "before": null,
+      "after": "f487b2f11280033529968c5107ad74315335b94aa7f7d33e0d44cb51b9fe7cce"
+    },
+    {
+      "path": "evidence/starting-point-20261029/inventory.txt",
+      "before": null,
+      "after": "8b347d179ae68bcaef2b1563a0706d92fe5570d3d101807d781eca5dbb3df6b7"
+    },
+    {
+      "path": "evidence/starting-point-20261029/rebuild.txt",
+      "before": null,
+      "after": "e554d377617479721caec3dc45ea0b25c83f4b467d7c67cfaf5c93b31ffc1e53"
+    },
+    {
+      "path": "evidence/starting-point-20261029/build.txt",
+      "before": null,
+      "after": "e554d377617479721caec3dc45ea0b25c83f4b467d7c67cfaf5c93b31ffc1e53"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+      "before": "d54152cbf59ab54a8a19d8f3eac7355f129d3a587b30de5423d8599c0e30f4a3",
+      "after": "5a0317a0ad8e880bf93045410e0fcc524da19cd1bc3cb601512529130bec1ed8"
+    },
+    {
+      "path": "public/css/beauty-dashboard.css",
+      "before": "1abd31f61832af0ab234725bb1e00459ad7e4f7b15bbc237875cf8d5ffc73087",
+      "after": "668fe216d6661db13da3dc743f6ae409c091f25ffee2465faeba0b819b63ce80"
+    },
+    {
+      "path": "public/css/login.css",
+      "before": "cb95c804b8b955c6b8b028138633ecf416b038161bc1805ee4a51e7dce3697a1",
+      "after": "763365ca2f1abd2a466ddcceb46c0d3fca515bd4c6a07f8c78562acdb477808b"
+    },
+    {
+      "path": "public/js/login.js",
+      "before": "a0edef022c64d3a7a2ac1c3ed8b1da49a5005857e3c9b6c29717b4a0d1e3b627",
+      "after": "724f0bee98bdeaaff0020e1430899f17ef09a10f3746a5e0f6dfe70649d002ea"
+    },
+    {
+      "path": "public/js/pool-board-allocation.js",
+      "before": null,
+      "after": "2b95219dafd3caf0f67118de6ae02bdd9efaf307f4c97b66b2996ddd8d2f2f10"
+    }
+  ]
+}

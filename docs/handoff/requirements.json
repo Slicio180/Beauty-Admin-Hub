@@ -203,7 +203,7 @@
     "id": "POOL-001",
     "requirement": "Read-only event Pool Planner using IN count, preferred size and board capacity, with original scheme download",
     "priority": "Normal",
-    "acceptance": "Exact supplied 5–101 arrangements; explain board sharing and one-pool-per-board alternatives; no backend writes; stale event data blocks recommendations."
+    "acceptance": "Exact supplied 5\u2013101 arrangements; explain board sharing and one-pool-per-board alternatives; no backend writes; stale event data blocks recommendations."
   },
   {
     "id": "NAKKATRANSFER-001",
@@ -280,7 +280,7 @@
     "priority": "Critical",
     "source": "Existing Pool Planner To Do; owner approved evenly spreading unknown averages on 28 October 2026",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
-    "acceptance": "Original 5–101 scheme, overall score/darts weighted three-dart average by reviewed LPID, separate points, retained last-good/stale state, no invented zero, exact membership/capacity, expiring session-bound frozen draw, manual swaps and strength coverage, roster invalidation, fixed pre-start TEST only, full settings/entries preservation, CAS group update, native round-robin fixture generation, durable audit before POST, full readback, no automatic retries after uncertain send. Production and JDC untouched."
+    "acceptance": "Original 5\u2013101 scheme, overall score/darts weighted three-dart average by reviewed LPID, separate points, retained last-good/stale state, no invented zero, exact membership/capacity, expiring session-bound frozen draw, manual swaps and strength coverage, roster invalidation, fixed pre-start TEST only, full settings/entries preservation, CAS group update, native round-robin fixture generation, durable audit before POST, full readback, no automatic retries after uncertain send. Production and JDC untouched."
   },
   {
     "id": "POOL-WORKSPACE-001",
@@ -297,5 +297,37 @@
     "source": "Owner read-only TEST event output and official Nakka API manual,29Oct2026",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "acceptance": "Statistics/frozen preview and explicitly reviewed empty-event pool handoff support25; status retained without event transition; active30/finished40/unknown/string states blocked; existing groups/brackets/results/ranks/cards and changed-state barriers remain; transfer/removal/registration routes unchanged."
+  },
+  {
+    "id": "START-20261029",
+    "requirement": "Approved typography, direct authorised entry and isolated actual-board allocation starting point",
+    "priority": "High",
+    "evidenceLabel": "LOCAL_TESTED",
+    "source": "Owner approved designs and instruction to begin coding29Oct2026",
+    "acceptance": "519 local tests; native review and board UI/provider integration pending"
+  },
+  {
+    "id": "COMPVIEW-20261029",
+    "requirement": "Practical read-only stage review controls and minimal fixed TEST schema diagnostic",
+    "priority": "High",
+    "source": "Owner29Oct2026: prepare everything possible before computer review",
+    "evidenceLabel": "LOCAL_TESTED; NATIVE PENDING",
+    "acceptance": "Fullscreen, stage selection, pool paging, auto/manual refresh, stale/paused/offline states, literal provider text, fixed-event GET diagnostic with values omitted; no provider writes, no invented rankings or progression; native route/shape/visual qualification pending."
+  },
+  {
+    "id": "INTEGRATION-20261029",
+    "requirement": "Guarded TEST stage route, documented result projection, typography corrections and closed production-profile validation",
+    "priority": "Critical",
+    "source": "Owner29Oct2026: code as much as possible before Monday; preserve morning work",
+    "evidenceLabel": "LOCAL_TESTED; NATIVE PENDING",
+    "acceptance": "Open stages from authenticated Hub with date/session checks; no synthetic content in deployed mode; round-robin/league matrices and third-place results use documented fields only; no guessed ambiguous formats or repeated-fixture totals; retain original kiosk sizing; production profile remains closed and no runtime production migration or writes are activated."
+  },
+  {
+    "id": "OUTSTANDING-20261029",
+    "requirement": "Portable board plan, closed TEST memo handoff and native ranking qualification, remaining-play focus",
+    "priority": "High",
+    "source": "Owner29Oct2026: code outstanding work",
+    "evidenceLabel": "LOCAL_TESTED; NATIVE PENDING",
+    "acceptance": "Portable planned board output; no inferred rankings or live assignment; closed transport; durable revision claim; pending native and production work explicit."
   }
 ]

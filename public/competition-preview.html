@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Beauty · Pool and knockout play — TEST review</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/competition-preview.css">
+</head>
+<body>
+<header class="competition-header">
+ <div class="brand"><img src="assets/logo/aik-crest.svg" alt="AIK crest"><span>AIK DART</span></div>
+ <h1>EVENT HUB</h1><div class="event-caption"><span id="sourceLabel">SYNTHETIC REVIEW</span><p id="eventTitle">Example competition · not live</p></div>
+</header>
+<main>
+ <div class="page-heading"><div><h2>Pool and knockout play</h2><p>Standings and results supplied by Nakka.</p></div><button id="fullScreen" type="button">Full screen</button></div>
+ <section class="options-bar" aria-label="Display options">
+  <label>Display<select id="stageView"><option value="pools">Pool standings</option></select></label>
+  <label id="pageSizeLabel">Pools per page<select id="pageSize"><option value="4">4 pools</option><option value="6">6 pools</option></select></label>
+  <label class="check-label"><input id="rotatePages" type="checkbox"> Rotate pool pages</label>
+  <label class="check-label"><input id="autoRefresh" type="checkbox" checked> Refresh every 10 seconds</label>
+  <button id="focusRemaining" type="button">Focus remaining play</button><button id="loadTest" type="button">Load TEST event</button><button id="refreshStage" type="button" disabled>Refresh now</button>
+ </section>
+ <div class="feed-state"><p id="stageStatus" role="status" aria-live="polite">Synthetic preview · not live. Load TEST explicitly to read Nakka.</p><p id="pageIndicator"></p></div>
+ <p id="staleNotice" class="stale-notice" hidden>Last known data — board assignments may have changed. Recheck Nakka before calling players.</p>
+ <div id="stagePreview"></div>
+ <nav class="pagination" aria-label="Pool pages"><button id="previousPage" type="button">Previous</button><button id="nextPage" type="button">Next</button></nav>
+ <footer>Read-only TEST review · Scores and automatic board assignment stay in Nakka. Pool board plans are separate.<p id="displayMessage" role="status"></p></footer>
+</main>
+<script src="js/nakka-stage-model.js"></script><script src="js/nakka-stage-feed.js"></script><script src="js/competition-view.js"></script><script src="js/competition-preview.js"></script>
+</body></html>

@@ -1,0 +1,24 @@
+@font-face {
+  font-family: "AIK Display";
+  src: url("../assets/fonts/AIK-FONTS/AIKDisplay-Light.woff2") format("woff2");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "AIK Display";
+  src: url("../assets/fonts/AIK-FONTS/AIKDisplay-Bold.woff2") format("woff2");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "AIK Condensed";
+  src: url("../assets/fonts/AIK-FONTS/AIKDisplay-Condensed-Bold.woff2") format("woff2");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "AIK Siffror";
+  src: url("../assets/fonts/AIK-FONTS/AIKSiffror-Regular.woff2") format("woff2");
+  font-weight: 400;
+}
+

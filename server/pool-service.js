@@ -174,12 +174,14 @@ function beautyHubPool_(action,input){
     const mappings=beautyPoolMappings_(roster,stats,beautyPoolEntries_(event),frozen.mappings.map(p=>({id:p.id,lpid:p.lpid,tpid:p.tpid})));
     if(mappings.some(p=>!p.lpid||!p.tpid))beautyPoolError_('Every IN player needs a reviewed league identity and existing event entry before sending. Resolve the listed missing entries in Nakka, then draw again.');
     BeautyPoolSeeding.check(frozen.draw);
+    const assigned=new Set(mappings.map(p=>p.tpid)),unassignedEntries=beautyPoolEntries_(event).filter(p=>!assigned.has(p.tpid)).map(p=>({tpid:p.tpid,name:p.name}));
     const max=Math.max(...frozen.draw.pools.map(g=>g.capacity)),table=frozen.draw.pools.map(g=>{const a=g.players.map(p=>mappings.find(m=>m.id===p.id).tpid);while(a.length<max)a.push('');return a;}),setting={...event.lg_setting,robin_count:table.length,robin_player_count:max};
     const version=beautyPoolHash_({event,schedule,rosterSignature:roster.signature,table,setting});
     if(action==='poolprepare'){
       cache.remove('beauty-pool:'+input.ticket);
-      return {success:true,ticket:ticketWrite({...frozen,ready:true,version}),table,setting,warnings:BeautyPoolSeeding.warnings(frozen.draw),event:{id:event.tdid,title:event.title,date:roster.date},expectedCards:table.reduce((s,g)=>s+g.filter(Boolean).length*(g.filter(Boolean).length-1)/2,0)};
+      return {success:true,unassignedEntries,ticket:ticketWrite({...frozen,ready:true,version}),table,setting,warnings:BeautyPoolSeeding.warnings(frozen.draw),event:{id:event.tdid,title:event.title,date:roster.date},expectedCards:table.reduce((s,g)=>s+g.filter(Boolean).length*(g.filter(Boolean).length-1)/2,0)};
     }
+    if(unassignedEntries.length&&(typeof BEAUTY_POOL_UNASSIGNED_ENTRIES_VERIFIED_==='undefined'||BEAUTY_POOL_UNASSIGNED_ENTRIES_VERIFIED_!==true))beautyPoolError_('Unassigned Nakka entries need review. Compatibility with excluded OUT/STANDBY entries has not yet been verified in TEST. Resolve event registrations explicitly before sending; no automatic removal.');
     cache.remove('beauty-pool:'+input.ticket); // Consume save ticket before any external mutation.
     if(input.confirmed!=='true'||!frozen.ready||frozen.version!==version||BEAUTY_IDENTITY_WRITES_ENABLED_!==true)beautyPoolError_('Approved preview missing or stale. Nothing was sent.');
     // Re-authenticate and re-read the roster immediately before durable audit.

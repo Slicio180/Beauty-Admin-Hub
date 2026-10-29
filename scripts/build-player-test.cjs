@@ -1,12 +1,13 @@
-/* Inline shared TEST player theme/assets; preserve registration/identity scripts. */
+/* Inline separate TEST kiosk/remote themes and common assets; preserve registration/identity scripts. */
 const fs=require('node:fs'),path=require('node:path');
 const root=path.resolve(__dirname,'..'),read=f=>fs.readFileSync(path.join(root,f));
 function build(){
- const theme=read('public/css/beauty-player.css').toString();
+
  const logo='data:image/png;base64,'+read('public/assets/logo/aik-mandagsdartarna-clean.png').toString('base64');
  const icon='data:image/svg+xml;base64,'+read('public/assets/logo/aik-crest.svg').toString('base64');
  const names={'AIK Display':'AIKDisplay-Bold.woff2','AIK Display Light':'AIKDisplay-Light.woff2','AIK Condensed':'AIKDisplay-Condensed-Bold.woff2'};
  for(const name of ['RemoteRegistration.html','KioskTest.html']){
+  const theme=read(name==='KioskTest.html'?'public/css/beauty-kiosk.css':'public/css/beauty-player.css').toString();
   const file=path.join(root,'apps-script/registration-identity-test/remote-app',name);let h=fs.readFileSync(file,'utf8');
   h=h.replace(/(@font-face\s*\{[^}]*font-family:\s*'([^']+)'[^}]*src:\s*url\(')[^']+('\))/g,(full,before,family,after)=>names[family]?before+'data:font/woff2;base64,'+read('public/assets/fonts/AIK-FONTS/'+names[family]).toString('base64')+after:full);
   h=h.replace(/<img\b[^>]*class="(?:brand-image|success-brand)"[^>]*>/g,tag=>tag.replace(/src="[^"]*"/,'src="'+logo+'"'));

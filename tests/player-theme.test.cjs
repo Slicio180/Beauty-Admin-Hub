@@ -16,3 +16,11 @@ test('Hub remote and kiosk use the supplied original sponsor-free logo and embed
 test('Remote tonight list has a matching named close tile without removing the existing close action',()=>{
  const h=fs.readFileSync(base+'RemoteRegistration.html','utf8');assert.match(h,/id="tonightPlayersClose"[^>]*aria-label="Stäng spelarlistan"[^>]*onclick="closeTonightsPlayers\(\)"/);assert.match(h,/class="tonight-close-button"/);assert.match(h,/aria-modal="true" aria-label="Kvällens spelare"/);
 });
+
+test('Kiosk retains its original sizing and omits player list while remote keeps independent list and sizing',()=>{
+ const kiosk=fs.readFileSync(base+'KioskTest.html','utf8'),remote=fs.readFileSync(base+'RemoteRegistration.html','utf8');
+ const theme=h=>h.match(/<style id="beauty-player-theme">([\s\S]*?)<\/style>/)[1];
+ assert.equal(theme(kiosk).trim(),fs.readFileSync('public/css/beauty-kiosk.css','utf8').trim());assert.equal(theme(remote).trim(),fs.readFileSync('public/css/beauty-player.css','utf8').trim());
+ assert.doesNotMatch(theme(kiosk),/\b(?:font(?:-size|-family|-weight)?|line-height|min-height|padding)\s*:/);assert.doesNotMatch(kiosk,/<(?:button|div)[^>]*(?:tonight-players-button|tonightPlayersModal)|function\s+openTonightsPlayers|\.getTonightsPlayerNames\(/);
+ assert.match(remote,/openTonightsPlayers\(/);assert.match(remote,/id="tonightPlayersModal"/);assert.match(theme(remote),/body \.submit-button,body \.next-button \{ font-size:24px/);
+});

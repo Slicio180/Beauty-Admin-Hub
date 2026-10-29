@@ -1,0 +1,17 @@
+/* Kiosk TEST colours only. Original kiosk fonts, sizes and touch dimensions stay in its base CSS. */
+:root{--gold:#ffd700;--panel:#111214}
+html,body,.page{background:#080808;color:#fff}
+.branding{background:transparent}
+.card,.success-card,.identity-dialog{background:var(--panel);color:#fff;border-color:var(--gold)}
+body button[class],body .consent-option label{background:#080808!important;color:var(--gold)!important;border-color:var(--gold)!important;transition:none}
+body button:hover:not(:disabled){background:#1b1b12!important}
+body button:active:not(:disabled),body button.selected,body .consent-option input:checked+label{background:var(--gold)!important;color:#080808!important}
+body button:active:not(:disabled) *{color:#080808!important}
+body button:disabled{opacity:.45;cursor:not-allowed}
+body :focus-visible,.consent-option input:focus-visible+label{outline:2px solid #fff;outline-offset:3px}
+body .label,body .field>label{color:#fff}
+body .help,body .new-player-help{color:#c5c9cf}
+body input[type=text],body textarea,body .player-search{color:#fff;background:#080808;border-color:#73777e}
+body input::placeholder,body textarea::placeholder{color:#aaa}
+#loading,#registrationOutcome,#registrationEventLabel{color:#fff}
+#newPlayerArea{background:#1b1d20;border-left-color:var(--gold)}

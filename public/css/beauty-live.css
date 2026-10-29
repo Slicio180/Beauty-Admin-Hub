@@ -4,3 +4,13 @@
 header{display:grid;grid-template-columns:180px minmax(0,1fr) 180px;gap:12px;padding:12px 26px;align-items:center}header h1{grid-column:2;text-align:center;font-size:clamp(30px,4.3vw,84px)}header .count{grid-column:3;justify-self:end;width:170px;padding:10px 18px}header .count strong{font-size:80px;line-height:1}header .count span{font-size:28px;line-height:1.2}@media(max-width:799px){header{grid-template-columns:100px minmax(0,1fr) 100px;padding:10px;gap:6px}header h1{font-size:clamp(24px,4vw,34px)}header .count{width:96px;padding:8px}header .count strong{font-size:54px}header .count span{font-size:20px}}
 
 header{grid-template-columns:220px minmax(0,1fr) 220px}.live-logo{grid-column:1;width:220px;height:110px;overflow:hidden}.live-logo img{display:block;width:220px;height:auto;transform:translateY(-15px)}@media(max-width:799px){header{grid-template-columns:100px minmax(0,1fr) 100px}.live-logo{width:100px;height:60px}.live-logo img{width:100px;transform:translateY(-5px)}}
+
+/* Thirty-player venue pages with visible column/batch divisions. */
+header{padding:8px 26px}.live-logo{height:85px}.live-logo img{transform:none;max-height:85px;object-fit:contain}header .count strong{font-size:60px}
+ul{--live-columns:3;--live-rows:10;column-gap:24px;grid-auto-rows:calc((100vh - 180px)/10)}
+li{font:700 34px/1.15 'AIK Condensed',sans-serif;padding:6px 12px;position:relative}
+li[style*="grid-column: 2"],li[style*="grid-column: 3"]{border-left:1px solid #ffd700}
+.live-number{font-size:28px}.live-name{overflow-wrap:anywhere}small{font:400 24px/1.2 'AIK Display',sans-serif;color:#ddd;margin-left:40px}
+footer{border-top:1px solid #ffd700;font-size:18px}footer button{color:#ffd700;border-color:#ffd700;min-height:44px}footer select{font-size:18px}
+@supports(height:1cqh){ul{grid-auto-rows:calc(100cqh / var(--live-rows))}li{font-size:clamp(24px,3.2cqh,36px)}}
+@media(max-width:699px){main{overflow-y:auto}ul{grid-auto-rows:minmax(60px,auto)}li{font-size:24px}small{font-size:18px}.live-number{font-size:22px}.live-logo{height:60px}.live-logo img{max-height:60px}}

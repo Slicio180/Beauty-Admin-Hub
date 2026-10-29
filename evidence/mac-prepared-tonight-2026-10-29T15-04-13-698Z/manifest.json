@@ -1,0 +1,462 @@
+[
+  {
+    "path": "apps-script/registration-identity-test/remote-app/BeautyLiveTest.gs",
+    "before": "ab15cd9698b4c2fa238f951546314f3ad3a42ae9b93736609ad820bfeda0fd0e",
+    "after": "25d7b0f8c8662adaceceb24e5c90e13b2c636291f1acba073553c0c7480dc3ea"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/BeautyLiveTest.html",
+    "before": "52dd7b863f4b481f1e24cc1fa1eea19d78903d9770f07f9e020b3fcc0b296f17",
+    "after": "593b89365ced6d8096ab3d37f49f27c667d5427b5f0ea5dc492b54a97e6a20ec"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/Code.js",
+    "before": "9c346b687f8bbc9637162eb6ad797275cddbdf6b1e5ca5808fc1fda3f0280861",
+    "after": "f8439b5c7ff8413cd53f6e5693b1e4e31cab2118c24ceb92660ee6ecc1635ca0"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "d54152cbf59ab54a8a19d8f3eac7355f129d3a587b30de5423d8599c0e30f4a3",
+    "after": "21177a1e386474ef87956ba6b0be26e6e1ecf10b701ced7ef495bb3cbedb69c6"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTestPools.gs",
+    "before": "f906175c6be6372eaef31a42f02e9b3d88d0b2675d5626553ca3e8652eef8cf6",
+    "after": "d1b7b8ef4d5eca84cebdfea7e101583adc76ca95deb80196492342472fbc7a8b"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/KioskTest.html",
+    "before": "24ffca08badbfbd5ea0e3f673ec8c2e30fa8a2391aeb23a93bb05d57966c75a0",
+    "after": "adc0c97c6f25bb4ceeac044474b3b5af92e2df776fa6f3ecde234cc8ec3ca2bf"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/StageTest.html",
+    "before": null,
+    "after": "327a03472d97b46043b3f7776105f2dd948d45cfaf3d28fdd71b0c9f31b5c418"
+  },
+  {
+    "path": "config/release-production.template.json",
+    "before": null,
+    "after": "d82e9a29aaa231f3188859257e8b3b95d75868777bdfb17c66c2fc9673d2d2ff"
+  },
+  {
+    "path": "docs/handoff/Beauty_To_Do.md",
+    "before": "fdf7b5d66189c904f0656072b40c6b8dd47d68576f7751cbb520a9e07772be2f",
+    "after": "4e488ea3d35be156f5c0bea65fb4b18ed152dce77fc56cd40f058bcb448d738b"
+  },
+  {
+    "path": "docs/handoff/audit-register.md",
+    "before": "4e0fd3315c88ffacff6adc1e158cb5c230cfc6d7bae3f55aa1f12568a0f3f5d6",
+    "after": "c9e3b49d4255bede657c1d4686b0e8ffd1270f1b5fa333507b87c04f0ff7c722"
+  },
+  {
+    "path": "docs/handoff/native-review-20261029.md",
+    "before": null,
+    "after": "fec6407a99a5402c9af9d9f44442e2c4740733969ac22f3cb5d3d3af8a8bef01"
+  },
+  {
+    "path": "docs/handoff/outstanding-work-20261029.md",
+    "before": null,
+    "after": "a472678610e3e3fcb613fd75da8a45ddc30f1fb600b6480454a8dae9fc39431d"
+  },
+  {
+    "path": "docs/handoff/prepared-tonight-20261029.md",
+    "before": null,
+    "after": "bd0c2a1d5a659d52caaf7761f301a1b254de09a69a53de6ef032a4e553620e2c"
+  },
+  {
+    "path": "docs/handoff/production-profile-20261029.md",
+    "before": null,
+    "after": "b9007e31ab1da86e8afae1859f931fdf9330a0cdf647d32ee3c8c2219b26c12e"
+  },
+  {
+    "path": "docs/handoff/requirements.json",
+    "before": "49dc42221b466c5685a24c96e610d82037291d3a098e0ade84b2dbcc8a89c2b1",
+    "after": "ba21cf748507d0b83418995af59e78332febc1286a89f9e07bcc8485307febfa"
+  },
+  {
+    "path": "docs/handoff/starting-point-20261029.md",
+    "before": null,
+    "after": "5a5ca3713c67f93a6ad23abe26c76fcf43e83d86dbb455f6dc84aaf60f766abd"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "7cdeaa858e9de4b706a6911572fe7855cf2cf5ec2342ea2857ccaeb7adbc0f07",
+    "after": "6bf552638107c8ebe08ea09e926fa6702af830c142c9fdb1551cecc2c9651e0d"
+  },
+  {
+    "path": "evidence/badge-mirroring-20261029/all-tests.txt",
+    "before": null,
+    "after": "44c2e13beb71f1fb7413325f01d9f290ed57963710837269c00699c371e9be43"
+  },
+  {
+    "path": "evidence/badge-mirroring-20261029/inventory.txt",
+    "before": null,
+    "after": "4b5608a833af204f6ac04604b1bc26b64d4a5a2b73081cf8484b8922809ef049"
+  },
+  {
+    "path": "evidence/competition-screen-20261029/all-tests.txt",
+    "before": null,
+    "after": "fe0263c3554536bdb1b9677d2b30c5ed117823fe8bd795d035e29a4a683e4f37"
+  },
+  {
+    "path": "evidence/competition-screen-20261029/hub-build.txt",
+    "before": null,
+    "after": "e554d377617479721caec3dc45ea0b25c83f4b467d7c67cfaf5c93b31ffc1e53"
+  },
+  {
+    "path": "evidence/competition-screen-20261029/inventory.txt",
+    "before": null,
+    "after": "65a851ae9f30a8daaf647a5226e2d4bcc5868d1fc95a269731c3ed44795ba922"
+  },
+  {
+    "path": "evidence/competition-screen-20261029/live-build.txt",
+    "before": null,
+    "after": "ff886a75abfe907fc8204c2a6286fa83ac78f17f7364f3c8e47e4f1561ef244c"
+  },
+  {
+    "path": "evidence/integration-20261029/all-tests.txt",
+    "before": null,
+    "after": "ec006351f2455da41e4292ff3d97f19f972aa80d4d949dced5f38f942a195ca6"
+  },
+  {
+    "path": "evidence/integration-20261029/hub-build.txt",
+    "before": null,
+    "after": "e554d377617479721caec3dc45ea0b25c83f4b467d7c67cfaf5c93b31ffc1e53"
+  },
+  {
+    "path": "evidence/integration-20261029/inventory.txt",
+    "before": null,
+    "after": "db537f142389d08de76713cfe4ab0034e6736f36d02ebdce11b4d594f6d6c63b"
+  },
+  {
+    "path": "evidence/integration-20261029/live-build.txt",
+    "before": null,
+    "after": "ff886a75abfe907fc8204c2a6286fa83ac78f17f7364f3c8e47e4f1561ef244c"
+  },
+  {
+    "path": "evidence/kiosk-independent-20261029/all-tests.txt",
+    "before": null,
+    "after": "7d30914098f8a7109406fcc9973e93c5ba75d120d4842bd9c1cb5d1eade4688e"
+  },
+  {
+    "path": "evidence/kiosk-independent-20261029/inventory.txt",
+    "before": null,
+    "after": "a56a44f9cfd95303055a8098452ebf079a788ae2217bb2293b0a4264e0cc3fc2"
+  },
+  {
+    "path": "evidence/outstanding-20261029/all-tests.txt",
+    "before": null,
+    "after": "bd4395e9b921f89551f684982c189e059b847e002f28a898f5addc9e69c4685b"
+  },
+  {
+    "path": "evidence/outstanding-20261029/build.txt",
+    "before": null,
+    "after": "e554d377617479721caec3dc45ea0b25c83f4b467d7c67cfaf5c93b31ffc1e53"
+  },
+  {
+    "path": "evidence/outstanding-20261029/inventory.txt",
+    "before": null,
+    "after": "5f37a113397d509264562f0a7e08c0cff6bf417ca42945e09b33f1f7b93046c7"
+  },
+  {
+    "path": "evidence/outstanding-20261029/targeted.txt",
+    "before": null,
+    "after": "43477c40c4cdd1be9a74bfbe365b31e4896013fc554d6d23ced98bd06f1e422f"
+  },
+  {
+    "path": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "before": null,
+    "after": "d74d424a5bbff5005859224664c657931e693b9b3f01509e27ed19eace5bc3b0"
+  },
+  {
+    "path": "evidence/prepared-tonight-20261029/hub-build.txt",
+    "before": null,
+    "after": "e554d377617479721caec3dc45ea0b25c83f4b467d7c67cfaf5c93b31ffc1e53"
+  },
+  {
+    "path": "evidence/prepared-tonight-20261029/inventory.txt",
+    "before": null,
+    "after": "35e3e9499ceffac042d8111a189e43625080ea41b518300fe133ee8e6be3dae3"
+  },
+  {
+    "path": "evidence/stage-focus-20261029/all-tests.txt",
+    "before": null,
+    "after": "e2db66db9f097a54343f3cbbe6a9bd5f0ebe8a046debe735a587511f82232878"
+  },
+  {
+    "path": "evidence/stage-focus-20261029/inventory.txt",
+    "before": null,
+    "after": "d1ae54928abcef0492c33c84efe57820938a5da2e14ea3c59a9a6ea3aea357c9"
+  },
+  {
+    "path": "evidence/starting-point-20261029/all-tests.txt",
+    "before": null,
+    "after": "f487b2f11280033529968c5107ad74315335b94aa7f7d33e0d44cb51b9fe7cce"
+  },
+  {
+    "path": "evidence/starting-point-20261029/build.txt",
+    "before": null,
+    "after": "e554d377617479721caec3dc45ea0b25c83f4b467d7c67cfaf5c93b31ffc1e53"
+  },
+  {
+    "path": "evidence/starting-point-20261029/changed-files.json",
+    "before": null,
+    "after": "d9a1c1f14df77a5ae845b317ba106f67e44c827850feda9d3ea6892d30179cb5"
+  },
+  {
+    "path": "evidence/starting-point-20261029/inventory.txt",
+    "before": null,
+    "after": "8b347d179ae68bcaef2b1563a0706d92fe5570d3d101807d781eca5dbb3df6b7"
+  },
+  {
+    "path": "evidence/starting-point-20261029/rebuild.txt",
+    "before": null,
+    "after": "e554d377617479721caec3dc45ea0b25c83f4b467d7c67cfaf5c93b31ffc1e53"
+  },
+  {
+    "path": "public/beauty-live.html",
+    "before": "7e799365a39fed7934022a413d4e3c848b8a288b384d975e76b47c7c58d9a66a",
+    "after": "031ef44c69fed56353c2c18f8f1c22003132a311bb8c49fe988e50c7facf7732"
+  },
+  {
+    "path": "public/competition-preview.html",
+    "before": null,
+    "after": "d6019303da0436a3fad32eaa855c30a5a780d0e137bf7edecfecbb15998f4810"
+  },
+  {
+    "path": "public/css/aik-fonts.css",
+    "before": null,
+    "after": "97cab98507222d5dfd2a0b434f1b56cb56303ef2166d8757f7c30ff68b8620ee"
+  },
+  {
+    "path": "public/css/beauty-dashboard.css",
+    "before": "1abd31f61832af0ab234725bb1e00459ad7e4f7b15bbc237875cf8d5ffc73087",
+    "after": "be15d479f8eb0caa7bc2d08253bf5323fea90df8318a8e2dfcfd4634da396717"
+  },
+  {
+    "path": "public/css/beauty-kiosk.css",
+    "before": null,
+    "after": "592ad28c5da8e39d19b4046f60c257f3e8998d1c920172cfde1f1561d9c9ecb0"
+  },
+  {
+    "path": "public/css/beauty-live.css",
+    "before": "b740dadc9e2b20860e3ba40188058b2ffa31ecc7f47c5da08d39788f38eaa295",
+    "after": "3169bd3f78ddd05946a909540d04e7034e97f659db07742d02a4867bef24b0ef"
+  },
+  {
+    "path": "public/css/competition-preview.css",
+    "before": null,
+    "after": "d167137f8cae39df1d68bd5f96e7f6d76aa2a5c91bd0653f323a86269f9d9359"
+  },
+  {
+    "path": "public/css/login.css",
+    "before": "cb95c804b8b955c6b8b028138633ecf416b038161bc1805ee4a51e7dce3697a1",
+    "after": "763365ca2f1abd2a466ddcceb46c0d3fca515bd4c6a07f8c78562acdb477808b"
+  },
+  {
+    "path": "public/js/beauty-live-model.js",
+    "before": "40e043c785ad602715e133a8b3a27366c0ed24455a6c37f44c1f65180bcc3b44",
+    "after": "9f5a52acf15f46dd6fa3aec81e4d1df94e787a5e77370074ae25594d2e194613"
+  },
+  {
+    "path": "public/js/beauty-live.js",
+    "before": "ab36b8cfe412617bc09b93edf7d59a753883918522852878b1ecfd71bc02f8b2",
+    "after": "765647104b3716c8acd63ad9240c6ed9ec170a5d480be5de66e682d26735f904"
+  },
+  {
+    "path": "public/js/competition-preview.js",
+    "before": null,
+    "after": "425a08cdce1f5304df3253bc7f57fb655c0a683e310237c360099f0fe2240b5a"
+  },
+  {
+    "path": "public/js/competition-view.js",
+    "before": null,
+    "after": "f658678d2b99cc94d3420808456197652cad75c4b0502524742ae219861176ae"
+  },
+  {
+    "path": "public/js/hub-stage-open.js",
+    "before": null,
+    "after": "cdbd9d1f45ad4d588cecbec228bd6e995633e95103507f8d2b25074e92ed1cc2"
+  },
+  {
+    "path": "public/js/login.js",
+    "before": "a0edef022c64d3a7a2ac1c3ed8b1da49a5005857e3c9b6c29717b4a0d1e3b627",
+    "after": "724f0bee98bdeaaff0020e1430899f17ef09a10f3746a5e0f6dfe70649d002ea"
+  },
+  {
+    "path": "public/js/nakka-stage-feed.js",
+    "before": null,
+    "after": "aba87bb1f61ba664a0ac29dd82bde56d15470f974fa8e9e1a622d3bff14a15ba"
+  },
+  {
+    "path": "public/js/nakka-stage-model.js",
+    "before": null,
+    "after": "3d5d6ae3bfa9bf03ae60365e2506b6b3c88bdb4147d61edee3ad122d2a61b336"
+  },
+  {
+    "path": "public/js/pool-board-allocation.js",
+    "before": null,
+    "after": "401572f7bf7d85a72c30a457a8c97b9e7127a21971a92bc7bcc05c9a599d4758"
+  },
+  {
+    "path": "public/js/pool-board-plan.js",
+    "before": null,
+    "after": "dfb161bcbb6cc17ecc9c1ff2fb822df4d0f0069392998dc588c1da27cd4b4c56"
+  },
+  {
+    "path": "public/js/pool-planner-seeded.js",
+    "before": "776cb13cbcb08fa8339a82352eab80fdcaee7c4646c4d5c201f2066562a38054",
+    "after": "19a3b683298ae53e65d8f6161a8344145e44db790fdc49027e997d129bf2cf82"
+  },
+  {
+    "path": "public/js/pool-seeding.js",
+    "before": "b3a3ef13a20c9fa4b4348a97897dd32b8ccfe946184ab6d4b479b7a569a2870a",
+    "after": "b349fd05b4c7307afd92867133b693ed46605ae599d3e6af385d5489b6dfcb86"
+  },
+  {
+    "path": "public/login.html",
+    "before": "514150e6021c027954aacb8d3a53c5cef4cd645937c578fe13a6489d3cbf5474",
+    "after": "328f2b7ed1d28230d53f2fb1100c0a50c8f6934d41fd1fe4025a935026458db2"
+  },
+  {
+    "path": "scripts/build-beauty-live.cjs",
+    "before": "538f95f7a9c2801221d53db625a9f9a51f7ed1a488305830a7ef0a4fa3da45f0",
+    "after": "90bfa9fc9b144646a3c91841279c839c089658def14b0bd3636745ead6805a63"
+  },
+  {
+    "path": "scripts/build-hub-test.cjs",
+    "before": "a04e25fdea68eb78d51ac34abde1428c484f3db1a390b8c26a7ddd3e2df28766",
+    "after": "4b383996747e979e9efd742f928683ff932b85ead5818e4277d354b7ce833e86"
+  },
+  {
+    "path": "scripts/build-player-test.cjs",
+    "before": "84c7cad4540dff2f8ad40540f4d75d48b0c43f49fd3083a93f8eaf1cde9010a5",
+    "after": "3e4afa529b3498a6ed450c77568ee467c75ecdb6b664eb80c801d77585b1ce3c"
+  },
+  {
+    "path": "scripts/build-stage-test.cjs",
+    "before": null,
+    "after": "ae30dd5b440f4ac15ee151e696f012f565c2c952153e4755dd8bc903510949fc"
+  },
+  {
+    "path": "scripts/check-release-profile.cjs",
+    "before": null,
+    "after": "39b75f38bfc478e653fc2d1814aa1fecc580372e968ca86e45d77ee44f94d258"
+  },
+  {
+    "path": "scripts/inspect-stage-readonly.cjs",
+    "before": null,
+    "after": "be4ae69ab6076c81763dfda9b78f4c4b0035e703eafe04b181d6dc523a9a1d1e"
+  },
+  {
+    "path": "scripts/qualify-native-ranking.cjs",
+    "before": null,
+    "after": "8561cc612ead98ac46cf1937b41e1d870ee1e874b7da6b8502f77c7c765468a0"
+  },
+  {
+    "path": "scripts/serve-preview.cjs",
+    "before": "405379d1cdad86d62ebf1caee849b36fb83ff0b14dbfbc1e43094e4820f16322",
+    "after": "ee763e9de8d4db920a3b02fee8126eb96a2b17bb23cc9a992d4a565b589888d7"
+  },
+  {
+    "path": "server/board-handoff.cjs",
+    "before": null,
+    "after": "d63864da5cf3bdbe76d3845bd967d65d96310dbc2dc826a8e8b091cab567872e"
+  },
+  {
+    "path": "server/handoff-journal.cjs",
+    "before": null,
+    "after": "01f9c456f238163d1edc6a537131688d6b7a6f83eafcdba03b29174221864daf"
+  },
+  {
+    "path": "server/league-ranking.cjs",
+    "before": null,
+    "after": "6d3affc8db23cb4cdbb9b7d5ee30c9997c977a2d53299ed683bb954b6d430460"
+  },
+  {
+    "path": "server/pool-service.js",
+    "before": "03d5c536700e7eeb287f5be7627be9d560c3b5a287e1fcff549efb994f544e33",
+    "after": "838bbe7710078cf72fde5debb88f86d06166283797ecf1960c105288956a295b"
+  },
+  {
+    "path": "server/release-profile.cjs",
+    "before": null,
+    "after": "0dbd54bd108286be9d044aab988f59286217fb6ad04a032ffd0d07d3ce13cf33"
+  },
+  {
+    "path": "tests/beauty-live.test.cjs",
+    "before": "1f83357e31d12daed37211e1f5de8c70be0206da737c9e7a852ba586d0281e43",
+    "after": "8f9690a99a28bb3bb4559473ee27f10f71c2996817de432c22a7e16310e31bad"
+  },
+  {
+    "path": "tests/board-handoff.test.cjs",
+    "before": null,
+    "after": "3773b0971dbecb16aad23cd8b71f6125e492de0d0316db00e18c9d6de83e1242"
+  },
+  {
+    "path": "tests/competition-screen.test.cjs",
+    "before": null,
+    "after": "15c2949f03790b612209bb6f033c773ff3d694fc415aec0b038c95e4b3776250"
+  },
+  {
+    "path": "tests/hub-test-connection.test.cjs",
+    "before": "b17c1379d59df9f3b9d9bcc6d6f17d523128a9ca19037c2f6bdc106215762db6",
+    "after": "0b78b5d74233cda31a8977a431616ca244531bd60deb902030de6c3c5813b393"
+  },
+  {
+    "path": "tests/league-ranking-contract.test.cjs",
+    "before": null,
+    "after": "1036415810367a795ebbb6a47cd08cbcbe92c891e38ec43b497dd6a0a926271e"
+  },
+  {
+    "path": "tests/login-page.test.cjs",
+    "before": "f82039c6fc67787b890aa2753fc2a7ecf0a31babfc03f7d8cdf0ee731fd2db31",
+    "after": "f0a8868375382a3cd6f679db67d1d5ef8593062e4bfcfda2aaac4d48bdf7a336"
+  },
+  {
+    "path": "tests/nakka-stage-badges.test.cjs",
+    "before": null,
+    "after": "eaceeb609923ca3f27d1df8e4a7d0e1af4540506da8775d79983ae55f51f4742"
+  },
+  {
+    "path": "tests/nakka-stage-model.test.cjs",
+    "before": null,
+    "after": "f4c1af0840e24fa4716dfb34c6e2be54d8be21257eac79468dfa850372fed9b8"
+  },
+  {
+    "path": "tests/player-theme.test.cjs",
+    "before": "2a4d2f4e050c24b492562d9ff720d9b68557011d42e1839f822101fc11184575",
+    "after": "ffb13097a0602a328170f278f08c5b28b9d2387a8b454b95c0bb0cf98b774c80"
+  },
+  {
+    "path": "tests/pool-board-allocation.test.cjs",
+    "before": null,
+    "after": "0ad4a5bbd6cbc76a62ea70fdd0181f7de96b7f6e6ec9fbebdd02c8c415fd3762"
+  },
+  {
+    "path": "tests/pool-planner-seeded-ui.test.cjs",
+    "before": "1fdd877ff8ba25503fc64a9f0fc627a6da25801c8c158557dfad425aa87e81ee",
+    "after": "2d5f592b36ea181b8e9ac860d12840b29391bd13339c44ead7495f43b48250dd"
+  },
+  {
+    "path": "tests/pool-service.test.cjs",
+    "before": "c6238d23e426bd34207c2980dd9b9f36fbc4805416e079a98e5cc5d950962965",
+    "after": "a1ea73240e1ac7ca27f17dc486f65ff81ba1ee1602336d8431e8190398a3a9dc"
+  },
+  {
+    "path": "tests/release-profile.test.cjs",
+    "before": null,
+    "after": "5c898b806a7e6f43b23da27a5473ca400e3de5ad3b44303d5fd2928a087e687d"
+  },
+  {
+    "path": "tests/stage-integration.test.cjs",
+    "before": null,
+    "after": "7a7b26639024ec5e318a0319ab2aaa293312056a2e579945e8b28bc9e0f5939f"
+  },
+  {
+    "path": "tests/stage-readonly-diagnostic.test.cjs",
+    "before": null,
+    "after": "d4c31c6632358835bb53c892ff087558d394ad7126ced4208451e5464befc5c3"
+  }
+]

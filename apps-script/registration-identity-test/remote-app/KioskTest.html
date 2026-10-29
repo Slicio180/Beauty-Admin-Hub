@@ -1054,61 +1054,23 @@ var BeautyIdentityDialog = (() => {
 
 </script>
 <style id="beauty-player-theme">
-/* Shared public TEST mobile/kiosk presentation. Registration values/RPCs unchanged. */
-:root { --gold:#ffd700; --panel:#111214; }
-html,body { background:#080808; color:#fff; font-family:'AIK Display Light',serif; font-weight:400; }
-.page { background:#080808; padding:24px 18px 40px; }
-.branding { padding:8px 0 20px; background:transparent; }
-.brand-image,.success-brand { width:100%; max-width:620px; height:auto; object-fit:contain; background:transparent; }
-.registration-title { font:700 clamp(24px,5vw,38px)/1.2 'AIK Display',serif; letter-spacing:1px; margin-top:22px; }
-.intro { font:400 16px/1.5 'AIK Display Light',serif; color:#c5c9cf; }
-.card,.success-card,.identity-dialog,.tonight-modal-card { background:var(--panel); color:#fff; border:1px solid var(--gold); border-radius:14px; }
-.card { padding:26px; }
-body button[class],body .consent-option label { background:#080808 !important; color:var(--gold) !important; border:1px solid var(--gold) !important; border-radius:8px; font-family:'AIK Display',serif !important; font-weight:700; line-height:1.3; min-height:48px; transition:none; }
-body button:hover:not(:disabled) { background:#1b1b12 !important; }
-body button:active:not(:disabled),body button.selected,body .consent-option input:checked+label { background:var(--gold) !important; color:#080808 !important; }
-body button:active:not(:disabled) * { color:#080808 !important; }
-body button:disabled { opacity:.45; cursor:not-allowed; }
-body :focus-visible { outline:2px solid #fff; outline-offset:3px; }
-.consent-option input:focus-visible+label { outline:2px solid #fff; outline-offset:3px; }
-body .label,body .field > label { color:#fff; font-family:'AIK Display',serif !important; font-size:16px; font-weight:700; letter-spacing:.4px; }
-body .help,body .new-player-help { color:#c5c9cf; font:400 15px/1.5 'AIK Display Light',serif !important; }
-body input[type="text"],body textarea,body .player-search { color:#fff; background:#080808; border:1px solid #73777e; font:400 18px/1.5 'AIK Display Light',serif !important; }
-body input::placeholder,body textarea::placeholder { font:400 16px/1.5 'AIK Display Light',serif !important; color:#aaa; }
-body .player-dropdown-button,body .player-option { font-size:18px; padding:14px 16px; }
-.player-dropdown-menu { border-width:1px; }
-body .tonight-players-button { font-size:clamp(20px,5vw,27px); min-height:64px; padding:16px; }
-body .submit-button,body .next-button { font-size:24px; padding:16px; min-height:60px; }
-body .consent-option label { font-size:17px; padding:14px 10px; }
-#loading { color:#fff; font:400 18px/1.5 'AIK Display Light',serif; }
-#errorBox { border-width:1px; font:400 16px/1.5 'AIK Display Light',serif; }
-#newPlayerArea { border-left-width:2px; background:#1b1d20; }
-.success-card { padding:28px; }
-.success-card h2 { font:700 30px/1.2 'AIK Display',serif; }
-.success-card p,#registrationOutcome,#registrationEventLabel { font:400 17px/1.5 'AIK Display Light',serif !important; color:#fff; }
-.identity-dialog { font:400 17px/1.5 'AIK Display Light',serif; max-height:88vh; }
-.identity-dialog h2 { padding-right:48px; font:700 25px/1.3 'AIK Display',serif; }
-body .identity-close,body .tonight-close-tile { position:sticky; float:right; top:0; right:0; width:44px; height:44px; min-height:44px; min-width:44px; margin:0 0 12px 14px; padding:0; font:400 28px/42px Arial,Helvetica,sans-serif !important; z-index:5; box-shadow:0 0 0 4px var(--panel); }
-.tonight-modal-card { padding:22px; max-height:88vh; }
-.tonight-modal-heading { clear:both; gap:12px; }
-.tonight-modal-header { font:700 26px/1.2 'AIK Display',serif; }
-.tonight-player-count { border:1px solid var(--gold); color:#fff; }
-.tonight-players-list { clear:both; font:400 19px/1.5 'AIK Display Light',serif; }
-body .tonight-close-button { font-size:18px; min-height:48px; }
-@media(max-width:560px){
- .page { padding:18px 14px 28px; }
- .card,.success-card { padding:22px 18px; }
- .consent-options { grid-template-columns:1fr; gap:12px; }
- .identity-dialog { padding:20px; }
- .tonight-modal { padding:14px; }
- .tonight-modal-card { padding:18px; }
- .tonight-modal-header { font-size:24px; }
- .tonight-player-count { min-width:70px; }
-}
-
-body .message-label { font-size:16px !important; }
-.tonight-player-name { font-family:'AIK Display Light',serif !important; font-size:19px; line-height:1.5; }
-.player-list-icon { width:24px; height:24px; display:inline-block; vertical-align:middle; margin-right:8px; }
+/* Kiosk TEST colours only. Original kiosk fonts, sizes and touch dimensions stay in its base CSS. */
+:root{--gold:#ffd700;--panel:#111214}
+html,body,.page{background:#080808;color:#fff}
+.branding{background:transparent}
+.card,.success-card,.identity-dialog{background:var(--panel);color:#fff;border-color:var(--gold)}
+body button[class],body .consent-option label{background:#080808!important;color:var(--gold)!important;border-color:var(--gold)!important;transition:none}
+body button:hover:not(:disabled){background:#1b1b12!important}
+body button:active:not(:disabled),body button.selected,body .consent-option input:checked+label{background:var(--gold)!important;color:#080808!important}
+body button:active:not(:disabled) *{color:#080808!important}
+body button:disabled{opacity:.45;cursor:not-allowed}
+body :focus-visible,.consent-option input:focus-visible+label{outline:2px solid #fff;outline-offset:3px}
+body .label,body .field>label{color:#fff}
+body .help,body .new-player-help{color:#c5c9cf}
+body input[type=text],body textarea,body .player-search{color:#fff;background:#080808;border-color:#73777e}
+body input::placeholder,body textarea::placeholder{color:#aaa}
+#loading,#registrationOutcome,#registrationEventLabel{color:#fff}
+#newPlayerArea{background:#1b1d20;border-left-color:var(--gold)}
 </style>
 </head>
 

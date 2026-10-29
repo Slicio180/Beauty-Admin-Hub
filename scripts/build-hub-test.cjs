@@ -5,6 +5,7 @@ require('./build-hub-english.cjs').build();
 require('./build-pool-scheme.cjs');
 require('./build-pool-service.cjs');
 require('./build-player-test.cjs').build();
+require('./build-stage-test.cjs').build();
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 let html = read('public/preview.html');
 // Only the generated Google TEST gets the real account service. Offline demo
@@ -17,10 +18,10 @@ html=html.replace('</aside>\n\n\n    <!-- MAIN DASHBOARD -->', '<div class="hub-
 if (!html.includes('id="hubSignOut"')) throw Error('Account controls insertion failed');
 html=html.replace('<script src="js/hub-services.js"','<script src="js/hub-auth.js"></script>\n<script src="js/hub-services.js"');
 html=html.replace('</body>','<script src="js/login.js"></script></body>');
-html=html.replace('<h2 id="nakkaPanelTitle">Nakka</h2>', '<h2 id="nakkaPanelTitle">Nakka</h2><section class="health-card"><h3>Event connection</h3><p>Check the Hub date against Nakka. Read only; no player sync.</p><button id="nakkaEventCheck" type="button">CHECK EVENT</button> <button id="nakkaCompare" type="button">COMPARE PLAYERS</button><div id="nakkaEventResult" role="status" aria-live="polite"></div></section>');
+html=html.replace('<h2 id="nakkaPanelTitle">Nakka</h2>', '<h2 id="nakkaPanelTitle">Nakka</h2><section class="health-card"><h3>Event connection</h3><p>Check the Hub date against Nakka. Read only; no player sync.</p><button id="nakkaEventCheck" type="button">CHECK EVENT</button> <button id="nakkaCompare" type="button">COMPARE PLAYERS</button><button id="nakkaStagesOpen" type="button">OPEN POOLS &amp; KNOCKOUTS — TEST</button><div id="nakkaEventResult" role="status" aria-live="polite"></div></section>');
 html=html.replace('</body>','<script src="js/hub-nakka-event.js"></script></body>');
 html=html.replace('</body>','<script src="js/hub-nakka-transfer.js"></script></body>');
-html=html.replace('</body>','<script src="js/hub-player-removal.js"></script></body>');
+html=html.replace('</body>','<script src="js/hub-player-removal.js"></script><script src="js/hub-stage-open.js"></script></body>');
 html=html.replace('</head>','<style>#nakkaTransferOpen{background:#ffd700;color:#080808;border:0;border-radius:5px;font:inherit;font-size:20px;padding:10px 16px;margin:16px 0 4px;min-height:44px}</style></head>');
 
 
@@ -45,7 +46,7 @@ for (const asset of ['aik-dart-yellow.png', 'aik-mandagsdartarna.png', 'aik-cres
 }
 html = html.replace(/<script src="js\/([^"]+)"[^>]*><\/script>/g, (_, file) => {
   let js = read('public/js/' + (file === 'hub-services.js' ? 'hub-test-services.js' : file));
-  if (file === 'pool-planner.js') js = read('public/js/pool-seeding.js')+'\n'+js+'\n'+read('public/js/pool-planner-seeded.js');
+  if (file === 'pool-planner.js') js = read('public/js/pool-seeding.js')+'\n'+js+'\n'+read('public/js/pool-board-allocation.js')+'\n'+read('public/js/pool-board-plan.js')+'\n'+read('public/js/pool-planner-seeded.js');
   if (file === 'app.js') {
     const start = js.indexOf('function addStatusCell(');
     const end = js.indexOf('function setStatusClass(', start);

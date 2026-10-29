@@ -1,10 +1,10 @@
 const fs=require('node:fs'),path=require('node:path');
 const root=path.resolve(__dirname,'..');const read=f=>fs.readFileSync(path.join(root,f),'utf8');
 let html=read('public/beauty-live.html');
-let fonts=read('public/css/style.css').split('* {')[0];
+let fonts=read('public/css/aik-fonts.css');
 fonts=fonts.replace(/url\("([^"\n]+)"\)/g,(_,asset)=>'url("data:font/woff2;base64,'+fs.readFileSync(path.resolve(root,'public/css',asset)).toString('base64')+'")');
-html=html.replace('<head>','<head><base target="_top">').replace(/<link rel="stylesheet" href="css\/beauty-live.css">/,'<style>'+fonts+read('public/css/beauty-live.css')+'</style>');
+html=html.replace('<head>','<head><base target="_top">').replace('<link rel="stylesheet" href="css/aik-fonts.css">','<style>'+fonts+'</style>').replace(/<link rel="stylesheet" href="css\/beauty-live.css">/,'<style>'+read('public/css/beauty-live.css')+'</style>');
 html=html.replace(/<script src="([^"\n]+)"><\/script>/g,(_,file)=>'<script>\n'+read('public/'+file).replace(/<\/script/gi,'<\\/script')+'\n</script>');
-html=html.replace('assets/logo/aik-mandagsdartarna.png','data:image/png;base64,'+fs.readFileSync(path.join(root,'public/assets/logo/aik-mandagsdartarna.png')).toString('base64'));
+html=html.replace('assets/logo/aik-mandagsdartarna-clean.png','data:image/png;base64,'+fs.readFileSync(path.join(root,'public/assets/logo/aik-mandagsdartarna-clean.png')).toString('base64'));
 fs.writeFileSync(path.join(root,'apps-script/registration-identity-test/remote-app/BeautyLiveTest.html'),html);
 console.log('Generated Swedish TEST Beauty Live.');

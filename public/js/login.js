@@ -23,7 +23,11 @@
   message('Signing in…');let result;
   try{result=await service.signIn({email:$('loginEmail').value.trim(),password:$('loginPassword').value});}finally{clearPassword();}
   if(!result||result.authorized!==true)throw Error('This account does not have access to the Hub.');
-  session=result;$('openHub').hidden=false;view('sessionView');$('signedInEmail').textContent=result.email||'';$('openHub').focus();
+  session=result;
+  // Open through the existing server-validated touch; never unlock locally.
+  try{await service.openHub();}
+  catch(error){session=null;view('signInView');throw error;}
+  message('');
  });});
  $('resetForm').addEventListener('submit',event=>{event.preventDefault();perform(async()=>{
   message('Requesting reset link…');await service.sendPasswordReset($('resetEmail').value.trim());

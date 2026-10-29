@@ -1,0 +1,34 @@
+✔ board plan export records sparse boards sharing batches and no private roster data (8.886714ms)
+✔ board memo preparation binds exact TEST group order identities date and board batches (57.476204ms)
+✔ board notes stay closed without native qualification and never update badges or autopilot (5.105412ms)
+✔ board notes require durable attempt then single write and exact readback before success (1.84237ms)
+✔ board notes reject drift expired approvals and overlapping attempts before mutation (3.862007ms)
+✔ board notes uncertain write and audit failures never retry a provider mutation (4.46861ms)
+✔ board handoff durable revision journal refuses restart retries and competing plans (8.507546ms)
+✔ competition pool pages cover every numbered pool once and clamp after source shrinks (4.538625ms)
+✔ competition renderer preserves provider rank zero points and untrusted names as literal text (1.863077ms)
+✔ competition knockout renderer distinguishes byes missing averages winner and exact board state (1.725516ms)
+✔ competition view options reflect supplied stages and empty view remains honest (0.583855ms)
+✔ competition screen loads TEST explicitly clears synthetic content and recovers from failure (63.841464ms)
+✔ competition screen marks failed paused overdue and offline board views as last known (10.447759ms)
+✔ competition screen retains full screen options rotates pages and stops polling on page exit (6.409975ms)
+✔ competition-only preview policy allows the fixed API origin while Hub stays offline (494.951374ms)
+✔ competition all-stages screen has independent accessible section chevrons (2.677143ms)
+✔ competition arrows show only the chosen adjacent round pair and keep each stage independent (1.742628ms)
+✔ competition section and round choices survive new provider data and clamp safely if rounds disappear (0.297848ms)
+✔ competition screen preserves manual collapse during refresh and pauses rotation for hidden pools (15.574044ms)
+✔ deployed stage mode loads TEST immediately without ever rendering synthetic players (12.591457ms)
+✔ competition renderer shows pool matrices and third-place result without turning either into ranking (3.314671ms)
+✔ focus remaining play folds only complete matrices and stages and moves to first unrecorded round (1.576266ms)
+✔ focus remaining button leaves explicit stage controls usable and selection survives updates (35.512901ms)
+✔ native ranking contract preserves supplied full league ordinal ranks ties and zero points (11.988495ms)
+✔ native ranking contract refuses guessed rankings subsets duplicate identities and wrong totals (1.32685ms)
+✔ native ranking contract expires invalidates changed totals and rejects tampered storage (0.379776ms)
+ℹ tests 26
+ℹ suites 0
+ℹ pass 26
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1544.974561

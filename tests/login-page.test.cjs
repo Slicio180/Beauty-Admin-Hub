@@ -20,8 +20,7 @@ test('login page: authorization required; successful session and logout use serv
  let authorized=false,opened=0,signedOut=0;
  const p=page({signIn:async()=>({authorized,email:'test@example.invalid'}),signOut:async()=>{signedOut++;},openHub:async()=>{opened++;}});
  await p.submit('loginForm');assert.equal(p.nodes.sessionView.hidden,true);
- authorized=true;await p.submit('loginForm');assert.equal(p.nodes.sessionView.hidden,false);
- p.click('openHub');await new Promise(setImmediate);assert.equal(opened,1);
+ authorized=true;await p.submit('loginForm');assert.equal(p.nodes.sessionView.hidden,true);assert.equal(opened,1);
  p.click('signOut');await new Promise(setImmediate);assert.equal(signedOut,1);assert.equal(p.nodes.sessionView.hidden,true);assert.equal(p.nodes.loginEmail.value,'');
 });
 test('login page: prevents duplicate sign-in and reports reset/signout failures truthfully',async()=>{
@@ -29,6 +28,12 @@ test('login page: prevents duplicate sign-in and reports reset/signout failures 
  const p=page({signIn:()=>{calls++;return new Promise(r=>finish=r);},sendPasswordReset:async()=>{throw Error('Network unavailable');},signOut:async()=>{throw Error('Session could not be revoked');}});
  await p.submit('loginForm');await p.submit('loginForm');assert.equal(calls,1);assert.equal(p.nodes.signInButton.disabled,true);
  finish({authorized:true});await new Promise(setImmediate);assert.equal(p.nodes.signInButton.disabled,false);
- p.click('signOut');await new Promise(setImmediate);assert.equal(p.nodes.sessionView.hidden,false);assert.match(p.nodes.loginMessage.textContent,/could not be revoked/);
+ p.click('signOut');await new Promise(setImmediate);assert.match(p.nodes.loginMessage.textContent,/could not be revoked/);
  await p.submit('resetForm');assert.match(p.nodes.loginMessage.textContent,/Network unavailable/);
+});
+
+test('login page: failed Hub validation stays on login and never offers an unlocked session',async()=>{
+ const p=page({signIn:async()=>({authorized:true}),openHub:async()=>{throw Error('Session validation failed');}});
+ p.nodes.loginPassword.value='test-only';await p.submit('loginForm');
+ assert.equal(p.nodes.sessionView.hidden,true);assert.equal(p.nodes.signInView.hidden,false);assert.equal(p.nodes.loginPassword.value,'');assert.match(p.nodes.loginMessage.textContent,/Session validation failed/);
 });

@@ -4,7 +4,8 @@ function doGet(e) {
   }
   if (Object.keys(e?.parameter || {}).some(key => key !== 'page')) throw new Error('Candidate configuration rejected.');
   const page = e?.parameter?.page || '';
-  if (!['', 'remote', 'kiosk', 'hub', 'live'].includes(page)) throw new Error('Candidate serves registration pages only.');
+  if (!['', 'remote', 'kiosk', 'hub', 'live', 'stages'].includes(page)) throw new Error('Candidate serves registration pages only.');
+  if(page==='stages'){beautyHubTestGuard_();return HtmlService.createHtmlOutputFromFile('StageTest').setTitle('Beauty pool and knockout play — TEST');}
   if(page==='kiosk'){
     beautyHubTestGuard_();
     return HtmlService.createHtmlOutputFromFile('KioskTest').setTitle('Beauty — Kiosk Identity TEST');
