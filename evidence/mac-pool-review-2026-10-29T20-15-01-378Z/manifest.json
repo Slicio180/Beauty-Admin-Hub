@@ -1,0 +1,57 @@
+[
+  {
+    "path": "public/js/pool-planner-seeded.js",
+    "before": "19a3b683298ae53e65d8f6161a8344145e44db790fdc49027e997d129bf2cf82",
+    "after": "12239e4adeb881c149e2836f1e86ce6a50e24d3bcbf6f35677845aa7d2298253"
+  },
+  {
+    "path": "public/css/beauty-dashboard.css",
+    "before": "748258df102a709fffe22f5d6170e83650f6b2e110b63d0b4c5d20fa14a2e855",
+    "after": "fafcb3181e4bc3357a363b0a58c570b192dfcd98ea4892349f9fa68da14098a4"
+  },
+  {
+    "path": "server/pool-service.js",
+    "before": "838bbe7710078cf72fde5debb88f86d06166283797ecf1960c105288956a295b",
+    "after": "3e0ce206c32c1eab4d60c11a809744c87b5c3e9bce60ee4fd663079fb89624b8"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTestPools.gs",
+    "before": "d1b7b8ef4d5eca84cebdfea7e101583adc76ca95deb80196492342472fbc7a8b",
+    "after": "49a84614ec16f50c23498c955baafb3dccc688ab998adc1ee656bafd0f29e097"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "798d28c06de4825b7a159f17eb4b5307d3a4702d536056e019baa1c90e8b60f2",
+    "after": "f5651e2693e55aacb57c56a7e71ca65a399cd75d45105fe9e18d115edd55f782"
+  },
+  {
+    "path": "tests/pool-planner-seeded-ui.test.cjs",
+    "before": "2d5f592b36ea181b8e9ac860d12840b29391bd13339c44ead7495f43b48250dd",
+    "after": "a1ceb8daff47f751b6cffb0baa410dc819f04b9b73322b3abe9baa41faf0f02c"
+  },
+  {
+    "path": "tests/pool-service.test.cjs",
+    "before": "a1ea73240e1ac7ca27f17dc486f65ff81ba1ee1602336d8431e8190398a3a9dc",
+    "after": "42d955a50ec603422ad67cd66b815efd03a241288d415a4db31b7593d0c7ce8f"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "c9665a3109bbb4f43af6623bc22d3807d5de19968aa7a61c8a6ee2e9f60f3e83",
+    "after": "a289da07e68dfda5cefa9467859eddec475d50ab1f2ab6dfe5ef7dfa26919e6f"
+  },
+  {
+    "path": "docs/handoff/pool-review-20261029.md",
+    "before": null,
+    "after": "4e7fd01109599009817346ae7de0dde8d4fd08aaa37c01cd1d398adc5c0cf8bc"
+  },
+  {
+    "path": "evidence/pool-review-20261029/tests.txt",
+    "before": null,
+    "after": "dcbec3a3de1711c3386c224e1e0a9a2e0cf6bd38c227570ee3a24d8f4e8d93aa"
+  },
+  {
+    "path": "evidence/pool-review-20261029/inventory.txt",
+    "before": null,
+    "after": "641f4f160bbc6b376e1f03c37591ef88fccc8d384a8649c063e4d50b345f0bda"
+  }
+]

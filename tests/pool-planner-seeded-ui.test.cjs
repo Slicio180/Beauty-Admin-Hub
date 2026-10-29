@@ -30,9 +30,10 @@ function fixture(options={}){
  const tick=async()=>{for(let i=0;i<8;i++)await Promise.resolve();};
  const find=text=>host.all().find(n=>n.tag==='button'&&n._text===text);
  async function load(){await find('LOAD / REFRESH LEAGUE STATS').fire('click');queue.shift().resolve(clone(source));await tick();}
- async function generate(){host.querySelector('[data-mapping-reviewed]').checked=true;await find('GENERATE SEEDED PREVIEW').fire('click');queue.shift().resolve({success:true,ticket:'draw',draw:clone(draw)});await tick();}
+ async function startGenerate(){await find('GENERATE SEEDED PREVIEW').fire('click');host.querySelector('[data-mapping-reviewed]').checked=true;await host.querySelector('[data-mapping-reviewed]').fire('change');await find('GENERATE PREVIEW').fire('click');}
+ async function generate(){await startGenerate();queue.shift().resolve({success:true,ticket:'draw',draw:clone(draw)});await tick();}
  async function prepare(){await find('REVIEW NAKKA HANDOFF — TEST').fire('click');queue.shift().resolve({success:true,ticket:'approved',event:{title:'TEST',date:data.eventDate},setting:{startScore:501},expectedCards:6});await tick();}
- return {host,window,document,main,nav,source,data,draw,requests,queue,find,tick,load,generate,prepare,timer:()=>timer(),lock(){generation++;(handlers['beauty-hub-locked']||[]).forEach(fn=>fn());},notice:()=>host.querySelector('[data-pool-message]').textContent};
+ return {startGenerate,host,window,document,main,nav,source,data,draw,requests,queue,find,tick,load,generate,prepare,timer:()=>timer(),lock(){generation++;(handlers['beauty-hub-locked']||[]).forEach(fn=>fn());},notice:()=>host.querySelector('[data-pool-message]').textContent};
 }
 test('pool UI reviews mappings, renders frozen means and coverage, and does not send during generation',async()=>{
  const f=fixture();await f.load();await f.find('GENERATE SEEDED PREVIEW').fire('click');assert.equal(f.requests.length,1);assert.match(f.notice(),/acknowledgement/);await f.generate();assert.match(f.host.textContent,/Coverage 2\/3/);assert.match(f.host.textContent,/Unseeded/);assert.match(f.host.textContent,/Frozen/);assert.deepEqual(f.requests.map(p=>p.page),['poolload','pooldraw']);const sent=JSON.parse(f.requests[1].bindings);assert.equal(sent.length,6);assert.equal(sent[0].lpid,'L0');
@@ -47,16 +48,17 @@ test('pool UI only sends after final approval and cannot double click while savi
  f.queue.shift().resolve({success:true,message:'Verified groups and cards',audit:'before',receipt:'after'});await f.tick();assert.match(f.notice(),/Verified groups/);assert.equal(f.find('SEND APPROVED TEST POOLS'),undefined);
 });
 test('pool UI withdrawals invalidate review and preserve visible frozen draw without silently redrawing',async()=>{
- const f=fixture();await f.load();await f.generate();await f.prepare();f.data.players[0].status='OUT';f.window.BeautySeededPoolUI.update(f.data);assert.match(f.host.textContent,/REVIEW INVALIDATED/);assert.match(f.host.textContent,/Player 0/);assert.equal(f.find('SEND APPROVED TEST POOLS'),undefined);assert.equal(f.find('REVIEW NAKKA HANDOFF — TEST'),undefined);assert.equal(f.requests.length,3);
+ const f=fixture();await f.load();await f.generate();await f.prepare();f.data.players[0].status='OUT';f.window.BeautySeededPoolUI.update(f.data);assert.match(f.host.textContent,/REVIEW INVALIDATED/);assert.match(f.host.textContent,/Player 0/);assert.equal(f.find('SEND APPROVED TEST POOLS'),undefined);assert.equal(f.find('REVIEW NAKKA HANDOFF — TEST').disabled,true);assert.equal(f.requests.length,3);
 });
 test('pool UI lock drops late response and clears identities and previews',async()=>{
- const f=fixture();await f.load();f.host.querySelector('[data-mapping-reviewed]').checked=true;await f.find('GENERATE SEEDED PREVIEW').fire('click');f.lock();f.queue.shift().resolve({success:true,ticket:'late',draw:f.draw});await f.tick();assert.equal(f.host.open,false);assert.doesNotMatch(f.host.textContent,/Player 0|Frozen/);assert.match(f.notice(),/Sign in/);
+ const f=fixture();await f.load();await f.startGenerate();f.lock();f.queue.shift().resolve({success:true,ticket:'late',draw:f.draw});await f.tick();assert.equal(f.host.open,false);assert.doesNotMatch(f.host.textContent,/Player 0|Frozen/);assert.match(f.notice(),/Sign in/);
 });
 test('pool UI provider timeout blocks repeat send and retains inspect-before-retry guidance',async()=>{
  const f=fixture();await f.load();await f.generate();await f.prepare();const check=f.host.querySelector('.pool-approval').querySelector('input');check.checked=true;await check.fire('change');await f.find('SEND APPROVED TEST POOLS').fire('click');f.queue.shift().reject(Error('Connection lost'));await f.tick();assert.match(f.notice(),/Do not repeat/);assert.equal(f.find('SEND APPROVED TEST POOLS'),undefined);assert.match(f.host.textContent,/REVIEW INVALIDATED/);
 });
-test('pool UI automatic refresh runs only while visible and invalidates expired frozen approval',async()=>{
- const f=fixture();await f.load();await f.generate();await f.prepare();f.document.hidden=true;f.timer();assert.equal(f.queue.length,0);f.document.hidden=false;f.timer();await f.tick();assert.equal(f.requests.at(-1).page,'poolload');assert.equal(f.requests.at(-1).refresh,'false');f.queue.shift().resolve(f.source);await f.tick();assert.equal(f.find('SEND APPROVED TEST POOLS'),undefined);assert.match(f.host.textContent,/REVIEW INVALIDATED/);
+test('pool UI automatic refresh preserves a frozen preview and its controls',async()=>{
+ const f=fixture();await f.load();f.document.hidden=true;f.timer();assert.equal(f.queue.length,0);f.document.hidden=false;f.timer();await f.tick();assert.equal(f.requests.at(-1).page,'poolload');f.queue.shift().resolve(f.source);await f.tick();
+ await f.generate();await f.prepare();const requests=f.requests.length;f.timer();await f.tick();assert.equal(f.requests.length,requests);assert.ok(f.find('SEND APPROVED TEST POOLS'));assert.ok(f.find('SWAP PLAYERS'));assert.doesNotMatch(f.host.textContent,/REVIEW INVALIDATED/);
 });
 test('pool TEST transport routes authenticated exact payloads and rejects target or extra-key injection',async()=>{
  const calls=[],context=vm.createContext({URL,BeautyHubAuth:{generation:()=>1,token:()=> 'staff-token',isCurrent:()=>true},google:{script:{get run(){let success;return {withSuccessHandler(fn){success=fn;return this;},withFailureHandler(){return this;},beautyHubTest(action,input,token){calls.push({action,input:clone(input),token});success({success:true});}};}}}});
@@ -76,8 +78,8 @@ test('pool UI renders omitted and null RPC averages as Unseeded and keeps measur
  const row=f.host.querySelectorAll('[data-binding]')[0];row.querySelector('[data-lpid]').value='L0';await row.querySelector('[data-lpid]').fire('change');assert.equal(f.host.querySelector('[data-mapping-reviewed]').checked,false);
 });
 test('pool UI normalizes omitted frozen averages before pool means colours and manual review',async()=>{
- const f=fixture();await f.load();f.host.querySelector('[data-mapping-reviewed]').checked=true;
- await f.find('GENERATE SEEDED PREVIEW').fire('click');const draw=clone(f.draw);for(const p of draw.roster)if(p.average===null)delete p.average;for(const g of draw.pools)for(const p of g.players)if(p.average===null)delete p.average;
+ const f=fixture();await f.load();await f.startGenerate();
+ const draw=clone(f.draw);for(const p of draw.roster)if(p.average===null)delete p.average;for(const g of draw.pools)for(const p of g.players)if(p.average===null)delete p.average;
  f.queue.shift().resolve({success:true,ticket:'draw',draw});await f.tick();assert.match(f.host.textContent,/Coverage 2\/3/);assert.match(f.host.textContent,/Unseeded/);assert.ok(f.find('REVIEW NAKKA HANDOFF — TEST'));assert.doesNotMatch(f.notice(),/toFixed/);
 });
 test('pool approved workspace opens as one main-page section and sidebar navigation closes it without RPC',async()=>{
@@ -99,7 +101,7 @@ test('pool workspace colour bands only alter preview presentation and retain fro
  const f=fixture();await f.load();await f.generate();const tools=f.host.querySelector('.pool-preview-tools'),toggle=tools.querySelector('input');toggle.checked=true;await toggle.fire('change');assert.ok(f.host.all().some(n=>n.className==='pool-band-UNSEEDED'));assert.ok(f.host.all().some(n=>n.className==='pool-band-2'));assert.equal(f.requests.length,2);assert.match(f.host.textContent,/Frozen/);
 });
 test('pool workspace unavailable Hub data blocks generating and clears handoff approval until a new draw',async()=>{
- const f=fixture();await f.load();await f.generate();await f.prepare();f.window.BeautySeededPoolUI.unavailable();assert.equal(f.find('GENERATE SEEDED PREVIEW').disabled,true);assert.equal(f.find('SEND APPROVED TEST POOLS'),undefined);assert.match(f.host.textContent,/REVIEW INVALIDATED/);f.window.BeautySeededPoolUI.update(f.data);assert.equal(f.find('GENERATE SEEDED PREVIEW').disabled,false);assert.equal(f.find('REVIEW NAKKA HANDOFF — TEST'),undefined);assert.equal(f.requests.length,3);
+ const f=fixture();await f.load();await f.generate();await f.prepare();f.window.BeautySeededPoolUI.unavailable();assert.equal(f.find('GENERATE SEEDED PREVIEW').disabled,true);assert.equal(f.find('SEND APPROVED TEST POOLS'),undefined);assert.match(f.host.textContent,/REVIEW INVALIDATED/);f.window.BeautySeededPoolUI.update(f.data);assert.equal(f.find('GENERATE SEEDED PREVIEW').disabled,false);assert.equal(f.find('REVIEW NAKKA HANDOFF — TEST').disabled,true);assert.equal(f.requests.length,3);
 });
 
 test('pool workspace selects physical boards and shows numbered pools sharing only available boards',async()=>{
@@ -109,4 +111,14 @@ test('pool workspace selects physical boards and shows numbered pools sharing on
 test('pool workspace invalid board ranges block drawing and excluded Nakka entries block approval',async()=>{
  const f=fixture();await f.load();f.host.querySelector('[data-boards]').value='1-4,4';await f.host.querySelector('[data-boards]').fire('input');assert.equal(f.find('GENERATE SEEDED PREVIEW').disabled,true);
  f.host.querySelector('[data-boards]').value='1,7';await f.host.querySelector('[data-boards]').fire('input');await f.generate();await f.find('REVIEW NAKKA HANDOFF — TEST').fire('click');f.queue.shift().resolve({success:true,ticket:'approved',event:{title:'TEST',date:f.data.eventDate},setting:{},expectedCards:6,unassignedEntries:[{tpid:'extra',name:'Standby Player'}]});await f.tick();assert.match(f.host.textContent,/Standby Player/);const check=f.host.querySelector('.pool-approval').querySelector('input');check.checked=true;await check.fire('change');assert.equal(f.find('SEND APPROVED TEST POOLS').disabled,true);
+});
+
+test('pool review orders unresolved identities first and confirms generation only through popup',async()=>{
+ const f=fixture();f.source.mappings[5].lpid='';await f.load();assert.equal(f.host.querySelectorAll('[data-binding]')[0].dataset.binding,'P5');
+ await f.find('GENERATE SEEDED PREVIEW').fire('click');assert.equal(f.host.querySelector('[data-preview-confirm]').open,true);assert.equal(f.requests.length,1);assert.equal(f.find('GENERATE PREVIEW').disabled,true);await f.find('CANCEL').fire('click');assert.equal(f.requests.length,1);
+ await f.generate();assert.equal(f.host.querySelector('[data-preview-confirm]').open,false);assert.equal(f.requests.at(-1).page,'pooldraw');
+});
+test('pool invalidation retains board overview and disabled swaps with a specific reason',async()=>{
+ const f=fixture();await f.load();await f.generate();f.data.players[0].status='OUT';f.window.BeautySeededPoolUI.update(f.data);
+ assert.match(f.host.textContent,/Board overview/);assert.match(f.host.textContent,/IN roster or event date changed/);assert.equal(f.find('SWAP PLAYERS').disabled,true);const n=f.requests.length;await f.find('SWAP PLAYERS').fire('click');assert.equal(f.requests.length,n);
 });

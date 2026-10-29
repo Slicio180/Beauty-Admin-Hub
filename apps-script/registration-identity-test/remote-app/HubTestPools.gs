@@ -132,7 +132,7 @@ var BeautyPoolSeeding=(function(){
 
 /* Staff-only, fixed Identity TEST. No entry additions/deletions, no event start.
  * API contract: https://push.n01darts.com/api/v1/n01_api_manual_en.html
- * Frozen previews expire after five minutes. A provider write is never retried.
+ * Planning previews expire after30 minutes; final approvals after five minutes. A provider write is never retried.
  */
 function beautyPoolError_(message){const e=Error(message);e.name='BeautyPoolError';throw e;}
 function beautyPoolKey_(s){return s.normalize('NFC').trim().replace(/\s+/g,' ').toLocaleLowerCase('sv-SE');}
@@ -280,7 +280,7 @@ function beautyHubPool_(action,input){
     const fields={poolload:['refresh'],pooldraw:['bindings','reviewed','sizes'],pooladjust:['change','ticket'],poolprepare:['ticket'],poolsave:['confirmed','ticket']}[action];
     if(!fields||!input||Object.keys(input).sort().join(',')!==fields.sort().join(',')||Object.values(input).some(v=>typeof v!=='string'||v.length>40000)||input.sizes?.length>400||input.change?.length>1000)beautyPoolError_('Invalid Pool Planner request.');
     const ticketRead=()=>{if(!/^[a-f0-9]{32}$/.test(input.ticket))beautyPoolError_('Expired pool preview.');const r=JSON.parse(cache.get('beauty-pool:'+input.ticket)||'null');if(!r||r.uid!==account.uid||r.session!==session||Date.now()>=r.expires)beautyPoolError_('Expired pool preview.');return r;};
-    const ticketWrite=r=>{const ticket=Utilities.getUuid().replace(/-/g,'');r.uid=account.uid;r.session=session;r.expires=Date.now()+300000;const text=JSON.stringify(r);if(text.length>90000)beautyPoolError_('Draw too large.');cache.put('beauty-pool:'+ticket,text,300);return ticket;};
+    const ticketWrite=r=>{const ticket=Utilities.getUuid().replace(/-/g,'');r.uid=account.uid;r.session=session;const lifetime=r.ready===true?300:1800;r.expires=Date.now()+lifetime*1000;const text=JSON.stringify(r);if(text.length>90000)beautyPoolError_('Draw too large.');cache.put('beauty-pool:'+ticket,text,lifetime);return ticket;};
     if(action==='poolload'||action==='pooldraw'){
       if(action==='poolload'&&!['true','false'].includes(input.refresh))beautyPoolError_('Invalid refresh.');
       const stats=beautyPoolStats_(auth,action==='poolload'&&input.refresh==='true'),roster=beautyPoolRoster_(),event=beautyPoolEvent_(auth),entries=beautyPoolEntries_(event);

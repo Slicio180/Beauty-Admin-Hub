@@ -1,7 +1,7 @@
 /* Identity TEST seeded Pool Planner. Approval and draws are server-owned. */
 (function(root){
  'use strict';
- let panel,host,opener,state=null,frozen=null,approval=null,busy=false,epoch=0,invalid=true,lastRoster='',hubAvailable=true;
+ let panel,host,opener,state=null,frozen=null,approval=null,busy=false,epoch=0,invalid=true,lastRoster='',hubAvailable=true,invalidReason='',plannedBoards=null;
  const el=(tag,text,parent)=>{const n=document.createElement(tag);if(text!=null)n.textContent=text;parent?.appendChild(n);return n;};
  const average=value=>typeof value==='number'&&Number.isFinite(value)&&value>=0&&value<=180?value:null;
  const averageLabel=value=>average(value)===null?'Unseeded':average(value).toFixed(2);
@@ -27,7 +27,7 @@
   let selectedIds=[];try{selectedIds=selectedBoards();}catch(e){}for(const b of panel.querySelectorAll('[data-board-choice]'))b.setAttribute('aria-pressed',String(selectedIds.includes(Number(b.dataset.boardChoice))));
   disable();
  }
- function settingsChanged(){if(frozen){approval=null;invalid=true;message('Draw settings changed. Generate and review a new preview.');renderDraw();}renderSettings();}
+ function settingsChanged(){if(frozen){approval=null;invalid=true;invalidReason='Draw settings changed. Generate and review a new preview.';message('Draw settings changed. Generate and review a new preview.');renderDraw();}renderSettings();}
  async function generate(send){
   if(!hubAvailable)throw Error('Hub data unavailable. Wait for a verified refresh before drawing.');
   if(!state)throw Error('Load league statistics and review player identities first.');
@@ -35,12 +35,12 @@
   const plan=currentPlan(),scheme=panel.querySelector('[data-draw-scheme]').value;
   if(plan.error||!plan[scheme])throw Error(plan.error||'That arrangement cannot fit the boards. Choose the preferred format or add boards.');
   frozen=await send('pooldraw',{bindings:JSON.stringify(bindings()),sizes:JSON.stringify(BeautyPoolSeeding.sizesFromPlan(plan[scheme])),reviewed:'true'});
-  approval=null;invalid=false;lastRoster=fingerprint(root.beautyHubData);panel.querySelector('[data-player-review]').open=false;
+  plannedBoards=selectedBoards();approval=null;invalid=false;invalidReason='';lastRoster=fingerprint(root.beautyHubData);panel.querySelector('[data-player-review]').open=false;
   message('Averages are frozen. Review pool balance and make any manual swaps before approving.');renderDraw();
  }
 
  function fingerprint(data){return data?.success&&Array.isArray(data.players)?JSON.stringify([data.eventDate,data.players.filter(p=>p.status==='IN').map(p=>p.player||p.newPlayer).sort()]):'';}
- function invalidate(text){invalid=true;approval=null;if(panel){message(text);renderDraw();}}
+ function invalidate(text){invalid=true;invalidReason=text;approval=null;if(panel){message(text);renderDraw();}}
  async function request(page,input){
   const url=new URL(BeautyHubServices.endpoint);url.search='';url.searchParams.set('page',page);for(const [k,v]of Object.entries(input))url.searchParams.set(k,v);
   const data=await(await BeautyHubServices.request(url.toString())).json();if(!data.success)throw Error((data.error||'Pool request failed.')+(data.audit?' Audit: '+data.audit:''));// Treat absent optional average fields as explicitly unknown at the RPC boundary.
@@ -54,7 +54,7 @@
   if(busy)return;busy=true;const generation=BeautyHubAuth.generation(),revision=epoch;
   const valid=()=>revision===epoch&&BeautyHubAuth.isCurrent(generation)&&host?.open;
   const send=async(page,input)=>{const r=await request(page,input);if(!valid())throw Error('Session or panel changed. Reopen the planner.');return r;};
-  disable();try{await job(send);}catch(e){if(valid())message(e.message);}finally{busy=false;disable();}
+  disable();try{await job(send);}catch(e){if(valid()){if(frozen&&/Expired pool preview/.test(e.message))invalidate('Planning ticket expired or was evicted. Generate a new preview; the old draw remains visible.');message(e.message);}}finally{busy=false;disable();}
  }
  function disable(){if(panel)panel.querySelectorAll('button,input,select').forEach(n=>{n.disabled=busy||n.dataset.blocked==='true';});}
  function bindings(){return [...panel.querySelectorAll('[data-binding]')].map(row=>({id:row.dataset.binding,lpid:row.querySelector('[data-lpid]').value,tpid:row.querySelector('[data-tpid]').value}));}
@@ -74,9 +74,15 @@
   button('REVIEW PLAYERS',reviewCard,()=>{details.open=!details.open;details.scrollIntoView?.({block:'nearest',behavior:'smooth'});});
   el('p','Names propose matches. Check the LPID and event entry ID in Nakka. If Nakka does not expose the saved league link, this records your review; it does not prove that hidden link. Missing averages remain Unseeded.',details);
   const wrap=section('div','pool-review-table-wrap',details),table=el('table',null,wrap),head=el('tr',null,el('thead',null,table));['Player','League identity (LPID)','Event entry (TPID)','Overall average'].forEach(t=>el('th',t,head));const body=el('tbody',null,table);
-  for(const p of state.mappings){const row=el('tr',null,body);row.dataset.binding=p.id;el('td',p.name,row);select(el('td',null,row),'lpid',p.leagueCandidates,'lpid',p.lpid);select(el('td',null,row),'tpid',p.eventCandidates,'tpid',p.tpid);const avg=numeric('td',averageLabel(p.average),row);if(p.reason)el('small',p.reason,avg);}
-  const label=el('label',null,details),review=el('input',null,label);review.type='checkbox';review.dataset.mappingReviewed='';label.appendChild(document.createTextNode(' I reviewed all proposed identities. Unresolved players may be planned as Unseeded; sending requires every league identity and event entry.'));
-  review.addEventListener('change',()=>{panel.querySelector('[data-review-state]').textContent=review.checked?'Identity review acknowledged':needsReview?needsReview+' player identities need review':'Player identities ready for review';});
+  for(const p of state.mappings.slice().sort((a,b)=>Number(!b.lpid||!b.tpid)-Number(!a.lpid||!a.tpid)||a.name.localeCompare(b.name,'sv'))){const row=el('tr',null,body);row.dataset.binding=p.id;el('td',p.name,row);select(el('td',null,row),'lpid',p.leagueCandidates,'lpid',p.lpid);select(el('td',null,row),'tpid',p.eventCandidates,'tpid',p.tpid);const avg=numeric('td',averageLabel(p.average),row);if(p.reason)el('small',p.reason,avg);}
+  const confirm=el('dialog',null,box);confirm.className='pool-preview-confirm';confirm.dataset.previewConfirm='';confirm.setAttribute('aria-labelledby','poolPreviewConfirmTitle');
+  const confirmTitle=el('h3','Generate pool preview',confirm);confirmTitle.id='poolPreviewConfirmTitle';
+  el('p','This creates a Hub preview only. No Nakka changes will be sent.',confirm);
+  const label=el('label',null,confirm),review=el('input',null,label);review.type='checkbox';review.dataset.mappingReviewed='';label.appendChild(document.createTextNode(' I reviewed all proposed identities. Unresolved players may be planned as Unseeded; sending requires every league identity and event entry.'));
+  const actions=section('div','pool-confirm-actions',confirm);button('CANCEL',actions,()=>confirm.close());
+  const proceed=button('GENERATE PREVIEW',actions,()=>{if(!review.checked)return;confirm.close();run(generate);});proceed.dataset.confirmGenerate='';proceed.dataset.blocked='true';proceed.disabled=true;
+  review.addEventListener('change',()=>{proceed.dataset.blocked=String(!review.checked);disable();});
+  confirm.addEventListener('close',()=>panel.querySelector('[data-generate]')?.focus());
   const source=el('details',null,box);source.className='pool-source-detail';el('summary','Statistics source and calculation',source);
   el('p',(stats.title||'AIK league')+' · '+(stats.method||'Overall three-dart average = 3 × total score / total darts. Display uses two decimals; seeding keeps full precision. Ranking points are separate.'),source);
   if(stats.message)el('p',stats.message,source);if(state.journal)el('p',state.journal,source);
@@ -85,9 +91,10 @@
  function renderDraw(){
   const box=panel?.querySelector('[data-pool-draw]');if(!box)return;box.replaceChildren();steps();
   if(!frozen){el('p','Generate a preview after reviewing player identities. No Nakka changes are sent by previewing or swapping.',box).className='pool-empty';return;}
-  let allocation;try{allocation=root.BeautyPoolBoards.allocate(frozen.draw.pools,selectedBoards());}catch(e){invalid=true;approval=null;}
+  const statsTitle=panel.querySelector('[data-fresh]');if(statsTitle)statsTitle.textContent='League averages frozen for this preview';
+  let allocation;try{allocation=root.BeautyPoolBoards.allocate(frozen.draw.pools,plannedBoards||selectedBoards());}catch(e){invalid=true;approval=null;}
   const draw=frozen.draw,heading=section('div','pool-preview-heading',box);el('h3','Pool preview',heading);el('p','Frozen '+draw.frozenAt+' · Statistics '+draw.source.fetchedAt+' · Draw seed '+draw.seed,heading);
-  if(invalid)el('p','REVIEW INVALIDATED — source expired, unavailable or changed. Generate a new draw before sending.',box).className='pool-invalid';
+  if(invalid)el('p','REVIEW INVALIDATED — '+(invalidReason||'Preview is no longer active. Generate a new draw before sending.'),box).className='pool-invalid';
   const warnings=BeautyPoolSeeding.warnings(draw);if(warnings.length){const details=el('details',null,box);details.className='pool-draw-notes';el('summary','Draw notes · '+warnings.length,details);warnings.forEach(t=>el('p',t,details));}
   const settings=section('div','pool-preview-tools',box),label=el('label',null,settings),colours=el('input',null,label);colours.type='checkbox';colours.checked=!!root.beautyPoolColours;label.appendChild(document.createTextNode(' Show seeding colours'));
   const bands=el('details',null,settings);el('summary','Edit bands',bands);const bounds=el('label','Band boundaries (three increasing values) ',bands),inputs=[50,55,60].map((v,i)=>{const n=el('input',null,bounds);n.type='number';n.min='0';n.max='180';n.step='0.01';n.value=String(root.beautyPoolBands?.[i]??v);return n;});
@@ -103,10 +110,10 @@
     for(const p of pool.players){const li=el('li',null,list);if(colours.checked)li.className='pool-band-'+BeautyPoolSeeding.band(p.average,thresholds);el('span',p.name,li).className='pool-player-name';const value=el('span',averageLabel(p.average),li);value.className=p.average===null?'pool-unseeded':'pool-number';}
    }
   }
-  colours.addEventListener('change',paint);inputs.forEach(n=>n.addEventListener('change',paint));paint();if(invalid){disable();return;}
+  colours.addEventListener('change',paint);inputs.forEach(n=>n.addEventListener('change',paint));paint();
   if(allocation){const overview=section('section','pool-board-overview',box);el('h3','Board overview · planned in Hub',overview);el('p','Pools take turns on each board. This allocation has not been sent to Nakka.',overview);for(const b of allocation.boards)el('p','Board '+b.board+' · '+(b.pools.map(p=>'Pool '+p.poolNumber+' (batch '+p.batch+')').join(', ')||'Unused')+' · '+b.matches+' matches',overview);}
   button('DOWNLOAD BOARD PLAN',box,()=>{
-   try{const plan=root.BeautyPoolBoardPlan.create(draw,selectedBoards(),root.beautyHubData?.eventDate),body=root.BeautyPoolBoardPlan.text(plan);
+   try{const plan=root.BeautyPoolBoardPlan.create(draw,plannedBoards||selectedBoards(),draw.eventDate),body=root.BeautyPoolBoardPlan.text(plan);
     const url=URL.createObjectURL(new Blob([body],{type:'text/plain;charset=utf-8'})),link=el('a',null,box);link.href=url;link.download='Beauty-Board-Plan-TEST-'+plan.eventDate+'.txt';link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);message('Board plan downloaded. Planned boards have not been sent to Nakka.');
    }catch(e){message(e.message);}
   });
@@ -115,10 +122,12 @@
   for(const pool of draw.pools)for(const p of pool.players)for(const target of [left,right])el('option','Pool '+pool.name+' · '+p.name,target).value=p.id;
   const footer=section('div','pool-action-bar',box);el('p','Preview only · No Nakka changes sent',footer);
   const unresolved=(frozen.mappings||state?.mappings||[]).filter(p=>!p.lpid||!p.tpid).length;
-  button('SWAP PLAYERS',swap,()=>run(async send=>{const target=draw.pools.find(g=>g.players.some(p=>p.id===right.value));frozen=await send('pooladjust',{ticket:frozen.ticket,change:JSON.stringify({playerId:left.value,targetPool:target.id,swapWith:right.value})});approval=null;message('Swap saved in preview. Review the new pool balance.');renderDraw();}));
+  const swapButton=button('SWAP PLAYERS',swap,()=>run(async send=>{const target=draw.pools.find(g=>g.players.some(p=>p.id===right.value));frozen=await send('pooladjust',{ticket:frozen.ticket,change:JSON.stringify({playerId:left.value,targetPool:target.id,swapWith:right.value})});approval=null;message('Swap saved in preview. Review the new pool balance.');renderDraw();}));
+  swapButton.dataset.blocked=String(invalid||!hubAvailable);left.dataset.blocked=right.dataset.blocked=String(invalid||!hubAvailable);
+  if(invalid)el('p','Swaps and sending are disabled. '+(invalidReason||'Generate a new preview to continue.'),footer);
   const handoff=button('REVIEW NAKKA HANDOFF — TEST',footer,()=>run(async send=>{approval=await send('poolprepare',{ticket:frozen.ticket});frozen.ticket=approval.ticket;message('Handoff checked. Close Nakka editing pages, then confirm these TEST pools.');renderDraw();}));
-  handoff.dataset.blocked=String(unresolved>0||!state?.stats?.fresh||!hubAvailable);
-  if(unresolved)el('p','Resolve '+unresolved+' player identities before sending. Preview and manual swaps remain available.',footer);
+  handoff.dataset.blocked=String(invalid||unresolved>0||!state?.stats?.fresh||!hubAvailable);
+  if(unresolved)el('p','Resolve '+unresolved+' player identities before sending. '+(invalid?'The frozen preview is retained for reference.':'Preview and manual swaps remain available.'),footer);
   if(approval){const review=el('section',null,box);review.className='pool-approval';el('h3','Approve TEST pool handoff',review);el('p',approval.event.title+' · '+approval.event.date+' · '+draw.roster.length+' IN players · '+draw.pools.length+' pools · '+approval.expectedCards+' round-robin match cards.',review);
    el('p','Only pool assignments, division count and maximum pool size change. Existing players and other event settings are retained. Sending uses two Nakka operations: groups, then match cards. If either cannot be verified, inspect the audit before another action.',review);
    if(approval.unassignedEntries?.length){el('p','Excluded from these pools but still registered in Nakka: '+approval.unassignedEntries.map(p=>p.name).join(', ')+'. Sending is blocked until these entries are resolved or compatibility is verified in TEST. No automatic removals.',review);}
@@ -127,20 +136,20 @@
    const save=button('SEND APPROVED TEST POOLS',review,()=>run(async send=>{if(!check.checked)throw Error('Tick the final approval first.');const ticket=approval.ticket;approval=null;invalid=true;message('Sending once. Waiting for group and match-card readback…');try{const r=await send('poolsave',{ticket,confirmed:'true'});frozen=null;message(r.message+' Audit: '+r.audit+' · Receipt: '+r.receipt);renderDraw();}catch(e){renderDraw();throw Error(e.message+' Do not repeat a send until the event and audit have been inspected.');}}));save.dataset.blocked='true';save.disabled=true;check.addEventListener('change',()=>{save.dataset.blocked=String(!check.checked||!!approval?.unassignedEntries?.length);disable();});
   }steps();disable();
  }
- async function load(send,refresh){state=await send('poolload',{refresh:String(refresh)});approval=null;if(frozen)invalid=true;renderSource();renderDraw();message('Review player mappings before generating a draw. '+(state.stats.message||''));}
+ async function load(send,refresh){state=await send('poolload',{refresh:String(refresh)});approval=null;if(frozen){invalid=true;invalidReason='Statistics or identity mappings were reloaded. Generate a new preview.';}renderSource();renderDraw();message('Review player mappings before generating a draw. '+(state.stats.message||''));}
  function mount(dialog){
   if(BeautyHubServices.mode!=='test')return;host=dialog;panel=section('section','seeded-pool-planner pool-planner-workspace',host);
   const header=section('header','pool-page-heading',panel),intro=el('div',null,header);el('h2','Pool Planner',intro);el('p','Balance the field. Review the draw. Send when ready.',intro);
   const progress=section('ol','pool-progress',header);['Setup','Pool preview','Nakka review'].forEach((text,i)=>{const n=el('li',null,progress);n.dataset.step=String(i+1);numeric('span',i+1,n);el('strong',text,n);});
   const event=section('div','pool-event-label',header);el('strong','TEST EVENT',event);el('p','Selected Hub event',event).dataset.eventLabel='';
   button('BACK TO DASHBOARD',header,()=>{if(!busy){host.close();root.BeautyHubNavigation?.dashboard();opener?.focus();}});
-  const setup=section('section','pool-setup',panel),total=el('div',null,setup);el('span','IN PLAYERS',total).className='label';numeric('strong','—',total).dataset.inCount='';el('small','OUT and STANDBY excluded',total);
+  const setup=section('section','pool-setup',panel),total=el('div',null,setup);el('span','PLAYERS IN',total).className='label';numeric('strong','—',total).dataset.inCount='';el('small','OUT and STANDBY excluded',total);
   const sizeLabel=el('div',null,setup);el('span','PLAYERS PER POOL',sizeLabel).className='label';const size=el('select',null,sizeLabel);size.dataset.size='';size.hidden=true;size.setAttribute('aria-hidden','true');size.tabIndex=-1;
   [3,4].forEach(n=>el('option',String(n),size).value=String(n));const choices=section('div','pool-size-choices',sizeLabel);
   [3,4].forEach(n=>{const b=button(String(n),choices,()=>{size.value=String(n);settingsChanged();});b.dataset.sizeChoice=String(n);b.setAttribute('aria-label',n+' players per pool');});
   const boardsLabel=el('label','AVAILABLE BOARDS',setup),boards=el('input',null,boardsLabel);boards.type='text';boards.maxLength=1000;boards.placeholder='1-4, 7-9, 13-15';boards.dataset.boards='';
   const arrangement=el('label','BOARD LAYOUT',setup),scheme=el('select',null,arrangement);scheme.dataset.drawScheme='';for(const [v,t]of [['preferredPlan','Preferred format'],['perBoard','One pool per dartboard']])el('option',t,scheme).value=v;
-  const draw=button('GENERATE SEEDED PREVIEW',setup,()=>run(generate));draw.dataset.generate='';draw.dataset.blocked='true';
+  const draw=button('GENERATE SEEDED PREVIEW',setup,()=>{const confirm=panel.querySelector('[data-preview-confirm]');if(!confirm)return;panel.querySelector('[data-mapping-reviewed]').checked=false;const proceed=panel.querySelector('[data-confirm-generate]');proceed.dataset.blocked='true';disable();message('Review the player identity acknowledgement in the popup.');confirm.showModal();});draw.dataset.generate='';draw.dataset.blocked='true';
   el('p','Select actual board numbers; only those boards will be used.',setup).dataset.planSummary='';
   const boardChoices=section('div','pool-board-choices',panel);for(let n=1;n<=16;n++){const b=button(String(n),boardChoices,()=>{let selected=[];try{selected=selectedBoards();}catch(e){}const next=selected.includes(n)?selected.filter(v=>v!==n):[...selected,n];boards.value=next.sort((a,b)=>a-b).join(', ');settingsChanged();});b.dataset.boardChoice=String(n);b.setAttribute('aria-label','Board '+n);}
   const advanced=el('details',null,panel);advanced.className='pool-advanced';el('summary','Advanced planning and original scheme',advanced);
@@ -152,7 +161,7 @@
   el('div',null,panel).dataset.poolSource='';const notice=el('p','Load league statistics to review identities and generate a draw.',panel);notice.dataset.poolMessage='';notice.setAttribute('role','status');notice.setAttribute('aria-live','polite');el('div',null,panel).dataset.poolDraw='';
   boards.addEventListener('input',settingsChanged);scheme.addEventListener('change',settingsChanged);
   host.addEventListener('cancel',e=>{if(busy)e.preventDefault();});host.addEventListener('close',()=>{epoch++;approval=null;invalid=true;renderDraw();});
-  root.setInterval(()=>{if(host?.open&&!document.hidden&&!busy&&state)run(send=>load(send,false));},300000);
+  root.setInterval(()=>{if(host?.open&&!document.hidden&&!busy&&state&&!frozen&&!panel.querySelector('[data-player-review]')?.open)run(send=>load(send,false));},300000);
   renderSource();renderDraw();steps();
  }
  function open(button){

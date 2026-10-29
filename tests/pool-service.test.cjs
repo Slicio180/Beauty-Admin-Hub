@@ -143,3 +143,10 @@ test('pool unqualified excluded event entries block every write and retain expli
  const f=fixture({unassignedVerified:false}),{p}=f.prepare();assert.equal(p.unassignedEntries.length,2);assert.equal(p.unassignedEntries[0].name,'Player 6');
  const r=f.call('poolsave',{ticket:p.ticket,confirmed:'true'});assert.equal(r.success,false);assert.match(r.error,/Unassigned Nakka entries/);assert.equal(f.calls.filter(c=>c.payload).length,0);assert.equal(f.audits.length,0);
 });
+
+test('pool planning lasts thirty minutes while final approval retains five-minute expiry',()=>{
+ const f=fixture(),d=f.draw();f.advance(360000);
+ const adjusted=f.call('pooladjust',{ticket:d.ticket,change:JSON.stringify({playerId:d.draw.pools[0].players[0].id,targetPool:d.draw.pools[1].id,swapWith:d.draw.pools[1].players[0].id})});assert.equal(adjusted.success,true);assert.equal(f.calls.filter(c=>c.payload).length,0);
+ f.advance(1800001);assert.equal(f.call('pooladjust',{ticket:adjusted.ticket,change:'{}'}).success,false);
+ const g=fixture(),{p}=g.prepare();g.advance(300001);assert.equal(g.call('poolsave',{ticket:p.ticket,confirmed:'true'}).success,false);assert.equal(g.calls.filter(c=>c.payload).length,0);
+});

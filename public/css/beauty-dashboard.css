@@ -324,3 +324,21 @@ body .register-popup .hub-kiosk-player-option:active:not(:disabled){background:#
 /* Approved pure-white dashboard card labels and table headings. */
 .summary-card span:not(.attention-icon){color:#fff}
 .players-workspace .players-table th{color:#fff}
+
+/* Pool review: retain names while scanning identities; compact the frozen cards. */
+.pool-review-table-wrap{max-width:100%;overflow:auto}
+.pool-review-table-wrap table{width:100%;min-width:760px;table-layout:fixed}
+.pool-review-table-wrap :is(th,td){overflow-wrap:anywhere;padding:10px 8px}
+.pool-review-table-wrap :is(th,td):first-child{width:25%;position:sticky;left:0;background:#111214;z-index:1}
+.pool-review-table-wrap :is(th,td):nth-child(2),.pool-review-table-wrap :is(th,td):nth-child(3){width:29%}
+.pool-review-table-wrap :is(th,td):last-child{width:17%}
+.pool-review-table-wrap select{width:100%;min-width:0;max-width:100%;text-overflow:ellipsis}
+.pool-preview-confirm{width:min(600px,calc(100vw - 32px));background:#111214;color:#fff;border:1px solid #ffd700;border-radius:10px;padding:24px;font:20px/1.4 'AIK Display',serif}
+.pool-preview-confirm::backdrop{background:rgba(0,0,0,.7)}
+.pool-preview-confirm h3{font:700 28px 'AIK Condensed',serif;margin-top:0}
+.pool-preview-confirm label{display:flex;align-items:flex-start;gap:12px;margin:20px 0}
+.pool-preview-confirm input{width:22px;height:22px;flex-shrink:0}
+.pool-confirm-actions{display:flex;justify-content:flex-end;gap:12px}
+.pool-card-heading{padding:8px 12px}.pool-card .pool-board-label{margin:0;padding:10px 12px}
+.pool-card-summary{padding:6px 12px;gap:6px}
+.pool-card ol{padding:0 12px}.pool-card li{padding-top:10px;padding-bottom:10px}

@@ -6194,7 +6194,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6207,7 +6207,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6220,7 +6220,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6233,7 +6233,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6246,7 +6246,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6259,20 +6259,20 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
     "id": "SEEDED-POOL-037",
     "file": "tests/pool-planner-seeded-ui.test.cjs",
-    "name": "pool UI automatic refresh runs only while visible and invalidates expired frozen approval",
+    "name": "pool UI automatic refresh preserves a frozen preview and its controls",
     "requirement": "POOL-SEEDED-001",
     "kind": "Executable synthetic service or DOM behavior",
     "purpose": "Seeded draw, frozen statistics and guarded fixed TEST handoff",
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6285,7 +6285,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6298,7 +6298,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6311,7 +6311,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6324,7 +6324,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6337,7 +6337,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE VISUAL REVIEW PENDING",
     "origin": "Owner approved mockup28Oct2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "Synthetic DOM has no layout engine. Native viewport/typography checks remain pending."
   },
   {
@@ -6350,7 +6350,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE VISUAL REVIEW PENDING",
     "origin": "Owner approved mockup28Oct2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "Synthetic DOM has no layout engine. Native viewport/typography checks remain pending."
   },
   {
@@ -6363,7 +6363,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE VISUAL REVIEW PENDING",
     "origin": "Owner approved mockup28Oct2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "Synthetic DOM has no layout engine. Native viewport/typography checks remain pending."
   },
   {
@@ -6376,7 +6376,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE VISUAL REVIEW PENDING",
     "origin": "Owner approved mockup28Oct2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "Synthetic DOM has no layout engine. Native viewport/typography checks remain pending."
   },
   {
@@ -6389,7 +6389,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE VISUAL REVIEW PENDING",
     "origin": "Owner approved mockup28Oct2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "Synthetic DOM has no layout engine. Native viewport/typography checks remain pending."
   },
   {
@@ -6402,7 +6402,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE VISUAL REVIEW PENDING",
     "origin": "Owner approved mockup28Oct2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "Synthetic DOM has no layout engine. Native viewport/typography checks remain pending."
   },
   {
@@ -6416,7 +6416,7 @@
     "evidenceLabel": "LOCAL_TESTED",
     "origin": "Owner request29Oct2026",
     "limitations": "Synthetic fixtures; native/provider verification still pending",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt"
+    "evidence": "evidence/pool-review-20261029/tests.txt"
   },
   {
     "id": "PREP-501",
@@ -6429,7 +6429,7 @@
     "evidenceLabel": "LOCAL_TESTED",
     "origin": "Owner request29Oct2026",
     "limitations": "Synthetic fixtures; native/provider verification still pending",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt"
+    "evidence": "evidence/pool-review-20261029/tests.txt"
   },
   {
     "id": "SEEDED-POOL-013",
@@ -6441,7 +6441,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6454,7 +6454,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6467,7 +6467,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6480,7 +6480,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6493,7 +6493,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6506,7 +6506,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6519,7 +6519,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6532,7 +6532,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6545,7 +6545,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6558,7 +6558,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6571,7 +6571,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6584,7 +6584,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6597,7 +6597,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6610,7 +6610,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6623,7 +6623,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6636,7 +6636,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6649,7 +6649,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6662,7 +6662,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6675,7 +6675,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner fixed TEST diagnostic29Oct2026; official Nakka API manual section4.3",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google/Nakka mutation performed by these tests. Actual table/card state has not been provided."
   },
   {
@@ -6688,7 +6688,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner fixed TEST diagnostic29Oct2026; official Nakka API manual section4.3",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google/Nakka mutation performed by these tests. Actual table/card state has not been provided."
   },
   {
@@ -6701,7 +6701,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner fixed TEST diagnostic29Oct2026; official Nakka API manual section4.3",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google/Nakka mutation performed by these tests. Actual table/card state has not been provided."
   },
   {
@@ -6714,7 +6714,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner fixed TEST diagnostic29Oct2026; official Nakka API manual section4.3",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/pool-review-20261029/tests.txt",
     "limitations": "No Google/Nakka mutation performed by these tests. Actual table/card state has not been provided."
   },
   {
@@ -6728,7 +6728,7 @@
     "evidenceLabel": "LOCAL_TESTED",
     "origin": "Owner request29Oct2026",
     "limitations": "Synthetic fixtures; native/provider verification still pending",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt"
+    "evidence": "evidence/pool-review-20261029/tests.txt"
   },
   {
     "id": "PREP-525",
@@ -7444,5 +7444,44 @@
     "origin": "Owner approval29Oct2026",
     "limitations": "Synthetic fixtures; native/provider verification still pending",
     "evidence": "evidence/live-polish-20261029/tests.txt"
+  },
+  {
+    "id": "POOL-REVIEW-UI-001",
+    "file": "tests/pool-planner-seeded-ui.test.cjs",
+    "name": "pool review orders unresolved identities first and confirms generation only through popup",
+    "requirement": "START-20261029",
+    "kind": "Executable offline behavior",
+    "purpose": "Stable frozen preview, explicit confirmation and retained review controls",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner request29Oct2026",
+    "limitations": "Local fixtures; native Google visual review and real Nakka send not verified",
+    "evidence": "evidence/pool-review-20261029/tests.txt"
+  },
+  {
+    "id": "POOL-REVIEW-UI-002",
+    "file": "tests/pool-planner-seeded-ui.test.cjs",
+    "name": "pool invalidation retains board overview and disabled swaps with a specific reason",
+    "requirement": "START-20261029",
+    "kind": "Executable offline behavior",
+    "purpose": "Stable frozen preview, explicit confirmation and retained review controls",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner request29Oct2026",
+    "limitations": "Local fixtures; native Google visual review and real Nakka send not verified",
+    "evidence": "evidence/pool-review-20261029/tests.txt"
+  },
+  {
+    "id": "POOL-REVIEW-SERVICE-001",
+    "file": "tests/pool-service.test.cjs",
+    "name": "pool planning lasts thirty minutes while final approval retains five-minute expiry",
+    "requirement": "START-20261029",
+    "kind": "Executable offline behavior",
+    "purpose": "Stable frozen preview, explicit confirmation and retained review controls",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner request29Oct2026",
+    "limitations": "Local fixtures; native Google visual review and real Nakka send not verified",
+    "evidence": "evidence/pool-review-20261029/tests.txt"
   }
 ]
