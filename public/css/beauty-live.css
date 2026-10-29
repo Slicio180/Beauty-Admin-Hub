@@ -44,3 +44,10 @@ main{display:grid;grid-template-rows:auto minmax(0,1fr);overflow:hidden}
 #liveSettings input{width:20px;height:20px;flex-shrink:0}
 @media(max-width:1100px){#liveNames.with-stats li,.live-column-heading{grid-template-columns:minmax(0,1fr) 56px 46px}#liveNames li{font-size:24px}.live-average,.live-points{font-size:20px;padding:0 5px}.live-column-heading{font-size:16px;padding:0 5px}.live-column-heading span{padding:0 5px}}
 @media(max-width:699px){#liveNames{column-gap:12px}#liveNames li{font-size:18px;padding:2px}#liveNames.with-stats li,.live-column-heading{grid-template-columns:minmax(0,1fr) 40px 32px}.live-average,.live-points{font-size:15px;padding:0 3px}.live-column-heading{font-size:13px;padding:0 2px}.live-column-heading span{padding:0 3px}.live-columns{gap:12px}#liveNames .live-identity{gap:4px}#liveNames .live-number{min-width:1.7ch}footer{font-size:14px}}
+
+/* Approved white centred headings and fine yellow panel divisions after points. */
+.live-columns{height:40px}
+.live-column-heading{font-size:24px;color:#fff;border-right:1px solid #ffd700}
+.live-column-heading span,.live-column-heading span:first-child{justify-content:center;text-align:center}
+#liveNames.with-stats li{border-right:1px solid #ffd700}
+@media(max-width:699px){.live-column-heading{font-size:18px}}

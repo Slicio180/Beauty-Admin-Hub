@@ -1,0 +1,47 @@
+[
+  {
+    "path": "public/index.html",
+    "before": "a0d03023b411c3ddfcd5bd1048498cececbc04a70b51d46bb2726b3eb717e868",
+    "after": "888e69993d4277dd219fb58efd14aa74f1afe0773ee3bf3b76467673b1567603"
+  },
+  {
+    "path": "public/preview.html",
+    "before": "36b5300f9ae45218751eddc9c9ca4cb3af338bd6e4b7114d381c8c091323e3bb",
+    "after": "2ce2f255f2b9717e4d1ca31fb5c4f0cdbb1b3756e6d40190b49db55ac0f1974b"
+  },
+  {
+    "path": "public/css/beauty-dashboard.css",
+    "before": "0219daf9195642120d5c1077af22a4814457515688e1dfb870175a31c0331643",
+    "after": "748258df102a709fffe22f5d6170e83650f6b2e110b63d0b4c5d20fa14a2e855"
+  },
+  {
+    "path": "public/css/beauty-live.css",
+    "before": "f46fee41c188651ebc876f3e0f3e04b37e08f9766ec85415ce4105204abf9122",
+    "after": "91e73f139534fd70abeb37be281c9db95c5aee57de38266a36e31ad8229a0103"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/BeautyLiveTest.html",
+    "before": "5074908f3828f18f44b566c431cfa165ff6cbf994d54e32dad859fc849095824",
+    "after": "65c8b1efcfd9a717d5f9f254e9a3c073d0f45be3107bc3432564ae836a96f94a"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "bca677aa02864e81346ed53bc120058d71b30b8c30ea780dd9ea35ceee6082bd",
+    "after": "798d28c06de4825b7a159f17eb4b5307d3a4702d536056e019baa1c90e8b60f2"
+  },
+  {
+    "path": "docs/handoff/white-headings-review-20261029.md",
+    "before": null,
+    "after": "112bc351fd054f768e27921394cd06deaa0cbd43ab479245a30139a6acc99806"
+  },
+  {
+    "path": "evidence/white-headings-20261029/tests.txt",
+    "before": null,
+    "after": "e8fbec8215f8c1d9f8acfe2ad2e7f8cf4ebc845dccf090d7b098e513ee13e69c"
+  },
+  {
+    "path": "evidence/white-headings-20261029/inventory.txt",
+    "before": null,
+    "after": "ae64fcccce17ab2ebeae7326832d0df360d57f3a638cc35a1c074fa4a76c9d8d"
+  }
+]

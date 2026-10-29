@@ -320,3 +320,7 @@ body .attention-review-button{margin-left:auto;font-size:18px;padding:8px 10px;f
 @media(max-width:1100px){#attentionCard{flex-wrap:wrap}#attentionCard .attention-review-button{margin-left:0}}
 
 body .register-popup .hub-kiosk-player-option:active:not(:disabled){background:#1b1b12!important}
+
+/* Approved pure-white dashboard card labels and table headings. */
+.summary-card span:not(.attention-icon){color:#fff}
+.players-workspace .players-table th{color:#fff}
