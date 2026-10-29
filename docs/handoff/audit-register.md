@@ -991,3 +991,17 @@ Production runtime guards unchanged; no GitHub push or Google/Nakka writes.
 
 
 PREP-OUTSTANDING-20261029:575 offline tests, board plan export, closed memo engine, durable local retry journal, native ordinal ranking contract and remaining-play focus. Native qualification and production readiness PENDING.
+
+
+### NAKKA-POOL-20261029-01
+Recorded UTC:2026-10-29T22:18:49.051921+00:00. Owner installed checkpoint1888750.
+TEST event t_RqC2_2034,27October2026:56IN,18groups(16×3+2×4),60round-robin pairings.
+PASS: owner Hub screenshot23:13:23 reports allgroups/pairings readback verified,
+entries/settings preserved, event pre-start. Nakka screenshot23:15:42 confirms
+visible groups; full manual card inspection not claimed.501/bestof3/roundlimitoff.
+Audit:POOL-61b3b08affa84b578988. Receipt:POOL-7287fd3023054477b9a8.
+Evidence:evidence/nakka-pool-acceptance-20261029/README.md and acceptance.json.
+Baseline588offline tests/inventory PASS; no rerun for documentation-only record.
+Board/group headings, readable review, A-final bestof5 and dynamic event selection
+remain pending. Production unqualified. No new event writes by this recorder.
+Numbered AUD-register reconciliation remains open; existing entries preserved.

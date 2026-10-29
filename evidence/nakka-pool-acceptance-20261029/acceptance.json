@@ -1,0 +1,51 @@
+{
+  "id": "NAKKA-POOL-20261029-01",
+  "recordedUTC": "2026-10-29T22:18:49.051921+00:00",
+  "eventDate": "2026-10-27",
+  "eventId": "t_RqC2_2034",
+  "leagueId": "lg_tM2v_3523",
+  "environment": "TEST",
+  "installedCheckpoint": "1888750",
+  "players": 56,
+  "groups": 18,
+  "threePlayerGroups": 16,
+  "fourPlayerGroups": 2,
+  "expectedMatchCards": 60,
+  "audit": "POOL-61b3b08affa84b578988",
+  "receipt": "POOL-7287fd3023054477b9a8",
+  "result": "PASS",
+  "verification": "Owner native screenshot shows server readback success; subsequent Nakka screenshot confirms visible groups. No independent provider read performed in this recording step.",
+  "settings": {
+    "game": "501",
+    "firstToLegs": 2,
+    "bestOfLegs": 3,
+    "roundLimitEnabled": false
+  },
+  "eventState": "PRE_START",
+  "regressionBaseline": {
+    "tests": 588,
+    "failed": 0,
+    "scope": "Pool Toolbar local offline suite; not rerun for evidence-only recording"
+  },
+  "evidence": [
+    {
+      "filename": "Screenshot 2026-10-29 at 23.13.23.png",
+      "sha256": "98c6e860d7fd96d2deeaf775c237efc622904606507b0f526d1d49f04fdf815a",
+      "observed": "Hub reports all TEST groups and every round-robin pairing verified; entries and other settings preserved, pre-start; exact Audit and Receipt."
+    },
+    {
+      "filename": "Screenshot 2026-10-29 at 23.15.42.png",
+      "sha256": "1e1681637b0bc2d06e9603980ba5981e35264df4275790410d91a8411691693c",
+      "observed": "Nakka native UI shows groups1 and2 with4players and beginning ofgroup3. This screenshot is not visual evidence of all18groups/60cards."
+    }
+  ],
+  "pending": [
+    "Nakka board/group titles and actual board assignment support",
+    "Human-readable handoff settings replacing raw JSON",
+    "Busy/progress feedback and timeout handling; do not automatically retry writes",
+    "A-side final best of5 configuration and testing",
+    "Dynamic tournament selection beyond fixed TEST scope",
+    "Consolidate numbered audit register; do not invent missing AUD089\u2013102",
+    "Full native device and stage qualification; production release remains unqualified"
+  ]
+}
