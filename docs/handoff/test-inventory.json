@@ -6560,5 +6560,57 @@
     "origin": "Owner approved mockup28Oct2026",
     "evidence": "evidence/pool-workspace-20261028/ui-tests.tap",
     "limitations": "Synthetic DOM has no layout engine. Native viewport/typography checks remain pending."
+  },
+  {
+    "id": "POOL-STATUS25-001",
+    "file": "tests/pool-service.test.cjs",
+    "name": "pool bracket-building status25 permits statistics and frozen preview without a provider mutation",
+    "requirement": "POOL-STATUS25-001",
+    "kind": "Executable synthetic service behavior",
+    "purpose": "Support documented pre-start bracket-building state while preserving all existing-data and started-event barriers",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
+    "origin": "Owner fixed TEST diagnostic29Oct2026; official Nakka API manual section4.3",
+    "evidence": "evidence/pool-status25-20261029/service-tests.tap",
+    "limitations": "No Google/Nakka mutation performed by these tests. Actual table/card state has not been provided."
+  },
+  {
+    "id": "POOL-STATUS25-002",
+    "file": "tests/pool-service.test.cjs",
+    "name": "pool status25 approved handoff retains bracket-building state and boolean auto_schedule through full readback",
+    "requirement": "POOL-STATUS25-001",
+    "kind": "Executable synthetic service behavior",
+    "purpose": "Support documented pre-start bracket-building state while preserving all existing-data and started-event barriers",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
+    "origin": "Owner fixed TEST diagnostic29Oct2026; official Nakka API manual section4.3",
+    "evidence": "evidence/pool-status25-20261029/service-tests.tap",
+    "limitations": "No Google/Nakka mutation performed by these tests. Actual table/card state has not been provided."
+  },
+  {
+    "id": "POOL-STATUS25-003",
+    "file": "tests/pool-service.test.cjs",
+    "name": "pool status25 still refuses existing groups brackets results ranks and match cards before every provider write",
+    "requirement": "POOL-STATUS25-001",
+    "kind": "Executable synthetic service behavior",
+    "purpose": "Support documented pre-start bracket-building state while preserving all existing-data and started-event barriers",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
+    "origin": "Owner fixed TEST diagnostic29Oct2026; official Nakka API manual section4.3",
+    "evidence": "evidence/pool-status25-20261029/service-tests.tap",
+    "limitations": "No Google/Nakka mutation performed by these tests. Actual table/card state has not been provided."
+  },
+  {
+    "id": "POOL-STATUS25-004",
+    "file": "tests/pool-service.test.cjs",
+    "name": "pool active finished unknown and string states cannot load or prepare despite status25 support",
+    "requirement": "POOL-STATUS25-001",
+    "kind": "Executable synthetic service behavior",
+    "purpose": "Support documented pre-start bracket-building state while preserving all existing-data and started-event barriers",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
+    "origin": "Owner fixed TEST diagnostic29Oct2026; official Nakka API manual section4.3",
+    "evidence": "evidence/pool-status25-20261029/service-tests.tap",
+    "limitations": "No Google/Nakka mutation performed by these tests. Actual table/card state has not been provided."
   }
 ]

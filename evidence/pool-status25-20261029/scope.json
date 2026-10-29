@@ -1,0 +1,43 @@
+{
+  "owner_baseline": "b0e3ebf",
+  "provider_mutations": 0,
+  "newly_accepted_status": 25,
+  "status_meaning": "Building the bracket",
+  "blocked_statuses": [
+    30,
+    40
+  ],
+  "primary_source": "https://push.n01darts.com/api/v1/n01_api_manual_en.html",
+  "unchanged": [
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+      "sha256": "d54152cbf59ab54a8a19d8f3eac7355f129d3a587b30de5423d8599c0e30f4a3",
+      "unchanged": true
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTestBridge.gs",
+      "sha256": "88369f696f86b164f4340437c58276a6f1d9611d8e7eb05ba44a92c804534f2c",
+      "unchanged": true
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTestNakkaTransfer.gs",
+      "sha256": "8a0babcbf7704d5cf1da22f19d425ea97b22ff7d520c1a33543d504f807c447a",
+      "unchanged": true
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTestRemove.gs",
+      "sha256": "a2496bfa0d4504f4e7ba250cbc0ad4c07d46f7947be28de3014d5ed294ac22e6",
+      "unchanged": true
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/RemoteRegistration.html",
+      "sha256": "5c75f79d9529953973f6211e10227ecefba2278a1795b797a19114ae7de013d5",
+      "unchanged": true
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/KioskTest.html",
+      "sha256": "24ffca08badbfbd5ea0e3f673ec8c2e30fa8a2391aeb23a93bb05d57966c75a0",
+      "unchanged": true
+    }
+  ]
+}

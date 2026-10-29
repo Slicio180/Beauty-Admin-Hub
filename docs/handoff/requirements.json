@@ -289,5 +289,13 @@
     "source": "Owner approved AIK Event Hub pool planner mockup28Oct2026",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "acceptance": "Main-page sidebar workspace, 3/4 preference, board layout/count/batches, advanced hypothetical estimate and original scheme, grouped freshness and identity review, fixed separate name/average columns with wrapping, frozen pool mean/coverage, optional editable bands, isolated swaps and explicit Nakka approval. Preserve backend/core/fonts and guard stale settings/roster/session."
+  },
+  {
+    "id": "POOL-STATUS25-001",
+    "requirement": "Pool Planner accepts Nakka bracket-building state25 in addition to10/20 and preserves all write barriers",
+    "priority": "High",
+    "source": "Owner read-only TEST event output and official Nakka API manual,29Oct2026",
+    "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
+    "acceptance": "Statistics/frozen preview and explicitly reviewed empty-event pool handoff support25; status retained without event transition; active30/finished40/unknown/string states blocked; existing groups/brackets/results/ranks/cards and changed-state barriers remain; transfer/removal/registration routes unchanged."
   }
 ]

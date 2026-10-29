@@ -116,3 +116,22 @@ test('pool five-player exception and mixed 4/3 divisions generate the exact rect
 test('pool event started between group save and fixture generation blocks the second mutation and records uncertainty',()=>{
  const f=fixture(),{p}=f.prepare();f.options.afterGroups=event=>event.status=30;const r=f.call('poolsave',{ticket:p.ticket,confirmed:'true'});assert.equal(r.uncertain,true);assert.equal(f.calls.filter(c=>c.payload).length,1);assert.equal(f.schedule.length,0);
 });
+test('pool bracket-building status25 permits statistics and frozen preview without a provider mutation',()=>{
+ const f=fixture();f.event.status=25;f.event.lg_setting.auto_schedule=true;
+ const d=f.draw();assert.equal(d.success,true,JSON.stringify(d));assert.equal(d.draw.roster.length,6);
+ const p=f.call('poolprepare',{ticket:d.ticket});assert.equal(p.success,true,JSON.stringify(p));assert.equal(f.event.status,25);assert.equal(f.calls.filter(c=>c.payload).length,0);assert.equal(f.audits.length,0);
+});
+test('pool status25 approved handoff retains bracket-building state and boolean auto_schedule through full readback',()=>{
+ const f=fixture();f.event.status=25;f.event.lg_setting.auto_schedule=true;const before=copy(f.event),{p}=f.prepare();
+ const r=f.call('poolsave',{ticket:p.ticket,confirmed:'true'});assert.equal(r.success,true,JSON.stringify(r));assert.equal(r.readbackVerified,true);assert.equal(f.event.status,25);assert.equal(f.event.lg_setting.auto_schedule,true);assert.deepEqual(f.event.entry_list,before.entry_list);
+ const posts=f.calls.filter(c=>c.payload);assert.equal(posts.length,2);assert.equal(Object.hasOwn(posts[0].payload.set,'status'),false);assert.equal(f.schedule.flat().length,6);assert.equal(JSON.parse(f.values.get('BEAUTY_POOL_SEND_t_RqC2_2034')).state,'VERIFIED');
+});
+test('pool status25 still refuses existing groups brackets results ranks and match cards before every provider write',()=>{
+ for(const change of [f=>f.event.lg_table=[['E000']],f=>f.event.t_table=[['E000']],f=>f.event.lg_result=[1],f=>f.event.lg_rank=[1],f=>f.setSchedule([[{p:['E000','E001'],lsid:'ab01',t:''}]])]){
+  const f=fixture();f.event.status=25;change(f);const d=f.draw();assert.equal(d.success,true);const p=f.call('poolprepare',{ticket:d.ticket});assert.equal(p.success,false);assert.equal(f.calls.filter(c=>c.payload).length,0);assert.equal(f.audits.length,0);
+ }
+});
+test('pool active finished unknown and string states cannot load or prepare despite status25 support',()=>{
+ for(const status of [30,40,0,26,'25']){const f=fixture();f.event.status=status;assert.equal(f.load().success,false);assert.equal(f.calls.filter(c=>c.payload).length,0);}
+ const f=fixture();f.event.status=25;const {p}=f.prepare();f.event.status=30;assert.equal(f.call('poolsave',{ticket:p.ticket,confirmed:'true'}).success,false);assert.equal(f.calls.filter(c=>c.payload).length,0);
+});

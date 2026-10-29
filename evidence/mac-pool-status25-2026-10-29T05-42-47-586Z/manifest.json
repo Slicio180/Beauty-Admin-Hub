@@ -1,0 +1,57 @@
+[
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTestPools.gs",
+    "before": "2eeef515cf758aaf034b7eded2151b74fb738f92a3319e5338e71accc4c133d6",
+    "after": "f906175c6be6372eaef31a42f02e9b3d88d0b2675d5626553ca3e8652eef8cf6"
+  },
+  {
+    "path": "docs/handoff/pool-status25-20261029.md",
+    "before": null,
+    "after": "eef5880461e93ac4dd4398ddf128e44fdc4c42976e32f91aba8165c2eecb23d1"
+  },
+  {
+    "path": "docs/handoff/requirements.json",
+    "before": "1740bd8bd743212a51581bdf234b8dd8909b5cfe809038c41969aadfff39a8f3",
+    "after": "49dc42221b466c5685a24c96e610d82037291d3a098e0ade84b2dbcc8a89c2b1"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "9829cc7995402a3bc8421d585c2c88f344c7af3de6181a6a9929c93a000e945c",
+    "after": "7cdeaa858e9de4b706a6911572fe7855cf2cf5ec2342ea2857ccaeb7adbc0f07"
+  },
+  {
+    "path": "evidence/pool-status25-20261029/all-tests.txt",
+    "before": null,
+    "after": "25562ceed95d1e231d9d755af48f37bd53cf1736ec2d22041c2480130a8b19cf"
+  },
+  {
+    "path": "evidence/pool-status25-20261029/diagnosis.json",
+    "before": null,
+    "after": "648aa0c0ce04d7aa4be80dc5ff47fe551226843ba332d568bd07ea2ca56771a2"
+  },
+  {
+    "path": "evidence/pool-status25-20261029/inventory.txt",
+    "before": null,
+    "after": "96265e939b9a0eac0484a45ae8ddd837debb28ad22cf08cf6ebfa883f64e837e"
+  },
+  {
+    "path": "evidence/pool-status25-20261029/scope.json",
+    "before": null,
+    "after": "74c1f819e189c7e761b2600f4db003b5480771c0e4c20e244dde448d4e5a631a"
+  },
+  {
+    "path": "evidence/pool-status25-20261029/service-tests.tap",
+    "before": null,
+    "after": "4431cf3a3610d19d10597d978210fbda023c15822f21cecb5348151a4fffc006"
+  },
+  {
+    "path": "server/pool-service.js",
+    "before": "54a5c342a62d61f27c3980d81d55b4b94b1bac8c5c7813db882d2516fd3b9d80",
+    "after": "03d5c536700e7eeb287f5be7627be9d560c3b5a287e1fcff549efb994f544e33"
+  },
+  {
+    "path": "tests/pool-service.test.cjs",
+    "before": "a80a75634c2649a1b36d57a6b68fa03a64ce3cfee4b6745a7640e22a4f9cb777",
+    "after": "c6238d23e426bd34207c2980dd9b9f36fbc4805416e079a98e5cc5d950962965"
+  }
+]

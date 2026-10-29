@@ -215,7 +215,7 @@ function beautyPoolRoster_(){
 }
 function beautyPoolEvent_(auth){
   const t=beautyHubTransferFetch_('tournament/get?tdid=t_RqC2_2034',auth).tournament;
-  if(!t||t.tdid!=='t_RqC2_2034'||t.lgid!=='lg_tM2v_3523'||t.title!=='Beauty Hub TEST — DO NOT USE LIVE'||![10,20].includes(t.status)||!Number.isFinite(t.updateTime)||!Number.isFinite(t.t_date)||t.league!==1||t.team_games!==0||t.lg_setting?.league!==1||t.lg_setting?.match_type!=='01'||t.lg_setting.turnaround!==0||(t.lg_setting.swiss??0)!==0)beautyPoolError_('Only the pre-start, single round-robin Beauty TEST league event is supported.');
+  if(!t||t.tdid!=='t_RqC2_2034'||t.lgid!=='lg_tM2v_3523'||t.title!=='Beauty Hub TEST — DO NOT USE LIVE'||![10,20,25].includes(t.status)||!Number.isFinite(t.updateTime)||!Number.isFinite(t.t_date)||t.league!==1||t.team_games!==0||t.lg_setting?.league!==1||t.lg_setting?.match_type!=='01'||t.lg_setting.turnaround!==0||(t.lg_setting.swiss??0)!==0)beautyPoolError_('Only the pre-start, single round-robin Beauty TEST league event is supported.');
   const date=Utilities.formatDate(new Date(t.t_date*1000),'Europe/Berlin','yyyy-MM-dd');
   if(date!==beautyPoolRoster_().date||date!==beautyHubNakkaDate_().date)beautyPoolError_('Hub date and TEST event differ.');
   return t;

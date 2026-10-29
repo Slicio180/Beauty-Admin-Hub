@@ -1,0 +1,142 @@
+TAP version 13
+# Subtest: pool stats qualify score/darts keyed by LPID; points stay separate and unknown is not zero
+ok 1 - pool stats qualify score/darts keyed by LPID; points stay separate and unknown is not zero
+  ---
+  duration_ms: 20.079969
+  type: 'test'
+  ...
+# Subtest: pool stats retain durable last-good on outage and block fresh draw after refresh failure
+ok 2 - pool stats retain durable last-good on outage and block fresh draw after refresh failure
+  ---
+  duration_ms: 7.04956
+  type: 'test'
+  ...
+# Subtest: pool stats reject inconsistent points and invalid numeric totals without replacing last-good
+ok 3 - pool stats reject inconsistent points and invalid numeric totals without replacing last-good
+  ---
+  duration_ms: 10.724817
+  type: 'test'
+  ...
+# Subtest: pool league profiles paginate and reject repeated IDs or a truncated over-limit list
+ok 4 - pool league profiles paginate and reject repeated IDs or a truncated over-limit list
+  ---
+  duration_ms: 2.413252
+  type: 'test'
+  ...
+# Subtest: pool mappings expose ambiguity and missing entry without silently choosing a league identity
+ok 5 - pool mappings expose ambiguity and missing entry without silently choosing a league identity
+  ---
+  duration_ms: 5.08949
+  type: 'test'
+  ...
+# Subtest: pool handoff verifies all groups and cards, preserves settings and inactive entries, and blocks duplicate send
+ok 6 - pool handoff verifies all groups and cards, preserves settings and inactive entries, and blocks duplicate send
+  ---
+  duration_ms: 7.652325
+  type: 'test'
+  ...
+# Subtest: pool manual swap is server-owned, consumes old ticket, preserves frozen averages and invalidates approval
+ok 7 - pool manual swap is server-owned, consumes old ticket, preserves frozen averages and invalidates approval
+  ---
+  duration_ms: 8.622397
+  type: 'test'
+  ...
+# Subtest: pool source additions withdrawals renames and date changes invalidate a reviewed draw
+ok 8 - pool source additions withdrawals renames and date changes invalidate a reviewed draw
+  ---
+  duration_ms: 17.487659
+  type: 'test'
+  ...
+# Subtest: pool tickets expire and are bound to staff session; unconfirmed sends never mutate
+ok 9 - pool tickets expire and are bound to staff session; unconfirmed sends never mutate
+  ---
+  duration_ms: 16.454495
+  type: 'test'
+  ...
+# Subtest: pool existing groups results cards started events and unsupported formats block handoff
+ok 10 - pool existing groups results cards started events and unsupported formats block handoff
+  ---
+  duration_ms: 20.011188
+  type: 'test'
+  ...
+# Subtest: pool event concurrency or league identity changes after approval block every provider write
+ok 11 - pool event concurrency or league identity changes after approval block every provider write
+  ---
+  duration_ms: 17.595676
+  type: 'test'
+  ...
+# Subtest: pool failures in either provider phase retain attempted journal and block retry without leaking errors
+ok 12 - pool failures in either provider phase retain attempted journal and block retry without leaking errors
+  ---
+  duration_ms: 10.062069
+  type: 'test'
+  ...
+# Subtest: pool unexpected setting changes or missing duplicate foreign pairings fail full readback
+ok 13 - pool unexpected setting changes or missing duplicate foreign pairings fail full readback
+  ---
+  duration_ms: 40.813504
+  type: 'test'
+  ...
+# Subtest: pool audit failure occurs before Nakka mutation and cannot report successful send
+ok 14 - pool audit failure occurs before Nakka mutation and cannot report successful send
+  ---
+  duration_ms: 7.012075
+  type: 'test'
+  ...
+# Subtest: pool structural comparison ignores JSON object order while preserving array order
+ok 15 - pool structural comparison ignores JSON object order while preserving array order
+  ---
+  duration_ms: 1.563482
+  type: 'test'
+  ...
+# Subtest: pool routes require exact inputs, staff authentication and the write gate
+ok 16 - pool routes require exact inputs, staff authentication and the write gate
+  ---
+  duration_ms: 7.325782
+  type: 'test'
+  ...
+# Subtest: pool five-player exception and mixed 4/3 divisions generate the exact rectangular table and pair coverage
+ok 17 - pool five-player exception and mixed 4/3 divisions generate the exact rectangular table and pair coverage
+  ---
+  duration_ms: 20.981958
+  type: 'test'
+  ...
+# Subtest: pool event started between group save and fixture generation blocks the second mutation and records uncertainty
+ok 18 - pool event started between group save and fixture generation blocks the second mutation and records uncertainty
+  ---
+  duration_ms: 5.091667
+  type: 'test'
+  ...
+# Subtest: pool bracket-building status25 permits statistics and frozen preview without a provider mutation
+ok 19 - pool bracket-building status25 permits statistics and frozen preview without a provider mutation
+  ---
+  duration_ms: 3.603612
+  type: 'test'
+  ...
+# Subtest: pool status25 approved handoff retains bracket-building state and boolean auto_schedule through full readback
+ok 20 - pool status25 approved handoff retains bracket-building state and boolean auto_schedule through full readback
+  ---
+  duration_ms: 7.865484
+  type: 'test'
+  ...
+# Subtest: pool status25 still refuses existing groups brackets results ranks and match cards before every provider write
+ok 21 - pool status25 still refuses existing groups brackets results ranks and match cards before every provider write
+  ---
+  duration_ms: 16.094696
+  type: 'test'
+  ...
+# Subtest: pool active finished unknown and string states cannot load or prepare despite status25 support
+ok 22 - pool active finished unknown and string states cannot load or prepare despite status25 support
+  ---
+  duration_ms: 18.802758
+  type: 'test'
+  ...
+1..22
+# tests 22
+# suites 0
+# pass 22
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 418.430767

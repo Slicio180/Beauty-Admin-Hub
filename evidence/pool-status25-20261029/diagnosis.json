@@ -1,0 +1,20 @@
+{
+  "source": "Owner terminal read-only diagnostic,29Oct2026",
+  "event_id": "t_RqC2_2034",
+  "title": "Beauty Hub TEST \u2014 DO NOT USE LIVE",
+  "league_id": "lg_tM2v_3523",
+  "observed_status": 25,
+  "status_meaning": "Building the bracket",
+  "league": 1,
+  "team_games": 0,
+  "updateTime": 1793229524486,
+  "t_date": 1793124000,
+  "lg_setting_league": 1,
+  "match_type": "01",
+  "turnaround": 0,
+  "swiss_field": "absent; guard default0",
+  "auto_schedule": true,
+  "failed_condition": "Old Pool Planner accepted status10/20 only",
+  "groups_results_cards_state": "Not included in diagnostic; must be checked before any send",
+  "provider_mutations": 0
+}
