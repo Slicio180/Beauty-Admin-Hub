@@ -254,7 +254,13 @@ addCell(
         remove.type = 'button'; remove.className = 'remove-player-button'; remove.textContent = 'REMOVE';
         remove.setAttribute('aria-label', 'Remove ' + (player.player || player.newPlayer) + ' from this event');
         remove.addEventListener('click', () => window.BeautyPlayerRemoval.open(player, remove));
-        sourceCell.appendChild(remove);
+        const actions = document.createElement('div');
+        actions.className = 'player-source-actions';
+        const label = document.createElement('span');
+        label.className = 'player-source-label'; label.textContent = sourceCell.textContent;
+        sourceCell.textContent = '';
+        actions.appendChild(label); actions.appendChild(remove);
+        sourceCell.appendChild(actions);
       }
 
 
@@ -595,27 +601,7 @@ function addMessageCell(
   }
 
 
-  /*
-  Short messages can stay visible
-  directly in the table.
-  */
-
-  if (
-    cleanMessage.length <= 30
-  ) {
-
-    cell.textContent =
-      cleanMessage;
-
-    row.appendChild(cell);
-
-    return;
-  }
-
-
-  /*
-  Long messages get a READ button.
-  */
+  // Keep Message compact; every non-empty message opens in the existing popup.
 
   const button =
     document.createElement('button');

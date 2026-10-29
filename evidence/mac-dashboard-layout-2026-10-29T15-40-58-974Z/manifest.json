@@ -1,0 +1,22 @@
+[
+  {
+    "path": "public/css/beauty-dashboard.css",
+    "before": "be15d479f8eb0caa7bc2d08253bf5323fea90df8318a8e2dfcfd4634da396717",
+    "after": "3c0e9f7b53ffb66c608f39f84917726be247ebbc90bdc5acf70e065e6e9cd98d"
+  },
+  {
+    "path": "public/js/app.js",
+    "before": "ce805aa8298b375728e730fbae6ea33d8453cdd9009fa2442d7bf8b5f8cb6ab9",
+    "after": "a9851ebd6b2e266e1ad71d74a24398ea93cbef6837b6880ecceafc44b9cacdf4"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "21177a1e386474ef87956ba6b0be26e6e1ecf10b701ced7ef495bb3cbedb69c6",
+    "after": "7fd6d4e927ac8463c9af674121899f2687c5ecdc9bc7878c2e6adf79aa09cf7f"
+  },
+  {
+    "path": "docs/handoff/dashboard-review-20261029.md",
+    "before": null,
+    "after": "28e3d6e0fbed01c1fbcf2b4ddd403766b3aee8c9f5e689fdcca51233f26d7a15"
+  }
+]

@@ -273,3 +273,28 @@ body .hub-kiosk-player-search,body .hub-kiosk-new-name,body .hub-kiosk-message{f
 body .hub-health-panel,body .message-popup,body .register-popup,body .identity-dialog{font-size:20px}
 .event-inspection p,.event-inspection label{font-size:20px}
 .message-popup-text{font-size:20px}.message-popup-label{font-size:20px}
+
+/* Dashboard review29Oct: fit the table, keep only the rows scrolling vertically. */
+.summary-card span:not(.attention-icon){font:700 25px/1.25 'AIK Condensed',serif}
+.summary-card strong{font:400 50px/1.15 'AIK Siffror',serif}
+.players-workspace>.players-table-wrap{overflow-x:hidden;overflow-y:auto;min-width:0;width:100%}
+.players-workspace .players-table{width:100%;min-width:0;table-layout:fixed}
+.players-workspace .players-table :is(th,td){box-sizing:border-box;overflow-wrap:anywhere}
+.players-workspace .players-table th{font:700 26px/1.15 'AIK Condensed',serif;padding-top:8px;padding-bottom:8px}
+.players-workspace .players-table :is(th,td):nth-child(1){width:4%}
+.players-workspace .players-table :is(th,td):nth-child(2){width:31%}
+.players-workspace .players-table :is(th,td):nth-child(3){width:14%}
+.players-workspace .players-table :is(th,td):nth-child(4){width:14%}
+.players-workspace .players-table :is(th,td):nth-child(5){width:13%}
+.players-workspace .players-table :is(th,td):nth-child(6){width:24%;min-width:0;white-space:normal}
+.players-workspace .status-select{width:128px;max-width:100%;min-width:0;box-sizing:border-box}
+.player-source-actions{display:grid;grid-template-columns:64px 86px;align-items:center;gap:8px;max-width:100%}
+.player-source-label{white-space:nowrap}
+body .players-workspace .remove-player-button{margin:0;width:86px;min-width:0;padding:8px 6px;white-space:nowrap}
+@media(max-width:1000px){
+ .players-workspace .players-table :is(th,td){padding-left:6px;padding-right:6px}
+ .player-source-actions{grid-template-columns:minmax(0,1fr);justify-items:start;row-gap:6px}
+ .players-workspace .players-table :is(th,td):nth-child(1){width:5%}
+ .players-workspace .players-table :is(th,td):nth-child(2){width:28%}
+ .players-workspace .players-table :is(th,td):nth-child(6){width:26%}
+}
