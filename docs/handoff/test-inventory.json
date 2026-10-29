@@ -6025,7 +6025,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "VERIFIED locally only",
     "origin": "Beauty Live block 2026-10-26",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/live-polish-20261029/tests.txt",
     "limitations": "No real browser pixels or Google qualification; Nakka feed unavailable"
   },
   {
@@ -6038,7 +6038,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "VERIFIED locally only",
     "origin": "Beauty Live block 2026-10-26",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/live-polish-20261029/tests.txt",
     "limitations": "No real browser pixels or Google qualification; Nakka feed unavailable"
   },
   {
@@ -6051,7 +6051,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "VERIFIED locally only",
     "origin": "Beauty Live block 2026-10-26",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/live-polish-20261029/tests.txt",
     "limitations": "No real browser pixels or Google qualification; Nakka feed unavailable"
   },
   {
@@ -6064,7 +6064,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "VERIFIED locally only",
     "origin": "Beauty Live block 2026-10-26",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/live-polish-20261029/tests.txt",
     "limitations": "No real browser pixels or Google qualification; Nakka feed unavailable"
   },
   {
@@ -6077,7 +6077,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "VERIFIED locally only",
     "origin": "Beauty Live block 2026-10-26",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/live-polish-20261029/tests.txt",
     "limitations": "No real browser pixels or Google qualification; Nakka feed unavailable"
   },
   {
@@ -6090,7 +6090,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "VERIFIED locally only",
     "origin": "Beauty Live block 2026-10-26",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/live-polish-20261029/tests.txt",
     "limitations": "No real browser pixels or Google qualification; Nakka feed unavailable"
   },
   {
@@ -6103,7 +6103,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "VERIFIED locally only",
     "origin": "Beauty Live block 2026-10-26",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/live-polish-20261029/tests.txt",
     "limitations": "No real browser pixels or Google qualification; Nakka feed unavailable"
   },
   {
@@ -6117,7 +6117,7 @@
     "evidenceLabel": "LOCAL_TESTED",
     "origin": "Owner request29Oct2026",
     "limitations": "Synthetic fixtures; native/provider verification still pending",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt"
+    "evidence": "evidence/live-polish-20261029/tests.txt"
   },
   {
     "id": "PREP-478",
@@ -6130,7 +6130,7 @@
     "evidenceLabel": "LOCAL_TESTED",
     "origin": "Owner request29Oct2026",
     "limitations": "Synthetic fixtures; native/provider verification still pending",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt"
+    "evidence": "evidence/live-polish-20261029/tests.txt"
   },
   {
     "id": "LIVE-010",
@@ -6142,7 +6142,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "VERIFIED locally only",
     "origin": "Beauty Live block 2026-10-26",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt",
+    "evidence": "evidence/live-polish-20261029/tests.txt",
     "limitations": "No real browser pixels or Google qualification; Nakka feed unavailable"
   },
   {
@@ -6156,12 +6156,12 @@
     "evidenceLabel": "LOCAL_TESTED",
     "origin": "Owner request29Oct2026",
     "limitations": "Synthetic fixtures; native/provider verification still pending",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt"
+    "evidence": "evidence/live-polish-20261029/tests.txt"
   },
   {
     "id": "PREP-481",
     "file": "tests/beauty-live.test.cjs",
-    "name": "Live real ranking values and ties survive paging; statistics force ranking order when available",
+    "name": "Live real ranking values and ties survive paging; statistics respect the selected sorting mode",
     "requirement": "START-20261029",
     "kind": "Executable offline behavior",
     "purpose": "Prepared board/Live/stage integration",
@@ -6169,12 +6169,12 @@
     "evidenceLabel": "LOCAL_TESTED",
     "origin": "Owner request29Oct2026",
     "limitations": "Synthetic fixtures; native/provider verification still pending",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt"
+    "evidence": "evidence/live-polish-20261029/tests.txt"
   },
   {
     "id": "PREP-482",
     "file": "tests/beauty-live.test.cjs",
-    "name": "Live cached public statistics reject stale failed and ambiguous identity matches",
+    "name": "Live cached statistics label stale or failed snapshots and reject old or ambiguous data",
     "requirement": "START-20261029",
     "kind": "Executable offline behavior",
     "purpose": "Prepared board/Live/stage integration",
@@ -6182,7 +6182,7 @@
     "evidenceLabel": "LOCAL_TESTED",
     "origin": "Owner request29Oct2026",
     "limitations": "Synthetic fixtures; native/provider verification still pending",
-    "evidence": "evidence/prepared-tonight-20261029/all-tests.txt"
+    "evidence": "evidence/live-polish-20261029/tests.txt"
   },
   {
     "id": "SEEDED-POOL-031",
@@ -7392,5 +7392,57 @@
     "origin": "Owner outstanding-work instruction29Oct2026",
     "evidence": "evidence/outstanding-20261029/all-tests.txt",
     "limitations": "Synthetic tests only; native provider and deployment pending"
+  },
+  {
+    "id": "LIVE-POLISH-001",
+    "file": "tests/beauty-live.test.cjs",
+    "name": "Live statistics columns keep average before points without forcing rank sorting",
+    "requirement": "START-20261029",
+    "kind": "Executable offline behavior",
+    "purpose": "Approved stats layout, settings and authenticated automatic refresh",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approval29Oct2026",
+    "limitations": "Synthetic fixtures; native/provider verification still pending",
+    "evidence": "evidence/live-polish-20261029/tests.txt"
+  },
+  {
+    "id": "LIVE-POLISH-002",
+    "file": "tests/beauty-live.test.cjs",
+    "name": "Live settings pause page rotation and return keyboard focus on close",
+    "requirement": "START-20261029",
+    "kind": "Executable offline behavior",
+    "purpose": "Approved stats layout, settings and authenticated automatic refresh",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approval29Oct2026",
+    "limitations": "Synthetic fixtures; native/provider verification still pending",
+    "evidence": "evidence/live-polish-20261029/tests.txt"
+  },
+  {
+    "id": "LIVE-POLISH-003",
+    "file": "tests/beauty-live.test.cjs",
+    "name": "Live automatic stats refresh requires staff authorization and releases its lock",
+    "requirement": "START-20261029",
+    "kind": "Executable offline behavior",
+    "purpose": "Approved stats layout, settings and authenticated automatic refresh",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approval29Oct2026",
+    "limitations": "Synthetic fixtures; native/provider verification still pending",
+    "evidence": "evidence/live-polish-20261029/tests.txt"
+  },
+  {
+    "id": "LIVE-POLISH-004",
+    "file": "tests/beauty-live.test.cjs",
+    "name": "Live staff timer refreshes only unlocked visible sessions and prevents overlap",
+    "requirement": "START-20261029",
+    "kind": "Executable offline behavior",
+    "purpose": "Approved stats layout, settings and authenticated automatic refresh",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approval29Oct2026",
+    "limitations": "Synthetic fixtures; native/provider verification still pending",
+    "evidence": "evidence/live-polish-20261029/tests.txt"
   }
 ]

@@ -1,0 +1,72 @@
+[
+  {
+    "path": "public/beauty-live.html",
+    "before": "031ef44c69fed56353c2c18f8f1c22003132a311bb8c49fe988e50c7facf7732",
+    "after": "f037d1b0ea058b73d435f40fdfd36b3fa88d25be838ae9842273fa0fe0d7b53c"
+  },
+  {
+    "path": "public/css/beauty-live.css",
+    "before": "3169bd3f78ddd05946a909540d04e7034e97f659db07742d02a4867bef24b0ef",
+    "after": "f46fee41c188651ebc876f3e0f3e04b37e08f9766ec85415ce4105204abf9122"
+  },
+  {
+    "path": "public/js/beauty-live.js",
+    "before": "765647104b3716c8acd63ad9240c6ed9ec170a5d480be5de66e682d26735f904",
+    "after": "fbba9e6573f17a200943a6b37a3e582cbac02bb839cc6449ed3fe1be2a109803"
+  },
+  {
+    "path": "public/js/hub-live-stats.js",
+    "before": null,
+    "after": "660fc58777ef76b468fc4858dced516c0c62d271e405081613d22ccf96f4a54b"
+  },
+  {
+    "path": "scripts/build-hub-test.cjs",
+    "before": "4b383996747e979e9efd742f928683ff932b85ead5818e4277d354b7ce833e86",
+    "after": "610195a8acfd33fb5b47acf4df5205d4f3a32ba373b92083320f4bd0e8c6cd9e"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/BeautyLiveTest.gs",
+    "before": "25d7b0f8c8662adaceceb24e5c90e13b2c636291f1acba073553c0c7480dc3ea",
+    "after": "2a80e4c37e1cefa23b05d5b0f9e999411947ff330f0d7ce31424f9f50e4797ae"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/BeautyLiveTest.html",
+    "before": "593b89365ced6d8096ab3d37f49f27c667d5427b5f0ea5dc492b54a97e6a20ec",
+    "after": "5074908f3828f18f44b566c431cfa165ff6cbf994d54e32dad859fc849095824"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "3258ebbb1b5ed68cf3ac06c53370d6cc614961ee8315dfc933dc2fc557995bbe",
+    "after": "bca677aa02864e81346ed53bc120058d71b30b8c30ea780dd9ea35ceee6082bd"
+  },
+  {
+    "path": "tests/beauty-live.test.cjs",
+    "before": "8f9690a99a28bb3bb4559473ee27f10f71c2996817de432c22a7e16310e31bad",
+    "after": "3fc25ab8831b3a0ee5cd848b2ae94de1293d3232d30cfd50930dc1cbabb88921"
+  },
+  {
+    "path": "tests/hub-test-connection.test.cjs",
+    "before": "0b78b5d74233cda31a8977a431616ca244531bd60deb902030de6c3c5813b393",
+    "after": "ccf66937000f1f9b4d5912582c825355d2c7381ec345546680142693df2d39c6"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "dd5afacb074bd97fb8f3e5bf08fa7e66edd2d9431f138233120800d131fc8f31",
+    "after": "d581e46f3af94db85eb2cfc96a49ec905f2317a613a90fda19a59d1281f28227"
+  },
+  {
+    "path": "docs/handoff/live-display-review-20261029.md",
+    "before": null,
+    "after": "0dec17a37376c09022262706dcfa3e0b395f1a27cf2f1a7536eecdf2a39b37d7"
+  },
+  {
+    "path": "evidence/live-polish-20261029/tests.txt",
+    "before": null,
+    "after": "79ae4217fd4dbdb147ec68bd4e9a314378338c7076a16f295510d6de78305fab"
+  },
+  {
+    "path": "evidence/live-polish-20261029/inventory.txt",
+    "before": null,
+    "after": "ae64fcccce17ab2ebeae7326832d0df360d57f3a638cc35a1c074fa4a76c9d8d"
+  }
+]

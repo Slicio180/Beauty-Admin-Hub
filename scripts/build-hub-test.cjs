@@ -17,7 +17,7 @@ html=html.replace('<body>','<body class="beauty-auth-locked"><section id="beauty
 html=html.replace('</aside>\n\n\n    <!-- MAIN DASHBOARD -->', '<div class="hub-account-controls"><span class="label">ORGANISER</span><span id="hubSessionEmail"></span><button id="hubSignOut" type="button">SIGN OUT</button></div></aside>\n\n\n    <!-- MAIN DASHBOARD -->');
 if (!html.includes('id="hubSignOut"')) throw Error('Account controls insertion failed');
 html=html.replace('<script src="js/hub-services.js"','<script src="js/hub-auth.js"></script>\n<script src="js/hub-services.js"');
-html=html.replace('</body>','<script src="js/login.js"></script></body>');
+html=html.replace('</body>','<script src="js/login.js"></script><script src="js/hub-live-stats.js"></script></body>');
 html=html.replace('<h2 id="nakkaPanelTitle">Nakka</h2>', '<h2 id="nakkaPanelTitle">Nakka</h2><section class="health-card"><h3>Event connection</h3><p>Check the Hub date against Nakka. Read only; no player sync.</p><button id="nakkaEventCheck" type="button">CHECK EVENT</button> <button id="nakkaCompare" type="button">COMPARE PLAYERS</button><button id="nakkaStagesOpen" type="button">OPEN POOLS &amp; KNOCKOUTS — TEST</button><div id="nakkaEventResult" role="status" aria-live="polite"></div></section>');
 html=html.replace('</body>','<script src="js/hub-nakka-event.js"></script></body>');
 html=html.replace('</body>','<script src="js/hub-nakka-transfer.js"></script></body>');

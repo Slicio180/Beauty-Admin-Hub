@@ -1,4 +1,4 @@
-/* Read-only, owner-only Identity TEST casting feed. No provider calls or writes; uses sanitised last-good league cache. */
+/* Read-only, owner-only Identity TEST casting feed. Cast feed has no provider calls or writes; staff refresh is separately authenticated. */
 function beautyLiveTestData() {
   beautyHubTestGuard_();
   const data = getBeautyHubData_();
@@ -17,7 +17,7 @@ function beautyLiveTestData() {
     }
   }
   const snapshot = beautyLiveStatsSnapshot_();
-  return { statsAvailable: !!snapshot, statsFetchedAt: snapshot ? snapshot.fetchedAt : null, success: true, eventDate: data.eventDate, updatedAt: new Date().toISOString(), rankingAvailable: false,
+  return { statsAvailable: !!snapshot, statsStale: !!snapshot && snapshot.fresh !== true, statsFetchedAt: snapshot ? snapshot.fetchedAt : null, success: true, eventDate: data.eventDate, updatedAt: new Date().toISOString(), rankingAvailable: false,
     players: data.players.map(function(p) {
       const name = String(p.player || p.newPlayer || '').trim();
       const matches = snapshot ? snapshot.profiles.filter(function(q){return beautyPoolKey_(q.name) === beautyPoolKey_(name);}) : [];
@@ -33,8 +33,8 @@ function beautyLiveTestUrl(token) {
 }
 
 /* Anonymous cast requests never trigger authenticated Nakka refreshes. The staff
- * statistics refresh publishes this shared snapshot; expired/failed data is not
- * represented as current. Rank deliberately remains unavailable until qualified.
+ * statistics refresh publishes this shared snapshot; expired/failed values remain visibly labelled as last fetched for up to seven days;
+ * they are never represented as current or used to qualify a draw. Rank deliberately remains unavailable until qualified.
  */
 function beautyLiveStatsSnapshot_() {
   try {
@@ -42,8 +42,8 @@ function beautyLiveStatsSnapshot_() {
     if (!snapshot || snapshot.leagueId !== 'lg_tM2v_3523' || !Array.isArray(snapshot.profiles)) return null;
     const at = Date.parse(snapshot.fetchedAt), age = Date.now() - at;
     const failed = Number(PropertiesService.getScriptProperties().getProperty('BEAUTY_LEAGUE_STATS_FAILED') || 0);
-    if (!Number.isFinite(at) || age < 0 || age >= 300000 || failed > at) return null;
-    return snapshot;
+    if (!Number.isFinite(at) || age < 0 || age >= 604800000) return null;
+    return Object.assign({}, snapshot, {fresh: age < 300000 && failed <= at});
   } catch (e) { return null; }
 }
 
@@ -55,4 +55,17 @@ function beautyStageTestUrl(token){
   if(response.getResponseCode()!==200)throw Error('TEST event unavailable.');const data=JSON.parse(response.getContentText()),t=data?.tournament;
   if(data.result!==0||t?.tdid!=='t_RqC2_2034'||t.lgid!=='lg_tM2v_3523'||!Number.isFinite(t.t_date)||t.t_date<=0||Utilities.formatDate(new Date(t.t_date*1000),Session.getScriptTimeZone(),'yyyy-MM-dd')!==hub.eventDate)throw Error('Stage display does not match the selected Hub event.');
   beautyHubAuthRequire_(token);if(getBeautyHubData_()?.eventDate!==hub.eventDate)throw Error('Hub date changed while opening the display.');return ScriptApp.getService().getUrl()+'?page=stages';
+}
+
+/* Staff-owned automatic refresh; the cast feed itself never contacts Nakka. */
+function beautyLiveRefreshStats(token){
+  beautyHubTestGuard_();beautyHubAuthRequire_(token);
+  const lock=LockService.getScriptLock();
+  if(!lock.tryLock(1000))return {success:false,message:'Statistics refresh already running.'};
+  try{
+    beautyHubAuthRequire_(token);
+    const snapshot=beautyPoolStats_(beautyPoolAuth_(),true);
+    beautyHubAuthRequire_(token);
+    return {success:true,fresh:snapshot.fresh===true,fetchedAt:snapshot.fetchedAt||null};
+  }finally{lock.releaseLock();}
 }
