@@ -20,12 +20,20 @@
   const count=hubAvailable?BeautyPoolPlanner.eventCount(root.beautyHubData):null,result=currentPlan(),selected=result[panel.querySelector('[data-draw-scheme]').value];
   panel.querySelector('[data-in-count]').textContent=count===null?'—':String(count);
   panel.querySelector('[data-event-label]').textContent=(state?.event?.title||'Selected Hub event')+' · '+(root.beautyHubData?.eventDateDisplay||root.beautyHubData?.eventDate||'No date');
-  const summary=panel.querySelector('[data-plan-summary]');summary.textContent=result.error||(!selected?'Select available boards.':[selected.three+' × 3-manna',selected.four+' × 4-manna',...(selected.five?[selected.five+' × 5-manna']:[])].join(' · '));
+  const summary=panel.querySelector('[data-plan-summary]');summary.textContent=result.error||(!selected?'Select available boards.':[selected.three+' × 3-manna',selected.four+' × 4-manna',result.boards+' banor',...(selected.five?[selected.five+' × 5-manna']:[])].join(' · '));
   panel.querySelector('[data-generate]').dataset.blocked=String(!hubAvailable||!state?.stats?.fresh||!selected||!!result.error||count>101);
   const options=panel.querySelector('[data-plan-options]');options.textContent=result.error?'':('Preferred: '+result.preferredPlan.three+' × 3 / '+result.preferredPlan.four+' × 4 / '+result.preferredPlan.five+' × 5. '+(result.perBoard?'One pool per board: '+result.perBoard.three+' × 3 / '+result.perBoard.four+' × 4 / '+result.perBoard.five+' × 5.':'No one-pool-per-board arrangement available.'));
   for(const n of panel.querySelectorAll('[data-size-choice]'))n.setAttribute('aria-pressed',String(n.dataset.sizeChoice===host.querySelector('[data-size]').value));
   let selectedIds=[];try{selectedIds=selectedBoards();}catch(e){}for(const b of panel.querySelectorAll('[data-board-choice]'))b.setAttribute('aria-pressed',String(selectedIds.includes(Number(b.dataset.boardChoice))));
-  disable();
+  renderEstimate();disable();
+ }
+ function renderEstimate(){
+  const count=panel?.querySelector('[data-manual-count]'),estimate=panel?.querySelector('[data-estimate]');if(!estimate||!count)return;
+  if(!count.value){estimate.textContent='Enter 5–101 players to estimate the scheme. This does not change registrations.';return;}
+  const n=Number(count.value);if(!Number.isInteger(n)||n<5||n>101){estimate.textContent='Enter a whole player count from 5 to 101.';return;}
+  let boards=[];try{boards=selectedBoards();}catch(e){}
+  const result=BeautyPoolPlanner.plan(n,Number(host.querySelector('[data-size]').value),boards.length||1),plan=result.preferredPlan;
+  estimate.textContent=result.error||plan.pools+' pools: '+plan.three+' × 3-manna · '+plan.four+' × 4-manna'+(plan.five?' · '+plan.five+' × 5-manna':'')+' · '+(boards.length?boards.length+' banor':'No boards selected')+'. Estimate only; draws use the verified IN list.';
  }
  function settingsChanged(){if(frozen){approval=null;invalid=true;invalidReason='Draw settings changed. Generate and review a new preview.';message('Draw settings changed. Generate and review a new preview.');renderDraw();}renderSettings();}
  async function generate(send){
@@ -58,20 +66,18 @@
  }
  function disable(){if(panel)panel.querySelectorAll('button,input,select').forEach(n=>{n.disabled=busy||n.dataset.blocked==='true';});}
  function bindings(){return [...panel.querySelectorAll('[data-binding]')].map(row=>({id:row.dataset.binding,lpid:row.querySelector('[data-lpid]').value,tpid:row.querySelector('[data-tpid]').value}));}
- function select(parent,key,candidates,field,value){const s=el('select',null,parent);s.dataset[key]='';el('option','Unresolved / Unseeded',s).value='';for(const p of candidates)el('option',p.name+' · '+p[field],s).value=p[field];s.value=value;s.addEventListener('change',()=>{frozen=null;approval=null;invalid=true;const row=parent.parentElement,p=state.mappings.find(p=>p.id===row.dataset.binding),selected=p?.leagueCandidates.find(p=>p.lpid===row.querySelector('[data-lpid]').value);const cell=row.querySelector('.pool-number');if(cell)cell.textContent=averageLabel(selected?.average);panel.querySelector('[data-mapping-reviewed]').checked=false;const count=bindings().filter(p=>!p.lpid||!p.tpid).length;panel.querySelector('[data-identity-notice]').hidden=!count;panel.querySelector('[data-review-state]').textContent=count+' identities need review';message('Player identity changed. Review the mappings and generate a new preview.');renderDraw();});return s;}
+ function select(parent,key,candidates,field,value){const s=el('select',null,parent);s.dataset[key]='';el('option','Unresolved / Unseeded',s).value='';for(const p of candidates)el('option',p.name+' · '+p[field],s).value=p[field];s.value=value;s.addEventListener('change',()=>{frozen=null;approval=null;invalid=true;const row=parent.parentElement,p=state.mappings.find(p=>p.id===row.dataset.binding),selected=p?.leagueCandidates.find(p=>p.lpid===row.querySelector('[data-lpid]').value);const cell=row.querySelector('.pool-number');if(cell)cell.textContent=averageLabel(selected?.average);panel.querySelector('[data-mapping-reviewed]').checked=false;const count=bindings().filter(p=>!p.lpid||!p.tpid).length;panel.querySelector('[data-identity-notice]').hidden=!count;panel.querySelector('[data-review-state]').textContent=count+' identities need review';panel.querySelector('[data-review-summary]').textContent='Review players'+(count?' · '+count+' need review':'');message('Player identity changed. Review the mappings and generate a new preview.');renderDraw();});return s;}
  function renderSource(){
   const box=panel.querySelector('[data-pool-source]');box.replaceChildren();
   const status=section('div','pool-source-status',box),statsCard=section('section','pool-status-card',status);
-  const stats=state?.stats;
+  const stats=state?.stats;panel.querySelector('[data-stat-calculation]').replaceChildren();
   const title=el('strong',stats?(stats.fresh?'League averages current':'Statistics stale / unavailable'):'Load league averages',statsCard);title.dataset.fresh=String(!!stats?.fresh);
   el('p',stats?.fetchedAt?'Last successful update '+new Date(stats.fetchedAt).toLocaleString('sv-SE',{timeZone:'Europe/Stockholm'}):'Overall league three-dart averages',statsCard);
   button(state?'REFRESH STATS':'LOAD / REFRESH LEAGUE STATS',statsCard,()=>run(send=>load(send,true)));
   if(!state){el('p','Load statistics before reviewing player identities.',box);renderSettings();return;}
-  const needsReview=state.mappings.filter(p=>!p.lpid||!p.tpid).length,reviewCard=section('section','pool-status-card pool-identity-notice',status);reviewCard.hidden=!needsReview;reviewCard.dataset.identityNotice='';
+  const needsReview=state.mappings.filter(p=>!p.lpid||!p.tpid).length;const details=el('details',null,box);details.dataset.playerReview='';details.className='pool-player-review';const reviewSummary=el('summary','Review players'+(needsReview?' · '+needsReview+' need review':''),details);reviewSummary.dataset.reviewSummary='';const reviewCard=section('section','pool-status-card pool-identity-notice',details);reviewCard.hidden=!needsReview;reviewCard.dataset.identityNotice='';
   const reviewState=el('strong',needsReview?needsReview+' identities need review':'Player identities ready for review',reviewCard);reviewState.dataset.reviewState='';
   el('p',needsReview?'Missing identities can be planned as Unseeded. Sending stays blocked.':'Confirm the proposed league and event identities below.',reviewCard);
-  const details=el('details',null,box);details.dataset.playerReview='';details.className='pool-player-review';el('summary','Review '+state.mappings.length+' IN players and league / event identities',details);
-  button('REVIEW PLAYERS',reviewCard,()=>{details.open=!details.open;details.scrollIntoView?.({block:'nearest',behavior:'smooth'});});
   el('p','Names propose matches. Check the LPID and event entry ID in Nakka. If Nakka does not expose the saved league link, this records your review; it does not prove that hidden link. Missing averages remain Unseeded.',details);
   const wrap=section('div','pool-review-table-wrap',details),table=el('table',null,wrap),head=el('tr',null,el('thead',null,table));['Player','League identity (LPID)','Event entry (TPID)','Overall average'].forEach(t=>el('th',t,head));const body=el('tbody',null,table);
   for(const p of state.mappings.slice().sort((a,b)=>Number(!b.lpid||!b.tpid)-Number(!a.lpid||!a.tpid)||a.name.localeCompare(b.name,'sv'))){const row=el('tr',null,body);row.dataset.binding=p.id;el('td',p.name,row);select(el('td',null,row),'lpid',p.leagueCandidates,'lpid',p.lpid);select(el('td',null,row),'tpid',p.eventCandidates,'tpid',p.tpid);const avg=numeric('td',averageLabel(p.average),row);if(p.reason)el('small',p.reason,avg);}
@@ -83,7 +89,7 @@
   const proceed=button('GENERATE PREVIEW',actions,()=>{if(!review.checked)return;confirm.close();run(generate);});proceed.dataset.confirmGenerate='';proceed.dataset.blocked='true';proceed.disabled=true;
   review.addEventListener('change',()=>{proceed.dataset.blocked=String(!review.checked);disable();});
   confirm.addEventListener('close',()=>panel.querySelector('[data-generate]')?.focus());
-  const source=el('details',null,box);source.className='pool-source-detail';el('summary','Statistics source and calculation',source);
+  const source=panel.querySelector('[data-stat-calculation]');source.replaceChildren();el('h3','Statistics source and calculation',source);
   el('p',(stats.title||'AIK league')+' · '+(stats.method||'Overall three-dart average = 3 × total score / total darts. Display uses two decimals; seeding keeps full precision. Ranking points are separate.'),source);
   if(stats.message)el('p',stats.message,source);if(state.journal)el('p',state.journal,source);
   renderSettings();
@@ -166,18 +172,18 @@
   const sizeLabel=el('div',null,setup);el('span','PLAYERS PER POOL',sizeLabel).className='label';const size=el('select',null,sizeLabel);size.dataset.size='';size.hidden=true;size.setAttribute('aria-hidden','true');size.tabIndex=-1;
   [3,4].forEach(n=>el('option',String(n),size).value=String(n));const choices=section('div','pool-size-choices',sizeLabel);
   [3,4].forEach(n=>{const b=button(String(n),choices,()=>{size.value=String(n);settingsChanged();});b.dataset.sizeChoice=String(n);b.setAttribute('aria-label',n+' players per pool');});
-  const boardsLabel=el('label','AVAILABLE BOARDS',setup),boards=el('input',null,boardsLabel);boards.type='text';boards.maxLength=1000;boards.placeholder='1-4, 7-9, 13-15';boards.dataset.boards='';
+  const boardsLabel=el('label','BOARDS',setup),boards=el('input',null,boardsLabel);boards.type='text';boards.maxLength=1000;boards.placeholder='Select boards below';boards.dataset.boards='';
   const arrangement=el('label',null,setup);arrangement.hidden=true;const scheme=el('select',null,arrangement);scheme.dataset.drawScheme='';for(const [v,t]of [['preferredPlan','Preferred format'],['perBoard','One pool per dartboard']])el('option',t,scheme).value=v;
   const draw=button('GENERATE SEEDED PREVIEW',setup,()=>{const confirm=panel.querySelector('[data-preview-confirm]');if(!confirm)return;panel.querySelector('[data-mapping-reviewed]').checked=false;const proceed=panel.querySelector('[data-confirm-generate]');proceed.dataset.blocked='true';disable();message('Review the player identity acknowledgement in the popup.');confirm.showModal();});draw.dataset.generate='';draw.dataset.blocked='true';
   const schemeTile=section('div','pool-scheme-tile',setup);el('span','SCHEME',schemeTile).className='label';el('p','Select available boards.',schemeTile).dataset.planSummary='';
   const boardChoices=section('div','pool-board-choices',panel);for(let n=1;n<=16;n++){const b=button(String(n),boardChoices,()=>{let selected=[];try{selected=selectedBoards();}catch(e){}const next=selected.includes(n)?selected.filter(v=>v!==n):[...selected,n];boards.value=next.sort((a,b)=>a-b).join(', ');settingsChanged();});b.dataset.boardChoice=String(n);b.setAttribute('aria-label','Board '+n);}
-  const advanced=el('details',null,panel);advanced.className='pool-advanced';el('summary','Advanced planning and original scheme',advanced);
+  const advanced=el('details',null,panel);advanced.className='pool-advanced';advanced.dataset.advancedSettings='';el('summary','Advanced settings',advanced);
   el('p','',advanced).dataset.planOptions='';
   const manual=el('label','Try a different player count (estimate only) ',advanced),count=el('input',null,manual);count.type='number';count.min='5';count.max='101';count.placeholder='e.g. 37';count.dataset.manualCount='';const estimate=el('p','Estimates do not change registrations or the actual draw.',advanced);
-  count.addEventListener('input',()=>{const p=BeautyPoolPlanner.plan(Number(count.value),Number(size.value),(()=>{try{return selectedBoards().length;}catch(e){return 0;}})());estimate.textContent=Number(count.value)>101?'The supplied scheme covers 5–101.':p.error||p.preferredPlan.pools+' pools: '+p.preferredPlan.three+' × 3, '+p.preferredPlan.four+' × 4, '+p.preferredPlan.five+' × 5. Draws always use the verified IN list.';});
+  count.addEventListener('input',renderEstimate);estimate.dataset.estimate='';
   const reference=el('a','Open original 5–101 pool scheme ↗',advanced);reference.href='assets/pool-scheme.html';
   if(reference.href.startsWith('data:')){const encoded=reference.href.split(',')[1],bytes=Uint8Array.from(atob(encoded),c=>c.charCodeAt(0));reference.href=URL.createObjectURL(new Blob([bytes],{type:'text/html;charset=utf-8'}));}reference.target='_blank';reference.rel='noopener noreferrer';
-  el('div',null,panel).dataset.poolSource='';el('div',null,panel).dataset.drawUtilities='';const notice=el('p','Load league statistics to review identities and generate a draw.',panel);notice.dataset.poolMessage='';notice.setAttribute('role','status');notice.setAttribute('aria-live','polite');el('div',null,panel).dataset.poolDraw='';
+  el('section',null,advanced).dataset.statCalculation='';el('div',null,panel).dataset.poolSource='';el('div',null,panel).dataset.drawUtilities='';const notice=el('p','Load league statistics to review identities and generate a draw.',panel);notice.dataset.poolMessage='';notice.setAttribute('role','status');notice.setAttribute('aria-live','polite');el('div',null,panel).dataset.poolDraw='';
   boards.addEventListener('input',settingsChanged);scheme.addEventListener('change',settingsChanged);
   host.addEventListener('cancel',e=>{if(busy)e.preventDefault();});host.addEventListener('close',()=>{epoch++;approval=null;invalid=true;renderDraw();});
   root.setInterval(()=>{if(host?.open&&!document.hidden&&!busy&&state&&!frozen&&!panel.querySelector('[data-player-review]')?.open)run(send=>load(send,false));},300000);

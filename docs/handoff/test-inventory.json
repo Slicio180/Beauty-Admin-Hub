@@ -6497,6 +6497,32 @@
     "evidence": "evidence/pool-layout-20261029/tests.txt"
   },
   {
+    "id": "POOL-CONTROLS-1",
+    "file": "tests/pool-planner-seeded-ui.test.cjs",
+    "name": "pool estimate works before boards are selected and updates with selected board count",
+    "requirement": "START-20261029",
+    "kind": "Executable offline behavior",
+    "purpose": "Unified review/advanced controls and isolated scheme estimates",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner request29Oct2026",
+    "limitations": "Offline UI behavior; native TEST visual review pending",
+    "evidence": "evidence/pool-controls-20261029/tests.txt"
+  },
+  {
+    "id": "POOL-CONTROLS-2",
+    "file": "tests/pool-planner-seeded-ui.test.cjs",
+    "name": "pool review is one expandable tab and calculation lives inside Advanced settings",
+    "requirement": "START-20261029",
+    "kind": "Executable offline behavior",
+    "purpose": "Unified review/advanced controls and isolated scheme estimates",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner request29Oct2026",
+    "limitations": "Offline UI behavior; native TEST visual review pending",
+    "evidence": "evidence/pool-controls-20261029/tests.txt"
+  },
+  {
     "id": "SEEDED-POOL-013",
     "file": "tests/pool-service.test.cjs",
     "name": "pool stats qualify score/darts keyed by LPID; points stay separate and unknown is not zero",

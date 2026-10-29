@@ -141,3 +141,14 @@ test('pool compact identity warning hides when resolved and scheme counts remain
  const f=fixture();await f.load();assert.equal(f.host.querySelector('[data-identity-notice]').hidden,true);assert.match(f.host.querySelector('[data-plan-summary]').textContent,/2 × 3-manna.*0 × 4-manna/);
  assert.equal(f.find('BACK TO DASHBOARD'),undefined);await f.generate();assert.equal(f.host.querySelector('[data-pool-draw]').children.length,1);
 });
+
+test('pool estimate works before boards are selected and updates with selected board count',async()=>{
+ const f=fixture(),count=f.host.querySelector('[data-manual-count]'),boards=f.host.querySelector('[data-boards]');boards.value='';await boards.fire('input');count.value='16';await count.fire('input');assert.match(f.host.querySelector('[data-estimate]').textContent,/5 pools:.*No boards selected/);
+ boards.value='1,7';await boards.fire('input');assert.match(f.host.querySelector('[data-estimate]').textContent,/2 banor/);assert.match(f.host.querySelector('[data-plan-summary]').textContent,/2 banor/);assert.equal(f.requests.length,0);
+ count.value='4';await count.fire('input');assert.match(f.host.querySelector('[data-estimate]').textContent,/5 to 101/);assert.equal(f.data.players.length,6);
+});
+test('pool review is one expandable tab and calculation lives inside Advanced settings',async()=>{
+ const f=fixture();f.source.mappings[0].lpid='';await f.load();const review=f.host.querySelector('[data-player-review]');assert.match(review.querySelector('summary').textContent,/Review players · 1 need review/);assert.ok(review.querySelector('[data-identity-notice]'));assert.equal(f.host.querySelectorAll('[data-player-review]').length,1);
+ const advanced=f.host.querySelector('[data-advanced-settings]');assert.ok(advanced.querySelector('[data-stat-calculation]'));assert.match(advanced.textContent,/Overall three-dart average/);
+ const row=review.querySelector('[data-binding]');row.querySelector('[data-lpid]').value='L0';await row.querySelector('[data-lpid]').fire('change');assert.equal(review.querySelector('[data-identity-notice]').hidden,true);assert.equal(review.querySelector('summary').textContent,'Review players');assert.equal(f.requests.length,1);
+});

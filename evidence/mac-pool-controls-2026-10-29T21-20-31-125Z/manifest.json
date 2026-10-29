@@ -1,0 +1,42 @@
+[
+  {
+    "path": "public/js/pool-planner-seeded.js",
+    "before": "dff7cb8e2b0ac130fa0a855d67e0fed62ac8ed19d813c558fc0613af2aecbd8e",
+    "after": "d888e05609e837139efd010c2cdd37c7d654974593dfd76a23f25529858976eb"
+  },
+  {
+    "path": "public/css/beauty-dashboard.css",
+    "before": "414df3017256c004fd7471333e9b2be6097b93cc6f54491c83a138b5b9e366da",
+    "after": "4efe113c07f67dd2308d36bc41f0190b680e8551fda65c7e30aa629539fd889d"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "21043361a83c7c6c40feb66b17fa31006e7cd3df6318bc9ba58dbf067b776d9d",
+    "after": "b43340097cd007907db18b7c48d6eeea9f9568be5a5cf916dc39f036f5d31c71"
+  },
+  {
+    "path": "tests/pool-planner-seeded-ui.test.cjs",
+    "before": "51a8fd425a2a25ccfaffcdc371d15e262f6e196500cbc5df7ee9c6bb4ca016ad",
+    "after": "166296b456f785b4f4bb564947b7c5ebfa00220dac8c3d95693ca66370502dce"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "25fc1ea3feba583303aa502609c30bbc628c9a5018698a2a721dd37202852ce3",
+    "after": "681c9e582bd451ba56f106b5ceb5ef6011fedc73fddea5b4f400899a18680b04"
+  },
+  {
+    "path": "docs/handoff/pool-controls-20261029.md",
+    "before": null,
+    "after": "2f54227bde44cf814f0f95d2dcce08efbf6c1285ed991b4dc45a86794dbf7d9b"
+  },
+  {
+    "path": "evidence/pool-controls-20261029/tests.txt",
+    "before": null,
+    "after": "5b4eaa32bb99a4d695c1d24e20d067a6bc3d73d6c7f54502cf82ab47adb499af"
+  },
+  {
+    "path": "evidence/pool-controls-20261029/inventory.txt",
+    "before": null,
+    "after": "ac66979317186fb194ae78503d5cb89f839291074e0020736314955bd544a7e6"
+  }
+]
