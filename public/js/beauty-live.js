@@ -21,7 +21,7 @@
     headings.style.setProperty('--live-columns',columns);
     if(stats.checked)for(let i=0;i<columns;i++){
       const head=document.createElement('div');head.className='live-column-heading';
-      for(const text of ['SPELARE','SNITT','POÄNG']){const label=document.createElement('span');label.textContent=text;head.append(label);}headings.append(head);
+      for(const text of ['SPELARE','SNITT']){const label=document.createElement('span');label.textContent=text;head.append(label);}headings.append(head);
     }
     list.replaceChildren();
     if(!players.length){const item=document.createElement('li');item.textContent='Inga spelare anmälda ännu';list.append(item);}
@@ -36,7 +36,7 @@
       const identity=document.createElement('div');identity.className='live-identity';identity.append(number);identity.append(name);item.append(identity);
       if(stats.checked){
         const average=document.createElement('span');average.className='live-average';average.textContent=p.average===null?'—':p.average.toFixed(2);average.setAttribute('aria-label','Snitt '+average.textContent);
-        const points=document.createElement('span');points.className='live-points';points.textContent=p.points===null?'—':String(p.points);points.setAttribute('aria-label','Poäng '+points.textContent);item.append(average);item.append(points);
+        item.append(average);
       }
       list.append(item);
     });
@@ -57,7 +57,7 @@
   function apply(data){BeautyLiveModel.project(data,sort.value); latest=data;
     document.getElementById('rankingOrder').disabled=!data.rankingAvailable;stats.disabled=!(data.statsAvailable||data.rankingAvailable);
     if(!data.rankingAvailable&&sort.value==='ranking')sort.value='alphabetical';
-    draw();const note=document.getElementById('liveStatsSource');if(note)note.textContent=(data.statsFetchedAt?'Statistik '+new Date(data.statsFetchedAt).toLocaleString('sv-SE')+' · ':'')+(data.rankingAvailable?'Verifierad Nakka-ranking':data.statsAvailable?(data.statsStale?'Senast hämtade värden · inte uppdaterade':'Snitt/poäng anslutna · ranking ej verifierad'):'Statistik ej tillgänglig');status.textContent='Uppdaterad '+new Date().toLocaleTimeString('sv-SE')+' · TEST';status.dataset.state='ok';}
+    draw();const note=document.getElementById('liveStatsSource');if(note)note.textContent=(data.statsFetchedAt?'Statistik '+new Date(data.statsFetchedAt).toLocaleString('sv-SE')+' · ':'')+(data.rankingAvailable?'Verifierad Nakka-ranking':data.statsAvailable?(data.statsStale?'Senast hämtade värden · inte uppdaterade':'Snitt anslutet · ranking ej verifierad'):'Statistik ej tillgänglig');status.textContent='Uppdaterad '+new Date().toLocaleTimeString('sv-SE')+' · TEST';status.dataset.state='ok';}
   function refresh(){const ticket=++sequence;let finished=false;
     const done=(data,error)=>{if(finished||ticket!==sequence)return;finished=true;clearTimeout(timeout);
       try{if(error)throw Error();apply(data);}catch(e){status.textContent=latest?'Anslutningen bruten – senast hämtade lista visas · TEST':'Kunde inte hämta spelarna · TEST';status.dataset.state='error';}

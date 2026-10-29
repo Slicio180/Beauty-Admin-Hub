@@ -51,3 +51,8 @@ main{display:grid;grid-template-rows:auto minmax(0,1fr);overflow:hidden}
 .live-column-heading span,.live-column-heading span:first-child{justify-content:center;text-align:center}
 #liveNames.with-stats li{border-right:1px solid #ffd700}
 @media(max-width:699px){.live-column-heading{font-size:18px}}
+
+/* Approved average-only cast view. Keep the yellow panel edge after Snitt. */
+#liveNames.with-stats li,.live-column-heading{grid-template-columns:minmax(0,1fr) 76px}
+@media(max-width:1100px){#liveNames.with-stats li,.live-column-heading{grid-template-columns:minmax(0,1fr) 64px}}
+@media(max-width:699px){#liveNames.with-stats li,.live-column-heading{grid-template-columns:minmax(0,1fr) 44px}}

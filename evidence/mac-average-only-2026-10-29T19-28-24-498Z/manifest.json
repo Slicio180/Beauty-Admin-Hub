@@ -1,0 +1,47 @@
+[
+  {
+    "path": "public/beauty-live.html",
+    "before": "f037d1b0ea058b73d435f40fdfd36b3fa88d25be838ae9842273fa0fe0d7b53c",
+    "after": "e33e90b4a85dbd38dad169d30582de7673bd3beef1e46e168b3aaf597f5b62ac"
+  },
+  {
+    "path": "public/css/beauty-live.css",
+    "before": "91e73f139534fd70abeb37be281c9db95c5aee57de38266a36e31ad8229a0103",
+    "after": "1aeeb9a5ac773555b7a1e920d2bd8f63a33cdbf8029fcd2330cf97ad4b13cbb8"
+  },
+  {
+    "path": "public/js/beauty-live.js",
+    "before": "fbba9e6573f17a200943a6b37a3e582cbac02bb839cc6449ed3fe1be2a109803",
+    "after": "daa2bed04c11c7947682ad4240f4741d780603cd4ff2b2a4a3923b7b6727dec6"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/BeautyLiveTest.html",
+    "before": "65c8b1efcfd9a717d5f9f254e9a3c073d0f45be3107bc3432564ae836a96f94a",
+    "after": "9bf7a61ad97de6b00963e027ca7bd51243f62950f5ed52c8548700ce7b4590f1"
+  },
+  {
+    "path": "tests/beauty-live.test.cjs",
+    "before": "3fc25ab8831b3a0ee5cd848b2ae94de1293d3232d30cfd50930dc1cbabb88921",
+    "after": "02783cd8391317981d54aba966052bd7fbe3870c92c7c5338cb818c02a12c0c9"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "d581e46f3af94db85eb2cfc96a49ec905f2317a613a90fda19a59d1281f28227",
+    "after": "c9665a3109bbb4f43af6623bc22d3807d5de19968aa7a61c8a6ee2e9f60f3e83"
+  },
+  {
+    "path": "docs/handoff/average-only-20261029.md",
+    "before": null,
+    "after": "da8f32cde8805a5966520acd8207ffc8ce2a8212672224a8605b82c4a644b94a"
+  },
+  {
+    "path": "evidence/average-only-20261029/tests.txt",
+    "before": null,
+    "after": "00ec9639fefe911ffcb04b597b103cbdd5e00520a32ddc45dfd2535452d3323f"
+  },
+  {
+    "path": "evidence/average-only-20261029/inventory.txt",
+    "before": null,
+    "after": "ae64fcccce17ab2ebeae7326832d0df360d57f3a638cc35a1c074fa4a76c9d8d"
+  }
+]

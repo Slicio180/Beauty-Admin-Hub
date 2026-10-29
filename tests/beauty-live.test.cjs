@@ -42,7 +42,7 @@ test('Live real ranking values and ties survive paging; statistics respect the s
  const c=client();c.ok({success:true,rankingAvailable:true,statsAvailable:true,players:[{name:'Z',rank:7,points:0,average:0},{name:'A',rank:2,points:40,average:54.123},{name:'B',rank:2,points:40},{name:'C'}]});
  c.nodes.liveStats.checked=true;c.nodes.liveSort.value='ranking';c.nodes.liveStats.events.change();
  assert.equal(c.nodes.liveNames.children[0].children[0].children[0].textContent,'2');assert.equal(c.nodes.liveNames.children[1].children[0].children[0].textContent,'2');
- assert.equal(c.nodes.liveNames.children[2].children[0].children[0].textContent,'7');assert.equal(c.nodes.liveNames.children[2].children[1].textContent,'0.00');assert.equal(c.nodes.liveNames.children[2].children[2].textContent,'0');
+ assert.equal(c.nodes.liveNames.children[2].children[0].children[0].textContent,'7');assert.equal(c.nodes.liveNames.children[2].children[1].textContent,'0.00');assert.equal(c.nodes.liveNames.children[2].children.length,2);
  assert.equal(c.nodes.liveNames.children[3].children[0].children[0].textContent,'—');
 });
 test('Live cached statistics label stale or failed snapshots and reject old or ambiguous data',()=>{
@@ -57,11 +57,11 @@ test('Live cached statistics label stale or failed snapshots and reject old or a
  snapshot.fetchedAt=now;s.c.PropertiesService={getScriptProperties:()=>({getProperty:()=>String(Date.now()+1)})};assert.equal(s.c.beautyLiveTestData().statsAvailable,true);assert.equal(s.c.beautyLiveTestData().statsStale,true);
 });
 
-test('Live statistics columns keep average before points without forcing rank sorting',()=>{
+test('Live display shows only average without forcing rank sorting',()=>{
  const c=client();c.ok({success:true,statsAvailable:true,rankingAvailable:true,players:[{name:'Z',rank:1,points:102,average:54.94},{name:'A',rank:2,points:0,average:0}]});
  c.nodes.liveStats.checked=true;c.nodes.liveStats.events.change();
  assert.equal(c.nodes.liveNames.children[0].children[0].children[1].textContent,'A');
- assert.equal(c.nodes.liveNames.children[1].children[1].textContent,'54.94');assert.equal(c.nodes.liveNames.children[1].children[2].textContent,'102');
+ assert.equal(c.nodes.liveNames.children[1].children[1].textContent,'54.94');assert.equal(c.nodes.liveNames.children[1].children.length,2);assert.deepEqual(c.nodes.liveColumns.children[0].children.map(n=>n.textContent),['SPELARE','SNITT']);
  assert.equal(c.nodes.liveColumns.hidden,false);assert.equal(c.nodes.liveColumns.children.length,3);
  c.timeouts.at(-1).fn();c.ok({success:true,statsAvailable:true,statsStale:true,players:[{name:'A',average:0,points:0}]});
  assert.equal(c.nodes.liveStats.checked,true);assert.match(c.nodes.liveStatsSource.textContent,/inte uppdaterade/);

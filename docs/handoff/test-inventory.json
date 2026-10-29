@@ -7396,7 +7396,7 @@
   {
     "id": "LIVE-POLISH-001",
     "file": "tests/beauty-live.test.cjs",
-    "name": "Live statistics columns keep average before points without forcing rank sorting",
+    "name": "Live display shows only average without forcing rank sorting",
     "requirement": "START-20261029",
     "kind": "Executable offline behavior",
     "purpose": "Approved stats layout, settings and authenticated automatic refresh",
