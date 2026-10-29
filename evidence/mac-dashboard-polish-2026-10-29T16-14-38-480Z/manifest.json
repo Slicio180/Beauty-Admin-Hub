@@ -1,0 +1,52 @@
+[
+  {
+    "path": "public/css/beauty-dashboard.css",
+    "before": "3c0e9f7b53ffb66c608f39f84917726be247ebbc90bdc5acf70e065e6e9cd98d",
+    "after": "0219daf9195642120d5c1077af22a4814457515688e1dfb870175a31c0331643"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "7fd6d4e927ac8463c9af674121899f2687c5ecdc9bc7878c2e6adf79aa09cf7f",
+    "after": "3258ebbb1b5ed68cf3ac06c53370d6cc614961ee8315dfc933dc2fc557995bbe"
+  },
+  {
+    "path": "public/preview.html",
+    "before": "61ad38f7b3a1bab81bef4a7be6f6b1213be6f4d49d8cf0e809d57f13cf6bc51d",
+    "after": "36b5300f9ae45218751eddc9c9ca4cb3af338bd6e4b7114d381c8c091323e3bb"
+  },
+  {
+    "path": "public/index.html",
+    "before": "04265443a01b953c49c9eca23ecf2c656335bc2971ff58b1eea889bdd002e379",
+    "after": "a0d03023b411c3ddfcd5bd1048498cececbc04a70b51d46bb2726b3eb717e868"
+  },
+  {
+    "path": "public/js/hub-dashboard.js",
+    "before": "1bd2ca143a740e1c107708f7361bcd1722a815728756ff4619705f0e18606651",
+    "after": "1637ed94bbb5db737357f8a23aa0d1bd6537b0b356119f6e076f6d071d5aefd1"
+  },
+  {
+    "path": "tests/dashboard-ui.test.cjs",
+    "before": "6ef3558455cdfbb1e06c12fac8e0722ea511babb68cb310390599fb68669eb07",
+    "after": "10b2d255cb48784948e8caa13abcba64bc8be60bcbd45c4e1c01d8a4bb2b4234"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "6bf552638107c8ebe08ea09e926fa6702af830c142c9fdb1551cecc2c9651e0d",
+    "after": "dd5afacb074bd97fb8f3e5bf08fa7e66edd2d9431f138233120800d131fc8f31"
+  },
+  {
+    "path": "docs/handoff/dashboard-review-20261029.md",
+    "before": "28e3d6e0fbed01c1fbcf2b4ddd403766b3aee8c9f5e689fdcca51233f26d7a15",
+    "after": "af2d19d51935b5ea4fd50e8fd29e0fe362d548d4bd49f82ea6db2ee9b4fb968f"
+  },
+  {
+    "path": "evidence/dashboard-polish-20261029/tests.txt",
+    "before": null,
+    "after": "5fb41de5c5f19f550b5663a7b5271791098c0e593b15668a26a253135f3e691a"
+  },
+  {
+    "path": "evidence/dashboard-polish-20261029/inventory.txt",
+    "before": null,
+    "after": "5f37a113397d509264562f0a7e08c0cff6bf417ca42945e09b33f1f7b93046c7"
+  }
+]

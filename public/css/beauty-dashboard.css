@@ -298,3 +298,25 @@ body .players-workspace .remove-player-button{margin:0;width:86px;min-width:0;pa
  .players-workspace .players-table :is(th,td):nth-child(2){width:28%}
  .players-workspace .players-table :is(th,td):nth-child(6){width:26%}
 }
+
+/* Centre the Source heading and aligned Source/Remove tracks in their column. */
+.players-workspace .players-table th:nth-child(6){text-align:center}
+.players-workspace .player-source-actions{justify-content:center}
+@media(max-width:1000px){.players-workspace .player-source-actions{grid-template-columns:86px}}
+
+/* Reviewed Hub-only dropdown; public remote and kiosk styles remain independent. */
+body .register-popup .hub-kiosk-player-search{background:#fff!important;color:#111!important}
+body .register-popup .hub-kiosk-player-search::placeholder{color:#666}
+body .register-popup .hub-kiosk-player-option{border:0!important;border-bottom:1px solid rgba(255,255,255,.09)!important;border-radius:0;color:var(--gold)!important;box-shadow:none}
+body .register-popup .hub-kiosk-player-option:last-child{border-bottom:0!important}
+body .register-popup .hub-kiosk-new-player{border:1px solid var(--gold)!important;border-radius:7px;color:#fff!important;margin-bottom:8px}
+/* Compact summary cards retain the approved25px labels and50px totals. */
+.summary-card,body button.summary-card{min-height:96px;padding:8px 16px;gap:12px}
+.summary-card .hub-icon{width:36px;height:36px;flex-basis:36px}
+.summary-card span:not(.attention-icon){line-height:1.15}
+.summary-card strong{margin-top:0;line-height:1}
+.attention-card-count{min-width:0;flex:1}
+body .attention-review-button{margin-left:auto;font-size:18px;padding:8px 10px;flex:0 0 auto}
+@media(max-width:1100px){#attentionCard{flex-wrap:wrap}#attentionCard .attention-review-button{margin-left:0}}
+
+body .register-popup .hub-kiosk-player-option:active:not(:disabled){background:#1b1b12!important}

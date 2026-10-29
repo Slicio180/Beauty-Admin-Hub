@@ -18,12 +18,13 @@
     const items=attention?.items||[],count=items.length;
     const available=attention?.available===true;
     if(get('attentionCount'))get('attentionCount').textContent=available?String(count):'—';
+    const needsReview=!!data&&(count>0||!available||attention?.complete!==true||!!requestError);
+    if(get('attentionCard'))get('attentionCard').dataset.active=String(count>0);
     if(get('attentionTile')){
+      get('attentionTile').hidden=!needsReview;
       get('attentionTile').dataset.active=String(count>0);
       get('attentionTile').setAttribute('aria-label',available?`Needs attention: ${count} ${count===1?'player':'players'}. Open review.`:'Player attention status unavailable. Open review.');
     }
-    if(get('attentionBanner'))get('attentionBanner').hidden=count===0;
-    if(get('attentionBannerText'))get('attentionBannerText').textContent=`${count} ${count===1?'player needs':'players need'} review`;
     const status=requestError||(busy?'Checking player entries in Nakka…':!available?'Player attention check unavailable. Open review to check again.':
       !attention.complete?'Saved alerts shown. A full event check is pending.':`Player entries checked ${new Date(attention.checkedAt).toLocaleString('en-GB',{timeZone:'Europe/Stockholm',day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})}. Name presence does not prove the exact league link.`);
     if(get('attentionStatus'))get('attentionStatus').textContent=status;
@@ -68,11 +69,11 @@
     const actions=document.createElement('div');actions.className='attention-actions';
     const check=document.createElement('button');check.type='button';check.dataset.attentionRefresh='';check.textContent='CHECK AGAIN';check.addEventListener('click',refresh);
     const nakka=document.createElement('button');nakka.type='button';nakka.textContent='OPEN NAKKA REVIEW';nakka.addEventListener('click',()=>{panel.close();get('nakkaNavButton')?.click();});
-    close.addEventListener('click',()=>panel.close());panel.addEventListener('close',()=>get('attentionTile')?.focus());
+    close.addEventListener('click',()=>panel.close());panel.addEventListener('close',()=>{const target=get('attentionTile');if(target&&!target.hidden)target.focus();else get('dashboardNavButton')?.focus();});
     actions.append(check,nakka);panel.append(close,title,note,state,actions,list);document.body.append(panel);render();panel.showModal();close.focus();
   }
   window.BeautyDashboard=Object.freeze({update,refresh,review});
-  get('attentionTile')?.addEventListener('click',review);get('attentionReview')?.addEventListener('click',review);
+  get('attentionTile')?.addEventListener('click',review);
   get('dashboardNavButton')?.addEventListener('click',()=>document.querySelector('.main-content')?.scrollIntoView({behavior:'smooth',block:'start'}));
   document.addEventListener('beauty-hub-opened',refresh);
   document.addEventListener('beauty-hub-locked',()=>{

@@ -4692,14 +4692,14 @@
   {
     "id": "DASHUI-102-001",
     "file": "tests/dashboard-ui.test.cjs",
-    "name": "Dashboard shows white zero without banner and active player count with review banner",
+    "name": "Dashboard hides review for a verified clear event and shows it inside the attention card for alerts",
     "requirement": "DASHBOARD-102",
     "kind": "Executable synthetic server or DOM behavior",
     "purpose": "Dashboard shows white zero without banner and active player count with review banner",
     "expected": "Named behavior passes; see test body",
     "evidenceLabel": "LOCAL VERIFIED; OWNER GOOGLE PENDING",
     "origin": "Owner approved dashboard and submenus 28 October 2026",
-    "evidence": "evidence/dashboard-style-20261028/tests.tap",
+    "evidence": "evidence/dashboard-polish-20261029/tests.txt",
     "limitations": "No real Sheets/API writes or production qualification"
   },
   {
@@ -4712,7 +4712,7 @@
     "expected": "Named behavior passes; see test body",
     "evidenceLabel": "LOCAL VERIFIED; OWNER GOOGLE PENDING",
     "origin": "Owner approved dashboard and submenus 28 October 2026",
-    "evidence": "evidence/dashboard-style-20261028/tests.tap",
+    "evidence": "evidence/dashboard-polish-20261029/tests.txt",
     "limitations": "No real Sheets/API writes or production qualification"
   },
   {
@@ -4725,7 +4725,7 @@
     "expected": "Named behavior passes; see test body",
     "evidenceLabel": "LOCAL VERIFIED; OWNER GOOGLE PENDING",
     "origin": "Owner approved dashboard and submenus 28 October 2026",
-    "evidence": "evidence/dashboard-style-20261028/tests.tap",
+    "evidence": "evidence/dashboard-polish-20261029/tests.txt",
     "limitations": "No real Sheets/API writes or production qualification"
   },
   {
@@ -4738,7 +4738,7 @@
     "expected": "Named behavior passes; see test body",
     "evidenceLabel": "LOCAL VERIFIED; OWNER GOOGLE PENDING",
     "origin": "Owner approved dashboard and submenus 28 October 2026",
-    "evidence": "evidence/dashboard-style-20261028/tests.tap",
+    "evidence": "evidence/dashboard-polish-20261029/tests.txt",
     "limitations": "No real Sheets/API writes or production qualification"
   },
   {
@@ -4751,7 +4751,7 @@
     "expected": "Named behavior passes; see test body",
     "evidenceLabel": "LOCAL VERIFIED; OWNER GOOGLE PENDING",
     "origin": "Owner approved dashboard and submenus 28 October 2026",
-    "evidence": "evidence/dashboard-style-20261028/tests.tap",
+    "evidence": "evidence/dashboard-polish-20261029/tests.txt",
     "limitations": "No real Sheets/API writes or production qualification"
   },
   {
@@ -4764,7 +4764,7 @@
     "expected": "Named behavior passes; see test body",
     "evidenceLabel": "LOCAL VERIFIED; OWNER GOOGLE PENDING",
     "origin": "Owner approved dashboard and submenus 28 October 2026",
-    "evidence": "evidence/dashboard-style-20261028/tests.tap",
+    "evidence": "evidence/dashboard-polish-20261029/tests.txt",
     "limitations": "No real Sheets/API writes or production qualification"
   },
   {
@@ -4777,7 +4777,7 @@
     "expected": "Named behavior passes; see test body",
     "evidenceLabel": "LOCAL VERIFIED; OWNER GOOGLE PENDING",
     "origin": "Owner approved dashboard and submenus 28 October 2026",
-    "evidence": "evidence/dashboard-style-20261028/tests.tap",
+    "evidence": "evidence/dashboard-polish-20261029/tests.txt",
     "limitations": "No real Sheets/API writes or production qualification"
   },
   {
