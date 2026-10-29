@@ -152,3 +152,9 @@ test('pool review is one expandable tab and calculation lives inside Advanced se
  const advanced=f.host.querySelector('[data-advanced-settings]');assert.ok(advanced.querySelector('[data-stat-calculation]'));assert.match(advanced.textContent,/Overall three-dart average/);
  const row=review.querySelector('[data-binding]');row.querySelector('[data-lpid]').value='L0';await row.querySelector('[data-lpid]').fire('change');assert.equal(review.querySelector('[data-identity-notice]').hidden,true);assert.equal(review.querySelector('summary').textContent,'Review players');assert.equal(f.requests.length,1);
 });
+
+test('pool toolbar orders review league advanced and buttons expand content without RPC or losing mappings',async()=>{
+ const f=fixture(),row=f.host.querySelector('[data-pool-toolbar]');assert.deepEqual(row.children.map(n=>Object.keys(n.dataset)[0]),['reviewToggle','leagueSlot','advancedToggle']);assert.equal(f.host.querySelector('[data-review-toggle]').disabled,true);
+ await f.load();const review=f.host.querySelector('[data-review-toggle]'),advanced=f.host.querySelector('[data-advanced-toggle]'),details=f.host.querySelector('[data-player-review]');assert.equal(review.disabled,false);await review.fire('click');assert.equal(details.open,true);assert.equal(review['aria-expanded'],'true');const ids=f.host.querySelectorAll('[data-binding]').map(n=>n.dataset.binding);
+ await advanced.fire('click');assert.equal(f.host.querySelector('[data-advanced-settings]').open,true);await review.fire('click');assert.equal(details.open,false);assert.deepEqual(f.host.querySelectorAll('[data-binding]').map(n=>n.dataset.binding),ids);assert.equal(f.requests.length,1);await advanced.fire('click');assert.equal(f.host.querySelector('[data-advanced-settings]').open,false);
+});

@@ -383,3 +383,15 @@ body.pool-workspace-active .hub-masthead{position:sticky;top:0;z-index:5;backgro
 .pool-advanced [data-stat-calculation]:empty{display:none}
 @media(max-width:1100px){.pool-planner-workspace .pool-setup{grid-template-columns:140px 1fr 1fr}.pool-planner-workspace .pool-setup > button{grid-column:2/-1;margin-top:0!important}.pool-planner-workspace .pool-in-tile{grid-row:1/4}}
 @media(max-width:700px){.pool-planner-workspace .pool-setup{grid-template-columns:1fr 1fr}.pool-planner-workspace .pool-in-tile{grid-row:auto}.pool-planner-workspace .pool-setup > button,.pool-planner-workspace .pool-setup .pool-scheme-tile{grid-column:1/-1}}
+
+/* Approved Review / League / Advanced toolbar. Bodies expand below the row. */
+.pool-toolbar{display:grid;grid-template-columns:minmax(200px,1fr) minmax(360px,1.5fr) minmax(190px,1fr);gap:12px;align-items:stretch;margin:14px 0}
+.pool-toolbar > button{box-sizing:border-box;margin:0!important;min-height:84px;border:1px solid #ffd700;border-radius:9px;background:#080808;color:#ffd700;font:700 22px/1.25 'AIK Condensed',serif;text-align:center;white-space:normal;padding:12px}
+.pool-toolbar > button[aria-expanded=true]{background:#ffd700;color:#080808}
+.pool-toolbar [data-league-slot]{display:flex;min-width:0}.pool-toolbar .pool-status-card{box-sizing:border-box;min-height:84px;width:100%;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;padding:10px 14px}
+.pool-toolbar .pool-status-card p{font-size:17px;overflow-wrap:anywhere}.pool-toolbar .pool-status-card button{padding:8px;font-size:18px;min-width:0}
+.pool-planner-workspace :is(.pool-player-review,.pool-advanced) > summary{display:none}
+.pool-planner-workspace :is(.pool-player-review,.pool-advanced):not([open]){display:none}
+.pool-planner-workspace :is(.pool-player-review,.pool-advanced)[open]{display:block;margin:12px 0;padding:14px 18px;border:1px solid #383a3e;border-radius:8px}
+@media(max-width:1050px){.pool-toolbar{grid-template-columns:minmax(160px,1fr) minmax(300px,1.5fr) minmax(150px,1fr)}.pool-toolbar .pool-status-card{grid-template-columns:1fr}.pool-toolbar .pool-status-card button{grid-row:auto;grid-column:1;justify-self:start}.pool-toolbar > button,.pool-toolbar .pool-status-card{min-height:110px}}
+@media(max-width:760px){.pool-toolbar{grid-template-columns:1fr}.pool-toolbar > button,.pool-toolbar .pool-status-card{min-height:84px}}

@@ -6523,6 +6523,19 @@
     "evidence": "evidence/pool-controls-20261029/tests.txt"
   },
   {
+    "id": "POOL-TOOLBAR-1",
+    "file": "tests/pool-planner-seeded-ui.test.cjs",
+    "name": "pool toolbar orders review league advanced and buttons expand content without RPC or losing mappings",
+    "requirement": "START-20261029",
+    "kind": "Executable offline behavior",
+    "purpose": "Toolbar order, accessible toggles and preservation of identity edits",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner request29Oct2026",
+    "limitations": "Offline behavior only; native visual review pending",
+    "evidence": "evidence/pool-toolbar-20261029/tests.txt"
+  },
+  {
     "id": "SEEDED-POOL-013",
     "file": "tests/pool-service.test.cjs",
     "name": "pool stats qualify score/darts keyed by LPID; points stay separate and unknown is not zero",
