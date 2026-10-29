@@ -1,0 +1,42 @@
+[
+  {
+    "path": "public/js/pool-planner-seeded.js",
+    "before": "12239e4adeb881c149e2836f1e86ce6a50e24d3bcbf6f35677845aa7d2298253",
+    "after": "dff7cb8e2b0ac130fa0a855d67e0fed62ac8ed19d813c558fc0613af2aecbd8e"
+  },
+  {
+    "path": "public/css/beauty-dashboard.css",
+    "before": "fafcb3181e4bc3357a363b0a58c570b192dfcd98ea4892349f9fa68da14098a4",
+    "after": "414df3017256c004fd7471333e9b2be6097b93cc6f54491c83a138b5b9e366da"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "f5651e2693e55aacb57c56a7e71ca65a399cd75d45105fe9e18d115edd55f782",
+    "after": "21043361a83c7c6c40feb66b17fa31006e7cd3df6318bc9ba58dbf067b776d9d"
+  },
+  {
+    "path": "tests/pool-planner-seeded-ui.test.cjs",
+    "before": "a1ceb8daff47f751b6cffb0baa410dc819f04b9b73322b3abe9baa41faf0f02c",
+    "after": "51a8fd425a2a25ccfaffcdc371d15e262f6e196500cbc5df7ee9c6bb4ca016ad"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "a289da07e68dfda5cefa9467859eddec475d50ab1f2ab6dfe5ef7dfa26919e6f",
+    "after": "25fc1ea3feba583303aa502609c30bbc628c9a5018698a2a721dd37202852ce3"
+  },
+  {
+    "path": "docs/handoff/pool-layout-20261029.md",
+    "before": null,
+    "after": "dd4fb2c29af7f93eb48b98cd5a2ede5215344891a6bce30cbb4d29bb5b322908"
+  },
+  {
+    "path": "evidence/pool-layout-20261029/tests.txt",
+    "before": null,
+    "after": "6484d01f563591d17c92a46210d2884e6d547aaff0031cfc4d4b74f03d4f4d4d"
+  },
+  {
+    "path": "evidence/pool-layout-20261029/inventory.txt",
+    "before": null,
+    "after": "9e3b47c3e224526b0b77067d991aa743a1cdae811115ac91e7ea3fdd3561c04c"
+  }
+]

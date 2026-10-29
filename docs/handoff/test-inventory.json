@@ -6187,7 +6187,7 @@
   {
     "id": "SEEDED-POOL-031",
     "file": "tests/pool-planner-seeded-ui.test.cjs",
-    "name": "pool UI reviews mappings, renders frozen means and coverage, and does not send during generation",
+    "name": "pool UI reviews mappings, renders frozen group means, and does not send during generation",
     "requirement": "POOL-SEEDED-001",
     "kind": "Executable synthetic service or DOM behavior",
     "purpose": "Seeded draw, frozen statistics and guarded fixed TEST handoff",
@@ -6430,6 +6430,71 @@
     "origin": "Owner request29Oct2026",
     "limitations": "Synthetic fixtures; native/provider verification still pending",
     "evidence": "evidence/pool-review-20261029/tests.txt"
+  },
+  {
+    "id": "POOL-REVIEW-UI-001",
+    "file": "tests/pool-planner-seeded-ui.test.cjs",
+    "name": "pool review orders unresolved identities first and confirms generation only through popup",
+    "requirement": "START-20261029",
+    "kind": "Executable offline behavior",
+    "purpose": "Stable frozen preview, explicit confirmation and retained review controls",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner request29Oct2026",
+    "limitations": "Local fixtures; native Google visual review and real Nakka send not verified",
+    "evidence": "evidence/pool-review-20261029/tests.txt"
+  },
+  {
+    "id": "POOL-REVIEW-UI-002",
+    "file": "tests/pool-planner-seeded-ui.test.cjs",
+    "name": "pool invalidation retains group overview and disabled swaps with a specific reason",
+    "requirement": "START-20261029",
+    "kind": "Executable offline behavior",
+    "purpose": "Stable frozen preview, explicit confirmation and retained review controls",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner request29Oct2026",
+    "limitations": "Local fixtures; native Google visual review and real Nakka send not verified",
+    "evidence": "evidence/pool-review-20261029/tests.txt"
+  },
+  {
+    "id": "POOL-LAYOUT-22",
+    "file": "tests/pool-planner-seeded-ui.test.cjs",
+    "name": "pool card picker excludes same group and marks exactly both exchanged players yellow",
+    "requirement": "START-20261029",
+    "kind": "Executable offline behavior",
+    "purpose": "Approved editable board/group cards and server-checked picker swaps",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner request29Oct2026",
+    "limitations": "Offline UI behavior; native TEST review pending",
+    "evidence": "evidence/pool-layout-20261029/tests.txt"
+  },
+  {
+    "id": "POOL-LAYOUT-23",
+    "file": "tests/pool-planner-seeded-ui.test.cjs",
+    "name": "pool card labels reject collisions and preserve the frozen players and RPC ticket",
+    "requirement": "START-20261029",
+    "kind": "Executable offline behavior",
+    "purpose": "Approved editable board/group cards and server-checked picker swaps",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner request29Oct2026",
+    "limitations": "Offline UI behavior; native TEST review pending",
+    "evidence": "evidence/pool-layout-20261029/tests.txt"
+  },
+  {
+    "id": "POOL-LAYOUT-24",
+    "file": "tests/pool-planner-seeded-ui.test.cjs",
+    "name": "pool compact identity warning hides when resolved and scheme counts remain visible",
+    "requirement": "START-20261029",
+    "kind": "Executable offline behavior",
+    "purpose": "Approved editable board/group cards and server-checked picker swaps",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner request29Oct2026",
+    "limitations": "Offline UI behavior; native TEST review pending",
+    "evidence": "evidence/pool-layout-20261029/tests.txt"
   },
   {
     "id": "SEEDED-POOL-013",
@@ -7444,32 +7509,6 @@
     "origin": "Owner approval29Oct2026",
     "limitations": "Synthetic fixtures; native/provider verification still pending",
     "evidence": "evidence/live-polish-20261029/tests.txt"
-  },
-  {
-    "id": "POOL-REVIEW-UI-001",
-    "file": "tests/pool-planner-seeded-ui.test.cjs",
-    "name": "pool review orders unresolved identities first and confirms generation only through popup",
-    "requirement": "START-20261029",
-    "kind": "Executable offline behavior",
-    "purpose": "Stable frozen preview, explicit confirmation and retained review controls",
-    "expected": "Named assertions pass",
-    "evidenceLabel": "LOCAL_TESTED",
-    "origin": "Owner request29Oct2026",
-    "limitations": "Local fixtures; native Google visual review and real Nakka send not verified",
-    "evidence": "evidence/pool-review-20261029/tests.txt"
-  },
-  {
-    "id": "POOL-REVIEW-UI-002",
-    "file": "tests/pool-planner-seeded-ui.test.cjs",
-    "name": "pool invalidation retains board overview and disabled swaps with a specific reason",
-    "requirement": "START-20261029",
-    "kind": "Executable offline behavior",
-    "purpose": "Stable frozen preview, explicit confirmation and retained review controls",
-    "expected": "Named assertions pass",
-    "evidenceLabel": "LOCAL_TESTED",
-    "origin": "Owner request29Oct2026",
-    "limitations": "Local fixtures; native Google visual review and real Nakka send not verified",
-    "evidence": "evidence/pool-review-20261029/tests.txt"
   },
   {
     "id": "POOL-REVIEW-SERVICE-001",

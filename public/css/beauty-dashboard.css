@@ -342,3 +342,28 @@ body .register-popup .hub-kiosk-player-option:active:not(:disabled){background:#
 .pool-card-heading{padding:8px 12px}.pool-card .pool-board-label{margin:0;padding:10px 12px}
 .pool-card-summary{padding:6px 12px;gap:6px}
 .pool-card ol{padding:0 12px}.pool-card li{padding-top:10px;padding-bottom:10px}
+
+/* Approved board/group planner,29Oct2026. */
+body.pool-workspace-active .hub-masthead{position:sticky;top:0;z-index:5;background:#080808}
+.pool-planner-workspace [hidden]{display:none!important}
+.pool-planner-workspace :is(h2,h3,h4,.label,.pool-setup label,.pool-status-card strong,summary){color:#fff}
+.pool-planner-workspace :is(h3,.label,.pool-setup label,.pool-status-card strong,summary){font:700 22px/1.25 'AIK Condensed',serif;letter-spacing:0}
+.pool-setup{grid-template-columns:150px minmax(150px,1fr) minmax(180px,1fr) minmax(200px,1.2fr)}
+.pool-setup .pool-in-tile{border:1px solid #ffd700;border-radius:8px;padding:12px;text-align:center;grid-row:span 2}
+.pool-setup .pool-in-tile > strong{font:400 76px/1 'AIK Siffror',serif;color:#ffd700}
+.pool-setup [data-boards]{background:#080808!important;color:#ffd700!important;border:1px solid #ffd700;padding:8px 10px;border-radius:6px;max-width:240px}
+.pool-setup .pool-scheme-tile{grid-column:2/-1;border-top:1px solid #383a3e;padding-top:10px}.pool-scheme-tile p{margin:4px 0 0;font-size:24px;color:#fff}
+.pool-status-card{padding:10px 14px}.pool-identity-notice p{display:none}.pool-source-status{margin-bottom:12px}
+.pool-card .pool-edit-label{color:#fff!important;background:transparent!important;border:0!important;padding:0!important;margin:0!important;text-align:left;font:700 30px/1.2 'AIK Condensed',serif!important;box-shadow:none}
+.pool-group-heading{display:flex;align-items:center;justify-content:space-between;padding:6px 12px;border-bottom:1px solid #383a3e}.pool-card .pool-group-heading .pool-edit-label{font-size:22px!important}
+.pool-group-heading .pool-number{font-size:24px;color:#fff}
+.pool-planner-workspace .pool-card .pool-player-name{background:transparent;border:0;color:#fff;text-align:left;padding:0;margin:0;font:700 24px/1.2 'AIK Condensed',serif;min-width:0;min-height:44px;box-shadow:none}
+.pool-planner-workspace .pool-card .pool-player-name[data-swapped=true]{color:#ffd700}
+.pool-card .pool-player-name:hover,.pool-card .pool-edit-label:hover{text-decoration:underline}
+.pool-player-name:focus-visible,.pool-edit-label:focus-visible{outline:2px solid #ffd700;outline-offset:2px}
+.pool-action-bar{position:static;box-shadow:none}.pool-preview-tools{flex-wrap:wrap}
+.pool-swap-picker{max-height:80vh}.pool-swap-picker > input{box-sizing:border-box;width:100%;background:#080808;color:#ffd700;padding:10px;border:1px solid #ffd700}
+.pool-swap-list{max-height:45vh;overflow-y:auto;margin:12px 0;display:grid;gap:4px}.pool-swap-list button{text-align:left;background:#171819;color:#fff;border:0;border-bottom:1px solid #383a3e;margin:0;padding:10px;font-size:22px}
+.pool-preview-confirm label select,.pool-preview-confirm label input[type=number]{background:#080808;color:#ffd700;padding:8px;width:110px}
+@media(max-width:1100px){.pool-setup{grid-template-columns:140px 1fr 1fr}.pool-setup > button{grid-column:2/-1}.pool-setup .pool-in-tile{grid-row:span 3}}
+@media(max-width:700px){.pool-setup{grid-template-columns:1fr 1fr}.pool-setup .pool-in-tile{grid-row:auto}.pool-setup .pool-scheme-tile,.pool-setup > button{grid-column:1/-1}.pool-page-heading{display:flex;flex-direction:column}}

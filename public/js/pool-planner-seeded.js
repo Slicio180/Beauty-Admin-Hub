@@ -1,7 +1,7 @@
 /* Identity TEST seeded Pool Planner. Approval and draws are server-owned. */
 (function(root){
  'use strict';
- let panel,host,opener,state=null,frozen=null,approval=null,busy=false,epoch=0,invalid=true,lastRoster='',hubAvailable=true,invalidReason='',plannedBoards=null;
+ let panel,host,opener,state=null,frozen=null,approval=null,busy=false,epoch=0,invalid=true,lastRoster='',hubAvailable=true,invalidReason='',plannedBoards=null,cardLabels={},swapped=[];
  const el=(tag,text,parent)=>{const n=document.createElement(tag);if(text!=null)n.textContent=text;parent?.appendChild(n);return n;};
  const average=value=>typeof value==='number'&&Number.isFinite(value)&&value>=0&&value<=180?value:null;
  const averageLabel=value=>average(value)===null?'Unseeded':average(value).toFixed(2);
@@ -20,7 +20,7 @@
   const count=hubAvailable?BeautyPoolPlanner.eventCount(root.beautyHubData):null,result=currentPlan(),selected=result[panel.querySelector('[data-draw-scheme]').value];
   panel.querySelector('[data-in-count]').textContent=count===null?'—':String(count);
   panel.querySelector('[data-event-label]').textContent=(state?.event?.title||'Selected Hub event')+' · '+(root.beautyHubData?.eventDateDisplay||root.beautyHubData?.eventDate||'No date');
-  const summary=panel.querySelector('[data-plan-summary]');summary.textContent=result.error||(!selected?'One pool per board cannot fit. Choose preferred format or add boards.':selected.pools+' pools · '+result.boards+' boards · '+Math.ceil(selected.pools/result.boards)+' starting batch'+(Math.ceil(selected.pools/result.boards)===1?'':'es'));
+  const summary=panel.querySelector('[data-plan-summary]');summary.textContent=result.error||(!selected?'Select available boards.':[selected.three+' × 3-manna',selected.four+' × 4-manna',...(selected.five?[selected.five+' × 5-manna']:[])].join(' · '));
   panel.querySelector('[data-generate]').dataset.blocked=String(!hubAvailable||!state?.stats?.fresh||!selected||!!result.error||count>101);
   const options=panel.querySelector('[data-plan-options]');options.textContent=result.error?'':('Preferred: '+result.preferredPlan.three+' × 3 / '+result.preferredPlan.four+' × 4 / '+result.preferredPlan.five+' × 5. '+(result.perBoard?'One pool per board: '+result.perBoard.three+' × 3 / '+result.perBoard.four+' × 4 / '+result.perBoard.five+' × 5.':'No one-pool-per-board arrangement available.'));
   for(const n of panel.querySelectorAll('[data-size-choice]'))n.setAttribute('aria-pressed',String(n.dataset.sizeChoice===host.querySelector('[data-size]').value));
@@ -35,7 +35,7 @@
   const plan=currentPlan(),scheme=panel.querySelector('[data-draw-scheme]').value;
   if(plan.error||!plan[scheme])throw Error(plan.error||'That arrangement cannot fit the boards. Choose the preferred format or add boards.');
   frozen=await send('pooldraw',{bindings:JSON.stringify(bindings()),sizes:JSON.stringify(BeautyPoolSeeding.sizesFromPlan(plan[scheme])),reviewed:'true'});
-  plannedBoards=selectedBoards();approval=null;invalid=false;invalidReason='';lastRoster=fingerprint(root.beautyHubData);panel.querySelector('[data-player-review]').open=false;
+  plannedBoards=selectedBoards();cardLabels={};swapped=[];approval=null;invalid=false;invalidReason='';lastRoster=fingerprint(root.beautyHubData);panel.querySelector('[data-player-review]').open=false;
   message('Averages are frozen. Review pool balance and make any manual swaps before approving.');renderDraw();
  }
 
@@ -58,7 +58,7 @@
  }
  function disable(){if(panel)panel.querySelectorAll('button,input,select').forEach(n=>{n.disabled=busy||n.dataset.blocked==='true';});}
  function bindings(){return [...panel.querySelectorAll('[data-binding]')].map(row=>({id:row.dataset.binding,lpid:row.querySelector('[data-lpid]').value,tpid:row.querySelector('[data-tpid]').value}));}
- function select(parent,key,candidates,field,value){const s=el('select',null,parent);s.dataset[key]='';el('option','Unresolved / Unseeded',s).value='';for(const p of candidates)el('option',p.name+' · '+p[field],s).value=p[field];s.value=value;s.addEventListener('change',()=>{frozen=null;approval=null;invalid=true;const row=parent.parentElement,p=state.mappings.find(p=>p.id===row.dataset.binding),selected=p?.leagueCandidates.find(p=>p.lpid===row.querySelector('[data-lpid]').value);const cell=row.querySelector('.pool-number');if(cell)cell.textContent=averageLabel(selected?.average);panel.querySelector('[data-mapping-reviewed]').checked=false;message('Player identity changed. Review the mappings and generate a new preview.');renderDraw();});return s;}
+ function select(parent,key,candidates,field,value){const s=el('select',null,parent);s.dataset[key]='';el('option','Unresolved / Unseeded',s).value='';for(const p of candidates)el('option',p.name+' · '+p[field],s).value=p[field];s.value=value;s.addEventListener('change',()=>{frozen=null;approval=null;invalid=true;const row=parent.parentElement,p=state.mappings.find(p=>p.id===row.dataset.binding),selected=p?.leagueCandidates.find(p=>p.lpid===row.querySelector('[data-lpid]').value);const cell=row.querySelector('.pool-number');if(cell)cell.textContent=averageLabel(selected?.average);panel.querySelector('[data-mapping-reviewed]').checked=false;const count=bindings().filter(p=>!p.lpid||!p.tpid).length;panel.querySelector('[data-identity-notice]').hidden=!count;panel.querySelector('[data-review-state]').textContent=count+' identities need review';message('Player identity changed. Review the mappings and generate a new preview.');renderDraw();});return s;}
  function renderSource(){
   const box=panel.querySelector('[data-pool-source]');box.replaceChildren();
   const status=section('div','pool-source-status',box),statsCard=section('section','pool-status-card',status);
@@ -67,8 +67,8 @@
   el('p',stats?.fetchedAt?'Last successful update '+new Date(stats.fetchedAt).toLocaleString('sv-SE',{timeZone:'Europe/Stockholm'}):'Overall league three-dart averages',statsCard);
   button(state?'REFRESH STATS':'LOAD / REFRESH LEAGUE STATS',statsCard,()=>run(send=>load(send,true)));
   if(!state){el('p','Load statistics before reviewing player identities.',box);renderSettings();return;}
-  const needsReview=state.mappings.filter(p=>!p.lpid||!p.tpid).length,reviewCard=section('section','pool-status-card',status);
-  const reviewState=el('strong',needsReview?needsReview+' player identities need review':'Player identities ready for review',reviewCard);reviewState.dataset.reviewState='';
+  const needsReview=state.mappings.filter(p=>!p.lpid||!p.tpid).length,reviewCard=section('section','pool-status-card pool-identity-notice',status);reviewCard.hidden=!needsReview;reviewCard.dataset.identityNotice='';
+  const reviewState=el('strong',needsReview?needsReview+' identities need review':'Player identities ready for review',reviewCard);reviewState.dataset.reviewState='';
   el('p',needsReview?'Missing identities can be planned as Unseeded. Sending stays blocked.':'Confirm the proposed league and event identities below.',reviewCard);
   const details=el('details',null,box);details.dataset.playerReview='';details.className='pool-player-review';el('summary','Review '+state.mappings.length+' IN players and league / event identities',details);
   button('REVIEW PLAYERS',reviewCard,()=>{details.open=!details.open;details.scrollIntoView?.({block:'nearest',behavior:'smooth'});});
@@ -89,46 +89,66 @@
   renderSettings();
  }
  function renderDraw(){
-  const box=panel?.querySelector('[data-pool-draw]');if(!box)return;box.replaceChildren();steps();
+  const box=panel?.querySelector('[data-pool-draw]');if(!box)return;box.replaceChildren();const utility=panel.querySelector('[data-draw-utilities]');utility.replaceChildren();steps();
   if(!frozen){el('p','Generate a preview after reviewing player identities. No Nakka changes are sent by previewing or swapping.',box).className='pool-empty';return;}
   const statsTitle=panel.querySelector('[data-fresh]');if(statsTitle)statsTitle.textContent='League averages frozen for this preview';
   let allocation;try{allocation=root.BeautyPoolBoards.allocate(frozen.draw.pools,plannedBoards||selectedBoards());}catch(e){invalid=true;approval=null;}
-  const draw=frozen.draw,heading=section('div','pool-preview-heading',box);el('h3','Pool preview',heading);el('p','Frozen '+draw.frozenAt+' · Statistics '+draw.source.fetchedAt+' · Draw seed '+draw.seed,heading);
-  if(invalid)el('p','REVIEW INVALIDATED — '+(invalidReason||'Preview is no longer active. Generate a new draw before sending.'),box).className='pool-invalid';
-  const warnings=BeautyPoolSeeding.warnings(draw);if(warnings.length){const details=el('details',null,box);details.className='pool-draw-notes';el('summary','Draw notes · '+warnings.length,details);warnings.forEach(t=>el('p',t,details));}
-  const settings=section('div','pool-preview-tools',box),label=el('label',null,settings),colours=el('input',null,label);colours.type='checkbox';colours.checked=!!root.beautyPoolColours;label.appendChild(document.createTextNode(' Show seeding colours'));
+  const draw=frozen.draw,heading=section('div','pool-preview-heading',utility);el('h3','Gruppöversikt',heading);el('p','Frozen '+draw.frozenAt+' · Statistics '+draw.source.fetchedAt+' · Draw seed '+draw.seed,heading);
+  if(invalid)el('p','REVIEW INVALIDATED — '+(invalidReason||'Preview is no longer active. Generate a new draw before sending.'),utility).className='pool-invalid';
+  const warnings=BeautyPoolSeeding.warnings(draw);if(warnings.length){const details=el('details',null,utility);details.className='pool-draw-notes';el('summary','Draw notes · '+warnings.length,details);warnings.forEach(t=>el('p',t,details));}
+  const settings=section('div','pool-preview-tools',utility),label=el('label',null,settings),colours=el('input',null,label);colours.type='checkbox';colours.checked=!!root.beautyPoolColours;label.appendChild(document.createTextNode(' Show seeding colours'));
   const bands=el('details',null,settings);el('summary','Edit bands',bands);const bounds=el('label','Band boundaries (three increasing values) ',bands),inputs=[50,55,60].map((v,i)=>{const n=el('input',null,bounds);n.type='number';n.min='0';n.max='180';n.step='0.01';n.value=String(root.beautyPoolBands?.[i]??v);return n;});
   const legend=el('p',null,bands),grid=section('div','pool-grid',box);
   function paint(){
    const thresholds=inputs.map(n=>Number(n.value));try{BeautyPoolSeeding.band(null,thresholds);}catch(e){legend.textContent=e.message;return;}
    root.beautyPoolBands=thresholds;root.beautyPoolColours=colours.checked;legend.textContent='Bands: below '+thresholds[0]+'; '+thresholds[0]+'–<'+thresholds[1]+'; '+thresholds[1]+'–<'+thresholds[2]+'; '+thresholds[2]+'+. Unseeded is separate.';grid.replaceChildren();
-   for(const pool of draw.pools){
-    const assignment=allocation?.assignments.find(a=>a.poolId===pool.id);
-    const card=section('section','pool-card',grid),top=section('div','pool-card-heading',card);el('h4','Pool '+pool.name,top);numeric('span',pool.players.length+'/'+pool.capacity,top);if(assignment)el('p','Board '+assignment.board+' · Batch '+assignment.batch,card).className='pool-board-label';
-    const summary=BeautyPoolSeeding.summary(pool),info=section('div','pool-card-summary',card);el('span','Known average: ',info);numeric('strong',summary.knownAverage===null?'—':summary.knownAverage.toFixed(2),info);el('span','Coverage '+summary.known+'/'+summary.players+' · Unseeded '+summary.unseeded,info);
+   const assignments=allocation?.assignments||[];
+   for(const a of assignments)if(!cardLabels[a.poolId])cardLabels[a.poolId]={board:a.board,group:a.batch};
+   const ordered=draw.pools.slice().sort((a,b)=>(cardLabels[a.id]?.board||0)-(cardLabels[b.id]?.board||0)||(cardLabels[a.id]?.group||0)-(cardLabels[b.id]?.group||0));
+   for(const pool of ordered){
+    const position=cardLabels[pool.id];
+    const card=section('section','pool-card',grid);card.dataset.poolId=pool.id;
+    const top=section('div','pool-card-heading',card),groupRow=section('div','pool-group-heading',card);
+    function editable(key,parent,prefix){const edit=button(prefix+' '+position[key]+' ✎',parent,()=>{
+     const dialog=el('dialog',null,utility);dialog.className='pool-preview-confirm';el('h3','Edit Bana / Grupp',dialog);
+     const boardLabel=el('label','Bana',dialog),board=el('select',null,boardLabel);board.dataset.editBoard='';for(const n of plannedBoards||selectedBoards())el('option',String(n),board).value=n;board.value=position.board;
+     const groupLabel=el('label','Grupp',dialog),group=el('input',null,groupLabel);group.type='number';group.min='1';group.max='1000';group.value=position.group;group.dataset.editGroup='';
+     const error=el('p','Changes apply to the Hub board plan.',dialog),actions=section('div','pool-confirm-actions',dialog);button('CANCEL',actions,()=>dialog.close());
+     button('SAVE LABELS',actions,()=>{const next={board:Number(board.value),group:Number(group.value)};if(!(plannedBoards||selectedBoards()).includes(next.board)||!Number.isInteger(next.group)||next.group<1||next.group>1000){error.textContent='Choose an available board and group 1–1000.';return;}
+      if(Object.entries(cardLabels).some(([id,v])=>id!==String(pool.id)&&v.board===next.board&&v.group===next.group)){error.textContent='That Bana / Grupp is already used. Choose another group number.';return;}
+      cardLabels[pool.id]=next;approval=null;dialog.close();message('Bana / Grupp saved in the Hub plan.');renderDraw();});dialog.showModal();
+    });edit.className='pool-edit-label';edit.dataset.blocked=String(invalid||!hubAvailable);}
+    if(position){editable('board',top,'Bana');editable('group',groupRow,'Grupp');}
+    const summary=BeautyPoolSeeding.summary(pool);numeric('strong',summary.knownAverage===null?'—':summary.knownAverage.toFixed(2),groupRow);
     const list=el('ol',null,card);
-    for(const p of pool.players){const li=el('li',null,list);if(colours.checked)li.className='pool-band-'+BeautyPoolSeeding.band(p.average,thresholds);el('span',p.name,li).className='pool-player-name';const value=el('span',averageLabel(p.average),li);value.className=p.average===null?'pool-unseeded':'pool-number';}
+    for(const p of pool.players){const li=el('li',null,list);if(colours.checked)li.className='pool-band-'+BeautyPoolSeeding.band(p.average,thresholds);
+     const name=button(p.name,li,()=>openSwap(p));name.className='pool-player-name';name.dataset.swapPlayer=p.id;name.dataset.blocked=String(invalid||!hubAvailable);if(swapped.includes(p.id))name.dataset.swapped='true';
+     const value=el('span',averageLabel(p.average),li);value.className=p.average===null?'pool-unseeded':'pool-number';}
    }
+
   }
   colours.addEventListener('change',paint);inputs.forEach(n=>n.addEventListener('change',paint));paint();
-  if(allocation){const overview=section('section','pool-board-overview',box);el('h3','Board overview · planned in Hub',overview);el('p','Pools take turns on each board. This allocation has not been sent to Nakka.',overview);for(const b of allocation.boards)el('p','Board '+b.board+' · '+(b.pools.map(p=>'Pool '+p.poolNumber+' (batch '+p.batch+')').join(', ')||'Unused')+' · '+b.matches+' matches',overview);}
-  button('DOWNLOAD BOARD PLAN',box,()=>{
-   try{const plan=root.BeautyPoolBoardPlan.create(draw,plannedBoards||selectedBoards(),draw.eventDate),body=root.BeautyPoolBoardPlan.text(plan);
-    const url=URL.createObjectURL(new Blob([body],{type:'text/plain;charset=utf-8'})),link=el('a',null,box);link.href=url;link.download='Beauty-Board-Plan-TEST-'+plan.eventDate+'.txt';link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);message('Board plan downloaded. Planned boards have not been sent to Nakka.');
-   }catch(e){message(e.message);}
+  function openSwap(player){
+   const dialog=el('dialog',null,utility);dialog.className='pool-preview-confirm pool-swap-picker';dialog.dataset.swapPicker='';el('h3','Swap '+player.name+' with…',dialog);
+   const search=el('input',null,dialog);search.type='search';search.placeholder='Search player';search.setAttribute('aria-label','Search player');search.dataset.swapSearch='';
+   const list=section('div','pool-swap-list',dialog);list.dataset.swapList='';
+   const origin=draw.pools.find(g=>g.players.some(p=>p.id===player.id));
+   function choices(){list.replaceChildren();for(const pool of draw.pools)if(pool.id!==origin.id)for(const other of pool.players){if(!other.name.toLocaleLowerCase('sv').includes(search.value.toLocaleLowerCase('sv')))continue;
+    const pos=cardLabels[pool.id],pick=button(other.name+' · Bana '+pos.board+' · Grupp '+pos.group,list,()=>{dialog.close();run(async send=>{const result=await send('pooladjust',{ticket:frozen.ticket,change:JSON.stringify({playerId:player.id,targetPool:pool.id,swapWith:other.id})});frozen=result;swapped=[player.id,other.id];approval=null;message('Swap saved in preview. Both moved players are yellow.');renderDraw();});});pick.dataset.swapWith=other.id;
+   }}search.addEventListener('input',choices);choices();button('CANCEL',dialog,()=>dialog.close());dialog.showModal();search.focus();
+  }
+  button('DOWNLOAD BOARD PLAN',utility,()=>{
+   const lines=['AIK DART · HUB BOARD PLAN · TEST',draw.eventDate,'PLANNED — NOT SENT TO NAKKA',''];
+   for(const pool of draw.pools.slice().sort((a,b)=>cardLabels[a.id].board-cardLabels[b.id].board||cardLabels[a.id].group-cardLabels[b.id].group)){const pos=cardLabels[pool.id];lines.push('Bana '+pos.board+' · Grupp '+pos.group,...pool.players.map(p=>p.name+' · '+averageLabel(p.average)),'');}
+   const url=URL.createObjectURL(new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'})),link=el('a',null,utility);link.href=url;link.download='Beauty-Board-Plan-TEST-'+draw.eventDate+'.txt';link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
   });
-  const swap=section('fieldset','pool-manual-swap',box);el('legend','Manual swap',swap);el('p','Swap between pools. Your frozen averages and pool sizes are retained.',swap);
-  const first=el('label','Player ',swap),left=el('select',null,first),second=el('label','Swap with ',swap),right=el('select',null,second);
-  for(const pool of draw.pools)for(const p of pool.players)for(const target of [left,right])el('option','Pool '+pool.name+' · '+p.name,target).value=p.id;
-  const footer=section('div','pool-action-bar',box);el('p','Preview only · No Nakka changes sent',footer);
+  const footer=section('div','pool-action-bar',utility);el('p','Preview only · No Nakka changes sent',footer);
   const unresolved=(frozen.mappings||state?.mappings||[]).filter(p=>!p.lpid||!p.tpid).length;
-  const swapButton=button('SWAP PLAYERS',swap,()=>run(async send=>{const target=draw.pools.find(g=>g.players.some(p=>p.id===right.value));frozen=await send('pooladjust',{ticket:frozen.ticket,change:JSON.stringify({playerId:left.value,targetPool:target.id,swapWith:right.value})});approval=null;message('Swap saved in preview. Review the new pool balance.');renderDraw();}));
-  swapButton.dataset.blocked=String(invalid||!hubAvailable);left.dataset.blocked=right.dataset.blocked=String(invalid||!hubAvailable);
   if(invalid)el('p','Swaps and sending are disabled. '+(invalidReason||'Generate a new preview to continue.'),footer);
   const handoff=button('REVIEW NAKKA HANDOFF — TEST',footer,()=>run(async send=>{approval=await send('poolprepare',{ticket:frozen.ticket});frozen.ticket=approval.ticket;message('Handoff checked. Close Nakka editing pages, then confirm these TEST pools.');renderDraw();}));
   handoff.dataset.blocked=String(invalid||unresolved>0||!state?.stats?.fresh||!hubAvailable);
   if(unresolved)el('p','Resolve '+unresolved+' player identities before sending. '+(invalid?'The frozen preview is retained for reference.':'Preview and manual swaps remain available.'),footer);
-  if(approval){const review=el('section',null,box);review.className='pool-approval';el('h3','Approve TEST pool handoff',review);el('p',approval.event.title+' · '+approval.event.date+' · '+draw.roster.length+' IN players · '+draw.pools.length+' pools · '+approval.expectedCards+' round-robin match cards.',review);
+  if(approval){const review=el('section',null,utility);review.className='pool-approval';el('h3','Approve TEST pool handoff',review);el('p',approval.event.title+' · '+approval.event.date+' · '+draw.roster.length+' IN players · '+draw.pools.length+' pools · '+approval.expectedCards+' round-robin match cards.',review);
    el('p','Only pool assignments, division count and maximum pool size change. Existing players and other event settings are retained. Sending uses two Nakka operations: groups, then match cards. If either cannot be verified, inspect the audit before another action.',review);
    if(approval.unassignedEntries?.length){el('p','Excluded from these pools but still registered in Nakka: '+approval.unassignedEntries.map(p=>p.name).join(', ')+'. Sending is blocked until these entries are resolved or compatibility is verified in TEST. No automatic removals.',review);}
    const details=el('details',null,review);el('summary','Review preserved game settings',details);el('pre',JSON.stringify(approval.setting,null,2),details);
@@ -142,15 +162,14 @@
   const header=section('header','pool-page-heading',panel),intro=el('div',null,header);el('h2','Pool Planner',intro);el('p','Balance the field. Review the draw. Send when ready.',intro);
   const progress=section('ol','pool-progress',header);['Setup','Pool preview','Nakka review'].forEach((text,i)=>{const n=el('li',null,progress);n.dataset.step=String(i+1);numeric('span',i+1,n);el('strong',text,n);});
   const event=section('div','pool-event-label',header);el('strong','TEST EVENT',event);el('p','Selected Hub event',event).dataset.eventLabel='';
-  button('BACK TO DASHBOARD',header,()=>{if(!busy){host.close();root.BeautyHubNavigation?.dashboard();opener?.focus();}});
-  const setup=section('section','pool-setup',panel),total=el('div',null,setup);el('span','PLAYERS IN',total).className='label';numeric('strong','—',total).dataset.inCount='';el('small','OUT and STANDBY excluded',total);
+  const setup=section('section','pool-setup',panel),total=section('div','pool-in-tile',setup);el('span','PLAYERS IN',total).className='label';numeric('strong','—',total).dataset.inCount='';
   const sizeLabel=el('div',null,setup);el('span','PLAYERS PER POOL',sizeLabel).className='label';const size=el('select',null,sizeLabel);size.dataset.size='';size.hidden=true;size.setAttribute('aria-hidden','true');size.tabIndex=-1;
   [3,4].forEach(n=>el('option',String(n),size).value=String(n));const choices=section('div','pool-size-choices',sizeLabel);
   [3,4].forEach(n=>{const b=button(String(n),choices,()=>{size.value=String(n);settingsChanged();});b.dataset.sizeChoice=String(n);b.setAttribute('aria-label',n+' players per pool');});
   const boardsLabel=el('label','AVAILABLE BOARDS',setup),boards=el('input',null,boardsLabel);boards.type='text';boards.maxLength=1000;boards.placeholder='1-4, 7-9, 13-15';boards.dataset.boards='';
-  const arrangement=el('label','BOARD LAYOUT',setup),scheme=el('select',null,arrangement);scheme.dataset.drawScheme='';for(const [v,t]of [['preferredPlan','Preferred format'],['perBoard','One pool per dartboard']])el('option',t,scheme).value=v;
+  const arrangement=el('label',null,setup);arrangement.hidden=true;const scheme=el('select',null,arrangement);scheme.dataset.drawScheme='';for(const [v,t]of [['preferredPlan','Preferred format'],['perBoard','One pool per dartboard']])el('option',t,scheme).value=v;
   const draw=button('GENERATE SEEDED PREVIEW',setup,()=>{const confirm=panel.querySelector('[data-preview-confirm]');if(!confirm)return;panel.querySelector('[data-mapping-reviewed]').checked=false;const proceed=panel.querySelector('[data-confirm-generate]');proceed.dataset.blocked='true';disable();message('Review the player identity acknowledgement in the popup.');confirm.showModal();});draw.dataset.generate='';draw.dataset.blocked='true';
-  el('p','Select actual board numbers; only those boards will be used.',setup).dataset.planSummary='';
+  const schemeTile=section('div','pool-scheme-tile',setup);el('span','SCHEME',schemeTile).className='label';el('p','Select available boards.',schemeTile).dataset.planSummary='';
   const boardChoices=section('div','pool-board-choices',panel);for(let n=1;n<=16;n++){const b=button(String(n),boardChoices,()=>{let selected=[];try{selected=selectedBoards();}catch(e){}const next=selected.includes(n)?selected.filter(v=>v!==n):[...selected,n];boards.value=next.sort((a,b)=>a-b).join(', ');settingsChanged();});b.dataset.boardChoice=String(n);b.setAttribute('aria-label','Board '+n);}
   const advanced=el('details',null,panel);advanced.className='pool-advanced';el('summary','Advanced planning and original scheme',advanced);
   el('p','',advanced).dataset.planOptions='';
@@ -158,7 +177,7 @@
   count.addEventListener('input',()=>{const p=BeautyPoolPlanner.plan(Number(count.value),Number(size.value),(()=>{try{return selectedBoards().length;}catch(e){return 0;}})());estimate.textContent=Number(count.value)>101?'The supplied scheme covers 5–101.':p.error||p.preferredPlan.pools+' pools: '+p.preferredPlan.three+' × 3, '+p.preferredPlan.four+' × 4, '+p.preferredPlan.five+' × 5. Draws always use the verified IN list.';});
   const reference=el('a','Open original 5–101 pool scheme ↗',advanced);reference.href='assets/pool-scheme.html';
   if(reference.href.startsWith('data:')){const encoded=reference.href.split(',')[1],bytes=Uint8Array.from(atob(encoded),c=>c.charCodeAt(0));reference.href=URL.createObjectURL(new Blob([bytes],{type:'text/html;charset=utf-8'}));}reference.target='_blank';reference.rel='noopener noreferrer';
-  el('div',null,panel).dataset.poolSource='';const notice=el('p','Load league statistics to review identities and generate a draw.',panel);notice.dataset.poolMessage='';notice.setAttribute('role','status');notice.setAttribute('aria-live','polite');el('div',null,panel).dataset.poolDraw='';
+  el('div',null,panel).dataset.poolSource='';el('div',null,panel).dataset.drawUtilities='';const notice=el('p','Load league statistics to review identities and generate a draw.',panel);notice.dataset.poolMessage='';notice.setAttribute('role','status');notice.setAttribute('aria-live','polite');el('div',null,panel).dataset.poolDraw='';
   boards.addEventListener('input',settingsChanged);scheme.addEventListener('change',settingsChanged);
   host.addEventListener('cancel',e=>{if(busy)e.preventDefault();});host.addEventListener('close',()=>{epoch++;approval=null;invalid=true;renderDraw();});
   root.setInterval(()=>{if(host?.open&&!document.hidden&&!busy&&state&&!frozen&&!panel.querySelector('[data-player-review]')?.open)run(send=>load(send,false));},300000);
