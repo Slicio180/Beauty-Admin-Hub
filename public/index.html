@@ -21,9 +21,9 @@
   </aside>
 
   <header class="hub-masthead">
-    <div class="masthead-brand"><img src="assets/logo/aik-crest.svg" alt="AIK"><span>AIK DART</span></div>
-    <h1 class="masthead-title">EVENT HUB</h1>
-    <div class="masthead-event"><span>CURRENT TOURNAMENT</span><strong id="nakkaTournamentTitle" role="status" aria-live="polite">Checking Nakka…</strong></div>
+    <div class="masthead-brand"><img src="assets/logo/aik-mandagsdartarna-clean.png" alt="AIK Dart Måndagsdartarna"></div>
+    <h1 class="masthead-title">Event Hub</h1>
+    <div class="masthead-meta"><div class="masthead-event"><span class="sr-only">CURRENT TOURNAMENT FROM NAKKA</span><strong id="nakkaTournamentTitle" role="status" aria-live="polite">Checking Nakka…</strong><span id="nakkaTournamentDate"></span></div><span class="hub-test-badge">TEST</span><div class="masthead-session"></div></div>
   </header>
 
   <div class="hub-layout">
@@ -51,32 +51,31 @@
         <span id="currentEventStatus" hidden>No event connected yet</span>
       </section>
 
-      <section class="dashboard-summary" aria-label="Event overview">
-        <div class="summary-card"><svg class="hub-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="7" r="3"/><path d="M2 21v-4a7 7 0 0 1 14 0v4M17 4a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 5v2"/></svg><div><span>REGISTERED PLAYERS</span><strong id="playerCount">0</strong></div></div>
-        <div class="summary-card summary-in"><svg class="hub-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m7 12 3 3 7-7"/></svg><div><span>PLAYERS IN</span><strong id="inPlayerCount">0</strong></div></div>
-        <div id="attentionCard" class="summary-card summary-attention"><span class="attention-icon"><svg class="hub-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v8m0 3v1"/></svg></span><div class="attention-card-count"><span>NEEDS ATTENTION</span><strong id="attentionCount">0</strong></div><button type="button" id="attentionTile" class="attention-review-button" aria-label="Review player attention list" hidden>REVIEW</button></div>
-      </section>
-      <p id="attentionStatus" class="attention-status" role="status">Player attention check pending.</p>
-
       <!-- TONIGHT'S PLAYERS -->
 
       <section class="workspace players-workspace">
 
-        <div class="workspace-header">
+      <section class="dashboard-summary" aria-label="Event overview">
+        <div class="summary-card"><svg class="hub-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="7" r="3"/><path d="M2 21v-4a7 7 0 0 1 14 0v4M17 4a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 5v2"/></svg><div><span>TONIGHT’S PLAYERS</span><strong id="playerCount">0</strong></div></div>
+        <div class="summary-card summary-in"><svg class="hub-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m7 12 3 3 7-7"/></svg><div><span>PLAYERS IN</span><strong id="inPlayerCount">0</strong></div></div>
+        <div id="attentionCard" class="summary-card summary-attention"><span class="attention-icon"><svg class="hub-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v8m0 3v1"/></svg></span><div class="attention-card-count"><span>NEEDS ATTENTION</span><strong id="attentionCount">0</strong></div><button type="button" id="attentionTile" class="attention-review-button" aria-label="Review player attention list" hidden>REVIEW</button></div>
+<button id="registerPlayerButton" type="button">+ REGISTER PLAYER</button>
+      </section>
+      <p id="attentionStatus" class="attention-status sr-only" role="status">Player attention check pending.</p>
 
-          <div>
-            <span class="label">LIVE EVENT CONTROL</span>
-            <h2>Tonight's Players</h2>
-          </div>
-
-          <button id="registerPlayerButton">
-            + REGISTER PLAYER
-          </button>
-
+        <div class="player-list-controls">
+          <label class="sr-only" for="hubPlayerSort">Sort players</label>
+          <select id="hubPlayerSort" aria-label="Sort players">
+            <option value="alphabetical">Sort: Name A–Ö</option>
+            <option value="ranking" disabled>Nakka ranking — not verified</option>
+            <option value="registration" disabled>Registration order — not recorded</option>
+            <option value="original">Original list order</option>
+          </select>
+          <label class="sr-only" for="hubPlayerSearch">Search players</label>
+          <input id="hubPlayerSearch" type="search" placeholder="Search players…" autocomplete="off">
+          <p id="hubListConnection" role="status" aria-live="polite">Connection not checked</p>
         </div>
-
-
-        <div class="players-table-wrap">
+        <div class="players-table-wrap" tabindex="0" role="region" aria-label="Tonight’s players — scroll list">
 
           <table class="players-table">
 
@@ -189,6 +188,7 @@
   <script src="js/identity-dialog-en.js"></script>
   <script src="js/hub-services.js"></script>
   <script src="js/pool-planner.js"></script>
+  <script src="js/hub-player-list.js"></script>
   <script src="js/app.js"></script>
   <script src="js/hub-chrome.js"></script>
   <script src="js/hub-dashboard.js"></script>

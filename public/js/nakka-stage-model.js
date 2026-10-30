@@ -79,7 +79,7 @@
    knockouts.push({kind,rounds,thirdPlace});
   }
   // No admin IDs, passwords, consent, messages or private provider fields.
-  return {eventId:target,title:String(t.title||''),updateTime:number(t.updateTime),status:t.status,pools,knockouts};
+  return {eventId:target,title:String(t.title||''),eventDate:number(t.t_date),updateTime:number(t.updateTime),status:t.status,pools,knockouts};
  }
  const api=Object.freeze({project});if(typeof module==='object'&&module.exports)module.exports=api;else root.BeautyNakkaStages=api;
 })(typeof globalThis==='object'?globalThis:this);

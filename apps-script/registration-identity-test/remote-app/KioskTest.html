@@ -1329,7 +1329,14 @@ let registrationEventDate='';
     window.addEventListener('load', loadPlayers);
 
 
-    function loadPlayers() {
+        function beautyPlayerError(result) {
+      const messages = {"NAME_CONFLICT": "Det här namnet finns redan i listan.", "INVALID_NAME": "Skriv ett giltigt fullständigt namn.", "AMBIGUOUS_NAME": "Flera spelarposter har samma namn. Be arrangören om hjälp.", "UNKNOWN_PLAYER": "Välj ditt namn i listan eller lägg till en ny spelare.", "INVALID_CHOICE": "Välj vem du är.", "STALE_IDENTITY": "Namnvalet har ändrats. Börja om med ditt namn.", "INVALID_DETAIL": "Skriv ett giltigt mellannamn, smeknamn eller en annan uppgift.", "DETAIL_IN_USE": "Det namnet med tillägg finns redan. Välj det i spelarlistan om det är du, eller ange ett annat tillägg.", "CONFIRM_NAME": "Bekräfta hur ditt namn ska visas.", "ALREADY_REGISTERED": "Du är redan anmäld till den här spelkvällen.", "BLOCKED": "TEST-registreringen är avstängd. Be arrangören om hjälp.", "INVALID": "Kontrollera uppgifterna och ladda om sidan.", "BUSY": "En annan åtgärd pågår. Kontrollera med arrangören innan du försöker igen.", "STALE_EVENT": "Speldatumet har ändrats. Ladda om sidan. Ingen anmälan sparades.", "REGISTRATION_DAY_MISMATCH": "Speldatumet stämmer inte med dagens datum. Kontakta arrangören. Ingen anmälan sparades.", "READ_FAILED": "Uppgifterna kunde inte kontrolleras. Kontrollera med arrangören innan du försöker igen.", "SAVE_UNCERTAIN": "Anmälan kunde inte bekräftas. Kontrollera med arrangören innan du försöker igen."};
+      return messages[result?.code] || 'Anmälan kunde inte bekräftas. Kontrollera med arrangören innan du försöker igen.';
+    }
+    function beautyPlayerResult(result) {
+      return result?.success === false ? {...result,error:beautyPlayerError(result)} : result;
+    }
+function loadPlayers() {
 
       document.getElementById('loading').style.display = 'block';
       document.getElementById('formArea').style.display = 'none';
@@ -1355,8 +1362,7 @@ let registrationEventDate='';
             'KUNDE INTE LADDA SPELARLISTAN';
 
           showError(
-            error.message ||
-            'Ett fel uppstod.'
+            'Spelarlistan kunde inte hämtas. Ladda om sidan eller be arrangören om hjälp.'
           );
 
         })
@@ -1598,11 +1604,11 @@ function filterPlayers() {
 
       try {
         const result = await BeautyIdentityDialog.submit(payload => new Promise((resolve, reject) => {
-          google.script.run.withSuccessHandler(resolve).withFailureHandler(reject).submitKioskRegistration(payload);
+          google.script.run.withSuccessHandler(result=>resolve(beautyPlayerResult(result))).withFailureHandler(reject).submitKioskRegistration(payload);
         }), data);
         if (result?.code === 'CANCELLED') return;
         if (result?.success) showSuccess(result.player,result.nakka);
-        else showError(result?.error || 'Registreringen kunde inte sparas.');
+        else showError(beautyPlayerError(result));
       } catch (error) {
         showError('Registreringen kunde inte bekräftas. Kontrollera med arrangören innan du försöker igen.');
       } finally {

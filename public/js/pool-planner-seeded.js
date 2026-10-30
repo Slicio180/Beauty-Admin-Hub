@@ -11,7 +11,7 @@
  function section(tag,cls,parent){const n=el(tag,null,parent);n.className=cls;return n;}
  function steps(){
   const current=approval?3:frozen?2:1;
-  for(const n of panel.querySelectorAll('[data-step]')){n.dataset.active=String(Number(n.dataset.step)===current);n.setAttribute('aria-current',Number(n.dataset.step)===current?'step':'false');}
+  for(const n of panel.querySelectorAll('[data-step]')){if(Number(n.dataset.step)===3){const handoff=panel.querySelector('[data-handoff]');n.dataset.blocked=String(!handoff||handoff.dataset.blocked==='true');n.title='Review Nakka handoff — TEST';}n.dataset.active=String(Number(n.dataset.step)===current);n.setAttribute('aria-current',Number(n.dataset.step)===current?'step':'false');}
  }
  function selectedBoards(){return root.BeautyPoolBoards.parseBoards(host.querySelector('[data-boards]').value);}
  function currentPlan(){let boards;try{boards=selectedBoards().length;}catch(e){return {error:e.message};}return BeautyPoolPlanner.plan(BeautyPoolPlanner.eventCount(root.beautyHubData),Number(host.querySelector('[data-size]').value),boards);}
@@ -20,12 +20,25 @@
   const count=hubAvailable?BeautyPoolPlanner.eventCount(root.beautyHubData):null,result=currentPlan(),selected=result[panel.querySelector('[data-draw-scheme]').value];
   panel.querySelector('[data-in-count]').textContent=count===null?'—':String(count);
   panel.querySelector('[data-event-label]').textContent=(state?.event?.title||'Selected Hub event')+' · '+(root.beautyHubData?.eventDateDisplay||root.beautyHubData?.eventDate||'No date');
-  const summary=panel.querySelector('[data-plan-summary]');summary.textContent=result.error||(!selected?'Select available boards.':[selected.three+' × 3-manna',selected.four+' × 4-manna',result.boards+' banor',...(selected.five?[selected.five+' × 5-manna']:[])].join(' · '));
+  const summary=panel.querySelector('[data-plan-summary]');summary.textContent=result.error||(!selected?'Select available boards.':[selected.three+' × 3-player groups',selected.four+' × 4-player groups',result.boards+' boards',...(selected.five?[selected.five+' × 5-player groups']:[])].join(' · '));
   panel.querySelector('[data-generate]').dataset.blocked=String(!hubAvailable||!state?.stats?.fresh||!selected||!!result.error||count>101);
   const options=panel.querySelector('[data-plan-options]');options.textContent=result.error?'':('Preferred: '+result.preferredPlan.three+' × 3 / '+result.preferredPlan.four+' × 4 / '+result.preferredPlan.five+' × 5. '+(result.perBoard?'One pool per board: '+result.perBoard.three+' × 3 / '+result.perBoard.four+' × 4 / '+result.perBoard.five+' × 5.':'No one-pool-per-board arrangement available.'));
   for(const n of panel.querySelectorAll('[data-size-choice]'))n.setAttribute('aria-pressed',String(n.dataset.sizeChoice===host.querySelector('[data-size]').value));
   let selectedIds=[];try{selectedIds=selectedBoards();}catch(e){}for(const b of panel.querySelectorAll('[data-board-choice]'))b.setAttribute('aria-pressed',String(selectedIds.includes(Number(b.dataset.boardChoice))));
   renderEstimate();disable();
+ }
+ function reviewCastLabels(){
+  if(busy)return;let generation,token;try{generation=root.BeautyHubAuth.generation();token=root.BeautyHubAuth.token();}catch(e){message('Sign in before saving cast labels.');return;}
+  const dialog=el('dialog',null,panel);dialog.className='pool-preview-confirm';el('h3','Review cast board labels',dialog);el('p','Labels for the verified sent groups only. Starting averages remain frozen. Nakka board assignments and results are unchanged.',dialog);
+  const status=el('p','Loading verified groups…',dialog);button('CANCEL',dialog,()=>dialog.close());dialog.showModal();
+  const current=()=>root.BeautyHubAuth.isCurrent(generation)&&dialog.open;
+  try{google.script.run.withSuccessHandler(plan=>{
+   if(!current())return;if(!plan?.pools?.length){status.textContent='No verified sent groups are available. Nothing changed.';return;}
+   let allocation;try{allocation=root.BeautyPoolBoards.allocate(plan.pools.map(p=>({id:p.id,players:p.ids})),selectedBoards());}catch(e){status.textContent='Choose boards in Setup, then reopen this review.';return;}
+   status.textContent='Check every board and group before saving.';
+   const fields=plan.pools.map((p,i)=>{const row=el('div',null,dialog);el('span','Group '+(i+1)+' · '+p.ids.length+' players ',row);const board=el('input',null,el('label','Board ',row));board.type='number';board.min='1';board.max='1000';board.value=p.board??allocation.assignments[i].board;const group=el('input',null,el('label','Group ',row));group.type='number';group.min='1';group.max='101';group.value=p.group??allocation.assignments[i].batch;return {p,board,group};});
+   const save=button('SAVE CAST LABELS',dialog,()=>{if(!current())return;const labels=fields.map(({p,board,group})=>({ids:p.ids,board:Number(board.value),group:Number(group.value)}));save.disabled=true;google.script.run.withSuccessHandler(()=>{if(!current())return;root.beautyStagePendingLabels=null;dialog.close();message('Cast board labels saved. Reopen the stage screen to load them.');}).withFailureHandler(()=>{if(current()){save.disabled=false;status.textContent='Labels could not be saved. Check board/group numbers and your session. Pool assignments were not sent again.';}}).beautyStageLabelsTest(token,labels);});
+  }).withFailureHandler(()=>{if(current())status.textContent='Verified cast plan unavailable. Check your session.';}).beautyStagePlanTest();}catch(e){status.textContent='Cast review requires the connected TEST Hub.';}
  }
  function renderEstimate(){
   const count=panel?.querySelector('[data-manual-count]'),estimate=panel?.querySelector('[data-estimate]');if(!estimate||!count)return;
@@ -33,7 +46,7 @@
   const n=Number(count.value);if(!Number.isInteger(n)||n<5||n>101){estimate.textContent='Enter a whole player count from 5 to 101.';return;}
   let boards=[];try{boards=selectedBoards();}catch(e){}
   const result=BeautyPoolPlanner.plan(n,Number(host.querySelector('[data-size]').value),boards.length||1),plan=result.preferredPlan;
-  estimate.textContent=result.error||plan.pools+' pools: '+plan.three+' × 3-manna · '+plan.four+' × 4-manna'+(plan.five?' · '+plan.five+' × 5-manna':'')+' · '+(boards.length?boards.length+' banor':'No boards selected')+'. Estimate only; draws use the verified IN list.';
+  estimate.textContent=result.error||plan.pools+' pools: '+plan.three+' × 3-player groups · '+plan.four+' × 4-player groups'+(plan.five?' · '+plan.five+' × 5-player groups':'')+' · '+(boards.length?boards.length+' boards':'No boards selected')+'. Estimate only; draws use the verified IN list.';
  }
  function settingsChanged(){if(frozen){approval=null;invalid=true;invalidReason='Draw settings changed. Generate and review a new preview.';message('Draw settings changed. Generate and review a new preview.');renderDraw();}renderSettings();}
  async function generate(send){
@@ -72,7 +85,7 @@
   const status=panel.querySelector('[data-league-slot]');status.replaceChildren();const statsCard=section('section','pool-status-card',status);const reviewToggle=panel.querySelector('[data-review-toggle]');reviewToggle.dataset.blocked=String(!state);reviewToggle.setAttribute('aria-expanded','false');reviewToggle.textContent='Review players';
   const stats=state?.stats;panel.querySelector('[data-stat-calculation]').replaceChildren();
   const title=el('strong',stats?(stats.fresh?'League averages current':'Statistics stale / unavailable'):'Load league averages',statsCard);title.dataset.fresh=String(!!stats?.fresh);
-  el('p',stats?.fetchedAt?'Last successful update '+new Date(stats.fetchedAt).toLocaleString('sv-SE',{timeZone:'Europe/Stockholm'}):'Overall league three-dart averages',statsCard);
+  const updated=el('p',stats?.fetchedAt?'Last successful update '+new Date(stats.fetchedAt).toLocaleString('en-GB',{timeZone:'Europe/Stockholm'}):'Overall league three-dart averages',statsCard);statsCard.title=updated.textContent;
   button(state?'REFRESH STATS':'LOAD / REFRESH LEAGUE STATS',statsCard,()=>run(send=>load(send,true)));
   if(!state){el('p','Load statistics before reviewing player identities.',box);renderSettings();return;}
   const needsReview=state.mappings.filter(p=>!p.lpid||!p.tpid).length;const details=el('details',null,box);details.dataset.playerReview='';details.className='pool-player-review';const reviewSummary=el('summary','Review players'+(needsReview?' · '+needsReview+' need review':''),details);reviewSummary.dataset.reviewSummary='';details.id='pool-player-review';reviewToggle.textContent=reviewSummary.textContent;details.addEventListener('toggle',()=>reviewToggle.setAttribute('aria-expanded',String(details.open)));const reviewCard=section('section','pool-status-card pool-identity-notice',details);reviewCard.hidden=!needsReview;reviewCard.dataset.identityNotice='';
@@ -99,7 +112,7 @@
   if(!frozen){el('p','Generate a preview after reviewing player identities. No Nakka changes are sent by previewing or swapping.',box).className='pool-empty';return;}
   const statsTitle=panel.querySelector('[data-fresh]');if(statsTitle)statsTitle.textContent='League averages frozen for this preview';
   let allocation;try{allocation=root.BeautyPoolBoards.allocate(frozen.draw.pools,plannedBoards||selectedBoards());}catch(e){invalid=true;approval=null;}
-  const draw=frozen.draw,heading=section('div','pool-preview-heading',utility);el('h3','Gruppöversikt',heading);el('p','Frozen '+draw.frozenAt+' · Statistics '+draw.source.fetchedAt+' · Draw seed '+draw.seed,heading);
+  const draw=frozen.draw,heading=section('div','pool-preview-heading',utility);el('h3','Group overview',heading);el('p','Frozen '+draw.frozenAt+' · Statistics '+draw.source.fetchedAt+' · Draw seed '+draw.seed,heading);
   if(invalid)el('p','REVIEW INVALIDATED — '+(invalidReason||'Preview is no longer active. Generate a new draw before sending.'),utility).className='pool-invalid';
   const warnings=BeautyPoolSeeding.warnings(draw);if(warnings.length){const details=el('details',null,utility);details.className='pool-draw-notes';el('summary','Draw notes · '+warnings.length,details);warnings.forEach(t=>el('p',t,details));}
   const settings=section('div','pool-preview-tools',utility),label=el('label',null,settings),colours=el('input',null,label);colours.type='checkbox';colours.checked=!!root.beautyPoolColours;label.appendChild(document.createTextNode(' Show seeding colours'));
@@ -112,24 +125,24 @@
    for(const a of assignments)if(!cardLabels[a.poolId])cardLabels[a.poolId]={board:a.board,group:a.batch};
    const ordered=draw.pools.slice().sort((a,b)=>(cardLabels[a.id]?.board||0)-(cardLabels[b.id]?.board||0)||(cardLabels[a.id]?.group||0)-(cardLabels[b.id]?.group||0));
    for(const pool of ordered){
-    const position=cardLabels[pool.id];
+    const position=cardLabels[pool.id],shared=position&&ordered.filter(g=>cardLabels[g.id]?.board===position.board).length>1;
     const card=section('section','pool-card',grid);card.dataset.poolId=pool.id;
     const top=section('div','pool-card-heading',card),groupRow=section('div','pool-group-heading',card);
-    function editable(key,parent,prefix){const edit=button(prefix+' '+position[key]+' ✎',parent,()=>{
-     const dialog=el('dialog',null,utility);dialog.className='pool-preview-confirm';el('h3','Edit Bana / Grupp',dialog);
-     const boardLabel=el('label','Bana',dialog),board=el('select',null,boardLabel);board.dataset.editBoard='';for(const n of plannedBoards||selectedBoards())el('option',String(n),board).value=n;board.value=position.board;
-     const groupLabel=el('label','Grupp',dialog),group=el('input',null,groupLabel);group.type='number';group.min='1';group.max='1000';group.value=position.group;group.dataset.editGroup='';
+    function editable(key,parent,prefix){const edit=button(prefix+' '+position[key],parent,()=>{
+     const dialog=el('dialog',null,utility);dialog.className='pool-preview-confirm';el('h3','Edit Board / Group',dialog);
+     const boardLabel=el('label','Board',dialog),board=el('select',null,boardLabel);board.dataset.editBoard='';for(const n of plannedBoards||selectedBoards())el('option',String(n),board).value=n;board.value=position.board;
+     const groupLabel=el('label','Group',dialog),group=el('input',null,groupLabel);group.type='number';group.min='1';group.max='1000';group.value=position.group;group.dataset.editGroup='';
      const error=el('p','Changes apply to the Hub board plan.',dialog),actions=section('div','pool-confirm-actions',dialog);button('CANCEL',actions,()=>dialog.close());
      button('SAVE LABELS',actions,()=>{const next={board:Number(board.value),group:Number(group.value)};if(!(plannedBoards||selectedBoards()).includes(next.board)||!Number.isInteger(next.group)||next.group<1||next.group>1000){error.textContent='Choose an available board and group 1–1000.';return;}
-      if(Object.entries(cardLabels).some(([id,v])=>id!==String(pool.id)&&v.board===next.board&&v.group===next.group)){error.textContent='That Bana / Grupp is already used. Choose another group number.';return;}
-      cardLabels[pool.id]=next;approval=null;dialog.close();message('Bana / Grupp saved in the Hub plan.');renderDraw();});dialog.showModal();
-    });edit.className='pool-edit-label';edit.dataset.blocked=String(invalid||!hubAvailable);}
-    if(position){editable('board',top,'Bana');editable('group',groupRow,'Grupp');}
+      if(Object.entries(cardLabels).some(([id,v])=>id!==String(pool.id)&&v.board===next.board&&v.group===next.group)){error.textContent='That Board / Group is already used. Choose another group number.';return;}
+      cardLabels[pool.id]=next;approval=null;dialog.close();message('Board / Group saved in the Hub plan.');renderDraw();});dialog.showModal();
+    });edit.className='pool-edit-label';edit.setAttribute('aria-label','Edit '+prefix+' '+position[key]);edit.dataset.blocked=String(invalid||!hubAvailable);}
+    if(position){editable('board',top,'Board');if(shared)editable('group',top,'Group');}
     const summary=BeautyPoolSeeding.summary(pool);numeric('strong',summary.knownAverage===null?'—':summary.knownAverage.toFixed(2),groupRow);
     const list=el('ol',null,card);
     for(const p of pool.players){const li=el('li',null,list);if(colours.checked)li.className='pool-band-'+BeautyPoolSeeding.band(p.average,thresholds);
-     const name=button(p.name,li,()=>openSwap(p));name.className='pool-player-name';name.dataset.swapPlayer=p.id;name.dataset.blocked=String(invalid||!hubAvailable);if(swapped.includes(p.id))name.dataset.swapped='true';
-     const value=el('span',averageLabel(p.average),li);value.className=p.average===null?'pool-unseeded':'pool-number';}
+     const name=button(null,li,()=>openSwap(p));el('span',p.name,name);name.className='pool-player-name';name.dataset.swapPlayer=p.id;name.dataset.blocked=String(invalid||!hubAvailable);if(swapped.includes(p.id))name.dataset.swapped='true';
+     const value=el('span',p.average===null?'—':averageLabel(p.average),name);value.setAttribute('aria-label',p.average===null?'Unseeded':'Average '+averageLabel(p.average));value.className=p.average===null?'pool-unseeded':'pool-number';}
    }
 
   }
@@ -140,33 +153,33 @@
    const list=section('div','pool-swap-list',dialog);list.dataset.swapList='';
    const origin=draw.pools.find(g=>g.players.some(p=>p.id===player.id));
    function choices(){list.replaceChildren();for(const pool of draw.pools)if(pool.id!==origin.id)for(const other of pool.players){if(!other.name.toLocaleLowerCase('sv').includes(search.value.toLocaleLowerCase('sv')))continue;
-    const pos=cardLabels[pool.id],pick=button(other.name+' · Bana '+pos.board+' · Grupp '+pos.group,list,()=>{dialog.close();run(async send=>{const result=await send('pooladjust',{ticket:frozen.ticket,change:JSON.stringify({playerId:player.id,targetPool:pool.id,swapWith:other.id})});frozen=result;swapped=[player.id,other.id];approval=null;message('Swap saved in preview. Both moved players are yellow.');renderDraw();});});pick.dataset.swapWith=other.id;
+    const pos=cardLabels[pool.id],pick=button(other.name+' · Board '+pos.board+' · Group '+pos.group,list,()=>{dialog.close();run(async send=>{const result=await send('pooladjust',{ticket:frozen.ticket,change:JSON.stringify({playerId:player.id,targetPool:pool.id,swapWith:other.id})});frozen=result;swapped=[player.id,other.id];approval=null;message('Swap saved in preview. Both moved players are yellow.');renderDraw();});});pick.dataset.swapWith=other.id;
    }}search.addEventListener('input',choices);choices();button('CANCEL',dialog,()=>dialog.close());dialog.showModal();search.focus();
   }
   button('DOWNLOAD BOARD PLAN',utility,()=>{
    const lines=['AIK DART · HUB BOARD PLAN · TEST',draw.eventDate,'PLANNED — NOT SENT TO NAKKA',''];
-   for(const pool of draw.pools.slice().sort((a,b)=>cardLabels[a.id].board-cardLabels[b.id].board||cardLabels[a.id].group-cardLabels[b.id].group)){const pos=cardLabels[pool.id];lines.push('Bana '+pos.board+' · Grupp '+pos.group,...pool.players.map(p=>p.name+' · '+averageLabel(p.average)),'');}
+   for(const pool of draw.pools.slice().sort((a,b)=>cardLabels[a.id].board-cardLabels[b.id].board||cardLabels[a.id].group-cardLabels[b.id].group)){const pos=cardLabels[pool.id];lines.push('Board '+pos.board+' · Group '+pos.group,...pool.players.map(p=>p.name+' · '+averageLabel(p.average)),'');}
    const url=URL.createObjectURL(new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'})),link=el('a',null,utility);link.href=url;link.download='Beauty-Board-Plan-TEST-'+draw.eventDate+'.txt';link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
   });
   const footer=section('div','pool-action-bar',utility);el('p','Preview only · No Nakka changes sent',footer);
   const unresolved=(frozen.mappings||state?.mappings||[]).filter(p=>!p.lpid||!p.tpid).length;
   if(invalid)el('p','Swaps and sending are disabled. '+(invalidReason||'Generate a new preview to continue.'),footer);
   const handoff=button('REVIEW NAKKA HANDOFF — TEST',footer,()=>run(async send=>{approval=await send('poolprepare',{ticket:frozen.ticket});frozen.ticket=approval.ticket;message('Handoff checked. Close Nakka editing pages, then confirm these TEST pools.');renderDraw();}));
-  handoff.dataset.blocked=String(invalid||unresolved>0||!state?.stats?.fresh||!hubAvailable);
+  handoff.dataset.handoff='';handoff.dataset.blocked=String(invalid||unresolved>0||!state?.stats?.fresh||!hubAvailable);
   if(unresolved)el('p','Resolve '+unresolved+' player identities before sending. '+(invalid?'The frozen preview is retained for reference.':'Preview and manual swaps remain available.'),footer);
   if(approval){const review=el('section',null,utility);review.className='pool-approval';el('h3','Approve TEST pool handoff',review);el('p',approval.event.title+' · '+approval.event.date+' · '+draw.roster.length+' IN players · '+draw.pools.length+' pools · '+approval.expectedCards+' round-robin match cards.',review);
    el('p','Only pool assignments, division count and maximum pool size change. Existing players and other event settings are retained. Sending uses two Nakka operations: groups, then match cards. If either cannot be verified, inspect the audit before another action.',review);
    if(approval.unassignedEntries?.length){el('p','Excluded from these pools but still registered in Nakka: '+approval.unassignedEntries.map(p=>p.name).join(', ')+'. Sending is blocked until these entries are resolved or compatibility is verified in TEST. No automatic removals.',review);}
    const details=el('details',null,review);el('summary','Review preserved game settings',details);el('pre',JSON.stringify(approval.setting,null,2),details);
    const label=el('label',null,review),check=el('input',null,label);check.type='checkbox';label.appendChild(document.createTextNode(' I approve these identities, frozen pools and match cards for the named TEST event. Nakka editing pages are closed.'));
-   const save=button('SEND APPROVED TEST POOLS',review,()=>run(async send=>{if(!check.checked)throw Error('Tick the final approval first.');const ticket=approval.ticket;approval=null;invalid=true;message('Sending once. Waiting for group and match-card readback…');try{const r=await send('poolsave',{ticket,confirmed:'true'});frozen=null;message(r.message+' Audit: '+r.audit+' · Receipt: '+r.receipt);renderDraw();}catch(e){renderDraw();throw Error(e.message+' Do not repeat a send until the event and audit have been inspected.');}}));save.dataset.blocked='true';save.disabled=true;check.addEventListener('change',()=>{save.dataset.blocked=String(!check.checked||!!approval?.unassignedEntries?.length);disable();});
+   const save=button('SEND APPROVED TEST POOLS',review,()=>run(async send=>{if(!check.checked)throw Error('Tick the final approval first.');const ticket=approval.ticket;approval=null;invalid=true;message('Sending once. Waiting for group and match-card readback…');try{const labels=frozen.draw.pools.map(p=>({ids:p.players.map(q=>(frozen.mappings||state.mappings).find(m=>m.id===q.id)?.tpid),board:cardLabels[p.id]?.board,group:cardLabels[p.id]?.group}));const r=await send('poolsave',{ticket,confirmed:'true'});root.beautyStagePendingLabels=labels;frozen=null;message(r.message+' Audit: '+r.audit+' · Receipt: '+r.receipt);renderDraw();const labelEpoch=epoch;try{await new Promise((resolve,reject)=>google.script.run.withSuccessHandler(resolve).withFailureHandler(reject).beautyStageLabelsTest(root.BeautyHubAuth.token(),labels));if(labelEpoch===epoch)root.beautyStagePendingLabels=null;}catch(e){if(labelEpoch===epoch)message(r.message+' Cast board labels pending. Open the stage screen from the Hub to retry labels only. Do not resend pools.');}}catch(e){renderDraw();throw Error(e.message+' Do not repeat a send until the event and audit have been inspected.');}}));save.dataset.blocked='true';save.disabled=true;check.addEventListener('change',()=>{save.dataset.blocked=String(!check.checked||!!approval?.unassignedEntries?.length);disable();});
   }steps();disable();
  }
  async function load(send,refresh){state=await send('poolload',{refresh:String(refresh)});approval=null;if(frozen){invalid=true;invalidReason='Statistics or identity mappings were reloaded. Generate a new preview.';}renderSource();renderDraw();message('Review player mappings before generating a draw. '+(state.stats.message||''));}
  function mount(dialog){
   if(BeautyHubServices.mode!=='test')return;host=dialog;panel=section('section','seeded-pool-planner pool-planner-workspace',host);
   const header=section('header','pool-page-heading',panel),intro=el('div',null,header);el('h2','Pool Planner',intro);el('p','Balance the field. Review the draw. Send when ready.',intro);
-  const progress=section('ol','pool-progress',header);['Setup','Pool preview','Nakka review'].forEach((text,i)=>{const n=el('li',null,progress);n.dataset.step=String(i+1);numeric('span',i+1,n);el('strong',text,n);});
+  const progress=section('ol','pool-progress',header);['Setup','Preview','Nakka'].forEach((text,i)=>{const li=el('li',null,progress),n=button(null,li,()=>{if(i===0){panel.querySelector('[data-size-choice]')?.focus();panel.querySelector('.pool-setup')?.scrollIntoView?.({block:'center'});}else if(i===1){panel.querySelector('[data-pool-draw]')?.scrollIntoView?.({block:'start'});}else panel.querySelector('[data-handoff]')?.click();});n.dataset.step=String(i+1);numeric('span',i+1,n);el('strong',text,n);n.setAttribute('aria-label',text);});
   const event=section('div','pool-event-label',header);el('strong','TEST EVENT',event);el('p','Selected Hub event',event).dataset.eventLabel='';
   const setup=section('section','pool-setup',panel),total=section('div','pool-in-tile',setup);el('span','PLAYERS IN',total).className='label';numeric('strong','—',total).dataset.inCount='';
   const sizeLabel=el('div',null,setup);el('span','PLAYERS PER POOL',sizeLabel).className='label';const size=el('select',null,sizeLabel);size.dataset.size='';size.hidden=true;size.setAttribute('aria-hidden','true');size.tabIndex=-1;
@@ -174,12 +187,13 @@
   [3,4].forEach(n=>{const b=button(String(n),choices,()=>{size.value=String(n);settingsChanged();});b.dataset.sizeChoice=String(n);b.setAttribute('aria-label',n+' players per pool');});
   const boardsLabel=el('label','BOARDS',setup),boards=el('input',null,boardsLabel);boards.type='text';boards.maxLength=1000;boards.placeholder='Select boards below';boards.dataset.boards='';
   const arrangement=el('label',null,setup);arrangement.hidden=true;const scheme=el('select',null,arrangement);scheme.dataset.drawScheme='';for(const [v,t]of [['preferredPlan','Preferred format'],['perBoard','One pool per dartboard']])el('option',t,scheme).value=v;
-  const draw=button('GENERATE SEEDED PREVIEW',setup,()=>{const confirm=panel.querySelector('[data-preview-confirm]');if(!confirm)return;panel.querySelector('[data-mapping-reviewed]').checked=false;const proceed=panel.querySelector('[data-confirm-generate]');proceed.dataset.blocked='true';disable();message('Review the player identity acknowledgement in the popup.');confirm.showModal();});draw.dataset.generate='';draw.dataset.blocked='true';
+  const draw=button('GENERATE PREVIEW',setup,()=>{const confirm=panel.querySelector('[data-preview-confirm]');if(!confirm)return;panel.querySelector('[data-mapping-reviewed]').checked=false;const proceed=panel.querySelector('[data-confirm-generate]');proceed.dataset.blocked='true';disable();message('Review the player identity acknowledgement in the popup.');confirm.showModal();});draw.dataset.generate='';draw.dataset.blocked='true';
   const schemeTile=section('div','pool-scheme-tile',setup);el('span','SCHEME',schemeTile).className='label';el('p','Select available boards.',schemeTile).dataset.planSummary='';
   const boardChoices=section('div','pool-board-choices',panel);for(let n=1;n<=16;n++){const b=button(String(n),boardChoices,()=>{let selected=[];try{selected=selectedBoards();}catch(e){}const next=selected.includes(n)?selected.filter(v=>v!==n):[...selected,n];boards.value=next.sort((a,b)=>a-b).join(', ');settingsChanged();});b.dataset.boardChoice=String(n);b.setAttribute('aria-label','Board '+n);}
   const toolbar=section('div','pool-toolbar',panel);toolbar.dataset.poolToolbar='';const reviewToggle=button('Review players',toolbar,()=>{const details=panel.querySelector('[data-player-review]');if(details){details.open=!details.open;reviewToggle.setAttribute('aria-expanded',String(details.open));}});reviewToggle.dataset.reviewToggle='';reviewToggle.setAttribute('aria-controls','pool-player-review');reviewToggle.setAttribute('aria-expanded','false');reviewToggle.dataset.blocked='true';el('div',null,toolbar).dataset.leagueSlot='';const advancedToggle=button('Advanced settings',toolbar,()=>{advanced.open=!advanced.open;advancedToggle.setAttribute('aria-expanded',String(advanced.open));});advancedToggle.dataset.advancedToggle='';advancedToggle.setAttribute('aria-controls','pool-advanced-settings');advancedToggle.setAttribute('aria-expanded','false');
+  toolbar.appendChild(progress);const boardRow=section('div','pool-board-row',panel);const boardTitle=el('span','BOARDS',boardRow);boardTitle.className='label';boardRow.appendChild(boardChoices);boardRow.appendChild(draw);setup.after?.(boardRow);
   const advanced=el('details',null,panel);advanced.id='pool-advanced-settings';advanced.addEventListener('toggle',()=>advancedToggle.setAttribute('aria-expanded',String(advanced.open)));advanced.className='pool-advanced';advanced.dataset.advancedSettings='';el('summary','Advanced settings',advanced);
-  el('p','',advanced).dataset.planOptions='';
+  button('REVIEW CAST BOARD LABELS',advanced,reviewCastLabels);advanced.appendChild(boardsLabel);el('p','',advanced).dataset.planOptions='';
   const manual=el('label','Try a different player count (estimate only) ',advanced),count=el('input',null,manual);count.type='number';count.min='5';count.max='101';count.placeholder='e.g. 37';count.dataset.manualCount='';const estimate=el('p','Estimates do not change registrations or the actual draw.',advanced);
   count.addEventListener('input',renderEstimate);estimate.dataset.estimate='';
   const reference=el('a','Open original 5–101 pool scheme ↗',advanced);reference.href='assets/pool-scheme.html';
@@ -196,12 +210,12 @@
   if(!host){
    const main=document.querySelector('.main-content');if(!main)return false;
    const workspace=el('section',null,main);workspace.className='pool-workspace';workspace.setAttribute('aria-label','Pool Planner');workspace.hidden=true;workspace.open=false;
-   workspace.close=()=>{if(busy)return;workspace.open=false;workspace.hidden=true;document.body.classList.remove('pool-workspace-active');workspace.dispatchEvent(new Event('close'));};
+   workspace.close=()=>{if(busy)return;workspace.open=false;workspace.hidden=true;document.body.classList.remove('pool-workspace-active');const title=document.querySelector('.masthead-title');if(title)title.textContent='Event Hub';workspace.dispatchEvent(new Event('close'));};
    mount(workspace);
    for(const nav of document.querySelectorAll('.sidebar > button'))if(nav!==button)nav.addEventListener('click',event=>{if(!workspace.open)return;if(busy){event.preventDefault();event.stopImmediatePropagation();message('Wait for the current operation to finish.');return;}workspace.close();},true);
   }
-  host.hidden=false;host.open=true;document.body.classList.add('pool-workspace-active');root.BeautyHubNavigation?.activate(button);renderSettings();renderDraw();host.scrollIntoView?.({block:'start'});return true;
+  host.hidden=false;host.open=true;const masthead=document.querySelector('.masthead-title');if(masthead)masthead.textContent='Pool Plan';document.body.classList.add('pool-workspace-active');root.BeautyHubNavigation?.activate(button);renderSettings();renderDraw();host.scrollIntoView?.({block:'start'});return true;
  }
- document.addEventListener('beauty-hub-locked',()=>{epoch++;busy=false;state=null;frozen=null;approval=null;invalid=true;host?.close();panel?.querySelector('[data-pool-source]')?.replaceChildren();panel?.querySelector('[data-pool-draw]')?.replaceChildren();if(panel){renderSource();renderDraw();message('Sign in, then reload league statistics.');}});
+ document.addEventListener('beauty-hub-locked',()=>{epoch++;root.beautyStagePendingLabels=null;busy=false;state=null;frozen=null;approval=null;invalid=true;host?.close();panel?.querySelector('[data-pool-source]')?.replaceChildren();panel?.querySelector('[data-pool-draw]')?.replaceChildren();if(panel){renderSource();renderDraw();message('Sign in, then reload league statistics.');}});
  root.BeautySeededPoolUI={mount,open,update(data){hubAvailable=root.BeautyPoolPlanner.eventCount(data)!==null;renderSettings();if(frozen&&fingerprint(data)!==lastRoster)invalidate('The IN roster or event date changed. The frozen preview is retained for reference; generate a new draw.');},unavailable(){hubAvailable=false;renderSettings();if(frozen)invalidate('Hub data unavailable. Wait for a verified refresh, then generate a new draw.');},isBusy:()=>busy};
 })(window);

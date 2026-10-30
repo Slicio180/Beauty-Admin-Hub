@@ -25,7 +25,7 @@
         const link=document.createElement('a');link.textContent=event.title+' ('+event.id+') ↗';link.href=event.url;link.target='_blank';link.rel='noopener noreferrer';link.style.color='#ffd700';output.append(link);
       }
       if(result.status==='COMPARED'&&result.comparison){
-        paragraph('Hub: '+result.hubCount+' · Nakka: '+result.nakkaCount+' · Snapshot: '+new Date(result.checkedAt).toLocaleString());
+        paragraph('Hub: '+result.hubCount+' · Nakka: '+result.nakkaCount+' · Snapshot: '+new Date(result.checkedAt).toLocaleString('en-GB',{timeZone:'Europe/Stockholm'}));
         paragraph('Matching names do not confirm permanent player identity. OUT and STANDBY remain visible for review.');
         for(const [key,title] of [['both','Same name on both lists'],['hubOnly','Hub only'],['nakkaOnly','Nakka only'],['ambiguous','Duplicate names — needs review']]){
           const rows=result.comparison[key];if(!Array.isArray(rows))throw Error('Invalid comparison');

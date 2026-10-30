@@ -1,9 +1,10 @@
 /* Reusable read-only renderer. Provider text is always inserted as text, never HTML. */
 (function(root){
  'use strict';
+ function formatText(text){return typeof text==='string'?text.replace(/^First to (\d+) legs$/,'Först till $1 leg').replace(/^First to (\d+) sets$/,'Först till $1 set').replace(/^Limit (\d+) legs · draws allowed$/,'Högst $1 leg · oavgjort tillåtet').replace(/^Limit (\d+) sets · draws allowed$/,'Högst $1 set · oavgjort tillåtet'):text;}
  const value=n=>n==null?'—':String(n);
  const average=n=>n==null?'—':Number(n).toFixed(2);
- function views(data){return [{id:'all',label:'All stages'},{id:'pools',label:'Pool standings'},...data.knockouts.map(s=>({id:s.kind,label:s.kind==='t'?'Knockout stage 1':'Knockout stage 2'}))];}
+ function views(data){return [{id:'all',label:'Alla spelstadier'},{id:'pools',label:'Gruppställning'},{id:'boards',label:'Banöversikt'},...data.knockouts.map(s=>({id:s.kind,label:s.kind==='t'?'Slutspel 1':'Slutspel 2'}))];}
  function page(data,options={}){
   const choices=views(data),selected=choices.some(v=>v.id===options.view)?options.view:'pools',size=options.size===6?6:4;
   const hasPools=selected==='pools'||selected==='all',total=hasPools?Math.max(1,Math.ceil(data.pools.length/size)):1;
@@ -30,58 +31,71 @@
   function el(tag,text,parent,css){const n=doc.createElement(tag);if(text!=null)n.textContent=text;if(css)n.className=css;parent.appendChild(n);return n;}
   function drawMatch(m,column,winner=false){
      const box=el('article',null,column,winner?'match winner':'match');
-     if(!winner){const badge=el('span',m.board.text?'Board '+m.board.text:m.board.state==='unavailable'?'Board unavailable':'Awaiting board',box,'stage-board-badge');badge.dataset.state=m.board.state;
-      const labels={'assigned':'Assigned','in-progress':'In progress','finished':'Finished','unassigned':'Not assigned','unavailable':'Unavailable'};badge.setAttribute('aria-label',badge.textContent+' · '+labels[m.board.state]);}
+     if(!winner){const badge=el('span',m.board.text?'Bana '+m.board.text:m.board.state==='unavailable'?'Bana ej tillgänglig':'Väntar på bana',box,'stage-board-badge');badge.dataset.state=m.board.state;
+      const labels={'assigned':'Tilldelad','in-progress':'Pågår','finished':'Avslutad','unassigned':'Ej tilldelad','unavailable':'Ej tillgänglig'};badge.setAttribute('aria-label',badge.textContent+' · '+labels[m.board.state]);}
      const players=winner?[[m.left,null,null]]:[[m.left,m.leftScore,m.leftAverage],[m.right,m.rightScore,m.rightAverage]];
-     for(const [p,score,avg]of players){const line=el('div',null,box,'match-player');const name=el('div',null,line,'participant');el('span',p.name,name,'player-name');if(!winner&&p.state==='player')el('small','Match average '+average(avg),name,'muted');if(!winner)el('strong',value(score),line,'score');}
+     for(const [p,score,avg]of players){const line=el('div',null,box,'match-player');const name=el('div',null,line,'participant');el('span',p.state==='bye'?'Frirond':p.state==='pending'?'Väntar på spelare':p.name,name,'player-name');if(!winner&&p.state==='player')el('small','Matchsnitt '+average(avg),name,'muted');if(!winner)el('strong',value(score),line,'score');}
   }
   function section(id,title){
    const outer=el('section',null,host,'competition-section'),heading=el('h2',null,outer),button=el('button',(state.collapsed[id]?'▸ ':'▾ ')+title,heading,'stage-toggle');button.type='button';button.id='toggle-'+id;button.setAttribute('aria-expanded',String(!state.collapsed[id]));button.setAttribute('aria-controls','content-'+id);
    button.addEventListener('click',()=>onAction({type:'toggle',id,focusId:button.id}));const content=el('div',null,outer,'stage-content');content.id='content-'+id;content.hidden=state.collapsed[id];return content;
   }
   if(state.view==='pools'||state.view==='all'){
-   const poolHost=section('pools','Round robin');
-   if(!state.pools.length)el('p','No pool standings have been supplied for this event.',poolHost,'empty-state');
-   const grid=el('div',null,poolHost,'pool-grid');
+   const formats=[...new Set(data.pools.map(p=>p.format))],format=formats.length===1&&formats[0]?formatText(formats[0]):null;
+   const poolHost=section('pools','Gruppspel'+(format?' · '+format:''));
+   if(!state.pools.length)el('p','Ingen gruppställning har hämtats för tävlingen.',poolHost,'empty-state');
+   const grid=el('div',null,poolHost,'pool-grid');grid.dataset.size=String(state.size);
    for(const pool of state.pools){
-    const card=el('section',null,grid,'stage-card');el('h3','Pool '+pool.number,card);
-    if(pool.format)el('p',pool.format,card,'muted');
+    const card=el('section',null,grid,'stage-card'),header=el('header',null,card,'pool-card-header');
+    const left=el('div',null,header,'pool-board-title');el('h3','Bana '+value(pool.board),left);
+    const right=el('div',null,header,'pool-card-meta');
+    if(pool.shared||!pool.board)el('h3','Grupp '+value(pool.group??pool.number),right);
+    const averages=el('div',null,right,'group-averages');
+    const start=el('span','Start '+average(pool.startAverage),averages,'start-average');start.setAttribute('title','Fryst snitt vid gruppindelningen · '+value(pool.startCoverage)+' kända spelarvärden');
+    const current=el('span','Nu '+average(pool.currentAverage),averages,'current-average');current.setAttribute('title','Poäng / kastade pilar × 3 i gruppspelet hittills');
     let standingsHost=card;
     if(pool.matrix){
-     const wrap=el('div',null,card,'table-scroll'),matrix=el('table',null,wrap);el('caption','Pool '+pool.number+' · match results by player position',matrix);const h=el('tr',null,el('thead',null,matrix));
-     for(const title of ['#','Player',...pool.matrix.map(p=>String(p.position)),'W–L']){const th=el('th',title,h);th.setAttribute('scope','col');}
+     const wrap=el('div',null,card,'table-scroll'),matrix=el('table',null,wrap,'pool-matrix');el('caption','Grupp '+pool.number+' · matchresultat per spelarposition',matrix);const h=el('tr',null,el('thead',null,matrix));
+     for(const title of ['#','Spelare',...pool.matrix.map(p=>String(p.position)),'V–F']){const th=el('th',title,h);th.setAttribute('scope','col');}
      const body=el('tbody',null,matrix);
-     for(const p of pool.matrix){const row=el('tr',null,body);el('td',p.position,row,'number');el('td',p.name,row,'player-name');for(const cell of p.cells){const td=el('td',null,row,cell.state==='self'?'self-cell':'number');
-      if(cell.state==='result'){el('span',cell.score+'–'+cell.opponentScore,td);el('small',average(cell.average),td,'muted');}
-      else if(cell.state==='multiple')el('span','Multiple matches',td);else el('span',cell.state==='self'?'':'—',td);
-     }const standing=pool.players.find(q=>q.id===p.id);el('td',value(standing?.wins)+'–'+value(standing?.losses),row,'number');}
-     standingsHost=el('details',null,card);el('summary','Standings and points',standingsHost);
+     for(const p of pool.matrix){const row=el('tr',null,body);el('td',p.position,row,'position number');const player=el('td',null,row,'pool-player');el('span',p.name,player,'player-name');el('small',average(p.overallAverage),player,'overall-average');
+      for(const cell of p.cells){const td=el('td',null,row,cell.state==='self'?'self-cell':'number'+(cell.live?' live-cell':''));
+       if(cell.state==='result'||cell.state==='live'){if(cell.live){el('small','LIVE',td,'live-tag');td.setAttribute('aria-label','Pågående match · '+cell.score+'–'+cell.opponentScore);}el('span',cell.score+'–'+cell.opponentScore,td);el('small','('+average(cell.average)+')',td,'muted');}
+       else if(cell.state==='multiple')el('span','Flera matcher',td);else el('span',cell.state==='self'?'':'—',td);
+      }const standing=pool.players.find(q=>q.id===p.id);el('td',value(standing?.wins)+'–'+value(standing?.losses),row,'number');}
+     standingsHost=el('details',null,card,'pool-standings');el('summary','Tabell och poäng',standingsHost);
     }
     const scroll=el('div',null,standingsHost,'table-scroll'),table=el('table',null,scroll);
-    el('caption','Pool '+pool.number+' · Nakka standings',table);
-    const head=el('tr',null,el('thead',null,table));for(const title of ['#','Player','P','W–L','Pts']){const th=el('th',title,head);th.setAttribute('scope','col');}
+    el('caption','Grupp '+pool.number+' · tabell från Nakka',table);
+    const head=el('tr',null,el('thead',null,table));for(const title of ['#','Spelare','S','V–F','Poäng']){const th=el('th',title,head);th.setAttribute('scope','col');}
     const body=el('tbody',null,table);
     for(const p of pool.players){const row=el('tr',null,body);for(const [i,text]of [value(p.rank),p.name,value(p.played),value(p.wins)+'–'+value(p.losses),value(p.points)].entries())el('td',text,row,i===1?'player-name':'number');}
-    if(!pool.players.length)el('p','No standings yet.',card,'muted');
+    if(!pool.players.length)el('p','Ingen tabell ännu.',card,'muted');
    }
   }
+  if(state.view==='boards'){
+   const boardHost=section('boards','Banöversikt'),list=el('div',null,boardHost,'board-overview');
+   const boards=[...new Set(data.pools.map(p=>p.board).filter(Boolean))].sort((a,b)=>a-b);
+   for(const board of boards){const item=el('article',null,list,'stage-card');el('h3','Bana '+board,item);el('p',data.pools.filter(p=>p.board===board).map(p=>'Grupp '+value(p.group??p.number)).join(' / '),item);el('small','Planerad i Hubben · direkttilldelning styrs av Nakka',item,'muted');}
+   if(!boards.length)el('p','Ingen verifierad banplan tillgänglig. Spara banetiketterna i Hubben.',boardHost,'empty-state');
+  }
   for(const stage of state.stages){
-   const stageHost=section(stage.kind,stage.kind==='t'?'Knockout stage 1':'Knockout stage 2'),start=state.roundStarts[stage.kind];
-   const navigation=el('nav',null,stageHost,'round-navigation');navigation.setAttribute('aria-label','Rounds for '+(stage.kind==='t'?'knockout stage 1':'knockout stage 2'));
-   for(const [direction,label,disabled]of [[-1,'Earlier rounds',start===0],[1,'Later rounds',start>=stage.rounds.length-2]]){const button=el('button',(direction<0?'◀ ':'▶ ')+label,navigation);button.type='button';button.id='round-'+stage.kind+'-'+(direction<0?'previous':'next');button.disabled=disabled;button.addEventListener('click',()=>onAction({type:'round',id:stage.kind,direction,focusId:button.id}));}
-   el('p',stage.rounds.length?'Showing rounds '+(start+1)+'–'+Math.min(start+2,stage.rounds.length)+' of '+stage.rounds.length:'No rounds',navigation,'muted');
-   const rounds=el('div',null,stageHost,'rounds');rounds.setAttribute('tabindex','0');rounds.setAttribute('aria-label','Knockout rounds. Scroll horizontally to later rounds.');
-   if(!stage.rounds.length)el('p','No bracket has been supplied for this stage.',stageHost,'empty-state');
+   const stageHost=section(stage.kind,stage.kind==='t'?'Slutspel 1':'Slutspel 2'),start=state.roundStarts[stage.kind];
+   const navigation=el('nav',null,stageHost,'round-navigation');navigation.setAttribute('aria-label','Omgångar i '+(stage.kind==='t'?'slutspel 1':'slutspel 2'));
+   for(const [direction,label,disabled]of [[-1,'Tidigare omgångar',start===0],[1,'Senare omgångar',start>=stage.rounds.length-2]]){const button=el('button',(direction<0?'◀ ':'▶ ')+label,navigation);button.type='button';button.id='round-'+stage.kind+'-'+(direction<0?'previous':'next');button.disabled=disabled;button.addEventListener('click',()=>onAction({type:'round',id:stage.kind,direction,focusId:button.id}));}
+   el('p',stage.rounds.length?'Visar omgång '+(start+1)+'–'+Math.min(start+2,stage.rounds.length)+' av '+stage.rounds.length:'Inga omgångar',navigation,'muted');
+   const rounds=el('div',null,stageHost,'rounds');rounds.setAttribute('tabindex','0');rounds.setAttribute('aria-label','Slutspelsomgångar. Rulla i sidled till senare omgångar.');
+   if(!stage.rounds.length)el('p','Inget slutspelsträd har hämtats för detta spelstadium.',stageHost,'empty-state');
    for(const [offset,r]of stage.rounds.slice(start,start+2).entries()){
     const ri=start+offset,column=el('section',null,rounds,'round');
     const winner=r.slotCount===1&&ri===stage.rounds.length-1&&ri>0;
-    el('h3',winner?'Winner':r.slotCount===2?'Final':r.slotCount===4?'Semi-final':r.slotCount>4?'Top '+r.slotCount:'Round '+r.round,column);
-    if(r.format&&!winner)el('p',r.format,column,'muted');
+    el('h3',winner?'Vinnare':r.slotCount===2?'Final':r.slotCount===4?'Semifinal':r.slotCount>4?'Topp '+r.slotCount:'Omgång '+r.round,column);
+    if(r.format&&!winner)el('p',formatText(r.format),column,'muted');
     for(const m of r.matches){
      drawMatch(m,column,winner);
     }
    }
-   if(stage.thirdPlace){const third=el('section',null,stageHost,'stage-third-place');el('h3','Third-place match',third);if(stage.thirdPlace.format)el('p',stage.thirdPlace.format,third,'muted');drawMatch(stage.thirdPlace,third);}
+   if(stage.thirdPlace){const third=el('section',null,stageHost,'stage-third-place');el('h3','Match om tredje pris',third);if(stage.thirdPlace.format)el('p',formatText(stage.thirdPlace.format),third,'muted');drawMatch(stage.thirdPlace,third);}
   }
   return state;
  }

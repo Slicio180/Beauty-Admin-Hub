@@ -15,7 +15,7 @@
     const content = make('div', 'Loading event…'); content.setAttribute('role', 'status');
     const edit = make('div');
     const label = make('label', 'New event date');
-    const date = make('input'); date.type = 'date'; date.disabled = true; date.setAttribute('aria-label', 'New event date'); label.appendChild(date);
+    const date = make('input'); date.type = 'date'; date.lang = 'en'; date.disabled = true; date.setAttribute('aria-label', 'New event date'); label.appendChild(date);
     const ackLabel = make('label', undefined, 'event-acknowledgement');
     const ack = make('input'); ack.type = 'checkbox'; ack.disabled = true; ack.setAttribute('aria-label', 'I understand that changing the date resets event data');
     ackLabel.appendChild(ack); ackLabel.appendChild(make('span', 'I understand that changing the date resets event data.'));

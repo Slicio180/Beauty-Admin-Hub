@@ -1,10 +1,10 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 function ui(initial){
  const make=text=>{const classes=new Set(),attrs={};return {textContent:text,dataset:{},attrs,classes,classList:{toggle:(key,on)=>on?classes.add(key):classes.delete(key)},setAttribute:(k,v)=>attrs[k]=v,removeAttribute:k=>delete attrs[k],addEventListener:(name,fn)=>{(events[text+':'+name]??=[]).push(fn);}};};
- const events={},nodes=['Dashboard','Beauty Live','Pool Planner','Event Control','Nakka','System Status','Instructions'].map(make),title=make(''),requests=[],pending=[],intervals=[];
- const c={Date,JSON,Object,document:{hidden:false,getElementById:id=>id==='dashboardNavButton'?nodes[0]:id==='nakkaTournamentTitle'?title:null,querySelectorAll:()=>nodes,addEventListener:(name,fn)=>(events[name]??=[]).push(fn)},addEventListener:(name,fn)=>(events['window:'+name]??=[]).push(fn),setInterval:fn=>intervals.push(fn),BeautyHubServices:{request:url=>{requests.push(url);return new Promise((resolve,reject)=>pending.push({resolve:r=>resolve({json:async()=>r}),reject}));}},beautyHubData:initial};c.window=c;
+ const events={},nodes=['Dashboard','Beauty Live','Pool Planner','Event Control','Nakka','System Status','Instructions'].map(make),title=make(''),eventDate=make(''),requests=[],pending=[],intervals=[];
+ const c={Date,JSON,Object,document:{hidden:false,getElementById:id=>id==='dashboardNavButton'?nodes[0]:id==='nakkaTournamentTitle'?title:id==='nakkaTournamentDate'?eventDate:null,querySelectorAll:()=>nodes,addEventListener:(name,fn)=>(events[name]??=[]).push(fn)},addEventListener:(name,fn)=>(events['window:'+name]??=[]).push(fn),setInterval:fn=>intervals.push(fn),BeautyHubServices:{request:url=>{requests.push(url);return new Promise((resolve,reject)=>pending.push({resolve:r=>resolve({json:async()=>r}),reject}));}},beautyHubData:initial};c.window=c;
  vm.createContext(c);vm.runInContext(fs.readFileSync('public/js/hub-chrome.js','utf8'),c);
- return {c,nodes,title,requests,pending,intervals,chrome:c.BeautyHubChrome,nav:c.BeautyHubNavigation,emit:name=>Promise.all((events[name]||[]).map(fn=>fn()))};
+ return {c,nodes,title,eventDate,requests,pending,intervals,chrome:c.BeautyHubChrome,nav:c.BeautyHubNavigation,emit:name=>Promise.all((events[name]||[]).map(fn=>fn()))};
 }
 const result=(date='2026-10-27',title='Nakka tournament title')=>({success:true,status:'MATCHED',eventDate:date,event:{id:'t_RqC2_2034',date,title}});
 const settle=async()=>{for(let i=0;i<12;i++)await Promise.resolve();};
@@ -36,4 +36,8 @@ test('Sidebar active icon text marker and aria-current follow the current sectio
 });
 test('Sidebar returns to Dashboard on session lock and after returning from the separate Live tab',async()=>{
  const u=ui();u.nav.activate(u.nodes[1]);await u.emit('window:focus');assert(u.nodes[0].classes.has('active'));u.nav.activate(u.nodes[4]);await u.emit('beauty-hub-locked');assert(u.nodes[0].classes.has('active'));
+});
+
+test('Header date comes only from the matched Nakka event and clears on mismatch and logout',async()=>{
+ const u=ui();u.chrome.update({eventDate:'2026-10-27'});assert.equal(u.eventDate.textContent,'');u.pending.shift().resolve(result());await settle();assert.match(u.eventDate.textContent,/27 October 2026/);const req=u.chrome.refresh();u.pending.shift().resolve(result('2026-10-28'));await req;assert.equal(u.eventDate.textContent,'');u.chrome.update({eventDate:'2026-10-29'});await u.emit('beauty-hub-locked');assert.equal(u.eventDate.textContent,'');u.pending.shift().resolve(result('2026-10-29'));await settle();assert.equal(u.eventDate.textContent,'');
 });

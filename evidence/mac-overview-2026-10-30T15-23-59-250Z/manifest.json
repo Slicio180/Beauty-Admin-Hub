@@ -1,0 +1,262 @@
+[
+  {
+    "path": "public/index.html",
+    "before": "888e69993d4277dd219fb58efd14aa74f1afe0773ee3bf3b76467673b1567603",
+    "after": "6ed3a6e04e6c1bde6c6328afb5e947c06f581fe4fde36ee50ba269a6399889bf"
+  },
+  {
+    "path": "public/preview.html",
+    "before": "2ce2f255f2b9717e4d1ca31fb5c4f0cdbb1b3756e6d40190b49db55ac0f1974b",
+    "after": "094a4c6b607028bdedc9bb06423d8262032ee34119913add6e677b2d6cb6f8b8"
+  },
+  {
+    "path": "public/js/pool-planner-seeded.js",
+    "before": "d3a68ab04582a06f5e26aaaea42783ea79382df0a1b3d93c8746308a9352fada",
+    "after": "104192e8a555f1fd77846b03bb6b7c0649fd13a5e59242a743d334c9b969bd94"
+  },
+  {
+    "path": "public/js/hub-player-list.js",
+    "before": null,
+    "after": "272a356dd9874d1d0f034a8d0ebf68159a12e2de5ff0f8641510d1d2fa63df74"
+  },
+  {
+    "path": "public/js/hub-chrome.js",
+    "before": "0abfd123a7731c6b8dc4294cec227e6bb97451d82b936ac18a9079dddfc1a1bd",
+    "after": "3eee3b0d53ee697dd08112410b9c3da25c89c84c71caa334b4a00d57e375a6d5"
+  },
+  {
+    "path": "public/js/app.js",
+    "before": "a9851ebd6b2e266e1ad71d74a24398ea93cbef6837b6880ecceafc44b9cacdf4",
+    "after": "271fcf4c1551f11172081e02e9b8340bef71111f8e755cb9e9c8157489a3a3dc"
+  },
+  {
+    "path": "public/css/beauty-dashboard.css",
+    "before": "d56f5ef094c6139ebbf2e0dfd96c05c17a4b69b4b80847165390698ede6939fd",
+    "after": "87493aebc81a3b8547bde1a28c235de64769f4b807f7589ac6091f3d9a2d222b"
+  },
+  {
+    "path": "scripts/build-hub-test.cjs",
+    "before": "610195a8acfd33fb5b47acf4df5205d4f3a32ba373b92083320f4bd0e8c6cd9e",
+    "after": "0275a1d9f491d1a1d4977b5eb154236985f3af054f7f1d8709bfc4e9132fa2c8"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "43b0da0f5bb830108cbbdb4fb761638b253e266a8b56459a7a0e89f56162712b",
+    "after": "1d55ff78fcd5675cdf9dfdbdc0459275595bbc55668b241c7fc7173fad08a241"
+  },
+  {
+    "path": "tests/pool-planner-seeded-ui.test.cjs",
+    "before": "236d1c40509cd0684c4ce6e9dfaa78bc935b3d57e16575e6b812e0d39808518c",
+    "after": "f796028586aa900a25aea91800de674e93eda8e87cb6afffbad8a383b0576506"
+  },
+  {
+    "path": "tests/dashboard-ui.test.cjs",
+    "before": "10b2d255cb48784948e8caa13abcba64bc8be60bcbd45c4e1c01d8a4bb2b4234",
+    "after": "480d72ac3f38a6f3108f0301768d99d2e752f31b43196259e503b8597b4e017b"
+  },
+  {
+    "path": "tests/hub-chrome.test.cjs",
+    "before": "4a5bc3a24ac98b97f4c8fa2dbe14574487c33c0899ad1a399238ae05123baf79",
+    "after": "c020b3f32e0fd9e9ff0fec785e490e00aa96a8c4ae95f446381b00003f57f38e"
+  },
+  {
+    "path": "tests/hub-english-date-review.test.cjs",
+    "before": "20470bcb937c68e44e678c69b9725d414284db6c30a6c89af3dafe29600e2d5e",
+    "after": "8842d6be579ee1cb76a32460b31c314d6e0a678b210b4e21da6cbddf1dae556e"
+  },
+  {
+    "path": "tests/hub-test-connection.test.cjs",
+    "before": "ccf66937000f1f9b4d5912582c825355d2c7381ec345546680142693df2d39c6",
+    "after": "66b14ee5fa74eb470d4492001b568e07859ab14cbf675bc865c030c2ed99039e"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "2aae2bdbd687bebb0c379ef34f9f44ca97398a69c6c20e87013ecaee8f89a673",
+    "after": "0d1e9a2e92b03dec4f79aaf56d2c964c51cdac6326f563033e73defe137b75ea"
+  },
+  {
+    "path": "docs/handoff/pool-elegant-20261030.md",
+    "before": null,
+    "after": "472367363a6d5d7f374ef78f042fd6b7906bdd211a73b6e251e52ff1dbca6e81"
+  },
+  {
+    "path": "docs/handoff/hub-elegant-20261030.md",
+    "before": null,
+    "after": "1939588070bf0caa25884a7f7830e15f8b4754b2eb188f4eea28dfbeec1f7442"
+  },
+  {
+    "path": "evidence/pool-elegant-20261030/tests.txt",
+    "before": null,
+    "after": "c45f809937ff6436c48bed449fa2ca2cbca542115b66c27acbe7330af31c9d4c"
+  },
+  {
+    "path": "evidence/pool-elegant-20261030/inventory.txt",
+    "before": null,
+    "after": "0650c3d3460266e1584653cfb5997a0912f3b0649add5fea5f05f477c6459c7e"
+  },
+  {
+    "path": "evidence/hub-elegant-20261030/build.txt",
+    "before": null,
+    "after": "e554d377617479721caec3dc45ea0b25c83f4b467d7c67cfaf5c93b31ffc1e53"
+  },
+  {
+    "path": "evidence/hub-elegant-20261030/tests.txt",
+    "before": null,
+    "after": "40be9b597f4809482c11396495dad61dc0aa947bc8676c4c1f55faf2092d8f94"
+  },
+  {
+    "path": "evidence/hub-elegant-20261030/inventory.txt",
+    "before": null,
+    "after": "f4a4398a17fb4417345575159fea324606bd44e7460d129bc0d240d588fed61c"
+  },
+  {
+    "path": "public/competition-preview.html",
+    "before": "d6019303da0436a3fad32eaa855c30a5a780d0e137bf7edecfecbb15998f4810",
+    "after": "65658fdf8ee43839d82d9efd4ea81f46e877ae0f2939e35378be1d1cd9ede8be"
+  },
+  {
+    "path": "tests/player-registration-pages.test.cjs",
+    "before": "d85ff7a0457914a5d99fbf518072e9631825bf384ebf4faf1802b8852c357735",
+    "after": "2f241edb615fb4b08a9db41de9900fb10d12bf7a8bd3c5a4339b0ea5739cf0f0"
+  },
+  {
+    "path": "tests/competition-screen.test.cjs",
+    "before": "15c2949f03790b612209bb6f033c773ff3d694fc415aec0b038c95e4b3776250",
+    "after": "5fefd591dd946ec678ea7070a17d2973aaa3ddb30079955760151589c0a16e94"
+  },
+  {
+    "path": "scripts/build-stage-test.cjs",
+    "before": "ae30dd5b440f4ac15ee151e696f012f565c2c952153e4755dd8bc903510949fc",
+    "after": "e044faa4fd1042ecdbd0553fe5fe34741d2c91de5e05206d679d772e8c479f5e"
+  },
+  {
+    "path": "docs/handoff/language-fix-20261030.md",
+    "before": null,
+    "after": "f299a298db60822fa8eeac6209d8bd1d9e7feb4aa34a8d70f58329daca3ce711"
+  },
+  {
+    "path": "public/js/competition-view.js",
+    "before": "f658678d2b99cc94d3420808456197652cad75c4b0502524742ae219861176ae",
+    "after": "9596cb4efa50f242893f67ff47b90aecef940fe04852b8d6b5ac757afcfdb368"
+  },
+  {
+    "path": "public/js/hub-nakka-event.js",
+    "before": "e3a40068487956fd151aa917dd20cbb7718518b4d5408f56e64efd174741199b",
+    "after": "4009d370e45b7980f3c17fcdd6546173b67db312d4f3a46ce40183df590672f9"
+  },
+  {
+    "path": "public/js/competition-preview.js",
+    "before": "425a08cdce1f5304df3253bc7f57fb655c0a683e310237c360099f0fe2240b5a",
+    "after": "e2ec158df9ec78502b77788cd0e7fb76d68fb0dc1ab56a557acb5c327591c5f5"
+  },
+  {
+    "path": "public/js/hub-test-event-control.js",
+    "before": "30d07836521ce2c14fa240fced5ccd51ac07e388262acb83903d66414e8d1935",
+    "after": "0683b387d6031b0863d1a6092801cb4a84836d0add9a8ee0f87a7c4f52e147bd"
+  },
+  {
+    "path": "public/js/nakka-health.js",
+    "before": "1a1b11177b36222230b913a55c1431f0e5560390f253b6513ff1cbb5429a025a",
+    "after": "9ad1ff6434d20118672071fa48b3fb5ffe677486b792cd46aed9139f28721021"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/KioskTest.html",
+    "before": "adc0c97c6f25bb4ceeac044474b3b5af92e2df776fa6f3ecde234cc8ec3ca2bf",
+    "after": "058e0bdb5f78ffca5b6c73a53555bb6378917e881b8a560535fd874152692e47"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/RemoteRegistration.html",
+    "before": "5c75f79d9529953973f6211e10227ecefba2278a1795b797a19114ae7de013d5",
+    "after": "509067b8695864b8ea36a2b61b471821a3b01e4cd1f8904d5885005568e3a1b3"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/StageTest.html",
+    "before": "327a03472d97b46043b3f7776105f2dd948d45cfaf3d28fdd71b0c9f31b5c418",
+    "after": "8f65e3f299a5b81777772e572b4f2f093150bff892e97f60b643b3937bcbd1ca"
+  },
+  {
+    "path": "evidence/language-fix-20261030/inventory.txt",
+    "before": null,
+    "after": "0415d2f659d359e017c1253acfc4aa98182a2a5a1372d3236808ebe5d79f8fd5"
+  },
+  {
+    "path": "evidence/language-fix-20261030/tests.txt",
+    "before": null,
+    "after": "3400e1885db43f895158a766151cf5130d97df31efc418bd56a4499d90571b57"
+  },
+  {
+    "path": "evidence/language-fix-20261030/build.txt",
+    "before": null,
+    "after": "e554d377617479721caec3dc45ea0b25c83f4b467d7c67cfaf5c93b31ffc1e53"
+  },
+  {
+    "path": "tests/venue-cast.test.cjs",
+    "before": null,
+    "after": "920d9c02ab1a2626457af3915ca9356f6d76770e5d2286263ebd33ede69a867e"
+  },
+  {
+    "path": "public/css/competition-preview.css",
+    "before": "d167137f8cae39df1d68bd5f96e7f6d76aa2a5c91bd0653f323a86269f9d9359",
+    "after": "6a3c04b1ddf8e27bad8875297c927f000fde3d2ae459fb43df6b4f6d9841c952"
+  },
+  {
+    "path": "public/js/nakka-stage-feed.js",
+    "before": "aba87bb1f61ba664a0ac29dd82bde56d15470f974fa8e9e1a622d3bff14a15ba",
+    "after": "c953d7e9ee1d699873d4f7ee525853f48649b8ab061a4063a098e2fe2f6707ab"
+  },
+  {
+    "path": "public/js/hub-stage-open.js",
+    "before": "cdbd9d1f45ad4d588cecbec228bd6e995633e95103507f8d2b25074e92ed1cc2",
+    "after": "140a4142bf843adf9ce8cbe5e448ff050be8413d5c2a817830ee57ec691bf7af"
+  },
+  {
+    "path": "public/js/nakka-stage-model.js",
+    "before": "3d5d6ae3bfa9bf03ae60365e2506b6b3c88bdb4147d61edee3ad122d2a61b336",
+    "after": "66ba0218dafb65ae3baec0b9bad1a753d468b2e0eb4b8bc925d66ba0e5d1b003"
+  },
+  {
+    "path": "public/js/nakka-pool-live.js",
+    "before": null,
+    "after": "7906b109f844f77fe08c164acf6c30d928badfc616c2624471ac9d45178663fe"
+  },
+  {
+    "path": "docs/handoff/venue-cast-20261030.md",
+    "before": null,
+    "after": "cb0f0bd8397d679034527df217f20a6bdb59b9a160e581f5b83b67be1de93f9d"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/BeautyLiveTest.gs",
+    "before": "2a80e4c37e1cefa23b05d5b0f9e999411947ff330f0d7ce31424f9f50e4797ae",
+    "after": "4206a215c22974ce5ef0f94e5040f66ae6be6ab79db62af5058b1df1906922fe"
+  },
+  {
+    "path": "evidence/venue-cast-20261030/tests.txt",
+    "before": null,
+    "after": "156e7d6cf3c20d9b2858f07ed668345bc0e99f524dffa806bc9e7dd395862442"
+  },
+  {
+    "path": "evidence/venue-cast-20261030/inventory.txt",
+    "before": null,
+    "after": "5564b5726cefb6d783cafba418239af710d3b6c9163a686c2037d2f51135a5c2"
+  },
+  {
+    "path": "evidence/venue-cast-20261030/build.txt",
+    "before": null,
+    "after": "e554d377617479721caec3dc45ea0b25c83f4b467d7c67cfaf5c93b31ffc1e53"
+  },
+  {
+    "path": "docs/handoff/overview-20261030.md",
+    "before": null,
+    "after": "a56dcc9adb27715e9c54f5747d2a7359991b25f0a7e95cff492c77e21fda29fc"
+  },
+  {
+    "path": "evidence/overview-20261030/tests.txt",
+    "before": null,
+    "after": "c790db47c616ef59ab046c2f88daa009552694b7b72308c1a2a91c2e2d82fc71"
+  },
+  {
+    "path": "evidence/overview-20261030/inventory.txt",
+    "before": null,
+    "after": "7ed0818a88fac3e1ff35a8b5417301d085500422301fbc199158fa8c07818140"
+  }
+]

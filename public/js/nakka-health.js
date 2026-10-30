@@ -47,7 +47,7 @@
     dot.classList.add({ OK: 'ok', DEGRADED: 'degraded', UNAVAILABLE: 'problem' }[health.status]);
     message.textContent = health.message;
     timestamp.dateTime = health.timestamp;
-    timestamp.textContent = 'Checked: ' + new Date(health.timestamp).toLocaleString();
+    timestamp.textContent = 'Checked: ' + new Date(health.timestamp).toLocaleString('en-GB',{timeZone:'Europe/Stockholm'});
   }
 
   async function loadNakkaHealth() {

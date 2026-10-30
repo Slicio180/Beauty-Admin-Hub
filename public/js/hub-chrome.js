@@ -3,7 +3,7 @@
   'use strict';
   const nav=[...document.querySelectorAll('.sidebar > button')],home=document.getElementById('dashboardNavButton');
   let selected=home,date='',version=0,busy=false,checkedDate='';
-  const title=document.getElementById('nakkaTournamentTitle');
+  const title=document.getElementById('nakkaTournamentTitle'),eventDate=document.getElementById('nakkaTournamentDate');
   function activate(button){
     if(!button||!nav.includes(button))return;
     selected=button;
@@ -13,7 +13,7 @@
   window.BeautyHubNavigation=Object.freeze({activate,dashboard});
   home?.addEventListener('click',dashboard);
   window.addEventListener('focus',()=>{if(selected?.textContent.trim()==='Beauty Live')dashboard();});
-  function show(text,state){if(title){title.textContent=text;title.dataset.state=state;}}
+  function show(text,state){if(eventDate&&state!=='matched')eventDate.textContent='';if(title){title.textContent=text;title.dataset.state=state;}window.BeautyPlayerList?.connection();}
   async function refresh(){
     if(!date||busy)return;
     const current=++version,startedDate=date;busy=true;
@@ -24,7 +24,7 @@
       if(r.success!==true||r.status!=='MATCHED'||r.eventDate!==startedDate||r.event?.date!==startedDate||
         typeof r.event?.id!=='string'||!/^t_[A-Za-z0-9_]{1,80}$/.test(r.event.id)||
         typeof r.event?.title!=='string'||!r.event.title.trim()||r.event.title.length>300)throw Error('unavailable');
-      show(r.event.title,'matched');checkedDate=startedDate;
+      show(r.event.title,'matched');if(eventDate)eventDate.textContent=new Date(r.event.date+'T12:00:00Z').toLocaleDateString('en-GB',{year:'numeric',month:'long',day:'numeric',timeZone:'Europe/Stockholm'});checkedDate=startedDate;
     }catch(e){if(current===version){checkedDate='';show('Event unavailable — check Nakka','unavailable');}}
     finally{if(current===version)busy=false;}
   }

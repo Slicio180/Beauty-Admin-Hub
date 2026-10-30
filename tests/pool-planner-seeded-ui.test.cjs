@@ -4,7 +4,7 @@ const clone=x=>JSON.parse(JSON.stringify(x));
 class Node{
  constructor(tag,owner){this.tag=tag;this.owner=owner;this.children=[];this.dataset={};this.events={};this.value='';this.disabled=false;this.checked=false;this.open=false;this._text='';}
  set textContent(t){this._text=String(t);this.children=[];}get textContent(){return this._text+this.children.map(c=>c.textContent).join(' ');}
- appendChild(n){n.parentElement=this;this.children.push(n);if(this.tag==='select'&&this.children.length===1)this._selected=0;return n;}
+ appendChild(n){if(n.parentElement){const a=n.parentElement.children;a.splice(a.indexOf(n),1);}n.parentElement=this;this.children.push(n);if(this.tag==='select'&&this.children.length===1)this._selected=0;return n;}
  append(...nodes){nodes.forEach(n=>this.appendChild(n));}replaceChildren(...nodes){this._text='';this.children=[];this.append(...nodes);}
  set value(v){this._value=String(v);}get value(){if(this.tag==='select'&&!this._value)return this.children[0]?.value||'';return this._value||'';}
  setAttribute(k,v){this[k]=v;}addEventListener(k,fn){(this.events[k]??=[]).push(fn);}
@@ -14,6 +14,7 @@ class Node{
  querySelector(q){return this.querySelectorAll(q)[0]||null;}
  dispatchEvent(event){for(const fn of this.events[event.type]||[])fn(event);}
  close(){this.open=false;for(const fn of this.events.close||[])fn();}
+ click(){return this.fire('click');}after(n){const p=this.parentElement;if(n.parentElement){const a=n.parentElement.children;a.splice(a.indexOf(n),1);}n.parentElement=p;p.children.splice(p.children.indexOf(this)+1,0,n);}
  showModal(){this.open=true;}focus(){this.owner.activeElement=this;}
 }
 function fixture(options={}){
@@ -30,13 +31,13 @@ function fixture(options={}){
  const tick=async()=>{for(let i=0;i<8;i++)await Promise.resolve();};
  const find=text=>host.all().find(n=>n.tag==='button'&&n._text===text);
  async function load(){await find('LOAD / REFRESH LEAGUE STATS').fire('click');queue.shift().resolve(clone(source));await tick();}
- async function startGenerate(){await find('GENERATE SEEDED PREVIEW').fire('click');host.querySelector('[data-mapping-reviewed]').checked=true;await host.querySelector('[data-mapping-reviewed]').fire('change');await find('GENERATE PREVIEW').fire('click');}
+ async function startGenerate(){await host.querySelector('[data-generate]').fire('click');host.querySelector('[data-mapping-reviewed]').checked=true;await host.querySelector('[data-mapping-reviewed]').fire('change');await host.querySelector('[data-confirm-generate]').fire('click');}
  async function generate(){await startGenerate();queue.shift().resolve({success:true,ticket:'draw',draw:clone(draw)});await tick();}
  async function prepare(){await find('REVIEW NAKKA HANDOFF — TEST').fire('click');queue.shift().resolve({success:true,ticket:'approved',event:{title:'TEST',date:data.eventDate},setting:{startScore:501},expectedCards:6});await tick();}
  return {startGenerate,host,window,document,main,nav,source,data,draw,requests,queue,find,tick,load,generate,prepare,timer:()=>timer(),lock(){generation++;(handlers['beauty-hub-locked']||[]).forEach(fn=>fn());},notice:()=>host.querySelector('[data-pool-message]').textContent};
 }
 test('pool UI reviews mappings, renders frozen group means, and does not send during generation',async()=>{
- const f=fixture();await f.load();await f.find('GENERATE SEEDED PREVIEW').fire('click');assert.equal(f.requests.length,1);assert.match(f.notice(),/acknowledgement/);await f.generate();assert.ok(f.host.querySelector('.pool-group-heading'));assert.match(f.host.textContent,/Unseeded/);assert.match(f.host.textContent,/Frozen/);assert.deepEqual(f.requests.map(p=>p.page),['poolload','pooldraw']);const sent=JSON.parse(f.requests[1].bindings);assert.equal(sent.length,6);assert.equal(sent[0].lpid,'L0');
+ const f=fixture();await f.load();await f.host.querySelector('[data-generate]').fire('click');assert.equal(f.requests.length,1);assert.match(f.notice(),/acknowledgement/);await f.generate();assert.ok(f.host.querySelector('.pool-group-heading'));assert.match(f.host.textContent,/Unseeded/);assert.match(f.host.textContent,/Frozen/);assert.deepEqual(f.requests.map(p=>p.page),['poolload','pooldraw']);const sent=JSON.parse(f.requests[1].bindings);assert.equal(sent.length,6);assert.equal(sent[0].lpid,'L0');
 });
 test('pool UI manual swaps request server adjustment and retain no old approval',async()=>{
  const f=fixture();await f.load();await f.generate();await f.prepare();const first=f.draw.pools[0].players[0],other=f.draw.pools[1].players[0];await f.host.querySelectorAll('[data-swap-player]').find(n=>n.dataset.swapPlayer===first.id).fire('click');await f.host.querySelectorAll('[data-swap-with]').find(n=>n.dataset.swapWith===other.id).fire('click');assert.equal(f.requests.at(-1).page,'pooladjust');const change=JSON.parse(f.requests.at(-1).change),adjusted=core.adjust(f.draw,change);f.queue.shift().resolve({success:true,ticket:'adjusted',draw:adjusted});await f.tick();assert.equal(f.find('SEND APPROVED TEST POOLS'),undefined);assert.match(f.notice(),/Swap saved/);
@@ -73,7 +74,7 @@ test('pool UI closing and reopening drops an old handoff approval while retainin
 
 test('pool UI renders omitted and null RPC averages as Unseeded and keeps measured zero numeric',async()=>{
  const f=fixture();delete f.source.mappings[0].average;f.source.mappings[1].average=null;f.source.mappings[2].average=0;
- await f.load();assert.match(f.host.textContent,/Unseeded/);assert.match(f.host.textContent,/0.00/);assert.ok(f.find('GENERATE SEEDED PREVIEW'));assert.doesNotMatch(f.notice(),/toFixed/);
+ await f.load();assert.match(f.host.textContent,/Unseeded/);assert.match(f.host.textContent,/0.00/);assert.ok(f.host.querySelector('[data-generate]'));assert.doesNotMatch(f.notice(),/toFixed/);
  const row=f.host.querySelectorAll('[data-binding]')[0];row.querySelector('[data-lpid]').value='L0';await row.querySelector('[data-lpid]').fire('change');assert.equal(f.host.querySelector('[data-mapping-reviewed]').checked,false);
 });
 test('pool UI normalizes omitted frozen averages before pool means colours and manual review',async()=>{
@@ -100,26 +101,26 @@ test('pool workspace colour bands only alter preview presentation and retain fro
  const f=fixture();await f.load();await f.generate();const tools=f.host.querySelector('.pool-preview-tools'),toggle=tools.querySelector('input');toggle.checked=true;await toggle.fire('change');assert.ok(f.host.all().some(n=>n.className==='pool-band-UNSEEDED'));assert.ok(f.host.all().some(n=>n.className==='pool-band-2'));assert.equal(f.requests.length,2);assert.match(f.host.textContent,/Frozen/);
 });
 test('pool workspace unavailable Hub data blocks generating and clears handoff approval until a new draw',async()=>{
- const f=fixture();await f.load();await f.generate();await f.prepare();f.window.BeautySeededPoolUI.unavailable();assert.equal(f.find('GENERATE SEEDED PREVIEW').disabled,true);assert.equal(f.find('SEND APPROVED TEST POOLS'),undefined);assert.match(f.host.textContent,/REVIEW INVALIDATED/);f.window.BeautySeededPoolUI.update(f.data);assert.equal(f.find('GENERATE SEEDED PREVIEW').disabled,false);assert.equal(f.find('REVIEW NAKKA HANDOFF — TEST').disabled,true);assert.equal(f.requests.length,3);
+ const f=fixture();await f.load();await f.generate();await f.prepare();f.window.BeautySeededPoolUI.unavailable();assert.equal(f.host.querySelector('[data-generate]').disabled,true);assert.equal(f.find('SEND APPROVED TEST POOLS'),undefined);assert.match(f.host.textContent,/REVIEW INVALIDATED/);f.window.BeautySeededPoolUI.update(f.data);assert.equal(f.host.querySelector('[data-generate]').disabled,false);assert.equal(f.find('REVIEW NAKKA HANDOFF — TEST').disabled,true);assert.equal(f.requests.length,3);
 });
 
 test('pool workspace selects physical boards and shows numbered pools sharing only available boards',async()=>{
- const f=fixture();f.host.querySelector('[data-boards]').value='1,7';await f.load();await f.generate();assert.match(f.host.textContent,/Bana 1/);assert.match(f.host.textContent,/Bana 7/);assert.match(f.host.textContent,/Grupp 1/);assert.doesNotMatch(f.host.textContent,/Pool A/);
+ const f=fixture();f.host.querySelector('[data-boards]').value='1,7';await f.load();await f.generate();assert.match(f.host.textContent,/Board 1/);assert.match(f.host.textContent,/Board 7/);assert.doesNotMatch(f.host.querySelector('[data-pool-draw]').textContent,/Group/);assert.doesNotMatch(f.host.textContent,/Pool A/);
  const first=f.host.querySelectorAll('[data-board-choice]')[0];await first.fire('click');assert.equal(f.host.querySelector('[data-boards]').value,'7');assert.match(f.host.textContent,/REVIEW INVALIDATED/);assert.equal(f.requests.length,2);
 });
 test('pool workspace invalid board ranges block drawing and excluded Nakka entries block approval',async()=>{
- const f=fixture();await f.load();f.host.querySelector('[data-boards]').value='1-4,4';await f.host.querySelector('[data-boards]').fire('input');assert.equal(f.find('GENERATE SEEDED PREVIEW').disabled,true);
+ const f=fixture();await f.load();f.host.querySelector('[data-boards]').value='1-4,4';await f.host.querySelector('[data-boards]').fire('input');assert.equal(f.host.querySelector('[data-generate]').disabled,true);
  f.host.querySelector('[data-boards]').value='1,7';await f.host.querySelector('[data-boards]').fire('input');await f.generate();await f.find('REVIEW NAKKA HANDOFF — TEST').fire('click');f.queue.shift().resolve({success:true,ticket:'approved',event:{title:'TEST',date:f.data.eventDate},setting:{},expectedCards:6,unassignedEntries:[{tpid:'extra',name:'Standby Player'}]});await f.tick();assert.match(f.host.textContent,/Standby Player/);const check=f.host.querySelector('.pool-approval').querySelector('input');check.checked=true;await check.fire('change');assert.equal(f.find('SEND APPROVED TEST POOLS').disabled,true);
 });
 
 test('pool review orders unresolved identities first and confirms generation only through popup',async()=>{
  const f=fixture();f.source.mappings[5].lpid='';await f.load();assert.equal(f.host.querySelectorAll('[data-binding]')[0].dataset.binding,'P5');
- await f.find('GENERATE SEEDED PREVIEW').fire('click');assert.equal(f.host.querySelector('[data-preview-confirm]').open,true);assert.equal(f.requests.length,1);assert.equal(f.find('GENERATE PREVIEW').disabled,true);await f.find('CANCEL').fire('click');assert.equal(f.requests.length,1);
+ await f.host.querySelector('[data-generate]').fire('click');assert.equal(f.host.querySelector('[data-preview-confirm]').open,true);assert.equal(f.requests.length,1);assert.equal(f.host.querySelector('[data-confirm-generate]').disabled,true);await f.find('CANCEL').fire('click');assert.equal(f.requests.length,1);
  await f.generate();assert.equal(f.host.querySelector('[data-preview-confirm]').open,false);assert.equal(f.requests.at(-1).page,'pooldraw');
 });
 test('pool invalidation retains group overview and disabled swaps with a specific reason',async()=>{
  const f=fixture();await f.load();await f.generate();f.data.players[0].status='OUT';f.window.BeautySeededPoolUI.update(f.data);
- assert.match(f.host.textContent,/Gruppöversikt/);assert.match(f.host.textContent,/IN roster or event date changed/);assert.equal(f.host.querySelector('[data-swap-player]').disabled,true);const n=f.requests.length;await f.host.querySelector('[data-swap-player]').fire('click');assert.equal(f.requests.length,n);
+ assert.match(f.host.textContent,/Group overview/);assert.match(f.host.textContent,/IN roster or event date changed/);assert.equal(f.host.querySelector('[data-swap-player]').disabled,true);const n=f.requests.length;await f.host.querySelector('[data-swap-player]').fire('click');assert.equal(f.requests.length,n);
 });
 
 
@@ -133,18 +134,18 @@ test('pool card picker excludes same group and marks exactly both exchanged play
  assert.equal(f.host.querySelector('[data-pool-draw]').children.at(-1).className,'pool-grid');
 });
 test('pool card labels reject collisions and preserve the frozen players and RPC ticket',async()=>{
- const f=fixture();await f.load();await f.generate();const before=f.requests.length,edit=f.host.querySelectorAll('button').find(n=>n._text==='Bana 2 ✎');await edit.fire('click');
+ const f=fixture();await f.load();await f.generate();const before=f.requests.length,edit=f.host.querySelectorAll('button').find(n=>n._text==='Board 2');await edit.fire('click');
  const group=f.host.querySelector('[data-edit-group]');group.value='2';await f.find('SAVE LABELS').fire('click');assert.match(f.host.textContent,/already used/);assert.equal(f.requests.length,before);
- group.value='3';await f.find('SAVE LABELS').fire('click');assert.match(f.host.textContent,/Grupp 3/);assert.equal(f.requests.length,before);assert.equal(f.host.querySelectorAll('[data-swap-player]').length,6);
+ group.value='3';await f.find('SAVE LABELS').fire('click');assert.match(f.host.textContent,/Group 3/);assert.equal(f.requests.length,before);assert.equal(f.host.querySelectorAll('[data-swap-player]').length,6);
 });
 test('pool compact identity warning hides when resolved and scheme counts remain visible',async()=>{
- const f=fixture();await f.load();assert.equal(f.host.querySelector('[data-identity-notice]').hidden,true);assert.match(f.host.querySelector('[data-plan-summary]').textContent,/2 × 3-manna.*0 × 4-manna/);
+ const f=fixture();await f.load();assert.equal(f.host.querySelector('[data-identity-notice]').hidden,true);assert.match(f.host.querySelector('[data-plan-summary]').textContent,/2 × 3-player groups.*0 × 4-player groups/);
  assert.equal(f.find('BACK TO DASHBOARD'),undefined);await f.generate();assert.equal(f.host.querySelector('[data-pool-draw]').children.length,1);
 });
 
 test('pool estimate works before boards are selected and updates with selected board count',async()=>{
  const f=fixture(),count=f.host.querySelector('[data-manual-count]'),boards=f.host.querySelector('[data-boards]');boards.value='';await boards.fire('input');count.value='16';await count.fire('input');assert.match(f.host.querySelector('[data-estimate]').textContent,/5 pools:.*No boards selected/);
- boards.value='1,7';await boards.fire('input');assert.match(f.host.querySelector('[data-estimate]').textContent,/2 banor/);assert.match(f.host.querySelector('[data-plan-summary]').textContent,/2 banor/);assert.equal(f.requests.length,0);
+ boards.value='1,7';await boards.fire('input');assert.match(f.host.querySelector('[data-estimate]').textContent,/2 boards/);assert.match(f.host.querySelector('[data-plan-summary]').textContent,/2 boards/);assert.equal(f.requests.length,0);
  count.value='4';await count.fire('input');assert.match(f.host.querySelector('[data-estimate]').textContent,/5 to 101/);assert.equal(f.data.players.length,6);
 });
 test('pool review is one expandable tab and calculation lives inside Advanced settings',async()=>{
@@ -154,7 +155,18 @@ test('pool review is one expandable tab and calculation lives inside Advanced se
 });
 
 test('pool toolbar orders review league advanced and buttons expand content without RPC or losing mappings',async()=>{
- const f=fixture(),row=f.host.querySelector('[data-pool-toolbar]');assert.deepEqual(row.children.map(n=>Object.keys(n.dataset)[0]),['reviewToggle','leagueSlot','advancedToggle']);assert.equal(f.host.querySelector('[data-review-toggle]').disabled,true);
+ const f=fixture(),row=f.host.querySelector('[data-pool-toolbar]');assert.deepEqual(row.children.map(n=>Object.keys(n.dataset)[0]),['reviewToggle','leagueSlot','advancedToggle',undefined]);assert.equal(f.host.querySelector('[data-review-toggle]').disabled,true);
  await f.load();const review=f.host.querySelector('[data-review-toggle]'),advanced=f.host.querySelector('[data-advanced-toggle]'),details=f.host.querySelector('[data-player-review]');assert.equal(review.disabled,false);await review.fire('click');assert.equal(details.open,true);assert.equal(review['aria-expanded'],'true');const ids=f.host.querySelectorAll('[data-binding]').map(n=>n.dataset.binding);
  await advanced.fire('click');assert.equal(f.host.querySelector('[data-advanced-settings]').open,true);await review.fire('click');assert.equal(details.open,false);assert.deepEqual(f.host.querySelectorAll('[data-binding]').map(n=>n.dataset.binding),ids);assert.equal(f.requests.length,1);await advanced.fire('click');assert.equal(f.host.querySelector('[data-advanced-settings]').open,false);
+});
+
+test('pool compact cards show groups only for shared boards and keep average in clickable player row',async()=>{
+ const f=fixture();await f.load();await f.generate();const cards=f.host.querySelectorAll('.pool-card');assert.equal(cards.length,2);assert.match(cards[0].querySelector('.pool-card-heading').textContent,/Board 2.*Group 1/);assert.match(cards[1].querySelector('.pool-card-heading').textContent,/Board 2.*Group 2/);assert.doesNotMatch(f.host.textContent,/✎/);const row=cards[0].querySelector('[data-swap-player]');assert.equal(row.children.length,2);await row.children[1].parentElement.fire('click');assert.ok(f.host.querySelector('[data-swap-picker]'));assert.equal(f.requests.length,2);
+});
+test('pool compact Nakka step preserves handoff gates and opens review without sending',async()=>{
+ const f=fixture(),nakka=f.host.querySelectorAll('[data-step]')[2];assert.equal(nakka.disabled,true);await f.load();assert.equal(nakka.disabled,true);await f.generate();assert.equal(nakka.disabled,false);await nakka.fire('click');assert.equal(f.requests.at(-1).page,'poolprepare');assert.equal(f.requests.some(r=>r.page==='poolsave'),false);
+});
+
+test('Hub board and group dialog picker and scheme are English while canonical draw metadata stays intact',async()=>{
+ const f=fixture();await f.load();await f.generate();const before=JSON.stringify(f.draw);await f.find('Board 2').fire('click');assert.ok(f.find('SAVE LABELS'));assert.match(f.host.textContent,/Edit Board \/ Group/);assert.doesNotMatch(f.host.textContent,/Bana|Grupp|manna|banor/);f.host.querySelector('[data-edit-board]').parentElement.parentElement.close();const p=f.host.querySelector('[data-swap-player]');await p.fire('click');assert.match(f.host.querySelector('[data-swap-picker]').textContent,/Board 2.*Group/);assert.equal(JSON.stringify(f.draw),before);assert.equal(f.requests.length,2);
 });

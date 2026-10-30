@@ -43,3 +43,18 @@ test('Dashboard unavailable storage is shown honestly rather than as an all-clea
 });
 
 test('Dashboard initializes from data that loaded before its external script',()=>{const u=ui(data([{name:'Anna',code:'MISSING_EVENT_ENTRY'}]));assert.equal(u.ids.inPlayerCount.textContent,'1');assert.equal(u.ids.attentionCount.textContent,'1');assert.equal(u.ids.attentionTile.hidden,false);});
+
+test('Hub player list filters and sorts Swedish names without changing source order or player identities',()=>{
+ const list=require('../public/js/hub-player-list.js'),players=[{player:'Östen',status:'IN'},{player:'Anna',status:'OUT'},{newPlayer:'Åsa',status:'STANDBY'}],before=JSON.stringify(players);
+ assert.deepEqual(list.arrange(players).map(p=>p.player||p.newPlayer),['Anna','Åsa','Östen']);assert.equal(list.arrange(players,{search:' ÅS '})[0],players[2]);assert.equal(list.arrange(players,{sort:'original'})[0],players[0]);assert.equal(JSON.stringify(players),before);
+});
+test('Hub player list requires verified ranking and complete timestamps and keeps unranked players last',()=>{
+ const list=require('../public/js/hub-player-list.js'),players=[{player:'Anna',rank:null},{player:'Zed',rank:1},{player:'Bea',rank:2}];assert.equal(list.capabilities(players,{}).ranking,false);assert.equal(list.arrange(players,{sort:'ranking'})[0].player,'Anna');assert.deepEqual(list.arrange(players,{sort:'ranking',rankingAvailable:true}).map(p=>p.player),['Zed','Bea','Anna']);assert.equal(list.capabilities(players,{}).registration,false);
+ const timed=[{player:'Zed',registeredAt:'2026-10-27T18:00:00Z'},{player:'Anna',registeredAt:'2026-10-27T18:01:00Z'}];assert.equal(list.capabilities(timed,{}).registration,true);assert.equal(list.arrange(timed,{sort:'registration'})[0],timed[0]);
+});
+
+test('Hub search persists across refresh and sorting keeps event records intact then resets on lock',()=>{
+ const handlers={},events={},sort={value:'alphabetical',options:['alphabetical','ranking','registration','original'].map(value=>({value})),addEventListener:(k,f)=>handlers['sort:'+k]=f},search={value:'',addEventListener:(k,f)=>handlers['search:'+k]=f},wrap={scrollTop:88},status={dataset:{}},title={dataset:{state:'matched'}},ids={hubPlayerSort:sort,hubPlayerSearch:search,hubListConnection:status,nakkaTournamentTitle:title};let rendered=[];
+ const c={document:{getElementById:id=>ids[id],querySelector:()=>wrap,addEventListener:(k,f)=>events[k]=f},BeautyHubServices:{mode:'test'},Date,beautyHubData:{players:[{player:'Zed',status:'OUT'},{player:'Anna',status:'IN'}]},updatePlayersTable(players){rendered=c.BeautyPlayerList.rows(players);}};c.window=c;vm.runInNewContext(fs.readFileSync('public/js/hub-player-list.js','utf8'),c);
+ search.value='ann';handlers['search:input']();assert.equal(rendered[0],c.beautyHubData.players[1]);assert.equal(wrap.scrollTop,0);c.beautyHubData.players.push({player:'Annika',status:'STANDBY'});c.updatePlayersTable(c.beautyHubData.players);assert.equal(rendered.length,2);assert.equal(sort.options[1].disabled,true);assert.equal(sort.options[2].disabled,true);c.BeautyPlayerList.connection(true);assert.match(status.textContent,/Nakka event verified/);events['beauty-hub-locked']();assert.equal(search.value,'');assert.equal(sort.value,'alphabetical');assert.match(status.textContent,/Sign in/);
+});

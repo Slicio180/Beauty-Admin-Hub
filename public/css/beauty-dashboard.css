@@ -395,3 +395,125 @@ body.pool-workspace-active .hub-masthead{position:sticky;top:0;z-index:5;backgro
 .pool-planner-workspace :is(.pool-player-review,.pool-advanced)[open]{display:block;margin:12px 0;padding:14px 18px;border:1px solid #383a3e;border-radius:8px}
 @media(max-width:1050px){.pool-toolbar{grid-template-columns:minmax(160px,1fr) minmax(300px,1.5fr) minmax(150px,1fr)}.pool-toolbar .pool-status-card{grid-template-columns:1fr}.pool-toolbar .pool-status-card button{grid-row:auto;grid-column:1;justify-self:start}.pool-toolbar > button,.pool-toolbar .pool-status-card{min-height:110px}}
 @media(max-width:760px){.pool-toolbar{grid-template-columns:1fr}.pool-toolbar > button,.pool-toolbar .pool-status-card{min-height:84px}}
+
+/* Approved Pool Plan mockup · 30 October 2026. AIK fonts, existing TEST engine. */
+.hub-masthead{box-sizing:border-box;min-height:112px;padding:16px 28px;border-bottom:1px solid #303438;background:linear-gradient(110deg,#090b0c,#101314 55%,#090b0c)}
+.masthead-brand{max-width:280px;border-right:1px solid #b8bec6;padding-right:30px}
+.masthead-brand img{width:250px;height:78px;max-width:100%;object-fit:contain}
+.hub-layout{grid-template-columns:224px minmax(0,1fr)}
+.sidebar{padding:26px 0 12px;border-right:1px solid #303438;background:linear-gradient(110deg,#101416,#090b0c)}
+body .sidebar>button{border-radius:0;min-height:64px;padding:14px 24px;gap:22px;font:400 22px/1.2 'AIK Display',serif!important}
+body.pool-workspace-active .masthead-title{font:700 64px/1.05 'AIK Display',serif;color:#fff}
+body.pool-workspace-active .main-content{padding:24px 26px 14px;background:#090b0c}
+.pool-planner-workspace .pool-page-heading{display:none}
+.pool-planner-workspace .pool-setup{display:grid;grid-template-columns:300px 260px minmax(0,1fr);align-items:center;gap:0;border:1px solid #303438;border-radius:6px;padding:10px 18px;background:linear-gradient(110deg,#101314,#090b0c);min-height:68px;box-sizing:border-box}
+.pool-planner-workspace .pool-setup .pool-in-tile{grid-row:auto;display:flex;flex-direction:row;align-items:center;justify-content:space-between;border:0;border-right:1px solid #303438;border-radius:0;padding:0 30px 0 14px;margin-right:28px;gap:20px}
+.pool-planner-workspace .pool-setup .pool-in-tile>strong[data-in-count]{font:400 58px/1 'AIK Siffror',serif}
+.pool-planner-workspace .pool-setup>div:nth-child(2){display:flex;align-items:center;gap:18px}
+.pool-planner-workspace .pool-setup>div:nth-child(2)>.label{max-width:76px}
+.pool-planner-workspace .pool-size-choices{display:flex;gap:12px;margin:0!important;min-height:44px}
+body .pool-planner-workspace .pool-size-choices button{width:60px;min-height:44px;padding:4px 14px;font:400 24px/1 'AIK Siffror',serif!important}
+.pool-planner-workspace .pool-setup .pool-scheme-tile{grid-column:auto;border:0;border-left:1px solid #303438;padding:0 0 0 24px;display:flex;gap:26px;align-items:center}
+.pool-planner-workspace .pool-scheme-tile p{margin:0;font:400 23px/1.2 'AIK Display',serif}
+.pool-planner-workspace .label{font:700 18px/1.2 'AIK Condensed',serif}
+.pool-board-row{display:flex;align-items:center;gap:18px;padding:8px 10px 8px 16px;margin:12px 0 16px;border:1px solid #303438;border-radius:6px;background:#0c0e0f}
+.pool-board-row .pool-board-choices{flex:1;display:grid;grid-template-columns:repeat(16,minmax(28px,1fr));gap:10px;margin:0}
+body .pool-board-row button{font:700 19px/1.1 'AIK Condensed',serif!important;padding:6px 8px;margin:0;min-height:42px;min-width:0}
+body .pool-board-row [data-generate]{flex:0 0 auto;padding:8px 18px;font-size:17px!important}
+.pool-toolbar{display:flex;gap:16px;align-items:stretch;margin:0 0 22px}
+body .pool-toolbar>button{min-height:48px;padding:8px 20px;border-radius:5px;font:700 20px/1.2 'AIK Condensed',serif!important;white-space:nowrap}
+.pool-toolbar [data-league-slot]{flex:1;min-width:210px}
+.pool-toolbar .pool-status-card{display:flex;align-items:center;gap:12px;min-height:48px;padding:6px 12px;border:1px solid #303438;border-radius:5px;background:#0d1011}
+.pool-toolbar .pool-status-card strong{flex:1;font:400 17px/1.1 'AIK Display',serif}
+.pool-toolbar .pool-status-card p{display:none}
+body .pool-toolbar .pool-status-card button{font:400 16px/1.1 'AIK Display',serif!important;border:0!important;min-height:32px;padding:4px;color:#fff!important;background:transparent!important}
+.pool-toolbar .pool-progress{display:flex;gap:12px;padding:0;margin:0}
+.pool-toolbar .pool-progress li{padding:0;margin:0}
+body .pool-toolbar .pool-progress button{display:flex;align-items:center;justify-content:center;gap:10px;border-color:#737a80!important;color:#fff!important;min-height:48px;min-width:94px;padding:6px 14px;font:400 18px/1 'AIK Display',serif!important;background:#0d1011!important}
+body .pool-toolbar .pool-progress button[data-active=true]{background:#ffd700!important;color:#080808!important;border-color:#ffd700!important}
+.pool-toolbar .pool-progress .pool-number{font:400 22px/1 'AIK Siffror',serif}
+.pool-toolbar .pool-progress strong{font-weight:400}
+.pool-planner-workspace .pool-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 20px;margin:0}
+.pool-planner-workspace .pool-card{position:relative;border:1px solid #303438;border-radius:6px;background:linear-gradient(115deg,#101415,#0b0d0e);padding:9px 16px 8px;overflow:visible}
+.pool-card::before{content:'';position:absolute;top:-1px;left:0;width:32%;height:4px;background:#ffd700;border-radius:4px 0 0}
+.pool-planner-workspace .pool-card-heading{display:flex;align-items:start;justify-content:space-between;gap:12px;padding:0;border:0;min-height:30px}
+body .pool-planner-workspace .pool-card .pool-edit-label{font:700 30px/1 'AIK Condensed',serif!important;min-height:30px;padding:0!important;border:0!important;background:transparent!important;color:#fff!important;border-radius:0;letter-spacing:0}
+body .pool-planner-workspace .pool-card-heading .pool-edit-label:nth-child(2){font:400 21px/1.2 'AIK Display',serif!important}
+.pool-planner-workspace .pool-group-heading{padding:0;margin:0 0 10px;min-height:24px;border:0;justify-content:flex-end;background:transparent}
+.pool-planner-workspace .pool-group-heading .pool-number{font:400 25px/1 'AIK Siffror',serif;color:#ffd700}
+.pool-planner-workspace .pool-card ol{padding:0;margin:0;list-style:none}
+.pool-planner-workspace .pool-card li{display:block;min-height:0;padding:0;border:0;border-bottom:1px solid #282e30;font-weight:400}
+.pool-planner-workspace .pool-card li:last-child{border-bottom:0}
+body .pool-planner-workspace .pool-card .pool-player-name{box-sizing:border-box;display:flex;justify-content:space-between;align-items:center;gap:16px;width:100%;min-height:31px;margin:0;padding:3px 0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none;color:#fff!important;text-align:left;font:400 22px/1.15 'AIK Display',serif!important;letter-spacing:0}
+.pool-player-name>span:first-child{min-width:0;overflow-wrap:anywhere}
+.pool-planner-workspace .pool-card .pool-player-name .pool-number,.pool-planner-workspace .pool-card .pool-player-name .pool-unseeded{flex:none;font:400 21px/1 'AIK Display',serif;color:#fff;border:0;padding:0;background:transparent}
+body .pool-planner-workspace .pool-card .pool-player-name[data-swapped=true]>span:first-child{color:#ffd700}
+body .pool-planner-workspace .pool-card .pool-player-name:hover:not(:disabled){background:#171b1c!important;text-decoration:none}
+.pool-planner-workspace [data-draw-utilities]>.pool-preview-heading,.pool-planner-workspace [data-draw-utilities]>.pool-draw-notes,.pool-planner-workspace [data-draw-utilities]>.pool-preview-tools,.pool-planner-workspace [data-draw-utilities]>button,.pool-planner-workspace [data-draw-utilities]>.pool-action-bar{display:none}
+.pool-planner-workspace .pool-advanced[open]~[data-draw-utilities]>.pool-preview-heading,.pool-planner-workspace .pool-advanced[open]~[data-draw-utilities]>.pool-preview-tools,.pool-planner-workspace .pool-advanced[open]~[data-draw-utilities]>.pool-action-bar{display:flex}
+.pool-planner-workspace .pool-advanced[open]~[data-draw-utilities]>.pool-draw-notes,.pool-planner-workspace .pool-advanced[open]~[data-draw-utilities]>button{display:block}
+.pool-planner-workspace [data-pool-message]{font-size:16px;margin:0 0 12px;padding:4px 10px}
+.pool-planner-workspace .pool-advanced [data-boards]{display:block;background:#080808;color:#ffd700;border:1px solid #ffd700;padding:8px;max-width:100%;font:400 20px 'AIK Display',serif}
+@media(max-width:1380px){.hub-layout{grid-template-columns:190px minmax(0,1fr)}.pool-toolbar{gap:10px;flex-wrap:wrap}.pool-toolbar [data-league-slot]{flex:1}.pool-board-row{flex-wrap:wrap}.pool-board-row .pool-board-choices{flex-basis:80%;gap:6px}.pool-planner-workspace .pool-setup{grid-template-columns:230px 230px minmax(0,1fr)}.pool-planner-workspace .pool-scheme-tile p{font-size:21px}.pool-planner-workspace .pool-setup .pool-scheme-tile{gap:14px;padding-left:18px}}
+@media(max-width:1050px){.pool-planner-workspace .pool-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.pool-planner-workspace .pool-setup{grid-template-columns:1fr 1fr;row-gap:12px}.pool-planner-workspace .pool-setup .pool-scheme-tile{grid-column:1/-1;border-left:0;padding-left:0}.pool-board-row .pool-board-choices{grid-template-columns:repeat(8,minmax(28px,1fr))}.masthead-brand{padding-right:12px}.masthead-brand img{width:190px}body.pool-workspace-active .masthead-title{font-size:48px}}
+@media(max-width:760px){.hub-layout{grid-template-columns:1fr}.sidebar{display:grid;padding:8px;grid-template-columns:repeat(2,minmax(0,1fr))}body .sidebar>button{min-height:44px;padding:8px 12px;font-size:19px!important}.hub-masthead{min-height:96px;padding:12px;gap:10px}.masthead-brand{border:0;padding:0}.masthead-brand img{height:58px}.pool-toolbar{flex-wrap:wrap}.pool-toolbar [data-league-slot]{order:0;flex-basis:100%}.pool-toolbar .pool-progress{flex-wrap:wrap}.pool-planner-workspace .pool-grid{grid-template-columns:1fr}body.pool-workspace-active .main-content{padding:14px}.pool-board-row .pool-board-choices{grid-template-columns:repeat(8,minmax(24px,1fr));flex-basis:100%}.pool-planner-workspace .pool-setup{padding:10px;grid-template-columns:1fr 1fr}.pool-planner-workspace .pool-setup .pool-in-tile{padding:0 12px 0 0;margin:0 10px 0 0}.pool-planner-workspace .pool-size-choices{gap:6px}.pool-planner-workspace .pool-setup>div:nth-child(2){gap:8px}.pool-planner-workspace .pool-size-choices button{width:40px}.pool-planner-workspace .pool-scheme-tile p{font-size:20px}}
+.pool-masthead-date{display:none}
+body.pool-workspace-active .masthead-event>span,body.pool-workspace-active #nakkaTournamentTitle{display:none}
+body.pool-workspace-active .pool-masthead-date{display:flex;align-items:center;gap:18px;font:400 22px/1.2 'AIK Display',serif;white-space:nowrap}
+.pool-masthead-date b{font:700 24px/1 'AIK Condensed',serif;color:#ffd700;border:1px solid #ffd700;border-radius:5px;padding:12px 22px}
+@media(min-width:1381px){.pool-board-row [data-generate]{max-width:190px}.pool-planner-workspace .pool-toolbar{gap:12px}.pool-toolbar>button{padding-left:16px!important;padding-right:16px!important}.pool-toolbar .pool-progress button{min-width:90px;padding:6px 12px}.pool-toolbar .pool-progress{gap:10px}}
+@media(max-width:1050px){body.pool-workspace-active .pool-masthead-date{font-size:18px;gap:10px}}
+
+/* Main Hub approved 30 October: integrated summary and fifteen roomy list rows. */
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.hub-masthead{grid-template-columns:minmax(220px,1fr) auto minmax(180px,1fr) auto auto;gap:18px;position:sticky;top:0;z-index:5}
+.masthead-title{font:700 56px/1.05 'AIK Display',serif;color:#fff}
+body.pool-workspace-active .masthead-title{font-size:56px}
+.masthead-event{font:400 20px/1.2 'AIK Display',serif;max-width:300px}
+.masthead-event strong{font:400 20px/1.2 'AIK Display',serif}
+.masthead-event #nakkaTournamentDate{display:block;font:400 20px/1.2 'AIK Display',serif;margin-top:4px;color:#fff}
+body.pool-workspace-active #nakkaTournamentTitle{display:block}
+body.pool-workspace-active .masthead-event>span#nakkaTournamentDate{display:block}
+.hub-test-badge{font:700 20px/1 'AIK Condensed',serif;color:#ffd700;border:1px solid #ffd700;border-radius:5px;padding:10px 14px}
+body .masthead-session button{font:400 20px/1 'AIK Display',serif!important;color:#fff!important;border:0!important;border-left:1px solid #3b4245!important;border-radius:0;background:transparent!important;white-space:nowrap;padding:8px 0 8px 18px}
+.main-content{padding:18px 16px 14px;background:#090b0c}
+.event-identity{display:none}
+.players-workspace{border:1px solid #30383b;border-radius:6px;background:linear-gradient(110deg,#101415,#090b0c);overflow:hidden;margin:0;padding:0;min-width:0}
+.players-workspace>.dashboard-summary{display:grid;grid-template-columns:1fr .85fr 1.15fr auto;align-items:center;gap:24px;margin:0;padding:16px 24px;border-bottom:1px solid #30383b;min-height:100px;box-sizing:border-box}
+.players-workspace .summary-card{position:relative;min-height:60px;padding:0 22px 0 0;gap:16px;border:0;border-right:1px solid #424b50;border-radius:0!important;background:transparent!important;flex-wrap:nowrap!important}
+.players-workspace .summary-card>.hub-icon,.players-workspace .summary-card>.attention-icon{display:none}
+.players-workspace .summary-card span:not(.attention-icon){display:table;font:700 18px/1.2 'AIK Condensed',serif;color:#fff;letter-spacing:0}
+.players-workspace .summary-card span:not(.attention-icon)::before{content:'';display:block;width:100%;height:2px;background:#ffd700;margin-bottom:8px}
+.players-workspace .summary-card strong{font:400 44px/1 'AIK Siffror',serif;color:#ffd700;margin:2px 0 0}
+.players-workspace #attentionCard[data-active=true] strong{color:#ffd700}
+body .players-workspace .attention-review-button{font:400 20px/1.1 'AIK Display',serif!important;min-height:36px;padding:6px 18px;margin-left:auto}
+body .players-workspace #registerPlayerButton{font:700 20px/1.1 'AIK Condensed',serif!important;min-height:44px;margin:0;padding:10px 20px;white-space:nowrap}
+.player-list-controls{display:flex;align-items:center;gap:22px;padding:12px 20px;border-bottom:1px solid #30383b;min-height:66px;box-sizing:border-box}
+.player-list-controls input,.player-list-controls select{box-sizing:border-box;background:#0e1315!important;color:#fff!important;border:1px solid #526068;border-radius:5px;min-height:44px;margin:0;padding:8px 12px;font:400 20px/1.2 'AIK Display',serif!important}
+.player-list-controls select{width:250px;max-width:100%}.player-list-controls input{flex:1;min-width:150px;max-width:490px}.player-list-controls input::placeholder{color:#b8bec6}
+#hubListConnection{font:400 18px/1.2 'AIK Display',serif;margin:0 0 0 auto;color:#fff;max-width:300px}
+#hubListConnection::before{content:'●';margin-right:10px;color:#d3a537}#hubListConnection[data-state=ok]::before{color:#28d465}#hubListConnection[data-state=problem]::before{color:#ff4747}
+.players-workspace>.players-table-wrap{height:max(640px,calc(100dvh - 304px));max-height:none;overflow:auto;scrollbar-width:thin;scrollbar-color:#53616a transparent;overscroll-behavior:contain}
+.players-workspace .players-table{border-collapse:separate;border-spacing:0;width:100%;min-width:880px;table-layout:fixed}
+.players-workspace .players-table th{position:sticky;top:0;z-index:2;background:#0d1113;color:#fff;font:700 18px/1.2 'AIK Condensed',serif;padding:10px 14px;height:40px;box-sizing:border-box;letter-spacing:0;border-bottom:1px solid #30383b}
+.players-workspace .players-table td{box-sizing:border-box;height:40px;padding:4px 14px;border-bottom:1px solid #252d30;font:400 20px/1.2 'AIK Display',serif;vertical-align:middle}
+.players-workspace .players-table td:first-child{font:400 22px/1 'AIK Siffror',serif;color:#ffd700}
+.players-workspace .players-table td:nth-child(2){font:400 22px/1.2 'AIK Display',serif;color:#fff}
+.players-workspace .players-table :is(th,td):nth-child(1){width:6%}.players-workspace .players-table :is(th,td):nth-child(2){width:30%}.players-workspace .players-table :is(th,td):nth-child(3){width:14%}.players-workspace .players-table :is(th,td):nth-child(4){width:15%}.players-workspace .players-table :is(th,td):nth-child(5){width:14%}.players-workspace .players-table :is(th,td):nth-child(6){width:21%;min-width:0;text-align:left}
+.players-workspace .status-select{font:400 20px/1.1 'AIK Display',serif!important;width:112px;min-width:0;max-width:100%;min-height:32px;height:32px;padding:3px 20px 3px 10px;border-radius:5px;border:1px solid;background:#0d2717;color:#fff}
+.players-workspace .status-in{background:#0d2717;border-color:#28d465}.players-workspace .status-out{background:#351313;border-color:#ff424b}.players-workspace .status-standby{background:#302609;border-color:#ffd700;color:#ffd700}
+.players-workspace .consent-badge,body .players-workspace .message-read-button{box-sizing:border-box;display:inline-flex;justify-content:center;align-items:center;min-width:74px;min-height:32px;height:32px;font:400 20px/1.1 'AIK Display',serif!important;padding:3px 12px;border:1px solid;border-radius:5px;letter-spacing:0;margin:0}
+.players-workspace .consent-yes{background:#0d2717;border-color:#28d465;color:#fff}.players-workspace .consent-no{background:#351313;border-color:#ff424b;color:#fff}
+body .players-workspace .message-read-button{border-color:#ffd700!important;background:transparent!important;color:#fff!important}
+.players-workspace .player-source-actions{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.players-workspace .player-source-label{font:400 20px/1.2 'AIK Display',serif}
+body .players-workspace .remove-player-button{display:inline-flex;align-items:center;justify-content:center;min-width:32px;width:32px;height:32px;min-height:32px;border:0!important;background:transparent!important;color:#fff!important;padding:5px;margin:0}
+.remove-player-button svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:1100px){.hub-masthead{grid-template-columns:minmax(150px,1fr) auto minmax(150px,1fr) auto;gap:12px}.masthead-session{grid-column:4}.hub-test-badge{grid-column:4;grid-row:1;align-self:start;transform:translateY(-12px)}.masthead-session{grid-row:1;align-self:end;transform:translateY(16px)}.masthead-title,body.pool-workspace-active .masthead-title{font-size:42px}.masthead-event strong,.masthead-event #nakkaTournamentDate{font-size:18px}.players-workspace>.dashboard-summary{gap:14px;padding:14px}.players-workspace .summary-card{padding-right:12px;gap:8px}.players-workspace .summary-card span:not(.attention-icon){font-size:17px}.player-list-controls{gap:12px;flex-wrap:wrap}#hubListConnection{max-width:none;font-size:16px}.players-workspace .player-source-actions{display:flex}.players-workspace .players-table :is(th,td){padding-left:10px;padding-right:10px}}
+@media(max-width:760px){.hub-masthead{position:static;grid-template-columns:1fr auto;gap:12px;min-height:0}.masthead-title,body.pool-workspace-active .masthead-title{font-size:36px}.masthead-event{grid-column:1;grid-row:2;justify-self:start;text-align:left}.hub-test-badge{grid-column:2;grid-row:2;transform:none;align-self:center}.masthead-session{grid-column:2;grid-row:3;transform:none}.players-workspace>.dashboard-summary{grid-template-columns:1fr 1fr;gap:16px}.players-workspace .summary-card{min-height:60px;border-right:0}.players-workspace #attentionCard{grid-column:1}.players-workspace #registerPlayerButton{grid-column:2;white-space:normal;padding:8px}.player-list-controls select,.player-list-controls input{width:100%;flex-basis:100%;max-width:none}#hubListConnection{margin:0}.players-workspace>.players-table-wrap{height:640px}.players-workspace .players-table{min-width:960px}}
+/* Equal left/right tracks keep the page title truly centred. */
+.hub-masthead{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}
+.masthead-meta{display:flex;align-items:center;justify-content:flex-end;gap:18px;min-width:0}
+.masthead-meta .masthead-event{min-width:0}.masthead-meta .hub-test-badge,.masthead-meta .masthead-session{flex:none;transform:none;align-self:center}
+@media(max-width:1100px){.masthead-meta{gap:10px}.masthead-meta .masthead-event strong,.masthead-meta .masthead-event #nakkaTournamentDate{font-size:17px}.masthead-meta .hub-test-badge{padding:8px;font-size:17px}body .masthead-session button{font-size:17px!important;padding-left:10px}}
+@media(max-width:760px){.hub-masthead{grid-template-columns:1fr auto}.masthead-meta{grid-column:1/-1;flex-wrap:wrap;justify-content:space-between}.masthead-meta .masthead-event{grid-column:auto;grid-row:auto;flex:1}.masthead-meta .masthead-session{grid-column:auto;grid-row:auto}}

@@ -158,6 +158,7 @@ function updatePlayersTable(players) {
     return;
   }
 
+  players = window.BeautyPlayerList?.rows(players) || players;
   tableBody.replaceChildren();
 
   if (!players.length) {
@@ -171,7 +172,7 @@ function updatePlayersTable(players) {
     cell.colSpan = 6;
 
     cell.textContent =
-      'No players registered yet.';
+      window.BeautyPlayerList?.searching() ? 'No players match your search.' : 'No players registered yet.';
 
     row.appendChild(cell);
     tableBody.appendChild(row);
@@ -251,7 +252,7 @@ addCell(
       if (BeautyHubServices.mode === 'test' && window.BeautyPlayerRemoval) {
         const sourceCell = row.lastElementChild;
         const remove = document.createElement('button');
-        remove.type = 'button'; remove.className = 'remove-player-button'; remove.textContent = 'REMOVE';
+        remove.type = 'button'; remove.className = 'remove-player-button'; remove.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7m4-7v7"/></svg>';
         remove.setAttribute('aria-label', 'Remove ' + (player.player || player.newPlayer) + ' from this event');
         remove.addEventListener('click', () => window.BeautyPlayerRemoval.open(player, remove));
         const actions = document.createElement('div');
@@ -779,6 +780,7 @@ BEAUTY BACKEND STATUS
 */
 
 function setBeautyConnected() {
+  window.BeautyPlayerList?.connection(true);
   const nav = document.getElementById('systemStatusNavButton');
   if(nav) {
     const live = BeautyHubServices.mode === 'test';
@@ -823,6 +825,7 @@ function setBeautyConnected() {
 function setBeautyDisconnected(
   errorMessage
 ) {
+  window.BeautyPlayerList?.connection(false);
   window.BeautyPoolPlanner?.unavailable();
   const nav = document.getElementById('systemStatusNavButton');
   if(nav){nav.setAttribute('data-health','problem');nav.setAttribute('title','Google Sheets — connection problem');nav.setAttribute('aria-label','System Status — connection problem');}

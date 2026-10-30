@@ -8,7 +8,7 @@
    if(busy)return;let token,generation;try{token=window.BeautyHubAuth.token();generation=window.BeautyHubAuth.generation();}catch{alert('Sign in before opening the stage display.');return;}
    const tab=window.open('about:blank','_blank');if(!tab){alert('Allow pop-ups to open the stage display.');return;}tab.opener=null;tab.document.body.textContent='Opening TEST pool and knockout display…';busy=true;button.disabled=true;
    const fail=()=>{tab.close();busy=false;button.disabled=false;if(window.BeautyHubAuth.isCurrent(generation))alert('Could not open the stage display. Check the selected TEST event and session.');};
-   try{google.script.run.withSuccessHandler(url=>{if(!window.BeautyHubAuth.isCurrent(generation)||!valid(url)){fail();return;}busy=false;button.disabled=false;if(!tab.closed)tab.location.href=url;}).withFailureHandler(fail).beautyStageTestUrl(token);}catch{fail();}
+   try{const openStage=()=>google.script.run.withSuccessHandler(url=>{if(!window.BeautyHubAuth.isCurrent(generation)||!valid(url)){fail();return;}busy=false;button.disabled=false;if(!tab.closed)tab.location.href=url;}).withFailureHandler(fail).beautyStageTestUrl(token);if(window.beautyStagePendingLabels){google.script.run.withSuccessHandler(()=>{if(!window.BeautyHubAuth.isCurrent(generation)){fail();return;}window.beautyStagePendingLabels=null;openStage();}).withFailureHandler(fail).beautyStageLabelsTest(token,window.beautyStagePendingLabels);}else openStage();}catch{fail();}
   });
  });
 })();
