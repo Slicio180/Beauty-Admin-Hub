@@ -1,0 +1,14 @@
+{
+  "result": "PASS",
+  "finishedUTC": "2026-10-31T15:35:43.851Z",
+  "baseline": "LivePolish",
+  "checkpoint": "ad64659",
+  "tests": 656,
+  "testFiles": 52,
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Prepared-Tonight-Backups/Beauty-Admin-Hub/live-refine-before-2026-10-31T15-35-03-249Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/mac-live-refine-2026-10-31T15-35-03-249Z",
+  "googleUpload": "PENDING",
+  "commit": "NONE",
+  "providerWrites": "NONE",
+  "browserReview": "PENDING"
+}

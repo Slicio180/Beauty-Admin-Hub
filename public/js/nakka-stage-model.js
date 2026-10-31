@@ -66,9 +66,12 @@
    const rounds=table.map((players,round)=>{
     if(!Array.isArray(players)||players.length>1024)fail();
     const slots=players.map(slot),matches=[];
+    // Only explicit numeric opening guide values; never substitute league ranks.
+    const guide=t[kind+'_init'],candidate=Array.isArray(guide?.[0])?guide[0]:guide;
+    const drawNumbers=round===0&&Array.isArray(candidate)&&candidate.length===players.length&&candidate.every(n=>Number.isInteger(n)&&n>0&&n<=players.length)&&new Set(candidate).size===candidate.length?candidate:null;
     for(let i=0;i<slots.length;i+=2){const left=slots[i],right=slots[i+1]||{id:null,name:'Awaiting player',state:'pending'};
      const results=t[kind+'_result']?.[round],a=left.id&&right.id?results?.[left.id]?.[right.id]:null,b=left.id&&right.id?results?.[right.id]?.[left.id]:null;
-     matches.push({key:kind+'-'+round+'-'+i,board:badge(t,kind+'-'+round+'-'+i),left,right,leftScore:number(a?.r),rightScore:number(b?.r),leftAverage:number(a?.a),rightAverage:number(b?.a)});
+     matches.push({leftDrawNumber:drawNumbers?.[i]??null,rightDrawNumber:drawNumbers?.[i+1]??null,key:kind+'-'+round+'-'+i,board:badge(t,kind+'-'+round+'-'+i),left,right,leftScore:number(a?.r),rightScore:number(b?.r),leftAverage:number(a?.a),rightAverage:number(b?.a)});
     }
     return {round:round+1,slotCount:players.length,format:format(t[kind+'_setting'],round,players.length),matches};
    });

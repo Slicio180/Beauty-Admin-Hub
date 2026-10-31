@@ -1,0 +1,14 @@
+{
+  "feature": "LIVE-SHELL-20261031",
+  "verifiedUTC": "2026-10-31T12:55:07.628573+00:00",
+  "result": "PASS",
+  "tests": 637,
+  "testFiles": 50,
+  "inventory": "PASS",
+  "ownerBaseline": "ad64659",
+  "googleUpload": "NOT_PERFORMED",
+  "browserReview": "PENDING",
+  "nativeNakkaScoring": "PENDING",
+  "providerWrites": "NONE",
+  "productionChanges": "NONE"
+}

@@ -1005,3 +1005,57 @@ Baseline588offline tests/inventory PASS; no rerun for documentation-only record.
 Board/group headings, readable review, A-final bestof5 and dynamic event selection
 remain pending. Production unqualified. No new event writes by this recorder.
 Numbered AUD-register reconciliation remains open; existing entries preserved.
+
+## Dated continuation — LIVE-SHELL-20261031 (no AUD number assigned)
+Approved public four-tab shell/knockout design implemented and tested offline.
+637cases/50files, inventory and installer rehearsal recorded in
+`evidence/live-shell-20261031/` and `docs/handoff/live-shell-20261031.md`.
+Owner baselinead64659 verified against saved artifact hashes; separate standalone
+folder preserved. Installation/Google upload/native/browser acceptance PENDING.
+No provider or production writes. Numbered audit-register reconciliation pending.
+
+###31October2026 — POOL-CARDS-20261031 (owner-approved design)
+Two-column six-card pool layout with all-three and mixed-three/four-player row
+tracks. Completely blank padding rows; bounded first/surname/average lines;
+provider rank, exact legs totals, paired translucent live cells.646offline tests
+across52files PASS; native browser, Google readback and live-game acceptance
+PENDING. No new AUD number assigned. TEST only. See pool-layout-approved-20261031.md.
+
+
+31October2026 — CAST-FOOTER-20261031: native screenshots showed excess footer rows/clipped pool cards. Pagination merged into one reserved footer; player duplicate hidden, fullscreen errors remain visible.648offline tests/52files PASS; device re-review PENDING. No new AUD number.
+
+
+31October2026 — CAST-LAYOUT-FIX-20261031: owner reported oversized Grupp and inconsistent four-group card heights. Fixed236/288px row tracks with space below; Grupp22px. Includes pending footer correction.648tests/52files PASS; native re-review PENDING.
+
+
+31October2026 — LIVE-POLISH-20261031: owner authorised all paused feedback. Per-pair mixed layout fit, uppercase/count tile/icons/menu, authenticated planned-board editing and live plan reload.654tests/52files PASS; native/browser and actual newGoogle readback PENDING. No AUD number invented; no Nakka assignment writes.
+
+
+
+
+
+31October2026 — POOL-READABILITY-20261031: native pool typography feedback applied: loweredBANA/single accent, centredGRUPP, half-row average target, larger two-line names and right-side event average.656tests/52files PASS; actual newGoogle/native reviewPENDING. No AUD sequence invented.
+
+
+31October2026 — APPROVED-LIVE-20261031: approved3px/133% BANA accent, bounded larger names, single main title/borderless count, tab-row icon docking with selected-panel fullscreen.658offline tests/52filesPASS; newGoogle/native reviewPENDING. Six-hour login held. No AUD number invented.
+
+
+31October2026 — FOUR-GROUP-FILL-20261031: small SPELARE label removed bothviews, full four-group grid fills viewport, Start/Nu captions halfaveragefont.659offline tests/52filesPASS; actualnewGoogle/browserreviewPENDING. No AUD number invented.
+
+
+31October2026 — LIVE-USABILITY-20261031: equal four-group cardtracks acrosspartialpages, top pagingarrows, bold halfsizecaptionlabels, clarified displayboard dropdown and nonzero schemetiles, yellowpageedge; six-hour revocable TESTsession/durablecachefallback/browsermemoryonly.664tests/52filesPASS; actualnewGoogle/native acceptancePENDING. No AUD sequence invented.
+
+
+31October2026 — COMPACT-REVIEW-20261031: ownerlocalUsability664PASS, GooglebaselineSTOPbeforeupload; compactlogin/boardsummary pendingUI665PASS. ReadonlyGooglecomparison collected before anyguardedauthmerge/upload. NoAUDnumber invented.
+
+
+31October2026 — GOOGLE-AUTH-RECONCILE-20261031: uploadedreview provesonlytwoleading-space formattingdifference inGoogleauthprobe; exactactualhash7df44 reviewed,preserved. LocalUsability664installed/GoogleLiveFillunchanged splitstate retained. FinalcompactUI665PASS; guardedResume package usescorrectindependentbaselines. ActualnewGoogle/nativepending. NoAUDsequence invented.
+
+
+31 October 2026 — POOLS-LABEL-20261031: add POOLS between board count and vertically stacked equal-width pool-size tiles. 665 tests/52 files PASS; Google/native review pending. No AUD number invented.
+
+
+31 October 2026 — POOL-ROW-20261031: explicit board/pool summary grid, visible POOLS slot, centred controls and aligned dividers; stacked equal-width tiles retained. 665 tests/52 files PASS; native/Google review pending. No AUD sequence invented.
+
+
+31 October 2026 — PLANNER-STYLE-20261031: approved full-width summary with equal 22px headings and matching light toolbar controls; white default/yellow selected. 665 tests/52 files PASS; native/Google new update pending. No AUD number invented.

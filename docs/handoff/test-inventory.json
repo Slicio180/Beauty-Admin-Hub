@@ -2414,7 +2414,7 @@
     "expected": "PASS",
     "evidenceLabel": "VERIFIED locally",
     "origin": "New coverage at source checkpoint 23a0b93",
-    "evidence": "evidence/hub-english-date-review-20261025/full-regression.tap",
+    "evidence": "evidence/live-polish-20261031/tests.txt",
     "limitations": "Local fixture checks updated for English Hub and separate Event Details; historical evidence retained. Real Google/browser review remains separate."
   },
   {
@@ -3282,7 +3282,7 @@
     "expected": "Only approved verified sessions may use Hub; logout/expiry reject access",
     "evidenceLabel": "VERIFIED",
     "origin": "Dedicated Beauty Firebase integration 2026-10-26",
-    "evidence": "evidence/hub-auth-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Local fake-service tests; actual Firebase and Google browser acceptance pending."
   },
   {
@@ -3295,7 +3295,7 @@
     "expected": "Only approved verified sessions may use Hub; logout/expiry reject access",
     "evidenceLabel": "VERIFIED",
     "origin": "Dedicated Beauty Firebase integration 2026-10-26",
-    "evidence": "evidence/hub-auth-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Local fake-service tests; actual Firebase and Google browser acceptance pending."
   },
   {
@@ -3308,7 +3308,7 @@
     "expected": "Only approved verified sessions may use Hub; logout/expiry reject access",
     "evidenceLabel": "VERIFIED",
     "origin": "Dedicated Beauty Firebase integration 2026-10-26",
-    "evidence": "evidence/hub-auth-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Local fake-service tests; actual Firebase and Google browser acceptance pending."
   },
   {
@@ -3321,7 +3321,7 @@
     "expected": "Only approved verified sessions may use Hub; logout/expiry reject access",
     "evidenceLabel": "VERIFIED",
     "origin": "Dedicated Beauty Firebase integration 2026-10-26",
-    "evidence": "evidence/hub-auth-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Local fake-service tests; actual Firebase and Google browser acceptance pending."
   },
   {
@@ -3334,7 +3334,7 @@
     "expected": "Only approved verified sessions may use Hub; logout/expiry reject access",
     "evidenceLabel": "VERIFIED",
     "origin": "Dedicated Beauty Firebase integration 2026-10-26",
-    "evidence": "evidence/hub-auth-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Local fake-service tests; actual Firebase and Google browser acceptance pending."
   },
   {
@@ -3347,7 +3347,7 @@
     "expected": "Only approved verified sessions may use Hub; logout/expiry reject access",
     "evidenceLabel": "VERIFIED",
     "origin": "Dedicated Beauty Firebase integration 2026-10-26",
-    "evidence": "evidence/hub-auth-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Local fake-service tests; actual Firebase and Google browser acceptance pending."
   },
   {
@@ -3360,7 +3360,7 @@
     "expected": "Only approved verified sessions may use Hub; logout/expiry reject access",
     "evidenceLabel": "VERIFIED",
     "origin": "Dedicated Beauty Firebase integration 2026-10-26",
-    "evidence": "evidence/hub-auth-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Local fake-service tests; actual Firebase and Google browser acceptance pending."
   },
   {
@@ -3373,7 +3373,7 @@
     "expected": "Only approved verified sessions may use Hub; logout/expiry reject access",
     "evidenceLabel": "VERIFIED",
     "origin": "Dedicated Beauty Firebase integration 2026-10-26",
-    "evidence": "evidence/hub-auth-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Local fake-service tests; actual Firebase and Google browser acceptance pending."
   },
   {
@@ -3386,20 +3386,20 @@
     "expected": "Only approved verified sessions may use Hub; logout/expiry reject access",
     "evidenceLabel": "VERIFIED",
     "origin": "Dedicated Beauty Firebase integration 2026-10-26",
-    "evidence": "evidence/hub-auth-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Local fake-service tests; actual Firebase and Google browser acceptance pending."
   },
   {
     "id": "AUTH-SRV-010",
     "file": "tests/hub-auth.test.cjs",
-    "name": "Hub auth: removing approval and cache eviction revoke existing sessions",
+    "name": "Hub auth: removing approval revokes sessions while cache eviction retains the six-hour session",
     "requirement": "SEC-001",
     "kind": "Executable authentication behavior with fake Firebase/RPC/DOM/time",
     "purpose": "Validate server access gates and shared-computer session behavior",
     "expected": "Only approved verified sessions may use Hub; logout/expiry reject access",
     "evidenceLabel": "VERIFIED",
     "origin": "Dedicated Beauty Firebase integration 2026-10-26",
-    "evidence": "evidence/hub-auth-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Local fake-service tests; actual Firebase and Google browser acceptance pending."
   },
   {
@@ -3412,7 +3412,7 @@
     "expected": "Only approved verified sessions may use Hub; logout/expiry reject access",
     "evidenceLabel": "VERIFIED",
     "origin": "Dedicated Beauty Firebase integration 2026-10-26",
-    "evidence": "evidence/hub-auth-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Local fake-service tests; actual Firebase and Google browser acceptance pending."
   },
   {
@@ -3425,7 +3425,7 @@
     "expected": "Only approved verified sessions may use Hub; logout/expiry reject access",
     "evidenceLabel": "VERIFIED",
     "origin": "Dedicated Beauty Firebase integration 2026-10-26",
-    "evidence": "evidence/hub-auth-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Local fake-service tests; actual Firebase and Google browser acceptance pending."
   },
   {
@@ -3438,7 +3438,7 @@
     "expected": "Only approved verified sessions may use Hub; logout/expiry reject access",
     "evidenceLabel": "VERIFIED",
     "origin": "Dedicated Beauty Firebase integration 2026-10-26",
-    "evidence": "evidence/hub-auth-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Local fake-service tests; actual Firebase and Google browser acceptance pending."
   },
   {
@@ -3451,7 +3451,7 @@
     "expected": "Only approved verified sessions may use Hub; logout/expiry reject access",
     "evidenceLabel": "VERIFIED",
     "origin": "Dedicated Beauty Firebase integration 2026-10-26",
-    "evidence": "evidence/hub-auth-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Local fake-service tests; actual Firebase and Google browser acceptance pending."
   },
   {
@@ -3464,7 +3464,7 @@
     "expected": "Only approved verified sessions may use Hub; logout/expiry reject access",
     "evidenceLabel": "VERIFIED",
     "origin": "Dedicated Beauty Firebase integration 2026-10-26",
-    "evidence": "evidence/hub-auth-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Local fake-service tests; actual Firebase and Google browser acceptance pending."
   },
   {
@@ -3477,7 +3477,7 @@
     "expected": "Only approved verified sessions may use Hub; logout/expiry reject access",
     "evidenceLabel": "VERIFIED",
     "origin": "Dedicated Beauty Firebase integration 2026-10-26",
-    "evidence": "evidence/hub-auth-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Local fake-service tests; actual Firebase and Google browser acceptance pending."
   },
   {
@@ -3490,7 +3490,7 @@
     "expected": "Padded decode succeeds; verification remains mandatory; diagnostics exclude credentials",
     "evidenceLabel": "VERIFIED",
     "origin": "Native TEST login failed after AUD-079",
-    "evidence": "evidence/hub-auth-verification-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Native cause and successful login remain unconfirmed until browser retest."
   },
   {
@@ -3503,7 +3503,7 @@
     "expected": "Padded decode succeeds; verification remains mandatory; diagnostics exclude credentials",
     "evidenceLabel": "VERIFIED",
     "origin": "Native TEST login failed after AUD-079",
-    "evidence": "evidence/hub-auth-verification-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Native cause and successful login remain unconfirmed until browser retest."
   },
   {
@@ -3516,7 +3516,7 @@
     "expected": "Padded decode succeeds; verification remains mandatory; diagnostics exclude credentials",
     "evidenceLabel": "VERIFIED",
     "origin": "Native TEST login failed after AUD-079",
-    "evidence": "evidence/hub-auth-verification-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Native cause and successful login remain unconfirmed until browser retest."
   },
   {
@@ -3789,7 +3789,7 @@
     "expected": "Only approved verified sessions may use Hub; logout/expiry reject access",
     "evidenceLabel": "VERIFIED",
     "origin": "Dedicated Beauty Firebase integration 2026-10-26",
-    "evidence": "evidence/hub-auth-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Local fake-service tests; actual Firebase and Google browser acceptance pending."
   },
   {
@@ -3802,7 +3802,7 @@
     "expected": "Only approved verified sessions may use Hub; logout/expiry reject access",
     "evidenceLabel": "VERIFIED",
     "origin": "Dedicated Beauty Firebase integration 2026-10-26",
-    "evidence": "evidence/hub-auth-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Local fake-service tests; actual Firebase and Google browser acceptance pending."
   },
   {
@@ -3815,7 +3815,7 @@
     "expected": "Only approved verified sessions may use Hub; logout/expiry reject access",
     "evidenceLabel": "VERIFIED",
     "origin": "Dedicated Beauty Firebase integration 2026-10-26",
-    "evidence": "evidence/hub-auth-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Local fake-service tests; actual Firebase and Google browser acceptance pending."
   },
   {
@@ -3828,7 +3828,7 @@
     "expected": "Only approved verified sessions may use Hub; logout/expiry reject access",
     "evidenceLabel": "VERIFIED",
     "origin": "Dedicated Beauty Firebase integration 2026-10-26",
-    "evidence": "evidence/hub-auth-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Local fake-service tests; actual Firebase and Google browser acceptance pending."
   },
   {
@@ -3841,7 +3841,7 @@
     "expected": "Only approved verified sessions may use Hub; logout/expiry reject access",
     "evidenceLabel": "VERIFIED",
     "origin": "Dedicated Beauty Firebase integration 2026-10-26",
-    "evidence": "evidence/hub-auth-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Local fake-service tests; actual Firebase and Google browser acceptance pending."
   },
   {
@@ -3854,7 +3854,7 @@
     "expected": "Only approved verified sessions may use Hub; logout/expiry reject access",
     "evidenceLabel": "VERIFIED",
     "origin": "Dedicated Beauty Firebase integration 2026-10-26",
-    "evidence": "evidence/hub-auth-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Local fake-service tests; actual Firebase and Google browser acceptance pending."
   },
   {
@@ -3867,7 +3867,7 @@
     "expected": "Only approved verified sessions may use Hub; logout/expiry reject access",
     "evidenceLabel": "VERIFIED",
     "origin": "Dedicated Beauty Firebase integration 2026-10-26",
-    "evidence": "evidence/hub-auth-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Local fake-service tests; actual Firebase and Google browser acceptance pending."
   },
   {
@@ -3880,7 +3880,7 @@
     "expected": "Only approved verified sessions may use Hub; logout/expiry reject access",
     "evidenceLabel": "VERIFIED",
     "origin": "Dedicated Beauty Firebase integration 2026-10-26",
-    "evidence": "evidence/hub-auth-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Local fake-service tests; actual Firebase and Google browser acceptance pending."
   },
   {
@@ -3893,7 +3893,7 @@
     "expected": "Only approved verified sessions may use Hub; logout/expiry reject access",
     "evidenceLabel": "VERIFIED",
     "origin": "Dedicated Beauty Firebase integration 2026-10-26",
-    "evidence": "evidence/hub-auth-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Local fake-service tests; actual Firebase and Google browser acceptance pending."
   },
   {
@@ -3906,7 +3906,7 @@
     "expected": "Only approved verified sessions may use Hub; logout/expiry reject access",
     "evidenceLabel": "VERIFIED",
     "origin": "Dedicated Beauty Firebase integration 2026-10-26",
-    "evidence": "evidence/hub-auth-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Local fake-service tests; actual Firebase and Google browser acceptance pending."
   },
   {
@@ -3919,7 +3919,7 @@
     "expected": "Identity/target/stale/duplicate guards prevent writes; one confirmed add verifies or stays uncertain without retry; busy renewal keeps expiry gates",
     "evidenceLabel": "LOCAL ONLY",
     "origin": "AUD-092",
-    "evidence": "evidence/nakka-controlled-transfer-20261027/scope.md",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "No actual Google or Nakka write was executed by automated tests."
   },
   {
@@ -3932,7 +3932,7 @@
     "expected": "Identity/target/stale/duplicate guards prevent writes; one confirmed add verifies or stays uncertain without retry; busy renewal keeps expiry gates",
     "evidenceLabel": "LOCAL ONLY",
     "origin": "AUD-092",
-    "evidence": "evidence/nakka-controlled-transfer-20261027/scope.md",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "No actual Google or Nakka write was executed by automated tests."
   },
   {
@@ -3945,7 +3945,7 @@
     "expected": "Padded decode succeeds; verification remains mandatory; diagnostics exclude credentials",
     "evidenceLabel": "VERIFIED",
     "origin": "Native TEST login failed after AUD-079",
-    "evidence": "evidence/hub-auth-verification-20261026/tests.tap",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Native cause and successful login remain unconfirmed until browser retest."
   },
   {
@@ -6298,7 +6298,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/pool-review-20261029/tests.txt",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6311,7 +6311,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/pool-review-20261029/tests.txt",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6324,7 +6324,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/pool-review-20261029/tests.txt",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6337,7 +6337,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/pool-review-20261029/tests.txt",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6350,7 +6350,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/pool-review-20261029/tests.txt",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6363,7 +6363,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/pool-review-20261029/tests.txt",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6376,7 +6376,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/pool-review-20261029/tests.txt",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6389,7 +6389,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/pool-review-20261029/tests.txt",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6402,7 +6402,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/pool-review-20261029/tests.txt",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6415,7 +6415,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/pool-review-20261029/tests.txt",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6428,7 +6428,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
     "origin": "Owner Pool Planner To Do, 28 October 2026",
-    "evidence": "evidence/pool-review-20261029/tests.txt",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "No Google upload or Nakka mutation performed by these tests. Native averages, settings and match cards require owner review."
   },
   {
@@ -6441,7 +6441,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE VISUAL REVIEW PENDING",
     "origin": "Owner approved mockup28Oct2026",
-    "evidence": "evidence/pool-review-20261029/tests.txt",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Synthetic DOM has no layout engine. Native viewport/typography checks remain pending."
   },
   {
@@ -6454,7 +6454,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE VISUAL REVIEW PENDING",
     "origin": "Owner approved mockup28Oct2026",
-    "evidence": "evidence/pool-review-20261029/tests.txt",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Synthetic DOM has no layout engine. Native viewport/typography checks remain pending."
   },
   {
@@ -6467,7 +6467,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE VISUAL REVIEW PENDING",
     "origin": "Owner approved mockup28Oct2026",
-    "evidence": "evidence/pool-review-20261029/tests.txt",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Synthetic DOM has no layout engine. Native viewport/typography checks remain pending."
   },
   {
@@ -6480,7 +6480,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE VISUAL REVIEW PENDING",
     "origin": "Owner approved mockup28Oct2026",
-    "evidence": "evidence/pool-review-20261029/tests.txt",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Synthetic DOM has no layout engine. Native viewport/typography checks remain pending."
   },
   {
@@ -6493,7 +6493,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE VISUAL REVIEW PENDING",
     "origin": "Owner approved mockup28Oct2026",
-    "evidence": "evidence/pool-review-20261029/tests.txt",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Synthetic DOM has no layout engine. Native viewport/typography checks remain pending."
   },
   {
@@ -6506,7 +6506,7 @@
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL TESTS; NATIVE VISUAL REVIEW PENDING",
     "origin": "Owner approved mockup28Oct2026",
-    "evidence": "evidence/pool-review-20261029/tests.txt",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Synthetic DOM has no layout engine. Native viewport/typography checks remain pending."
   },
   {
@@ -6520,7 +6520,7 @@
     "evidenceLabel": "LOCAL_TESTED",
     "origin": "Owner request29Oct2026",
     "limitations": "Synthetic fixtures; native/provider verification still pending",
-    "evidence": "evidence/pool-review-20261029/tests.txt"
+    "evidence": "evidence/live-usability-20261031/tests.txt"
   },
   {
     "id": "PREP-501",
@@ -6533,7 +6533,7 @@
     "evidenceLabel": "LOCAL_TESTED",
     "origin": "Owner request29Oct2026",
     "limitations": "Synthetic fixtures; native/provider verification still pending",
-    "evidence": "evidence/pool-review-20261029/tests.txt"
+    "evidence": "evidence/live-usability-20261031/tests.txt"
   },
   {
     "id": "POOL-REVIEW-UI-001",
@@ -6546,7 +6546,7 @@
     "evidenceLabel": "LOCAL_TESTED",
     "origin": "Owner request29Oct2026",
     "limitations": "Local fixtures; native Google visual review and real Nakka send not verified",
-    "evidence": "evidence/pool-review-20261029/tests.txt"
+    "evidence": "evidence/live-usability-20261031/tests.txt"
   },
   {
     "id": "POOL-REVIEW-UI-002",
@@ -6559,7 +6559,7 @@
     "evidenceLabel": "LOCAL_TESTED",
     "origin": "Owner request29Oct2026",
     "limitations": "Local fixtures; native Google visual review and real Nakka send not verified",
-    "evidence": "evidence/pool-review-20261029/tests.txt"
+    "evidence": "evidence/live-usability-20261031/tests.txt"
   },
   {
     "id": "POOL-LAYOUT-22",
@@ -6572,7 +6572,7 @@
     "evidenceLabel": "LOCAL_TESTED",
     "origin": "Owner request29Oct2026",
     "limitations": "Offline UI behavior; native TEST review pending",
-    "evidence": "evidence/pool-layout-20261029/tests.txt"
+    "evidence": "evidence/live-usability-20261031/tests.txt"
   },
   {
     "id": "POOL-LAYOUT-23",
@@ -6585,7 +6585,7 @@
     "evidenceLabel": "LOCAL_TESTED",
     "origin": "Owner request29Oct2026",
     "limitations": "Offline UI behavior; native TEST review pending",
-    "evidence": "evidence/pool-layout-20261029/tests.txt"
+    "evidence": "evidence/live-usability-20261031/tests.txt"
   },
   {
     "id": "POOL-LAYOUT-24",
@@ -6598,7 +6598,7 @@
     "evidenceLabel": "LOCAL_TESTED",
     "origin": "Owner request29Oct2026",
     "limitations": "Offline UI behavior; native TEST review pending",
-    "evidence": "evidence/pool-layout-20261029/tests.txt"
+    "evidence": "evidence/live-usability-20261031/tests.txt"
   },
   {
     "id": "POOL-CONTROLS-1",
@@ -6611,7 +6611,7 @@
     "evidenceLabel": "LOCAL_TESTED",
     "origin": "Owner request29Oct2026",
     "limitations": "Offline UI behavior; native TEST visual review pending",
-    "evidence": "evidence/pool-controls-20261029/tests.txt"
+    "evidence": "evidence/live-usability-20261031/tests.txt"
   },
   {
     "id": "POOL-CONTROLS-2",
@@ -6624,7 +6624,7 @@
     "evidenceLabel": "LOCAL_TESTED",
     "origin": "Owner request29Oct2026",
     "limitations": "Offline UI behavior; native TEST visual review pending",
-    "evidence": "evidence/pool-controls-20261029/tests.txt"
+    "evidence": "evidence/live-usability-20261031/tests.txt"
   },
   {
     "id": "POOL-TOOLBAR-1",
@@ -6637,7 +6637,7 @@
     "evidenceLabel": "LOCAL_TESTED",
     "origin": "Owner request29Oct2026",
     "limitations": "Offline behavior only; native visual review pending",
-    "evidence": "evidence/pool-toolbar-20261029/tests.txt"
+    "evidence": "evidence/live-usability-20261031/tests.txt"
   },
   {
     "id": "POOL-ELEGANT-1",
@@ -6650,7 +6650,7 @@
     "evidenceLabel": "LOCAL_TESTED",
     "origin": "Owner request29Oct2026",
     "limitations": "Offline behavioral checks; owner native visual review pending",
-    "evidence": "evidence/pool-elegant-20261030/tests.txt"
+    "evidence": "evidence/live-usability-20261031/tests.txt"
   },
   {
     "id": "POOL-ELEGANT-2",
@@ -6663,7 +6663,7 @@
     "evidenceLabel": "LOCAL_TESTED",
     "origin": "Owner request29Oct2026",
     "limitations": "Offline behavioral checks; owner native visual review pending",
-    "evidence": "evidence/pool-elegant-20261030/tests.txt"
+    "evidence": "evidence/live-usability-20261031/tests.txt"
   },
   {
     "id": "LANGUAGE-HUB-1",
@@ -6676,7 +6676,7 @@
     "evidenceLabel": "LOCAL_TESTED",
     "origin": "Owner request29Oct2026",
     "limitations": "Offline behavior and generated pages; native UI acceptance pending",
-    "evidence": "evidence/language-fix-20261030/tests.txt"
+    "evidence": "evidence/live-usability-20261031/tests.txt"
   },
   {
     "id": "SEEDED-POOL-013",
@@ -7938,5 +7938,629 @@
     "origin": "Owner30Oct2026",
     "evidence": "evidence/venue-cast-20261030/tests.txt",
     "limitations": "Executable offline behavior; actual Nakka live scoring, Google upload and screen visual acceptance pending"
+  },
+  {
+    "id": "LIVE-SHELL-1",
+    "file": "tests/live-shell.test.cjs",
+    "name": "live shell has four slim Swedish tabs and one selected shared panel with internal fullscreen",
+    "requirement": "LIVE-SHELL-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Independent cast views, selected-panel fullscreen, readable connected bracket, public TEST live feed, guarded opener",
+    "expected": "Named behavior assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approval30Oct2026; resumed31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Offline model/DOM behavior and source layout assertions; real Google browser, device pixels, native Nakka scoring and guide shape acceptance pending"
+  },
+  {
+    "id": "LIVE-SHELL-2",
+    "file": "tests/live-shell.test.cjs",
+    "name": "live shell requests fullscreen on selected panel and preserves chosen view when exiting",
+    "requirement": "LIVE-SHELL-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Independent cast views, selected-panel fullscreen, readable connected bracket, public TEST live feed, guarded opener",
+    "expected": "Named behavior assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approval30Oct2026; resumed31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Offline model/DOM behavior and source layout assertions; real Google browser, device pixels, native Nakka scoring and guide shape acceptance pending"
+  },
+  {
+    "id": "LIVE-SHELL-3",
+    "file": "tests/live-shell.test.cjs",
+    "name": "live windows keep independent round choices scroll positions and continue refresh without resetting",
+    "requirement": "LIVE-SHELL-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Independent cast views, selected-panel fullscreen, readable connected bracket, public TEST live feed, guarded opener",
+    "expected": "Named behavior assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approval30Oct2026; resumed31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Offline model/DOM behavior and source layout assertions; real Google browser, device pixels, native Nakka scoring and guide shape acceptance pending"
+  },
+  {
+    "id": "LIVE-SHELL-4",
+    "file": "tests/live-shell.test.cjs",
+    "name": "live pool paging and automatic rotation retain approved card renderer and pause outside pools",
+    "requirement": "LIVE-SHELL-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Independent cast views, selected-panel fullscreen, readable connected bracket, public TEST live feed, guarded opener",
+    "expected": "Named behavior assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approval30Oct2026; resumed31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Offline model/DOM behavior and source layout assertions; real Google browser, device pixels, native Nakka scoring and guide shape acceptance pending"
+  },
+  {
+    "id": "LIVE-SHELL-5",
+    "file": "tests/live-shell.test.cjs",
+    "name": "live knockout scroll pauses for controls interaction hidden pages and reduced motion",
+    "requirement": "LIVE-SHELL-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Independent cast views, selected-panel fullscreen, readable connected bracket, public TEST live feed, guarded opener",
+    "expected": "Named behavior assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approval30Oct2026; resumed31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Offline model/DOM behavior and source layout assertions; real Google browser, device pixels, native Nakka scoring and guide shape acceptance pending"
+  },
+  {
+    "id": "LIVE-SHELL-6",
+    "file": "tests/live-shell.test.cjs",
+    "name": "live shell failure pause offline and page exit remove current status and stop scheduled work",
+    "requirement": "LIVE-SHELL-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Independent cast views, selected-panel fullscreen, readable connected bracket, public TEST live feed, guarded opener",
+    "expected": "Named behavior assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approval30Oct2026; resumed31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Offline model/DOM behavior and source layout assertions; real Google browser, device pixels, native Nakka scoring and guide shape acceptance pending"
+  },
+  {
+    "id": "LIVE-SHELL-7",
+    "file": "tests/live-shell.test.cjs",
+    "name": "live public list and stage event dates must agree before bracket content is displayed",
+    "requirement": "LIVE-SHELL-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Independent cast views, selected-panel fullscreen, readable connected bracket, public TEST live feed, guarded opener",
+    "expected": "Named behavior assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approval30Oct2026; resumed31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Offline model/DOM behavior and source layout assertions; real Google browser, device pixels, native Nakka scoring and guide shape acceptance pending"
+  },
+  {
+    "id": "LIVE-SHELL-8",
+    "file": "tests/live-shell.test.cjs",
+    "name": "knockout layout aligns all source centres and target centres exactly with orthogonal paths",
+    "requirement": "LIVE-SHELL-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Independent cast views, selected-panel fullscreen, readable connected bracket, public TEST live feed, guarded opener",
+    "expected": "Named behavior assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approval30Oct2026; resumed31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Offline model/DOM behavior and source layout assertions; real Google browser, device pixels, native Nakka scoring and guide shape acceptance pending"
+  },
+  {
+    "id": "LIVE-SHELL-9",
+    "file": "tests/live-shell.test.cjs",
+    "name": "knockout round navigation remains readable for full narrow and split windows without champion column",
+    "requirement": "LIVE-SHELL-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Independent cast views, selected-panel fullscreen, readable connected bracket, public TEST live feed, guarded opener",
+    "expected": "Named behavior assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approval30Oct2026; resumed31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Offline model/DOM behavior and source layout assertions; real Google browser, device pixels, native Nakka scoring and guide shape acceptance pending"
+  },
+  {
+    "id": "LIVE-SHELL-10",
+    "file": "tests/live-shell.test.cjs",
+    "name": "knockout cards keep literal names every average and opening-only draw numbers inside player identity",
+    "requirement": "LIVE-SHELL-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Independent cast views, selected-panel fullscreen, readable connected bracket, public TEST live feed, guarded opener",
+    "expected": "Named behavior assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approval30Oct2026; resumed31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Offline model/DOM behavior and source layout assertions; real Google browser, device pixels, native Nakka scoring and guide shape acceptance pending"
+  },
+  {
+    "id": "LIVE-SHELL-11",
+    "file": "tests/live-shell.test.cjs",
+    "name": "knockout preserves missing averages pending slots byes third place and provider final format",
+    "requirement": "LIVE-SHELL-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Independent cast views, selected-panel fullscreen, readable connected bracket, public TEST live feed, guarded opener",
+    "expected": "Named behavior assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approval30Oct2026; resumed31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Offline model/DOM behavior and source layout assertions; real Google browser, device pixels, native Nakka scoring and guide shape acceptance pending"
+  },
+  {
+    "id": "LIVE-SHELL-12",
+    "file": "tests/live-shell.test.cjs",
+    "name": "knockout draw numbers use only unique numeric provider opening guide and never league ranks",
+    "requirement": "LIVE-SHELL-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Independent cast views, selected-panel fullscreen, readable connected bracket, public TEST live feed, guarded opener",
+    "expected": "Named behavior assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approval30Oct2026; resumed31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Offline model/DOM behavior and source layout assertions; real Google browser, device pixels, native Nakka scoring and guide shape acceptance pending"
+  },
+  {
+    "id": "LIVE-SHELL-13",
+    "file": "tests/live-shell.test.cjs",
+    "name": "knockout live cycle uses exact event round pair and maps reversed provider player order",
+    "requirement": "LIVE-SHELL-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Independent cast views, selected-panel fullscreen, readable connected bracket, public TEST live feed, guarded opener",
+    "expected": "Named behavior assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approval30Oct2026; resumed31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Offline model/DOM behavior and source layout assertions; real Google browser, device pixels, native Nakka scoring and guide shape acceptance pending"
+  },
+  {
+    "id": "LIVE-SHELL-14",
+    "file": "tests/live-shell.test.cjs",
+    "name": "knockout live collector excludes unrelated fixtures and refuses invalid identities sets and incomplete totals",
+    "requirement": "LIVE-SHELL-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Independent cast views, selected-panel fullscreen, readable connected bracket, public TEST live feed, guarded opener",
+    "expected": "Named behavior assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approval30Oct2026; resumed31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Offline model/DOM behavior and source layout assertions; real Google browser, device pixels, native Nakka scoring and guide shape acceptance pending"
+  },
+  {
+    "id": "LIVE-SHELL-15",
+    "file": "tests/live-shell.test.cjs",
+    "name": "knockout CSS reserves two-line rows single one-pixel title accent and one connector layer",
+    "requirement": "LIVE-SHELL-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Independent cast views, selected-panel fullscreen, readable connected bracket, public TEST live feed, guarded opener",
+    "expected": "Named behavior assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approval30Oct2026; resumed31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Offline model/DOM behavior and source layout assertions; real Google browser, device pixels, native Nakka scoring and guide shape acceptance pending"
+  },
+  {
+    "id": "LIVE-SHELL-16",
+    "file": "tests/live-shell.test.cjs",
+    "name": "both TEST cast routes embed identical wired shell scripts without external asset dependencies",
+    "requirement": "LIVE-SHELL-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Independent cast views, selected-panel fullscreen, readable connected bracket, public TEST live feed, guarded opener",
+    "expected": "Named behavior assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approval30Oct2026; resumed31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Offline model/DOM behavior and source layout assertions; real Google browser, device pixels, native Nakka scoring and guide shape acceptance pending"
+  },
+  {
+    "id": "LIVE-SHELL-17",
+    "file": "tests/live-shell.test.cjs",
+    "name": "Hub Beauty Live clicks open new independent tabs and reject late signed-out callbacks",
+    "requirement": "LIVE-SHELL-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Independent cast views, selected-panel fullscreen, readable connected bracket, public TEST live feed, guarded opener",
+    "expected": "Named behavior assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approval30Oct2026; resumed31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Offline model/DOM behavior and source layout assertions; real Google browser, device pixels, native Nakka scoring and guide shape acceptance pending"
+  },
+  {
+    "id": "LIVE-SHELL-18",
+    "file": "tests/live-shell.test.cjs",
+    "name": "Hub Beauty Live opener rejects foreign unguarded duplicate-query and fragment URLs",
+    "requirement": "LIVE-SHELL-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Independent cast views, selected-panel fullscreen, readable connected bracket, public TEST live feed, guarded opener",
+    "expected": "Named behavior assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approval30Oct2026; resumed31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Offline model/DOM behavior and source layout assertions; real Google browser, device pixels, native Nakka scoring and guide shape acceptance pending"
+  },
+  {
+    "id": "LIVE-SHELL-19",
+    "file": "tests/live-shell.test.cjs",
+    "name": "combined live URL uses the selected event date guard rather than returning a bare route",
+    "requirement": "LIVE-SHELL-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Independent cast views, selected-panel fullscreen, readable connected bracket, public TEST live feed, guarded opener",
+    "expected": "Named behavior assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approval30Oct2026; resumed31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Offline model/DOM behavior and source layout assertions; real Google browser, device pixels, native Nakka scoring and guide shape acceptance pending"
+  },
+  {
+    "id": "LIVE-SHELL-20",
+    "file": "tests/live-shell.test.cjs",
+    "name": "feed knockout option reuses one match list and propagates live match data through full and fast cycles",
+    "requirement": "LIVE-SHELL-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Independent cast views, selected-panel fullscreen, readable connected bracket, public TEST live feed, guarded opener",
+    "expected": "Named behavior assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approval30Oct2026; resumed31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Offline model/DOM behavior and source layout assertions; real Google browser, device pixels, native Nakka scoring and guide shape acceptance pending"
+  },
+  {
+    "id": "POOL-NAME-1",
+    "file": "tests/venue-player-names.test.cjs",
+    "name": "pool display name split preserves multipart surnames and leaves single-name second line empty",
+    "requirement": "LIVE-SHELL-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Fixed first-name and surname display lines with full-stop truncation and preserved full identity",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner31Oct2026",
+    "evidence": "evidence/pool-names-20261031/tests.txt",
+    "limitations": "Offline behavior and CSS contract; native browser card dimensions pending"
+  },
+  {
+    "id": "POOL-NAME-2",
+    "file": "tests/venue-player-names.test.cjs",
+    "name": "pool display truncates to one full stop without changing fitting names or splitting graphemes",
+    "requirement": "LIVE-SHELL-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Fixed first-name and surname display lines with full-stop truncation and preserved full identity",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner31Oct2026",
+    "evidence": "evidence/pool-names-20261031/tests.txt",
+    "limitations": "Offline behavior and CSS contract; native browser card dimensions pending"
+  },
+  {
+    "id": "POOL-NAME-3",
+    "file": "tests/venue-player-names.test.cjs",
+    "name": "pool name rendering keeps two bounded lines full-name accessibility and separate average",
+    "requirement": "LIVE-SHELL-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Fixed first-name and surname display lines with full-stop truncation and preserved full identity",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner31Oct2026",
+    "evidence": "evidence/pool-names-20261031/tests.txt",
+    "limitations": "Offline behavior and CSS contract; native browser card dimensions pending"
+  },
+  {
+    "id": "POOL-CARDS-1",
+    "file": "tests/venue-pool-cards.test.cjs",
+    "name": "approved pool cards show six three-player cards without fourth columns or blank rows",
+    "requirement": "POOL-CARDS-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Approved equal pool cards for three players and mixed three/four groups",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approved31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Offline DOM/data behavior and CSS contracts; native screen acceptance pending"
+  },
+  {
+    "id": "POOL-CARDS-2",
+    "file": "tests/venue-pool-cards.test.cjs",
+    "name": "mixed pool page pads only the three-player neighbour of a four-player pool",
+    "requirement": "POOL-CARDS-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Approved equal pool cards for three players and mixed three/four groups",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approved31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Offline DOM/data behavior and CSS contracts; native screen acceptance pending"
+  },
+  {
+    "id": "POOL-CARDS-3",
+    "file": "tests/venue-pool-cards.test.cjs",
+    "name": "pool card row count follows the visible page and ranking remains provider-owned",
+    "requirement": "POOL-CARDS-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Approved equal pool cards for three players and mixed three/four groups",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approved31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Offline DOM/data behavior and CSS contracts; native screen acceptance pending"
+  },
+  {
+    "id": "POOL-CARDS-4",
+    "file": "tests/venue-pool-cards.test.cjs",
+    "name": "pool legs totals include exact result and live cells and refuse ambiguous totals",
+    "requirement": "POOL-CARDS-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Approved equal pool cards for three players and mixed three/four groups",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approved31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Offline DOM/data behavior and CSS contracts; native screen acceptance pending"
+  },
+  {
+    "id": "POOL-CARDS-5",
+    "file": "tests/venue-pool-cards.test.cjs",
+    "name": "pool cards preserve paired live highlights averages and missing values without LIVE tags",
+    "requirement": "POOL-CARDS-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Approved equal pool cards for three players and mixed three/four groups",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approved31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Offline DOM/data behavior and CSS contracts; native screen acceptance pending"
+  },
+  {
+    "id": "POOL-CARDS-6",
+    "file": "tests/venue-pool-cards.test.cjs",
+    "name": "approved pool layout uses two columns fixed name slots blank padding and internal fullscreen",
+    "requirement": "POOL-CARDS-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Approved equal pool cards for three players and mixed three/four groups",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approved31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "CSS contracts only; four/six page native size parity pending re-review"
+  },
+  {
+    "id": "CAST-FOOTER-21",
+    "file": "tests/live-shell.test.cjs",
+    "name": "pool paging arrows sit above cards and footer is absent below the player footer",
+    "requirement": "LIVE-SHELL-20261031",
+    "kind": "Executable offline DOM and CSS contracts",
+    "purpose": "Single reserved footer row with no duplicate player footer or hidden error",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner native screenshots31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Actual device layout acceptance pending owner review"
+  },
+  {
+    "id": "CAST-FOOTER-22",
+    "file": "tests/live-shell.test.cjs",
+    "name": "cast footer keeps fullscreen failure visible and reserves space without covering cards",
+    "requirement": "LIVE-SHELL-20261031",
+    "kind": "Executable offline DOM and CSS contracts",
+    "purpose": "Single reserved footer row with no duplicate player footer or hidden error",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner native screenshots31Oct2026",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Actual device layout acceptance pending owner review"
+  },
+  {
+    "id": "LIVE-POLISH-1-23",
+    "file": "tests/live-shell.test.cjs",
+    "name": "live plan labels reload in existing windows and late callbacks are ignored after exit",
+    "requirement": "LIVE-POLISH-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Visible neighbour sizing and fit, shared icon/menu/count controls, or authenticated planned-board edit",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner31Oct2026 paused feedback now authorised",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Actual browser/device fit and real Google readback pending; no Nakka assignment mutation"
+  },
+  {
+    "id": "LIVE-POLISH-1-24",
+    "file": "tests/live-shell.test.cjs",
+    "name": "all shared live views keep icon buttons and one menu with list settings and count tile",
+    "requirement": "LIVE-POLISH-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Visible neighbour sizing and fit, shared icon/menu/count controls, or authenticated planned-board edit",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner31Oct2026 paused feedback now authorised",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Actual browser/device fit and real Google readback pending; no Nakka assignment mutation"
+  },
+  {
+    "id": "LIVE-POLISH-2-7",
+    "file": "tests/venue-pool-cards.test.cjs",
+    "name": "pool layout fits mixed neighbours on the observed cast viewport and keeps lower rows shorter",
+    "requirement": "LIVE-POLISH-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Visible neighbour sizing and fit, shared icon/menu/count controls, or authenticated planned-board edit",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner31Oct2026 paused feedback now authorised",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Actual browser/device fit and real Google readback pending; no Nakka assignment mutation"
+  },
+  {
+    "id": "LIVE-POLISH-2-8",
+    "file": "tests/venue-pool-cards.test.cjs",
+    "name": "pool layout does not stretch four-group last rows and limits padding to visible neighbours",
+    "requirement": "LIVE-POLISH-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Visible neighbour sizing and fit, shared icon/menu/count controls, or authenticated planned-board edit",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner31Oct2026 paused feedback now authorised",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Actual browser/device fit and real Google readback pending; no Nakka assignment mutation"
+  },
+  {
+    "id": "LIVE-POLISH-3-31",
+    "file": "tests/pool-planner-seeded-ui.test.cjs",
+    "name": "organiser moves a verified pool board without Setup dependency or resending Nakka pools",
+    "requirement": "LIVE-POLISH-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Visible neighbour sizing and fit, shared icon/menu/count controls, or authenticated planned-board edit",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner31Oct2026 paused feedback now authorised",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Actual browser/device fit and real Google readback pending; no Nakka assignment mutation"
+  },
+  {
+    "id": "LIVE-POLISH-3-32",
+    "file": "tests/pool-planner-seeded-ui.test.cjs",
+    "name": "pool board edit validates duplicate labels and drops writes after the organiser locks",
+    "requirement": "LIVE-POLISH-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Visible neighbour sizing and fit, shared icon/menu/count controls, or authenticated planned-board edit",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner31Oct2026 paused feedback now authorised",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Actual browser/device fit and real Google readback pending; no Nakka assignment mutation"
+  },
+  {
+    "id": "LIVE-REFINE-MENU-24-24",
+    "file": "tests/live-shell.test.cjs",
+    "name": "display menu anchors under its icon closes outside or on Escape and keeps viewport space",
+    "requirement": "LIVE-POLISH-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Anchored menu, nested list settings and dismissal/keyboard behavior",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner31Oct2026menu feedback",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Native overlay positioning pending browser review"
+  },
+  {
+    "id": "LIVE-REFINE-MENU-17-17",
+    "file": "tests/beauty-live.test.cjs",
+    "name": "inline list submenu toggles inside display menu and preserves sort and statistics controls",
+    "requirement": "LIVE-POLISH-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Anchored menu, nested list settings and dismissal/keyboard behavior",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner31Oct2026menu feedback",
+    "evidence": "evidence/pool-readability-20261031/tests.txt",
+    "limitations": "Native overlay positioning pending browser review"
+  },
+  {
+    "id": "APPROVED-LIVE-live-shell.test-25",
+    "file": "tests/live-shell.test.cjs",
+    "name": "approved title and action nodes dock into header and tab row then remain inside selected fullscreen",
+    "requirement": "APPROVED-LIVE-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Header docking and bounded enlarged name layout",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner31Oct approved screenshot feedback",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Native pixel rendering remains pending"
+  },
+  {
+    "id": "APPROVED-LIVE-venue-pool-cards.test-8",
+    "file": "tests/venue-pool-cards.test.cjs",
+    "name": "approved larger two-line names stay within row budget at mixed narrow and compact viewport sizes",
+    "requirement": "APPROVED-LIVE-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Header docking and bounded enlarged name layout",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner31Oct approved screenshot feedback",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Native pixel rendering remains pending"
+  },
+  {
+    "id": "FOUR-GROUP-FILL-9",
+    "file": "tests/venue-pool-cards.test.cjs",
+    "name": "four-group mode fills available desktop height with bounded typography and preserves six-group sizing",
+    "requirement": "FOUR-GROUP-FILL-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Fill four-group grid and verify typography ratio",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner31Oct17:08 screenshot",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Native review pending"
+  },
+  {
+    "id": "LIVE-USABILITY-hub-auth.test-19",
+    "file": "tests/hub-auth.test.cjs",
+    "name": "Hub auth: six-hour session outlives login ID token but never its absolute limit and prunes expired records",
+    "requirement": "LIVE-USABILITY-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Six-hour session, uniform cards, clear planner controls",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner31Oct21:30\u201321:57 feedback",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Native and six-hour runtime acceptance pending"
+  },
+  {
+    "id": "LIVE-USABILITY-hub-auth.test-20",
+    "file": "tests/hub-auth.test.cjs",
+    "name": "Hub auth: logout after cache eviction revokes durable session and its sibling sessions",
+    "requirement": "LIVE-USABILITY-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Six-hour session, uniform cards, clear planner controls",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner31Oct21:30\u201321:57 feedback",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Native and six-hour runtime acceptance pending"
+  },
+  {
+    "id": "LIVE-USABILITY-hub-auth-client.test-13",
+    "file": "tests/hub-auth-client.test.cjs",
+    "name": "Hub auth client: six-hour open page stays signed in without activity and page close or reload loses credentials",
+    "requirement": "LIVE-USABILITY-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Six-hour session, uniform cards, clear planner controls",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner31Oct21:30\u201321:57 feedback",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Native and six-hour runtime acceptance pending"
+  },
+  {
+    "id": "LIVE-USABILITY-venue-pool-cards.test-10",
+    "file": "tests/venue-pool-cards.test.cjs",
+    "name": "four-group partial pages retain the same outer card size and complete pages keep all tracks equal",
+    "requirement": "LIVE-USABILITY-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Six-hour session, uniform cards, clear planner controls",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner31Oct21:30\u201321:57 feedback",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Native and six-hour runtime acceptance pending"
+  },
+  {
+    "id": "LIVE-USABILITY-pool-planner-seeded-ui.test-32",
+    "file": "tests/pool-planner-seeded-ui.test.cjs",
+    "name": "planner scheme uses only needed pool-size tiles ordered by selected preference and hides redundant boards field",
+    "requirement": "LIVE-USABILITY-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Six-hour session, uniform cards, clear planner controls",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner31Oct21:30\u201321:57 feedback",
+    "evidence": "evidence/live-usability-20261031/tests.txt",
+    "limitations": "Native and six-hour runtime acceptance pending"
+  },
+  {
+    "id": "COMPACT-BOARDS-33",
+    "file": "tests/pool-planner-seeded-ui.test.cjs",
+    "name": "planner BOARDS tile counts used physical boards and retains only nonzero size chips",
+    "requirement": "COMPACT-REVIEW-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Physical board count and nonzero arrangement chips",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner31Oct22:07 screenshot and continue",
+    "evidence": "evidence/compact-review-20261031/tests.txt",
+    "limitations": "Native layout pending"
   }
 ]

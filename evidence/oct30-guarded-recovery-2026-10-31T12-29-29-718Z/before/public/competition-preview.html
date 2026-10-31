@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Beauty · Gruppspel och slutspel — TEST-visning</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/competition-preview.css">
+</head>
+<body>
+<header class="competition-header">
+ <div class="brand"><img class="venue-logo" src="assets/logo/aik-mandagsdartarna-clean.png" alt="AIK Dart Måndagsdartarna"><img class="crest-source" src="assets/logo/aik-crest.svg" alt=""></div>
+ <h1 id="screenTitle">Tävlingsöversikt</h1><div class="event-caption"><span id="sourceLabel">EXEMPELVISNING</span><p id="eventTitle">Exempeltävling · inte direktsänd</p></div>
+</header>
+<nav class="venue-tabs" aria-label="Spelstadier"><button id="tabTonight" type="button" aria-pressed="false">KVÄLLENS SPELARE</button><button id="tabPools" type="button" aria-pressed="true">GRUPPSPEL</button><button id="tabKnockout1" type="button" aria-pressed="false">SLUTSPEL 1</button><button id="tabKnockout2" type="button" aria-pressed="false">SLUTSPEL 2</button><button id="fullScreen" type="button">Helskärm</button><button id="displaySettings" type="button" aria-expanded="false" aria-controls="castSettings">Visning</button></nav><main>
+ <section id="castSettings" class="options-bar" aria-label="Visningsinställningar" hidden>
+  <label>Visa<select id="stageView"><option value="pools">Gruppspel</option></select></label>
+  <label id="pageSizeLabel">Grupper per sida<select id="pageSize"><option value="6" selected>6 grupper</option></select></label>
+  <label class="check-label"><input id="rotatePages" type="checkbox" checked> Växla gruppsidor</label>
+  <label class="check-label"><input id="autoRefresh" type="checkbox" checked> Direktuppdatering · varannan sekund</label>
+  <button id="focusRemaining" type="button">Visa återstående spel</button><button id="loadTest" type="button">Hämta TEST-tävling</button><button id="refreshStage" type="button" disabled>Uppdatera nu</button>
+ </section>
+ <div class="feed-state"><p id="stageStatus" role="status" aria-live="polite">Exempelvisning · inte direktsänd. Hämta TEST-tävlingen för att läsa från Nakka.</p><p id="pageIndicator"></p></div>
+ <p id="staleNotice" class="stale-notice" hidden>Senast hämtade data — bantilldelningen kan ha ändrats. Kontrollera Nakka innan spelarna ropas upp.</p>
+ <section id="tonightPanel" aria-label="Kvällens spelare" hidden><div class="tonight-actions"><span id="tonightStatus" role="status">Den befintliga TEST-listan visas här när inbäddning stöds.</span><button id="openTonight" type="button">Öppna kvällens spelare i egen flik</button></div><iframe id="tonightFrame" title="Kvällens spelare – Beauty Live TEST" loading="lazy" referrerpolicy="no-referrer" allow="fullscreen" hidden></iframe></section>
+ <div id="stagePreview"></div>
+ <nav class="pagination" aria-label="Gruppsidor"><button id="previousPage" type="button">Föregående</button><button id="nextPage" type="button">Nästa</button></nav>
+ <footer><span>TEST · Resultat från Nakka · Banrubriker enligt Hub-planen</span><p id="displayMessage" role="status"></p></footer>
+</main>
+<script src="js/nakka-stage-model.js"></script><script src="js/nakka-pool-live.js"></script><script src="js/nakka-stage-feed.js"></script><script src="js/competition-view.js"></script><script src="js/competition-preview.js"></script>
+</body></html>

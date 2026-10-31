@@ -11,17 +11,17 @@ let html = read('public/preview.html');
 // Only the generated Google TEST gets the real account service. Offline demo
 // and the standalone login preview keep their closed service boundaries.
 let login=read('public/login.html').match(/<main class="login-card">([\s\S]*?)<\/main>/)[1];
-login=login.replace(/<p class="login-setup">[\s\S]*?<\/p>/,'<p class="login-setup">IDENTITY TEST · Approved staff accounts only. Session ends after 15 minutes of inactivity or at most one hour. Refreshing requires sign-in again.</p>');
+login=login.replace(/<p class="login-setup">[\s\S]*?<\/p>/,'<p class="login-setup">TEST staff access · Session lasts 6 hours. Reloading or closing this page requires sign-in again.</p>');
 html=html.replace('</head>','<link rel="stylesheet" href="css/login.css"><style>#nakkaEventCheck,#nakkaCompare{background:#ffd700;color:#080808;border:0;border-radius:5px;font:inherit;font-size:20px;padding:10px 16px;margin:4px 6px 8px 0;min-height:44px}#nakkaEventCheck:disabled,#nakkaCompare:disabled{opacity:.5}#nakkaEventResult ul{padding-left:24px;font-size:19px}#nakkaEventResult details{margin-top:16px}#nakkaEventResult summary{cursor:pointer;color:#ffd700}</style></head>');
 html=html.replace('<body>','<body class="beauty-auth-locked"><section id="beautyAuthSurface" class="login-card">'+login+'</section>');
 html=html.replace('<div class="masthead-session"></div>', '<div class="masthead-session"><span id="hubSessionEmail" class="sr-only"></span><button id="hubSignOut" type="button">Sign out</button></div>');
 if (!html.includes('id="hubSignOut"')) throw Error('Account controls insertion failed');
 html=html.replace('<script src="js/hub-services.js"','<script src="js/hub-auth.js"></script>\n<script src="js/hub-services.js"');
 html=html.replace('</body>','<script src="js/login.js"></script><script src="js/hub-live-stats.js"></script></body>');
-html=html.replace('<h2 id="nakkaPanelTitle">Nakka</h2>', '<h2 id="nakkaPanelTitle">Nakka</h2><section class="health-card"><h3>Event connection</h3><p>Check the Hub date against Nakka. Read only; no player sync.</p><button id="nakkaEventCheck" type="button">CHECK EVENT</button> <button id="nakkaCompare" type="button">COMPARE PLAYERS</button><button id="nakkaStagesOpen" type="button">OPEN POOLS &amp; KNOCKOUTS — TEST</button><div id="nakkaEventResult" role="status" aria-live="polite"></div></section>');
+html=html.replace('<h2 id="nakkaPanelTitle">Nakka</h2>', '<h2 id="nakkaPanelTitle">Nakka</h2><section class="health-card"><h3>Event connection</h3><p>Check the Hub date against Nakka. Read only; no player sync.</p><button id="nakkaEventCheck" type="button">CHECK EVENT</button> <button id="nakkaCompare" type="button">COMPARE PLAYERS</button><div id="nakkaEventResult" role="status" aria-live="polite"></div></section>');
 html=html.replace('</body>','<script src="js/hub-nakka-event.js"></script></body>');
 html=html.replace('</body>','<script src="js/hub-nakka-transfer.js"></script></body>');
-html=html.replace('</body>','<script src="js/hub-player-removal.js"></script><script src="js/hub-stage-open.js"></script></body>');
+html=html.replace('</body>','<script src="js/hub-player-removal.js"></script></body>');
 html=html.replace('</head>','<style>#nakkaTransferOpen{background:#ffd700;color:#080808;border:0;border-radius:5px;font:inherit;font-size:20px;padding:10px 16px;margin:16px 0 4px;min-height:44px}</style></head>');
 
 

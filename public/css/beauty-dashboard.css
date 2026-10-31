@@ -517,3 +517,53 @@ body .players-workspace .remove-player-button{display:inline-flex;align-items:ce
 .masthead-meta .masthead-event{min-width:0}.masthead-meta .hub-test-badge,.masthead-meta .masthead-session{flex:none;transform:none;align-self:center}
 @media(max-width:1100px){.masthead-meta{gap:10px}.masthead-meta .masthead-event strong,.masthead-meta .masthead-event #nakkaTournamentDate{font-size:17px}.masthead-meta .hub-test-badge{padding:8px;font-size:17px}body .masthead-session button{font-size:17px!important;padding-left:10px}}
 @media(max-width:760px){.hub-masthead{grid-template-columns:1fr auto}.masthead-meta{grid-column:1/-1;flex-wrap:wrap;justify-content:space-between}.masthead-meta .masthead-event{grid-column:auto;grid-row:auto;flex:1}.masthead-meta .masthead-session{grid-column:auto;grid-row:auto}}
+
+/* Clear scheme counts and display-only board editor. */
+.pool-planner-workspace [data-plan-summary]{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.pool-planner-workspace .pool-scheme-chip{display:flex;align-items:center;justify-content:center;gap:7px;white-space:nowrap;background:#080808;border:1px solid #ffd700;border-radius:5px;padding:8px 12px;color:#fff;font:400 20px/1.1 'AIK Display',sans-serif}
+.pool-planner-workspace .pool-scheme-chip .pool-number{color:#ffd700;font:400 24px/1 'AIK Siffror',serif}
+.pool-board-help{margin:8px 0 18px;font:400 18px/1.2 'AIK Display',sans-serif;color:#c7cdd1}
+.pool-display-boards{width:min(740px,calc(100vw - 32px));max-height:85dvh;overflow:auto}
+.pool-display-board-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 18px;align-items:center;padding:12px 0;border-bottom:1px solid #374149}
+.pool-display-board-row>div strong,.pool-display-board-row>div span{display:block}
+.pool-display-board-row>div strong{font:700 22px/1.1 'AIK Condensed',sans-serif;color:#fff}
+.pool-display-board-row>div span,.pool-board-destination{font:400 18px/1.2 'AIK Display',sans-serif;color:#c7cdd1}
+.pool-display-board-row label{display:flex;flex-direction:column;gap:4px;margin:0;font:400 17px/1.1 'AIK Display',sans-serif}
+.pool-display-board-row label select{background:#080808;color:#ffd700;border:1px solid #ffd700;border-radius:4px;min-height:36px;padding:4px 10px;font:700 20px/1.1 'AIK Condensed',sans-serif}
+.pool-board-destination{grid-column:2;color:#ffd700;text-align:right}
+
+/* BOARDS count and pool-size chips share the planner's restrained row style. */
+.pool-planner-workspace .pool-setup .pool-scheme-tile{gap:12px;padding-left:18px}
+.pool-planner-workspace .pool-needed-number{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;min-width:44px;min-height:40px;padding:6px 9px;background:#080808;color:#ffd700;border:1px solid #ffd700;border-radius:5px;font:400 26px/1 'AIK Siffror',serif}
+.pool-planner-workspace .pool-scheme-chip{min-height:40px;padding:6px 10px;font-size:19px;gap:6px}
+.pool-planner-workspace .pool-scheme-chip .pool-number{font-size:24px}
+@media(max-width:1050px){.pool-planner-workspace .pool-setup .pool-scheme-tile{padding-left:0;flex-wrap:wrap}}
+
+/* Pool-size summaries stack beside the POOLS label. */
+.pool-planner-workspace [data-plan-summary]{flex-direction:column;align-items:stretch;gap:6px}
+.pool-planner-workspace .pool-scheme-chip{width:100%}
+
+/* Explicit setup sections keep labels visible and all controls centred. */
+.pool-planner-workspace .pool-setup{grid-template-columns:minmax(max-content,1fr) minmax(max-content,1.15fr) minmax(0,2fr);gap:24px;align-items:stretch;padding:14px 20px}
+.pool-planner-workspace .pool-setup .pool-in-tile{display:grid;grid-template-columns:max-content max-content;align-content:center;align-items:center;justify-content:start;gap:16px;margin:0;padding:0 24px 0 0;text-align:left;border-right:1px solid #303438}
+.pool-planner-workspace .pool-setup>div.pool-size-setting{display:grid;grid-template-columns:76px max-content;align-items:center;align-content:center;gap:14px;padding-right:24px;border-right:1px solid #303438}
+.pool-planner-workspace .pool-size-choices{display:grid;grid-template-columns:repeat(2,44px);gap:8px;align-items:center}
+body .pool-planner-workspace .pool-size-choices button{width:44px;height:44px;min-height:44px;padding:0}
+.pool-planner-workspace .pool-setup .pool-scheme-tile{display:grid;grid-template-columns:minmax(max-content,.9fr) minmax(max-content,1.1fr);align-items:center;align-content:center;gap:24px;min-width:0;border:0;padding:0}
+.pool-planner-workspace .pool-board-summary{display:grid;grid-template-columns:max-content 44px;align-items:center;justify-content:center;gap:10px;padding-right:24px;border-right:1px solid #303438}
+.pool-planner-workspace .pool-pools-summary{display:grid;grid-template-columns:max-content minmax(110px,max-content);align-items:center;gap:12px;min-width:0}
+.pool-planner-workspace .pool-setup .label{display:block;color:#fff;font:700 22px/1.25 'AIK Condensed',serif;letter-spacing:0}
+.pool-planner-workspace .pool-board-summary>.label,.pool-planner-workspace .pool-pools-summary>.label{white-space:nowrap}
+.pool-planner-workspace .pool-board-summary>.pool-needed-number{width:44px;height:44px;min-height:44px;padding:0}
+.pool-planner-workspace .pool-pools-summary>[data-plan-summary]{display:grid;grid-template-columns:minmax(0,1fr);gap:6px;min-width:0}
+@media(max-width:1100px){.pool-planner-workspace .pool-setup{grid-template-columns:max-content minmax(0,1fr);gap:14px 24px}.pool-planner-workspace .pool-setup>div.pool-size-setting{border-right:0;padding-right:0}.pool-planner-workspace .pool-setup .pool-scheme-tile{grid-column:1/-1;justify-content:start;grid-template-columns:max-content max-content;border-top:1px solid #303438;padding-top:12px}}
+@media(max-width:600px){.pool-planner-workspace .pool-setup{grid-template-columns:minmax(0,1fr);gap:12px;padding:12px}.pool-planner-workspace .pool-setup .pool-in-tile{border:0;padding:0}.pool-planner-workspace .pool-setup>div.pool-size-setting{grid-template-columns:76px max-content}.pool-planner-workspace .pool-setup .pool-scheme-tile{gap:14px}.pool-planner-workspace .pool-pools-summary{gap:8px;grid-template-columns:max-content minmax(100px,max-content)}}
+
+/* Approved planner controls: light white text, yellow selected state. */
+body .pool-toolbar>button,body .pool-toolbar .pool-status-card,body .pool-toolbar .pool-progress button{box-sizing:border-box;min-height:52px;border:1px solid #ffd700!important;border-radius:5px;background:#080808!important;color:#fff!important}
+body .pool-toolbar>button,body .pool-toolbar .pool-status-card button,body .pool-toolbar .pool-progress button,.pool-toolbar .pool-status-card strong,.pool-toolbar .pool-progress strong,.pool-toolbar .pool-progress .pool-number{font:400 20px/1.2 'AIK Display',serif!important}
+body .pool-toolbar .pool-status-card button{color:#fff!important}
+body .pool-toolbar>button[aria-expanded=true],body .pool-toolbar .pool-progress button[data-active=true]{background:#080808!important;color:#ffd700!important}
+body .pool-toolbar .pool-progress button[data-active=true] strong,body .pool-toolbar .pool-progress button[data-active=true] .pool-number{color:inherit}
+@media(max-width:1100px){.pool-planner-workspace .pool-setup .pool-scheme-tile{grid-template-columns:minmax(max-content,1fr) minmax(max-content,1fr);justify-content:stretch}.pool-planner-workspace .pool-board-summary{justify-content:start}}
+@media(max-width:600px){.pool-planner-workspace .pool-setup .pool-scheme-tile{grid-template-columns:minmax(0,1fr)}.pool-planner-workspace .pool-board-summary{border:0;padding:0}.pool-planner-workspace .pool-setup .pool-in-tile{border:0}.pool-planner-workspace .pool-setup .pool-pools-summary{grid-template-columns:max-content minmax(100px,1fr)}}

@@ -1,0 +1,13 @@
+{
+  "dateUTC": "2026-10-31T12:04:47.377Z",
+  "branch": "recovery/2026-10-28",
+  "baseline": "ad64659",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Saved-Backups/Beauty-Admin-Hub/live-four-tabs-before-2026-10-31T12-04-47-348Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/beauty-live-four-tabs-2026-10-31T12-04-47-348Z",
+  "googleUpload": "NOT_PERFORMED",
+  "productionChanges": "NONE",
+  "githubPush": "NOT_PERFORMED",
+  "outcome": "FAIL",
+  "error": "unit tests FAILED: inspect evidence and restore from backup.",
+  "completedUTC": "2026-10-31T12:05:08.207Z"
+}

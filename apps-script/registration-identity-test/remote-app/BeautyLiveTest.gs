@@ -29,7 +29,7 @@ function beautyLiveTestData() {
 function beautyLiveTestUrl(token) {
   beautyHubTestGuard_();
   beautyHubAuthRequire_(token);
-  return ScriptApp.getService().getUrl() + '?page=live';
+  return beautyStageTestUrl(token).replace('?page=stages','?page=live');
 }
 
 /* Anonymous cast requests never trigger authenticated Nakka refreshes. The staff

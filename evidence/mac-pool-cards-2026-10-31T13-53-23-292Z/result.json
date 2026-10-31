@@ -1,0 +1,14 @@
+{
+  "result": "PASS",
+  "finishedUTC": "2026-10-31T13:54:03.049Z",
+  "baseline": "Complete",
+  "checkpoint": "ad64659",
+  "tests": 646,
+  "testFiles": 52,
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Prepared-Tonight-Backups/Beauty-Admin-Hub/pool-cards-before-2026-10-31T13-53-23-292Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/mac-pool-cards-2026-10-31T13-53-23-292Z",
+  "googleUpload": "PENDING",
+  "commit": "NONE",
+  "providerWrites": "NONE",
+  "browserReview": "PENDING"
+}

@@ -99,5 +99,5 @@
   }
   return state;
  }
- const api=Object.freeze({views,page,focusRemaining,render});if(typeof module==='object'&&module.exports)module.exports=api;else root.BeautyCompetitionView=api;
+ const api=Object.freeze({views,page,focusRemaining,render,formatText});if(typeof module==='object'&&module.exports)module.exports=api;else root.BeautyCompetitionView=api;
 })(typeof globalThis==='object'?globalThis:this);

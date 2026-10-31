@@ -1,0 +1,47 @@
+TAP version 13
+# Subtest: exact four casting tabs
+ok 1 - exact four casting tabs
+  ---
+  duration_ms: 5.023843
+  type: 'test'
+  ...
+# Subtest: six cards, two column grid with 3 rows
+ok 2 - six cards, two column grid with 3 rows
+  ---
+  duration_ms: 1.031785
+  type: 'test'
+  ...
+# Subtest: name inserted as literal text
+ok 3 - name inserted as literal text
+  ---
+  duration_ms: 0.491345
+  type: 'test'
+  ...
+# Subtest: no LIVE badge or HTML text injection
+ok 4 - no LIVE badge or HTML text injection
+  ---
+  duration_ms: 0.416255
+  type: 'test'
+  ...
+# Subtest: ranking highlights only ranks 1 and 2
+ok 5 - ranking highlights only ranks 1 and 2
+  ---
+  duration_ms: 0.953333
+  type: 'test'
+  ...
+# Subtest: provider feed is read-only
+ok 6 - provider feed is read-only
+  ---
+  duration_ms: 0.69963
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 278.1841
+

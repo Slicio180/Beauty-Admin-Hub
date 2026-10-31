@@ -1,0 +1,32 @@
+{
+  "stamp": "2026-10-31T12-29-29-718Z",
+  "branch": "recovery/2026-10-28",
+  "head": "ad64659",
+  "files": [
+    {
+      "file": "apps-script/registration-identity-test/remote-app/StageTest.html",
+      "previous": "e1a335a3a71b618383e96022e677fd53c83f02073f91380f6ea382f96c2225c4",
+      "restored": "8f65e3f299a5b81777772e572b4f2f093150bff892e97f60b643b3937bcbd1ca"
+    },
+    {
+      "file": "public/competition-preview.html",
+      "previous": "80bcb0eb83ec750a0c4e39543df0c61f298a1bae740b185ffb65618a6e7b8298",
+      "restored": "65658fdf8ee43839d82d9efd4ea81f46e877ae0f2939e35378be1d1cd9ede8be"
+    },
+    {
+      "file": "public/css/competition-preview.css",
+      "previous": "13715f0fb1be492bb9653c991ad5d327b90cdae52bb5711195eb8f09173cf1bc",
+      "restored": "6a3c04b1ddf8e27bad8875297c927f000fde3d2ae459fb43df6b4f6d9841c952"
+    },
+    {
+      "file": "public/js/competition-preview.js",
+      "previous": "612ac2099a19c418b38b50131a44ebd3425252e99bcc3021e69a970b9e839528",
+      "restored": "e2ec158df9ec78502b77788cd0e7fb76d68fb0dc1ab56a557acb5c327591c5f5"
+    },
+    {
+      "file": "public/js/competition-view.js",
+      "previous": "7fff0a3d586b533f156336df9a5b3259817b5dfc7f24d2e91051e19aa3a6acef",
+      "restored": "9596cb4efa50f242893f67ff47b90aecef940fe04852b8d6b5ac757afcfdb368"
+    }
+  ]
+}

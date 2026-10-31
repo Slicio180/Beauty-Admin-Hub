@@ -1,0 +1,11 @@
+{
+  "record": "CAST-FOOTER-20261031",
+  "result": "PASS",
+  "verifiedUTC": "2026-10-31T14:04:22.187797+00:00",
+  "tests": 648,
+  "testFiles": 52,
+  "nativeReview": "PENDING",
+  "priorNativeFinding": "Footer wasted space / pool clipping",
+  "googleUpload": "NOT_PERFORMED",
+  "providerWrites": "NONE"
+}

@@ -79,10 +79,17 @@ if (typeof document !== 'undefined') document.addEventListener('DOMContentLoaded
  const button=[...document.querySelectorAll('.sidebar button')].find(b=>b.textContent.trim()==='Beauty Live');
  if(!button)return;
  button.addEventListener('click',()=>{
+  let token,generation;try{token=BeautyHubAuth.token();generation=BeautyHubAuth.generation();}catch{alert('Sign in before opening Beauty Live.');return;}
   const tab=window.open('about:blank','_blank');
   if(!tab){alert('Allow pop-ups to open Beauty Live.');return;}
   window.BeautyHubNavigation?.activate(button);
   tab.opener=null;tab.document.body.textContent='Opening Beauty Live TEST…';
-  google.script.run.withSuccessHandler(url=>{tab.location.href=url;}).withFailureHandler(()=>{tab.close();window.BeautyHubNavigation?.dashboard();alert('Could not open Beauty Live TEST.');}).beautyLiveTestUrl(BeautyHubAuth.token());
+  const fail=()=>{tab.close();if(BeautyHubAuth.isCurrent(generation)){window.BeautyHubNavigation?.dashboard();alert('Could not open Beauty Live TEST. Check the selected TEST event and session.');}};
+  const current=()=>BeautyHubAuth.isCurrent(generation)&&!tab.closed;
+  const open=()=>google.script.run.withSuccessHandler(url=>{
+   if(!current()){tab.close();return;}
+   try{const u=new URL(url);if(u.protocol!=='https:'||u.hostname!=='script.google.com'||!/^\/macros\/s\/[A-Za-z0-9_-]+\/(exec|dev)$/.test(u.pathname)||u.search!=='?page=live'||u.hash)throw Error();tab.location.href=url;}catch{fail();}
+  }).withFailureHandler(fail).beautyLiveTestUrl(token);
+  try{if(window.beautyStagePendingLabels){google.script.run.withSuccessHandler(()=>{if(!current()){tab.close();return;}window.beautyStagePendingLabels=null;open();}).withFailureHandler(fail).beautyStageLabelsTest(token,window.beautyStagePendingLabels);}else open();}catch{fail();}
  });
 });

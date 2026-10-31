@@ -4,8 +4,8 @@
  */
 const BEAUTY_HUB_AUTH_PROJECT_ = 'beauty-admin-hub-test';
 const BEAUTY_HUB_AUTH_API_KEY_ = 'AIzaSyAVnGQ2_EAyKzylm78uf5ldCRteVgwgflY';
-const BEAUTY_HUB_AUTH_IDLE_MS_ = 15 * 60 * 1000;
-const BEAUTY_HUB_AUTH_MAX_MS_ = 60 * 60 * 1000;
+const BEAUTY_HUB_AUTH_IDLE_MS_ = 6 * 60 * 60 * 1000;
+const BEAUTY_HUB_AUTH_MAX_MS_ = 6 * 60 * 60 * 1000;
 var beautyHubRequestToken_ = null;
 function beautyHubAuthError_(code) { const e = new Error(code); e.name = 'HubAuthError'; throw e; }
 function beautyHubAuthAllowed_() {
@@ -17,6 +17,26 @@ function beautyHubAuthEpoch_(uid) { return PropertiesService.getScriptProperties
 function beautyHubAuthKey_(token) {
   if(typeof token!=='string'||!/^bhs_[a-f0-9]{64}$/.test(token))beautyHubAuthError_('AUTH_REQUIRED');
   return 'beauty-hub-session:'+token;
+}
+// Cache eviction must not sign out an open Hub. Only opaque Hub session records
+// are retained server-side; the browser session remains memory-only.
+function beautyHubAuthLoad_(key) {
+  const text=CacheService.getScriptCache().get(key)||PropertiesService.getScriptProperties().getProperty(key);
+  try{return JSON.parse(text||'null');}catch(e){return null;}
+}
+function beautyHubAuthStore_(key,record) {
+  const text=JSON.stringify(record);PropertiesService.getScriptProperties().setProperty(key,text);
+  CacheService.getScriptCache().put(key,text,Math.max(1,Math.min(600,Math.ceil((record.expires-Date.now())/1000))));
+}
+function beautyHubAuthForget_(key) {
+  CacheService.getScriptCache().remove(key);PropertiesService.getScriptProperties().deleteProperty(key);
+}
+function beautyHubAuthPrune_() {
+  const properties=PropertiesService.getScriptProperties();
+  for(const [key,text]of Object.entries(properties.getProperties()))if(key.startsWith('beauty-hub-session:')){
+    let record;try{record=JSON.parse(text);}catch(e){}
+    if(!record||!Number.isFinite(record.expires)||Date.now()>=record.expires||record.epoch!==beautyHubAuthEpoch_(record.uid))beautyHubAuthForget_(key);
+  }
 }
 function beautyHubAuthLocked_(callback) {
   const lock=LockService.getScriptLock();if(!lock.tryLock(5000))beautyHubAuthError_('AUTH_BUSY');
@@ -60,10 +80,10 @@ function beautyHubAuthLogin_(idToken) {
     (Number(account.validSince)||0)>claims.auth_time)beautyHubAuthError_('AUTH_DENIED');
   const token='bhs_'+Utilities.getUuid().replace(/-/g,'')+Utilities.getUuid().replace(/-/g,'');
   const now=Date.now(),record={uid:account.localId,email:account.email,created:now,active:now,
-    expires:Math.min(now+BEAUTY_HUB_AUTH_MAX_MS_,claims.exp*1000)};
+    expires:now+BEAUTY_HUB_AUTH_MAX_MS_};
   return beautyHubAuthLocked_(()=>{
     record.epoch=beautyHubAuthEpoch_(record.uid);
-    CacheService.getScriptCache().put(beautyHubAuthKey_(token),JSON.stringify(record),900);
+    beautyHubAuthPrune_();beautyHubAuthStore_(beautyHubAuthKey_(token),record);
     return {success:true,authorized:true,token,email:record.email,expiresAt:record.expires,idleMs:BEAUTY_HUB_AUTH_IDLE_MS_};
   });
 }
@@ -71,7 +91,7 @@ function beautyHubAuthLogin_(idToken) {
  * token, and logs only booleans/status codes; never inspects a real login. */
 function beautyHubAuthProbe() {
   beautyHubTestGuard_();
-  ScriptApp.requireScopes(ScriptApp.AuthMode.FULL, ['https://www.googleapis.com/auth/script.external_request']);
+    ScriptApp.requireScopes(ScriptApp.AuthMode.FULL, ['https://www.googleapis.com/auth/script.external_request']);
   const result={probe:'BEAUTY_AUTH_ENVIRONMENT',recordedUTC:new Date().toISOString()};
   for(const [name,value] of [['unpadded','YQ'],['padded','YQ==']]){
     try{result[name]=Utilities.newBlob(Utilities.base64DecodeWebSafe(value)).getDataAsString('UTF-8')==='a';}catch(e){result[name]=false;}
@@ -87,11 +107,10 @@ function beautyHubAuthProbe() {
 }
 function beautyHubAuthRequire_(token) {
   beautyHubTestGuard_();
-  const key=beautyHubAuthKey_(token),cache=CacheService.getScriptCache();let record;
-  try{record=JSON.parse(cache.get(key)||'null');}catch(e){beautyHubAuthError_('AUTH_REQUIRED');}
+  const key=beautyHubAuthKey_(token),record=beautyHubAuthLoad_(key);
   const now=Date.now();
   if(!record||!beautyHubAuthAllowed_().includes(record.uid)||record.epoch!==beautyHubAuthEpoch_(record.uid)||!Number.isFinite(record.expires)||!Number.isFinite(record.active)||
-    now>=record.expires||now-record.active>=BEAUTY_HUB_AUTH_IDLE_MS_){cache.remove(key);beautyHubAuthError_('AUTH_REQUIRED');}
+    now>=record.expires||now-record.active>=BEAUTY_HUB_AUTH_IDLE_MS_){beautyHubAuthForget_(key);beautyHubAuthError_('AUTH_REQUIRED');}
   return record;
 }
 function beautyHubAuth(action,input) {
@@ -102,13 +121,12 @@ function beautyHubAuth(action,input) {
     if(!['touch','logout'].includes(action)||Object.keys(input).length!==1||typeof input.token!=='string')beautyHubAuthError_('AUTH_INVALID');
     return beautyHubAuthLocked_(()=>{
       if(action==='logout'){
-        const cache=CacheService.getScriptCache(),key=beautyHubAuthKey_(input.token);
-        let record;try{record=JSON.parse(cache.get(key)||'null');}catch(e){}
+        const key=beautyHubAuthKey_(input.token),record=beautyHubAuthLoad_(key);
         if(record?.uid)PropertiesService.getScriptProperties().setProperty('BEAUTY_HUB_AUTH_EPOCH_'+record.uid,Utilities.getUuid());
-        cache.remove(key);return {success:true};
+        beautyHubAuthForget_(key);return {success:true};
       }
       const record=beautyHubAuthRequire_(input.token);record.active=Date.now();
-      CacheService.getScriptCache().put(beautyHubAuthKey_(input.token),JSON.stringify(record),Math.max(1,Math.min(900,Math.ceil((record.expires-Date.now())/1000))));
+      beautyHubAuthStore_(beautyHubAuthKey_(input.token),record);
       return {success:true,expiresAt:record.expires};
     });
   }catch(e){return {success:false,code:e.name==='HubAuthError'?e.message:'AUTH_UNAVAILABLE'};}

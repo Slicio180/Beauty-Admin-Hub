@@ -1,0 +1,1 @@
+PASS: read-only checker identifies differing auth, compares all19 previous verified files, creates review ZIP, preserves source/clone bytes and refuses missing clone. No network/provider calls.

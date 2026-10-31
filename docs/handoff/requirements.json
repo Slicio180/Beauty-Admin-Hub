@@ -192,14 +192,6 @@
     "acceptance": "English Hub pages/forms/identity/errors/status/consent/source labels; byte-identical Swedish remote/kiosk sources. Calendar validation and all confirmation prerequisites tested; changes/back/reopen reset confirmations. No date-save API exists yet. Future server-backed date save must enforce confirmation/version/authorization. Password reauthentication belongs to pending Hub login."
   },
   {
-    "id": "LIVE-001",
-    "requirement": "Swedish read-only TEST casting tab with automatic names/count refresh, sorting and privacy projection",
-    "priority": "High",
-    "evidenceLabel": "TESTING",
-    "source": "Beauty Live requirements confirmed 2026-10-26",
-    "acceptance": "Automated local behaviour plus pending actual Apps Script and landscape browser review; Nakka integration pending"
-  },
-  {
     "id": "POOL-001",
     "requirement": "Read-only event Pool Planner using IN count, preferred size and board capacity, with original scheme download",
     "priority": "Normal",
@@ -329,5 +321,61 @@
     "source": "Owner29Oct2026: code outstanding work",
     "evidenceLabel": "LOCAL_TESTED; NATIVE PENDING",
     "acceptance": "Portable planned board output; no inferred rankings or live assignment; closed transport; durable revision claim; pending native and production work explicit."
+  },
+  {
+    "id": "LIVE-SHELL-20261031",
+    "requirement": "Approved unified public Beauty Live and readable knockout bracket",
+    "priority": "High",
+    "source": "Owner approved four-tab Live page and fullscreen knockout design, including round navigation, automatic scrolling, original AIK fonts, all wiring; resumed31Oct2026",
+    "evidenceLabel": "LOCAL_TESTED; NATIVE PENDING",
+    "acceptance": "Four Swedish tabs share one panel; selected-only fullscreen; existing pool cards retained; each Hub click opens independent window; Nakka knockout results and averages display without invented progression; earlier rounds hidden/reopened independently; scroll and stale-data controls work; no production changes."
+  },
+  {
+    "id": "POOL-CARDS-20261031",
+    "requirement": "Approved two-column six-card public pool screen with fixed names and adaptive row tracks",
+    "priority": "High",
+    "source": "Owner31Oct2026 approved all-three-player and five-three/one-four-player layouts",
+    "evidenceLabel": "LOCAL_TESTED; NATIVE PENDING",
+    "acceptance": "Four slim Swedish tabs retained. Two columns and three card rows; equal card dimensions. Three rows when all visible groups have three players; empty fourth row in smaller groups when a visible group has four players. Empty rows contain no row number. First name, surname, average in bounded separate lines; measured full-stop truncation and accessible full-name dialog. Legs from exact matrix scores; rank only from provider. Fullscreen remains within the opened panel; polling, stale state, paging and independent knockout windows remain wired. TEST only."
+  },
+  {
+    "id": "LIVE-POLISH-20261031",
+    "requirement": "Per-pair public pool fit, shared live header controls and organiser planned-board edits",
+    "priority": "High",
+    "source": "Owner31Oct2026: code all paused feedback",
+    "evidenceLabel": "LOCAL_TESTED; NATIVE PENDING",
+    "acceptance": "Only neighbours share row count; mixed three/four pages fit six cards in observed fullscreen viewport. Three-only pairs are shorter. Blank padding has no player/position number. Uppercase display headings, single live count tile, no repeated player heading, accessible fullscreen/menu SVG icons for all four live views, list settings in menu. English Hub planned-board editor preserves frozen membership and averages, validates labels, refreshes open Swedish casts; no Nakka match-board mutation."
+  },
+  {
+    "id": "APPROVED-LIVE-20261031",
+    "requirement": "Approved stronger BANA accents, larger names, single main title/count and tab-row controls",
+    "priority": "High",
+    "source": "Owner31October2026 approved mockup and requested coding",
+    "evidenceLabel": "LOCAL_TESTED; NATIVE PENDING",
+    "acceptance": "Single3px BANA accent133.333% textwidth, close above text. Bounded larger two-line names, full-stop truncation retained. Selected view title occupies original BeautyLive headline position, borderless yellow count beside players title matches titlefont size. Menu/fullscreen icons share tab row outside fullscreen and remain in selected panel while fullscreen. No duplicate heading or count. Six-hour login explicitly held."
+  },
+  {
+    "id": "FOUR-GROUP-FILL-20261031",
+    "requirement": "Count without small label; expanded four-group page and half-size Start/Nu captions",
+    "priority": "High",
+    "source": "Owner31October2026 requested fix code and install",
+    "evidenceLabel": "LOCAL_TESTED; NATIVE PENDING",
+    "acceptance": "Remove only small SPELARE beside yellow count, both normal/fullscreen; keep KV\u00c4LLENS SPELARE title. Four-group desktop page uses available height, neighbouring pool row-count padding retained. Six-group geometry unchanged. Start/Nu font exactly half numeric average font."
+  },
+  {
+    "id": "LIVE-USABILITY-20261031",
+    "requirement": "Uniform four-group cards, paging arrows, readable average labels, six-hour Hub session, clear planner scheme/editor",
+    "priority": "High",
+    "source": "Owner31October2026 screenshots21:30\u201321:57",
+    "evidenceLabel": "LOCAL_TESTED; NATIVE PENDING",
+    "acceptance": "Four-group desktop cards same outer size even partial pages; arrows centered above left/right card columns. START/NU bold condensed halfpointsize average. Hub session fixed sixhours, browser-memoryonly, reload/close locks; durable server records survive cacheeviction, expiry/revocation retained. Hidden redundant boardfield; dropdown displayboard editor explicitNakkaunchanged; nonzero schemechips preferredsizefirst; yellow ownpage topborder."
+  },
+  {
+    "id": "COMPACT-REVIEW-20261031",
+    "requirement": "Compact login card and BOARDS count with arrangement chips; review Google mismatch before upload",
+    "priority": "High",
+    "source": "Owner31Oct22:07\u201322:08 screenshots; continue",
+    "evidenceLabel": "LOCAL_TESTED; GOOGLE BLOCKED",
+    "acceptance": "Login card bounded to viewport with reduced spacing and safe shortscreen inner scroll; accurate six-hour notice. BOARDS count reflects physical boards used by allocation, min(selectedboards,pools); only needed poolsizechips. Do not reinstall previousUsability or bypass failedGooglebaseline. Compare exactcurrentGooglecopy before authreplacement."
   }
 ]

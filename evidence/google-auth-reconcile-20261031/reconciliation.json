@@ -1,0 +1,11 @@
+{
+  "record": "GOOGLE_AUTH_BASELINE_RECONCILED",
+  "actualGoogleBefore": "7df4427d573e226f261f9a592d6ab2aa7175e1ef060028dcd3555f4411efe9c8",
+  "localOldBefore": "fb17ce7e13d2e5db190022e097d09f097e1cd2c177369a6bb4fddd0d283ac890",
+  "difference": "Two leading spaces before ScriptApp.requireScopes inside manual diagnostic probe only",
+  "functionalDifference": false,
+  "googleLastVerifiedUTC": "2026-10-31T20:27:27.960Z",
+  "reportUTC": "2026-10-31T21:21:14.021Z",
+  "all19StillMatchVerified": true,
+  "googleUpload": "NOT_PERFORMED"
+}

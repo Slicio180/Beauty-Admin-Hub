@@ -27,7 +27,7 @@ function fixture(options={}){
  const requests=[],queue=[];let generation=1,timer;
  const window={BeautyPoolBoards:require('../public/js/pool-board-allocation.js'),document,BeautyPoolPlanner:require('../public/js/pool-planner.js'),beautyHubData:data,setInterval(fn){timer=fn;}};
  const c={window,document,URL,Event:class {constructor(type){this.type=type;}},BeautyPoolSeeding:core,BeautyPoolPlanner:require('../public/js/pool-planner.js'),BeautyHubAuth:{generation:()=>generation,isCurrent:n=>n===generation},BeautyHubServices:{mode:'test',endpoint:'https://beauty.invalid/hub',request(raw){const u=new URL(raw),input=Object.fromEntries(u.searchParams);requests.push(input);return new Promise((resolve,reject)=>queue.push({resolve:r=>resolve({json:async()=>r}),reject}));}}};
- vm.runInNewContext(fs.readFileSync('public/js/pool-planner-seeded.js','utf8'),c);if(options.fullPage){window.BeautySeededPoolUI.open(nav[0]);host=main.children[0];}else window.BeautySeededPoolUI.mount(host);host.querySelector('[data-boards]').value='2';host.querySelector('[data-size]').value='3';window.BeautySeededPoolUI.update(data);
+ window.BeautyHubAuth=c.BeautyHubAuth;window.BeautyHubAuth.token=()=> 'TOKEN';if(options.google)c.google=options.google;vm.runInNewContext(fs.readFileSync('public/js/pool-planner-seeded.js','utf8'),c);if(options.fullPage){window.BeautySeededPoolUI.open(nav[0]);host=main.children[0];}else window.BeautySeededPoolUI.mount(host);host.querySelector('[data-boards]').value='2';host.querySelector('[data-size]').value='3';window.BeautySeededPoolUI.update(data);
  const tick=async()=>{for(let i=0;i<8;i++)await Promise.resolve();};
  const find=text=>host.all().find(n=>n.tag==='button'&&n._text===text);
  async function load(){await find('LOAD / REFRESH LEAGUE STATS').fire('click');queue.shift().resolve(clone(source));await tick();}
@@ -139,13 +139,13 @@ test('pool card labels reject collisions and preserve the frozen players and RPC
  group.value='3';await f.find('SAVE LABELS').fire('click');assert.match(f.host.textContent,/Group 3/);assert.equal(f.requests.length,before);assert.equal(f.host.querySelectorAll('[data-swap-player]').length,6);
 });
 test('pool compact identity warning hides when resolved and scheme counts remain visible',async()=>{
- const f=fixture();await f.load();assert.equal(f.host.querySelector('[data-identity-notice]').hidden,true);assert.match(f.host.querySelector('[data-plan-summary]').textContent,/2 × 3-player groups.*0 × 4-player groups/);
+ const f=fixture();await f.load();assert.equal(f.host.querySelector('[data-identity-notice]').hidden,true);assert.match(f.host.querySelector('[data-plan-summary]').textContent,/2 × 3 players/);
  assert.equal(f.find('BACK TO DASHBOARD'),undefined);await f.generate();assert.equal(f.host.querySelector('[data-pool-draw]').children.length,1);
 });
 
 test('pool estimate works before boards are selected and updates with selected board count',async()=>{
  const f=fixture(),count=f.host.querySelector('[data-manual-count]'),boards=f.host.querySelector('[data-boards]');boards.value='';await boards.fire('input');count.value='16';await count.fire('input');assert.match(f.host.querySelector('[data-estimate]').textContent,/5 pools:.*No boards selected/);
- boards.value='1,7';await boards.fire('input');assert.match(f.host.querySelector('[data-estimate]').textContent,/2 boards/);assert.match(f.host.querySelector('[data-plan-summary]').textContent,/2 boards/);assert.equal(f.requests.length,0);
+ boards.value='1,7';await boards.fire('input');assert.match(f.host.querySelector('[data-estimate]').textContent,/2 boards/);assert.match(f.host.querySelector('[data-plan-summary]').textContent,/2 × 3 players/);assert.equal(f.requests.length,0);
  count.value='4';await count.fire('input');assert.match(f.host.querySelector('[data-estimate]').textContent,/5 to 101/);assert.equal(f.data.players.length,6);
 });
 test('pool review is one expandable tab and calculation lives inside Advanced settings',async()=>{
@@ -169,4 +169,24 @@ test('pool compact Nakka step preserves handoff gates and opens review without s
 
 test('Hub board and group dialog picker and scheme are English while canonical draw metadata stays intact',async()=>{
  const f=fixture();await f.load();await f.generate();const before=JSON.stringify(f.draw);await f.find('Board 2').fire('click');assert.ok(f.find('SAVE LABELS'));assert.match(f.host.textContent,/Edit Board \/ Group/);assert.doesNotMatch(f.host.textContent,/Bana|Grupp|manna|banor/);f.host.querySelector('[data-edit-board]').parentElement.parentElement.close();const p=f.host.querySelector('[data-swap-player]');await p.fire('click');assert.match(f.host.querySelector('[data-swap-picker]').textContent,/Board 2.*Group/);assert.equal(JSON.stringify(f.draw),before);assert.equal(f.requests.length,2);
+});
+function boardRpc(){const calls=[];return {calls,google:{script:{get run(){let success,failure;return {withSuccessHandler(f){success=f;return this;},withFailureHandler(f){failure=f;return this;},beautyStagePlanTest(){calls.push({kind:'read',success,failure});},beautyStageLabelsTest(token,labels){calls.push({kind:'save',token,labels,success,failure});}};}}}};}
+test('organiser moves a verified pool board without Setup dependency or resending Nakka pools',()=>{
+ const rpc=boardRpc(),f=fixture({google:rpc.google});f.host.querySelector('[data-boards]').value='';f.find('EDIT DISPLAY BOARDS').click();assert.equal(rpc.calls[0].kind,'read');const plan={pools:[{id:'lg_0',ids:['aaaa','bbbb','cccc'],board:7,group:1},{id:'lg_1',ids:['dddd','eeee','ffff'],board:8,group:1}]};rpc.calls[0].success(plan);const dialog=f.host.querySelectorAll('dialog').find(n=>n.textContent.includes('Edit display boards'));assert.ok(dialog.open);const fields=dialog.querySelectorAll('[data-display-board]'),groups=dialog.querySelectorAll('[data-display-group]');fields[1].value='7';fields[1].fire('change');assert.equal(groups[1].value,'2');f.find('SAVE DISPLAY BOARDS').click();const save=rpc.calls[1];assert.equal(save.token,'TOKEN');assert.equal(save.labels[1].board,7);assert.equal(save.labels[1].group,2);assert.deepEqual(Array.from(save.labels[1].ids),plan.pools[1].ids);assert.equal(f.requests.length,0);save.success();assert.match(f.notice(),/Open live displays will refresh/);
+});
+test('pool board edit validates duplicate labels and drops writes after the organiser locks',()=>{
+ const rpc=boardRpc(),f=fixture({google:rpc.google});f.find('EDIT DISPLAY BOARDS').click();rpc.calls[0].success({pools:[{ids:['aaaa','bbbb','cccc'],board:7,group:1},{ids:['dddd','eeee','ffff'],board:8,group:1}]});const dialog=f.host.querySelectorAll('dialog').find(n=>n.textContent.includes('Edit display boards')),fields=dialog.querySelectorAll('[data-display-board]'),groups=dialog.querySelectorAll('[data-display-group]');fields[1].value='7';groups[1].value='1';f.find('SAVE DISPLAY BOARDS').click();assert.equal(rpc.calls.length,1);assert.match(dialog.textContent,/unique group numbers/);fields[1].value='8';f.lock();const save=dialog.querySelectorAll('button').find(n=>n._text==='SAVE DISPLAY BOARDS');save.click();assert.equal(rpc.calls.length,1);
+});
+
+test('planner scheme uses only needed pool-size tiles ordered by selected preference and hides redundant boards field',async()=>{
+ const f=fixture(),summary=f.host.querySelector('[data-plan-summary]');assert.equal(summary.children.length,1);assert.match(summary.textContent,/2 × 3 players/);assert.doesNotMatch(summary.textContent,/0 ×|boards/);assert.equal(f.host.querySelector('[data-boards]').parentElement.hidden,true);assert.match(f.host.querySelector('[data-advanced-settings]').textContent,/Nakka match assignments are unchanged/);
+ f.data.players=Array.from({length:62},(_,i)=>({player:'Player '+i,status:'IN'}));f.window.BeautySeededPoolUI.update(f.data);assert.equal(summary.children.length,2);assert.match(summary.children[0].textContent,/18 × 3 players/);assert.match(summary.children[1].textContent,/2 × 4 players/);
+ f.host.querySelectorAll('[data-size-choice]').find(n=>n.dataset.sizeChoice==='4').click();assert.match(summary.children[0].textContent,/14 × 4 players/);assert.match(summary.children[1].textContent,/2 × 3 players/);assert.equal(f.requests.length,0);
+});
+
+test('planner BOARDS tile counts used physical boards and retains only nonzero size chips',()=>{
+ const f=fixture(),boards=f.host.querySelector('[data-boards]'),needed=f.host.querySelector('[data-boards-needed]');const summary=f.host.querySelector('[data-plan-summary]'),label=f.host.querySelector('[data-pools-label]');assert.equal(label.textContent,'POOLS');assert.equal(label.parentElement,summary.parentElement);assert.equal(summary.parentElement.children[0],label);assert.equal(needed.parentElement.parentElement.children[1],label.parentElement);assert.equal(needed.parentElement.children[0].textContent,'BOARDS');assert.equal(needed.textContent,'1');assert.match(needed['aria-label'],/1 boards used/);
+ boards.value='1,2,3,4';boards.fire('input');assert.equal(needed.textContent,'2');assert.equal(f.host.querySelector('[data-plan-summary]').children.length,1);
+ boards.value='';boards.fire('input');assert.equal(needed.textContent,'—');
+ f.data.players=Array.from({length:62},(_,i)=>({player:'Player '+i,status:'IN'}));boards.value='1-8';boards.fire('input');f.window.BeautySeededPoolUI.update(f.data);assert.equal(needed.textContent,'8');assert.match(f.host.querySelector('[data-plan-summary]').textContent,/18 × 3 players.*2 × 4 players/);assert.equal(f.requests.length,0);
 });

@@ -1,0 +1,132 @@
+[
+  {
+    "path": "scripts/build-stage-test.cjs",
+    "before": "e044faa4fd1042ecdbd0553fe5fe34741d2c91de5e05206d679d772e8c479f5e",
+    "after": "e44f5c168bc33e79596955b29f5aace358cf1a9ae0d56fb7de655207ac318f29"
+  },
+  {
+    "path": "scripts/serve-preview.cjs",
+    "before": "ee763e9de8d4db920a3b02fee8126eb96a2b17bb23cc9a992d4a565b589888d7",
+    "after": "03378ca1c1a38cc7072b8da9a3ca6f4583807df1de05ae93fda8d6d6fbed0aa8"
+  },
+  {
+    "path": "scripts/build-beauty-live.cjs",
+    "before": "90bfa9fc9b144646a3c91841279c839c089658def14b0bd3636745ead6805a63",
+    "after": "639598227de3b7a21d8e25e667df25923137055e74c7f7787cd3b05847328b80"
+  },
+  {
+    "path": "tests/live-shell.test.cjs",
+    "before": null,
+    "after": "ba84404dbf283d5814927add8749e89bfa0b27746f9387bcfaaf324d3f6f7a78"
+  },
+  {
+    "path": "public/beauty-live.html",
+    "before": "e33e90b4a85dbd38dad169d30582de7673bd3beef1e46e168b3aaf597f5b62ac",
+    "after": "0a10719bd02f0c7fdc5d1b44258c2f39b194be8023068ffd48a7a4acca7c3291"
+  },
+  {
+    "path": "public/competition-preview.html",
+    "before": "65658fdf8ee43839d82d9efd4ea81f46e877ae0f2939e35378be1d1cd9ede8be",
+    "after": "0a10719bd02f0c7fdc5d1b44258c2f39b194be8023068ffd48a7a4acca7c3291"
+  },
+  {
+    "path": "docs/handoff/audit-register.md",
+    "before": "39a494b4f52aa075b4d4df4b432369e07bcc53506c57bc64013836807b5ce626",
+    "after": "ac71b2d035f6bb8918b2d3d259365f2dcb88f3d7e7fddc08b5a2072ebf202568"
+  },
+  {
+    "path": "docs/handoff/requirements.json",
+    "before": "ba21cf748507d0b83418995af59e78332febc1286a89f9e07bcc8485307febfa",
+    "after": "b7cb0b8496aabe592e763e67bcdf2bfd9d10b20ebdfb59672b10fe9fb5560c83"
+  },
+  {
+    "path": "docs/handoff/live-shell-20261031.md",
+    "before": null,
+    "after": "f1590e937dd1ecdd2a144a13275f21cbc99a31806f6e2104146b9baaa3bfacac"
+  },
+  {
+    "path": "docs/handoff/test-inventory.json",
+    "before": "0d1e9a2e92b03dec4f79aaf56d2c964c51cdac6326f563033e73defe137b75ea",
+    "after": "071288bf68c348a81bdec497839858550499bde8c35a6b0431d7942edbe86492"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/BeautyLiveTest.html",
+    "before": "9bf7a61ad97de6b00963e027ca7bd51243f62950f5ed52c8548700ce7b4590f1",
+    "after": "a38e6fe57bf9d65207bc2e0b2e764e620813d1684f0e5630dca144e496ae046e"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "before": "1d55ff78fcd5675cdf9dfdbdc0459275595bbc55668b241c7fc7173fad08a241",
+    "after": "71640310c1b83c603b0f0a45e4635badcc1ab65994d446a58e4c6309b1581d0a"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/BeautyLiveTest.gs",
+    "before": "4206a215c22974ce5ef0f94e5040f66ae6be6ab79db62af5058b1df1906922fe",
+    "after": "1c96266a1c7a388f2061744c4397d6c6e13d45ad197038d451d42e2d188ae6c6"
+  },
+  {
+    "path": "apps-script/registration-identity-test/remote-app/StageTest.html",
+    "before": "8f65e3f299a5b81777772e572b4f2f093150bff892e97f60b643b3937bcbd1ca",
+    "after": "a38e6fe57bf9d65207bc2e0b2e764e620813d1684f0e5630dca144e496ae046e"
+  },
+  {
+    "path": "evidence/live-shell-20261031/result.json",
+    "before": null,
+    "after": "48def22bab64c3c1ad1a71ce35031c4f4330665368de6754317548a09668845c"
+  },
+  {
+    "path": "evidence/live-shell-20261031/tests.txt",
+    "before": null,
+    "after": "743298c981b88d8380e43b484698ac9324ea1c3830fc259e2eb3b2b47bffa802"
+  },
+  {
+    "path": "evidence/live-shell-20261031/inventory.txt",
+    "before": null,
+    "after": "446a1c3fef28a976c7742e5316c8d5bc08d7f7e82da24563a271c3a595e1f510"
+  },
+  {
+    "path": "public/js/nakka-stage-feed.js",
+    "before": "c953d7e9ee1d699873d4f7ee525853f48649b8ab061a4063a098e2fe2f6707ab",
+    "after": "c4242beb9b3f4f7683d1c154dea65298781e083a2e5bc1826b8ed52ed014935e"
+  },
+  {
+    "path": "public/js/hub-test-services.js",
+    "before": "a65e5edf2af1fcedd38fba2d82383652ee5652100e7918da37a4584275f9e22b",
+    "after": "70bd880299c23500863d381e120610b9df32c2dc03707c6ae37a1885e4c55739"
+  },
+  {
+    "path": "public/js/knockout-bracket.js",
+    "before": null,
+    "after": "f2feb47207f24bc2337e9aa9d667460317054c03c74961eaa2d60d21f2a9a328"
+  },
+  {
+    "path": "public/js/competition-view.js",
+    "before": "9596cb4efa50f242893f67ff47b90aecef940fe04852b8d6b5ac757afcfdb368",
+    "after": "aca7e9017c8921b23f93da62f5fdc0c48b00a09af2392b610c5d04266abfb91e"
+  },
+  {
+    "path": "public/js/nakka-stage-model.js",
+    "before": "66ba0218dafb65ae3baec0b9bad1a753d468b2e0eb4b8bc925d66ba0e5d1b003",
+    "after": "f42eaa9130c6f7b5a3a68476ae09d9e1de55d06c4be1257ead27d54c7165c6f6"
+  },
+  {
+    "path": "public/js/nakka-pool-live.js",
+    "before": "7906b109f844f77fe08c164acf6c30d928badfc616c2624471ac9d45178663fe",
+    "after": "0d70c20874897964b1d0aa46f54fc801e66c3bda89d7dd47304023e5d8d1f1a7"
+  },
+  {
+    "path": "public/js/beauty-live.js",
+    "before": "daa2bed04c11c7947682ad4240f4741d780603cd4ff2b2a4a3923b7b6727dec6",
+    "after": "8e63aca356e458e6e8eea85e48e3bc6a17bcdf82569cd949b3b4244ef171e289"
+  },
+  {
+    "path": "public/js/venue-live.js",
+    "before": null,
+    "after": "9442a00fa8b71672db5ab95151ff20e9c4a3cffacad33d27238c6510e2ffba6f"
+  },
+  {
+    "path": "public/css/venue-live.css",
+    "before": null,
+    "after": "fc808bbb710fae7ee819b7f8b09a52d0a77a8415e107bfdfb6ea51fe8e8c3d5b"
+  }
+]

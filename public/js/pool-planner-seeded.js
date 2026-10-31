@@ -20,7 +20,14 @@
   const count=hubAvailable?BeautyPoolPlanner.eventCount(root.beautyHubData):null,result=currentPlan(),selected=result[panel.querySelector('[data-draw-scheme]').value];
   panel.querySelector('[data-in-count]').textContent=count===null?'—':String(count);
   panel.querySelector('[data-event-label]').textContent=(state?.event?.title||'Selected Hub event')+' · '+(root.beautyHubData?.eventDateDisplay||root.beautyHubData?.eventDate||'No date');
-  const summary=panel.querySelector('[data-plan-summary]');summary.textContent=result.error||(!selected?'Select available boards.':[selected.three+' × 3-player groups',selected.four+' × 4-player groups',result.boards+' boards',...(selected.five?[selected.five+' × 5-player groups']:[])].join(' · '));
+  const summary=panel.querySelector('[data-plan-summary]');summary.replaceChildren();
+  const needed=panel.querySelector('[data-boards-needed]'),used=!result.error&&selected?Math.min(result.boards,selected.pools):null;
+  needed.textContent=used===null?'—':String(used);needed.setAttribute('aria-label',used===null?'Choose boards to calculate':used+' boards used by this plan');
+  if(result.error||!selected)summary.textContent=result.error||'Select available boards.';
+  else for(const size of (Number(panel.querySelector('[data-size]').value)===4?[4,3,5]:[3,4,5])){
+   const n=selected[({3:'three',4:'four',5:'five'})[size]];if(!n)continue;
+   const tile=section('div','pool-scheme-chip',summary);numeric('strong',n,tile);el('span','×',tile);numeric('strong',size,tile);el('span','players',tile);
+  }
   panel.querySelector('[data-generate]').dataset.blocked=String(!hubAvailable||!state?.stats?.fresh||!selected||!!result.error||count>101);
   const options=panel.querySelector('[data-plan-options]');options.textContent=result.error?'':('Preferred: '+result.preferredPlan.three+' × 3 / '+result.preferredPlan.four+' × 4 / '+result.preferredPlan.five+' × 5. '+(result.perBoard?'One pool per board: '+result.perBoard.three+' × 3 / '+result.perBoard.four+' × 4 / '+result.perBoard.five+' × 5.':'No one-pool-per-board arrangement available.'));
   for(const n of panel.querySelectorAll('[data-size-choice]'))n.setAttribute('aria-pressed',String(n.dataset.sizeChoice===host.querySelector('[data-size]').value));
@@ -29,15 +36,26 @@
  }
  function reviewCastLabels(){
   if(busy)return;let generation,token;try{generation=root.BeautyHubAuth.generation();token=root.BeautyHubAuth.token();}catch(e){message('Sign in before saving cast labels.');return;}
-  const dialog=el('dialog',null,panel);dialog.className='pool-preview-confirm';el('h3','Review cast board labels',dialog);el('p','Labels for the verified sent groups only. Starting averages remain frozen. Nakka board assignments and results are unchanged.',dialog);
+  const dialog=el('dialog',null,panel);dialog.className='pool-preview-confirm pool-display-boards';el('h3','Edit display boards',dialog);el('p','Choose the board shown for each pool on live screens. Nakka match assignments are unchanged.',dialog);
   const status=el('p','Loading verified groups…',dialog);button('CANCEL',dialog,()=>dialog.close());dialog.showModal();
   const current=()=>root.BeautyHubAuth.isCurrent(generation)&&dialog.open;
   try{google.script.run.withSuccessHandler(plan=>{
    if(!current())return;if(!plan?.pools?.length){status.textContent='No verified sent groups are available. Nothing changed.';return;}
-   let allocation;try{allocation=root.BeautyPoolBoards.allocate(plan.pools.map(p=>({id:p.id,players:p.ids})),selectedBoards());}catch(e){status.textContent='Choose boards in Setup, then reopen this review.';return;}
-   status.textContent='Check every board and group before saving.';
-   const fields=plan.pools.map((p,i)=>{const row=el('div',null,dialog);el('span','Group '+(i+1)+' · '+p.ids.length+' players ',row);const board=el('input',null,el('label','Board ',row));board.type='number';board.min='1';board.max='1000';board.value=p.board??allocation.assignments[i].board;const group=el('input',null,el('label','Group ',row));group.type='number';group.min='1';group.max='101';group.value=p.group??allocation.assignments[i].batch;return {p,board,group};});
-   const save=button('SAVE CAST LABELS',dialog,()=>{if(!current())return;const labels=fields.map(({p,board,group})=>({ids:p.ids,board:Number(board.value),group:Number(group.value)}));save.disabled=true;google.script.run.withSuccessHandler(()=>{if(!current())return;root.beautyStagePendingLabels=null;dialog.close();message('Cast board labels saved. Reopen the stage screen to load them.');}).withFailureHandler(()=>{if(current()){save.disabled=false;status.textContent='Labels could not be saved. Check board/group numbers and your session. Pool assignments were not sent again.';}}).beautyStageLabelsTest(token,labels);});
+   let allocation=null;if(plan.pools.some(p=>!p.board||!p.group))try{allocation=root.BeautyPoolBoards.allocate(plan.pools.map(p=>({id:p.id,players:p.ids})),selectedBoards());}catch(e){status.textContent='Choose boards in Setup for pools without saved labels, then reopen this review.';return;}
+   status.textContent='Select a new board. Shared-board group numbers adjust automatically.';
+   const available=new Set();try{for(const n of selectedBoards())available.add(n);}catch(e){}for(let n=1;n<=16;n++)available.add(n);for(const p of plan.pools)if(p.board)available.add(p.board);
+   const fields=plan.pools.map((p,i)=>{
+    const oldBoard=p.board??allocation?.assignments[i].board,oldGroup=p.group??allocation?.assignments[i].batch;
+    const row=section('div','pool-display-board-row',dialog),identity=el('div',null,row);el('strong','Pool '+(i+1),identity);el('span',(oldBoard?'Board '+oldBoard+' · Group '+oldGroup:'No saved board')+' · '+p.ids.length+' players',identity);
+    const board=el('select',null,el('label','Show on board',row));board.dataset.displayBoard='';for(const n of [...available].sort((a,b)=>a-b))el('option','Board '+n,board).value=String(n);board.value=String(oldBoard);
+    const group=el('input',null,row);group.type='hidden';group.value=String(oldGroup);group.dataset.displayGroup='';const target=el('span','',row);target.className='pool-board-destination';return {p,board,group,target};
+   });
+   function destinations(){for(const f of fields)f.target.textContent='Board '+f.board.value+' · Group '+f.group.value;}
+   destinations();for(const field of fields)field.board.addEventListener('change',()=>{
+    const used=new Set(fields.filter(f=>f!==field&&Number(f.board.value)===Number(field.board.value)).map(f=>Number(f.group.value)));
+    let group=1;while(used.has(group))group++;field.group.value=String(group);destinations();
+   });
+   const save=button('SAVE DISPLAY BOARDS',dialog,()=>{if(!current())return;const labels=fields.map(({p,board,group})=>({ids:p.ids,board:Number(board.value),group:Number(group.value)}));const used=new Set();for(const label of labels){const key=label.board+':'+label.group;if(!Number.isInteger(label.board)||label.board<1||label.board>1000||!Number.isInteger(label.group)||label.group<1||label.group>101||used.has(key)){status.textContent='Use whole board numbers from 1 to 1000 and unique group numbers from 1 to 101 on each board.';return;}used.add(key);}save.disabled=true;google.script.run.withSuccessHandler(()=>{if(!current())return;root.beautyStagePendingLabels=null;dialog.close();message('Display boards saved. Open live displays will refresh shortly. Nakka assignments are unchanged.');}).withFailureHandler(()=>{if(current()){save.disabled=false;status.textContent='Labels could not be saved. Check board/group numbers and your session. Pool assignments were not sent again.';}}).beautyStageLabelsTest(token,labels);});
   }).withFailureHandler(()=>{if(current())status.textContent='Verified cast plan unavailable. Check your session.';}).beautyStagePlanTest();}catch(e){status.textContent='Cast review requires the connected TEST Hub.';}
  }
  function renderEstimate(){
@@ -182,18 +200,20 @@
   const progress=section('ol','pool-progress',header);['Setup','Preview','Nakka'].forEach((text,i)=>{const li=el('li',null,progress),n=button(null,li,()=>{if(i===0){panel.querySelector('[data-size-choice]')?.focus();panel.querySelector('.pool-setup')?.scrollIntoView?.({block:'center'});}else if(i===1){panel.querySelector('[data-pool-draw]')?.scrollIntoView?.({block:'start'});}else panel.querySelector('[data-handoff]')?.click();});n.dataset.step=String(i+1);numeric('span',i+1,n);el('strong',text,n);n.setAttribute('aria-label',text);});
   const event=section('div','pool-event-label',header);el('strong','TEST EVENT',event);el('p','Selected Hub event',event).dataset.eventLabel='';
   const setup=section('section','pool-setup',panel),total=section('div','pool-in-tile',setup);el('span','PLAYERS IN',total).className='label';numeric('strong','—',total).dataset.inCount='';
-  const sizeLabel=el('div',null,setup);el('span','PLAYERS PER POOL',sizeLabel).className='label';const size=el('select',null,sizeLabel);size.dataset.size='';size.hidden=true;size.setAttribute('aria-hidden','true');size.tabIndex=-1;
+  const sizeLabel=section('div','pool-size-setting',setup);el('span','PLAYERS PER POOL',sizeLabel).className='label';const size=el('select',null,sizeLabel);size.dataset.size='';size.hidden=true;size.setAttribute('aria-hidden','true');size.tabIndex=-1;
   [3,4].forEach(n=>el('option',String(n),size).value=String(n));const choices=section('div','pool-size-choices',sizeLabel);
   [3,4].forEach(n=>{const b=button(String(n),choices,()=>{size.value=String(n);settingsChanged();});b.dataset.sizeChoice=String(n);b.setAttribute('aria-label',n+' players per pool');});
-  const boardsLabel=el('label','BOARDS',setup),boards=el('input',null,boardsLabel);boards.type='text';boards.maxLength=1000;boards.placeholder='Select boards below';boards.dataset.boards='';
+  const boardsLabel=el('label','BOARDS',setup),boards=el('input',null,boardsLabel);boards.type='text';boards.maxLength=1000;boards.setAttribute('aria-label','Selected boards');boards.dataset.boards='';
   const arrangement=el('label',null,setup);arrangement.hidden=true;const scheme=el('select',null,arrangement);scheme.dataset.drawScheme='';for(const [v,t]of [['preferredPlan','Preferred format'],['perBoard','One pool per dartboard']])el('option',t,scheme).value=v;
   const draw=button('GENERATE PREVIEW',setup,()=>{const confirm=panel.querySelector('[data-preview-confirm]');if(!confirm)return;panel.querySelector('[data-mapping-reviewed]').checked=false;const proceed=panel.querySelector('[data-confirm-generate]');proceed.dataset.blocked='true';disable();message('Review the player identity acknowledgement in the popup.');confirm.showModal();});draw.dataset.generate='';draw.dataset.blocked='true';
-  const schemeTile=section('div','pool-scheme-tile',setup);el('span','SCHEME',schemeTile).className='label';el('p','Select available boards.',schemeTile).dataset.planSummary='';
+  const schemeTile=section('div','pool-scheme-tile',setup),boardSummary=section('div','pool-board-summary',schemeTile),poolSummary=section('div','pool-pools-summary',schemeTile);
+  el('span','BOARDS',boardSummary).className='label';const needed=numeric('strong','—',boardSummary);needed.className='pool-number pool-needed-number';needed.dataset.boardsNeeded='';needed.setAttribute('title','Boards used by this plan; pools may share a board.');
+  const poolsLabel=el('span','POOLS',poolSummary);poolsLabel.className='label';poolsLabel.dataset.poolsLabel='';el('div','Select available boards.',poolSummary).dataset.planSummary='';
   const boardChoices=section('div','pool-board-choices',panel);for(let n=1;n<=16;n++){const b=button(String(n),boardChoices,()=>{let selected=[];try{selected=selectedBoards();}catch(e){}const next=selected.includes(n)?selected.filter(v=>v!==n):[...selected,n];boards.value=next.sort((a,b)=>a-b).join(', ');settingsChanged();});b.dataset.boardChoice=String(n);b.setAttribute('aria-label','Board '+n);}
   const toolbar=section('div','pool-toolbar',panel);toolbar.dataset.poolToolbar='';const reviewToggle=button('Review players',toolbar,()=>{const details=panel.querySelector('[data-player-review]');if(details){details.open=!details.open;reviewToggle.setAttribute('aria-expanded',String(details.open));}});reviewToggle.dataset.reviewToggle='';reviewToggle.setAttribute('aria-controls','pool-player-review');reviewToggle.setAttribute('aria-expanded','false');reviewToggle.dataset.blocked='true';el('div',null,toolbar).dataset.leagueSlot='';const advancedToggle=button('Advanced settings',toolbar,()=>{advanced.open=!advanced.open;advancedToggle.setAttribute('aria-expanded',String(advanced.open));});advancedToggle.dataset.advancedToggle='';advancedToggle.setAttribute('aria-controls','pool-advanced-settings');advancedToggle.setAttribute('aria-expanded','false');
   toolbar.appendChild(progress);const boardRow=section('div','pool-board-row',panel);const boardTitle=el('span','BOARDS',boardRow);boardTitle.className='label';boardRow.appendChild(boardChoices);boardRow.appendChild(draw);setup.after?.(boardRow);
   const advanced=el('details',null,panel);advanced.id='pool-advanced-settings';advanced.addEventListener('toggle',()=>advancedToggle.setAttribute('aria-expanded',String(advanced.open)));advanced.className='pool-advanced';advanced.dataset.advancedSettings='';el('summary','Advanced settings',advanced);
-  button('REVIEW CAST BOARD LABELS',advanced,reviewCastLabels);advanced.appendChild(boardsLabel);el('p','',advanced).dataset.planOptions='';
+  button('EDIT DISPLAY BOARDS',advanced,reviewCastLabels);el('p','Change board labels on live screens. Nakka match assignments are unchanged.',advanced).className='pool-board-help';boardsLabel.hidden=true;advanced.appendChild(boardsLabel);const planOptions=el('p','',advanced);planOptions.dataset.planOptions='';planOptions.hidden=true;
   const manual=el('label','Try a different player count (estimate only) ',advanced),count=el('input',null,manual);count.type='number';count.min='5';count.max='101';count.placeholder='e.g. 37';count.dataset.manualCount='';const estimate=el('p','Estimates do not change registrations or the actual draw.',advanced);
   count.addEventListener('input',renderEstimate);estimate.dataset.estimate='';
   const reference=el('a','Open original 5–101 pool scheme ↗',advanced);reference.href='assets/pool-scheme.html';

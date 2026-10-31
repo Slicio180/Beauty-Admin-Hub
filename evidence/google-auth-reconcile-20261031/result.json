@@ -1,0 +1,14 @@
+{
+  "record": "GOOGLE-AUTH-RECONCILE-20261031",
+  "verifiedUTC": "2026-10-31T21:24:08.976346+00:00",
+  "result": "PASS",
+  "tests": 665,
+  "testFiles": 52,
+  "localOwnerBaseline": "LiveUsability664",
+  "googleOwnerBaseline": "LiveFill19_READBACK_VERIFIED",
+  "googleAuthBaselineReviewed": true,
+  "functionalGoogleDifference": false,
+  "browserReview": "PENDING",
+  "googleUpload": "NOT_PERFORMED",
+  "providerWrites": "NONE"
+}

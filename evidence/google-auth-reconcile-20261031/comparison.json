@@ -1,0 +1,62 @@
+{
+  "record": "GOOGLE_TEST_BASELINE_DIAGNOSIS",
+  "recordedUTC": "2026-10-31T21:21:14.021Z",
+  "scriptId": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "clone": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/live-usability-google-NMgfib",
+  "checks": [
+    {
+      "file": "HubTest.html",
+      "expected": "55ddfc6dda38b57ab97d4b06f2f450a8f97f4119b26cca15cfd9634642d07904",
+      "actual": "55ddfc6dda38b57ab97d4b06f2f450a8f97f4119b26cca15cfd9634642d07904",
+      "match": true
+    },
+    {
+      "file": "BeautyLiveTest.html",
+      "expected": "901c57cca47d7598ff69c27ef6af1f3e0fef58851a0115fa901a4c7337d8ed63",
+      "actual": "901c57cca47d7598ff69c27ef6af1f3e0fef58851a0115fa901a4c7337d8ed63",
+      "match": true
+    },
+    {
+      "file": "StageTest.html",
+      "expected": "901c57cca47d7598ff69c27ef6af1f3e0fef58851a0115fa901a4c7337d8ed63",
+      "actual": "901c57cca47d7598ff69c27ef6af1f3e0fef58851a0115fa901a4c7337d8ed63",
+      "match": true
+    },
+    {
+      "file": "RemoteRegistration.html",
+      "expected": "509067b8695864b8ea36a2b61b471821a3b01e4cd1f8904d5885005568e3a1b3",
+      "actual": "509067b8695864b8ea36a2b61b471821a3b01e4cd1f8904d5885005568e3a1b3",
+      "match": true
+    },
+    {
+      "file": "KioskTest.html",
+      "expected": "058e0bdb5f78ffca5b6c73a53555bb6378917e881b8a560535fd874152692e47",
+      "actual": "058e0bdb5f78ffca5b6c73a53555bb6378917e881b8a560535fd874152692e47",
+      "match": true
+    },
+    {
+      "file": "BeautyLiveServer.js",
+      "expected": "1c96266a1c7a388f2061744c4397d6c6e13d45ad197038d451d42e2d188ae6c6",
+      "actual": "1c96266a1c7a388f2061744c4397d6c6e13d45ad197038d451d42e2d188ae6c6",
+      "match": true
+    },
+    {
+      "file": "HubTestAuth.js",
+      "expected": "fb17ce7e13d2e5db190022e097d09f097e1cd2c177369a6bb4fddd0d283ac890",
+      "actual": "7df4427d573e226f261f9a592d6ab2aa7175e1ef060028dcd3555f4411efe9c8",
+      "match": false
+    }
+  ],
+  "previousVerifiedComparison": {
+    "verifiedUTC": "2026-10-31T20:27:27.960Z",
+    "changedFiles": [],
+    "all19Match": true
+  },
+  "codeChanged": false,
+  "googleUploaded": false,
+  "authLimits": {
+    "BEAUTY_HUB_AUTH_IDLE_MS_": "15 * 60 * 1000",
+    "BEAUTY_HUB_AUTH_MAX_MS_": "60 * 60 * 1000"
+  },
+  "authMatchesLocalBefore": false
+}

@@ -1,0 +1,6 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> beauty-admin-hub@0.0.0-recovery test:inventory
+> node scripts/check-test-inventory.cjs
+
+PASS: 656 cases across 52 files map to known requirements and evidence.

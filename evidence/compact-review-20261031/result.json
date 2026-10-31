@@ -1,0 +1,11 @@
+{
+  "record": "COMPACT-REVIEW-20261031",
+  "verifiedUTC": "2026-10-31T21:18:32.014992+00:00",
+  "result": "PASS",
+  "tests": 665,
+  "testFiles": 52,
+  "browserReview": "PENDING",
+  "googleUpload": "BLOCKED_BASELINE_REVIEW",
+  "macInstallNewUI": "NOT_PERFORMED",
+  "providerWrites": "NONE"
+}

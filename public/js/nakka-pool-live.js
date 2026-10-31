@@ -13,7 +13,14 @@
   if(a.cells[b.position-1].state==='multiple')return null;
   return {pool,left:m[4],right:m[5]};
  }
- async function collect(get,data){
+ function knockoutFixture(tmid,data){
+  if(typeof tmid!=='string')return null;
+  const m=tmid.match(/^t_RqC2_2034_(t|s2|t3|s2_3)_(\d+)_([A-Za-z0-9]{4})_([A-Za-z0-9]{4})$/);if(!m||m[3]===m[4])return null;
+  const stage=data.knockouts?.find(s=>s.kind=== (m[1]==='t3'?'t':m[1]==='s2_3'?'s2':m[1]));
+  const matches=m[1]==='t3'||m[1]==='s2_3'?[stage?.thirdPlace]:stage?.rounds?.[Number(m[2])]?.matches;
+  return matches?.find(q=>q&&[q.left.id,q.right.id].includes(m[3])&&[q.left.id,q.right.id].includes(m[4]))||null;
+ }
+ async function collect(get,data,includeKnockouts=false){
   const all=[],seen=new Set();let done=false;
   for(let skip=0;skip<1000;skip+=100){
    const r=await get('match/list?tdid='+event+'&count=100&skip='+skip+'&sort=startTime&order=asc');
@@ -22,14 +29,14 @@
    if(r.list.length<100){done=true;break;}
   }
   if(!done)throw Error('Match limit exceeded');
-  const rows=all.filter(m=>fixture(m.tmid,data));
+  const rows=all.filter(m=>fixture(m.tmid,data)||(includeKnockouts&&knockoutFixture(m.tmid,data)));
   const active=rows.filter(m=>m.endMatch===0);if(active.length>32)throw Error('Too many active games');
   const live=new Map();
   // At most four requests at once. Every cycle starts afresh, including corrected scores.
   for(let i=0;i<active.length;i+=4)await Promise.all(active.slice(i,i+4).map(async m=>{
    const r=await get('match/live?mid='+encodeURIComponent(m.mid));
    if(r.result!==0||r.mid!==m.mid||r.tdid!==event||r.tmid!==m.tmid||!Array.isArray(r.players)||r.players.length!==2||!Array.isArray(r.stats)||r.stats.length!==2||![0,1].includes(r.end_match))throw Error('Invalid live match');
-   const f=fixture(r.tmid,data);if(new Set(r.players.map(p=>p.tpid)).size!==2||!r.players.every(p=>[f.left,f.right].includes(p.tpid)))throw Error('Live identity mismatch');
+   const f=fixture(r.tmid,data),k=knockoutFixture(r.tmid,data),ids=f?[f.left,f.right]:[k?.left.id,k?.right.id];if(new Set(r.players.map(p=>p.tpid)).size!==2||!r.players.every(p=>ids.includes(p.tpid)))throw Error('Live identity mismatch');
    live.set(m.mid,r);
   }));
   return {rows,live};
@@ -69,5 +76,16 @@
   out.pools.sort((a,b)=>(a.board??1001)-(b.board??1001)||(a.group??a.number)-(b.group??b.number));
   return out;
  }
- const api=Object.freeze({fixture,collect,apply});if(typeof module==='object'&&module.exports)module.exports=api;else root.BeautyNakkaPoolLive=api;
+ function applyKnockouts(data,snapshot){
+  const out=JSON.parse(JSON.stringify(data)),counts=new Map();
+  for(const stage of out.knockouts||[])for(const m of [...stage.rounds.flatMap(r=>r.matches),stage.thirdPlace].filter(Boolean))m.live=false;
+  for(const row of snapshot.rows){if(knockoutFixture(row.tmid,out))counts.set(row.tmid,(counts.get(row.tmid)||0)+1);}
+  for(const row of snapshot.rows){
+   const m=knockoutFixture(row.tmid,out),l=snapshot.live.get(row.mid);if(!m||!l||!l.stats.every(s=>num(s.score)!==null&&Number.isInteger(s.darts)&&s.darts>=0&&(s.darts>0||s.score===0))||counts.get(row.tmid)!==1||l.show_sets!==0||l.match_type&&l.match_type!=='01'||!Array.isArray(l.legs)||l.legs.length!==2||!l.legs.every(n=>num(n)!==null))continue;
+   for(const [side,id]of [['left',m.left.id],['right',m.right.id]]){const i=l.players.findIndex(p=>p.tpid===id);if(i<0)continue;m[side+'Score']=l.legs[i];m[side+'Average']=average(l.stats[i].score,l.stats[i].darts);}
+   m.live=l.end_match===0;
+  }
+  return out;
+ }
+ const api=Object.freeze({fixture,knockoutFixture,collect,apply,applyKnockouts});if(typeof module==='object'&&module.exports)module.exports=api;else root.BeautyNakkaPoolLive=api;
 })(typeof globalThis==='object'?globalThis:this);

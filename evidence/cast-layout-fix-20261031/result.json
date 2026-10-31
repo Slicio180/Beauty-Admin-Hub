@@ -1,0 +1,10 @@
+{
+  "record": "CAST-LAYOUT-FIX-20261031",
+  "result": "PASS",
+  "verifiedUTC": "2026-10-31T14:09:54.837106+00:00",
+  "tests": 648,
+  "testFiles": 52,
+  "nativeReview": "PENDING",
+  "googleUpload": "NOT_PERFORMED",
+  "providerWrites": "NONE"
+}
