@@ -2973,7 +2973,7 @@
   {
     "id": "POOL-003",
     "file": "tests/pool-planner.test.cjs",
-    "name": "pool planner: supplied 5\u2013101 schemes match both preferences",
+    "name": "pool planner: supplied 5–101 schemes match both preferences",
     "requirement": "POOL-001",
     "kind": "Local behavior",
     "expected": "PASS",
@@ -8460,6 +8460,19 @@
     "limitations": "Native pixel rendering remains pending"
   },
   {
+    "id": "LIVE-SHELL-11-FINALS-WINNER-V4",
+    "file": "tests/live-shell.test.cjs",
+    "name": "finals winner uses provider champion and correct award without inferring a winner from scores",
+    "requirement": "LIVE-SHELL-20261031",
+    "kind": "Executable offline behavior",
+    "purpose": "Independent cast views, selected-panel fullscreen, readable connected bracket, public TEST live feed, guarded opener",
+    "expected": "Named behavior assertions pass",
+    "evidenceLabel": "LOCAL_TESTED",
+    "origin": "Owner approval30Oct2026; resumed31Oct2026",
+    "evidence": "evidence/cast-finals-v4-2026-11-01T00-12-39-449Z/tests.txt",
+    "limitations": "Offline model/DOM behavior and source layout assertions; real Google browser, device pixels, native Nakka scoring and guide shape acceptance pending"
+  },
+  {
     "id": "APPROVED-LIVE-venue-pool-cards.test-8",
     "file": "tests/venue-pool-cards.test.cjs",
     "name": "approved larger two-line names stay within row budget at mixed narrow and compact viewport sizes",
@@ -8494,7 +8507,7 @@
     "purpose": "Six-hour session, uniform cards, clear planner controls",
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL_TESTED",
-    "origin": "Owner31Oct21:30\u201321:57 feedback",
+    "origin": "Owner31Oct21:30–21:57 feedback",
     "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Native and six-hour runtime acceptance pending"
   },
@@ -8507,7 +8520,7 @@
     "purpose": "Six-hour session, uniform cards, clear planner controls",
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL_TESTED",
-    "origin": "Owner31Oct21:30\u201321:57 feedback",
+    "origin": "Owner31Oct21:30–21:57 feedback",
     "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Native and six-hour runtime acceptance pending"
   },
@@ -8520,7 +8533,7 @@
     "purpose": "Six-hour session, uniform cards, clear planner controls",
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL_TESTED",
-    "origin": "Owner31Oct21:30\u201321:57 feedback",
+    "origin": "Owner31Oct21:30–21:57 feedback",
     "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Native and six-hour runtime acceptance pending"
   },
@@ -8533,7 +8546,7 @@
     "purpose": "Six-hour session, uniform cards, clear planner controls",
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL_TESTED",
-    "origin": "Owner31Oct21:30\u201321:57 feedback",
+    "origin": "Owner31Oct21:30–21:57 feedback",
     "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Native and six-hour runtime acceptance pending"
   },
@@ -8546,7 +8559,7 @@
     "purpose": "Six-hour session, uniform cards, clear planner controls",
     "expected": "Named assertions pass",
     "evidenceLabel": "LOCAL_TESTED",
-    "origin": "Owner31Oct21:30\u201321:57 feedback",
+    "origin": "Owner31Oct21:30–21:57 feedback",
     "evidence": "evidence/live-usability-20261031/tests.txt",
     "limitations": "Native and six-hour runtime acceptance pending"
   },

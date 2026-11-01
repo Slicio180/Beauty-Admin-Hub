@@ -1,0 +1,19 @@
+{
+  "startedUTC": "2026-10-31T23:06:33.957Z",
+  "baseline": "81f6667 source hashes",
+  "googleUpload": "PENDING",
+  "browserReview": "PENDING",
+  "checks": [
+    {
+      "name": "build-live",
+      "status": 0
+    },
+    {
+      "name": "tests",
+      "status": 1
+    }
+  ],
+  "result": "FAIL",
+  "error": "tests failed; see /Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/cast-type-bracket-2026-10-31T23-06-33-863Z",
+  "finishedUTC": "2026-10-31T23:06:48.561Z"
+}

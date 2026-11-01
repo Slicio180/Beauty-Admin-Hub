@@ -1,0 +1,23 @@
+{
+  "startedUTC": "2026-11-01T00:12:39.531Z",
+  "googleTEST": "PENDING UPLOAD AND VISUAL REVIEW",
+  "production": "UNCHANGED",
+  "targetedDisplayTests": "27 PASS in preparation environment",
+  "fullSuite": "PENDING",
+  "checks": [
+    {
+      "name": "build-live",
+      "status": 0
+    },
+    {
+      "name": "tests",
+      "status": 0
+    },
+    {
+      "name": "inventory",
+      "status": 1
+    }
+  ],
+  "result": "FAIL",
+  "finishedUTC": "2026-11-01T00:13:07.179Z"
+}

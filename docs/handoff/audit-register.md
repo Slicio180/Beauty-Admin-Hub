@@ -1059,3 +1059,23 @@ PENDING. No new AUD number assigned. TEST only. See pool-layout-approved-2026103
 
 
 31 October 2026 — PLANNER-STYLE-20261031: approved full-width summary with equal 22px headings and matching light toolbar controls; white default/yellow selected. 665 tests/52 files PASS; native/Google new update pending. No AUD number invented.
+
+
+### Cast review v2 — 2026-10-31T23:38:00.472Z
+Compact 16px knockout headings; 14px 3:e PLATS; readable START/NU captions; arrow navigation reaches semifinal/final; automatic scroll stops there. Google TEST saved and browser checked. Local full tests and inventory PASS. Evidence: evidence/cast-review-v2-2026-10-31T23-37-16-235Z
+
+
+### Cast review v3 — 2026-10-31T23:49:33.961Z
+22px round and bronze headings match navigation text; yellow 3:e and white PLATS; bronze match below lower semifinal connector. Previously approved START/NU and finals scroll stop retained. Google TEST saved and browser checked. Local full tests and inventory PASS. Evidence: evidence/cast-review-v3-2026-10-31T23-48-48-318Z
+
+
+### Cast finals v5 — 2026-11-01T00:38:04.772Z
+Approved side-by-side logo and larger VINNARE header; trophy or medal inside bordered name card; semifinal heading placed above first card. Existing winner test strengthened without adding inventory cases. Google TEST saved; both knockout views browser verified: heading gap 18.8px, awards inside name cards, zero viewport overflow. Local full tests and inventory PASS. Evidence: evidence/cast-finals-v5-2026-11-01T00-37-18-731Z
+
+
+### Cast finals v6 — 2026-11-01T00:47:26.789Z
+Keep semifinal and final headings fixed in their correct columns in scrolling views; dock headings only in finals-only view; centre winner name card on final match centre. Existing inventory cases retained. Google TEST browser verified: fixed LAST16/LAST8/SEMIFINAL headers, correct FINAL column, yellow semifinal line, winner name card aligned exactly to final centre in both stages. Local full tests and inventory PASS. Evidence: evidence/cast-finals-v6-2026-11-01T00-46-44-922Z
+
+
+### Cast finals v7 — 2026-11-01T00:59:22.467Z
+Position SEMIFINAL and FINAL directly above their cards in LAST8/semifinal/final views only. Earlier-round fixed headings and finals-only winner layout retained. Google TEST browser verified: LAST8 page semifinal and final headings sit about 18px above cards in both stages. Local full tests and inventory PASS. Evidence: evidence/cast-finals-v7-2026-11-01T00-58-35-298Z

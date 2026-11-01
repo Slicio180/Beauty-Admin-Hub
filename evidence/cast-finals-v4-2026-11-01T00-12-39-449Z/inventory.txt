@@ -1,0 +1,94 @@
+
+> beauty-admin-hub@0.0.0-recovery test:inventory
+> node scripts/check-test-inventory.cjs
+
+node:assert:150
+  throw new AssertionError(obj);
+  ^
+
+AssertionError [ERR_ASSERTION]: case drift in tests/live-shell.test.cjs
++ actual - expected
+... Skipped lines
+
+  [
+    'live shell has four slim Swedish tabs and one selected shared panel with internal fullscreen',
+    'live shell requests fullscreen on selected panel and preserves chosen view when exiting',
+    'live windows keep independent round choices scroll positions and continue refresh without resetting',
+    'live pool paging and automatic rotation retain approved card renderer and pause outside pools',
+...
+    'approved title and action nodes dock into header and tab row then remain inside selected fullscreen',
++   'finals winner uses provider champion and correct award without inferring a winner from scores'
+  ]
+
+    at Object.<anonymous> (/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/scripts/check-test-inventory.cjs:29:10)
+    at Module._compile (node:internal/modules/cjs/loader:1781:14)
+    at Object..js (node:internal/modules/cjs/loader:1913:10)
+    at Module.load (node:internal/modules/cjs/loader:1505:32)
+    at Function._load (node:internal/modules/cjs/loader:1309:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:254:19)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+    at node:internal/main/run_main_module:36:49 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: [
+    'live shell has four slim Swedish tabs and one selected shared panel with internal fullscreen',
+    'live shell requests fullscreen on selected panel and preserves chosen view when exiting',
+    'live windows keep independent round choices scroll positions and continue refresh without resetting',
+    'live pool paging and automatic rotation retain approved card renderer and pause outside pools',
+    'live knockout scroll pauses for controls interaction hidden pages and reduced motion',
+    'live shell failure pause offline and page exit remove current status and stop scheduled work',
+    'live public list and stage event dates must agree before bracket content is displayed',
+    'knockout layout aligns all source centres and target centres exactly with orthogonal paths',
+    'knockout round navigation remains readable for full narrow and split windows without champion column',
+    'knockout cards keep literal names every average and opening-only draw numbers inside player identity',
+    'knockout preserves missing averages pending slots byes third place and provider final format',
+    'knockout draw numbers use only unique numeric provider opening guide and never league ranks',
+    'knockout live cycle uses exact event round pair and maps reversed provider player order',
+    'knockout live collector excludes unrelated fixtures and refuses invalid identities sets and incomplete totals',
+    'knockout CSS reserves two-line rows single one-pixel title accent and one connector layer',
+    'both TEST cast routes embed identical wired shell scripts without external asset dependencies',
+    'Hub Beauty Live clicks open new independent tabs and reject late signed-out callbacks',
+    'Hub Beauty Live opener rejects foreign unguarded duplicate-query and fragment URLs',
+    'combined live URL uses the selected event date guard rather than returning a bare route',
+    'feed knockout option reuses one match list and propagates live match data through full and fast cycles',
+    'pool paging arrows sit above cards and footer is absent below the player footer',
+    'cast footer keeps fullscreen failure visible and reserves space without covering cards',
+    'live plan labels reload in existing windows and late callbacks are ignored after exit',
+    'all shared live views keep icon buttons and one menu with list settings and count tile',
+    'display menu anchors under its icon closes outside or on Escape and keeps viewport space',
+    'approved title and action nodes dock into header and tab row then remain inside selected fullscreen',
+    'finals winner uses provider champion and correct award without inferring a winner from scores'
+  ],
+  expected: [
+    'live shell has four slim Swedish tabs and one selected shared panel with internal fullscreen',
+    'live shell requests fullscreen on selected panel and preserves chosen view when exiting',
+    'live windows keep independent round choices scroll positions and continue refresh without resetting',
+    'live pool paging and automatic rotation retain approved card renderer and pause outside pools',
+    'live knockout scroll pauses for controls interaction hidden pages and reduced motion',
+    'live shell failure pause offline and page exit remove current status and stop scheduled work',
+    'live public list and stage event dates must agree before bracket content is displayed',
+    'knockout layout aligns all source centres and target centres exactly with orthogonal paths',
+    'knockout round navigation remains readable for full narrow and split windows without champion column',
+    'knockout cards keep literal names every average and opening-only draw numbers inside player identity',
+    'knockout preserves missing averages pending slots byes third place and provider final format',
+    'knockout draw numbers use only unique numeric provider opening guide and never league ranks',
+    'knockout live cycle uses exact event round pair and maps reversed provider player order',
+    'knockout live collector excludes unrelated fixtures and refuses invalid identities sets and incomplete totals',
+    'knockout CSS reserves two-line rows single one-pixel title accent and one connector layer',
+    'both TEST cast routes embed identical wired shell scripts without external asset dependencies',
+    'Hub Beauty Live clicks open new independent tabs and reject late signed-out callbacks',
+    'Hub Beauty Live opener rejects foreign unguarded duplicate-query and fragment URLs',
+    'combined live URL uses the selected event date guard rather than returning a bare route',
+    'feed knockout option reuses one match list and propagates live match data through full and fast cycles',
+    'pool paging arrows sit above cards and footer is absent below the player footer',
+    'cast footer keeps fullscreen failure visible and reserves space without covering cards',
+    'live plan labels reload in existing windows and late callbacks are ignored after exit',
+    'all shared live views keep icon buttons and one menu with list settings and count tile',
+    'display menu anchors under its icon closes outside or on Escape and keeps viewport space',
+    'approved title and action nodes dock into header and tab row then remain inside selected fullscreen'
+  ],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v22.23.2

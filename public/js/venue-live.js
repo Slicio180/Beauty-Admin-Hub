@@ -56,7 +56,7 @@
    bracket=BeautyKnockoutBracket.render(document,host,stage,{start:starts[selected],width:host.clientWidth||window.innerWidth-48},action=>{
     remember();starts[selected]+=action.direction;tops[selected]=0;direction=1;bracket=null;render(true);
    });
-   starts[selected]=bracket.start;bracket.viewport.scrollTop=tops[selected];
+   starts[selected]=bracket.start;if(bracket.viewport.classList.contains('bracket-fits'))tops[selected]=0;bracket.viewport.scrollTop=tops[selected];
    text('pageIndicator',bracket.total?'Omgång '+(bracket.start+1)+'–'+(bracket.start+bracket.rounds.length)+' av '+bracket.total:'');
    const pause=()=>{holdUntil=Date.now()+8000;};
    for(const name of ['wheel','touchstart','pointerdown','keydown'])bracket.viewport.addEventListener(name,pause,{passive:true});
@@ -107,7 +107,7 @@
  timers.push(window.setInterval(()=>{if(selected==='pools'&&data&&!document.hidden&&$('rotatePages').checked&&poolState.total>1){poolState.index=(poolState.index+1)%poolState.total;render(true);}},12000));
  timers.push(window.setInterval(()=>{
   const now=Date.now(),elapsed=lastTick?Math.min(100,now-lastTick):0;lastTick=now;
-  if(!bracket||document.hidden||disposed||!$('castSettings').hidden||!$('autoScroll').checked||$('pauseScroll').getAttribute('aria-pressed')==='true'||now<holdUntil||window.matchMedia?.('(prefers-reduced-motion: reduce)').matches)return;
+  if(!bracket||bracket.viewport.dataset.finalsOnly==='true'||bracket.viewport.classList.contains('bracket-fits')||document.hidden||disposed||!$('castSettings').hidden||!$('autoScroll').checked||$('pauseScroll').getAttribute('aria-pressed')==='true'||now<holdUntil||window.matchMedia?.('(prefers-reduced-motion: reduce)').matches)return;
   const v=bracket.viewport,max=v.scrollHeight-v.clientHeight;if(max<=1||elapsed===0)return;
   const next=Math.max(0,Math.min(max,v.scrollTop+direction*elapsed*.025));v.scrollTop=next;tops[selected]=next;
   if(next>=max||next<=0){direction*=-1;holdUntil=now+2500;}
@@ -116,3 +116,4 @@
  window.addEventListener('pageshow',event=>{if(event.persisted&&disposed){text('stageStatus','Visningen pausades efter navigering. Ladda om sidan för att fortsätta.');text('liveStatus','Ladda om sidan för att fortsätta uppdatera spelarlistan.');}});
  render();if(automatic)load();
 })();
+

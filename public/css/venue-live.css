@@ -170,3 +170,61 @@ html,body{height:100%;margin:0}body{display:flex;flex-direction:column;overflow:
 
 /* Page-owned top edge below browser chrome. */
 body{border-top:1px solid #ffd700}
+
+
+/* 31 October correction: fixed label ratio and compact knockout headings. */
+.venue-pool-card .group-averages .average-caption{font-family:'AIK Display',sans-serif;font-weight:400;font-size:calc(var(--pool-header-average-font,24px) * .5);line-height:1;letter-spacing:0}
+.bracket-heading{min-height:0;padding:2px 0 8px}
+.bracket-arrow{top:4px}
+.bracket-title h3>span{padding-top:5px}
+.bracket-title .round-word{color:#fff}
+.bracket-title .round-number{color:#ffd700}
+.bracket-viewport.bracket-fits{display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.bracket-canvas{flex-shrink:0}
+.bracket-canvas>.knockout-third{position:absolute;box-sizing:border-box;max-width:none;margin:0;z-index:1}
+.bracket-canvas>.knockout-third>h3{margin:0 0 4px}
+
+/* 1 November review: readable captions and minimal heading height. */
+.venue-pool-card .group-averages .average-caption{font-size:calc(var(--pool-header-average-font,24px) * .85)}
+.bracket-heading{min-height:28px;padding:0 0 2px}
+.bracket-heading .bracket-title h3{font-size:16px;line-height:1.1}
+.bracket-title h3>span{padding-top:2px}
+.bracket-title p{font-size:10px;line-height:1.1;margin:2px 0 0}
+.bracket-heading .bracket-arrow{top:0;width:24px;min-height:24px;height:24px;font-size:14px;padding:1px}
+.bracket-canvas>.knockout-third>h3{font-size:14px;line-height:1.1;text-transform:none;margin:0 0 4px}
+.bracket-canvas>.knockout-third>p{font-size:10px;line-height:1.1;margin:2px 0 4px}
+
+/* 1 November final heading review: match the 22px navigation labels. */
+.bracket-heading .bracket-title h3,.bracket-canvas>.knockout-third>h3{font-size:22px;line-height:1.1}
+.knockout-third .third-place-number{color:#ffd700}
+.knockout-third .third-place-word{color:#fff}
+@media(max-width:700px){.bracket-heading .bracket-title h3,.bracket-canvas>.knockout-third>h3{font-size:15px}}
+
+/* Approved finals composition: original supplied AIK DART PNG. */
+.final-heading-docked{z-index:2}
+.bracket-canvas>.final-heading-docked h3{font-size:22px}
+.bracket-canvas>.final-heading-docked h3>span{position:relative;display:inline-block;padding-top:5px}
+.bracket-canvas>.final-heading-docked h3>span:before{content:'';position:absolute;top:0;left:0;width:100%;height:1px;background:#ffd700}
+.knockout-third>h3{width:max-content;max-width:100%;margin:0 auto 6px!important;border-top:1px solid #ffd700;padding-top:5px}
+.knockout-third .third-place-suffix{font-weight:400;color:#fff}
+.knockout-winner{position:absolute;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;z-index:1}
+.winner-heading{font:700 22px/1.1 'AIK Condensed',sans-serif;color:#fff;border-top:1px solid #ffd700;padding-top:5px;margin:0}
+.winner-logo{height:145px;width:130px;object-fit:contain}
+.winner-award{font-size:40px;line-height:1.2}
+.winner-name{font:400 24px/1.15 'AIK Display',sans-serif;color:#fff;overflow-wrap:anywhere}
+
+/* Approved V5: compact logo/header and award inside winner name card. */
+.bracket-canvas>.semifinal-heading-docked{z-index:2;text-align:center}
+.bracket-canvas>.semifinal-heading-docked h3{font:700 22px/1.1 'AIK Condensed',sans-serif;margin:0;color:#fff}
+.bracket-canvas>.semifinal-heading-docked h3>span{position:relative;display:inline-block;padding-top:5px}
+.bracket-canvas>.semifinal-heading-docked h3>span:before{content:'';position:absolute;top:0;left:0;width:100%;height:1px;background:#ffd700}
+.winner-header{display:flex;align-items:center;justify-content:center;gap:14px;width:100%}
+.winner-header .winner-logo{width:66px;height:86px;flex:0 0 66px;object-fit:contain}
+.winner-header .winner-heading{font-size:30px;line-height:1.1}
+.knockout-winner .winner-card{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:90px;padding:14px;box-sizing:border-box;border:1px solid #4d606b;border-radius:5px;background:#0c141a}
+.winner-card .winner-award{font-size:38px;flex-shrink:0}
+.winner-card .winner-name{font-size:25px;min-width:0;text-align:left}
+
+/* V6: retain yellow accent on fixed and docked round headings. */
+.bracket-title h3>span{position:relative;display:inline-block;padding-top:5px}
+.bracket-title h3>span::before{content:"";display:block;position:absolute;top:0;left:0;width:100%;height:1px;background:#ffd700}
