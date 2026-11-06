@@ -18,3 +18,12 @@ test('boards: invalid ranges, empty selection and duplicate pool identities fail
  for(const b of [[],[1,1],[0],[1.5]])assert.throws(()=>allocate([pool('x')],b));
  assert.throws(()=>allocate([pool('x'),pool('x')],[1]));assert.throws(()=>allocate([],[1]));
 });
+
+test('boards: a four-player pool on two boards has six unique games in three conflict-free waves',()=>{
+ const {matchPlan}=require('../public/js/pool-board-allocation.js'),pools=[pool('a',4),pool('b',3)],r=matchPlan(pools,[5,6],[{poolId:'a',boards:[5,6]},{poolId:'b',boards:[5]}]);
+ const games=r.matches.filter(m=>m.poolId==='a');assert.equal(games.length,6);assert.equal(new Set(games.map(m=>m.players.slice().sort().join(':'))).size,6);assert.equal(new Set(games.map(m=>m.wave)).size,3);assert.equal(r.assignments[1].startWave,4);
+ for(const wave of new Set(r.matches.map(m=>m.wave))){const matches=r.matches.filter(m=>m.wave===wave),ids=matches.flatMap(m=>m.players);assert.equal(new Set(ids).size,ids.length);assert.equal(new Set(matches.map(m=>m.board)).size,matches.length);}
+ const single=matchPlan([pool('a',4)],[5],[{poolId:'a',boards:[5]}]);assert.equal(single.assignments[0].endWave,6);
+ for(const boards of [[5,5],[5,7],[]])assert.throws(()=>matchPlan([pool('a',4)],[5,6],[{poolId:'a',boards}]));
+ assert.throws(()=>matchPlan([pool('a',3)],[5,6],[{poolId:'a',boards:[5,6]}]));
+});

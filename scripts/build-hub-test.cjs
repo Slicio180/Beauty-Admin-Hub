@@ -18,10 +18,10 @@ html=html.replace('<div class="masthead-session"></div>', '<div class="masthead-
 if (!html.includes('id="hubSignOut"')) throw Error('Account controls insertion failed');
 html=html.replace('<script src="js/hub-services.js"','<script src="js/hub-auth.js"></script>\n<script src="js/hub-services.js"');
 html=html.replace('</body>','<script src="js/login.js"></script><script src="js/hub-live-stats.js"></script></body>');
-html=html.replace('<h2 id="nakkaPanelTitle">Nakka</h2>', '<h2 id="nakkaPanelTitle">Nakka</h2><section class="health-card"><h3>Event connection</h3><p>Check the Hub date against Nakka. Read only; no player sync.</p><button id="nakkaEventCheck" type="button">CHECK EVENT</button> <button id="nakkaCompare" type="button">COMPARE PLAYERS</button><div id="nakkaEventResult" role="status" aria-live="polite"></div></section>');
-html=html.replace('</body>','<script src="js/hub-nakka-event.js"></script></body>');
+html=html.replace('<h2 id="nakkaPanelTitle">Nakka</h2>', '<h2 id="nakkaPanelTitle">Nakka</h2>'+read('public/nakka-troubleshooting.html'));
+html=html.replace('</body>','<script src="js/hub-nakka-workflow.js"></script><script src="js/hub-nakka-event.js"></script></body>');
 html=html.replace('</body>','<script src="js/hub-nakka-transfer.js"></script></body>');
-html=html.replace('</body>','<script src="js/hub-player-removal.js"></script></body>');
+html=html.replace('</body>','<script src="js/hub-player-removal.js"></script><script src="js/hub-tournament-control.js"></script></body>');
 html=html.replace('</head>','<style>#nakkaTransferOpen{background:#ffd700;color:#080808;border:0;border-radius:5px;font:inherit;font-size:20px;padding:10px 16px;margin:16px 0 4px;min-height:44px}</style></head>');
 
 

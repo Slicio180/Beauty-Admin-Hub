@@ -12,8 +12,10 @@ function beautyHubEventSnapshot_(ss) {
   const expected=[['START DATE','LAST RESET'],['PLAYER','OLD NAME','STATUS','FOTO&VIDEO','MEDDELANDE'],['PLAYERS','NEW PLAYERS','STATUS','FOTO&VIDEO','MEDDELANDE','WHERE FROM'],['PLAYERS'],['Timestamp','VÄLJ DITT NAMN','Skriv ditt fullständiga namn','Foto- och videomedgivande','Meddelande','WHERE FROM']];
   const result={};
   titles.forEach((title,i)=>{
-    const sheet=ss.getSheetByName(title);if(!sheet || sheet.getLastRow()>limits[i] || sheet.getLastColumn()>widths[i])throw Error('LAYOUT');
-    const rows=['PLAYER STATUS DATA',"TONIGHT'S PLAYERS"].includes(title)?Math.min(1000,sheet.getMaxRows()):Math.max(2,sheet.getLastRow());
+    const sheet=ss.getSheetByName(title);if(!sheet)throw Error('LAYOUT');
+    const lastRow=sheet.getLastRow();
+    if(lastRow>limits[i] || sheet.getLastColumn()>widths[i])throw Error('LAYOUT');
+    const rows=['PLAYER STATUS DATA',"TONIGHT'S PLAYERS"].includes(title)?Math.min(1000,sheet.getMaxRows()):Math.max(2,lastRow);
     if(rows<2 || (title==="TONIGHT'S PLAYERS" && rows<100))throw Error('LAYOUT');
     const range=sheet.getRange(1,1,rows,widths[i]);
     const values=range.getValues(),display=range.getDisplayValues(),formulas=range.getFormulas(),formats=range.getNumberFormats();

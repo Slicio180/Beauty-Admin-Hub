@@ -274,6 +274,18 @@ body{border-top:1px solid #ffd700}
 /* V6: retain yellow accent on fixed and docked round headings. */
 .bracket-title h3>span{position:relative;display:inline-block;padding-top:5px}
 .bracket-title h3>span::before{content:"";display:block;position:absolute;top:0;left:0;width:100%;height:1px;background:#ffd700}
+
+/* Match result leads; secondary averages use the smaller size. */
+.venue-pool-card .pool-matrix td .match-cell-score{display:block;font-size:var(--pool-average-font,26px);line-height:1;white-space:nowrap}
+.venue-pool-card .pool-matrix td .match-cell-average{font-size:16px;line-height:1;margin-top:0}
+
+.venue-pool-card .pool-matrix .pool-player .overall-average{font-size:16px;line-height:1}
+
+/* One primary number size: START/NU, match scores and standings totals. */
+.venue-pool-card .pool-matrix td .match-cell-score,.venue-pool-card .pool-matrix td.number:not(.position){font-size:var(--pool-header-average-font,24px);line-height:1}
+
+/* Primary values share the same face as NU, including Rank. */
+.venue-pool-card .pool-matrix td .match-cell-score,.venue-pool-card .pool-matrix td.number:not(.position),.venue-pool-card .group-averages .average-value{font:400 24px/1 "AIK Display",sans-serif}
 </style>
 </head>
 <body data-stage-mode="test-live">
@@ -301,7 +313,7 @@ body{border-top:1px solid #ffd700}
 /* Read-only competition projection. Nakka alone supplies results/advancement. */
 (function(root){
  'use strict';
- const target='t_RqC2_2034';
+ const target='t_QHaG_7792';
  const fail=()=>{throw Error('Unsupported or mismatched TEST stage data.');};
  const number=v=>typeof v==='number'&&Number.isFinite(v)&&v>=0?v:null;
  function badge(t,key){
@@ -336,7 +348,7 @@ body{border-top:1px solid #ffd700}
    if(!['lg','rr'].includes(g.kind)||!Number.isInteger(g.index)||g.index<0||!Array.isArray(g.players)||g.players.length>1000)fail();
    const ids=new Set();const pool={id:g.kind+'_'+g.index,number:g.index+1,players:g.players.map(p=>{
     if(!names.has(p.tpid)||ids.has(p.tpid))fail();ids.add(p.tpid);
-    return {...slot(p.tpid),rank:number(p.rank)>0?p.rank:null,played:number(p.p),wins:number(p.w),draws:number(p.d),losses:number(p.l),points:number(p.pts)};
+    return {...slot(p.tpid),rank:number(p.rank)>0?p.rank:null,played:number(p.p),wins:number(p.win??p.w),draws:number(p.d),losses:number(p.lose??p.l),points:number(p.pts)};
    })};
    const table=t[g.kind+'_table']?.[g.index];pool.matrix=null;pool.format=t[g.kind+'_setting']?.game_setting?.length?null:format(t[g.kind+'_setting'],g.index,0);
    if(table!=null){
@@ -391,11 +403,11 @@ body{border-top:1px solid #ffd700}
 /* Public, read-only pool statistics. No estimates, credentials or provider writes. */
 (function(root){
  'use strict';
- const event='t_RqC2_2034',num=n=>typeof n==='number'&&Number.isFinite(n)&&n>=0?n:null;
+ const event='t_QHaG_7792',num=n=>typeof n==='number'&&Number.isFinite(n)&&n>=0?n:null;
  const average=(score,darts)=>darts>0?3*score/darts:null;
  function fixture(tmid,data){
   if(typeof tmid!=='string')return null;
-  const m=tmid.match(/^t_RqC2_2034_(rr|lg)_(\d+)_(?:(\d+)_)?([A-Za-z0-9]{4})_([A-Za-z0-9]{4})$/);
+  const m=tmid.match(/^t_QHaG_7792_(rr|lg)_(\d+)_(?:(\d+)_)?([A-Za-z0-9]{4})_([A-Za-z0-9]{4})$/);
   if(!m||(m[1]==='lg')!==(m[3]!==undefined)||m[4]===m[5])return null;
   const pool=data.pools.find(p=>p.id===m[1]+'_'+Number(m[2]));
   if(!pool?.matrix||![m[4],m[5]].every(id=>pool.matrix.some(p=>p.id===id)))return null;
@@ -405,7 +417,7 @@ body{border-top:1px solid #ffd700}
  }
  function knockoutFixture(tmid,data){
   if(typeof tmid!=='string')return null;
-  const m=tmid.match(/^t_RqC2_2034_(t|s2|t3|s2_3)_(\d+)_([A-Za-z0-9]{4})_([A-Za-z0-9]{4})$/);if(!m||m[3]===m[4])return null;
+  const m=tmid.match(/^t_QHaG_7792_(t|s2|t3|s2_3)_(\d+)_([A-Za-z0-9]{4})_([A-Za-z0-9]{4})$/);if(!m||m[3]===m[4])return null;
   const stage=data.knockouts?.find(s=>s.kind=== (m[1]==='t3'?'t':m[1]==='s2_3'?'s2':m[1]));
   const matches=m[1]==='t3'||m[1]==='s2_3'?[stage?.thirdPlace]:stage?.rounds?.[Number(m[2])]?.matches;
   return matches?.find(q=>q&&[q.left.id,q.right.id].includes(m[3])&&[q.left.id,q.right.id].includes(m[4]))||null;
@@ -433,7 +445,7 @@ body{border-top:1px solid #ffd700}
  }
  function apply(data,snapshot,plan){
   const out=JSON.parse(JSON.stringify(data)),used=new Set(),totals=new Map(),covered=new Map(),invalid=new Set();
-  for(const p of out.pools){p.startAverage=null;p.currentAverage=null;p.board=null;p.group=null;p.shared=false;for(const r of p.matrix||[]){r.overallAverage=null;for(const c of r.cells)c.live=false;}}
+  for(const p of out.pools){p.startAverage=null;p.currentAverage=null;p.board=null;p.boards=null;p.group=null;p.shared=false;for(const r of p.matrix||[]){r.overallAverage=null;for(const c of r.cells)c.live=false;}}
   for(const m of snapshot.rows){
    const f=fixture(m.tmid,out);if(!f)continue;
    // Multiple documents for a fixture (sets/duplicates) need separate qualification.
@@ -454,7 +466,7 @@ body{border-top:1px solid #ffd700}
   }
   for(const p of out.pools){
    const rows=p.matrix||[],metadata=plan?.eventId===event&&plan.pools?.find(q=>q.id===p.id);
-   if(metadata&&JSON.stringify(metadata.ids.slice().sort())===JSON.stringify(rows.map(q=>q.id).sort())){p.startAverage=num(metadata.startAverage);p.startCoverage=metadata.coverage;p.board=Number.isInteger(metadata.board)&&metadata.board>0?metadata.board:null;p.group=Number.isInteger(metadata.group)&&metadata.group>0?metadata.group:null;}
+   if(metadata&&JSON.stringify(metadata.ids.slice().sort())===JSON.stringify(rows.map(q=>q.id).sort())){p.boards=Array.isArray(metadata.boards)&&metadata.boards.length<=2&&metadata.boards.every(n=>Number.isInteger(n)&&n>0)?metadata.boards.slice():null;p.startAverage=num(metadata.startAverage);p.startCoverage=metadata.coverage;p.board=Number.isInteger(metadata.board)&&metadata.board>0?metadata.board:null;p.group=Number.isInteger(metadata.group)&&metadata.group>0?metadata.group:null;}
    for(const row of rows){const key=p.id+':'+row.id,recorded=row.cells.filter(c=>c.state==='result').length,standing=p.players.find(q=>q.id===row.id);if((covered.get(key)||0)<Math.max(recorded,standing?.played||0))invalid.add(p.id);}
    if(!invalid.has(p.id)){
     let score=0,darts=0;
@@ -462,7 +474,7 @@ body{border-top:1px solid #ffd700}
     p.currentAverage=average(score,darts);
    }
   }
-  for(const p of out.pools)p.shared=!!p.board&&out.pools.filter(q=>q.board===p.board).length>1;
+  for(const p of out.pools){const boards=p.boards||[p.board];p.shared=out.pools.some(q=>q!==p&&(q.boards||[q.board]).some(b=>b&&boards.includes(b)));}
   out.pools.sort((a,b)=>(a.board??1001)-(b.board??1001)||(a.group??a.number)-(b.group??b.number));
   return out;
  }
@@ -484,7 +496,7 @@ body{border-top:1px solid #ffd700}
 /* Fixed TEST event, public GETs only. No credentials, provider writes or autopilot changes. */
 (function(root){
  'use strict';
- const base='https://api.n01darts.com/api/v1/',id='t_RqC2_2034';
+ const base='https://api.n01darts.com/api/v1/',id='t_QHaG_7792';
  function create({fetch,onData,onError,model=root.BeautyNakkaStages,includeLive=false,liveModel=root.BeautyNakkaPoolLive,plan=null,includeKnockouts=false}){
   let busy=false,revision=0,stopped=false,baseData=null,baseAt=0;
   async function get(path){if(stopped)throw Error('Stopped');const response=await fetch(base+path,{method:'GET',credentials:'omit',cache:'no-store',referrerPolicy:'no-referrer',redirect:'error',signal:AbortSignal.timeout(15000)});const data=await response.json();if(!response.ok&&!(path.startsWith('tournament/standings?')&&data.result===-51))throw Error('Stage unavailable');return data;}
@@ -504,7 +516,7 @@ body{border-top:1px solid #ffd700}
    try{const snapshot=await liveModel.collect(get,baseData,includeKnockouts);if(!stopped&&ticket===revision)onData(includeKnockouts?liveModel.applyKnockouts(liveModel.apply(baseData,snapshot,plan),snapshot):liveModel.apply(baseData,snapshot,plan));}
    catch(e){if(!stopped&&ticket===revision)onError('Live pool data unavailable.');}finally{busy=false;}
   }
-  return Object.freeze({refresh,refreshLive,setPlan(next){plan=next;},stop(){stopped=true;revision++;}});
+  return Object.freeze({refresh,refreshLive,setPlan(next){if(next?.eventId===id&&Array.isArray(next.pools))plan=next;},stop(){stopped=true;revision++;}});
  }
  const api=Object.freeze({create});if(typeof module==='object'&&module.exports)module.exports=api;else root.BeautyNakkaStageFeed=api;
 })(typeof globalThis==='object'?globalThis:this);
@@ -559,7 +571,7 @@ body{border-top:1px solid #ffd700}
    const grid=el('div',null,poolHost,'pool-grid');grid.dataset.size=String(state.size);
    for(const pool of state.pools){
     const card=el('section',null,grid,'stage-card'),header=el('header',null,card,'pool-card-header');
-    const left=el('div',null,header,'pool-board-title');el('h3','Bana '+value(pool.board),left);
+    const left=el('div',null,header,'pool-board-title');el('h3','Bana '+(pool.boards?.length?pool.boards.join(' + '):value(pool.board)),left);
     const right=el('div',null,header,'pool-card-meta');
     if(pool.shared||!pool.board)el('h3','Grupp '+value(pool.group??pool.number),right);
     const averages=el('div',null,right,'group-averages');
@@ -587,8 +599,8 @@ body{border-top:1px solid #ffd700}
   }
   if(state.view==='boards'){
    const boardHost=section('boards','Banöversikt'),list=el('div',null,boardHost,'board-overview');
-   const boards=[...new Set(data.pools.map(p=>p.board).filter(Boolean))].sort((a,b)=>a-b);
-   for(const board of boards){const item=el('article',null,list,'stage-card');el('h3','Bana '+board,item);el('p',data.pools.filter(p=>p.board===board).map(p=>'Grupp '+value(p.group??p.number)).join(' / '),item);el('small','Planerad i Hubben · direkttilldelning styrs av Nakka',item,'muted');}
+   const boards=[...new Set(data.pools.flatMap(p=>p.boards||[p.board]).filter(Boolean))].sort((a,b)=>a-b);
+   for(const board of boards){const item=el('article',null,list,'stage-card');el('h3','Bana '+board,item);el('p',data.pools.filter(p=>(p.boards||[p.board]).includes(board)).map(p=>'Grupp '+value(p.group??p.number)).join(' / '),item);el('small','Planerad i Hubben · direkttilldelning styrs av Nakka',item,'muted');}
    if(!boards.length)el('p','Ingen verifierad banplan tillgänglig. Spara banetiketterna i Hubben.',boardHost,'empty-state');
   }
   for(const stage of state.stages){
@@ -806,7 +818,7 @@ body{border-top:1px solid #ffd700}
    const count=layout.pairs[Math.floor(index/layout.columns)];
    const card=el('section',null,grid,'stage-card venue-pool-card'),header=el('header',null,card,'pool-card-header');
    card.dataset.rows=String(count);
-   const left=el('div',null,header,'pool-board-title');el('h3','Bana '+value(pool.board),left);
+   const left=el('div',null,header,'pool-board-title');el('h3','Bana '+(pool.boards?.length?pool.boards.join(' + '):value(pool.board)),left);
    const right=el('div',null,header,'pool-card-meta');
    if(pool.shared||!pool.board)el('h3','Grupp '+value(pool.group??pool.number),header,'pool-group-title');
    const averages=el('div',null,right,'group-averages');
@@ -826,7 +838,7 @@ body{border-top:1px solid #ffd700}
     for(const c of p.cells){
      const td=el('td',null,row,c.state==='self'?'self-cell':'number'+(c.live?' live-cell':''));
      if(['result','live'].includes(c.state)){
-      el('span',value(c.score)+'–'+value(c.opponentScore),td);el('small','('+average(c.average)+')',td,'muted match-cell-average');
+      el('span',value(c.score)+'–'+value(c.opponentScore),td,'match-cell-score');el('small','('+average(c.average)+')',td,'muted match-cell-average');
       if(c.live)td.setAttribute('aria-label','Pågående match · '+value(c.score)+'–'+value(c.opponentScore));
      }else el('span',c.state==='self'?'':c.state==='multiple'?'—':'—',td);
     }

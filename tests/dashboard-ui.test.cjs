@@ -10,14 +10,14 @@ function ui(initial){
   fire(name='click'){if(this.disabled&&name==='click')return;return Promise.all((this.listeners[name]||[]).map(fn=>fn({target:this,preventDefault(){}})));}
  }
  const ids=Object.fromEntries(['attentionCount','attentionTile','attentionCard','attentionStatus','inPlayerCount','attentionReview','dashboardNavButton','nakkaNavButton'].map(id=>[id,new Node()]));
- const body=new Node('body'),events={},requests=[],pending=[];const c={window:{beautyHubData:initial},Date,JSON,Object,document:{body,hidden:false,getElementById:id=>ids[id],createElement:tag=>new Node(tag),querySelectorAll:()=>[],querySelector:()=>null,addEventListener:(k,fn)=>(events[k]??=[]).push(fn)},setInterval:fn=>{c.tick=fn;},BeautyHubServices:{request:url=>{requests.push(url);return new Promise((resolve,reject)=>pending.push({resolve:r=>resolve({json:async()=>r}),reject}));}}};
+ const body=new Node('body'),events={},requests=[],pending=[];const c={CustomEvent:class{constructor(type,init={}){this.type=type;this.detail=init.detail;}},window:{beautyHubData:initial},Date,JSON,Object,document:{body,hidden:false,getElementById:id=>ids[id],createElement:tag=>new Node(tag),querySelectorAll:()=>[],querySelector:()=>null,addEventListener:(k,fn)=>(events[k]??=[]).push(fn),dispatchEvent:event=>(events[event.type]||[]).forEach(fn=>fn(event))},setInterval:(fn,ms)=>{c.tick=fn;c.tickMs=ms;},BeautyHubServices:{request:url=>{requests.push(url);return new Promise((resolve,reject)=>pending.push({resolve:r=>resolve({json:async()=>r}),reject}));}}};
  vm.createContext(c);vm.runInContext(fs.readFileSync('public/js/hub-dashboard.js','utf8'),c);
  return {ids,body,c,events,requests,pending,dash:c.window.BeautyDashboard,emit:name=>Promise.all((events[name]||[]).map(fn=>fn()))};
 }
 const attention=(items=[])=>({available:true,eventDate:'2026-10-27',items,complete:true,checkedAt:'2026-10-27T18:00:00Z'});
 const data=(items=[])=>({eventDate:'2026-10-27',players:[{player:'Anna',status:'IN'},{player:'Other',status:'OUT'}],attention:attention(items)});
-test('Dashboard hides review for a verified clear event and shows it inside the attention card for alerts',()=>{
- const u=ui();u.dash.update(data());assert.equal(u.ids.attentionCount.textContent,'0');assert.equal(u.ids.attentionTile.dataset.active,'false');assert.equal(u.ids.attentionTile.hidden,true);assert.equal(u.ids.inPlayerCount.textContent,'1');
+test('Dashboard keeps the whole attention tile available for clear events and alerts',()=>{
+ const u=ui();u.dash.update(data());assert.equal(u.ids.attentionCount.textContent,'0');assert.equal(u.ids.attentionTile.dataset.active,'false');assert.equal(u.ids.attentionTile.hidden,false);assert.equal(u.ids.inPlayerCount.textContent,'1');
  u.dash.update(data([{name:'Anna',code:'MISSING_EVENT_ENTRY'}]));assert.equal(u.ids.attentionCount.textContent,'1');assert.equal(u.ids.attentionTile.dataset.active,'true');assert.equal(u.ids.attentionTile.hidden,false);assert.equal(u.ids.attentionCard.dataset.active,'true');
 });
 test('Dashboard review displays literal player names and sends no transfer or retry',()=>{
@@ -26,11 +26,11 @@ test('Dashboard review displays literal player names and sends no transfer or re
 test('Dashboard failed refresh retains alert and explicit verified refresh clears it',async()=>{
  const u=ui();u.dash.update(data([{name:'Anna',code:'MISSING_EVENT_ENTRY'}]));const p=u.dash.refresh();u.pending.shift().reject(Error('secret'));await p;
  assert.equal(u.ids.attentionCount.textContent,'1');assert.match(u.ids.attentionStatus.textContent,/retained/);assert.doesNotMatch(u.ids.attentionStatus.textContent,/secret/);
- const next=u.dash.refresh();u.pending.shift().resolve({success:true,attention:attention()});await next;assert.equal(u.ids.attentionCount.textContent,'0');assert.equal(u.ids.attentionTile.hidden,true);assert(u.requests.every(url=>url.endsWith('page=attentionrefresh')));
+ const next=u.dash.refresh();u.pending.shift().resolve({success:true,attention:attention()});await next;assert.equal(u.ids.attentionCount.textContent,'0');assert.equal(u.ids.attentionTile.hidden,false);assert(u.requests.every(url=>url.endsWith('page=attentionrefresh')));
 });
 test('Dashboard refresh is single flight and logout discards late private responses',async()=>{
  const u=ui();u.dash.update(data([{name:'Anna',code:'MISSING_EVENT_ENTRY'}]));const p=u.dash.refresh();await u.dash.refresh();assert.equal(u.requests.length,1);u.dash.review();await u.emit('beauty-hub-locked');assert.equal(u.body.children.length,0);
- u.pending.shift().resolve({success:true,attention:attention([{name:'Private',code:'ENTRY_UNCONFIRMED'}])});await p;assert.equal(u.ids.attentionTile.hidden,true);assert.equal(u.ids.attentionCount.textContent,'—');assert.doesNotMatch(u.ids.attentionStatus.textContent,/Private/);
+ u.pending.shift().resolve({success:true,attention:attention([{name:'Private',code:'ENTRY_UNCONFIRMED'}])});await p;assert.equal(u.ids.attentionTile.hidden,false);assert.equal(u.ids.attentionCount.textContent,'—');assert.doesNotMatch(u.ids.attentionStatus.textContent,/Private/);
 });
 test('Dashboard ignores a stale refresh after event or same-date player list changes',async()=>{
  for(const eventChange of [false,true]){
@@ -57,4 +57,42 @@ test('Hub search persists across refresh and sorting keeps event records intact 
  const handlers={},events={},sort={value:'alphabetical',options:['alphabetical','ranking','registration','original'].map(value=>({value})),addEventListener:(k,f)=>handlers['sort:'+k]=f},search={value:'',addEventListener:(k,f)=>handlers['search:'+k]=f},wrap={scrollTop:88},status={dataset:{}},title={dataset:{state:'matched'}},ids={hubPlayerSort:sort,hubPlayerSearch:search,hubListConnection:status,nakkaTournamentTitle:title};let rendered=[];
  const c={document:{getElementById:id=>ids[id],querySelector:()=>wrap,addEventListener:(k,f)=>events[k]=f},BeautyHubServices:{mode:'test'},Date,beautyHubData:{players:[{player:'Zed',status:'OUT'},{player:'Anna',status:'IN'}]},updatePlayersTable(players){rendered=c.BeautyPlayerList.rows(players);}};c.window=c;vm.runInNewContext(fs.readFileSync('public/js/hub-player-list.js','utf8'),c);
  search.value='ann';handlers['search:input']();assert.equal(rendered[0],c.beautyHubData.players[1]);assert.equal(wrap.scrollTop,0);c.beautyHubData.players.push({player:'Annika',status:'STANDBY'});c.updatePlayersTable(c.beautyHubData.players);assert.equal(rendered.length,2);assert.equal(sort.options[1].disabled,true);assert.equal(sort.options[2].disabled,true);c.BeautyPlayerList.connection(true);assert.match(status.textContent,/Nakka event verified/);events['beauty-hub-locked']();assert.equal(search.value,'');assert.equal(sort.value,'alphabetical');assert.match(status.textContent,/Sign in/);
+});
+
+test('Whole attention tile routes directly into existing Nakka troubleshooting without another dialog',()=>{
+ const u=ui();let opened=0;u.c.window.BeautyNakkaWorkflow={attention:()=>opened++};u.dash.update(data([{name:'Anna',code:'MISSING_EVENT_ENTRY'}]));u.ids.attentionTile.fire();assert.equal(opened,1);assert.equal(u.body.children.length,0);assert.equal(u.requests.length,0);
+});
+test('Guided attention offers only guarded IN-player review and blocks removal or creation retries',()=>{
+ const u=ui();let selected='';u.c.window.BeautyNakkaTransfer={open:name=>selected=name};u.dash.update(data([{name:'Anna',code:'MISSING_EVENT_ENTRY'}]));u.dash.review();
+ const all=n=>[n,...n.children.flatMap(all)];const action=all(u.body).find(n=>n.tag==='button'&&n.textContent==='Anna');assert.ok(action);action.fire();assert.equal(selected,'Anna');assert.equal(u.requests.length,0);
+ for(const code of ['REMOVE_UNCERTAIN','REMOVE_REVIEW_REQUIRED','LEAGUE_CREATION_UNCERTAIN','LEAGUE_CREATION_REVIEW_REQUIRED']){u.dash.update(data([{name:'Anna',code}]));assert.equal(all(u.body).some(n=>n.tag==='button'&&n.textContent==='Anna'),false);assert.match(u.body.textContent,/Next:/);}
+});
+
+test('A completed operation schedules a fresh attention check after an older check finishes without retrying a save',async()=>{
+ const u=ui();u.dash.update(data([{name:'Anna',code:'MISSING_EVENT_ENTRY'}]));const old=u.dash.refresh();await u.emit('beauty-nakka-operation-complete');assert.equal(u.requests.length,1);u.pending.shift().resolve({success:true,attention:attention([{name:'Anna',code:'MISSING_EVENT_ENTRY'}])});await old;assert.equal(u.requests.length,2);u.pending.shift().resolve({success:true,attention:attention()});await new Promise(setImmediate);assert.equal(u.ids.attentionCount.textContent,'0');assert(u.requests.every(url=>url.endsWith('page=attentionrefresh')));
+});
+
+test('Automatic Nakka monitor starts from loaded TEST data and checks every thirty seconds without overlapping requests',async()=>{
+ const u=ui();u.c.BeautyHubServices.mode='test';u.dash.update(data());assert.equal(u.requests.length,1);assert.equal(u.c.tickMs,30000);
+ u.c.tick();u.c.tick();assert.equal(u.requests.length,1);
+ u.pending.shift().resolve({success:true,attention:attention()});await new Promise(setImmediate);u.c.tick();assert.equal(u.requests.length,2);
+ u.pending.shift().resolve({success:true,attention:attention([{name:'Anna',code:'MISSING_EVENT_ENTRY'}])});await new Promise(setImmediate);
+ assert.equal(u.ids.attentionCount.textContent,'1');assert.equal(u.ids.attentionCard.dataset.active,'true');assert(u.requests.every(url=>url.endsWith('page=attentionrefresh')));
+});
+test('Automatic Nakka monitor pauses in hidden tabs resumes on return and stops on logout',async()=>{
+ const u=ui();u.c.BeautyHubServices.mode='test';u.c.document.hidden=true;u.dash.update(data());u.c.tick();assert.equal(u.requests.length,0);
+ u.c.document.hidden=false;await u.emit('visibilitychange');assert.equal(u.requests.length,1);await u.emit('beauty-hub-locked');
+ u.pending.shift().resolve({success:true,attention:attention([{name:'Private',code:'MISSING_EVENT_ENTRY'}])});await new Promise(setImmediate);
+ u.c.tick();await u.emit('visibilitychange');assert.equal(u.requests.length,1);assert.equal(u.ids.attentionCount.textContent,'—');assert.equal(u.ids.attentionCard.dataset.active,'false');
+});
+test('Automatic Nakka monitor keeps known alerts visible after failure and clears them only after a verified check',async()=>{
+ const u=ui();u.c.BeautyHubServices.mode='test';u.dash.update(data([{name:'Anna',code:'MISSING_EVENT_ENTRY'}]));u.pending.shift().reject(Error('private'));
+ await new Promise(setImmediate);assert.equal(u.ids.attentionCount.textContent,'1');assert.equal(u.ids.attentionCard.dataset.active,'true');assert.match(u.ids.attentionStatus.textContent,/automatic checks will continue/);
+ u.c.tick();u.pending.shift().resolve({success:true,attention:attention()});await new Promise(setImmediate);assert.equal(u.ids.attentionCount.textContent,'0');assert.equal(u.ids.attentionCard.dataset.active,'false');
+});
+test('Changed roster during an automatic check queues one fresh check and discards the older result',async()=>{
+ const u=ui();u.c.BeautyHubServices.mode='test';u.dash.update(data());const next=data([{name:'New',code:'MISSING_EVENT_ENTRY'}]);next.players.push({player:'New',status:'IN'});
+ u.dash.update(next);assert.equal(u.requests.length,1);u.pending.shift().resolve({success:true,attention:attention()});await new Promise(setImmediate);
+ assert.equal(u.requests.length,2);assert.equal(u.ids.attentionCount.textContent,'1');u.pending.shift().resolve({success:true,attention:attention([{name:'New',code:'MISSING_EVENT_ENTRY'}])});await new Promise(setImmediate);
+ assert.equal(u.ids.attentionCount.textContent,'1');assert.equal(u.ids.attentionCard.dataset.active,'true');
 });

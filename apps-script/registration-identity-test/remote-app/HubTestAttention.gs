@@ -13,6 +13,8 @@ function beautyHubAttentionRemember_(name,date,result) {
     const confirmed=result?.entryConfirmed===true||(result?.success===true&&result.readbackVerified===true&&['ALREADY_PRESENT','TRANSFERRED','ENTRY_VERIFIED_LINK_UNEXPOSED','PRESENT_AFTER_ATTEMPT','CURRENT_ENTRY_REVIEWED','REMOVED'].includes(result.status));
     const record={name,date,state:confirmed?'CLEAR':'ATTENTION',code:confirmed?'ENTRY_CONFIRMED':String(result?.code||'ENTRY_UNCONFIRMED').replace(/[^A-Z_]/g,'').slice(0,60),checkedAt:new Date().toISOString()};
     const props=PropertiesService.getScriptProperties(),key=beautyHubAttentionKey_(date,name),text=JSON.stringify(record);
+    const previous=props.getProperty(key);
+    if(previous){try{const old=JSON.parse(previous);if(old.name===record.name&&old.date===record.date&&old.state===record.state&&old.code===record.code)return true;}catch(e){}}
     props.setProperty(key,text);return props.getProperty(key)===text;
   } catch(e) { return false; }
 }
@@ -35,21 +37,25 @@ function beautyHubAttentionRead_(data) {
   }catch(e){return {...answer,available:false,complete:false};}
 }
 function beautyHubAttentionRefresh_(input) {
+  return beautyHubNakkaTimed_('diagnose',()=>beautyHubAttentionRefreshRun_(input));
+}
+function beautyHubAttentionRefreshRun_(input) {
   beautyHubTestGuard_();beautyHubAuthRequire_(beautyHubRequestToken_);
   if(!input||typeof input!=='object'||Array.isArray(input)||Object.keys(input).length)throw Error('Unexpected attention input.');
   const lock=LockService.getScriptLock();
   if(!lock.tryLock(5000))return {success:false,code:'BUSY',message:'Another operation is running. The saved attention list is retained.'};
+  let diagnosis='CHECK_UNAVAILABLE';
   try {
     const date=beautyHubNakkaDate_().date,hub=beautyHubNakkaHubRows_(),props=PropertiesService.getScriptProperties();
     const match=beautyHubNakkaEvent_({});
-    if(match.status!=='MATCHED'||match.event?.id!==BEAUTY_HUB_NAKKA_TEST_EVENT_||match.event?.title!=='Beauty Hub TEST — DO NOT USE LIVE'||match.eventDate!==date)throw Error('target');
+    if(match.status!=='MATCHED'||match.event?.id!==BEAUTY_HUB_NAKKA_TEST_EVENT_||match.event?.title!=='Beauty Registration TEST event DO NOT USE LIVE'||match.eventDate!==date){diagnosis=match.status==='NOT_FOUND'?'EVENT_DATE_MISMATCH':match.status==='STALE'?'STALE_CHECK':match.status==='AMBIGUOUS'?'EVENT_AMBIGUOUS':'EVENT_UNAVAILABLE';throw Error('target');}
     const user=props.getProperty('N01_API_USER'),password=props.getProperty('N01_API_PASSWORD');
     if(!user||!password)throw Error('credentials');
     const auth='Basic '+Utilities.base64Encode(user+':'+password);
-    const event=beautyHubTransferFetch_('tournament/get?tdid='+BEAUTY_HUB_NAKKA_TEST_EVENT_+'&entry=0',auth).tournament;
+    const [eventData,entryData,leagueData]=beautyHubNakkaReads_(auth,true),event=eventData.tournament;
     if(!event||event.tdid!==BEAUTY_HUB_NAKKA_TEST_EVENT_||event.lgid!=='lg_tM2v_3523'||event.title!==match.event.title||Utilities.formatDate(new Date(event.t_date*1000),'Europe/Berlin','yyyy-MM-dd')!==date)throw Error('target');
-    const entries=beautyHubTransferEntries_(beautyHubTransferFetch_('tournament/entry/list?tdid='+BEAUTY_HUB_NAKKA_TEST_EVENT_,auth));
-    const league=beautyHubTransferFetch_('league/entry/list?lgid=lg_tM2v_3523&count=1000',auth).list;
+    const entries=beautyHubTransferEntries_(entryData);
+    const league=leagueData.list;
     if(!Array.isArray(league)||league.length>=1000)throw Error('league');
     const ids=new Set();
     for(const r of league){if(!r||typeof r.name!=='string'||!r.name.trim()||r.name.length>120||typeof r.lpid!=='string'||!/^[A-Za-z0-9]{4}$/.test(r.lpid)||ids.has(r.lpid))throw Error('league');ids.add(r.lpid);}
@@ -77,20 +83,21 @@ function beautyHubAttentionRefresh_(input) {
           else if(t.state==='ATTEMPTED'){
             if((!Number.isInteger(t.beforeCount)||entries.length!==t.beforeCount+1||beautyHubTransferHash_(entries.filter(r=>r.tpid!==e[0].tpid))!==t.beforeHash)&&
               !beautyHubTransferReviewMatch_(transfer,{event:{id:BEAUTY_HUB_NAKKA_TEST_EVENT_,date},identity:{name,lpid:l[0].lpid},existing:e[0]}))code='TRANSFER_REVIEW_REQUIRED';
-          }else if(!['VERIFIED','ENTRY_VERIFIED_LINK_UNEXPOSED'].includes(t.state)||t.tpid!==e[0].tpid)code='TRANSFER_REVIEW_REQUIRED';
+          }else if(!['VERIFIED','ENTRY_VERIFIED_LINK_UNEXPOSED'].includes(t.state)||
+            t.tpid!==e[0].tpid&&!beautyHubTransferReviewMatch_(transfer,{event:{id:BEAUTY_HUB_NAKKA_TEST_EVENT_,date},identity:{name,lpid:l[0].lpid},existing:e[0]}))code='TRANSFER_REVIEW_REQUIRED';
         }
       }
       if(retained.items.some(item=>normalize(item.name)===key&&['REMOVE_UNCERTAIN','REMOVE_REVIEW_REQUIRED'].includes(item.code)))code='REMOVE_REVIEW_REQUIRED';
       decisions.push({name,code});
     }
     beautyHubAuthRequire_(beautyHubRequestToken_);
-    if(beautyHubNakkaDate_().date!==date||JSON.stringify(beautyHubNakkaHubRows_())!==JSON.stringify(hub))throw Error('stale');
+    if(beautyHubNakkaDate_().date!==date||JSON.stringify(beautyHubNakkaHubRows_())!==JSON.stringify(hub)){diagnosis='STALE_CHECK';throw Error('stale');}
     for(const d of decisions)if(!beautyHubAttentionRemember_(d.name,date,d.code?{code:d.code}:{entryConfirmed:true}))throw Error('save');
     const meta={checkedAt:new Date().toISOString(),signature:beautyHubTransferHash_(hub)};
     props.setProperty('BEAUTY_TEST_ATTENTION_CHECK_'+date,JSON.stringify(meta));
-    return {success:true,attention:beautyHubAttentionRead_({eventDate:date,players:hub.map(p=>({player:p.name,status:p.status}))})};
+    return {success:true,eventDate:date,event:match.event,hubCount:hub.length,nakkaCount:entries.length,attention:beautyHubAttentionRead_({eventDate:date,players:hub.map(p=>({player:p.name,status:p.status}))})};
   }catch(e){
     if(e.name==='HubAuthError')return {success:false,code:'AUTH_REQUIRED',message:'Sign in to continue.'};
-    return {success:false,code:'CHECK_UNAVAILABLE',message:'The player check could not be completed. Saved alerts are retained. Check the event date and Nakka; no players were added.'};
+    return {success:false,code:diagnosis,message:'The player check could not be completed. Saved alerts are retained. Check the event date and Nakka; no players were added.'};
   }finally{lock.releaseLock();}
 }

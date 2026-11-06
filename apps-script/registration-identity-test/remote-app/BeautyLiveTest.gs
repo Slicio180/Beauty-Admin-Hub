@@ -29,7 +29,25 @@ function beautyLiveTestData() {
 function beautyLiveTestUrl(token) {
   beautyHubTestGuard_();
   beautyHubAuthRequire_(token);
-  return beautyStageTestUrl(token).replace('?page=stages','?page=live');
+  const hub = getBeautyHubData_();
+  if (hub?.success !== true || !/^\d{4}-\d{2}-\d{2}$/.test(hub.eventDate))
+    throw Error('Selected TEST date unavailable.');
+  const response = UrlFetchApp.fetch('https://api.n01darts.com/api/v1/tournament/get?tdid=t_QHaG_7792', {
+    method:'get', muteHttpExceptions:true, followRedirects:false
+  });
+  if (response.getResponseCode() !== 200) throw Error('TEST event unavailable.');
+  const data = JSON.parse(response.getContentText()), event = data?.tournament;
+  if (data.result !== 0 || event?.tdid !== 't_QHaG_7792' ||
+      event.lgid !== 'lg_tM2v_3523' ||
+      event.title !== 'Beauty Registration TEST event DO NOT USE LIVE' ||
+      !Number.isFinite(event.t_date) || event.t_date <= 0 ||
+      Utilities.formatDate(new Date(event.t_date * 1000), Session.getScriptTimeZone(), 'yyyy-MM-dd') !== hub.eventDate)
+    throw Error('Beauty Live does not match the selected Hub TEST event.');
+  beautyHubAuthRequire_(token);
+  const current = getBeautyHubData_();
+  if (current?.success !== true || current.eventDate !== hub.eventDate)
+    throw Error('Hub date changed while opening the display.');
+  return ScriptApp.getService().getUrl() + '?page=live';
 }
 
 /* Anonymous cast requests never trigger authenticated Nakka refreshes. The staff
@@ -51,9 +69,9 @@ function beautyLiveStatsSnapshot_() {
 function beautyStageTestUrl(token){
   beautyHubTestGuard_();beautyHubAuthRequire_(token);
   const hub=getBeautyHubData_();if(hub?.success!==true||!/^\d{4}-\d{2}-\d{2}$/.test(hub.eventDate))throw Error('Selected TEST date unavailable.');
-  const response=UrlFetchApp.fetch('https://api.n01darts.com/api/v1/tournament/get?tdid=t_RqC2_2034',{method:'get',muteHttpExceptions:true,followRedirects:false});
+  const response=UrlFetchApp.fetch('https://api.n01darts.com/api/v1/tournament/get?tdid=t_QHaG_7792',{method:'get',muteHttpExceptions:true,followRedirects:false});
   if(response.getResponseCode()!==200)throw Error('TEST event unavailable.');const data=JSON.parse(response.getContentText()),t=data?.tournament;
-  if(data.result!==0||t?.tdid!=='t_RqC2_2034'||t.lgid!=='lg_tM2v_3523'||!Number.isFinite(t.t_date)||t.t_date<=0||Utilities.formatDate(new Date(t.t_date*1000),Session.getScriptTimeZone(),'yyyy-MM-dd')!==hub.eventDate)throw Error('Stage display does not match the selected Hub event.');
+  if(data.result!==0||t?.tdid!=='t_QHaG_7792'||t.lgid!=='lg_tM2v_3523'||t.title!=='Beauty Registration TEST event DO NOT USE LIVE'||!Number.isFinite(t.t_date)||t.t_date<=0||Utilities.formatDate(new Date(t.t_date*1000),Session.getScriptTimeZone(),'yyyy-MM-dd')!==hub.eventDate)throw Error('Stage display does not match the selected Hub event.');
   beautyHubAuthRequire_(token);if(getBeautyHubData_()?.eventDate!==hub.eventDate)throw Error('Hub date changed while opening the display.');return ScriptApp.getService().getUrl()+'?page=stages';
 }
 
@@ -75,20 +93,31 @@ function beautyLiveRefreshStats(token){
 function beautyStagePlanTest(){
  beautyHubTestGuard_();
  try{
-  const props=PropertiesService.getScriptProperties(),journal=JSON.parse(props.getProperty('BEAUTY_POOL_SEND_t_RqC2_2034')||'null');
+  const props=PropertiesService.getScriptProperties(),journal=JSON.parse(props.getProperty('BEAUTY_POOL_SEND_t_QHaG_7792')||'null');
   if(journal?.state!=='VERIFIED'||!/^POOL-[a-f0-9]{20}$/.test(journal.audit)||!/^POOL-[a-f0-9]{20}$/.test(journal.receipt))return null;
+  // Cache only already-verified public metadata; any saved-plan version change gets a new key.
+  const key='BEAUTY_STAGE_PLAN_V1_'+beautyPoolHash_({journal,boards:props.getProperty('BEAUTY_POOL_BOARDS_t_QHaG_7792'),labels:props.getProperty('BEAUTY_STAGE_LABELS_t_QHaG_7792')});
+  let cache=null;try{if(typeof CacheService!=='undefined')cache=CacheService.getScriptCache();const hit=cache?.get(key);if(hit)return JSON.parse(hit);}catch(e){}
   const ss=SpreadsheetApp.openById(SHEET_ID);
   function read(name){const sheet=ss.getSheetByName(name);if(!sheet||sheet.getLastRow()>100)return null;const rows=sheet.getRange(1,1,sheet.getLastRow(),2).getValues();if(rows[0]?.[0]!=='Beauty TEST pool audit')return null;return JSON.parse(rows.slice(1).map(r=>r[1]).join(''));}
   const before=read(journal.audit),receipt=read(journal.receipt);
-  if(before?.kind!=='POOL_SEND_BEFORE'||receipt?.kind!=='POOL_SEND_READBACK'||receipt.beforeAudit!==journal.audit||receipt.drawHash!==journal.drawHash||beautyPoolHash_(before.draw)!==journal.drawHash||before.event?.tdid!=='t_RqC2_2034'||!Array.isArray(before.draw?.pools)||!Array.isArray(before.mappings))return null;
-  const saved=JSON.parse(props.getProperty('BEAUTY_STAGE_LABELS_t_RqC2_2034')||'null');
+  if(before?.kind!=='POOL_SEND_BEFORE'||receipt?.kind!=='POOL_SEND_READBACK'||receipt.beforeAudit!==journal.audit||receipt.drawHash!==journal.drawHash||beautyPoolHash_(before.draw)!==journal.drawHash||before.event?.tdid!=='t_QHaG_7792'||!Array.isArray(before.draw?.pools)||!Array.isArray(before.mappings))return null;
+  const rr=before.event.rr_setting?.round_robin===1,lg=before.event.lg_setting?.league===1;
+  if(rr===lg)return null;
+  const mode=rr?'rr':'lg';
+  const saved=JSON.parse(props.getProperty('BEAUTY_STAGE_LABELS_t_QHaG_7792')||'null');
+  const boardSaved=JSON.parse(props.getProperty('BEAUTY_POOL_BOARDS_t_QHaG_7792')||'null');
+  const boardPlan=boardSaved?.drawHash===journal.drawHash?beautyPoolBoardPlan_(before.draw,boardSaved.input):before.boardPlan;
   const pools=before.draw.pools.map((pool,i)=>{
    const ids=pool.players.map(p=>before.mappings.find(q=>q.id===p.id)?.tpid);
    if(ids.some(id=>typeof id!=='string'||!/^[A-Za-z0-9]{4}$/.test(id))||new Set(ids).size!==ids.length||JSON.stringify(ids)!==JSON.stringify(before.table?.[i]?.filter(Boolean)))throw Error('Audit mismatch');
    const known=pool.players.map(p=>p.average).filter(n=>typeof n==='number'&&Number.isFinite(n)&&n>=0&&n<=180),label=saved?.drawHash===journal.drawHash?saved.labels?.[i]:null;
-   return {id:'lg_'+i,ids,startAverage:known.length?known.reduce((a,b)=>a+b,0)/known.length:null,coverage:known.length,board:Number.isInteger(label?.board)?label.board:null,group:Number.isInteger(label?.group)?label.group:null};
+   const boards=boardPlan?.assignments?.find(a=>a.poolId===pool.id)?.boards;
+   return {id:mode+'_'+i,ids,boards:Array.isArray(boards)?boards:null,startAverage:known.length?known.reduce((a,b)=>a+b,0)/known.length:null,coverage:known.length,board:Number.isInteger(boards?.[0])?boards[0]:Number.isInteger(label?.board)?label.board:null,group:Number.isInteger(label?.group)?label.group:null};
   });
-  return {eventId:'t_RqC2_2034',eventDate:before.draw.eventDate,frozenAt:before.draw.frozenAt,drawHash:journal.drawHash,pools};
+  const result={eventId:'t_QHaG_7792',eventDate:before.draw.eventDate,frozenAt:before.draw.frozenAt,drawHash:journal.drawHash,pools};
+  try{cache?.put(key,JSON.stringify(result),60);}catch(e){}
+  return result;
  }catch(e){return null;}
 }
 /* Organiser-only labels, isolated from Nakka assignments and audit baselines. */
@@ -99,6 +128,6 @@ function beautyStageLabelsTest(token,labels){
  const seen=new Set();
  const safe=labels.map((p,i)=>{if(!p||Object.keys(p).sort().join(',')!=='board,group,ids'||JSON.stringify(p.ids?.slice().sort())!==JSON.stringify(plan.pools[i].ids.slice().sort())||!Number.isInteger(p.board)||p.board<1||p.board>1000||!Number.isInteger(p.group)||p.group<1||p.group>101||seen.has(p.board+':'+p.group))throw Error('Cast labels do not match verified pools.');seen.add(p.board+':'+p.group);return {board:p.board,group:p.group};});
  beautyHubAuthRequire_(token);const current=beautyStagePlanTest();if(current?.drawHash!==plan.drawHash)throw Error('Verified plan changed.');
- const text=JSON.stringify({drawHash:plan.drawHash,labels:safe});PropertiesService.getScriptProperties().setProperty('BEAUTY_STAGE_LABELS_t_RqC2_2034',text);
- if(PropertiesService.getScriptProperties().getProperty('BEAUTY_STAGE_LABELS_t_RqC2_2034')!==text)throw Error('Cast labels could not be verified.');return {success:true};
+ const text=JSON.stringify({drawHash:plan.drawHash,labels:safe});PropertiesService.getScriptProperties().setProperty('BEAUTY_STAGE_LABELS_t_QHaG_7792',text);
+ if(PropertiesService.getScriptProperties().getProperty('BEAUTY_STAGE_LABELS_t_QHaG_7792')!==text)throw Error('Cast labels could not be verified.');return {success:true};
 }

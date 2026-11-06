@@ -2,13 +2,13 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('nod
 const base='apps-script/registration-identity-test/remote-app/';
 function harness(o={}){
  const props=new Map([['N01_API_USER','SECRET-USER'],['N01_API_PASSWORD','SECRET-PASS']]),cache=new Map(),calls=[];let releases=0,seq=0,authCalls=0;
- const state={uid:'owner',token:'session',date:'2026-10-27',hub:[{name:'Anna',status:'IN'}],league:[{name:'Anna',lpid:'a123'}],entries:[],event:{tdid:'t_RqC2_2034',lgid:'lg_tM2v_3523',title:'Beauty Hub TEST — DO NOT USE LIVE',status:10,t_date:Date.parse('2026-10-27T18:00Z')/1000,updateTime:1000},...o.state};
+ const state={uid:'owner',token:'session',date:'2026-10-27',hub:[{name:'Anna',status:'IN'}],league:[{name:'Anna',lpid:'a123'}],entries:[],event:{tdid:'t_QHaG_7792',lgid:'lg_tM2v_3523',title:'Beauty Registration TEST event DO NOT USE LIVE',status:10,t_date:Date.parse('2026-10-27T18:00Z')/1000,updateTime:1000},...o.state};
  const clone=v=>JSON.parse(JSON.stringify(v));
  const context={Date,console,Map,Set,JSON,Number,Object,Array,encodeURIComponent,BEAUTY_IDENTITY_WRITES_ENABLED_:o.writes!==false,
   beautyHubRequestToken_:state.token,beautyHubTestGuard_:()=>{if(o.wrongProject)throw Error('identity');},
   beautyHubAuthRequire_:()=>{authCalls++;if(o.noAuth||o.expireAt===authCalls){const e=Error('AUTH_REQUIRED');e.name='HubAuthError';throw e;}return {uid:state.uid};},
   beautyHubNakkaDate_:()=>({date:state.date}),beautyHubNakkaHubRows_:()=>clone(state.hub),
-  beautyHubNakkaEvent_:()=>({status:o.unmatched?'AMBIGUOUS':'MATCHED',eventDate:state.date,event:{id:o.otherTarget?'t_OTHER_0001':'t_RqC2_2034'}}),
+  beautyHubNakkaEvent_:()=>({status:o.unmatched?'AMBIGUOUS':'MATCHED',eventDate:state.date,event:{id:o.otherTarget?'t_OTHER_0001':'t_QHaG_7792'}}),
   LockService:{getScriptLock:()=>({tryLock:()=>!o.busy,releaseLock:()=>releases++})},
   CacheService:{getScriptCache:()=>({get:k=>cache.get(k)||null,put:(k,v)=>cache.set(k,v),remove:k=>cache.delete(k)})},
   PropertiesService:{getScriptProperties:()=>({getProperty:k=>props.get(k)||null,setProperty:(k,v)=>{if(o.journalFailure)throw Error('SECRET');props.set(k,v);}})},
@@ -28,7 +28,7 @@ function harness(o={}){
    }
    else if(url.endsWith('tournament/entry/update')&&options.method==='post'){
     assert.ok([...props.values()].some(v=>{try{return JSON.parse(v).state==='ATTEMPTED';}catch{return false;}}),'durable marker before POST');
-    const p=JSON.parse(options.payload),identity=o.newLeague?state.league.find(x=>x.name===p.add[0].name):{name:'Anna',lpid:'a123'};assert.ok(identity);assert.deepEqual(p,{tdid:'t_RqC2_2034',add:[{name:identity.name,lpid:identity.lpid}]});
+    const p=JSON.parse(options.payload),identity=o.newLeague?state.league.find(x=>x.name===p.add[0].name):{name:'Anna',lpid:'a123'};assert.ok(identity);assert.deepEqual(p,{tdid:'t_QHaG_7792',add:[{name:identity.name,lpid:identity.lpid}]});
     state.entries.push({tpid:'b123',name:identity.name,...(o.omitLink?{}:{lpid:o.wrongLink?'z123':identity.lpid})});state.event.updateTime++;
     if(o.postTimeout)throw Error('SECRET timeout after save');
     data=o.badReceipt?{result:0,added:[]}:{result:0,added:[{tpid:'b123',name:identity.name}]};

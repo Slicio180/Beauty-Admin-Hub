@@ -47,7 +47,7 @@ test('Attention flags duplicate league identity even when the name is already in
 });
 test('Attention verified entry clears its alert without claiming an unexposed league ID or deleting journals',()=>{
  const h=fixture({state:{entries:[{name:'Anna',tpid:'b123'}]}});h.context.beautyHubAttentionRemember_('Anna',h.state.date,{code:'ENTRY_UNCONFIRMED'});
- const key='BEAUTY_NAKKA_TRANSFER_t_RqC2_2034_a123',record=JSON.stringify({state:'ENTRY_VERIFIED_LINK_UNEXPOSED',event:{id:'t_RqC2_2034',date:h.state.date},identity:{name:'Anna',lpid:'a123'},tpid:'b123'});h.props.set(key,record);
+ const key='BEAUTY_NAKKA_TRANSFER_t_QHaG_7792_a123',record=JSON.stringify({state:'ENTRY_VERIFIED_LINK_UNEXPOSED',event:{id:'t_QHaG_7792',date:h.state.date},identity:{name:'Anna',lpid:'a123'},tpid:'b123'});h.props.set(key,record);
  const r=h.refresh();assert.equal(r.success,true);assert.equal(r.attention.items.length,0);assert.equal(h.props.get(key),record);assert.equal(h.posts().length,0);assert.doesNotMatch(JSON.stringify(r),/identityVerified":true/);
 });
 test('Attention uncertain creation cannot clear through same-name event presence',()=>{
@@ -56,8 +56,8 @@ test('Attention uncertain creation cannot clear through same-name event presence
 });
 test('Attention uncertain transfer reconciliation respects the saved fingerprint',()=>{
  for(const correct of [false,true]){
-  const h=fixture({state:{entries:[{name:'Anna',tpid:'b123'}]}}),key='BEAUTY_NAKKA_TRANSFER_t_RqC2_2034_a123';
-  h.props.set(key,JSON.stringify({state:'ATTEMPTED',event:{id:'t_RqC2_2034',date:h.state.date},identity:{name:'Anna',lpid:'a123'},beforeCount:0,beforeHash:correct?h.context.beautyHubTransferHash_([]):'wrong'}));
+  const h=fixture({state:{entries:[{name:'Anna',tpid:'b123'}]}}),key='BEAUTY_NAKKA_TRANSFER_t_QHaG_7792_a123';
+  h.props.set(key,JSON.stringify({state:'ATTEMPTED',event:{id:'t_QHaG_7792',date:h.state.date},identity:{name:'Anna',lpid:'a123'},beforeCount:0,beforeHash:correct?h.context.beautyHubTransferHash_([]):'wrong'}));
   const before=h.props.get(key),r=h.refresh();assert.equal(r.success,true);assert.equal(r.attention.items.length,correct?0:1);assert.equal(h.props.get(key),before);assert.equal(h.posts().length,0);
  }
 });

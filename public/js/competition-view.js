@@ -47,7 +47,7 @@
    const grid=el('div',null,poolHost,'pool-grid');grid.dataset.size=String(state.size);
    for(const pool of state.pools){
     const card=el('section',null,grid,'stage-card'),header=el('header',null,card,'pool-card-header');
-    const left=el('div',null,header,'pool-board-title');el('h3','Bana '+value(pool.board),left);
+    const left=el('div',null,header,'pool-board-title');el('h3','Bana '+(pool.boards?.length?pool.boards.join(' + '):value(pool.board)),left);
     const right=el('div',null,header,'pool-card-meta');
     if(pool.shared||!pool.board)el('h3','Grupp '+value(pool.group??pool.number),right);
     const averages=el('div',null,right,'group-averages');
@@ -75,8 +75,8 @@
   }
   if(state.view==='boards'){
    const boardHost=section('boards','Banöversikt'),list=el('div',null,boardHost,'board-overview');
-   const boards=[...new Set(data.pools.map(p=>p.board).filter(Boolean))].sort((a,b)=>a-b);
-   for(const board of boards){const item=el('article',null,list,'stage-card');el('h3','Bana '+board,item);el('p',data.pools.filter(p=>p.board===board).map(p=>'Grupp '+value(p.group??p.number)).join(' / '),item);el('small','Planerad i Hubben · direkttilldelning styrs av Nakka',item,'muted');}
+   const boards=[...new Set(data.pools.flatMap(p=>p.boards||[p.board]).filter(Boolean))].sort((a,b)=>a-b);
+   for(const board of boards){const item=el('article',null,list,'stage-card');el('h3','Bana '+board,item);el('p',data.pools.filter(p=>(p.boards||[p.board]).includes(board)).map(p=>'Grupp '+value(p.group??p.number)).join(' / '),item);el('small','Planerad i Hubben · direkttilldelning styrs av Nakka',item,'muted');}
    if(!boards.length)el('p','Ingen verifierad banplan tillgänglig. Spara banetiketterna i Hubben.',boardHost,'empty-state');
   }
   for(const stage of state.stages){

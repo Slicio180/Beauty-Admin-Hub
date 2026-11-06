@@ -228,3 +228,15 @@ body{border-top:1px solid #ffd700}
 /* V6: retain yellow accent on fixed and docked round headings. */
 .bracket-title h3>span{position:relative;display:inline-block;padding-top:5px}
 .bracket-title h3>span::before{content:"";display:block;position:absolute;top:0;left:0;width:100%;height:1px;background:#ffd700}
+
+/* Match result leads; secondary averages use the smaller size. */
+.venue-pool-card .pool-matrix td .match-cell-score{display:block;font-size:var(--pool-average-font,26px);line-height:1;white-space:nowrap}
+.venue-pool-card .pool-matrix td .match-cell-average{font-size:16px;line-height:1;margin-top:0}
+
+.venue-pool-card .pool-matrix .pool-player .overall-average{font-size:16px;line-height:1}
+
+/* One primary number size: START/NU, match scores and standings totals. */
+.venue-pool-card .pool-matrix td .match-cell-score,.venue-pool-card .pool-matrix td.number:not(.position){font-size:var(--pool-header-average-font,24px);line-height:1}
+
+/* Primary values share the same face as NU, including Rank. */
+.venue-pool-card .pool-matrix td .match-cell-score,.venue-pool-card .pool-matrix td.number:not(.position),.venue-pool-card .group-averages .average-value{font:400 24px/1 "AIK Display",sans-serif}

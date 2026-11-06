@@ -567,3 +567,116 @@ body .pool-toolbar>button[aria-expanded=true],body .pool-toolbar .pool-progress 
 body .pool-toolbar .pool-progress button[data-active=true] strong,body .pool-toolbar .pool-progress button[data-active=true] .pool-number{color:inherit}
 @media(max-width:1100px){.pool-planner-workspace .pool-setup .pool-scheme-tile{grid-template-columns:minmax(max-content,1fr) minmax(max-content,1fr);justify-content:stretch}.pool-planner-workspace .pool-board-summary{justify-content:start}}
 @media(max-width:600px){.pool-planner-workspace .pool-setup .pool-scheme-tile{grid-template-columns:minmax(0,1fr)}.pool-planner-workspace .pool-board-summary{border:0;padding:0}.pool-planner-workspace .pool-setup .pool-in-tile{border:0}.pool-planner-workspace .pool-setup .pool-pools-summary{grid-template-columns:max-content minmax(100px,1fr)}}
+
+/* Whole-tile navigation and guided troubleshooting in the existing Nakka menu. */
+body .players-workspace #attentionCard{display:block}
+body #attentionTile.attention-card-button{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;width:100%;height:100%;min-height:60px;margin:0;padding:0;border:0!important;border-radius:0!important;background:transparent!important;text-align:left;box-shadow:none}
+body #attentionTile.attention-card-button:hover:not(:disabled),body #attentionTile.attention-card-button:active:not(:disabled){background:transparent!important;color:#ffd700!important}
+body #attentionTile.attention-card-button:active:not(:disabled) :is(span,strong){color:inherit}
+body #attentionTile.attention-card-button:focus-visible{outline:2px solid #ffd700;outline-offset:4px}
+.nakka-step h3,.nakka-step summary{font:700 24px/1.3 'AIK Condensed',serif}
+.nakka-step>summary,.nakka-api-details>summary{color:#ffd700;cursor:pointer}
+.nakka-step p{font:400 20px/1.4 'AIK Display',serif}
+.nakka-action-hint{color:#c4c8ca;font-size:18px!important}
+#nakkaCheckProgress:empty,#nakkaConnectedEvent:empty{display:none}
+#nakkaDiagnose,.attention-list button{min-height:44px}
+#nakkaCheckTiming summary,.nakka-api-details>summary{font:400 20px/1.4 'AIK Display',serif}
+#nakkaCheckTimingResult p{margin:5px 0;font-size:18px}
+#nakkaAttentionPanel:focus-within{border-color:#ffd700}
+#nakkaStatusPanel{scroll-behavior:smooth}
+.nakka-test-link{color:#ffd700}
+
+/* Automatically monitored issues: original quiet tile at zero; red only for issues. */
+body .players-workspace #attentionCard[data-active="true"] .attention-card-button span::before{background:#ff5252}
+body .players-workspace #attentionCard[data-active="true"] #attentionCount{color:#ff5252!important}
+#nakkaWorkflow .nakka-monitor,#nakkaWorkflow .nakka-issues{padding:8px 0 18px;border:0;background:transparent}
+#nakkaWorkflow .nakka-issues{border-top:1px solid #343a3d}
+#nakkaWorkflow :is(.nakka-monitor,.nakka-issues) h3{font:700 25px/1.3 'AIK Condensed',serif}
+#nakkaWorkflow :is(.nakka-monitor,.nakka-issues) p{font:400 20px/1.4 'AIK Display',serif}
+#nakkaWorkflow .attention-list li:only-child:not(:has(strong)){border:0;padding:8px 0;color:#c4c8ca}
+#nakkaComparisonDetails{margin-top:12px}
+
+body .attention-list .nakka-issue-open{display:block;width:100%;min-height:44px;padding:0;text-align:left;border:0!important;background:transparent!important;color:#fff!important}
+body .attention-list .nakka-issue-open strong{font:700 24px/1.3 'AIK Condensed',serif;margin:0}
+body .attention-list .nakka-issue-open:hover strong{text-decoration:underline;text-underline-offset:4px}
+body .attention-list .nakka-issue-open:focus-visible{outline:2px solid #ffd700;outline-offset:3px}
+
+/* Required pool workflow controls stay on the main screen. */
+.pool-planner-workspace [data-draw-utilities]>.pool-action-bar,
+.pool-planner-workspace [data-draw-utilities]>.pool-preview-heading{display:flex;flex-wrap:wrap;gap:16px}
+.pool-planner-workspace .pool-action-bar{position:static;align-items:center}
+.pool-planner-workspace .pool-action-bar label{display:flex;flex-direction:column;gap:8px;flex:1 1 320px}
+.pool-planner-workspace .pool-action-bar select{width:100%;max-width:100%;min-width:0}
+.pool-qualification-help{flex-basis:100%;margin:0}
+.pool-planner-workspace [data-start-section]{margin-top:24px}
+.pool-planner-workspace [data-start-section]>button{margin:8px 12px 8px 0}
+
+.pool-board-options{display:flex;flex-wrap:wrap;gap:12px;margin:12px 0}.pool-board-options label{display:flex;flex-direction:column;gap:6px;max-width:100%}.pool-board-options select{min-height:42px;max-width:100%}
+
+.pool-planner-workspace .pool-toolbar{flex-wrap:wrap}
+.pool-planner-workspace .pool-toolbar .pool-progress{flex-basis:100%;flex-wrap:wrap}
+.pool-planner-workspace .pool-action-bar>p{flex-basis:100%}
+
+/* Compact workflow status; details appear only when attention is needed. */
+.pool-toolbar [data-league-slot].pool-saved-slot{flex:0 1 auto;min-width:0}
+.pool-toolbar .pool-status-card.pool-saved-status{min-height:44px;padding:4px 10px;gap:8px}
+.pool-saved-status strong[data-fresh=true],.pool-inline-status[data-ready=true]{color:#68cf7f!important}
+.pool-saved-status strong[data-fresh=false],.pool-inline-status[data-ready=false]{color:#ff737b!important}
+.pool-saved-status strong[data-fresh=false]::before{background:#ff737b!important}
+.pool-inline-status{display:inline-block;margin-top:8px;font:400 16px/1.2 'AIK Display',serif}
+.pool-saved-status button{min-width:40px!important;min-height:40px!important;font-size:24px!important}
+[data-pool-message]:empty{display:none}
+
+/* Approved compact Hub cards. This does not affect Beauty Live/cast grids. */
+.pool-planner-workspace .pool-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:stretch}
+.pool-planner-workspace .pool-card{padding:10px 12px;min-width:0}
+.pool-planner-workspace .pool-card-heading{align-items:center;flex-wrap:wrap;column-gap:10px;row-gap:4px;margin-bottom:8px}
+.pool-planner-workspace .pool-card-heading h3{margin:0;font-size:26px}
+.pool-planner-workspace .pool-card-heading .pool-group-heading{margin:0 0 0 auto;min-height:0;gap:5px;flex:none;white-space:nowrap}
+.pool-planner-workspace .pool-card-heading .pool-group-heading span{font-size:15px}
+.pool-planner-workspace .pool-card-heading .pool-group-heading .pool-number{font-size:23px}
+.pool-planner-workspace .pool-card .pool-player-name{gap:8px!important;font-size:20px!important;min-height:29px!important;padding:3px 0!important}
+.pool-planner-workspace .pool-board-options{display:flex;flex-wrap:nowrap;gap:8px;margin:12px 0 0}
+.pool-planner-workspace .pool-board-options label{flex:1 1 0;min-width:0;gap:5px;font-size:15px;line-height:1.2;white-space:nowrap}
+.pool-planner-workspace .pool-board-options label:first-child{flex-grow:1.35}
+.pool-planner-workspace .pool-board-options select{box-sizing:border-box;width:100%;min-width:0;min-height:38px;padding:4px;font:400 17px/1.2 'AIK Display',serif}
+.pool-planner-workspace [data-start-section]{display:flex;align-items:center;flex-wrap:wrap;gap:12px;padding:14px}
+.pool-planner-workspace [data-start-section]>h3{margin:0 8px 0 0}
+.pool-planner-workspace [data-start-section]>details{padding:0;min-width:0;flex:0 1 auto}
+.pool-planner-workspace [data-start-section]>button{margin:0}
+.pool-planner-workspace[aria-busy=true] .pool-saved-status button{animation:pool-loading 1.2s linear infinite}
+@keyframes pool-loading{to{transform:rotate(360deg)}}
+@media(max-width:1279px){.pool-planner-workspace .pool-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:1100px){.pool-planner-workspace .pool-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.pool-planner-workspace .pool-grid{grid-template-columns:1fr}}
+
+/* Saved-plan details belong in Advanced; keep the final action row compact. */
+.pool-planner-workspace [data-start-section]>h3{flex:0 0 auto}
+.pool-planner-workspace [data-saved-plan-settings] details{margin:12px 0}
+.pool-planner-workspace [data-start-section]>p,.pool-planner-workspace [data-start-section]>label{flex-basis:100%;margin:6px 0}
+
+.pool-planner-workspace [data-start-section]{gap:12px;min-height:76px;box-sizing:border-box}
+.pool-planner-workspace [data-start-section]>h3{margin-right:auto}
+.pool-planner-workspace [data-start-section]>button{min-height:44px;white-space:nowrap}
+@media(max-width:760px){.pool-planner-workspace [data-start-section]>h3{flex-basis:100%}.pool-planner-workspace [data-start-section]>button{flex:1 1 auto}}
+
+/* Match the accent to the Bana title rather than a percentage of the card. */
+.pool-planner-workspace .pool-card::before{content:none}
+.pool-planner-workspace .pool-card-heading>.pool-edit-label{position:relative;flex:0 1 auto;width:max-content;max-width:100%}
+.pool-planner-workspace .pool-card-heading>.pool-edit-label::before{content:"";position:absolute;left:0;top:-11px;width:100%;height:4px;background:#ffd700;border-radius:2px}
+
+/* Staff TEST knockout review: compact side-by-side stages. */
+.tournament-control{width:min(1000px,94vw);max-height:90vh;overflow:auto;padding:24px!important}
+.tournament-control h2{margin:0 36px 12px 0}.tournament-control p{margin:8px 0;line-height:1.35}
+.tournament-control-status{border-left:3px solid #ffd700;padding-left:10px}
+.tournament-control .is-complete{color:#69d884}.tournament-control .is-attention{color:#ff7777}
+.tournament-control-event{color:#c3c8ca;font-size:17px}.tournament-control-groups{display:flex;flex-wrap:wrap;gap:8px 24px;margin:12px 0}
+.tournament-control-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.tournament-control-stage{border:1px solid #394348;border-radius:6px;padding:14px;min-width:0}
+.tournament-control-stage h3{font-size:26px;margin:0 0 6px}.tournament-control-rule{color:#c3c8ca;font-size:17px}
+.tournament-control-stage ol{margin:12px 0;padding-left:24px}.tournament-control-stage li{padding:3px 0;overflow-wrap:anywhere}
+.tournament-control-stage h4{font-size:20px;border-top:1px solid #394348;padding-top:10px;margin:12px 0 6px}
+.tournament-control-pair{font-size:18px;overflow-wrap:anywhere}.tournament-control-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.tournament-control-confirm{margin-top:16px;border-top:1px solid #394348;padding-top:10px}.tournament-control-confirm label{display:flex;align-items:center;gap:10px;margin:12px 0}
+.tournament-control-confirm input{width:20px;height:20px}.tournament-control-confirm button{margin:0 10px 8px 0}
+@media(max-width:680px){.tournament-control-grid{grid-template-columns:1fr}}

@@ -3,10 +3,10 @@
  */
 'use strict';
 const crypto=require('node:crypto');
-const id='t_RqC2_2034',league='lg_tM2v_3523';
+const id='t_QHaG_7792',league='lg_tM2v_3523';
 const copy=x=>JSON.parse(JSON.stringify(x));
 const hash=x=>crypto.createHash('sha256').update(JSON.stringify(x)).digest('hex');
-function target(t){if(!t||t.tdid!==id||t.lgid!==league||t.title!=='Beauty Hub TEST — DO NOT USE LIVE'||![10,20,25].includes(t.status)||t.team_games!==0||!Number.isSafeInteger(t.updateTime)||t.lg_setting?.turnaround!==0||t.lg_setting?.swiss)throw Error('Only the pre-start single round-robin TEST event is supported.');}
+function target(t){if(!t||t.tdid!==id||t.lgid!==league||t.title!=='Beauty Registration TEST event DO NOT USE LIVE'||![10,20,25].includes(t.status)||t.team_games!==0||!Number.isSafeInteger(t.updateTime)||t.lg_setting?.turnaround!==0||t.lg_setting?.swiss)throw Error('Only the pre-start single round-robin TEST event is supported.');}
 function prepare(plan,t,bindings,now=Date.now()){
  target(t);if(plan?.schemaVersion!==1||plan.kind!=='hub-board-plan'||plan.state!=='PLANNED_NOT_SENT'||plan.eventId!==id||plan.leagueId!==league||!Array.isArray(plan.pools)||!plan.pools.length||plan.pools.length>1024||!Array.isArray(t.lg_table)||t.lg_table.length!==plan.pools.length)throw Error('Pool plan does not match TEST groups.');
  if(!Array.isArray(bindings)||!Array.isArray(plan.availableBoards)||new Set(plan.availableBoards).size!==plan.availableBoards.length||plan.availableBoards.some(n=>!Number.isInteger(n)||n<1||n>1000))throw Error('Invalid boards or identity bindings.');

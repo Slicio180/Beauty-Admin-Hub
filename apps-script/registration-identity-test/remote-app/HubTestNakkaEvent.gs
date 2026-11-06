@@ -1,6 +1,6 @@
-/* Identity TEST: read-only date matching. No Nakka or spreadsheet writes. */
+/* Identity TEST: fixed event identity and date matching. No Nakka or spreadsheet writes. */
 function beautyHubNakkaDate_() {
-  const ss = SpreadsheetApp.openById(SHEET_ID);
+  const ss = (typeof beautyHubSpreadsheet_==='function'?beautyHubSpreadsheet_():SpreadsheetApp.openById(SHEET_ID));
   if (ss.getId() !== SHEET_ID) throw new Error('identity');
   const zone = ss.getSpreadsheetTimeZone();
   if (zone !== 'Europe/Berlin') throw new Error('zone');
@@ -35,7 +35,11 @@ function beautyHubNakkaEvent_(input) {
     return answer('UNAVAILABLE','The Nakka event list is invalid or may be incomplete. No event selected.',selected.date);
   const matches = [];
   for (const event of data.list) {
-    if (!event || typeof event.t_date !== 'number' || !Number.isFinite(event.t_date) || event.t_date <= 0)
+    if (!event || typeof event !== 'object' || Array.isArray(event))
+      return answer('UNAVAILABLE','A Nakka event date needs review. No event selected.',selected.date);
+    // Undated events cannot match a calendar date. Do not coerce strings.
+    if (event.t_date === undefined || event.t_date === null || event.t_date === '' || event.t_date === 0) continue;
+    if (typeof event.t_date !== 'number' || !Number.isFinite(event.t_date) || event.t_date < 0)
       return answer('UNAVAILABLE','A Nakka event date needs review. No event selected.',selected.date);
     const date = new Date(event.t_date * 1000);
     if (!Number.isFinite(date.getTime())) return answer('UNAVAILABLE','A Nakka event date needs review. No event selected.',selected.date);
@@ -44,12 +48,17 @@ function beautyHubNakkaEvent_(input) {
   beautyHubNakkaAuthorize_();
   try { if (beautyHubNakkaDate_().date !== selected.date) return answer('STALE','The Hub date changed during lookup. Check again.'); }
   catch(e) { return answer('UNAVAILABLE','The TEST event date could not be rechecked.'); }
-  if (!matches.length) return answer('NOT_FOUND','No Nakka event matches this Hub date.',selected.date);
-  if (matches.length !== 1) return answer('AMBIGUOUS','Several Nakka events match this date. No event selected.',selected.date);
-  const match = matches[0];
-  if (typeof match.tdid !== 'string' || !/^t_[A-Za-z0-9_]{1,80}$/.test(match.tdid) || typeof match.title !== 'string' || !match.title.trim() || match.title.length > 300)
+  // A live Monday tournament can share this date. It must never become the TEST target.
+  if (matches.some(event => typeof event.tdid !== 'string' || !/^t_[A-Za-z0-9_]{1,80}$/.test(event.tdid)))
     return answer('UNAVAILABLE','The matching Nakka event details need review.',selected.date);
-  return answer('MATCHED','One Nakka event matches the selected Hub date. No players have been synced.',selected.date,
+  const targets = matches.filter(event => event.tdid === 't_QHaG_7792');
+  if (!targets.length) return answer('NOT_FOUND','The dedicated TEST event does not match this Hub date. No event selected.',selected.date);
+  if (targets.length !== 1 || data.list.filter(event => event.tdid === 't_QHaG_7792').length !== 1)
+    return answer('AMBIGUOUS','The dedicated TEST event appears more than once. No event selected.',selected.date);
+  const match = targets[0];
+  if (match.title !== 'Beauty Registration TEST event DO NOT USE LIVE' || (match.lgid !== undefined && match.lgid !== 'lg_tM2v_3523'))
+    return answer('UNAVAILABLE','The matching Nakka event details need review.',selected.date);
+  return answer('MATCHED','The dedicated TEST event matches the selected Hub date. No players have been synced.',selected.date,
     {id:match.tdid,title:match.title,date:selected.date,url:'https://n01darts.com/n01/league/season.php?id='+encodeURIComponent(match.tdid)});
 }
 
@@ -76,14 +85,16 @@ function beautyHubNakkaCompareNames_(hub, nakka) {
   return result;
 }
 function beautyHubNakkaHubRows_() {
-  const ss = SpreadsheetApp.openById(SHEET_ID);
+  const ss = (typeof beautyHubSpreadsheet_==='function'?beautyHubSpreadsheet_():SpreadsheetApp.openById(SHEET_ID));
   if (ss.getId() !== SHEET_ID) throw new Error('identity');
   const sheet = ss.getSheetByName("TONIGHT'S PLAYERS");
   const count = sheet.getLastRow();
   if (count > 1001) throw new Error('size');
-  if (JSON.stringify(sheet.getRange(1,1,1,3).getDisplayValues()[0]) !== JSON.stringify(['PLAYERS','NEW PLAYERS','STATUS'])) throw new Error('headers');
+  // Read headers and roster together, freshly on every call.
+  const rows = sheet.getRange(1,1,Math.max(1,count),3).getDisplayValues();
+  if (JSON.stringify(rows[0]) !== JSON.stringify(['PLAYERS','NEW PLAYERS','STATUS'])) throw new Error('headers');
   if (count < 2) return [];
-  return sheet.getRange(2,1,count-1,3).getDisplayValues().filter(row=>row[0]||row[1]).map(row=>{
+  return rows.slice(1).filter(row=>row[0]||row[1]).map(row=>{
     const name = String(row[0]||row[1]||'').trim();
     if (!name || name.length > 120 || /[\x00-\x1f\x7f]/.test(name)) throw new Error('name');
     return {name:name,status:String(row[2]||'').trim().slice(0,40)};

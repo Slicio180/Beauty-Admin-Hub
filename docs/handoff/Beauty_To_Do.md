@@ -1,5 +1,226 @@
 # Beauty — to-do and decisions
 
+## Current launch checklist — 6 November 2026, evening preparation
+
+This is the current priority list for Monday 9 November. It supersedes older work ordering and the proposal to build a full replacement event manager for this launch. Use Nakka Admin separately for main tournament editing, match control and moving completed pools into knockout brackets. Keep the existing Event Manager prototype as deferred work; do not integrate it for Monday. No installation, deployment or new acceptance test is claimed by this checklist update.
+
+### 1. Install prepared TEST changes
+
+- [ ] Save the current source checkpoint, configuration and rollback copy before installation.
+- [ ] Install and verify automatic pool-board defaults and the included running board-plan editing fix (Hub-Auto-Pool-Boards-TEST-20261106.zip). Package evidence: 779/779 local tests and inventory PASS; owner installation and Google TEST upload pending. Preserve manual one/two-board choices.
+- [ ] Install the removal of the user-facing “Beauty” labels (Hub-Plain-Labels-TEST-20261106.zip). Owner clarified this is label removal, not a general wording cleanup. Check compatibility/order with the board update before applying either installer; do not overwrite newer changes.
+
+### 2. Complete small interface changes
+
+- [ ] Add Open Nakka Admin for the correct event.
+- [ ] Remove the Hub Slutspel review/assignment panel in line with the agreed Nakka-admin workflow; preserve Beauty Live knockout display.
+- [ ] Display “Bye” for actual byes, retaining waiting text for genuinely pending player slots.
+
+### 3. Verify the full competition path in a fresh TEST event
+
+- [ ] Rehearse realistic player/pool numbers, seeded preview, manual player swaps, selected physical boards, one/two-board overrides, approval and exact Nakka group readback. The earlier completed two-pool test does not qualify all draw sizes.
+- [ ] Move completed pools into brackets through Nakka Admin, including incremental progression while other pools remain active where the event format permits. Confirm Beauty Live follows actual Nakka entrants, byes, results, finals and winners without resending pools or restarting the event.
+- [ ] Verify actual Nakka match-board assignments and document the operator workflow. Hub saved board labels are not proof of native assignments; keep actual assignment in Nakka unless a supported connection is separately qualified.
+- [ ] Preserve completed TEST event t_QHaG_7792. Use a new dedicated test event; never resend its pools, repeat Start or reassign its knockout players.
+
+### 4. Complete operational acceptance
+
+- [ ] Test kiosk, mobile and Hub registration together: duplicates, IN/OUT/STANDBY, persistence, consent, messages, source, removal/recovery and Nakka reconciliation.
+- [ ] Test on the home Windows desktop in Edge: login, reload, separate display opening, background refresh, logout boundaries and connection recovery. Prior spotless reload session remains valid; historical intermittent blank-page/DEADLINE_EXCEEDED root cause is still unresolved.
+- [ ] Check Beauty Live with realistic player numbers, long names, pagination/rotation and fullscreen. Compare ranking/points/averages with Nakka if that view is included. Verify mobile Safari opening separately.
+- [ ] Review the staged Nakka skin on TEST scoring screens and live-feed behaviour. Keep scoring-session requirements explicit; full authenticated Nakka Admin embedding/skinning is unverified and is not a prerequisite for separate Nakka administration.
+- [ ] Run the complete registration-to-winner and next-event rehearsal in TEST, checking no old-event data remains. Record timings, outcomes and unresolved limitations.
+- [ ] On Monday at the venue, check the actual internet connection, screen/casting setup, readability and computer settings. Home testing cannot close these venue checks.
+
+### 5. Handover and controlled release
+
+- [x] English first-time-operator booklet created: Beauty_Operator_Handbook_EN.pdf. Written on the requested assumption that the system is already launched/configured; it is not evidence of a real production launch.
+- [ ] Revise the booklet against the verified on-screen controls and handoff workflow; provide event links, access details and an organiser contact separately.
+- [ ] Verify live configuration and access, preserve TEST/production separation, prepare backup/rollback and the existing registration/Nakka fallback, then obtain an explicit release decision before production changes.
+- [ ] Save the final source checkpoint and dated test/audit evidence. Do not assume GitHub is current; no push without existing explicit authorization.
+
+Later work: separate Event Manager, AI/music, GP/multi-event expansion, multi-club hosting and broader enhancements. These are not Monday launch requirements.
+
+## Event Manager shared Slutspel boards — 6 November 2026, version 0.4.0
+
+- [x] Local rehearsal now allows Slutspel 1 and 2 to use identical or overlapping board ranges, with independent pause/resume. One shared occupied-board set prevents duplicate assignments; released shared boards alternate stage opportunity. Existing RR badges remain occupied.
+- [x] 61 local synthetic Node/HTTP tests pass. Native Nakka transport and actual shared-board arbitration are NOT qualified; current Hub and saved pool-board update unchanged.
+- [ ] User said “Checkwinnauks also”; clarification requested between knockout winners and wins/losses. No inferred real-event result changes. Result entry/corrections remain blocked pending native qualification.
+
+
+## Automatic pool board defaults — 6 November 2026
+
+- [x] Implemented in isolated Hub TEST source: pool drafts prefill selected physical board numbers in numeric order; sparse selections exclude unavailable boards. Example 3/3/4 pools and boards 1,4,5,6 → [1], [4], [5,6].
+- [x] Reserve one board per pool first; spare boards go to four-player pools. With scarce boards, pools get one and queue by earliest available board. Shared-board notes identify later pools. 50 players/nine sparse boards and 120 mixed-venue combinations covered.
+- [x] Manual one/two-board overrides, chosen board numbers and saved choices persist; download lists both boards and rows. Usage count reflects defaults and manual edits. Includes the preceding running-edit fix with revision protection.
+- [x] Fixed TEST request allowlist to carry poolprepare boardPlan and poolboardplan boardVersion, covered through the real client transport.
+- [x] LOCAL_AUTO_POOL_BOARDS_INSTALL_PASS: isolated installer baseline 766/766 → 779/779; no new failures; inventory PASS. Reproducible generated TEST files verified; repeat installer does nothing. Source, backups/tests and install evidence packaged as Hub-Auto-Pool-Boards-TEST-20261106.zip.
+- [ ] NOT INSTALLED on owner Mac or uploaded to Google. Google TEST files when ready: existing HubTestPools.gs and HubTest.html only. Device acceptance pending. Completed event must not have pools resent or Start repeated.
+- [ ] Native Nakka pool board-field connection still pending qualification. This is automatic draft/venue planning, not native automatic match assignment or Slutspel autopilot. Existing Event Manager project, production and GitHub unchanged. Deferred plain-label rename not included.
+
+
+## Pool board gaps — 6 November 2026
+
+- Owner requested fixing both pool-board gaps before further Event Manager work.
+- [x] ISOLATED LOCAL SOURCE: pool board controls and Save remain available while status is running. Running saves bind event revision and current saved plan, reject stale/missing versions and changed native group membership, audit before/after plans, preserve pools/results/status and do not repeat Start.
+- [ ] NOT DEPLOYED: owner Mac and Google TEST remain unchanged. Source checkpoint only; do not treat the editable Hub plan as native match assignment.
+- [ ] NATIVE ASSIGNMENT STILL BLOCKED: API supports badge/update, but the physical-board to native Round Robin pair/address mapping needs an observed native example. Public docs do not fully define RR address correspondence. All native attempts in this session were read-only; no credentials or authenticated native admin session available. Do not guess indices, write rr_board as physical board numbers, or assign all future matches as simultaneous in-progress badges.
+- [x] Added private read-only owner-editor capture beautyPoolBoardReadback_ for target t_QHaG_7792, omitting names/results/credentials. It does not qualify the mapping by itself and has not been executed against Nakka.
+- Preserve the completed existing TEST event; use a separate future native qualification event for write/readback checks. Do not resend groups, repeat Start, or reassign its knockout players.
+
+
+## Event Manager automatic badges — version 0.3.0, 6 November 2026
+
+- [x] Separate synthetic automatic scheduler now assigns distinct boards, holds a waiting queue, reuses finished boards, observes board/player breaks, protects busy players and preserves existing assigned badges.
+- [x] Per-stage pause/resume with repeated-cycle coverage, queue/status display, synthetic finish/clock controls and audit receipts bound to reviewed revisions. Manual badge changes require pausing their owning stage. Finals remain manual.
+- [x] 59 local tests pass, including HTTP automatic handover and pause/resume cycles. Current Hub source unchanged; no Google/Nakka/production writes or GitHub push.
+- [ ] This does not run real Nakka autopilot. Native held-status normalization, actual automatic assignment, cross-event boards/players, round/final/third-place/referee semantics and browser/device acceptance remain open. Production design must use the native autopilot service; never connect the local rehearsal scheduler as a real writer.
+
+
+## Event Manager development update — 6 November 2026, version 0.2.0
+
+- [x] Separate project now has 41 passing local synthetic/HTTP tests.
+- [x] Manual within-stage guide swaps, reviewable before/after positions, rematch warnings, protected assigned matches and stale-revision refusal.
+- [x] Durable guide revision store with immutable history and reopen/restart coverage. Local rehearsal guide can persist via EVENT_MANAGER_DATA_DIR; synthetic event tables/results still reset per server restart. Complete event persistence is not implemented.
+- [x] Saved-guide key-order comparison bug fixed and covered by reopening plus assignment test.
+- [ ] Native guide/partial assignment/badge/autopilot acceptance, remaining match/setup controls, full rule editor, host integration/persistence/recovery and visual acceptance remain pending. No Hub integration, production change, GitHub push or Nakka mutation.
+
+
+## Separate Event Manager project — authorised 6 November 2026
+
+Owner requested a full manager comparable to Nakka Admin, developed separately and integrated only when fully developed and accepted. Owner authorised autonomous development while the app stays open. This supersedes the earlier blanket direction to avoid a future manager; Nakka Admin remains the current/Monday operating choice.
+
+- [x] First isolated development build created, with its own source, loopback rehearsal, control inventory, provider references and tests. No current Hub/Google/production integration or Nakka mutation.
+- [x] Incremental completed-pool assignment engine, fixed approved pool/rank guide positions, membership/settings binding, structural byes and preservation of existing assignments.
+- [x] Manual badge and Nakka autopilot configuration proposals plus synthetic review/readback. These do not run the native autopilot service.
+- [x] Expiring staff/session approvals, stale-state refusal, serial writes, durable atomic event journal, no retry after uncertainty; 33 synthetic Node/HTTP tests pass.
+- [ ] Native provider adapter, authenticated snapshots/live-match normalization, actual partial assignment and badge/autopilot qualification; host persistent guide/journal and recovery console.
+- [ ] Complete match control (corrections, watch/game data, unlock), setup/player control, guide editor/referees/order/announcements/lifecycle and remaining parity inventory.
+- [ ] Browser/device acceptance: Chromium launch was environment-blocked; no visual pass claimed. Current first build is NOT complete or integration-ready.
+- [ ] Review against the full signed-in Nakka Admin page before claiming parity; preserve the existing scoring/progression engine.
+
+Monday test scope stays kiosk, remote registration, Hub and skin; use Nakka Admin for full tournament control. New manager is a separate workstream. Plain-label update Hub-Plain-Labels-TEST-20261106.zip is prepared (766 tests pass), but owner deferred applying it until tonight; do not assume it installed. Removal of the current Hub Slutspel review/assignment panel is agreed for tonight but not yet implemented/applied.
+
+
+## Latest TEST checkpoint — 6 November 2026, after midnight Stockholm
+
+This section supersedes older pending statements only for the checks explicitly recorded here. Production is unchanged. Full source checkpoint: Beauty-Full-Checkpoint-20261106.zip.
+
+### Verified tonight
+
+- [x] Reload reliability — owner follow-up on 6 November: reload was spotless throughout tonight’s session. PASS for tonight’s use; earlier intermittent failures did not recur tonight. Next priority is realistic casting and the complete event rehearsal. Historical DEADLINE_EXCEEDED root cause has not been established; this does not undo tonight’s successful check.
+
+- [x] Owner installed Tournament Control update: LOCAL_TOURNAMENT_CONTROL_INSTALL_PASS, 2026-11-05T22:59:17.135Z (23:59 Stockholm), baseline 752/752 and after 766/766; inventory PASS, no new failures. Source, generated TEST files, tests, backups and dated evidence preserved. Owner confirmed saving HubTestPools.gs, HubTestBridge.gs and HubTest.html to Identity TEST.
+- [x] Compact Hub pool cards approved: four per desktop row, START beside heading, Bana title/accent, inline Board 1/Board 2, explicit save and compact status. Advanced contains qualification rules and match order; step 4 has Save boards & match plan and Start event.
+- [x] Saved board plan and frozen START averages shown on Beauty Live: Bana 5 + 6 / START 46.21, Bana 2 / START 40.83. Native V-F win/lose projection corrected; scores, START/NU, V-F, Legs and Rank use 24px Display, secondary averages 16px. Latest owner screens show working values.
+- [x] Dedicated registration TEST t_QHaG_7792 started once and completed all nine group matches. Never resend its pools or repeat Start.
+- [x] TEST Hub Tournament Control review showed four Slutspel 1 qualifiers, three Slutspel 2 qualifiers and one bye, with correct cross-pool Slutspel 1 semifinals. Owner explicitly confirmed assignment once. Server reported assigned and verified at 00:08 Stockholm; audit POOL-f6e900cfe2fe44b99d04 (transcribed from screenshot).
+- [x] Beauty Live displayed both populated knockout brackets. Slutspel 2 bye advanced Beauty Test Mobile 02 Nov directly to the final.
+- [x] Slutspel 1 semifinal winners Alessio Tampella and Adam Pettersson advanced; both losers entered third place. Final 3–0 displayed Alessio as winner with cup; third place 2–0 displayed. Owner screenshot 00:13:10.
+- [x] Slutspel 2 semifinal 2–0 advanced Beauty Test New 02 Nov; final 2–0 displayed Beauty Test Mobile 02 Nov as winner with medal. Owner screenshot 00:14:58. This verifies the observed TEST path, not all tournament formats.
+
+### Agreed direction and next work
+
+- [ ] Use the full native Nakka Admin page for tournament administration. Owner accepted this fallback rather than reproducing all admin features in Hub. Plan an Open Nakka Admin entry from Event Control; this button is NOT implemented yet. Current Hub qualifier panel remains installed and has passed its specific TEST flow.
+- [ ] Do not extend the custom control panel into a replacement for all Nakka administration at this stage. Embedding authenticated Nakka Admin and applying a full Beauty admin skin are unverified. Official API documents competition custom themes; anonymous admin request redirects to Nakka login. No authenticated embed test was completed. No claim that embedding is impossible or blocked.
+- [ ] Fix Beauty Live bye text: an actual bye currently reads “Väntar på spelare”; display Bye without changing player advancement or pending-match slots. Not implemented tonight.
+- [ ] Check mobile Safari Beauty Live opening, real TV and realistic player-count casting, consent/messages/source parity, full registration-to-next-event rehearsal and production release preparation. Do not mark these closed from knockout evidence.
+- [ ] Current qualifier assignment implementation deliberately supports TWO saved pools in this fixed TEST event, with completed groups and unique native ranks. Larger draws need separate implementation/qualification. It does not configure board badges, autopilot or per-match routing; Hub board plan/display labels alone do not perform those native writes.
+- [ ] Nakka skin remains separately staged; no theme deployment or production activation tonight. Current TEST native player/admin page is not automatically Beauty-themed.
+- [ ] GitHub repository Slicio180/Beauty-Admin-Hub is connected/private; recovery/2026-10-28 exists. No commit/push performed by this checkpoint. Archive is the complete saved source reference; GitHub head must not be assumed current.
+
+No production changes, GitHub push, pool resend, repeat Start or assistant-triggered provider mutation. The owner performed the explicit TEST assignment and TEST scoring through the approved UI.
+
+
+## Monday launch priorities — updated 3 November 2026
+
+Target: **Monday, 9 November 2026**. Alessio is unavailable Tuesday 3 and Wednesday 4 November and will be at the venue on Monday. Available joint work window: Thursday 5–Sunday 8 November. This section supersedes earlier ordering for this launch; historical requirements below remain.
+
+### Scope and current evidence
+
+- Core registration and recovery paths have native TEST evidence. Latest owner local installation: 712/712 tests and inventory PASS. This does not establish acceptance of the complete competition engine or production readiness.
+- Automatic player attention, named missing-player guidance, manual restoration and fresh-check alert clearing were observed. Latest red top-line/red-number appearance uploaded; active appearance acceptance remains pending.
+- **Nakka card size and cosmetic cleanup are deferred until after launch**, per Alessio. Keep the existing working issue flow and Advanced section.
+- Production remains unchanged. Full checkpoint saved as Beauty-Full-Checkpoint-20261103.zip (libfile_e90c5fbf99f4819183ec295e6e592b12), including source, tests, audit evidence, preimages, installers and resume notes.
+
+### Launch work, in order
+
+1. [ ] **Reload reliability:** investigate intermittent blank pages and Google Apps Script storage DEADLINE_EXCEEDED. Repeated opening/login/refresh must be checked. Cause remains unresolved; do not attribute it conclusively to Google or background polling.
+2. [ ] **Player-list Live casting:** verify correct event and players, status inclusion rules, refresh, event switching without retained old data, fullscreen, pagination/rotation, long names and actual TV readability at realistic player numbers.
+3. [ ] **Cast access and recovery:** confirm separate public cast continues after Hub logout, exposes no organiser controls/credentials, marks stale/unavailable data honestly, and recovers after a connection interruption.
+4. [ ] **Ranking/statistics view if included Monday:** compare real overall rank/ties, points and averages with source data; missing/unranked handling must be honest. Use the existing view. Do not call it qualified from names-only casting.
+5. [ ] **Nakka skin:** retain existing staged theme work; last recorded configuration disabled, autoApply false, targetEventId null. Verify actual current configuration before any activation. Review skin on the intended TEST scoring screens: scoring controls, names/scores, board labels, readability and live-feed behavior. Previously observed requirement to keep the scoring session active must be included in rehearsal; background/closed-session behavior is unqualified. Stage-only completion is not production activation.
+6. [ ] **Competition display and planner:** separately rehearse correct TEST target, seeding/approved pools, supported Nakka handoff and readback, scores, standings, board numbers and round-robin/knockout progression. Names-only casting does not qualify competition screens; do not infer completed provider board writes from Hub planning.
+7. [ ] **Complete event rehearsal:** kiosk/mobile/Hub registration, duplicate guards, statuses and persistence, consent/messages/source, removal/recovery, cast, logout and next-event switch. Record timings and unresolved limitations.
+8. [ ] **Controlled production release:** verify production configuration rather than copying hard-coded TEST settings; preserve current data and working production, backup/rollback, access and public registration/cast links. Explicit release decision after acceptance; no production activation or deployment authorized by this to-do update alone.
+
+### Proposed joint work window
+
+- Thursday 5 November: reload reliability, player-list Live casting, Nakka skin review.
+- Friday 6 November: remaining casting/statistics, planner and competition integration checks.
+- Saturday 7 November: full rehearsal and corrections; another organiser's rehearsal if practical.
+- Sunday 8 November: final verification, backup and release decision; freeze extra features.
+
+This is a priority plan, not a delivery guarantee. Alessio's presence Monday supports operation but does not replace testing. Agree any fallback for unqualified modules before launch; preserve the existing working system. AI/music, GP and multi-club expansion remain later work.
+
+
+## Current checkpoint — 2 November 2026
+
+This checkpoint supersedes older pending statements below for the specific items verified on 1 November. Older sections remain as historical requirements; this is not a claim that the entire Hub is finished or production-ready.
+
+### Verified in the separate TEST system
+
+- [x] Staff sign-in and event-date change to 2026-11-01, with snapshot backup BKP-20261101-222938-fcc5da55. Registration history and master list retained.
+- [x] Nakka event matching fixed for undated historical events; correct registration TEST selected: t_QHaG_7792, “Beauty Registration TEST event DO NOT USE LIVE”.
+- [x] Hub registration: Alessio Tampella saved as IN, source HUB; manual existing-league-player transfer verified in the TEST event. Do not describe this initial Hub registration as an automatic-transfer pass.
+- [x] Remote registration: Eric Werkestam saved as IN, source MOBILE, and reached the TEST Nakka event automatically.
+- [x] Kiosk registration: Axel Johansson Edström saved as IN, source KIOSK, and reached the TEST Nakka event automatically.
+- [x] Three-player comparison: Hub 3 / Nakka 3, all three names matched; Hub-only 0, Nakka-only 0, duplicates 0. Name comparison alone does not prove permanent league identity linkage.
+- [x] Attention check repaired and completed; no players needing review. Dashboard showed IN 3 / attention 0; consent values and message buttons visible. Message contents and all consent behaviours still need their own acceptance checks.
+- [x] Beauty Live showed the three players; repaired Hub launcher opened it successfully (owner confirmed).
+- [x] Sign-out returned the Hub to login. Separate Beauty Live remained available after reloading (owner confirmed). This is workflow evidence, not a full security audit.
+- [x] Remote and kiosk colour fixes saved to Google TEST: white form, black controls, AIK yellow highlights. Remote pinning/scroll CSS updated; existing kiosk pinning and sizes preserved. Final mobile visual acceptance remains open.
+- [x] All six source fixes synced to the local Mac project: LOCAL_SYNC_PASS at 2026-11-01T22:53:11.802Z (23:53 Stockholm). Files: HubTestNakkaEvent.gs, HubTestNakkaTransfer.gs, HubTestAttention.gs, RemoteRegistration.html, KioskTest.html, BeautyLiveTest.gs.
+- [x] Local backup: backups/test-sync-2026-11-01T22-53-11-736Z. Local audit: evidence/test-sync-2026-11-01T22-53-11-736Z. Under the current Beauty-Admin-Hub project. Package: Beauty-Hub-Sync-20261101.zip, corrected launcher filename BeautyLiveTest.gs.
+- [x] Isolated mocked checks: event lookup 17, transfer 14, attention 7, Live launcher 9. Installer fixture checks covered install, repeat run and unknown-baseline refusal. These do not replace project-wide regression or native acceptance.
+
+### Next work, in order
+
+1. [ ] Run npm test and npm run test:inventory on the synced Mac project; retain dated output and review failures before further Google uploads. Do not assume old test assertions automatically qualify the new TEST target.
+2. [ ] Fix remote mobile typography throughout the form and player popup; sizes are too small. Repair popup spacing/alignment and check on a real phone. Preserve independent kiosk sizing. Detailed screenshot reference is in the next section.
+3. [ ] Verify final remote/kiosk colours, touch targets, search/pinned new-player option, consent selection and confirmations on their actual devices.
+4. [ ] Test IN / OUT / STANDBY changes, reload persistence and their intended effect on Nakka, planner and Live; do not infer behaviour from registration tests.
+5. [ ] Test duplicate registration across Hub/mobile/kiosk and existing-name manual entry; confirm no duplicate registration or repeated Nakka transfer. New-player and same-name identity flows need separate controlled qualification.
+6. [ ] Verify saved messages, consent and original registration source remain correct through status changes and refresh.
+7. [ ] Correct the stale old-event introductory text in the Hub transfer dialog using the current HubTest.html. Server-side transfer preview was correct; presentation still needs alignment.
+8. [ ] Review planner/stage TEST target configuration before using it with this new registration event. Existing stage planner/audit references remain on the old TEST event; they were not migrated by the Live launcher fix.
+9. [ ] Complete remaining ranking/statistics, competition display, full event rehearsal and release checks against current source; retain the detailed historical requirements below.
+
+### Launch constraints
+
+- Production Beauty and Monday 2 November's normal Nakka layout remain unchanged.
+- Nakka custom theme is staged only: enabled=false, autoApply=false, targetEventId=null. Activate it with the eventual combined Hub launch, after final review.
+- Existing theme work is complete/staged, including the pool-heading alignment fix and Live-feed operating instructions; no extra CSS installation step is needed now.
+- Keep the scoring session active for the Live-feed behaviour already verified. Broader background/closed-session behaviour remains unqualified.
+- Before a later-day public registration test, review the TEST Hub date and dedicated Nakka TEST event together: mobile/kiosk registration enforces today's date.
+- No production deployment, Google upload by the sync installer, Git commit or push was performed. Full production release remains pending.
+
+## Next session — mobile Tonight’s Players popup (1 November 2026)
+
+- [ ] Fix the remote/mobile “KVÄLLENS SPELARE” popup layout, using Screenshot 2026-11-01 at 23.47.22.png as the issue reference (libfile_2c0d916bd200819182f05a3107584af9). Review heading/count alignment, excess spacing, player-name size/readability, close controls and phone viewport fit. Preserve the live count, player data and existing registration logic. Confirm the desired final layout with Alessio during review; this item records the issue without claiming a specific visual fix is approved.
+- [ ] Increase all remote/mobile registration font sizes for phone readability: headings, labels, helper text, search/input text, dropdown names and pinned new-player option, consent choices, message field, submit/confirmation text, and Tonight’s Players popup names/count/controls. Current remote typography is too small per Alessio, 1 November 2026. Review on an actual phone; preserve independent kiosk sizing, agreed colours and registration behaviour. Exact sizes require mobile review; do not mark accepted from desktop alone.
+- [ ] Review on an actual phone and record before/after evidence. Deferred to next session; no code change for this item tonight.
+
+## Next-stage development — Beauty AI + Music & Playlists (31 October 2026)
+
+Status: AGREED / PLANNED — begin after the core Hub is stable. These features are not current core-release dependencies.
+
+- [ ] Beauty AI: explore an organiser assistant to help Alessio run tournaments within the Hub. Define the first useful tasks and integration scope during this next stage.
+- [ ] Music & Playlists: explore adding Spotify playlists/music access in the Hub for event use. Verify supported integration options and applicable service requirements before implementation.
+- [ ] Keep core Hub stability, event workflow verification and existing release priorities ahead of both additions.
+
+Requirements recorded only; neither feature is implemented or deployed by this update.
+
 ## Integration coding follow-up - 29 October 2026
 
 - [x] All morning code retained; authenticated, date-checked Hub opener and guarded TEST stage route/build prepared. Deployed mode loads real TEST data directly and never paints synthetic players. Native upload and comparison pending.

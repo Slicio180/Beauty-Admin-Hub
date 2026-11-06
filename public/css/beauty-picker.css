@@ -1,0 +1,49 @@
+/* Approved 2026-11-02 TEST picker: compact pinned controls and independent name scroll. */
+.beauty-picker-overlay[hidden] { display:none !important; }
+.beauty-picker-overlay { position:fixed; inset:0; z-index:10000; display:flex; align-items:flex-start; justify-content:center; padding:8px; background:rgba(0,0,0,.8); height:100vh; height:100dvh; box-sizing:border-box; overflow:hidden; }
+.beauty-picker-overlay *, .beauty-picker-overlay *::before { box-sizing:border-box; }
+.beauty-picker-overlay .player-dropdown-menu.open { position:relative; display:flex; flex-direction:column; width:100%; max-width:760px; height:100%; max-height:100%; margin:0; padding:0; overflow:hidden; border:2px solid var(--gold); border-radius:12px; background:#000; opacity:1; cursor:auto; }
+.beauty-picker-header { position:relative; flex:none; padding:10px 12px; background:#fff; color:#000; }
+.beauty-picker-header h2 { margin:0 44px 8px 0; font:700 28px/1.1 'AIK Display',sans-serif; color:#000; letter-spacing:0; }
+body .beauty-picker-close { position:absolute; top:6px; right:8px; width:40px; height:40px; min-width:40px; min-height:40px; padding:0; background:#fff !important; color:#000 !important; border:1px solid var(--gold) !important; border-radius:50%; font:400 30px/1 Arial,sans-serif !important; }
+body .beauty-picker-header .player-search { display:block; width:100%; min-height:44px; height:44px; margin:0; padding:6px 12px; background:#fff; color:#000; border:1px solid #888; border-radius:8px; font:400 22px/1.2 'AIK Display Light',sans-serif !important; }
+body .beauty-picker-header .player-search::placeholder { font:400 22px/1.2 'AIK Display Light',sans-serif !important; color:#777; }
+body .beauty-picker-help { margin:6px 0; color:#000; font:400 18px/1.2 'AIK Display Light',sans-serif; text-align:center; }
+body button.beauty-new-player,body button.beauty-new-player:hover:not(:disabled),body button.beauty-new-player:active:not(:disabled) { display:block; width:100%; min-height:48px; margin:8px 0 18px; padding:10px; background:var(--gold) !important; color:#000 !important; border:2px solid var(--gold) !important; border-radius:8px; font:700 24px/1.15 'AIK Condensed',sans-serif !important; white-space:normal; }
+body .beauty-picker-header button.beauty-new-player { min-height:44px; margin:0; padding:8px; font-size:22px !important; }
+.beauty-picker-overlay #playerOptions { flex:1 1 auto; min-height:0; height:auto; max-height:none; overflow-y:auto; overscroll-behavior:contain; touch-action:pan-y; -webkit-overflow-scrolling:touch; padding:0 10px; }
+body .beauty-picker-overlay .player-option { position:relative; display:block; width:100%; min-height:46px; padding:8px 26px 8px 6px; margin:0; border:0 !important; border-bottom:1px solid #333 !important; border-radius:0; background:#000 !important; color:var(--gold) !important; font:700 25px/1.15 'AIK Condensed',sans-serif !important; text-align:left; overflow-wrap:anywhere; }
+.beauty-picker-overlay .player-option::after { content:'›'; position:absolute; right:4px; top:50%; transform:translateY(-50%); }
+.beauty-picker-header :focus-visible { outline:2px solid #755f00; outline-offset:2px; }
+@media(min-width:600px) {
+ .beauty-picker-overlay { padding:16px; }
+ .beauty-picker-header { padding:14px 18px; }
+ .beauty-picker-header h2 { font-size:36px; }
+ body .beauty-picker-header .player-search { min-height:56px; height:56px; font-size:26px !important; }
+ body .beauty-picker-help { font-size:22px; }
+ body .beauty-picker-header button.beauty-new-player { min-height:56px; font-size:28px !important; }
+ body .beauty-picker-overlay .player-option { min-height:64px; padding:12px 32px 12px 12px; font-size:30px !important; }
+}
+/* Registration call to action uses the same yellow fill on both devices. */
+body .submit-button,body .submit-button:hover:not(:disabled) { background:var(--gold) !important; color:#000 !important; }
+
+/* Device-width layout plus readable, centred name rows. */
+body .beauty-picker-overlay .player-option { text-align:center; font-size:30px !important; min-height:54px; padding:10px 26px; }
+@media(min-width:600px) { body .beauty-picker-overlay .player-option { min-height:72px; font-size:34px !important; } }
+body .beauty-picker-header button.beauty-new-player { background:#ffd700 !important; color:#000 !important; }
+
+/* Approved joined instruction/action. No arrows; remote two lines, kiosk one. */
+.registration-title { padding-bottom:16px; border-bottom:1px solid #fff; }
+body .new-player-help,body .beauty-picker-help {
+ display:block; margin:12px 0 0; padding:12px 8px; border:2px solid var(--gold); border-bottom:0;
+ border-radius:10px 10px 0 0; background:#fff; color:#000; text-align:center;
+ font:700 clamp(16px,4.2vw,22px)/1.3 'AIK Condensed',sans-serif !important;
+}
+.beauty-instruction-first,.beauty-instruction-second { display:block; white-space:nowrap; }
+body .new-player-help + button.beauty-new-player,
+body .beauty-picker-help + button.beauty-new-player {
+ margin:0 0 18px; border-top:0 !important; border-radius:0 0 10px 10px;
+}
+body .beauty-picker-help + button.beauty-new-player { margin-bottom:0; }
+body.beauty-kiosk .new-player-help,body.beauty-kiosk .beauty-picker-help { font-size:clamp(11px,2.2vw,22px) !important; }
+.beauty-kiosk .beauty-instruction-first,.beauty-kiosk .beauty-instruction-second { display:inline; }

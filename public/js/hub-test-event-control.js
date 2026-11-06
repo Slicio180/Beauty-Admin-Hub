@@ -28,6 +28,8 @@
     const note = make('p', 'Inspection only. Saving is not enabled. Reset details are available from Event Control Details in the sidebar.');
     const reload = make('button', 'RELOAD EVENT'); reload.type = 'button'; reload.disabled = true;
     const cancel = make('button', 'CLOSE'); cancel.type = 'button';
+    const tournament=make('button','TOURNAMENT CONTROL');tournament.type='button';tournament.hidden=kind!=='control';
+    tournament.addEventListener('click',()=>{if(saving)return;if(!globalThis.BeautyTournamentControl)return;dismiss();globalThis.BeautyTournamentControl.open();});
     const switchPanel=make('button',kind==='control'?'EVENT DETAILS':'BACK TO EVENT CONTROL');switchPanel.type='button';
     switchPanel.addEventListener('click',()=>{if(saving)return;dismiss();openPanel(kind==='control'?'details':'control');});
     const state = { loaded: false, blocked: true, currentDate: '', newDate: '', acknowledged: false };
@@ -38,7 +40,7 @@
     function keys(e) {
       if (e.key === 'Escape') { e.preventDefault(); dismiss(); }
       if (e.key === 'Tab') {
-        const list = [close, ...(kind === 'control' ? (reviewArea.hidden ? [date, ack, review] : [unavailable, back]) : []), switchPanel, reload, cancel].filter(el => !el.disabled);
+        const list = [close, ...(kind === 'control' ? (reviewArea.hidden ? [date, ack, review] : [unavailable, back]) : []), tournament, switchPanel, reload, cancel].filter(el => !el.disabled&&!el.hidden);
         const first = list[0], last = list[list.length - 1];
         if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
         else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
@@ -109,7 +111,7 @@
     unavailable.addEventListener('click',async()=>{
       if(!saveEnabled||!prepared||unavailable.disabled||saving)return;
       saving=true;
-      for(const el of [close,cancel,switchPanel,reload,back,unavailable,date,ack,review])el.disabled=true;
+      for(const el of [close,cancel,tournament,switchPanel,reload,back,unavailable,date,ack,review])el.disabled=true;
       unavailable.textContent='SAVING…';
       try{
         const result=await eventRequest('eventsave',{date:state.newDate,expectedDate:state.currentDate,version:prepared.version,confirmed:'true'});
@@ -124,13 +126,13 @@
         content.textContent=error.message+' No automatic retry. Reload and inspect the TEST sheets before another save.';
         edit.hidden=true;reviewArea.hidden=true;
         if(typeof loadBeautyHubData==='function')await loadBeautyHubData();
-      }finally{saving=false;close.disabled=cancel.disabled=switchPanel.disabled=reload.disabled=false;prepared=null;}
+      }finally{saving=false;close.disabled=cancel.disabled=tournament.disabled=switchPanel.disabled=reload.disabled=false;prepared=null;}
     });
     back.addEventListener('click', () => { generation++; resetReview(); date.focus(); });
     close.addEventListener('click', dismiss); cancel.addEventListener('click', dismiss); reload.addEventListener('click', load);
     overlay.addEventListener('click', e => { if (e.target === overlay) dismiss(); });
     for (const element of [label, ackLabel, review]) edit.appendChild(element);
-    for (const element of [close, title, content, ...(kind === 'control' ? [edit, reviewArea, note] : []), switchPanel, reload, cancel]) panel.appendChild(element);
+    for (const element of [close, title, ...(kind === 'control' ? [tournament] : []), content, ...(kind === 'control' ? [edit, reviewArea, note] : []), switchPanel, reload, cancel]) panel.appendChild(element);
     overlay.appendChild(panel); document.body.appendChild(overlay); active = overlay; document.addEventListener('keydown', keys); close.focus(); load();
   }
   for (const button of document.querySelectorAll('.event-button, .sidebar button')) {

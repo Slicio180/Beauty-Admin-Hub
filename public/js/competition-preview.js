@@ -2,8 +2,8 @@
 (()=>{
  'use strict';
  const automatic=document.body?.dataset.stageMode==='test-live';
- const fixture={result:0,tournament:{tdid:'t_RqC2_2034',lgid:'lg_tM2v_3523',title:'Exempeltävling · inte direktsänd',status:30,entry_list:[{tpid:'aaaa',name:'Exempelspelare 1'},{tpid:'bbbb',name:'Exempelspelare 2'},{tpid:'cccc',name:'Exempelspelare 3'}],t_table:[['aaaa','bbbb','cccc','empty'],['bbbb','cccc'],['bbbb']],t_result:[{aaaa:{bbbb:{r:1,a:40.83}},bbbb:{aaaa:{r:2,a:43.99}}}],badge:{'t-0-0':{str:'14',st:1}}}};
- const standings={result:0,tdid:'t_RqC2_2034',groups:[{kind:'lg',index:0,players:[{tpid:'bbbb',rank:1,p:2,w:2,l:0,pts:4},{tpid:'aaaa',rank:2,p:2,w:1,l:1,pts:2},{tpid:'cccc',rank:3,p:2,w:0,l:2,pts:0}]}]};
+ const fixture={result:0,tournament:{tdid:'t_QHaG_7792',lgid:'lg_tM2v_3523',title:'Exempeltävling · inte direktsänd',status:30,entry_list:[{tpid:'aaaa',name:'Exempelspelare 1'},{tpid:'bbbb',name:'Exempelspelare 2'},{tpid:'cccc',name:'Exempelspelare 3'}],t_table:[['aaaa','bbbb','cccc','empty'],['bbbb','cccc'],['bbbb']],t_result:[{aaaa:{bbbb:{r:1,a:40.83}},bbbb:{aaaa:{r:2,a:43.99}}}],badge:{'t-0-0':{str:'14',st:1}}}};
+ const standings={result:0,tdid:'t_QHaG_7792',groups:[{kind:'lg',index:0,players:[{tpid:'bbbb',rank:1,p:2,w:2,l:0,pts:4},{tpid:'aaaa',rank:2,p:2,w:1,l:1,pts:2},{tpid:'cccc',rank:3,p:2,w:0,l:2,pts:0}]}]};
  const byId=id=>document.getElementById(id),host=byId('stagePreview');
  let data=automatic?null:BeautyNakkaStages.project(fixture,standings),state={view:'all',index:0,size:6,collapsed:{pools:true,t:true,s2:true},roundStarts:{}},controller=null,lastSuccess=null,busy=false,disposed=false,failed=false;
  function text(id,value){byId(id).textContent=value;}

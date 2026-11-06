@@ -1,0 +1,22 @@
+<div id="nakkaWorkflow" class="nakka-workflow">
+  <section class="nakka-monitor" aria-labelledby="nakkaConnectionTitle">
+    <h3 id="nakkaConnectionTitle">Event monitoring</h3>
+    <p id="nakkaDiagnosis" role="status" aria-live="polite">Checking Nakka automatically…</p>
+    <p id="nakkaConnectedEvent"></p>
+    <p class="nakka-action-hint">Checked automatically every 30 seconds while the Hub is visible. Problems appear on the red Needs Attention tile.</p>
+    <p id="nakkaCheckProgress" role="status" aria-live="polite"></p>
+  </section>
+  <section id="nakkaAttentionPanel" class="nakka-issues" aria-labelledby="attentionReviewTitle">
+    <h3 id="attentionReviewTitle" tabindex="-1">Players needing attention</h3>
+    <p data-attention-status role="status"></p>
+    <ul class="attention-list"></ul>
+  </section>
+  <details id="nakkaComparisonDetails" class="health-card nakka-step">
+    <summary>Advanced</summary>
+    <p>Optional checks, list comparison and connection information.</p>
+    <button id="nakkaDiagnose" type="button">CHECK NOW</button>
+    <button id="nakkaCompare" type="button">COMPARE LISTS</button>
+    <div id="nakkaEventResult" role="status" aria-live="polite"></div>
+    <details id="nakkaCheckTiming" hidden><summary>Check duration</summary><div id="nakkaCheckTimingResult"></div></details>
+  </details>
+</div>

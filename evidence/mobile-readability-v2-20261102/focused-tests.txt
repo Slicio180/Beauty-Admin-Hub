@@ -1,0 +1,33 @@
+✔ Remote and kiosk HtmlService outputs set device viewport while staff routes stay unchanged (6.18572ms)
+✔ Yellow new-player selector beats legacy button specificity and attendee panel grows to content (0.712186ms)
+✔ Opening either picker focuses its title without invoking search, locks background and sets dialog semantics (4.221241ms)
+✔ Picking a name closes, blurs search, clears filtering, restores scroll and original inert state (2.505286ms)
+✔ New-player action is outside results, stays visible while filtering and preserves canonical sentinel (1.657847ms)
+✔ Keyboard viewport resize keeps picker at visible top; Done dismisses input without submitting (1.36653ms)
+✔ Escape/backdrop close safely, and repeated closing cannot change restored scroll (3.38113ms)
+✔ Tab remains inside modal, and names and helper text are inserted literally (1.860094ms)
+✔ RemoteRegistration.html selection keeps canonical name, closes picker and continues existing new-player path (6.26135ms)
+✔ KioskTest.html selection keeps canonical name, closes picker and continues existing new-player path (5.892176ms)
+✔ RemoteRegistration.html loads minimal registration context and hides form on wrong event day (5.199633ms)
+✔ RemoteRegistration.html actual submit sends date through its own RPC with no client source or staff credential (2.574245ms)
+✔ RemoteRegistration.html success distinguishes saved registration from Nakka attention and keeps five-second next-player return (1.910159ms)
+✔ RemoteRegistration.html Swedish error boundary preserves identity fields and never exposes unknown server prose (2.841526ms)
+✔ RemoteRegistration.html context-load failure shows Swedish help instead of raw service errors (1.475469ms)
+✔ KioskTest.html loads minimal registration context and hides form on wrong event day (4.347425ms)
+✔ KioskTest.html actual submit sends date through its own RPC with no client source or staff credential (2.446949ms)
+✔ KioskTest.html success distinguishes saved registration from Nakka attention and keeps five-second next-player return (1.271608ms)
+✔ KioskTest.html Swedish error boundary preserves identity fields and never exposes unknown server prose (1.672671ms)
+✔ KioskTest.html context-load failure shows Swedish help instead of raw service errors (1.524192ms)
+✔ Central player TEST pages preserve Swedish shared identity modules and parse all inline scripts (6.470844ms)
+✔ Shared player theme build is deterministic and leaves registration scripts unchanged (153.948422ms)
+✔ Hub remote and kiosk use the supplied original sponsor-free logo and embedded AIK font assets (20.210841ms)
+✔ Remote approved tonight list uses the bottom close button and number-only shared heading (3.860405ms)
+✔ Kiosk retains its original sizing and omits player list while remote keeps independent list and sizing (4.564295ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 428.553881

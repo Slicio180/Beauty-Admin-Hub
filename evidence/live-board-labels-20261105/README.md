@@ -1,0 +1,3 @@
+# Beauty Live board labels and Start progress — TEST only
+
+5 November 2026. Owner confirmed the TEST Start on 5 November 2026; screenshot 22.38.03 shows server verified Competition running. Beauty Live screenshots 22.39.25 and 22.41.32 confirm START 40.83 and 46.21 but omit the second board. Root cause: actual venue-pool-cards renderer used pool.board while alternate competition renderer already used pool.boards. Corrected actual renderer to show the full saved boards list, retaining single-board fallback. Pending Start now displays progress instead of Save boards first; failed Start remains unverified without repeat. No provider writes or repeat Start performed by this update. Owner display acceptance pending.

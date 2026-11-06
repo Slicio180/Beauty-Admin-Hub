@@ -8,6 +8,13 @@
     return (await BeautyHubServices.request(url.toString())).json();
   }
   function node(tag,text,parent){const el=document.createElement(tag);if(text!==null)el.textContent=text;parent?.appendChild(el);return el;}
+  function timing(parent,result,started){
+    if(!result.timing||!Number.isFinite(result.timing.totalMs))return;
+    const details=node('details',null,parent);node('summary','Operation duration',details);
+    node('p','Total wait: '+((Date.now()-started)/1000).toFixed(1)+' s · Server: '+(result.timing.totalMs/1000).toFixed(1)+' s',details);
+    const labels={'sheet-snapshot':'Read and validate Sheets','sheet-prewrite-check':'Final Sheet check','sheet-preservation-check':'Verify Sheet preservation','hub-readback':'Verify Hub result','nakka-read-batch':'Parallel Nakka reads','nakka-mutation':'Nakka removal','nakka-read':'Nakka read','recovery-sheet-create':'Create recovery sheet'};
+    for(const step of result.timing.steps||[])if(labels[step.stage]&&Number.isFinite(step.ms))node('p',labels[step.stage]+': '+(step.ms/1000).toFixed(1)+' s',details);
+  }
   async function open(player,button){
     if(busy)return;close();opener=button;
     const generation=BeautyHubAuth.generation(),version=++revision;
@@ -20,9 +27,10 @@
     panel.addEventListener('cancel',event=>{event.preventDefault();close();});
     document.body.appendChild(panel);panel.showModal();x.focus();
     try{
-      const preview=await send('removepreview',input);if(!valid())return;
+      const started=Date.now(),preview=await send('removepreview',input);if(!valid())return;
       if(!preview.success){detail.textContent=preview.error||'Removal could not be checked.';return;}
       detail.textContent='Player: '+preview.player+'\nEvent: '+preview.event.title+' · '+preview.event.date+'\nLeague player ID: '+preview.identity.lpid+'\nNakka event entry ID: '+(preview.tpid||'Not present — Hub registration only')+'\nHub status: '+preview.statusInHub+'\n\nThis removes the registration from this Hub event and its Nakka event entry. The league profile is kept. Close Nakka editing pages before confirming.';
+      timing(panel,preview,started);
       const label=node('label',null,panel),check=node('input',null,label);check.type='checkbox';label.appendChild(document.createTextNode('I have checked this player and event, and want to remove this registration.'));
       const save=node('button','REMOVE FROM EVENT',panel);save.type='button';save.className='remove-player-confirm';save.disabled=true;
       check.addEventListener('change',()=>{save.disabled=!check.checked||busy;});
@@ -31,14 +39,16 @@
         busy=true;save.disabled=true;check.disabled=true;x.disabled=true;
         detail.textContent+='\n\nRemoving…';
         try{
-          const result=await send('removesave',{...input,ticket:preview.ticket,confirmed:'true'});
+          const started=Date.now(),result=await send('removesave',{...input,ticket:preview.ticket,confirmed:'true'});
           if(!valid())return;
           save.remove();label.remove();
           detail.textContent=result.success&&result.readbackVerified?'Removed '+input.player+' from this event. League profile kept.':(result.error||'Result uncertain. Inspect Hub and Nakka before another action.');
           if(result.journal)detail.textContent+='\nReference: '+result.journal;
           if(result.backup)detail.textContent+='\nRecovery sheet: '+result.backup;
+          timing(panel,result,started);
           if(result.success&&result.readbackVerified&&result.data)updateHub(result.data);
-        }catch(e){if(valid()){save.remove();label.remove();detail.textContent='The result is uncertain. Do not repeat removal. Inspect the Hub and Nakka event.';}}
+          document.dispatchEvent(new CustomEvent('beauty-nakka-operation-complete'));
+        }catch(e){if(valid()){save.remove();label.remove();detail.textContent='The result is uncertain. Do not repeat removal. Inspect the Hub and Nakka event.';document.dispatchEvent(new CustomEvent('beauty-nakka-operation-complete'));}}
         finally{busy=false;x.disabled=false;}
       });
     }catch(e){if(valid())detail.textContent='The removal preview could not be loaded. Nothing was confirmed.';}

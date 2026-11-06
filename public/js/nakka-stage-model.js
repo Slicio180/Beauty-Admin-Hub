@@ -1,7 +1,7 @@
 /* Read-only competition projection. Nakka alone supplies results/advancement. */
 (function(root){
  'use strict';
- const target='t_RqC2_2034';
+ const target='t_QHaG_7792';
  const fail=()=>{throw Error('Unsupported or mismatched TEST stage data.');};
  const number=v=>typeof v==='number'&&Number.isFinite(v)&&v>=0?v:null;
  function badge(t,key){
@@ -36,7 +36,7 @@
    if(!['lg','rr'].includes(g.kind)||!Number.isInteger(g.index)||g.index<0||!Array.isArray(g.players)||g.players.length>1000)fail();
    const ids=new Set();const pool={id:g.kind+'_'+g.index,number:g.index+1,players:g.players.map(p=>{
     if(!names.has(p.tpid)||ids.has(p.tpid))fail();ids.add(p.tpid);
-    return {...slot(p.tpid),rank:number(p.rank)>0?p.rank:null,played:number(p.p),wins:number(p.w),draws:number(p.d),losses:number(p.l),points:number(p.pts)};
+    return {...slot(p.tpid),rank:number(p.rank)>0?p.rank:null,played:number(p.p),wins:number(p.win??p.w),draws:number(p.d),losses:number(p.lose??p.l),points:number(p.pts)};
    })};
    const table=t[g.kind+'_table']?.[g.index];pool.matrix=null;pool.format=t[g.kind+'_setting']?.game_setting?.length?null:format(t[g.kind+'_setting'],g.index,0);
    if(table!=null){

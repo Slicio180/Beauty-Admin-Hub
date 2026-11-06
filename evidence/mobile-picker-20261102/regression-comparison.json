@@ -1,0 +1,10 @@
+{
+  "baselineTests": 666,
+  "baselinePass": 601,
+  "baselineFailures": 65,
+  "currentTests": 674,
+  "currentPass": 609,
+  "currentFailures": 65,
+  "newFailures": [],
+  "resolvedFailures": []
+}

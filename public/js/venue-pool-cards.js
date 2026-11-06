@@ -51,7 +51,7 @@
    const count=layout.pairs[Math.floor(index/layout.columns)];
    const card=el('section',null,grid,'stage-card venue-pool-card'),header=el('header',null,card,'pool-card-header');
    card.dataset.rows=String(count);
-   const left=el('div',null,header,'pool-board-title');el('h3','Bana '+value(pool.board),left);
+   const left=el('div',null,header,'pool-board-title');el('h3','Bana '+(pool.boards?.length?pool.boards.join(' + '):value(pool.board)),left);
    const right=el('div',null,header,'pool-card-meta');
    if(pool.shared||!pool.board)el('h3','Grupp '+value(pool.group??pool.number),header,'pool-group-title');
    const averages=el('div',null,right,'group-averages');
@@ -71,7 +71,7 @@
     for(const c of p.cells){
      const td=el('td',null,row,c.state==='self'?'self-cell':'number'+(c.live?' live-cell':''));
      if(['result','live'].includes(c.state)){
-      el('span',value(c.score)+'–'+value(c.opponentScore),td);el('small','('+average(c.average)+')',td,'muted match-cell-average');
+      el('span',value(c.score)+'–'+value(c.opponentScore),td,'match-cell-score');el('small','('+average(c.average)+')',td,'muted match-cell-average');
       if(c.live)td.setAttribute('aria-label','Pågående match · '+value(c.score)+'–'+value(c.opponentScore));
      }else el('span',c.state==='self'?'':c.state==='multiple'?'—':'—',td);
     }

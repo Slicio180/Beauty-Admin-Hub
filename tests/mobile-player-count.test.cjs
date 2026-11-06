@@ -3,7 +3,7 @@ const html=fs.readFileSync('apps-script/registration-identity-test/remote-app/Re
 function client(){
  const nodes={};for(const id of ['tonightPlayerCount','tonightPlayerTotal','tonightPlayersModal','tonightPlayersLoading','tonightPlayersList'])nodes[id]={hidden:false,textContent:'',innerHTML:'',style:{},children:[],classList:{add(){},remove(){}},appendChild(n){this.children.push(n);}};
  const requests=[];let ok,fail;const runner={withSuccessHandler(f){ok=f;return this;},withFailureHandler(f){fail=f;return this;},getTonightsPlayerNames(){requests.push({ok,fail});}};
- const c=vm.createContext({Array,console:{error(){}},document:{getElementById:id=>nodes[id],createElement:()=>({})},google:{script:{run:runner}}});
+ const c=vm.createContext({Array,console:{error(){}},document:{getElementById:id=>nodes[id],createElement:()=>({dataset:{}})},google:{script:{run:runner}}});
  const a=html.indexOf('let tonightPlayersRequest ='),b=html.indexOf('</script>',a);vm.runInContext(html.slice(a,b),c);return {c,nodes,requests};
 }
 test('Mobile total uses the displayed event list and includes a truthful zero state',()=>{

@@ -6,7 +6,7 @@ const fs=require('node:fs'),path=require('node:path');
 function create(directory){
  fs.mkdirSync(directory,{recursive:true,mode:0o700});
  return async function audit(record){
-  if(!record||record.eventId!=='t_RqC2_2034'||!/^[a-f0-9]{64}$/.test(record.digest)||!Number.isSafeInteger(record.revision)||record.revision<0||!['ATTEMPTED','READBACK_VERIFIED','UNKNOWN_INSPECT_NAKKA'].includes(record.state))throw Error('Invalid journal record.');
+  if(!record||record.eventId!=='t_QHaG_7792'||!/^[a-f0-9]{64}$/.test(record.digest)||!Number.isSafeInteger(record.revision)||record.revision<0||!['ATTEMPTED','READBACK_VERIFIED','UNKNOWN_INSPECT_NAKKA'].includes(record.state))throw Error('Invalid journal record.');
   const file=path.join(directory,'test-revision-'+record.revision+'.jsonl'),line=JSON.stringify({...record,recordedAt:new Date().toISOString()})+'\n';
   let fd;
   try{

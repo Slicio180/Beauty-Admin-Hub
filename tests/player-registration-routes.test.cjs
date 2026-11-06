@@ -37,7 +37,7 @@ test('Player registration context always clears on core error and never becomes 
  assert.throws(()=>h.context.beautyHubPlayerTransferRequire_('Anna'),/AUTH_REQUIRED/);
 });
 test('Central TEST kiosk route uses owner-only existing project and rejects configuration injection',()=>{
- const h=registration();h.context.HtmlService={createHtmlOutputFromFile:file=>({file,setTitle(){return this;}})};
+ const h=registration();h.context.HtmlService={createHtmlOutputFromFile:file=>({file,addMetaTag(){return this;},setTitle(){return this;}})};
  assert.equal(h.context.doGet({parameter:{page:'kiosk'}}).file,'KioskTest');assert.equal(h.context.doGet({parameter:{page:'remote'}}).file,'RemoteRegistration');assert.throws(()=>h.context.doGet({parameter:{page:'kiosk',sheet:'wrong'}}));
  const manifest=JSON.parse(fs.readFileSync('apps-script/registration-identity-test/remote-app/appsscript.json'));assert.equal(manifest.webapp.access,'MYSELF');assert.equal(manifest.webapp.executeAs,'USER_ACCESSING');assert.deepEqual(manifest.oauthScopes,['https://www.googleapis.com/auth/spreadsheets','https://www.googleapis.com/auth/script.external_request']);
 });

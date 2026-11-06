@@ -5,4 +5,6 @@ core=core.replace('(function(root){','var BeautyPoolSeeding=(function(){');
 const end=core.indexOf("  if(typeof module!=='undefined'&&module.exports)");
 if(end<0)throw Error('Pool core export boundary changed.');
 core=core.slice(0,end)+'  return Object.freeze(api);\n})();\n';
-fs.writeFileSync(path.join(root,'apps-script/registration-identity-test/remote-app/HubTestPools.gs'),'/* Generated shared pool core and staff service. Edit public/js/pool-seeding.js and server/pool-service.js. */\n'+core+'\n'+fs.readFileSync(path.join(root,'server/pool-service.js'),'utf8'));
+let boardCore=fs.readFileSync(path.join(root,'public/js/pool-board-allocation.js'),'utf8').replace('(function(root){','var BeautyPoolBoards=(function(){');
+boardCore=boardCore.slice(0,boardCore.indexOf(" if(typeof module==='object'"))+' return api;\n})();\n';
+fs.writeFileSync(path.join(root,'apps-script/registration-identity-test/remote-app/HubTestPools.gs'),'/* Generated shared pool core and staff service. Edit public/js/pool-seeding.js and server/pool-service.js. */\n'+core+'\n'+boardCore+'\n'+fs.readFileSync(path.join(root,'server/pool-service.js'),'utf8')+'\n'+fs.readFileSync(path.join(root,'server/tournament-control.js'),'utf8'));

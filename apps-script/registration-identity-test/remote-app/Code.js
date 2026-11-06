@@ -1,3 +1,10 @@
+// Invocation-local workbook handle only. No cell values or provider responses
+// are cached: each caller still performs its own fresh reads.
+var beautyHubSpreadsheetHandle_ = null;
+function beautyHubSpreadsheet_() {
+  if (!beautyHubSpreadsheetHandle_) beautyHubSpreadsheetHandle_ = SpreadsheetApp.openById(SHEET_ID);
+  return beautyHubSpreadsheetHandle_;
+}
 function doGet(e) {
   if (!BEAUTY_IDENTITY_APPROVED_SCRIPT_ || ScriptApp.getScriptId() !== BEAUTY_IDENTITY_APPROVED_SCRIPT_) {
     throw new Error('Identity candidate TEST project is not provisioned.');
@@ -8,7 +15,7 @@ function doGet(e) {
   if(page==='stages'){beautyHubTestGuard_();return HtmlService.createHtmlOutputFromFile('StageTest').setTitle('Beauty pool and knockout play — TEST');}
   if(page==='kiosk'){
     beautyHubTestGuard_();
-    return HtmlService.createHtmlOutputFromFile('KioskTest').setTitle('Beauty — Kiosk Identity TEST');
+    return HtmlService.createHtmlOutputFromFile('KioskTest').addMetaTag('viewport', 'width=device-width, initial-scale=1').setTitle('Beauty — Kiosk Identity TEST');
   }
   if (page === 'live') {
     beautyHubTestGuard_();
@@ -18,7 +25,7 @@ function doGet(e) {
     beautyHubTestGuard_();
     return HtmlService.createHtmlOutputFromFile('HubTest').setTitle('Beauty Hub — IDENTITY TEST');
   }
-  return HtmlService.createHtmlOutputFromFile('RemoteRegistration');
+  return HtmlService.createHtmlOutputFromFile('RemoteRegistration').addMetaTag('viewport', 'width=device-width, initial-scale=1');
 }
 /* CANDIDATE ONLY. No live deployment. Dedicated TEST provisioning and qualification pending. */
 const BEAUTY_IDENTITY_WRITES_ENABLED_ = true;
@@ -226,9 +233,7 @@ DO NOT run this during normal operation.
 function setupTrigger_() {
 
   const spreadsheet =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const triggers =
     ScriptApp.getProjectTriggers();
@@ -560,9 +565,7 @@ A2 downward = names
 function getPlayerNames() {
 
   const spreadsheet =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const sheet =
     spreadsheet.getSheetByName(
@@ -672,9 +675,7 @@ function submitRegistrationIdentityCandidate_(
 ) {
 
   const spreadsheet =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const sheet =
     spreadsheet.getSheetByName(
@@ -773,8 +774,9 @@ const source =
   const master = spreadsheet.getSheetByName(MASTER_SHEET);
   const tonight = spreadsheet.getSheetByName("TONIGHT'S PLAYERS");
   if (!master || !tonight) throw new Error('Spelarlistan kunde inte läsas.');
-  const masterNames = master.getLastRow() < 2 ? [] : master.getRange(2, 1, master.getLastRow() - 1, 1).getDisplayValues().flat();
-  const tonightNames = tonight.getLastRow() < 2 ? [] : tonight.getRange(2, 1, tonight.getLastRow() - 1, 2).getDisplayValues().flat().filter(Boolean);
+  const masterLast = master.getLastRow(), tonightLast = tonight.getLastRow();
+  const masterNames = masterLast < 2 ? [] : master.getRange(2, 1, masterLast - 1, 1).getDisplayValues().flat();
+  const tonightNames = tonightLast < 2 ? [] : tonight.getRange(2, 1, tonightLast - 1, 2).getDisplayValues().flat().filter(Boolean);
   const decision = BeautyNameResolution.resolve({ ...data, selectedName, newName }, masterNames, tonightNames);
   if (!decision.success) return decision;
   selectedName = decision.isNew ? NEW_PLAYER_OPTION : decision.player;
@@ -950,9 +952,7 @@ function addPlayerToMasterList_(
   }
 
   const spreadsheet =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const sheet =
     spreadsheet.getSheetByName(
@@ -1264,9 +1264,7 @@ deleted in the future.
 function setupMasterListEditTrigger_() {
 
   const spreadsheet =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const triggers =
     ScriptApp.getProjectTriggers();
@@ -1316,9 +1314,7 @@ automatically.
 function originalSyncMasterListToGoogleForm_() {
 
   const spreadsheet =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const masterSheet =
     spreadsheet.getSheetByName(
@@ -1802,9 +1798,7 @@ needs to be rebuilt from the Google Form.
 function importPlayersToMasterList_() {
 
   const spreadsheet =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const sheet =
     spreadsheet.getSheetByName(
@@ -2273,9 +2267,7 @@ REMOTE registrations are added to.
 function getN01EventIdFromControlDate_() {
 
   const ss =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const controlSheet =
     ss.getSheetByName(
@@ -2525,9 +2517,7 @@ function updatePlayerStatusData_(
 ) {
 
   const ss =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const sheet =
     ss.getSheetByName(
@@ -2813,9 +2803,7 @@ function updatePlayerStatusOnly_(
 ) {
 
   const ss =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const sheet =
     ss.getSheetByName(
@@ -2984,9 +2972,7 @@ function syncTonightStatusDisplay_(
 ) {
 
   const ss =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const tonight =
     ss.getSheetByName(
@@ -3199,21 +3185,12 @@ function syncTonightStatusDisplay_(
     REBUILD STATUS COLUMN
     ====================================================
 
-    clearContent() removes VALUES ONLY.
+    One setValues replaces all 99 status cells, including blank rows.
 
-    It does NOT remove the dropdown validation.
+    It preserves dropdown validation without an intermediate empty column.
 
     ====================================================
     */
-
-    tonight
-      .getRange(
-        2,
-        3,
-        99,
-        1
-      )
-      .clearContent();
 
     tonight
       .getRange(
@@ -3266,9 +3243,7 @@ survives between events.
 function resetPlayerEventData_() {
 
   const ss =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const sheet =
     ss.getSheetByName(
@@ -3401,9 +3376,7 @@ the source of truth.
 function getTonightsPlayerNames() {
 
   const spreadsheet =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const sheet =
     spreadsheet.getSheetByName(
@@ -3470,9 +3443,7 @@ function getBeautyHubData(token) {
 function getBeautyHubData_() {
 
   const spreadsheet =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const controlSheet =
     spreadsheet.getSheetByName(

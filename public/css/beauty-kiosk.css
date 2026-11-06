@@ -1,17 +1,16 @@
-/* Kiosk TEST colours only. Original kiosk fonts, sizes and touch dimensions stay in its base CSS. */
-:root{--gold:#ffd700;--panel:#111214}
-html,body,.page{background:#080808;color:#fff}
-.branding{background:transparent}
-.card,.success-card,.identity-dialog{background:var(--panel);color:#fff;border-color:var(--gold)}
-body button[class],body .consent-option label{background:#080808!important;color:var(--gold)!important;border-color:var(--gold)!important;transition:none}
-body button:hover:not(:disabled){background:#1b1b12!important}
-body button:active:not(:disabled),body button.selected,body .consent-option input:checked+label{background:var(--gold)!important;color:#080808!important}
-body button:active:not(:disabled) *{color:#080808!important}
-body button:disabled{opacity:.45;cursor:not-allowed}
-body :focus-visible,.consent-option input:focus-visible+label{outline:2px solid #fff;outline-offset:3px}
-body .label,body .field>label{color:#fff}
-body .help,body .new-player-help{color:#c5c9cf}
-body input[type=text],body textarea,body .player-search{color:#fff;background:#080808;border-color:#73777e}
-body input::placeholder,body textarea::placeholder{color:#aaa}
-#loading,#registrationOutcome,#registrationEventLabel{color:#fff}
-#newPlayerArea{background:#1b1d20;border-left-color:var(--gold)}
+/* Approved kiosk registration palette. Fonts, sizes and dropdown behaviour stay unchanged. */
+:root { --gold:#ffd700; --panel:#111214; }
+html,body,.page { background:var(--black); color:var(--white); }
+.card { background:var(--white); color:var(--black); border-color:var(--gold); }
+body .tonight-players-button { background:var(--gold); color:var(--black); }
+body .tonight-players-button:hover { background:var(--gold); color:var(--black); }
+body .help,body .new-player-help { color:#333; }
+body .label,body .field>label { background:var(--black); color:var(--white); }
+body input[type=text],body textarea,body .player-search { background:var(--white); color:var(--black); border-color:var(--gold); }
+body input::placeholder,body textarea::placeholder { color:#777; }
+body .player-dropdown-button,body .player-option,body .consent-option label,body .submit-button { background:var(--black); color:var(--gold); border-color:var(--gold); }
+body .player-option.new-player-option { color:var(--white); }
+body .consent-option input:checked+label { background:var(--gold); color:var(--black); }
+#loading,#registrationEventLabel { color:var(--black); }
+#newPlayerArea { background:#f3f3f3; border-left-color:var(--gold); }
+.card :focus-visible,.consent-option input:focus-visible+label { outline:2px solid #755f00; outline-offset:3px; }

@@ -1,0 +1,3 @@
+# Match score and average font sizes — TEST only
+
+5 November 2026. Owner requested swapping match score and match average font sizes after live scoring screenshot 23.00.07. Match scores use the previous larger average size (26px at standard row height); parenthesised match averages use the previous score size (18px). Player overall averages are also reduced to 18px at the owner's request; START and NU retain their sizes. Live scoring and NU updates are visible in owner screenshot; exact arithmetic acceptance remains pending. No provider writes, repeat Start, or pool resend. Owner visual acceptance pending.

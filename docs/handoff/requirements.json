@@ -195,7 +195,7 @@
     "id": "POOL-001",
     "requirement": "Read-only event Pool Planner using IN count, preferred size and board capacity, with original scheme download",
     "priority": "Normal",
-    "acceptance": "Exact supplied 5\u2013101 arrangements; explain board sharing and one-pool-per-board alternatives; no backend writes; stale event data blocks recommendations."
+    "acceptance": "Exact supplied 5–101 arrangements; explain board sharing and one-pool-per-board alternatives; no backend writes; stale event data blocks recommendations."
   },
   {
     "id": "NAKKATRANSFER-001",
@@ -272,7 +272,7 @@
     "priority": "Critical",
     "source": "Existing Pool Planner To Do; owner approved evenly spreading unknown averages on 28 October 2026",
     "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
-    "acceptance": "Original 5\u2013101 scheme, overall score/darts weighted three-dart average by reviewed LPID, separate points, retained last-good/stale state, no invented zero, exact membership/capacity, expiring session-bound frozen draw, manual swaps and strength coverage, roster invalidation, fixed pre-start TEST only, full settings/entries preservation, CAS group update, native round-robin fixture generation, durable audit before POST, full readback, no automatic retries after uncertain send. Production and JDC untouched."
+    "acceptance": "Original 5–101 scheme, overall score/darts weighted three-dart average by reviewed LPID, separate points, retained last-good/stale state, no invented zero, exact membership/capacity, expiring session-bound frozen draw, manual swaps and strength coverage, roster invalidation, fixed pre-start TEST only, full settings/entries preservation, CAS group update, native round-robin fixture generation, durable audit before POST, full readback, no automatic retries after uncertain send. Production and JDC untouched."
   },
   {
     "id": "POOL-WORKSPACE-001",
@@ -360,13 +360,13 @@
     "priority": "High",
     "source": "Owner31October2026 requested fix code and install",
     "evidenceLabel": "LOCAL_TESTED; NATIVE PENDING",
-    "acceptance": "Remove only small SPELARE beside yellow count, both normal/fullscreen; keep KV\u00c4LLENS SPELARE title. Four-group desktop page uses available height, neighbouring pool row-count padding retained. Six-group geometry unchanged. Start/Nu font exactly half numeric average font."
+    "acceptance": "Remove only small SPELARE beside yellow count, both normal/fullscreen; keep KVÄLLENS SPELARE title. Four-group desktop page uses available height, neighbouring pool row-count padding retained. Six-group geometry unchanged. Start/Nu font exactly half numeric average font."
   },
   {
     "id": "LIVE-USABILITY-20261031",
     "requirement": "Uniform four-group cards, paging arrows, readable average labels, six-hour Hub session, clear planner scheme/editor",
     "priority": "High",
-    "source": "Owner31October2026 screenshots21:30\u201321:57",
+    "source": "Owner31October2026 screenshots21:30–21:57",
     "evidenceLabel": "LOCAL_TESTED; NATIVE PENDING",
     "acceptance": "Four-group desktop cards same outer size even partial pages; arrows centered above left/right card columns. START/NU bold condensed halfpointsize average. Hub session fixed sixhours, browser-memoryonly, reload/close locks; durable server records survive cacheeviction, expiry/revocation retained. Hidden redundant boardfield; dropdown displayboard editor explicitNakkaunchanged; nonzero schemechips preferredsizefirst; yellow ownpage topborder."
   },
@@ -374,8 +374,16 @@
     "id": "COMPACT-REVIEW-20261031",
     "requirement": "Compact login card and BOARDS count with arrangement chips; review Google mismatch before upload",
     "priority": "High",
-    "source": "Owner31Oct22:07\u201322:08 screenshots; continue",
+    "source": "Owner31Oct22:07–22:08 screenshots; continue",
     "evidenceLabel": "LOCAL_TESTED; GOOGLE BLOCKED",
     "acceptance": "Login card bounded to viewport with reduced spacing and safe shortscreen inner scroll; accurate six-hour notice. BOARDS count reflects physical boards used by allocation, min(selectedboards,pools); only needed poolsizechips. Do not reinstall previousUsability or bypass failedGooglebaseline. Compare exactcurrentGooglecopy before authreplacement."
+  },
+  {
+    "id": "PLAYER-UI-20261102",
+    "requirement": "Approved remote and portrait kiosk name picker, keyboard behaviour, readable theme and remote attendee popup",
+    "priority": "High",
+    "evidenceLabel": "CODE-TESTED; DEVICE ACCEPTANCE PENDING",
+    "source": "User approved mobile and kiosk mockups 2026-11-02",
+    "acceptance": "Pinned controls, independent names scroll, no automatic search focus, close after selection; iPhone and Lenovo device checks pending"
   }
 ]

@@ -1,0 +1,73 @@
+{
+  "savedUTC": "2026-11-05T23:24:12.907651+00:00",
+  "dateStockholm": "2026-11-06",
+  "testEvent": "t_QHaG_7792",
+  "ownerInstall": {
+    "result": "LOCAL_TOURNAMENT_CONTROL_INSTALL_PASS",
+    "finishedUTC": "2026-11-05T22:59:17.135Z",
+    "before": 752,
+    "after": 766,
+    "inventory": "PASS",
+    "backup": "backups/tournament-control-before-2026-11-05T22-58-07-732Z",
+    "evidence": "evidence/tournament-control-install-2026-11-05T22-58-07-732Z"
+  },
+  "googleFilesOwnerSaved": [
+    "HubTestPools.gs",
+    "HubTestBridge.gs",
+    "HubTest.html"
+  ],
+  "qualificationAudit": "POOL-f6e900cfe2fe44b99d04",
+  "observations": [
+    {
+      "timeStockholm": "00:06:00",
+      "result": "PASS \u2014 completed groups and correct 4/3 qualification review",
+      "screenshot": "libfile_8558cff6cb0c8191badd707db1c86e17"
+    },
+    {
+      "timeStockholm": "00:08:09",
+      "result": "PASS \u2014 explicit owner assignment and verified server message",
+      "screenshot": "libfile_57e35f0f44488191b6771b6e86189a3a"
+    },
+    {
+      "timeStockholm": "00:08:46",
+      "result": "PASS \u2014 Slutspel 1 players present",
+      "screenshot": "libfile_e5837ef1f3308191a99255826333d6b4"
+    },
+    {
+      "timeStockholm": "00:08:58",
+      "result": "PASS \u2014 Slutspel 2 bye advancement; LABEL ISSUE \u2014 shows waiting instead of Bye",
+      "screenshot": "libfile_6fa1f3fd6ba881918c661cba50a5745e"
+    },
+    {
+      "timeStockholm": "00:11:05",
+      "result": "PASS \u2014 Slutspel 1 winners and third-place progression",
+      "screenshot": "libfile_9798c9e04b288191b6966ecfcee3a7ba"
+    },
+    {
+      "timeStockholm": "00:13:10",
+      "result": "PASS \u2014 Slutspel 1 final 3\u20130, winner cup, third place 2\u20130",
+      "screenshot": "libfile_964aa20d9ed881918e3437c20bcdef2b"
+    },
+    {
+      "timeStockholm": "00:14:58",
+      "result": "PASS \u2014 Slutspel 2 final 2\u20130 and winner medal",
+      "screenshot": "libfile_bd3a16aa9fd481918719c337f0b306b8"
+    }
+  ],
+  "adminDecision": "Use full native Nakka Admin; Hub launch button planned, not implemented; embedded admin/skin unverified",
+  "limitations": [
+    "Two saved pools only for current qualifier assignment",
+    "Bye text needs fix",
+    "Native board routing/autopilot not implemented by Hub plan",
+    "Event final status40 has not been read back independently",
+    "Live Google project is owner-maintained; full remote export not performed",
+    "Google-only owner runner and manifest userinfo.email scope may differ from local full source"
+  ],
+  "gitHub": {
+    "repository": "Slicio180/Beauty-Admin-Hub",
+    "visibility": "private",
+    "branchObserved": "recovery/2026-10-28",
+    "pushPerformed": false
+  },
+  "production": "UNCHANGED"
+}

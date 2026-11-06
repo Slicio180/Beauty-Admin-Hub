@@ -6,8 +6,8 @@ function fixture(o={}){
  const values={Control:[['START DATE','LAST RESET'],[stamp,stamp]],'PLAYER STATUS DATA':[['PLAYER','OLD NAME','STATUS','FOTO&VIDEO','MEDDELANDE','WHERE FROM'],['Test Player','Old Name','IN','JA','message','HUB'],['Other','','OUT','NEJ','other','MOBIL']],"PLAYER'S MASTER LIST":[['PLAYERS'],['Test Player'],['Other']],'Form responses 2':[['Timestamp','VÄLJ DITT NAMN','Skriv ditt fullständiga namn','Foto- och videomedgivande','Meddelande','WHERE FROM'],[stamp,'Test Player','','JA, JAG GODKÄNNER','message','HUB'],[stamp,'Other','','NEJ, JAG GODKÄNNER INTE','other','MOBIL']],"TONIGHT'S PLAYERS":[['PLAYERS','NEW PLAYERS','STATUS','FOTO&VIDEO','MEDDELANDE','WHERE FROM'],['Test Player','','IN','JA','message','HUB'],['Other','','OUT','NEJ','other','MOBIL'],...blank(97,6)]};
  let entries=[{tpid:'t001',name:'Test Player',lpid:'l001',index:1},{tpid:'t002',name:'Other',lpid:'l002',index:2}],released=0,authExpired=false;
  if(o.absent)entries=entries.slice(1);if(o.duplicateEntry)entries.push({tpid:'t003',name:'Test Player'});
- const raw={tdid:'t_RqC2_2034',lgid:'lg_tM2v_3523',title:'Beauty Hub TEST — DO NOT USE LIVE',status:20,t_date:stamp.getTime()/1000,updateTime:1};
- if(o.live)raw.tdid='t_live_9999';if(o.started)raw.status=30;if(o.bracket)raw.rr_table=[['t001','t002']];
+ const raw={tdid:'t_QHaG_7792',lgid:'lg_tM2v_3523',title:'Beauty Registration TEST event DO NOT USE LIVE',status:20,t_date:stamp.getTime()/1000,updateTime:1};
+ if(o.oldTitle)raw.title='Beauty Hub TEST — DO NOT USE LIVE';if(o.live)raw.tdid='t_live_9999';if(o.started)raw.status=30;if(o.bracket)raw.rr_table=[['t001','t002']];
  const sheets={};
  function range(name,r,c,h=1,w=1){return {
   getValues:()=>Array.from({length:h},(_,i)=>Array.from({length:w},(_,j)=>values[name]?.[r-1+i]?.[c-1+j]??'')),
@@ -33,7 +33,7 @@ function fixture(o={}){
   Utilities:{formatDate:(d,z,f)=>f==='yyyy-MM-dd'?d.toISOString().slice(0,10):'20261027-120000',getUuid:()=> 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee',base64Encode:v=>Buffer.from(v).toString('base64'),sleep(){}},
   beautyHubEventDateValid_:v=>typeof v==='string'&&/^20\d\d-\d\d-\d\d$/.test(v),beautyHubEventKey_:v=>String(v||'').normalize('NFC').trim().toLowerCase(),
   beautyHubEventSnapshot_:snapshot,beautyHubEventVersion_:(s,d)=>JSON.stringify({s,d}),
-  beautyHubNakkaEvent_:()=>({status:'MATCHED',event:{id:'t_RqC2_2034'},eventDate:date}),
+  beautyHubNakkaEvent_:()=>({status:'MATCHED',event:{id:'t_QHaG_7792'},eventDate:date}),
   getBeautyHubData_:()=>({success:true,eventDate:date,players:values["TONIGHT'S PLAYERS"].slice(1).filter(r=>r[0]||r[1]).map(r=>({player:r[0],newPlayer:r[1],status:r[2],consent:r[3],message:r[4],whereFrom:r[5]}))}),
   beautyHubAttentionRemember_:(n,d,r)=>{props.set('attention',r.code||r.status);},
  };
@@ -53,10 +53,10 @@ function fixture(o={}){
  return {c,input,values,posts,props,cache,raw,writes,preview:()=>c.beautyHubRemove_('preview',input),save:p=>c.beautyHubRemove_('save',{...input,ticket:p.ticket,confirmed:'true'}),get entries(){return entries;},get released(){return released;},expire:()=>authExpired=true};
 }
 test('removal preview is read-only and exposes exact event entry ID and league profile',()=>{const f=fixture(),p=f.preview();assert.equal(p.success,true);assert.equal(p.tpid,'t001');assert.equal(p.identity.lpid,'l001');assert.equal(f.posts.length,0);assert.equal(f.writes.length,0);assert.equal(f.released,1);});
-test('removal targets exactly one Nakka event entry then clears only selected registration names and event metadata',()=>{const f=fixture(),before=JSON.stringify(f.values["PLAYER'S MASTER LIST"]),r=f.save(f.preview());assert.equal(r.success,true,JSON.stringify(r));assert.equal(r.readbackVerified,true);assert.deepEqual(f.posts,[{tdid:'t_RqC2_2034',remove:['t001']}]);assert.equal(f.entries[0].name,'Other');assert.equal(f.entries[0].index,2);assert.equal(f.values['Form responses 2'][1][1],'');assert.equal(f.values['Form responses 2'][1][3],'JA, JAG GODKÄNNER');assert.equal(f.values['PLAYER STATUS DATA'][1][0],'Test Player');assert.equal(f.values['PLAYER STATUS DATA'][1][1],'Old Name');assert.equal(JSON.stringify(f.values["PLAYER'S MASTER LIST"]),before);assert.equal(r.data.players.length,1);assert.equal(r.data.players[0].player,'Other');assert.equal(f.props.get('attention'),'REMOVED');assert.ok([...f.props.keys()].some(k=>k.startsWith('BEAUTY_NAKKA_REMOVED_ENTRY_')));});
+test('removal targets exactly one Nakka event entry then clears only selected registration names and event metadata',()=>{const f=fixture(),before=JSON.stringify(f.values["PLAYER'S MASTER LIST"]),r=f.save(f.preview());assert.equal(r.success,true,JSON.stringify(r));assert.equal(r.readbackVerified,true);assert.deepEqual(f.posts,[{tdid:'t_QHaG_7792',remove:['t001']}]);assert.equal(f.entries[0].name,'Other');assert.equal(f.entries[0].index,2);assert.equal(f.values['Form responses 2'][1][1],'');assert.equal(f.values['Form responses 2'][1][3],'JA, JAG GODKÄNNER');assert.equal(f.values['PLAYER STATUS DATA'][1][0],'Test Player');assert.equal(f.values['PLAYER STATUS DATA'][1][1],'Old Name');assert.equal(JSON.stringify(f.values["PLAYER'S MASTER LIST"]),before);assert.equal(r.data.players.length,1);assert.equal(r.data.players[0].player,'Other');assert.equal(f.props.get('attention'),'REMOVED');assert.ok([...f.props.keys()].some(k=>k.startsWith('BEAUTY_NAKKA_REMOVED_ENTRY_')));});
 test('removal permits OUT and STANDBY without treating either as IN',()=>{for(const status of ['OUT','STANDBY']){const f=fixture();f.values['PLAYER STATUS DATA'][1][2]=status;f.values["TONIGHT'S PLAYERS"][1][2]=status;const p=f.preview();assert.equal(p.statusInHub,status);assert.equal(f.save(p).success,true);}});
 test('positively absent Nakka entry removes only the Hub registration with no provider POST',()=>{const f=fixture({absent:true}),p=f.preview();assert.equal(p.tpid,null);assert.equal(f.save(p).success,true);assert.equal(f.posts.length,0);});
-test('wrong target, started tournament, bracket placement and ambiguous identities block before writes',()=>{for(const o of [{live:true},{started:true},{bracket:true},{duplicateEntry:true},{duplicateLeague:true}]){const f=fixture(o),p=f.preview();assert.equal(p.success,false,JSON.stringify(o));assert.equal(f.posts.length,0);assert.equal(f.writes.length,0);}});
+test('wrong target, started tournament, bracket placement and ambiguous identities block before writes',()=>{for(const o of [{oldTitle:true},{live:true},{started:true},{bracket:true},{duplicateEntry:true},{duplicateLeague:true}]){const f=fixture(o),p=f.preview();assert.equal(p.success,false,JSON.stringify(o));assert.equal(f.posts.length,0);assert.equal(f.writes.length,0);}});
 test('malformed removal, missing confirmation, extra fields and disabled gate reject without write',()=>{const f=fixture();for(const input of [{}, {...f.input,live:'yes'},{...f.input,eventDate:'bad'}])assert.equal(f.c.beautyHubRemove_('preview',input).success,false);assert.equal(f.c.beautyHubRemove_('save',{...f.input,ticket:'a'.repeat(32),confirmed:'false'}).code,'INVALID_REMOVE');assert.equal(fixture({disabled:true}).preview().code,'REMOVE_DISABLED');assert.equal(f.posts.length,0);});
 test('busy lock and expired auth do not read or write provider state',()=>{assert.equal(fixture({busy:true}).preview().code,'REMOVE_BUSY');const f=fixture();f.expire();assert.equal(f.preview().code,'AUTH_REQUIRED');assert.equal(f.posts.length,0);assert.equal(f.released,1);});
 test('stale snapshot, status, date and Nakka version invalidate confirmation and consume ticket',()=>{for(const mutate of [f=>f.values['PLAYER STATUS DATA'][1][2]='OUT',f=>f.raw.updateTime++,f=>f.values.Control[1][0]=new Date('2026-10-28T12:00:00Z')]){const f=fixture(),p=f.preview();mutate(f);assert.equal(f.save(p).success,false);assert.equal(f.save(p).code,'REMOVE_STALE');assert.equal(f.posts.length,0);}});
@@ -75,8 +75,8 @@ function ui(send){
   focus(){focused++;}
  }
  const body=new El('body');body.isConnected=true;
- const doc={body,createElement:t=>new El(t),createTextNode:t=>({textContent:t}),addEventListener:(k,f)=>events[k]=f};
- const c=vm.createContext({URL,document:doc,window:{beautyHubData:{eventDate:'2026-10-27'}},BeautyHubServices:{endpoint:'https://beauty.invalid/hub?page=hubdata',request:async raw=>{const u=new URL(raw);calls.push(u);return {json:async()=>send(u)};}},BeautyHubAuth:{generation:()=>generation,isCurrent:g=>active&&g===generation},updateHub:d=>updated.push(d)});
+ const doc={body,createElement:t=>new El(t),createTextNode:t=>({textContent:t}),addEventListener:(k,f)=>events[k]=f,dispatchEvent:event=>events[event.type]?.(event)};
+ const c=vm.createContext({CustomEvent:class{constructor(type){this.type=type;}},URL,document:doc,window:{beautyHubData:{eventDate:'2026-10-27'}},BeautyHubServices:{endpoint:'https://beauty.invalid/hub?page=hubdata',request:async raw=>{const u=new URL(raw);calls.push(u);return {json:async()=>send(u)};}},BeautyHubAuth:{generation:()=>generation,isCurrent:g=>active&&g===generation},updateHub:d=>updated.push(d)});
  vm.runInContext(fs.readFileSync('public/js/hub-player-removal.js','utf8'),c);
  const preview={success:true,ticket:'a'.repeat(32),player:'Test Player',event:{title:'TEST',date:'2026-10-27'},identity:{lpid:'l001'},tpid:'t001',statusInHub:'IN'};
  return {c,body,calls,updated,preview,open:()=>c.window.BeautyPlayerRemoval.open({player:'Test Player'},new El('opener')),lock:()=>{active=false;generation++;events['beauty-hub-locked']();},get focused(){return focused;}};
@@ -94,4 +94,33 @@ test('late preview after sign-out cannot restore a confirmation or a player name
 });
 test('uncertain removal discards confirm button and never resends a save',async()=>{
  const h=ui(u=>u.searchParams.get('page')==='removepreview'?h.preview:Promise.reject(Error('network')));await h.open();const panel=h.body.children[0],check=panel.children.find(e=>e.tag==='label').children[0],save=panel.children.find(e=>e.textContent==='REMOVE FROM EVENT');check.checked=true;check.events.change();await save.events.click();assert.equal(h.calls.length,2);assert.equal(h.updated.length,0);assert.equal(panel.children.some(e=>e.textContent==='REMOVE FROM EVENT'),false);assert.ok(panel.children.some(e=>e.textContent?.includes('Do not repeat')));
+});
+
+test('Removal preview reuses the validated Sheet snapshot instead of rereading the Hub and master list',()=>{
+ const f=fixture();let reads=0;f.c.getBeautyHubData_=()=>{reads++;throw Error('redundant full read');};const p=f.preview();assert.equal(p.success,true);assert.equal(p.statusInHub,'IN');assert.equal(reads,0);assert.equal(f.posts.length,0);assert(p.timing.steps.some(s=>s.stage==='sheet-snapshot'));
+});
+
+test('Confirmed absent entry can finish guarded Hub removal with absence proof preserving its earlier transfer',()=>{
+ const f=fixture({absent:true}),p=f.preview(),key='BEAUTY_NAKKA_TRANSFER_t_QHaG_7792_l001';
+ const prior=JSON.stringify({state:'ENTRY_VERIFIED_LINK_UNEXPOSED',event:p.event,identity:p.identity,tpid:'t001'});
+ f.props.set(key,prior);const r=f.save(p);assert.equal(r.success,true);assert.equal(f.posts.length,0);assert.equal(f.props.get(key),prior);
+ const proof=JSON.parse(f.props.get('BEAUTY_NAKKA_REMOVED_ENTRY_t_QHaG_7792_t001'));
+ assert.equal(proof.basis,'ENTRY_ALREADY_ABSENT_AND_VERIFIED');assert.equal(proof.priorTransfer,prior);assert.equal(proof.journal,r.journal);
+});
+test('Absent-entry removal proof cannot bless uncertain mismatched historical transfers',()=>{
+ for(const change of [r=>r.state='ATTEMPTED',r=>r.event.date='2026-10-28',r=>r.identity.lpid='x123',r=>r.tpid='bad']){
+  const f=fixture({absent:true}),p=f.preview(),r={state:'VERIFIED',event:JSON.parse(JSON.stringify(p.event)),identity:JSON.parse(JSON.stringify(p.identity)),tpid:'t001'};change(r);
+  const prior=JSON.stringify(r);f.props.set('BEAUTY_NAKKA_TRANSFER_t_QHaG_7792_l001',prior);assert.equal(f.save(p).success,true);
+  assert.equal([...f.props.keys()].some(k=>k.startsWith('BEAUTY_NAKKA_REMOVED_ENTRY_')),false);assert.equal(f.posts.length,0);
+ }
+});
+test('Removing a reviewed replacement preserves proof for both its current ID and the original confirmed transfer',()=>{
+ const f=fixture(),p=f.preview(),key='BEAUTY_NAKKA_TRANSFER_t_QHaG_7792_l001';
+ const prior=JSON.stringify({state:'VERIFIED',event:p.event,identity:p.identity,tpid:'z001'});f.props.set(key,prior);
+ const review={kind:'STAFF_REVIEWED_CURRENT_ENTRY',journalHash:f.c.beautyHubTransferHash_(prior),event:p.event,identity:p.identity,tpid:p.tpid,uid:'owner',reviewedUTC:'2026-10-27T12:00:00Z',auditKey:'BEAUTY_NAKKA_REVIEW_HISTORY_'+'a'.repeat(32)};
+ const text=JSON.stringify(review);f.props.set('BEAUTY_NAKKA_REVIEW_t_QHaG_7792_l001',text);f.props.set(review.auditKey,text);
+ assert.equal(f.save(p).success,true);assert.equal(f.posts.length,1);assert.equal(f.props.get(key),prior);
+ const proof=JSON.parse(f.props.get('BEAUTY_NAKKA_REMOVED_ENTRY_t_QHaG_7792_z001'));
+ assert.equal(proof.basis,'REVIEWED_REPLACEMENT_REMOVED_AND_ORIGINAL_ABSENT');assert.equal(proof.removedEntryId,'t001');assert.equal(proof.priorTransfer,prior);
+ assert.ok(f.props.get('BEAUTY_NAKKA_REMOVED_ENTRY_t_QHaG_7792_t001'));
 });
