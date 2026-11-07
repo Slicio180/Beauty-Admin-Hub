@@ -18,7 +18,7 @@
     dialog=make('dialog');dialog.className='pool-planner';dialog.setAttribute('aria-label','Transfer one player to Nakka TEST');
     const active=dialog;
     const title=make('h2','Check & review player — TEST');
-    const note=make('p','Only Beauty Registration TEST event DO NOT USE LIVE (t_QHaG_7792). Existing league players only; IN status required. Close the Nakka editing page before confirming so it cannot overwrite the change.');
+    const note=make('p','Only the selected date-matched TEST event. Existing league players only; IN status required. Close the Nakka editing page before confirming so it cannot overwrite the change.');
     const label=make('label','Hub player '),select=make('select');select.setAttribute('aria-label','Hub player to transfer');
     const empty=make('option','Choose an IN player');empty.value='';select.append(empty);
     const names=new Set();
@@ -48,14 +48,14 @@
     select.addEventListener('change',()=>{generation++;invalidate();output.replaceChildren();review.disabled=!select.value;});
     function recoveryChoices(result){
       const r=result.recovery;
-      if(!r||r.player!==select.value||r.event?.id!=='t_QHaG_7792'||r.event?.date!==window.beautyHubData?.eventDate||
+      if(!r||r.event?.id!==result.event?.id||r.player!==select.value||!/^t_[A-Za-z0-9_]{1,80}$/.test(r.event?.id||'')||r.event?.date!==window.beautyHubData?.eventDate||
          !['CONFIRMED_ENTRY_MISSING','UNCONFIRMED_ENTRY_MISSING'].includes(r.kind))return false;
       const confirmed=r.kind==='CONFIRMED_ENTRY_MISSING';
       output.append(make('h3',confirmed?'Choose what should happen next':'Check the earlier unconfirmed request'));
       output.append(make('p','Player: '+r.player+' · Event: '+r.event.title+' · '+r.event.date));
       output.append(make('p','Use the existing league player: '+r.identity.name+' · League player ID: '+r.identity.lpid));
       const link=make('a',confirmed?'1. RESTORE ENTRY IN NAKKA':'OPEN TEST ENTRY LIST');
-      link.href='https://n01darts.com/n01/league/season.php?id=t_QHaG_7792';link.target='_blank';link.rel='noopener noreferrer';
+      link.href='https://n01darts.com/n01/league/season.php?id='+encodeURIComponent(r.event.id);link.target='_blank';link.rel='noopener noreferrer';
       output.append(link);
       if(confirmed){
         const steps=make('ol');
@@ -63,7 +63,7 @@
           'Open the TEST event entry list. Confirm '+r.player+' is absent.',
           'Choose Add from league, select the existing '+r.identity.name+' profile, and save the entry list. Do not create a new league player.',
           'Close the Nakka editing tab, return here, and click CHECK RESTORED ENTRY.',
-          'Review the returned entry and confirm it. Beauty keeps the earlier transfer history.'
+          'Review the returned entry and confirm it. The Hub keeps the earlier transfer history.'
         ])steps.append(make('li',text));
         output.append(steps);
         const check=make('button','CHECK RESTORED ENTRY');check.type='button';check.addEventListener('click',()=>review.click());output.append(check);

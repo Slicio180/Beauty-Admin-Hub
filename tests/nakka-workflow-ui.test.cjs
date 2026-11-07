@@ -37,7 +37,7 @@ test('Generated TEST entry makes the entire attention label and number one butto
 
 test('Event view has automatic monitoring and player issues with optional checks hidden under Advanced',()=>{
  const html=fs.readFileSync('public/nakka-troubleshooting.html','utf8'),main=html.slice(0,html.indexOf('<details id="nakkaComparisonDetails"'));
- assert.equal((main.match(/<button/g)||[]).length,0);assert.match(html.slice(main.length),/CHECK NOW/);assert.match(main,/automatically every 30 seconds/);assert.doesNotMatch(main,/<a\b|CHECK AGAIN|CHECK EVENT|1\.|2\./);
+ assert.equal((main.match(/<button/g)||[]).length,1);assert.match(main,/id="nakkaSelectEvent"[^>]*>FIND OR CREATE EVENT — TEST/);assert.match(html.slice(main.length),/CHECK NOW/);assert.match(main,/automatically every 30 seconds/);assert.doesNotMatch(main,/<a\b|CHECK AGAIN|CHECK EVENT|1\.|2\./);
  assert.match(html,/<summary>Advanced<\/summary>/);assert.doesNotMatch(html,/<a\b|id="nakkaEventCheck"/);
  const css=fs.readFileSync('public/css/beauty-dashboard.css','utf8');assert.match(css,/#attentionCard\[data-active="true"\] \.attention-card-button span::before\{background:#ff5252/);assert.doesNotMatch(css,/#attentionCard\[data-active="true"\]\{outline:/);assert.match(css,/#attentionCard\[data-active="true"\] #attentionCount\{color:#ff5252!important/);
 });

@@ -17,11 +17,12 @@
  function currentPlan(){let boards;try{boards=selectedBoards().length;}catch(e){return {error:e.message};}return BeautyPoolPlanner.plan(BeautyPoolPlanner.eventCount(root.beautyHubData),Number(host.querySelector('[data-size]').value),boards);}
  function renderSettings(){
   if(!panel)return;
+  for(const selector of ['.pool-setup','.pool-progress','[data-review-toggle]','[data-advanced-toggle]']){const n=panel.querySelector(selector);if(n)n.hidden=!!state?.knockoutOnly;}
   const count=hubAvailable?BeautyPoolPlanner.eventCount(root.beautyHubData):null,result=currentPlan(),selected=result[panel.querySelector('[data-draw-scheme]').value];
   panel.querySelector('[data-in-count]').textContent=count===null?'—':String(count);
   panel.querySelector('[data-event-label]').textContent=(state?.event?.title||'Selected Hub event')+' · '+(root.beautyHubData?.eventDateDisplay||root.beautyHubData?.eventDate||'No date');
   const summary=panel.querySelector('[data-plan-summary]');summary.replaceChildren();
-  const needed=panel.querySelector('[data-boards-needed]'),used=!result.error&&selected?Math.min(result.boards,selected.pools):null;
+  const needed=panel.querySelector('[data-boards-needed]'),used=!result.error&&selected?Math.min(result.boards,selected.pools+(selected.four||0)):null;
   needed.textContent=used===null?'—':String(used);needed.setAttribute('aria-label',used===null?'Choose boards to calculate':used+' boards used by this plan');
   if(result.error||!selected)summary.textContent=result.error||'Select available boards.';
   else for(const size of (Number(panel.querySelector('[data-size]').value)===4?[4,3,5]:[3,4,5])){
@@ -81,6 +82,7 @@
   const box=panel.querySelector('[data-pool-source]');box.replaceChildren();
   const status=panel.querySelector('[data-league-slot]');status.replaceChildren();const statsCard=section('section','pool-status-card',status);status.className=workflow?'pool-saved-slot':'';const reviewToggle=panel.querySelector('[data-review-toggle]');reviewToggle.dataset.blocked=String(!state);reviewToggle.setAttribute('aria-expanded','false');reviewToggle.textContent='Review players';
   const stats=state?.stats;panel.querySelector('[data-stat-calculation]').replaceChildren();
+  if(state?.knockoutOnly){el('strong','Slutspel only',statsCard);button('REFRESH EVENT',statsCard,()=>run(send=>load(send,false)));reviewToggle.dataset.blocked='true';renderSettings();return;}
   const title=el('strong',stats?(stats.fresh?'League averages current':'Statistics stale / unavailable'):'Load league averages',statsCard);title.dataset.fresh=String(!!stats?.fresh);
   const updated=el('p',stats?.fetchedAt?'Last successful update '+new Date(stats.fetchedAt).toLocaleString('en-GB',{timeZone:'Europe/Stockholm'}):'Overall league three-dart averages',statsCard);statsCard.title=updated.textContent;
   const reload=button(workflow?'↻':state?'REFRESH STATS':'LOAD / REFRESH LEAGUE STATS',statsCard,()=>run(send=>load(send,!workflow)));if(workflow){reload.setAttribute('aria-label','Refresh competition status');reload.title='Refresh competition status';}
@@ -107,10 +109,11 @@
  }
  function renderDraw(){
   const box=panel?.querySelector('[data-pool-draw]');if(!box)return;box.replaceChildren();panel.querySelector('[data-saved-plan-settings]')?.replaceChildren();const utility=panel.querySelector('[data-draw-utilities]');utility.replaceChildren();steps();
+  if(state?.knockoutOnly){el('h3',state.event.title,box);el('p','Slutspel only — no pools are needed. Register players in the Hub, then assign them to the chosen brackets and start in Nakka Control.',box);for(const stage of state.stages||[])el('p',stage.title+' · '+stage.slots+' bracket slots',box);const link=el('a','OPEN NAKKA EVENT ↗',box);link.href=state.event.url;link.target='_blank';link.rel='noopener noreferrer';el('p','Keep Nakka’s Automatic progress window open for automatic board assignment. Live follows Nakka’s results.',box);return;}
   if(workflow){renderSaved(box);return;}
   if(!frozen){el('p','Generate a preview after reviewing player identities. No Nakka changes are sent by previewing or swapping.',box).className='pool-empty';return;}
   const statsTitle=panel.querySelector('[data-fresh]');if(statsTitle)statsTitle.textContent='League averages frozen for this preview';
-  let allocation;try{allocation=root.BeautyPoolBoards.allocate(frozen.draw.pools,plannedBoards||selectedBoards());}catch(e){invalid=true;approval=null;}
+  let allocation;try{allocation=root.BeautyPoolBoards.defaults(frozen.draw.pools,plannedBoards||selectedBoards());seedBoardChoices(frozen.draw.pools,allocation);}catch(e){invalid=true;approval=null;}
   const draw=frozen.draw,heading=section('div','pool-preview-heading',utility);el('h3','Group overview',heading);el('p','Frozen '+draw.frozenAt+' · Statistics '+draw.source.fetchedAt+' · Draw seed '+draw.seed,heading);
   if(invalid)el('p','REVIEW INVALIDATED — '+(invalidReason||'Preview is no longer active. Generate a new draw before sending.'),utility).className='pool-invalid';
   const warnings=BeautyPoolSeeding.warnings(draw);if(warnings.length){const details=el('details',null,utility);details.className='pool-draw-notes';el('summary','Draw notes · '+warnings.length,details);warnings.forEach(t=>el('p',t,details));}
@@ -121,7 +124,7 @@
    const thresholds=inputs.map(n=>Number(n.value));try{BeautyPoolSeeding.band(null,thresholds);}catch(e){legend.textContent=e.message;return;}
    root.beautyPoolBands=thresholds;root.beautyPoolColours=colours.checked;legend.textContent='Bands: below '+thresholds[0]+'; '+thresholds[0]+'–<'+thresholds[1]+'; '+thresholds[1]+'–<'+thresholds[2]+'; '+thresholds[2]+'+. Unseeded is separate.';grid.replaceChildren();
    const assignments=allocation?.assignments||[];
-   for(const a of assignments)if(!cardLabels[a.poolId])cardLabels[a.poolId]={board:a.board,group:a.batch};
+   for(const a of assignments)if(!cardLabels[a.poolId])cardLabels[a.poolId]={board:a.boards[0],group:assignments.filter(b=>b.startWave<a.startWave&&b.boards.includes(a.boards[0])).length+1};
    const ordered=draw.pools.slice().sort((a,b)=>(cardLabels[a.id]?.board||0)-(cardLabels[b.id]?.board||0)||(cardLabels[a.id]?.group||0)-(cardLabels[b.id]?.group||0));
    for(const pool of ordered){
     const position=cardLabels[pool.id],shared=position&&ordered.filter(g=>cardLabels[g.id]?.board===position.board).length>1;
@@ -166,28 +169,33 @@
    }}search.addEventListener('input',choices);choices();button('CANCEL',dialog,()=>dialog.close());dialog.showModal();search.focus();
   }
   button('DOWNLOAD BOARD PLAN',utility,()=>{
+   const plan=root.BeautyPoolBoards.matchPlan(draw.pools,selectedBoards(),boardInput(draw.pools).choices);
    const lines=['AIK DART · HUB BOARD PLAN · TEST',draw.eventDate,'PLANNED — NOT SENT TO NAKKA',''];
-   for(const pool of draw.pools.slice().sort((a,b)=>cardLabels[a.id].board-cardLabels[b.id].board||cardLabels[a.id].group-cardLabels[b.id].group)){const pos=cardLabels[pool.id];lines.push('Board '+pos.board+' · Group '+pos.group,...pool.players.map(p=>p.name+' · '+averageLabel(p.average)),'');}
+   for(const [i,pool]of draw.pools.entries()){const a=plan.assignments.find(a=>a.poolId===pool.id);lines.push('Pool '+(i+1)+' · Bana '+a.boards.join(' + ')+' · Rows '+a.startWave+'–'+a.endWave,...pool.players.map(p=>p.name+' · '+averageLabel(p.average)),'');}
    const url=URL.createObjectURL(new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'})),link=el('a',null,utility);link.href=url;link.download='Beauty-Board-Plan-TEST-'+draw.eventDate+'.txt';link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
   });
+  queueNote(draw.pools,utility);
   const footer=section('div','pool-action-bar',utility);el('p','Preview only · No Nakka changes sent',footer);
   const unresolved=(frozen.mappings||state?.mappings||[]).filter(p=>!p.lpid||!p.tpid).length;
   if(invalid)el('p','Swaps and sending are disabled. '+(invalidReason||'Generate a new preview to continue.'),footer);
   const formatLabel=el('label','After the groups ',footer),formatSelect=el('select',null,formatLabel);formatSelect.dataset.eventFormat='';
-  for(const [v,t]of [['preserve','Keep current Nakka format'],['top2-rest','First 2 up → Slutspel 1 · remaining players down → Slutspel 2'],['top2-bottom2','Top 2 → Slutspel 1; bottom 2 → Slutspel 2 (groups of 4)']])el('option',t,formatSelect).value=v;
-  formatSelect.value=approval?.format?.mode||root.beautyPoolFormatChoice||state?.formatPreset||'top2-rest';el('p','Groups of 3: first 2 up, last 1 down. Groups of 4: first 2 up, last 2 down. Groups of 5: first 2 up, last 3 down.',footer).className='pool-qualification-help';formatSelect.addEventListener('change',()=>{root.beautyPoolFormatChoice=formatSelect.value;approval=null;renderDraw();});
+  const stage1=state?.stages?.stage1!==false,stage2=state?.stages?.stage2!==false;
+  const formats=!stage1&&!stage2?[['preserve','Round Robin only — no Slutspel']]:[['preserve','Keep current Nakka format'],['top2-rest',stage1&&stage2?'First 2 up → Slutspel 1 · remaining players down → Slutspel 2':'Top 2 per group → '+(stage1?'Slutspel 1':'Slutspel 2')],...(stage1&&stage2?[['top2-bottom2','Top 2 → Slutspel 1; bottom 2 → Slutspel 2 (groups of 4)']]:[])];
+  for(const [v,t]of formats)el('option',t,formatSelect).value=v;
+  const choice=approval?.format?.mode||root.beautyPoolFormatChoice||state?.formatPreset||'top2-rest';formatSelect.value=formats.some(([v])=>v===choice)?choice:(!stage1&&!stage2?'preserve':'top2-rest');
+  el('p',stage1&&stage2?'Groups of 3: first 2 up, last 1 down. Groups of 4: first 2 up, last 2 down. Groups of 5: first 2 up, last 3 down.':stage1||stage2?'Top two per group advance to '+(stage1?'Slutspel 1':'Slutspel 2')+'. Other players finish after the groups.':'Round Robin only. No knockout stages will be enabled or assigned.',footer).className='pool-qualification-help';formatSelect.addEventListener('change',()=>{root.beautyPoolFormatChoice=formatSelect.value;approval=null;renderDraw();});
   const handoff=button('REVIEW NAKKA HANDOFF — TEST',footer,()=>run(async send=>{approval=await send('poolprepare',{ticket:frozen.ticket,format:panel.querySelector('[data-event-format]').value,boardPlan:JSON.stringify(boardInput(frozen.draw.pools))});frozen.ticket=approval.ticket;message('Handoff checked. Close Nakka editing pages, then confirm these TEST pools.');renderDraw();}));
   let boardsReady=true;try{root.BeautyPoolBoards.matchPlan(draw.pools,selectedBoards(),boardInput(draw.pools).choices);}catch(e){boardsReady=false;el('p',e.message,footer);}
   handoff.dataset.handoff='';handoff.dataset.blocked=String(invalid||unresolved>0||!state?.stats?.fresh||!hubAvailable||!boardsReady);
   if(unresolved)el('p','Resolve '+unresolved+' player identities before sending. '+(invalid?'The frozen preview is retained for reference.':'Preview and manual swaps remain available.'),footer);
-  if(approval){const review=el('section',null,utility);review.className='pool-approval';el('h3','Approve TEST pool handoff',review);el('p',approval.event.title+' · '+approval.event.date+' · '+draw.roster.length+' IN players · '+draw.pools.length+' pools · '+approval.expectedCards+(approval.groupMode==='rr'?' native Round Robin pairings.':' round-robin match cards.'),review);
+  if(approval){const review=el('section',null,utility);review.className='pool-approval';el('h3','Review TEST pools',review);const back=button('BACK TO POOLS',review,()=>{approval=null;renderDraw();message('Review cleared. Edit the pools, boards or settings, then review again.');panel.querySelector('[data-pool-draw]')?.scrollIntoView?.({block:'start'});panel.querySelector('[data-handoff]')?.focus();});back.dataset.backToPools='';el('p',approval.event.title+' · '+approval.event.date+' · '+draw.roster.length+' IN players · '+draw.pools.length+' pools · '+(approval.boardPlan?.available?.length||selectedBoardsSafe().length)+' boards · '+approval.expectedCards+(approval.groupMode==='rr'?' native Round Robin pairings.':' round-robin match cards.'),review);
    if(approval.boardPlan)renderMatchPlan(approval.boardPlan,draw,review);
-   if(approval.format){const f=approval.format;el('h3','Competition format',review);el('p','Slutspel 1: top 2 per group · '+f.stage1.qualifiers+' players · '+f.stage1.slots+' slots · '+f.stage1.byes+' byes. Slutspel 2: remaining players · '+f.stage2.qualifiers+' players · '+f.stage2.slots+' slots · '+f.stage2.byes+' byes.',review);el('p','Three-player groups: 2 + 1. Four-player groups: 2 + 2. Five-player groups: 2 + 3. Assign completed groups only; automatic referee assignment off. Match formats are shown below. The format is saved as a preset after a verified send.',review);}
-   el('p',approval.format?'Groups, knockout sizes and qualification rules will be sent once and checked. Match settings are retained from existing knockout settings, or copied from this event’s group settings when absent. An incomplete operation needs audit review.':(approval.groupMode==='rr'?'Only Round Robin groups, group count and maximum group size change. Placement-dependent match order and board fields are cleared for the new draw. Existing players and game settings are retained. Groups are sent once and read back.':'Only pool assignments, division count and maximum pool size change. Existing players and other event settings are retained. Sending uses two Nakka operations: groups, then match cards. If either cannot be verified, inspect the audit before another action.'),review);
+   if(approval.format){const f=approval.format;for(const [key,title]of [['stage1','Slutspel 1'],['stage2','Slutspel 2']]){const stage=f[key];if(stage?.enabled===false)continue;el('p',title+': '+(key==='stage2'&&f.stage1.enabled!==false?'remaining players':'top 2 per group')+' · '+stage.qualifiers+' players · '+stage.slots+' slots · '+stage.byes+' byes.',review);}if(f.set)for(const [key,title]of [['t','Slutspel 1'],['s2','Slutspel 2']])if(f.set[key+'_setting'])el('p',title+' third place: '+(f.set[key+'_setting'].t3===1?'on':'off')+'.',review);}
+   el('p','Send once to Nakka, then verify the saved groups and settings. The event remains pre-start.',review);
    if(approval.unassignedEntries?.length){el('p','Excluded from these pools but still registered in Nakka: '+approval.unassignedEntries.map(p=>p.name).join(', ')+'. Sending is blocked until these entries are resolved or compatibility is verified in TEST. No automatic removals.',review);}
-   const details=el('details',null,review);el('summary','Review preserved game settings',details);el('pre',JSON.stringify(approval.format?{groups:approval.setting,slutspel1:approval.format.set.t_setting,slutspel2:approval.format.set.s2_setting}:approval.setting,null,2),details);
-   const label=el('label',null,review),check=el('input',null,label);check.type='checkbox';label.appendChild(document.createTextNode(' I approve these identities, frozen pools and match cards for the named TEST event. Nakka editing pages are closed.'));
-   const save=button('SEND APPROVED TEST POOLS',review,()=>run(async send=>{if(!check.checked)throw Error('Tick the final approval first.');const ticket=approval.ticket;approval=null;invalid=true;message('Sending once. Waiting for group and match-card readback…');try{const labels=frozen.draw.pools.map(p=>({ids:p.players.map(q=>(frozen.mappings||state.mappings).find(m=>m.id===q.id)?.tpid),board:boardChoices[p.id]?.boards[0]||cardLabels[p.id]?.board,group:cardLabels[p.id]?.group}));const r=await send('poolsave',{ticket,confirmed:'true'});root.beautyStagePendingLabels=labels;frozen=null;message(r.message+' Loading saved competition…');const saved=await send('poolload',{refresh:'false'});workflow=saved.workflow;state=saved;renderSource();message(r.message+' Audit: '+r.audit+' · Receipt: '+r.receipt);renderDraw();const labelEpoch=epoch;try{await new Promise((resolve,reject)=>google.script.run.withSuccessHandler(resolve).withFailureHandler(reject).beautyStageLabelsTest(root.BeautyHubAuth.token(),labels));if(labelEpoch===epoch)root.beautyStagePendingLabels=null;}catch(e){if(labelEpoch===epoch)message(r.message+' Cast board labels pending. Open the stage screen from the Hub to retry labels only. Do not resend pools.');}}catch(e){renderDraw();throw Error(e.message+' Do not repeat a send until the event and audit have been inspected.');}}));save.dataset.blocked='true';save.disabled=true;check.addEventListener('change',()=>{save.dataset.blocked=String(!check.checked||!!approval?.unassignedEntries?.length);disable();});
+   const details=el('details',null,review);el('summary','Game settings',details);el('pre',JSON.stringify(approval.format?{groups:approval.setting,slutspel1:approval.format.set.t_setting,slutspel2:approval.format.set.s2_setting}:approval.setting,null,2),details);
+   const label=el('label',null,review),check=el('input',null,label);check.type='checkbox';label.appendChild(document.createTextNode(' These pools and settings are correct. Nakka editing pages are closed.'));
+   const save=button('SEND APPROVED TEST POOLS',review,()=>run(async send=>{if(!approval||!check.checked)throw Error('Review the pools and tick the final approval first.');const ticket=approval.ticket;approval=null;invalid=true;message('Sending once. Waiting for group and match-card readback…');try{const labels=frozen.draw.pools.map(p=>({ids:p.players.map(q=>(frozen.mappings||state.mappings).find(m=>m.id===q.id)?.tpid),board:boardChoices[p.id]?.boards[0]||cardLabels[p.id]?.board,group:cardLabels[p.id]?.group}));const r=await send('poolsave',{ticket,confirmed:'true'});root.beautyStagePendingLabels=labels;frozen=null;message(r.message+' Loading saved competition…');const saved=await send('poolload',{refresh:'false'});workflow=saved.workflow;state=saved;renderSource();message(r.message+' Audit: '+r.audit+' · Receipt: '+r.receipt);renderDraw();const labelEpoch=epoch;try{await new Promise((resolve,reject)=>google.script.run.withSuccessHandler(resolve).withFailureHandler(reject).beautyStageLabelsTest(root.BeautyHubAuth.token(),labels));if(labelEpoch===epoch)root.beautyStagePendingLabels=null;}catch(e){if(labelEpoch===epoch)message(r.message+' Cast board labels pending. Open the stage screen from the Hub to retry labels only. Do not resend pools.');}}catch(e){renderDraw();throw Error(e.message+' Do not repeat a send until the event and audit have been inspected.');}}));save.dataset.blocked='true';save.disabled=true;check.addEventListener('change',()=>{save.dataset.blocked=String(!check.checked||!!approval?.unassignedEntries?.length);disable();});
   }steps();disable();
  }
  function selectedBoardsSafe(){try{return selectedBoards();}catch(e){return [];}}
@@ -195,12 +203,27 @@
   const c=boardChoices[p.id];if(!c?.count)throw Error('Choose 1 or 2 boards for every four-player pool.');if(c.boards.slice(0,c.count).length!==c.count)throw Error('Choose a second available board.');
   return {poolId:p.id,boards:c.boards.slice(0,c.count)};
  })};}
+ function seedBoardChoices(pools,plan){
+  for(const pool of pools)if(!boardChoices[pool.id]){
+   const saved=workflow?.boardPlan?.assignments.find(a=>a.poolId===pool.id)?.boards;
+   const boards=saved||plan?.assignments.find(a=>a.poolId===pool.id)?.boards;
+   if(boards?.length)boardChoices[pool.id]={count:boards.length,boards:boards.slice()};
+  }
+ }
+ function queueNote(pools,parent){
+  try{
+   const plan=root.BeautyPoolBoards.matchPlan(pools,selectedBoards(),boardInput(pools).choices);
+   const used=new Set(plan.assignments.flatMap(a=>a.boards)).size,needed=panel.querySelector('[data-boards-needed]');needed.textContent=String(used);needed.setAttribute('aria-label',used+' boards used by this plan');
+   const waiting=plan.assignments.filter(a=>a.startWave>1);
+   if(waiting.length)el('p','Shared boards · '+waiting.map(a=>'Pool '+(pools.findIndex(p=>p.id===a.poolId)+1)+' on Board '+a.boards.join(' + ')+' from row '+a.startWave).join('; ')+'. These pools play later.',parent).className='pool-board-queue';
+  }catch(e){}
+ }
  function renderBoardChoices(pool,parent,primary){
-  if(!boardChoices[pool.id]){const saved=workflow?.boardPlan?.assignments.find(a=>a.poolId===pool.id)?.boards;boardChoices[pool.id]={count:saved?.length||(pool.players.length===4?0:1),boards:saved?.slice()||[primary]};}
+  if(!boardChoices[pool.id]){const pools=workflow?.draw.pools||frozen?.draw.pools;try{seedBoardChoices(pools,root.BeautyPoolBoards.defaults(pools,selectedBoards()));}catch(e){}if(!boardChoices[pool.id])boardChoices[pool.id]={count:1,boards:[primary]};}
   const c=boardChoices[pool.id],row=section('div','pool-board-options',parent);
   if(pool.players.length===4){const label=el('label','Play on',row),select=el('select',null,label);select.dataset.poolBoardCount=String(pool.id);
    for(const [v,t]of [[0,'Choose 1 or 2 boards'],[1,'1 board'],[2,'2 boards']])el('option',t,select).value=String(v);
-   select.value=String(c.count);select.addEventListener('change',()=>{c.count=Number(select.value);approval=null;startReview=null;renderDraw();});
+   select.value=String(c.count);select.addEventListener('change',()=>{c.count=Number(select.value);if(c.count===2&&!c.boards[1]){const next=selectedBoardsSafe().find(n=>n!==c.boards[0]);if(next)c.boards[1]=next;}approval=null;startReview=null;renderDraw();});
   }
   for(let i=0;i<(c.count||1);i++){
    const label=el('label',c.count===2?(i?'Board 2':'Board 1'):'Board',row),select=el('select',null,label);select.dataset.poolBoardNumber=String(pool.id)+':'+i;el('option','Choose board',select).value='';
@@ -216,7 +239,7 @@
  }
  function renderSaved(box){
   const grid=section('div','pool-grid',box),pools=workflow.draw.pools;
-  for(const [i,pool]of pools.entries())if(!boardChoices[pool.id]){const saved=workflow.boardPlan?.assignments.find(a=>a.poolId===pool.id)?.boards;boardChoices[pool.id]={count:saved?.length||(pool.players.length===4?0:1),boards:saved?.slice()||[selectedBoardsSafe()[i%selectedBoardsSafe().length]]};}
+  try{seedBoardChoices(pools,root.BeautyPoolBoards.defaults(pools,selectedBoards()));}catch(e){}
   const chosen=p=>{const c=boardChoices[p.id],boards=c?.boards.slice(0,c.count)||[];return c?.count&&boards.length===c.count&&new Set(boards).size===boards.length&&boards.every(b=>selectedBoardsSafe().includes(b))?boards:[];};
   const boardsMatch=pools.every(p=>JSON.stringify(chosen(p))===JSON.stringify(workflow.boardPlan?.assignments.find(a=>a.poolId===p.id)?.boards||[]));
   const startReady=workflow.canStart&&boardsMatch&&!sourceLoadFailed;
@@ -231,16 +254,17 @@
     const row=section('div','pool-player-name',el('li',null,players));el('span',player.name,row);
     const value=el('span',player.average===null?'—':averageLabel(player.average),row);value.className=player.average===null?'pool-unseeded':'pool-number';value.setAttribute('aria-label',player.average===null?'Unseeded':'Frozen average '+averageLabel(player.average));
    }
-   if(!workflow.running){renderBoardChoices(pool,card,boards?.[0]||selectedBoardsSafe()[i%selectedBoardsSafe().length]||1);const saved=workflow.boardPlan?.assignments.find(a=>a.poolId===pool.id)?.boards;const ready=!!saved&&JSON.stringify(saved)===JSON.stringify(boards);const status=el('span',ready?'✓ Boards saved':'! Save boards',card);status.className='pool-inline-status';status.dataset.ready=String(ready);status.setAttribute('role','status');}
+   {renderBoardChoices(pool,card,boards?.[0]||selectedBoardsSafe()[i%selectedBoardsSafe().length]||1);const saved=workflow.boardPlan?.assignments.find(a=>a.poolId===pool.id)?.boards;const ready=!!saved&&JSON.stringify(saved)===JSON.stringify(boards);const status=el('span',ready?'✓ Boards saved':'! Save boards',card);status.className='pool-inline-status';status.dataset.ready=String(ready);status.setAttribute('role','status');}
   }
+  queueNote(pools,box);
   const start=section('section','pool-approval',box);start.dataset.startSection='';
   el('h3','4 · Start event',start);
   const settings=panel.querySelector('[data-saved-plan-settings]');
-  if(workflow.format){const f=workflow.format,rules=el('details',null,settings);el('summary','Qualification rules',rules);el('p','3-player pool: 1st & 2nd → Slutspel 1; 3rd → Slutspel 2.',rules);el('p','4-player pool: 1st & 2nd → Slutspel 1; 3rd & 4th → Slutspel 2.',rules);el('p','Slutspel 1: '+f.stage1.qualifiers+' Players · Slutspel 2: '+f.stage2.qualifiers+' Players',rules);}
+  if(workflow.format){const f=workflow.format,rules=el('details',null,settings);el('summary','Qualification rules',rules);if(f.stage1.enabled!==false&&f.stage2.enabled!==false){el('p','3-player pool: 1st & 2nd → Slutspel 1; 3rd → Slutspel 2.',rules);el('p','4-player pool: 1st & 2nd → Slutspel 1; 3rd & 4th → Slutspel 2.',rules);}for(const [key,title]of [['stage1','Slutspel 1'],['stage2','Slutspel 2']])if(f[key].enabled!==false)el('p',title+': '+f[key].qualifiers+' players'+(f.stage1.enabled===false||f.stage2.enabled===false?' · Top two per group':''),rules);}
   if(workflow.boardPlan)renderMatchPlan(workflow.boardPlan,workflow.draw,settings);
   if(workflow.startPending){el('p','Starting TEST event… Checking Nakka.',start);steps();disable();return;}
-  if(!workflow.running){const saveBoards=button('SAVE BOARDS & MATCH PLAN',start,()=>run(async send=>{const r=await send('poolboardplan',{boardPlan:JSON.stringify(boardInput(workflow.draw.pools))});workflow=r.workflow;startReview=null;renderDraw();message(r.message);}));saveBoards.dataset.blocked=String(sourceLoadFailed);}
-  if(workflow.running){el('p','Competition is running in Nakka. Open Beauty Live from the sidebar.',start);if(root.BeautyTournamentControl)button('TOURNAMENT CONTROL',start,()=>root.BeautyTournamentControl.open());steps();disable();return;}
+  if(!workflow.running){const saveBoards=button('SAVE BOARDS & MATCH PLAN',start,()=>run(async send=>{const r=await send('poolboardplan',{boardPlan:JSON.stringify(boardInput(workflow.draw.pools)),...(workflow.boardVersion?{boardVersion:workflow.boardVersion}:{})});workflow=r.workflow;startReview=null;renderDraw();message(r.message);}));saveBoards.dataset.blocked=String(sourceLoadFailed);}
+  if(workflow.running){el('p','Competition is running in Nakka. Open Live from the sidebar. Keep Nakka’s Automatic progress window open for automatic board assignment.',start);steps();disable();return;}
   if(!startReady){el('p',sourceLoadFailed?'! Reload Hub to check saved boards':workflow.startUncertain?'Start is unverified. Inspect the event and its audit before another action.':'! Save boards first',start);steps();disable();return;}
   const begin=button('START EVENT — TEST',start,()=>run(async send=>{
    const result=await send('poolstartprepare',{});startReview=result;renderDraw();
@@ -251,10 +275,10 @@
     if(!check.checked||!startReview)return;const ticket=startReview.ticket;startReview=null;workflow.canStart=false;workflow.startPending=true;renderDraw();message('Starting once. Checking Nakka…');
     try{const result=await send('poolstart',{ticket,confirmed:'true'});workflow.running=true;workflow.event.status=30;renderSource();message(result.message+' Audit: '+result.audit);}catch(e){workflow.startUncertain=true;throw e;}finally{workflow.startPending=false;renderDraw();}
    }));confirm.dataset.startConfirm='';confirm.dataset.blocked='true';check.addEventListener('change',()=>{confirm.dataset.blocked=String(!check.checked);disable();});
-   button('CANCEL START',start,()=>{startReview=null;renderDraw();});
+   button('BACK TO BOARDS',start,()=>{startReview=null;renderDraw();message('Start review cleared. Check boards and settings before reviewing Start again.');panel.querySelector('[data-pool-draw]')?.scrollIntoView?.({block:'start'});panel.querySelector('[data-start-prepare]')?.focus();});
   }steps();disable();
  }
- async function load(send,refresh){try{state=await send('poolload',{refresh:String(refresh)});sourceLoadFailed=false;}catch(e){sourceLoadFailed=true;if(state?.stats)state.stats.fresh=false;approval=null;startReview=null;renderSource();renderDraw();throw e;}workflow=state.workflow||null;if(workflow)boardChoices={};if(workflow?.boardPlan&&!selectedBoardsSafe().length)host.querySelector('[data-boards]').value=[...new Set(workflow.boardPlan.assignments.flatMap(a=>a.boards))].sort((a,b)=>a-b).join(', ');startReview=null;approval=null;if(frozen){invalid=true;invalidReason='Statistics or identity mappings were reloaded. Generate a new preview.';}renderSource();renderDraw();message(workflow?(workflow.running?'Competition is running. Open Beauty Live to follow play.':(!selectedBoardsSafe().length?'! Select available boards above':'')):'Review player mappings before generating a draw. '+(state.stats?.message||''));}
+ async function load(send,refresh){try{state=await send('poolload',{refresh:String(refresh)});sourceLoadFailed=false;}catch(e){sourceLoadFailed=true;if(state?.stats)state.stats.fresh=false;approval=null;startReview=null;renderSource();renderDraw();throw e;}workflow=state.workflow||null;if(workflow)boardChoices={};if(workflow?.boardPlan&&!selectedBoardsSafe().length)host.querySelector('[data-boards]').value=[...new Set(workflow.boardPlan.assignments.flatMap(a=>a.boards))].sort((a,b)=>a-b).join(', ');startReview=null;approval=null;if(frozen){invalid=true;invalidReason='Statistics or identity mappings were reloaded. Generate a new preview.';}renderSource();renderDraw();message(state.knockoutOnly?'Slutspel only. Assign players and start in Nakka Control.':workflow?(workflow.running?'Competition is running. Open Live to follow play.':(!selectedBoardsSafe().length?'! Select available boards above':'')):'Review player mappings before generating a draw. '+(state.stats?.message||''));}
  function mount(dialog){
   if(BeautyHubServices.mode!=='test')return;host=dialog;panel=section('section','seeded-pool-planner pool-planner-workspace',host);
   const header=section('header','pool-page-heading',panel),intro=el('div',null,header);el('h2','Pool Planner',intro);el('p','Choose boards → review players → make pools → choose qualifiers → send → start.',intro);

@@ -1,0 +1,21 @@
+# Integration contract — not enabled
+
+The host must provide authenticated staff/session context and persist both guides and operation journals. A guide is approved once with the full event membership, stage settings and pool/rank positions; later pool completions fill those positions instead of reseeding the bracket. Never infer a bye from a temporarily empty native slot. Only a structurally empty guide subtree is a bye.
+
+The provider adapter must create a consistent snapshot of `event`, `standings`, `completion`, normalized `active` match identities, match identities and autopilot configuration. Read revisions around the group of requests; reject drift. Normalize live match identities from actual native fixtures before trusting the engine's active-match guard. Bound response sizes, pagination and freshness. Do not pass raw authenticated tournament data to the browser: it may contain private administration/password fields. A public projection and permission checks are required before host integration.
+
+All provider credentials stay server-side. Use a fixed approved origin, explicit event allowlist and exact endpoint/request schemas. API documentation supplies methods; it does not prove permission or native behaviour for a specific account. There is currently no network adapter or credentials configuration in this project, and the local UI only reaches a synthetic loopback server.
+
+The host supplies coordinator callbacks: `read`, `plan`, `write`, `verify`, `authorize`, and a store exposing `assertClear`, atomic `claim`, and durable `verified`. A claim records preimage and proposal before writing. Use one host-wide writer for a given event; do not run a second scheduler alongside Nakka autopilot. External changes must be treated as conflicts. Updates with no optimistic provider check (badges/config) retain a race window between read and write: native qualification and single-controller operating policy are required; the local coordinator does not lock Nakka Admin or other clients.
+
+`ATTEMPTED` operations block further event mutations across process restarts. Recovery is manual in this version: inspect native event and audit, compare with approved proposal, then implement explicit reconciliation before enabling production. Never delete a lock merely because a browser timed out. Reconciliation, backup restoration and compensation are not yet implemented. A successful local HTTP response is not sufficient proof of a native mutation.
+
+Result editing must use Nakka's result API so the provider handles progression. Direct result-field replacement is not a supported shortcut. Current result/unlock proposal builders carry `requiresNativeQualification`; the coordinator refuses them. Do not remove this gate without native acceptance.
+
+Proposed future host adapter layout: staff-only API → coordinator → validated native adapter; separate read-only UI projection and spectator feed. The existing Hub can later launch or embed the approved module, supplying its session through a reviewed server boundary. No copied credentials in URLs, browser JS or local storage. Nothing is currently installed in the Hub.
+
+## Guide persistence added in 0.2.0
+
+The standalone guide store uses atomic revision checks, a single-writer lock, immutable revision records and an atomic current-head replacement. The coordinator reviews and audits guide changes as local operations, separately from native bracket writes. An assigned opening match is locked against guide changes; moving byes after assignment is refused. Persisted object key order is irrelevant to comparisons. Manual swaps may introduce pool rematches; review displays an explicit warning. The organiser must accept the whole guide revision before it is saved.
+
+For a persistent local rehearsal guide, set EVENT_MANAGER_DATA_DIR to a dedicated directory. Reopening retains the approved guide and its history, but the rehearsal event tables/scores are newly synthetic at each process start. This is guide persistence, not complete event persistence or a production state database. Uncertain operation locks also remain in that directory. Native host guide storage, recovery reconciliation, multi-user guide editing and full event persistence remain integration work.

@@ -38,7 +38,7 @@ test('Nakka transfer transport uses authenticated allowlisted routes and rejects
 
 test('Named troubleshooting opens one preselected guarded preview without an automatic save',async()=>{const u=ui();u.c.window.BeautyNakkaTransfer.open('Anna');assert.equal(u.calls.length,1);assert.equal(u.calls[0].searchParams.get('player'),'Anna');u.pending.shift().resolve(preview);await new Promise(setImmediate);assert.equal(u.find('button','ADD THIS PLAYER TO TEST EVENT').disabled,true);assert.equal(u.calls.length,1);});
 
-const recovery={success:false,code:'TRANSFER_REVIEW_REQUIRED',error:'Previously added, now missing',recovery:{kind:'CONFIRMED_ENTRY_MISSING',player:'Anna',event:{id:'t_QHaG_7792',title:'Beauty Registration TEST event DO NOT USE LIVE',date:'2026-10-27'},identity:{name:'Anna',lpid:'a123'}}};
+const recovery={success:false,code:'TRANSFER_REVIEW_REQUIRED',error:'Previously added, now missing',event:{id:'t_QHaG_7792'},recovery:{kind:'CONFIRMED_ENTRY_MISSING',player:'Anna',event:{id:'t_QHaG_7792',title:'Beauty Registration TEST event DO NOT USE LIVE',date:'2026-10-27'},identity:{name:'Anna',lpid:'a123'}}};
 async function recover(u,result=recovery){
  u.open();const s=u.find('select');s.value='Anna';s.fire('change');const p=u.find('button','CHECK PLAYER').fire();u.pending.shift().resolve(result);await p;
 }

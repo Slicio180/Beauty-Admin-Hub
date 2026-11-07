@@ -1,0 +1,3 @@
+# Project boundaries
+
+This standalone Event Manager development project must remain separate from the existing Hub and Monday release work. Owner authorized autonomous local development, tests and saved checkpoints. Do not modify installed Hub, Google project, production or real Nakka event data. No GitHub push without owner approval. Keep an honest implemented/planned/native-qualified inventory; do not present synthetic rehearsal as live integration or full Nakka parity. Plain labels, black/gold visual direction. Use Nakka as the scoring/progression and autopilot engine. Maintain tests, audit records and resumable source checkpoints. Provider writes and integration require a separate reviewed native test stage.

@@ -1,3 +1,7 @@
+# Latest checkpoint — 7 November 2026
+
+See [current checkpoint](docs/handoff/GITHUB-CHECKPOINT-20261107.md). This is saved development work, including unapproved cleanup UI; not a production release.
+
 # Beauty — START HERE
 
 Updated: 28 October 2026, Europe/Stockholm.

@@ -1,0 +1,490 @@
+[
+  {
+    "id": "EM-001",
+    "file": "tests/autopilot.test.cjs",
+    "name": "automatic rehearsal assigns distinct boards and retains waiting queue",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-002",
+    "file": "tests/autopilot.test.cjs",
+    "name": "repeated automatic tick does not duplicate or reshuffle existing badges",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-003",
+    "file": "tests/autopilot.test.cjs",
+    "name": "finished match releases board to the next waiting match",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-004",
+    "file": "tests/autopilot.test.cjs",
+    "name": "board and player break prevents early reuse and expires on rehearsal clock",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-005",
+    "file": "tests/autopilot.test.cjs",
+    "name": "pause stops new assignment and preserves matches already assigned",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-006",
+    "file": "tests/autopilot.test.cjs",
+    "name": "busy players cannot receive another badge",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-007",
+    "file": "tests/autopilot.test.cjs",
+    "name": "unresolved opponents byes and finals are never auto-badged",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-008",
+    "file": "tests/autopilot.test.cjs",
+    "name": "boards occupied in round robin or another stage are not reused",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-009",
+    "file": "tests/autopilot.test.cjs",
+    "name": "rehearsal scheduler refuses real events and missing active identities",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-010",
+    "file": "tests/autopilot.test.cjs",
+    "name": "enabled config is not reported as running without recent service status",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-011",
+    "file": "tests/autopilot.test.cjs",
+    "name": "pause patch changes only the chosen enable flag",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-012",
+    "file": "tests/autopilot.test.cjs",
+    "name": "resume allows shared stages while pause preserves invalid legacy configuration",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-013",
+    "file": "tests/autopilot.test.cjs",
+    "name": "manual badge updates require pausing the owning autopilot",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-014",
+    "file": "tests/autopilot.test.cjs",
+    "name": "existing assigned badge keeps its players busy in later candidate matches",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-015",
+    "file": "tests/autopilot.test.cjs",
+    "name": "selected round limit holds later matches and final stays manual",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-016",
+    "file": "tests/autopilot.test.cjs",
+    "name": "finished badges can clear without losing recorded match completion",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-017",
+    "file": "tests/autopilot.test.cjs",
+    "name": "shared stage ranges never double book and alternate when one board is released",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-018",
+    "file": "tests/autopilot.test.cjs",
+    "name": "identical and partially shared ranges respect occupied boards and stage pause independently",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-019",
+    "file": "tests/coordinator.test.cjs",
+    "name": "review is read-only; confirmed operation is written and audited once",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-020",
+    "file": "tests/coordinator.test.cjs",
+    "name": "missing approval expired session and changed event never write",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-021",
+    "file": "tests/coordinator.test.cjs",
+    "name": "uncertain operation blocks all further writes for event even after coordinator restart",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-022",
+    "file": "tests/coordinator.test.cjs",
+    "name": "two prepared tickets serialize and stale second confirmation refuses mutation",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-023",
+    "file": "tests/coordinator.test.cjs",
+    "name": "file store atomically blocks competing claims for the same event",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-024",
+    "file": "tests/coordinator.test.cjs",
+    "name": "audit failure prevents provider write and native qualification gate cannot be bypassed",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-025",
+    "file": "tests/coordinator.test.cjs",
+    "name": "unexpected provider readback retains uncertain journal and event lock",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-026",
+    "file": "tests/coordinator.test.cjs",
+    "name": "a new reviewed revision can repeat a verified configuration without audit-key collision",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-027",
+    "file": "tests/guide-editor.test.cjs",
+    "name": "manual guide swap preserves members rules and bracket state",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-028",
+    "file": "tests/guide-editor.test.cjs",
+    "name": "guide editing rejects stale revision and duplicate missing or wrong-stage qualifier",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-029",
+    "file": "tests/guide-editor.test.cjs",
+    "name": "matches with assigned players active games or results cannot be re-guided",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-030",
+    "file": "tests/guide-editor.test.cjs",
+    "name": "guide cannot silently adopt changed membership or settings",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-031",
+    "file": "tests/guide-editor.test.cjs",
+    "name": "guide readback checks revision content and unchanged native event",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-032",
+    "file": "tests/guide-editor.test.cjs",
+    "name": "guide store survives reopening with immutable history and stale-write refusal",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-033",
+    "file": "tests/guide-editor.test.cjs",
+    "name": "guide store rejects another event or actor and refuses an existing lock",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-034",
+    "file": "tests/match-control.test.cjs",
+    "name": "result proposal uses native result API and remains blocked pending qualification",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-035",
+    "file": "tests/match-control.test.cjs",
+    "name": "unfinished tied invalid and excessive result scores are rejected",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-036",
+    "file": "tests/match-control.test.cjs",
+    "name": "active and already recorded match requires separate correction review",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-037",
+    "file": "tests/match-control.test.cjs",
+    "name": "unsupported round overrides and set formats never guess a result format",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-038",
+    "file": "tests/match-control.test.cjs",
+    "name": "release proposal requires exact provider-owned match identity",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-039",
+    "file": "tests/operations.test.cjs",
+    "name": "numeric board parsing rejects overlap malformed descending and out of range",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-040",
+    "file": "tests/operations.test.cjs",
+    "name": "badge plan targets exact match and real occupied boards block another match",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-041",
+    "file": "tests/operations.test.cjs",
+    "name": "badge cannot target unresolved bye odd slot or active match",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-042",
+    "file": "tests/operations.test.cjs",
+    "name": "autopilot patch preserves other stages and allows shared enabled board sets",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-043",
+    "file": "tests/operations.test.cjs",
+    "name": "autopilot rejects invalid break round and wrong target reads",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-044",
+    "file": "tests/operations.test.cjs",
+    "name": "badge readback verifies changed match and preserves unrelated data",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-045",
+    "file": "tests/operations.test.cjs",
+    "name": "autopilot readback preserves per-stage extensions and unrelated settings",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-046",
+    "file": "tests/qualification.test.cjs",
+    "name": "one finished pool fills only its reserved positions while other pools play",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-047",
+    "file": "tests/qualification.test.cjs",
+    "name": "later completed pools preserve earlier players and progression",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-048",
+    "file": "tests/qualification.test.cjs",
+    "name": "unresolved pool positions are never promoted as structural byes",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-049",
+    "file": "tests/qualification.test.cjs",
+    "name": "real bye advances only to the next required round",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-050",
+    "file": "tests/qualification.test.cjs",
+    "name": "unfinished selected pool cannot be assigned",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-051",
+    "file": "tests/qualification.test.cjs",
+    "name": "duplicate completion clicks do not produce another mutation",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-052",
+    "file": "tests/qualification.test.cjs",
+    "name": "changed membership ambiguous ranks and conflicting existing positions are refused",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-053",
+    "file": "tests/qualification.test.cjs",
+    "name": "started match prevents filling its pair",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-054",
+    "file": "tests/qualification.test.cjs",
+    "name": "guides retain all qualifiers exactly once across mixed larger draws",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-055",
+    "file": "tests/qualification.test.cjs",
+    "name": "invalid guide duplicates missing qualifiers and wrong stage refuse assignment",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-056",
+    "file": "tests/qualification.test.cjs",
+    "name": "approved guide rejects another event reordered pools or changed settings",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-057",
+    "file": "tests/qualification.test.cjs",
+    "name": "result-bearing pairs cannot receive new qualifiers",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-058",
+    "file": "tests/server.test.cjs",
+    "name": "loopback rehearsal requires session and same-origin JSON; no external target accepted",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-059",
+    "file": "tests/server.test.cjs",
+    "name": "late pool finish can be reviewed and appended without clearing earlier assignment",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-060",
+    "file": "tests/server.test.cjs",
+    "name": "manual guide review saves revision, survives reopening and blocks editing assigned matches",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  },
+  {
+    "id": "EM-061",
+    "file": "tests/server.test.cjs",
+    "name": "automatic rehearsal assigns queues reuses boards and pauses without clearing active badges",
+    "result": "PASS",
+    "evidence": "evidence/tests.tap",
+    "verification": "LOCAL SYNTHETIC ONLY"
+  }
+]

@@ -1,7 +1,6 @@
 /* Read-only competition projection. Nakka alone supplies results/advancement. */
 (function(root){
  'use strict';
- const target='t_QHaG_7792';
  const fail=()=>{throw Error('Unsupported or mismatched TEST stage data.');};
  const number=v=>typeof v==='number'&&Number.isFinite(v)&&v>=0?v:null;
  function badge(t,key){
@@ -24,7 +23,8 @@
   if(!Number.isInteger(n)||n<1||n>99||![0,1].includes(selected.drawMode))return null;
   return selected.drawMode===1?'Limit '+n+' '+(selected.limit===1?'legs':'sets')+' · draws allowed':'First to '+n+' '+(selected.limit===1?'legs':'sets');
  }
- function project(tournament,standings,schedule){
+ function project(tournament,standings,schedule,target='t_QHaG_7792'){
+  if(!/^t_[A-Za-z0-9_]{1,80}$/.test(target))fail();
   const t=tournament?.tournament;
   if(tournament?.result!==0||!t||t.tdid!==target||t.lgid!=='lg_tM2v_3523'||t.team_games===1||!Array.isArray(t.entry_list)||t.entry_list.length>1000)fail();
   if(standings?.result!==0||standings.tdid!==target||!Array.isArray(standings.groups)||standings.groups.length>1000)fail();
@@ -62,6 +62,7 @@
   });
   const knockouts=[];
   for(const kind of ['t','s2']){
+   if(t[kind+'_setting']?.tournament===0)continue;
    const table=t[kind+'_table'];if(table==null)continue;if(!Array.isArray(table)||table.length>12)fail();
    const rounds=table.map((players,round)=>{
     if(!Array.isArray(players)||players.length>1024)fail();
@@ -82,7 +83,7 @@
    knockouts.push({kind,rounds,thirdPlace});
   }
   // No admin IDs, passwords, consent, messages or private provider fields.
-  return {eventId:target,title:String(t.title||''),eventDate:number(t.t_date),updateTime:number(t.updateTime),status:t.status,pools,knockouts};
+  return {eventId:target,title:String(t.title||''),eventDate:number(t.t_date),updateTime:number(t.updateTime),status:t.status,pools,knockouts,views:{pools:t.rr_setting?.round_robin===1||t.lg_setting?.league===1||((t.rr_setting?.round_robin!==0&&t.lg_setting?.league!==0)&&pools.length>0),t:t.t_setting?.tournament!==0&&(t.t_setting?.tournament===1||knockouts.some(s=>s.kind==='t')),s2:t.s2_setting?.tournament!==0&&(t.s2_setting?.tournament===1||knockouts.some(s=>s.kind==='s2'))}};
  }
  const api=Object.freeze({project});if(typeof module==='object'&&module.exports)module.exports=api;else root.BeautyNakkaStages=api;
 })(typeof globalThis==='object'?globalThis:this);

@@ -56,7 +56,7 @@ const BeautyHubServices = (() => {
     if (options.signal?.aborted) throw new Error('Aborted');
     const url = new URL(raw);
     const page = url.searchParams.get('page');
-    const keys = { poolcontrol:['page'],poolqualifyprepare:['page'],poolqualifysave:['page','ticket','confirmed'],poolload:['page','refresh'],pooldraw:['page','bindings','reviewed','sizes'],pooladjust:['page','ticket','change'],poolprepare:['page','ticket','format'],poolsave:['page','ticket','confirmed'],poolstartprepare:['page'],poolboardplan:['page','boardPlan'],poolstart:['page','ticket','confirmed'], removepreview:['page','player','eventDate'], removesave:['page','player','eventDate','ticket','confirmed'], hubdata: ['page'], attentionrefresh: ['page'], eventcontrol: ['page'], eventprepare: ['page','date','expectedDate'], eventsave: ['page','date','expectedDate','version','confirmed'], nakkahealth: ['page'], nakkaevent: ['page'], nakkacompare: ['page'], nakkatransferpreview:['page','player'], nakkatransfersave:['page','player','ticket','confirmed'], hubregister: ['page', ...allowed], hubstatus: ['page', 'player', 'status', 'expectedStatus', 'eventDate'] }[page];
+    const keys = { cleanuppreview:['page'],cleanupsave:['page','ticket','confirmed'],eveningsetup:['page'],eveningprepare:['page','settings','version'],eveningsave:['page','ticket','confirmed'],nakkacreaterecover:['page'],nakkacreateprepare:['page','title','settings'],nakkacreateconfirm:['page','ticket','confirmed'], poolcontrol:['page'],poolqualifyprepare:['page'],poolqualifysave:['page','ticket','confirmed'],poolload:['page','refresh'],pooldraw:['page','bindings','reviewed','sizes'],pooladjust:['page','ticket','change'],poolprepare:['page','ticket','format','boardPlan'],poolsave:['page','ticket','confirmed'],poolstartprepare:['page'],poolboardplan:['page','boardPlan','boardVersion'],poolstart:['page','ticket','confirmed'], removepreview:['page','player','eventDate'], removesave:['page','player','eventDate','ticket','confirmed'], hubdata: ['page'], attentionrefresh: ['page'], eventcontrol: ['page'], eventprepare: ['page','date','expectedDate'], eventsave: ['page','date','expectedDate','version','confirmed'], nakkahealth: ['page'], nakkaevent: ['page'], nakkacompare: ['page'], nakkatransferpreview:['page','player'], nakkatransfersave:['page','player','ticket','confirmed'], hubregister: ['page', ...allowed], hubstatus: ['page', 'player', 'status', 'expectedStatus', 'eventDate'] }[page];
     if (url.origin !== 'https://beauty.invalid' || url.pathname !== '/hub' ||
         url.username || url.password || url.hash || (options.method && options.method !== 'GET') ||
         !keys || [...url.searchParams.keys()].some(key => !keys.includes(key) || url.searchParams.getAll(key).length !== 1)) {
@@ -72,7 +72,7 @@ const BeautyHubServices = (() => {
       if(data?.code==='REGISTRATION_DAY_MISMATCH')return {ok:true,json:async()=>({...data,error:'Set the Hub event date to today before using this weekly TEST registration. No registration was saved.'})};
       return response(data);
     }
-    if (['poolcontrol','poolqualifyprepare','poolqualifysave','poolload','pooldraw','pooladjust','poolprepare','poolsave','poolstartprepare','poolstart','poolboardplan','nakkatransferpreview','nakkatransfersave','removepreview','removesave'].includes(page)) {
+    if (['cleanuppreview','cleanupsave','eveningsetup','eveningprepare','eveningsave','nakkacreaterecover','nakkacreateprepare','nakkacreateconfirm','poolcontrol','poolqualifyprepare','poolqualifysave','poolload','pooldraw','pooladjust','poolprepare','poolsave','poolstartprepare','poolstart','poolboardplan','nakkatransferpreview','nakkatransfersave','removepreview','removesave'].includes(page)) {
       // Server messages in this route are fixed strings; raw provider errors
       // never enter the response. Preserve the uncertain-operation guidance.
       const data=await rpc(page,input);
@@ -86,15 +86,15 @@ const BeautyHubServices = (() => {
 // TEST-only opener: host URL comes from the guarded Apps Script service.
 if (typeof document !== 'undefined') document.addEventListener('DOMContentLoaded', () => {
  document.addEventListener('beauty-hub-locked',()=>document.getElementById('hubRegistrationResult')?.remove());
- const button=[...document.querySelectorAll('.sidebar button')].find(b=>b.textContent.trim()==='Beauty Live');
+ const button=[...document.querySelectorAll('.sidebar button')].find(b=>b.textContent.trim()==='Live');
  if(!button)return;
  button.addEventListener('click',()=>{
-  let token,generation;try{token=BeautyHubAuth.token();generation=BeautyHubAuth.generation();}catch{alert('Sign in before opening Beauty Live.');return;}
+  let token,generation;try{token=BeautyHubAuth.token();generation=BeautyHubAuth.generation();}catch{alert('Sign in before opening Live.');return;}
   const tab=window.open('about:blank','_blank');
-  if(!tab){alert('Allow pop-ups to open Beauty Live.');return;}
+  if(!tab){alert('Allow pop-ups to open Live.');return;}
   window.BeautyHubNavigation?.activate(button);
-  tab.opener=null;tab.document.body.textContent='Opening Beauty Live TEST…';
-  const fail=()=>{tab.close();if(BeautyHubAuth.isCurrent(generation)){window.BeautyHubNavigation?.dashboard();alert('Could not open Beauty Live TEST. Check the selected TEST event and session.');}};
+  tab.opener=null;tab.document.body.textContent='Opening Live TEST…';
+  const fail=()=>{tab.close();if(BeautyHubAuth.isCurrent(generation)){window.BeautyHubNavigation?.dashboard();alert('Could not open Live TEST. Check the selected TEST event and session.');}};
   const current=()=>BeautyHubAuth.isCurrent(generation)&&!tab.closed;
   const open=()=>google.script.run.withSuccessHandler(url=>{
    if(!current()){tab.close();return;}

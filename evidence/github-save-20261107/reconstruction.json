@@ -1,0 +1,77 @@
+[
+  {
+    "package": "Hub-Combined-TEST-20261106.zip",
+    "files": 46,
+    "sha256": "676e21e4a1a20e5d06e830a849983dccc16564cf16473b8a8819f068178e8f5b"
+  },
+  {
+    "package": "Hub-Date-Events-TEST-20261106.zip",
+    "files": 44,
+    "sha256": "92bf31c1d70d2326be74c1e2deaa12761335606c6866546f0dbc2e7bda5e5e53"
+  },
+  {
+    "package": "Hub-Live-Fixes-TEST-20261106.zip",
+    "files": 20,
+    "sha256": "a80dcecafd2061b7376dc33db34b5bac39fc21499da1ba981660925bb62d9ddc"
+  },
+  {
+    "package": "Hub-Live-Text-TEST-20261106.zip",
+    "files": 3,
+    "sha256": "97d3cf5c6b90b5a095f75ed64757caa20a5da7a7b60c2586699817b14180cd62"
+  },
+  {
+    "package": "Hub-Live-Headings-TEST-20261106.zip",
+    "files": 5,
+    "sha256": "a711a0b83f705c5a717b82e48327b5101678134c664731ed9a57f941a8640c0e"
+  },
+  {
+    "package": "Hub-Live-Badges-TEST-20261106.zip",
+    "files": 8,
+    "sha256": "186dd759f914e48fe4a2c3e8ea030fc08aa7917b5cd2e289b532511d8e57953a"
+  },
+  {
+    "package": "Hub-Workflow-Review-TEST-20261106.zip",
+    "files": 13,
+    "sha256": "312f08e8fd15ec0d3da94135dccfd6daec18fd21362f26885e1c8267d07c2c4b"
+  },
+  {
+    "package": "Hub-Create-Match-Settings-TEST-20261106.zip",
+    "files": 13,
+    "sha256": "4b8f4d91333fe6f8c64608ca1d441ee85883190a5430bb74303b2ea81c23c3c8"
+  },
+  {
+    "package": "Hub-Event-Formats-TEST-20261106.zip",
+    "files": 20,
+    "sha256": "b57a16b5a758618a7891d7b97e0f7d858ec4e30643d78bd7b4ed088b60390898"
+  },
+  {
+    "package": "Hub-Create-Readback-Fix-TEST-20261106.zip",
+    "files": 12,
+    "sha256": "9f5473725f9e3d5f5f1b437bccb74119432d01977b0746ba136b944ce5a53956"
+  },
+  {
+    "package": "Hub-Evening-Setup-TEST-20261106.zip",
+    "files": 20,
+    "sha256": "22eaae4214f4baba6cf2d380535688526c75a09bd50c4268d49efe46a8a0e91f"
+  },
+  {
+    "package": "Hub-Evening-Direct-Settings-TEST-20261106.zip",
+    "files": 6,
+    "sha256": "8e6670c9bda07b5c8f2291e390d12f576419135ddcaa477b432de2fd028cbb64"
+  },
+  {
+    "package": "Hub-Monday-Preset-TEST-20261107.zip",
+    "files": 8,
+    "sha256": "9c444cf41989eeb7f63baa5b55bf2d4f168057255459da992d0cccfcead2f54d"
+  },
+  {
+    "package": "Hub-Clean-Creation-TEST-20261107.zip",
+    "files": 5,
+    "sha256": "0cd26dc48619137d69905dba7ef1a54a5601e874df1e37ed8ffd72bd610ad330"
+  },
+  {
+    "package": "Hub-Test-Data-Cleanup-20261107.zip",
+    "files": 12,
+    "sha256": "f1e5acbae3a48c03c4a058dfa23845d3b0bf741a85b02ca73b3a8e699005d2c1"
+  }
+]

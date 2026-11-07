@@ -23,7 +23,7 @@ function fixture(o={}){
   values["TONIGHT'S PLAYERS"]=[values["TONIGHT'S PLAYERS"][0],...rows,...blank(99-rows.length,6)];
  }
  const ss={getSpreadsheetTimeZone:()=> 'Europe/Berlin',getSheetByName:n=>sheets[n],insertSheet:name=>{values[name]=[];return {getRange:(r,c,h,w)=>range(name,r,c,h,w)};}};
- const context={console,Date,Set,Map,BEAUTY_IDENTITY_WRITES_ENABLED_:true,SHEET_ID:'test-sheet',beautyHubRequestToken_:'session',
+ const context={beautyHubActiveTestTarget_:()=>({id:'t_QHaG_7792',title:'Beauty Registration TEST event DO NOT USE LIVE'}),console,Date,Set,Map,BEAUTY_IDENTITY_WRITES_ENABLED_:true,SHEET_ID:'test-sheet',beautyHubRequestToken_:'session',
   beautyHubTestGuard_:()=>{if(o.wrongProject)throw Error('wrong project');},
   beautyHubAuthRequire_:()=>{if(authExpired){const e=Error('auth');e.name='HubAuthError';throw e;}return {uid:'owner',sessionBinding:'session'};},
   SpreadsheetApp:{openById:id=>{assert.equal(id,'test-sheet');return ss;},flush},

@@ -1,0 +1,89 @@
+{
+  "status": "Historical artifacts, not permission to install",
+  "packages": [
+    {
+      "name": "Hub-Clean-Creation-TEST-20261107.zip",
+      "sha256": "0cd26dc48619137d69905dba7ef1a54a5601e874df1e37ed8ffd72bd610ad330",
+      "bytes": 199966
+    },
+    {
+      "name": "Hub-Create-Match-Settings-TEST-20261106.zip",
+      "sha256": "4b8f4d91333fe6f8c64608ca1d441ee85883190a5430bb74303b2ea81c23c3c8",
+      "bytes": 1337728
+    },
+    {
+      "name": "Hub-Create-Readback-Fix-TEST-20261106.zip",
+      "sha256": "9f5473725f9e3d5f5f1b437bccb74119432d01977b0746ba136b944ce5a53956",
+      "bytes": 1335918
+    },
+    {
+      "name": "Hub-Evening-Direct-Settings-TEST-20261106.zip",
+      "sha256": "8e6670c9bda07b5c8f2291e390d12f576419135ddcaa477b432de2fd028cbb64",
+      "bytes": 1216799
+    },
+    {
+      "name": "Hub-Evening-Setup-TEST-20261106.zip",
+      "sha256": "22eaae4214f4baba6cf2d380535688526c75a09bd50c4268d49efe46a8a0e91f",
+      "bytes": 1443306
+    },
+    {
+      "name": "Hub-Event-Formats-TEST-20261106.zip",
+      "sha256": "b57a16b5a758618a7891d7b97e0f7d858ec4e30643d78bd7b4ed088b60390898",
+      "bytes": 3873766
+    },
+    {
+      "name": "Hub-Live-Badges-TEST-20261106.zip",
+      "sha256": "186dd759f914e48fe4a2c3e8ea030fc08aa7917b5cd2e289b532511d8e57953a",
+      "bytes": 2955940
+    },
+    {
+      "name": "Hub-Live-Headings-TEST-20261106.zip",
+      "sha256": "a711a0b83f705c5a717b82e48327b5101678134c664731ed9a57f941a8640c0e",
+      "bytes": 2845906
+    },
+    {
+      "name": "Hub-Live-Text-TEST-20261106.zip",
+      "sha256": "97d3cf5c6b90b5a095f75ed64757caa20a5da7a7b60c2586699817b14180cd62",
+      "bytes": 2474816
+    },
+    {
+      "name": "Hub-Monday-Preset-TEST-20261107.zip",
+      "sha256": "9c444cf41989eeb7f63baa5b55bf2d4f168057255459da992d0cccfcead2f54d",
+      "bytes": 1248213
+    },
+    {
+      "name": "Hub-Plain-Labels-TEST-20261106.zip",
+      "sha256": "ee177d605534180744aa6773ddd5c7399abf27c2001c46995207babbf439c12c",
+      "bytes": 2014736
+    },
+    {
+      "name": "Hub-Test-Data-Cleanup-20261107.zip",
+      "sha256": "f1e5acbae3a48c03c4a058dfa23845d3b0bf741a85b02ca73b3a8e699005d2c1",
+      "bytes": 1322981
+    },
+    {
+      "name": "Hub-Workflow-Review-TEST-20261106.zip",
+      "sha256": "312f08e8fd15ec0d3da94135dccfd6daec18fd21362f26885e1c8267d07c2c4b",
+      "bytes": 1277623
+    },
+    {
+      "name": "Hub-Auto-Pool-Boards-TEST-20261106.zip",
+      "sha256": "a574b11dbc8db8843df5dc5e4f323c37f747cc286d3aaae3e9b70cd8e1aa12d8",
+      "bytes": 1357078
+    },
+    {
+      "name": "Hub-Combined-TEST-20261106.zip",
+      "sha256": "676e21e4a1a20e5d06e830a849983dccc16564cf16473b8a8819f068178e8f5b",
+      "bytes": 4058203
+    },
+    {
+      "name": "Hub-Pool-Board-Gaps-WIP-20261106.zip",
+      "sha256": "c9b35c73a648449bcff6e3d04664dc2ef687ceae492a84697695f849b00edbf0",
+      "bytes": 1330087
+    }
+  ],
+  "omittedRedundantFullSourceArchives": [
+    "Hub-Date-Events-TEST-20261106.zip",
+    "Hub-Live-Fixes-TEST-20261106.zip"
+  ]
+}

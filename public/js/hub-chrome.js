@@ -12,7 +12,7 @@
   function dashboard(){activate(home);}
   window.BeautyHubNavigation=Object.freeze({activate,dashboard});
   home?.addEventListener('click',dashboard);
-  window.addEventListener('focus',()=>{if(selected?.textContent.trim()==='Beauty Live')dashboard();});
+  window.addEventListener('focus',()=>{if(selected?.textContent.trim()==='Live')dashboard();});
   function show(text,state){if(eventDate&&state!=='matched')eventDate.textContent='';if(title){title.textContent=text;title.dataset.state=state;}window.BeautyPlayerList?.connection();}
   async function refresh(){
     if(!date||busy)return;

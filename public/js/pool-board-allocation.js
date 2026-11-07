@@ -29,6 +29,22 @@
   }
   return {version:1,mode:'sequential-pools',boards,assignments:boards.flatMap(b=>b.pools.map(p=>({...p,board:b.board}))).sort((a,b)=>a.poolNumber-b.poolNumber)};
  }
+ // Reserve one board per pool before spending spare capacity on four-player pools.
+ // Scarce venues use one board per pool and queue by earliest free board.
+ function defaults(pools,available){
+  allocate(pools,available);
+  const ready=new Map([...available].sort((a,b)=>a-b).map(b=>[b,1]));
+  let spare=Math.max(0,available.length-pools.length);
+  const choices=pools.map(pool=>{
+   const count=pool.players.length===4&&spare>0?2:1;if(count===2)spare--;
+   const boards=[...ready.keys()].sort((a,b)=>ready.get(a)-ready.get(b)||a-b).slice(0,count);
+   const start=Math.max(...boards.map(b=>ready.get(b)));
+   const end=start+Math.ceil(pool.players.length*(pool.players.length-1)/2/count);
+   for(const b of boards)ready.set(b,end);
+   return {poolId:pool.id,boards};
+  });
+  return matchPlan(pools,available,choices);
+ }
  function matchPlan(pools,available,choices){
   allocate(pools,available); // Validate the same venue and frozen pool boundaries.
   if(!Array.isArray(choices)||choices.length!==pools.length)throw Error('Choose boards for every pool.');
@@ -45,6 +61,6 @@
   }
   return {version:1,assignments,matches};
  }
- const api=Object.freeze({parseBoards,allocate,matchPlan});
+ const api=Object.freeze({parseBoards,allocate,defaults,matchPlan});
  if(typeof module==='object'&&module.exports)module.exports=api;else root.BeautyPoolBoards=api;
 })(typeof globalThis==='object'?globalThis:this);

@@ -11,3 +11,7 @@ test('stage model distinguishes pending slots byes and unknown scores without ma
 test('stage model refuses cross-event data unknown identities and duplicate standings identities',()=>{
  let f=fixture();f[1].tdid='other';assert.throws(()=>project(...f));f=fixture();f[0].tournament.t_table[0][0]='unknown';assert.throws(()=>project(...f));f=fixture();f[1].groups[0].players.push(f[1].groups[0].players[0]);assert.throws(()=>project(...f));
 });
+
+test('stage model omits explicitly disabled knockouts and publishes only enabled competition views',()=>{
+ const f=fixture();f[0].tournament.t_setting={tournament:0};f[0].tournament.s2_setting={tournament:1};f[0].tournament.rr_setting={round_robin:0};f[0].tournament.s2_table=[['aaaa','bbbb'],['']];f[1].groups=[];const out=project(...f);assert.deepEqual(out.knockouts.map(s=>s.kind),['s2']);assert.deepEqual(out.views,{pools:false,t:false,s2:true});f[0].tournament.rr_setting.round_robin=1;f[0].tournament.s2_setting.tournament=0;assert.deepEqual(project(...f).views,{pools:true,t:false,s2:false});
+});

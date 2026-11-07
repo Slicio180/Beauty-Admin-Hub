@@ -4,7 +4,7 @@
  * API contract: https://push.n01darts.com/api/v1/n01_api_manual_en.html
  */
 const BEAUTY_HUB_NAKKA_TRANSFER_ENABLED_ = true;
-const BEAUTY_HUB_NAKKA_TEST_EVENT_ = 't_QHaG_7792';
+function beautyHubTransferTarget_(){return beautyHubActiveTestTarget_().id;}
 // Invocation-local context, created only by the guarded player registration
 // controller after validating its public input. Never accepted from a client.
 var beautyHubPlayerContext_ = null;
@@ -52,8 +52,8 @@ function beautyHubTransferDecode_(response) {
 }
 // Fresh, fixed-target GETs only. Nothing is cached or retried, and a batch cannot POST.
 function beautyHubNakkaReads_(authorization,includeLeague) {
-  const paths=['tournament/get?tdid='+BEAUTY_HUB_NAKKA_TEST_EVENT_+'&entry=0',
-    'tournament/entry/list?tdid='+BEAUTY_HUB_NAKKA_TEST_EVENT_];
+  const paths=['tournament/get?tdid='+beautyHubTransferTarget_()+'&entry=0',
+    'tournament/entry/list?tdid='+beautyHubTransferTarget_()];
   if(includeLeague)paths.push('league/entry/list?lgid=lg_tM2v_3523&count=1000');
   return beautyHubNakkaMeasure_('nakka-read-batch',()=>{
     if(typeof UrlFetchApp==='undefined'||typeof UrlFetchApp.fetchAll!=='function')return paths.map(path=>beautyHubTransferFetch_(path,authorization));
@@ -81,9 +81,9 @@ function beautyHubTransferEntries_(data) {
 function beautyHubTransferState_(player,authorization,allowMissing) {
   const key=v=>v.normalize('NFC').trim().replace(/\s+/g,' ').toLocaleLowerCase('sv-SE');
   const match=beautyHubNakkaEvent_({});
-  if(match.status!=='MATCHED'||match.event?.id!==BEAUTY_HUB_NAKKA_TEST_EVENT_)beautyHubTransferError_('TEST_TARGET_ONLY');
+  if(match.status!=='MATCHED'||match.event?.id!==beautyHubTransferTarget_())beautyHubTransferError_('TEST_TARGET_ONLY');
   const [eventData,entryData,leagueData]=beautyHubNakkaReads_(authorization,true),raw=eventData.tournament;
-  if(!raw||raw.tdid!==BEAUTY_HUB_NAKKA_TEST_EVENT_||raw.lgid!=='lg_tM2v_3523'||raw.title!=='Beauty Registration TEST event DO NOT USE LIVE'||
+  if(!raw||raw.tdid!==beautyHubTransferTarget_()||raw.lgid!=='lg_tM2v_3523'||raw.title!==beautyHubActiveTestTarget_().title||
      ![10,20].includes(raw.status)||!Number.isFinite(raw.t_date)||!Number.isFinite(raw.updateTime))beautyHubTransferError_('TEST_TARGET_ONLY');
   if(Utilities.formatDate(new Date(raw.t_date*1000),'Europe/Berlin','yyyy-MM-dd')!==match.eventDate)beautyHubTransferError_('STALE_TRANSFER');
   const event={id:raw.tdid,title:raw.title,date:match.eventDate,status:raw.status,updateTime:raw.updateTime};
@@ -115,7 +115,7 @@ function beautyHubNakkaTransfer_(action,input) {
 function beautyHubNakkaTransferRun_(action,input) {
   beautyHubTestGuard_();
   const messages={LEAGUE_CREATION_REVIEW_REQUIRED:'A previous league creation needs review. No add was sent; do not repeat the registration.',INVALID_TRANSFER:'Invalid transfer request. Reload the preview.',TRANSFER_DISABLED:'TEST transfers are disabled.',
-    TEST_TARGET_ONLY:'Transfers are restricted to Beauty Registration TEST event DO NOT USE LIVE (t_QHaG_7792), in Preparing or Accepting entries. No other event can be changed.',
+    TEST_TARGET_ONLY:'Transfers require the unique approved TEST event for the selected Hub date, in Preparing or Accepting entries. Check or create that event first.',
     PLAYER_NOT_ELIGIBLE:'Select exactly one Hub player with IN status.',LEAGUE_IDENTITY_REVIEW:'No unique existing league identity could be proposed. Review the player in Nakka; no new league player was created.',
     IDENTITY_CONFLICT:'An existing Nakka entry has conflicting or duplicate identity details. Review it manually.',STALE_TRANSFER:'The event, player or Nakka list changed. Review a new preview.',
     NAKKA_LAYOUT:'Nakka returned incomplete or unsupported player data. No transfer can be verified.',NAKKA_UNAVAILABLE:'Nakka could not be checked. No automatic retry.',
@@ -143,7 +143,7 @@ function beautyHubNakkaTransferRun_(action,input) {
       if(!reviewed||reviewed.uid!==account.uid||reviewed.session!==session||reviewed.player!==input.player||Date.now()>=reviewed.expires)return fail('STALE_TRANSFER');
     }
     const state=beautyHubTransferState_(input.player,authorization);
-    journal='BEAUTY_NAKKA_TRANSFER_'+BEAUTY_HUB_NAKKA_TEST_EVENT_+'_'+state.identity.lpid;
+    journal='BEAUTY_NAKKA_TRANSFER_'+beautyHubTransferTarget_()+'_'+state.identity.lpid;
     if(action==='save'&&reviewed.intent==='REVIEW_EXISTING'&&reviewed.version!==beautyHubTransferHash_({state,prior:props.getProperty(journal)}))return fail('STALE_TRANSFER');
     const creation=props.getProperty('BEAUTY_NAKKA_LEAGUE_CREATE_lg_tM2v_3523_'+beautyHubTransferHash_(input.player.normalize('NFC').trim().replace(/\s+/g,' ').toLocaleLowerCase('sv-SE')));
     if(creation){let old;try{old=JSON.parse(creation);}catch(e){}if(old?.state!=='VERIFIED'||old.name!==input.player||old.lpid!==state.identity.lpid)return fail('LEAGUE_CREATION_REVIEW_REQUIRED');}
@@ -213,6 +213,7 @@ function beautyHubNakkaTransferRun_(action,input) {
         if(action==='preview'&&beautyHubPlayerContext_===null&&!state.existing&&
           old.event?.id===state.event.id&&old.event?.date===state.event.date&&old.identity?.name===state.identity.name&&old.identity?.lpid===state.identity.lpid){
           beautyHubAuthRequire_(beautyHubRequestToken_);
+          blocked.event=state.event;
           blocked.recovery={kind:confirmedHistory?'CONFIRMED_ENTRY_MISSING':'UNCONFIRMED_ENTRY_MISSING',
             player:input.player,event:state.event,identity:state.identity};
           if(confirmedHistory)blocked.error='This player was previously added to Nakka, but their event entry is now missing. Their Hub registration is still saved.';
@@ -237,7 +238,7 @@ function beautyHubNakkaTransferRun_(action,input) {
     if(reviewed.version!==version)return fail('STALE_TRANSFER');
     // Check the event again immediately before posting. Nakka admin pages must
     // be closed during this operation: entry/add has no documented CAS token.
-    const latest=beautyHubTransferFetch_('tournament/get?tdid='+BEAUTY_HUB_NAKKA_TEST_EVENT_+'&entry=0',authorization).tournament;
+    const latest=beautyHubTransferFetch_('tournament/get?tdid='+beautyHubTransferTarget_()+'&entry=0',authorization).tournament;
     if(!latest||latest.tdid!==state.event.id||latest.lgid!=='lg_tM2v_3523'||latest.title!==state.event.title||
        latest.status!==state.event.status||latest.updateTime!==state.event.updateTime||Utilities.formatDate(new Date(latest.t_date*1000),'Europe/Berlin','yyyy-MM-dd')!==state.event.date)return fail('STALE_TRANSFER');
     beautyHubNakkaAuthorize_(input.player);
@@ -248,10 +249,10 @@ function beautyHubNakkaTransferRun_(action,input) {
     props.setProperty(journal,JSON.stringify(record));
     if(props.getProperty(journal)!==JSON.stringify(record))throw Error('journal');
     attempted=true;
-    const result=beautyHubTransferFetch_('tournament/entry/update',authorization,{tdid:BEAUTY_HUB_NAKKA_TEST_EVENT_,add:[{name:state.identity.name,lpid:state.identity.lpid}]});
+    const result=beautyHubTransferFetch_('tournament/entry/update',authorization,{tdid:beautyHubTransferTarget_(),add:[{name:state.identity.name,lpid:state.identity.lpid}]});
     if(!Array.isArray(result.added)||result.added.length!==1||!result.added[0]||!/^[A-Za-z0-9]{4}$/.test(result.added[0].tpid)||
        result.added[0].name!==state.identity.name||(result.updated||0)!==0||(result.removed||0)!==0)throw Error('receipt');
-    const tpid=result.added[0].tpid,after=beautyHubTransferEntries_(beautyHubTransferFetch_('tournament/entry/list?tdid='+BEAUTY_HUB_NAKKA_TEST_EVENT_,authorization));
+    const tpid=result.added[0].tpid,after=beautyHubTransferEntries_(beautyHubTransferFetch_('tournament/entry/list?tdid='+beautyHubTransferTarget_(),authorization));
     const added=after.filter(r=>r.tpid===tpid);
     if(added.length!==1||added[0].name!==state.identity.name||(added[0].lpid&&added[0].lpid!==state.identity.lpid)||after.length!==state.entries.length+1||
        JSON.stringify(after.filter(r=>r.tpid!==tpid))!==JSON.stringify(state.entries))throw Error('readback');

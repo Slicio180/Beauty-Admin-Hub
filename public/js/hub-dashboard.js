@@ -15,7 +15,7 @@
     REMOVE_UNCERTAIN:'A removal may be partly saved. Keep the recovery reference; do not repeat removal.',
     REMOVE_REVIEW_REQUIRED:'An earlier removal needs reconciliation. Check the recovery record before any new change.'
   };
-  const explain=code=>messages[code]||'Beauty registration is saved, but the Nakka entry is unconfirmed. Review Nakka before another action.';
+  const explain=code=>messages[code]||'Registration is saved, but the Nakka entry is unconfirmed. Review Nakka before another action.';
   function render() {
     const items=attention?.items||[],count=items.length;
     const available=attention?.available===true;
@@ -91,7 +91,7 @@
     panel=document.createElement('dialog');panel.className='pool-planner';panel.setAttribute('aria-labelledby','attentionReviewTitle');
     const close=document.createElement('button');close.type='button';close.className='pool-close';close.textContent='×';close.setAttribute('aria-label','Close attention review');
     const title=document.createElement('h2');title.id='attentionReviewTitle';title.textContent='Players needing attention';
-    const note=document.createElement('p');note.textContent='Check the named player and existing league identity. A saved Beauty registration must not be submitted again to fix Nakka. Alerts clear after a verified check; transfer journals are retained.';
+    const note=document.createElement('p');note.textContent='Check the named player and existing league identity. A saved registration must not be submitted again to fix Nakka. Alerts clear after a verified check; transfer journals are retained.';
     const state=document.createElement('p');state.dataset.attentionStatus='';state.setAttribute('role','status');
     const list=document.createElement('ul');list.className='attention-list';
     const actions=document.createElement('div');actions.className='attention-actions';

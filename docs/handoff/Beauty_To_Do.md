@@ -1,4 +1,57 @@
+# Latest GitHub save — 7 November 2026
+
+See GITHUB-CHECKPOINT-20261107.md for confirmed installation versus prepared work, owner interface boundaries and cleanup status.
+
 # Beauty — to-do and decisions
+
+## Immediate priorities — 7 November 2026, Stockholm
+
+Owner direction: continue development. Monday 9 November is the urgent operational priority: Round Robin followed by A/B slutspel. The club doubles KM is expected in about one month; exact date is not supplied. Treat it as the next delivery milestone, not an indefinite wishlist. These priorities supersede older ordering below; historical evidence remains intact.
+
+### Monday first
+- [x] Evening Setup and direct Change Settings installed and uploaded to Google TEST by owner. LOCAL_EVENING_DIRECT_SETTINGS_INSTALL_PASS: 840/840 -> 841/841; inventory PASS. GOOGLE_TEST_READBACK_VERIFIED at 2026-11-06T22:43:29.230Z (23:43 Stockholm), 20 files verified, one changed. Production and deployment unchanged.
+- [x] Owner accepted the one-place saved setup; manual Verify Existing Event button removed. Hub performs any existing-creation read-only check automatically.
+- [ ] Owner acceptance of opening Change Settings, saving intended rules, native readback and reopening persisted choices. Do not alter the November 8 RR-only event to the Monday format without the owner's chosen settings.
+- [ ] Rehearse a fresh Monday-format TEST competition: registration -> balanced pools/manual swaps -> boards -> Round Robin -> A/B through Nakka Control -> finals/winners -> next event. Check sparse boards, byes/empty slots and correct Live state. Preserve completed TEST results; no duplicate Start or pool resend.
+- [ ] Kiosk/mobile/Hub together, withdrawals/removal, login/reload/logout, actual casting and connection recovery. Keep native Automatic progress window open where used.
+- [ ] Reconcile operator handbook to current Evening Setup/Pool Planner/Nakka Control path; backup/rollback and explicit production release decision after acceptance. TEST upload is not a production release.
+- [ ] Saved reusable Monday preset and multiple-event selection remain unimplemented; do not describe either as available.
+
+### Next delivery — club doubles KM, about one month
+- [ ] Separate club-member player list/source for KM, selectable per event without replacing or adding to the permanent Monday master list automatically. Preserve an individual identity for each member.
+- [ ] Store a doubles entry as a pair of individual players with a combined display name. A display label alone must not merge two players into one permanent person.
+- [ ] Pairs are event/year-specific and can be redrawn or edited by the organiser each year. Preserve historical pairs, membership, results and the average snapshot used for each draw; never rewrite last year's event when changing this year's partners.
+- [ ] Propose pairs with team strength as equal as possible using each participating player's reviewed average. Use the two-player mean as the visible strength estimate; label it a pairing estimate, not a measured doubles match average. An initial unconstrained approach is highest average with lowest, then next highest with next lowest; review the spread across all pairs.
+- [ ] Let the organiser inspect individual averages, their source/date, estimated pair strengths and overall spread; swap partners manually and see recalculated balance before saving. Freeze the approved draw; no automatic reshuffle after sending to Nakka.
+- [ ] Missing/stale averages need explicit organiser input/review, never silently treated as zero. Handle odd player counts, incomplete pairs, duplicates and withdrawals explicitly. The same person cannot occupy two active pairs in one competition.
+- [ ] Verify native Nakka doubles/team representation, registrations, groups, knockout progression, board/scoring behaviour and readback in a dedicated TEST event. Do not assume one combined name gives full native doubles support or correct individual statistics.
+- [ ] Keep team event results separate from individual singles averages/rankings; choose and record the approved average source/time window before KM pairing.
+- [ ] End-to-end doubles KM rehearsal and owner acceptance before its real date. No doubles production readiness claimed yet.
+
+
+## Owner TEST installation and acceptance — 6 November 2026, 17:18–17:40 Stockholm
+
+- [x] Owner local installer LOCAL_COMBINED_HUB_INSTALL_PASS finished 2026-11-06T16:18:17.888Z: 766/766 before, 780/780 after, no failures, inventory PASS. Repeats returned ALREADY_INSTALLED with no changes.
+- Backup: /Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/combined-hub-before-2026-11-06T16-16-55-954Z. Evidence: same root/evidence/combined-hub-install-2026-11-06T16-16-55-954Z.
+- [x] Owner confirmed saving all seven existing Identity TEST files: BeautyLiveTest.gs into BeautyLiveServer.gs, HubTestRemove.gs, Code.js into Code.gs, HubTest.html, HubTestPools.gs, StageTest.html, BeautyLiveTest.html. This supersedes earlier Google-upload-pending notes for the combined update only.
+- [x] Event Control screenshot 17:31:25 shows Tournament Control command removed and date controls retained (libfile_ae5406bd9944819183f259a94dd1f5a3).
+- [x] Live opens with seven players (17:32:19, libfile_49c07438c10081918a93965ff8a1eacb); group view shows Bana 2 and Bana 5 + 6, START/NU, scores, V-F, Legs and Rank (17:33:09, libfile_7015491e3c688191a8794f32528d2e9f).
+- [x] Slutspel 1 final 3–0, Alessio winner/cup and third place 2–0 preserved (17:34:12, libfile_b4baae35f86881919f197c260af792b4). Slutspel 2 final 2–0 and Mobile winner/medal preserved (17:34:46, libfile_9d7eb2b8af90819195b237e177118679).
+- [x] Running Pool Planner shows editable boards, saved 5+6 / 2, no Tournament Control command and sidebar Live (17:36 screenshots libfile_aea8523fe1d08191bb748d72241f543b and libfile_edd9ef846d448191a774fcd2b6c01bb8). Owner confirmed one-board/two-board toggle restores 5 and 6.
+- [x] Owner clicked SAVE BOARDS & MATCH PLAN with unchanged boards; screenshot 17:39:53 reports Board match plan saved in the Hub, Nakka scoring unchanged (libfile_36032251ab948191afe668b182b691dc). Owner subsequently confirmed refresh retains 5+6 / 2.
+- [ ] Fresh draft acceptance of automatic defaults and manual player swaps remains pending. Running/sent event deliberately locks player swaps. This saved existing-event check does not prove fresh defaults, native board assignment or partial-pool advancement while others play.
+- [ ] Actual bye label remains incorrect (waiting text instead of Bye). Existing historical event title/player records still include Beauty; they were deliberately not renamed by label cleanup.
+- Production unchanged. Existing completed TEST event/results preserved; no pool resend or repeated Start. Separate Nakka Admin is the operating workflow; replacement manager/admin skin paused.
+
+
+## Combined TEST installer — 6 November 2026
+
+- [x] Removed Tournament Control/Slutspel review-assignment command from Event Control and running pool screen. Generated Hub no longer loads the assignment dialog. Initial event Start, board Save and Live knockout display retained. This supersedes older statements that command removal is not implemented.
+- [x] Reconciled automatic board defaults/running edits with user-facing Beauty label removal in ONE package: Hub-Combined-TEST-20261106.zip. Use it instead of separately applying the two older installers.
+- [x] Combined local suite: 780/780 PASS. Isolated installer and inventory results included in package checkpoint.
+- [ ] Owner Mac install and Google TEST upload still pending. Seven existing Google files listed in READ-ME.txt. Production unchanged; no GitHub push or native event mutation in this work.
+- [ ] Separate Event Manager and admin-skin work paused per owner decision. Use Nakka Admin separately. Partial completed-pool handover while other pools remain active still needs fresh TEST acceptance. Native physical pool-board field connection, Open Nakka Admin button and Bye wording remain pending.
+
 
 ## Current launch checklist — 6 November 2026, evening preparation
 
@@ -826,4 +879,3 @@ Still requires actual Nakka schema/ranking/badge comparison, decision and native
 qualification for board/memo/autopilot handoff, authenticated deployed adapters,
 production runtime migration, actual event rehearsal and physical screen review.
 No Google/Nakka mutation, production deployment or GitHub push has occurred.
-

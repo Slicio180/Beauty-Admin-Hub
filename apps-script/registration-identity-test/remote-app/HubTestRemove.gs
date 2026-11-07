@@ -22,9 +22,9 @@ function beautyHubRemoveState_(input, authorization) {
   });
   if(registrations.length!==1)throw Error('IDENTITY');
   const match=beautyHubNakkaEvent_({});
-  if(match.status!=='MATCHED'||match.event?.id!==BEAUTY_HUB_NAKKA_TEST_EVENT_||match.eventDate!==date)throw Error('TARGET');
+  if(match.status!=='MATCHED'||match.event?.id!==beautyHubTransferTarget_()||match.eventDate!==date)throw Error('TARGET');
   const [eventData,list,leagueData]=beautyHubNakkaReads_(authorization,true),raw=eventData.tournament;
-  if(!raw||raw.tdid!==BEAUTY_HUB_NAKKA_TEST_EVENT_||raw.lgid!=='lg_tM2v_3523'||raw.title!=='Beauty Registration TEST event DO NOT USE LIVE'||![10,20].includes(raw.status)||
+  if(!raw||raw.tdid!==beautyHubTransferTarget_()||raw.lgid!=='lg_tM2v_3523'||raw.title!==beautyHubActiveTestTarget_().title||![10,20].includes(raw.status)||
     !Number.isFinite(raw.t_date)||!Number.isFinite(raw.updateTime)||Utilities.formatDate(new Date(raw.t_date*1000),'Europe/Berlin','yyyy-MM-dd')!==date)throw Error('TARGET');
   const league=leagueData.list;
   if(!Array.isArray(league)||league.length>=1000)throw Error('IDENTITY');
@@ -48,7 +48,7 @@ function beautyHubRemove_(action,input) {
 }
 function beautyHubRemoveRun_(action,input) {
   beautyHubTestGuard_();
-  const fail=(code,journal,backup)=>({success:false,code,error:{INVALID_REMOVE:'Invalid removal request. Reload and review again.',REMOVE_DISABLED:'Removal is disabled.',REMOVE_BUSY:'Another operation is running. Review again shortly.',REMOVE_STALE:'The event or player data changed. Review a new removal.',REMOVE_IDENTITY:'A unique registration and league identity could not be verified. Review the player manually.',REMOVE_TARGET:'Removal is limited to the selected, pre-start Beauty TEST event.',REMOVE_BRACKET:'This player is placed in a bracket. Review the bracket in Nakka before removal.',REMOVE_REVIEW:'A previous removal needs review. No retry was sent.',REMOVE_UNCERTAIN:'Removal may be partly saved. Do not repeat it. Inspect Nakka and the Hub using the recovery reference.',REMOVE_FAILED:'Removal could not be checked. Nothing was deliberately retried.'}[code]||'Removal needs review.',...(journal?{journal}:{}),...(backup?{backup}:{})});
+  const fail=(code,journal,backup)=>({success:false,code,error:{INVALID_REMOVE:'Invalid removal request. Reload and review again.',REMOVE_DISABLED:'Removal is disabled.',REMOVE_BUSY:'Another operation is running. Review again shortly.',REMOVE_STALE:'The event or player data changed. Review a new removal.',REMOVE_IDENTITY:'A unique registration and league identity could not be verified. Review the player manually.',REMOVE_TARGET:'Removal is limited to the selected, pre-start TEST event.',REMOVE_BRACKET:'This player is placed in a bracket. Review the bracket in Nakka before removal.',REMOVE_REVIEW:'A previous removal needs review. No retry was sent.',REMOVE_UNCERTAIN:'Removal may be partly saved. Do not repeat it. Inspect Nakka and the Hub using the recovery reference.',REMOVE_FAILED:'Removal could not be checked. Nothing was deliberately retried.'}[code]||'Removal needs review.',...(journal?{journal}:{}),...(backup?{backup}:{})});
   const keys=action==='preview'?'eventDate,player':'confirmed,eventDate,player,ticket';
   if(!['preview','save'].includes(action)||!input||Array.isArray(input)||Object.keys(input).sort().join(',')!==keys||Object.values(input).some(v=>typeof v!=='string')||
      !beautyHubEventDateValid_(input.eventDate)||!input.player.trim()||input.player.length>120||/[\x00-\x1f\x7f]/.test(input.player)||

@@ -48,12 +48,12 @@ function beautyHubAttentionRefreshRun_(input) {
   try {
     const date=beautyHubNakkaDate_().date,hub=beautyHubNakkaHubRows_(),props=PropertiesService.getScriptProperties();
     const match=beautyHubNakkaEvent_({});
-    if(match.status!=='MATCHED'||match.event?.id!==BEAUTY_HUB_NAKKA_TEST_EVENT_||match.event?.title!=='Beauty Registration TEST event DO NOT USE LIVE'||match.eventDate!==date){diagnosis=match.status==='NOT_FOUND'?'EVENT_DATE_MISMATCH':match.status==='STALE'?'STALE_CHECK':match.status==='AMBIGUOUS'?'EVENT_AMBIGUOUS':'EVENT_UNAVAILABLE';throw Error('target');}
+    if(match.status!=='MATCHED'||match.event?.id!==beautyHubTransferTarget_()||match.event?.title!==beautyHubActiveTestTarget_().title||match.eventDate!==date){diagnosis=match.status==='NOT_FOUND'?'EVENT_DATE_MISMATCH':match.status==='STALE'?'STALE_CHECK':match.status==='AMBIGUOUS'?'EVENT_AMBIGUOUS':'EVENT_UNAVAILABLE';throw Error('target');}
     const user=props.getProperty('N01_API_USER'),password=props.getProperty('N01_API_PASSWORD');
     if(!user||!password)throw Error('credentials');
     const auth='Basic '+Utilities.base64Encode(user+':'+password);
     const [eventData,entryData,leagueData]=beautyHubNakkaReads_(auth,true),event=eventData.tournament;
-    if(!event||event.tdid!==BEAUTY_HUB_NAKKA_TEST_EVENT_||event.lgid!=='lg_tM2v_3523'||event.title!==match.event.title||Utilities.formatDate(new Date(event.t_date*1000),'Europe/Berlin','yyyy-MM-dd')!==date)throw Error('target');
+    if(!event||event.tdid!==beautyHubTransferTarget_()||event.lgid!=='lg_tM2v_3523'||event.title!==match.event.title||Utilities.formatDate(new Date(event.t_date*1000),'Europe/Berlin','yyyy-MM-dd')!==date)throw Error('target');
     const entries=beautyHubTransferEntries_(entryData);
     const league=leagueData.list;
     if(!Array.isArray(league)||league.length>=1000)throw Error('league');
@@ -76,15 +76,15 @@ function beautyHubAttentionRefreshRun_(input) {
       if(!code){
         const creation=props.getProperty('BEAUTY_NAKKA_LEAGUE_CREATE_lg_tM2v_3523_'+beautyHubTransferHash_(key));
         if(creation){const c=JSON.parse(creation);if(c.state!=='VERIFIED'||c.name!==name||c.lpid!==l[0].lpid)code='LEAGUE_CREATION_REVIEW_REQUIRED';}
-        const transfer=props.getProperty('BEAUTY_NAKKA_TRANSFER_'+BEAUTY_HUB_NAKKA_TEST_EVENT_+'_'+l[0].lpid);
+        const transfer=props.getProperty('BEAUTY_NAKKA_TRANSFER_'+beautyHubTransferTarget_()+'_'+l[0].lpid);
         if(transfer){
           const t=JSON.parse(transfer);
-          if(t.event?.id!==BEAUTY_HUB_NAKKA_TEST_EVENT_||t.event?.date!==date||t.identity?.name!==name||t.identity?.lpid!==l[0].lpid)code='TRANSFER_REVIEW_REQUIRED';
+          if(t.event?.id!==beautyHubTransferTarget_()||t.event?.date!==date||t.identity?.name!==name||t.identity?.lpid!==l[0].lpid)code='TRANSFER_REVIEW_REQUIRED';
           else if(t.state==='ATTEMPTED'){
             if((!Number.isInteger(t.beforeCount)||entries.length!==t.beforeCount+1||beautyHubTransferHash_(entries.filter(r=>r.tpid!==e[0].tpid))!==t.beforeHash)&&
-              !beautyHubTransferReviewMatch_(transfer,{event:{id:BEAUTY_HUB_NAKKA_TEST_EVENT_,date},identity:{name,lpid:l[0].lpid},existing:e[0]}))code='TRANSFER_REVIEW_REQUIRED';
+              !beautyHubTransferReviewMatch_(transfer,{event:{id:beautyHubTransferTarget_(),date},identity:{name,lpid:l[0].lpid},existing:e[0]}))code='TRANSFER_REVIEW_REQUIRED';
           }else if(!['VERIFIED','ENTRY_VERIFIED_LINK_UNEXPOSED'].includes(t.state)||
-            t.tpid!==e[0].tpid&&!beautyHubTransferReviewMatch_(transfer,{event:{id:BEAUTY_HUB_NAKKA_TEST_EVENT_,date},identity:{name,lpid:l[0].lpid},existing:e[0]}))code='TRANSFER_REVIEW_REQUIRED';
+            t.tpid!==e[0].tpid&&!beautyHubTransferReviewMatch_(transfer,{event:{id:beautyHubTransferTarget_(),date},identity:{name,lpid:l[0].lpid},existing:e[0]}))code='TRANSFER_REVIEW_REQUIRED';
         }
       }
       if(retained.items.some(item=>normalize(item.name)===key&&['REMOVE_UNCERTAIN','REMOVE_REVIEW_REQUIRED'].includes(item.code)))code='REMOVE_REVIEW_REQUIRED';

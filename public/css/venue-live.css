@@ -240,3 +240,15 @@ body{border-top:1px solid #ffd700}
 
 /* Primary values share the same face as NU, including Rank. */
 .venue-pool-card .pool-matrix td .match-cell-score,.venue-pool-card .pool-matrix td.number:not(.position),.venue-pool-card .group-averages .average-value{font:400 24px/1 "AIK Display",sans-serif}
+
+/* Clear AIK board badge, with room above the player names. */
+.knockout-board{width:max-content;margin:7px 10px 3px auto;padding:4px 10px;background:#ffd700;color:#000;border-radius:4px;font:700 18px/1.15 "AIK Condensed",sans-serif;text-align:center}
+
+/* Round headings match VINNARE; bracket links use AIK yellow. */
+.bracket-title h3,.bracket-heading .bracket-title h3,.bracket-canvas>.final-heading-docked h3,.bracket-canvas>.semifinal-heading-docked h3,.bracket-canvas>.knockout-third>h3,.winner-header .winner-heading{font-size:30px;text-align:center}
+.bracket-connectors{stroke:#ffd700}
+.winner-header{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:10px}
+.winner-header .winner-logo{grid-column:1;justify-self:end}
+.winner-header .winner-heading{grid-column:2}
+
+.knockout-winner .winner-card.confirmed-winner{border-color:#ffd700}

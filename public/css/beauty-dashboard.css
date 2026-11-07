@@ -680,3 +680,46 @@ body .attention-list .nakka-issue-open:focus-visible{outline:2px solid #ffd700;o
 .tournament-control-confirm{margin-top:16px;border-top:1px solid #394348;padding-top:10px}.tournament-control-confirm label{display:flex;align-items:center;gap:10px;margin:12px 0}
 .tournament-control-confirm input{width:20px;height:20px}.tournament-control-confirm button{margin:0 10px 8px 0}
 @media(max-width:680px){.tournament-control-grid{grid-template-columns:1fr}}
+
+/* Allow explanatory pool setup text to wrap within the workspace. */
+.pool-planner-workspace .pool-scheme-tile,.pool-planner-workspace .pool-pools-summary{min-width:0}
+.pool-planner-workspace .pool-pools-summary{flex-wrap:wrap;overflow-wrap:anywhere;white-space:normal}
+.pool-planner-workspace .pool-pools-summary p{min-width:0;white-space:normal;overflow-wrap:anywhere}
+.pool-planner-workspace .pool-pools-summary{grid-template-columns:max-content minmax(0,1fr)}
+@media(min-width:601px){.pool-planner-workspace .pool-setup .pool-scheme-tile{grid-template-columns:max-content minmax(0,1fr)}}
+
+/* Compact TEST event review actions. */
+.event-inspection .event-nakka-step{border-top:1px solid #665b18;margin-top:16px;padding-top:12px;text-align:left}
+.event-inspection .event-nakka-step h3{margin:0 0 8px;color:#ffd700}
+.event-inspection .event-nakka-step p{margin:8px 0;overflow-wrap:anywhere}
+.event-inspection .event-nakka-step input:not([type=checkbox]){display:block;width:100%;max-width:32rem;box-sizing:border-box;margin:8px 0}
+.event-inspection .event-nakka-step button,.pool-approval button{margin:6px 8px 6px 0}
+.event-inspection details{margin-top:8px;text-align:left}
+.event-inspection details summary{cursor:pointer;color:#ffd700}
+.pool-approval p{margin:8px 0}
+
+.create-event-settings{display:grid;gap:12px;margin:14px 0}
+.create-event-settings fieldset{border:1px solid #665b18;border-radius:7px;padding:10px 14px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 16px;min-width:0}
+.event-inspection .create-event-settings legend{color:#ffd700;font-size:22px;padding:0 6px}
+.event-inspection .create-event-settings label{margin:0;font-size:18px;min-width:0}
+.event-inspection .create-event-settings input[type=number]{width:100%;max-width:10rem;margin:4px 0 0;padding:8px;box-sizing:border-box}
+.event-inspection .create-event-settings .create-setting-toggle{display:flex;align-items:center;gap:8px;grid-column:1/-1}
+.event-inspection .create-event-settings input[type=checkbox]{display:inline-block;width:22px;height:22px;flex-shrink:0;margin:0}
+.event-inspection .create-event-settings input:disabled{opacity:.4}
+.event-inspection .create-event-settings .create-settings-help{font-size:16px;color:#c4c4c4;line-height:1.35;margin:0}
+@media(max-width:480px){.create-event-settings fieldset{grid-template-columns:1fr}}
+
+.event-inspection .create-format-choice{border:1px solid #665b18;border-radius:7px;padding:12px 14px;margin:12px 0}
+.event-inspection .create-format-choice label{margin:6px 0;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.event-inspection .create-format-choice input[type=checkbox]{display:inline-block;width:22px;height:22px;margin:0}
+.event-inspection .create-format-choice select,.event-inspection .create-event-settings select{background:#111;color:#fff;border:1px solid #ffd700;min-height:44px;padding:8px;font:inherit;max-width:100%}
+
+.evening-setup::backdrop{background:rgba(0,0,0,.8)}
+.evening-setup .evening-format{color:#ffd700;font-size:26px;margin:12px 0}
+.evening-setup .evening-rules{display:grid;grid-template-columns:100px minmax(0,1fr);gap:12px;margin:18px 0;text-align:left}
+.evening-setup .evening-rules dt{color:#ffd700;font-size:22px}
+.evening-setup .evening-rules dd{margin:0;font-size:20px;line-height:1.4}
+.evening-setup .evening-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.evening-setup .evening-checked{font-size:15px;color:#aaa}
+.evening-setup a{display:inline-block;margin-top:14px;color:#ffd700}
+@media(max-width:480px){.evening-setup .evening-rules{grid-template-columns:1fr;gap:4px}.evening-setup .evening-rules dd{margin-bottom:12px}}

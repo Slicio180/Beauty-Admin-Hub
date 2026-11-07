@@ -15,6 +15,8 @@ function build(){
   h=h.replace(/\n?<style id="beauty-player-theme">[\s\S]*?<\/style>/,'');
   h=h.replace(/\n?<script id="beauty-player-picker">[\s\S]*?<\/script>/,'');
   h=h.replace('</body>','<script id="beauty-player-picker">\n'+read('public/js/player-picker.js').toString()+'\n</script>\n</body>');
+  h=h.replace(/\n*<style id="beauty-number-font">[\s\S]*?<\/style>/,'');
+  if(name==='RemoteRegistration.html')h=h.replace('</head>',"<style id=\"beauty-number-font\">@font-face{font-family:'AIK Siffror';src:url('data:font/woff2;base64,"+read('public/assets/fonts/AIK-FONTS/AIKSiffror-Regular.woff2').toString('base64')+"') format('woff2');font-weight:400;font-display:swap;}</style></head>");
   h=h.replace('</head>','<style id="beauty-player-theme">\n'+theme+'</style>\n</head>');
   if(fs.readFileSync(file,'utf8')!==h)fs.writeFileSync(file,h);
  }

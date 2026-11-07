@@ -1,7 +1,7 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 function ui(initial){
  const make=text=>{const classes=new Set(),attrs={};return {textContent:text,dataset:{},attrs,classes,classList:{toggle:(key,on)=>on?classes.add(key):classes.delete(key)},setAttribute:(k,v)=>attrs[k]=v,removeAttribute:k=>delete attrs[k],addEventListener:(name,fn)=>{(events[text+':'+name]??=[]).push(fn);}};};
- const events={},nodes=['Dashboard','Beauty Live','Pool Planner','Event Control','Nakka','System Status','Instructions'].map(make),title=make(''),eventDate=make(''),requests=[],pending=[],intervals=[];
+ const events={},nodes=['Dashboard','Live','Pool Planner','Event Control','Nakka','System Status','Instructions'].map(make),title=make(''),eventDate=make(''),requests=[],pending=[],intervals=[];
  const c={Date,JSON,Object,document:{hidden:false,getElementById:id=>id==='dashboardNavButton'?nodes[0]:id==='nakkaTournamentTitle'?title:id==='nakkaTournamentDate'?eventDate:null,querySelectorAll:()=>nodes,addEventListener:(name,fn)=>(events[name]??=[]).push(fn)},addEventListener:(name,fn)=>(events['window:'+name]??=[]).push(fn),setInterval:fn=>intervals.push(fn),BeautyHubServices:{request:url=>{requests.push(url);return new Promise((resolve,reject)=>pending.push({resolve:r=>resolve({json:async()=>r}),reject}));}},beautyHubData:initial};c.window=c;
  vm.createContext(c);vm.runInContext(fs.readFileSync('public/js/hub-chrome.js','utf8'),c);
  return {c,nodes,title,eventDate,requests,pending,intervals,chrome:c.BeautyHubChrome,nav:c.BeautyHubNavigation,emit:name=>Promise.all((events[name]||[]).map(fn=>fn()))};

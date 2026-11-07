@@ -40,7 +40,7 @@ async function loadBeautyHubData() {
     if (!data.success) {
       throw new Error(
         data.error ||
-        'Beauty backend returned an error.'
+        'The service returned an error.'
       );
     }
 
@@ -50,7 +50,7 @@ async function loadBeautyHubData() {
   } catch (error) {
 
     console.error(
-      'Beauty Hub connection error:',
+      'Hub connection error:',
       error
     );
 
@@ -111,7 +111,7 @@ function updateEvent(data) {
 
     eventStatus.textContent =
       data.eventDate
-        ? (BeautyHubServices.mode === 'mock' ? 'Preview with fictional players' : 'Beauty event connected')
+        ? (BeautyHubServices.mode === 'mock' ? 'Preview with fictional players' : 'Event connected')
         : 'No event selected';
   }
 }
@@ -925,7 +925,7 @@ function openRegisterPlayerPopup() {
     'register-popup-label';
 
   label.textContent =
-    'BEAUTY REGISTRATION';
+    'REGISTRATION';
 
 
   const title =
@@ -942,7 +942,7 @@ function openRegisterPlayerPopup() {
     'register-popup-description';
 
   description.textContent =
-    'Register a player directly from the Beauty Hub.';
+    'Register a player directly from the Hub.';
 
 
   const errorBox =

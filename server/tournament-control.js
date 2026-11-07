@@ -20,10 +20,10 @@ function beautyTournamentSnapshot_(auth){
  const original=beautyTournamentReadAudit_(workflow.audit);
  if(original.kind!=='POOL_SEND_BEFORE'||!beautyPoolEqual_(event.rr_table,original.table))beautyPoolError_('The groups changed after approval. Review Nakka before assigning qualifiers.');
  if(!beautyPoolEqual_(beautyPoolAssignment_(event.assign_setting),workflow.format.assignment))beautyPoolError_('Qualification rules changed. Review the saved rules before assigning players.');
- const response=beautyHubTransferFetch_('tournament/standings?tdid=t_QHaG_7792',auth);
+ const response=beautyHubTransferFetch_(('tournament/standings?tdid='+beautyHubActiveTestTarget_().id),auth);
  if(response.result!==0||response.tdid!==event.tdid||!Array.isArray(response.groups)||response.groups.length!==event.rr_table.length)beautyPoolError_('Complete group standings are unavailable.');
  if(event.rr_table.length!==2)beautyPoolError_('This TEST assignment supports two saved pools. Review larger draws in Nakka.');
- const completion=beautyHubTransferFetch_('tournament/end_group?tdid=t_QHaG_7792',auth);
+ const completion=beautyHubTransferFetch_(('tournament/end_group?tdid='+beautyHubActiveTestTarget_().id),auth);
  if(completion.result!==0||completion.tdid!==event.tdid||!completion.groups||Object.keys(completion.groups).length!==event.rr_table.length||event.rr_table.some((_,i)=>![0,1].includes(completion.groups['rr_'+i])))beautyPoolError_('Group completion could not be verified.');
  const groups=event.rr_table.map((table,i)=>{
   const ids=table.filter(Boolean),g=response.groups.filter(g=>g.kind==='rr'&&g.index===i);
@@ -37,13 +37,14 @@ function beautyTournamentSnapshot_(auth){
   const savedPool=workflow.draw.pools[i],boards=workflow.boardPlan?.assignments.find(a=>a.poolId===savedPool.id)?.boards;
   return {number:i+1,title:boards?.length?'Bana '+boards.join(' + '):'Pool '+(i+1),complete,players};
  });
- const pending=JSON.parse(PropertiesService.getScriptProperties().getProperty('BEAUTY_POOL_QUALIFY_t_QHaG_7792')||'null');
+ const pending=JSON.parse(PropertiesService.getScriptProperties().getProperty(('BEAUTY_POOL_QUALIFY_'+beautyHubActiveTestTarget_().id))||'null');
  const assigned=['t','t3','s2','s2_3'].some(k=>!beautyPoolEmpty_(event[k+'_table'])),results=['t','t3','s2','s2_3'].some(k=>!beautyPoolEmpty_(event[k+'_result']));
  const allComplete=groups.every(g=>g.complete),reason=pending?.state==='ATTEMPTED'?'Assignment is unverified. Inspect its audit before another change.':assigned?'Knockout players are already assigned.':results?'Knockout results exist.':!allComplete?'Finish every group and resolve tied ranks before assigning knockouts.':'';
- const up=groups.flatMap(g=>g.players.slice(0,2).map(p=>({...p,group:g.number}))).sort((a,b)=>a.rank-b.rank||a.group-b.group),down=groups.flatMap(g=>g.players.slice(2).map(p=>({...p,group:g.number}))).sort((a,b)=>a.rank-b.rank||a.group-b.group);
+ const high=groups.flatMap(g=>g.players.slice(0,2).map(p=>({...p,group:g.number}))).sort((a,b)=>a.rank-b.rank||a.group-b.group),low=groups.flatMap(g=>g.players.slice(2).map(p=>({...p,group:g.number}))).sort((a,b)=>a.rank-b.rank||a.group-b.group);
+ const enabledA=workflow.format.stage1.enabled!==false,enabledB=workflow.format.stage2.enabled!==false,up=enabledA?high:[],down=enabledB?(enabledA?low:high):[];
  const plan={};if(!reason){
   if(up.length!==workflow.format.stage1.qualifiers||down.length!==workflow.format.stage2.qualifiers)beautyPoolError_('Qualifier counts differ from the approved format.');
-  for(const [k,players]of [['t',up],['s2',down]]){
+  for(const [k,players]of [['t',up],['s2',down]].filter(([key])=>key==='t'?enabledA:enabledB)){
    const stage=k==='t'?workflow.format.stage1:workflow.format.stage2,size=event[k+'_setting']?.t_player_count;
    if(event[k+'_setting']?.tournament!==1||size!==stage.slots)beautyPoolError_('Knockout settings differ from the approved format.');
    const expected=beautyTournamentBracket_(players,size);
@@ -53,7 +54,7 @@ function beautyTournamentSnapshot_(auth){
   }
  }
  const after=beautyPoolEvent_(auth,true);if(!beautyPoolEqual_(event,after))beautyPoolError_('Nakka changed during review. Reload tournament control.');
- const stages=[['t','Slutspel 1',up],['s2','Slutspel 2',down]].map(([key,title,players])=>({key,title,players,slots:event[key+'_setting']?.t_player_count,byes:(event[key+'_setting']?.t_player_count||0)-players.length,table:plan[key+'_table']||event[key+'_table']}));
+ const stages=[['t','Slutspel 1',up],['s2','Slutspel 2',down]].filter(([key])=>key==='t'?enabledA:enabledB).map(([key,title,players])=>({key,title,players,slots:event[key+'_setting']?.t_player_count,byes:(event[key+'_setting']?.t_player_count||0)-players.length,table:plan[key+'_table']||event[key+'_table']}));
  return {event,standings:response,completion,plan,view:{title:event.title,groups,stages,ready:!reason,assigned,reason,version:beautyPoolHash_({event,standings:response,completion,plan,poolReceipt:workflow.receipt})}};
 }
 function beautyTournamentControl_(action,input,account,session,auth,cache){
@@ -74,14 +75,14 @@ function beautyTournamentControl_(action,input,account,session,auth,cache){
  if(beautyTournamentSnapshot_(auth).view.version!==view.version)beautyPoolError_('Nakka changed before assignment. Nothing assigned.');
  if(Date.now()>=saved.expires)beautyPoolError_('Knockout approval expired. Nothing assigned.');
  beautyHubAuthRequire_(beautyHubRequestToken_);
- const props=PropertiesService.getScriptProperties(),key='BEAUTY_POOL_QUALIFY_t_QHaG_7792',journal={state:'ATTEMPTED',audit,uid:account.uid,recordedUTC:new Date().toISOString()};
+ const props=PropertiesService.getScriptProperties(),key=('BEAUTY_POOL_QUALIFY_'+beautyHubActiveTestTarget_().id),journal={state:'ATTEMPTED',audit,uid:account.uid,recordedUTC:new Date().toISOString()};
  props.setProperty(key,JSON.stringify(journal));if(props.getProperty(key)!==JSON.stringify(journal))beautyPoolError_('Assignment journal could not be verified.');
  try{
-  beautyHubTransferFetch_('tournament/update',auth,{tdid:'t_QHaG_7792',expect_update_time:snapshot.event.updateTime,set:snapshot.plan});
+  beautyHubTransferFetch_('tournament/update',auth,{tdid:(beautyHubActiveTestTarget_().id),expect_update_time:snapshot.event.updateTime,set:snapshot.plan});
   const after=beautyPoolEvent_(auth,true),expected={...beautyPoolProjection_(snapshot.event),...snapshot.plan};
   if(!beautyPoolEqual_(beautyPoolProjection_(after),expected))beautyPoolError_('Knockout assignment readback differs.');
   const receipt=beautyPoolAudit_({kind:'POOL_QUALIFY_READBACK',uid:account.uid,beforeAudit:audit,event:beautyPoolProjection_(after)});
   const verified=JSON.stringify({...journal,state:'VERIFIED',receipt});props.setProperty(key,verified);if(props.getProperty(key)!==verified)beautyPoolError_('Assignment receipt could not be verified.');
-  return {success:true,readbackVerified:true,audit,receipt,message:'TEST knockout players assigned and verified. Open Slutspel 1 and 2 in Beauty Live.'};
+  return {success:true,readbackVerified:true,audit,receipt,message:'TEST knockout players assigned and verified. Open Slutspel 1 and 2 in Live.'};
  }catch(e){return {success:false,uncertain:true,audit,error:'Knockout assignment may be saved. Do not repeat. Inspect the TEST event and assignment audit.'};}
 }

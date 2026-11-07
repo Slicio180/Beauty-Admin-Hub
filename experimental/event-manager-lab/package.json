@@ -1,0 +1,17 @@
+{
+  "name": "event-manager-lab",
+  "version": "0.4.0",
+  "private": true,
+  "description": "Isolated Nakka event management integration project; no production connection",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.cjs",
+    "start": "node src/demo-server.cjs",
+    "test:browser": "node scripts/check-browser.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}

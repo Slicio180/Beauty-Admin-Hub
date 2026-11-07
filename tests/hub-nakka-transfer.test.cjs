@@ -46,3 +46,10 @@ test('a new registration can add again only with matching verified removal proof
  }
  h.props.set(key,JSON.stringify(proof));const preview=h.preview();assert.equal(preview.status,'PREVIEW');assert.equal(h.save(preview).success,true);assert.equal(h.posts().length,2);assert.equal(JSON.parse(h.props.get(key)).priorTransfer,prior);
 });
+
+test('Date-selected player transfer uses the selected target and keeps old confirmed transfers unchanged',()=>{
+ const f=harness();f.state.event.tdid='t_SUNDAY_NEW';f.state.event.title='AIK Hub TEST Sunday';f.target.id=f.state.event.tdid;f.target.title=f.state.event.title;f.props.set('BEAUTY_NAKKA_TRANSFER_t_QHaG_7792_a123','historical');
+ const p=f.preview(),r=f.save(p);assert.equal(r.success,true,JSON.stringify(r));assert.equal(r.event.id,'t_SUNDAY_NEW');assert.equal(f.props.get('BEAUTY_NAKKA_TRANSFER_t_QHaG_7792_a123'),'historical');
+ for(const call of f.calls.filter(c=>c.url.includes('/tournament/')))assert(!call.url.includes('t_QHaG_7792'));
+ assert.equal(JSON.parse(f.posts()[0].options.payload).tdid,'t_SUNDAY_NEW');
+});

@@ -1,0 +1,29 @@
+{
+  "project": "Event Manager Lab",
+  "version": "0.4.0",
+  "savedUTC": "2026-11-06T09:44:09.511912+00:00",
+  "tests": {
+    "total": 61,
+    "pass": 61,
+    "fail": 0,
+    "kind": "synthetic Node and loopback HTTP"
+  },
+  "browser": "BLOCKED \u2014 local Chromium process could not launch; visual/device acceptance pending",
+  "hubSourceCheck": "PASS \u2014 all 33 plain-label patch source hashes unchanged by standalone development",
+  "nativeTransport": "NOT CONNECTED",
+  "nativeProviderWrites": 0,
+  "productionChanges": 0,
+  "githubPush": false,
+  "integrationReady": false,
+  "next": [
+    "Read docs/CONTROL-INVENTORY.md",
+    "Native read-only snapshot/active-match contract qualification",
+    "Expand manual rule/capacity editor and host persistence/recovery",
+    "Expand match/setup controls and downstream correction safeguards",
+    "Qualify partial assignment and badges/autopilot against a separate approved native TEST event",
+    "Browser/device acceptance and later reviewed integration"
+  ],
+  "guidePersistence": "Local guide store and manual swap editor implemented; host integration, complete event persistence and recovery remain pending",
+  "automaticBadges": "Synthetic autonomous waiting queue, board reuse, breaks, pause/resume and monitoring; real Nakka autopilot NOT connected",
+  "sharedBoards": "Identical/overlapping stage ranges supported in synthetic rehearsal only; native arbitration unqualified"
+}

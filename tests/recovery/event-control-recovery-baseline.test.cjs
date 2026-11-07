@@ -96,5 +96,5 @@ test('Adapter retains all stale diagnostics and no automatic retry', () => {
 test('Recovered TEST Hub clearly identifies isolated view', () => {
   const hub = read('Hub.html');
   assert.match(hub, /TEST Event Control only\. Dashboard player data and registration are unavailable in this test view\./);
-  assert.match(hub, /Beauty Admin Hub/);
+  assert.match(hub, /Admin Hub/);
 });

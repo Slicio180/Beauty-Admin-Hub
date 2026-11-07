@@ -118,3 +118,5 @@ body .beauty-picker-header button.beauty-new-player { min-height:52px; font-size
 body .help,body .new-player-help { font-size:23px !important; }
 .tonight-modal-card { height:auto; max-height:calc(100dvh - 20px); }
 .tonight-players-list { flex:0 1 auto; }
+
+.tonight-player-name::before,.tonight-player-count strong{font-family:'AIK Siffror',serif;font-weight:400}

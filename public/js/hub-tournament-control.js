@@ -55,7 +55,7 @@
   }
   async function load(prepare=false){
    if(busy||uncertain)return;busy=true;prepared=null;controls();status.textContent=prepare?'Checking qualifiers and bracket…':'Loading completed groups…';status.className='tournament-control-status';const token=++generation;
-   try{const r=await request(prepare?'poolqualifyprepare':'poolcontrol');if(active!==overlay||generation!==token)return;view=r.control;prepared=prepare?r:null;draw();status.textContent=prepare?'Review the players and matches below.':view.reason||(view.assigned?'✓ Knockout players are assigned. Open Beauty Live to follow play.':'✓ Groups complete · Qualifiers ready for review.');}
+   try{const r=await request(prepare?'poolqualifyprepare':'poolcontrol');if(active!==overlay||generation!==token)return;view=r.control;prepared=prepare?r:null;draw();status.textContent=prepare?'Review the players and matches below.':view.reason||(view.assigned?'✓ Knockout players are assigned. Open Live to follow play.':'✓ Groups complete · Qualifiers ready for review.');}
    catch(e){if(active===overlay&&generation===token){view=null;prepared=null;draw();status.textContent=e.message;status.className='tournament-control-status is-attention';}}
    finally{if(active===overlay&&generation===token){busy=false;controls();}}
   }

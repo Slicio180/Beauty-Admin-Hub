@@ -1,0 +1,11 @@
+# Resume Event Manager standalone development
+
+This is a separate project authorised on 6 November. Owner does not need to remain present for local development. No automatic background work is implied after a turn ends. Read AGENTS.md and README.md, then docs/CONTROL-INVENTORY.md and docs/INTEGRATION.md. Current version 0.4.0 has 61 local tests passing. The user requested a full Nakka-like manager; this first build is explicitly incomplete and NOT integration-ready. Keep working from the inventory; do not install a partial replacement in the Hub.
+
+Core completed-pool assignment, manual badge and autopilot config review are executable with synthetic data. Match result entry and release proposal builders are blocked pending native qualification. Current rehearsal is loopback only; no external transport or credentials. Authenticated active-match normalization, recovery console, full rule editor/host persistence, provider-native verification and remaining controls are still required. Browser launch failed in this execution environment, so do not claim a visual PASS. Run npm test; npm start opens local rehearsal on port 4317. All scores/completion and provider writes there are synthetic.
+
+The existing Hub/Monday scope remains separate: kiosk, remote, Hub and skin; native Nakka Admin handles full tournament operations. Plain labels patch is prepared but owner deferred applying until tonight; current Slutspel Hub panel removal is agreed but not implemented. No GitHub push or production change. Current Hub source hashes were checked unchanged against all 33 files of the latest prepared labels patch.
+
+Latest addition: manual guide swaps and atomic revision history. See docs/INTEGRATION.md section Guide persistence. EVENT_MANAGER_DATA_DIR retains guides and operation journals, not synthetic event results. Assigned matches cannot be re-guided. HTTP tests cover reopening the saved guide and using it for later assignment.
+
+Version 0.3 adds automatic badge rehearsal. Read docs/AUTO-BADGES.md. It is deliberately not a native scheduler. Real integration must configure/observe Nakka autopilot, not replay the synthetic tick writer. Automatic stage pause/resume, finished-board reuse, break timers, busy-player guards and audit revision identities have local/HTTP coverage. Browser/native qualification remains pending.

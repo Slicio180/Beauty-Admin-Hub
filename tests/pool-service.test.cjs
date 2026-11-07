@@ -10,10 +10,13 @@ function fixture(options={}){
  let event={tdid:'t_QHaG_7792',lgid:'lg_tM2v_3523',title:'Beauty Registration TEST event DO NOT USE LIVE',status:20,t_date:1793124000,updateTime:100,league:1,team_games:0,
  lg_setting:{auto_schedule:1,league:1,robin_count:7,robin_player_count:4,turnaround:0,include_leg:0,include_set:0,include_set_leg:0,limit:1,low_win:0,limit_leg_count:2,drawMode:0,limit_set_count:2,limit_set_leg_count:2,startScore:501,match_type:'01',limit_rounds:0,overkill:0,rounds:15,changeFirst:0,exitResult:0,autoNext:1,setOrder:0,schedule:[],point_w:2,point_d:1,point_l:0,priority_win:0,exclude_from_stats:0,game_setting:[],pt_setting:[]},
  lg_table:[],lg_result:[],lg_rank:[],t_order:{preserved:true},badge:{},entry_list:profiles.map((p,i)=>({tpid:'E'+String(i).padStart(3,'0'),name:p.name,index:i,c:'SE'}))};
+ // Standard fixtures explicitly enable both stages; absent native settings mean OFF.
+ event.t_setting={tournament:1,t_player_count:8,limit:1,limit_leg_count:2,drawMode:0};event.s2_setting=copy(event.t_setting);
  let schedule=[];
  const props={getProperty:k=>values.has(k)?values.get(k):null,setProperty(k,v){values.set(k,v);},deleteProperty:k=>values.delete(k)};
  const account={uid:'staff',sessionBinding:'session'};
- const context=vm.createContext({console,Set,Map,Date:class extends Date{constructor(...args){super(...args.length?args:[now]);}static now(){return now;}},
+ if(options.target){event.tdid=options.target;event.title='AIK Hub TEST Sunday';}
+ const context=vm.createContext({beautyHubActiveTestTarget_:()=>({id:options.target||'t_QHaG_7792',title:options.target?'AIK Hub TEST Sunday':'Beauty Registration TEST event DO NOT USE LIVE'}),console,Set,Map,Date:class extends Date{constructor(...args){super(...args.length?args:[now]);}static now(){return now;}},
   // Existing synthetic provider-path tests explicitly qualify unassigned entries;
   // real deployment has no qualification flag and remains blocked.
   BEAUTY_POOL_UNASSIGNED_ENTRIES_VERIFIED_:options.unassignedVerified!==false,
@@ -37,11 +40,11 @@ function fixture(options={}){
    if(path.startsWith('tournament/get?'))return {tournament:copy(event)};
    if(path.startsWith('league/schedule/get?'))return {tdid:event.tdid,swiss:0,schedule:copy(schedule)};
    if(path==='tournament/update'){
-    assert.equal(payload.expect_update_time,event.updateTime);assert.equal(payload.tdid,'t_QHaG_7792');event={...event,...copy(payload.set),updateTime:event.updateTime+1};options.afterGroups?.(event);return {result:0};
+    assert.equal(payload.expect_update_time,event.updateTime);assert.equal(payload.tdid,event.tdid);event={...event,...copy(payload.set),updateTime:event.updateTime+1};options.afterGroups?.(event);return {result:0};
    }
    if(path==='tournament/assign/update'){event.assign_setting=copy(payload.assign);event.updateTime++;options.afterAssignment?.(event);return {result:0,assign_setting:copy(event.assign_setting)};}
    if(path==='league/schedule/generate'){
-    assert.deepEqual(copy(payload),{tdid:'t_QHaG_7792',mode:'robin'});schedule=event.lg_table.map(g=>{const p=g.filter(Boolean),cards=[];for(let a=0;a<p.length;a++)for(let b=a+1;b<p.length;b++)cards.push({p:[p[a],p[b]],lsid:cards.length.toString(36).padStart(4,'0'),t:''});return cards;});options.afterCards?.(event,schedule);return {result:0};
+    assert.deepEqual(copy(payload),{tdid:event.tdid,mode:'robin'});schedule=event.lg_table.map(g=>{const p=g.filter(Boolean),cards=[];for(let a=0;a<p.length;a++)for(let b=a+1;b<p.length;b++)cards.push({p:[p[a],p[b]],lsid:cards.length.toString(36).padStart(4,'0'),t:''});return cards;});options.afterCards?.(event,schedule);return {result:0};
    }
    throw Error('Unexpected path '+path);
   }});
@@ -231,7 +234,7 @@ test('native Round Robin format review sizes both knockouts and preserves native
  assert.equal(f.event.assign_setting.s2_custom['3'].count,1);
 });
 test('native Round Robin rejects mixed formats disabled groups and unsupported modes before writes',()=>{
- for(const change of [f=>f.event.lg_setting={league:1},f=>f.event.rr_setting.round_robin=0,f=>f.event.rr_setting.swiss=1,f=>f.event.rr_setting.turnaround=1,f=>f.event.rr_setting.match_type='cricket']){
+ for(const change of [f=>f.event.lg_setting={league:1},f=>f.event.rr_setting.swiss=1,f=>f.event.rr_setting.turnaround=1,f=>f.event.rr_setting.match_type='cricket']){
   const f=nativeRobinFixture();change(f);assert.equal(f.load().success,false);assert.equal(f.calls.filter(c=>c.payload).length,0);
  }
 });
@@ -404,4 +407,89 @@ test('tournament audit or concurrent prewrite changes block provider mutation',(
 test('tournament routes reject wrong identity authentication unsupported inputs and prestart state',()=>{
  for(const change of [f=>f.event.tdid='other',f=>f.options.auth=true,f=>f.event.status=20]){const f=controlFixture();change(f);assert.equal(f.call('poolcontrol',{}).success,false);assert.equal(f.calls.some(c=>c.payload),false);}
  const f=controlFixture();for(const action of ['poolcontrol','poolqualifyprepare'])assert.equal(f.call(action,{event:'other'}).success,false);assert.equal(f.call('poolqualifysave',{ticket:'bad',confirmed:'true',set:'{}'}).success,false);assert.equal(f.calls.some(c=>c.payload),false);
+});
+
+
+test('running pool board edits persist with revision and no Nakka writes or Start',()=>{
+ const f=savedNative();f.event.status=30;
+ const w=f.call('poolload',{refresh:'false'}).workflow;
+ assert.equal(w.canEditBoards,true);assert.equal(w.canStart,false);
+ const before=copy(f.event),writes=f.calls.filter(c=>c.payload).length;
+ const input={available:[5,6],choices:w.draw.pools.map((p,i)=>({poolId:p.id,boards:[5+i]}))};
+ const r=f.call('poolboardplan',{boardPlan:JSON.stringify(input),boardVersion:w.boardVersion});
+ assert.equal(r.success,true,JSON.stringify(r));assert.equal(r.workflow.running,true);assert.equal(r.workflow.canStart,false);
+ assert.deepEqual(f.event,before);assert.equal(f.calls.filter(c=>c.payload).length,writes);
+ assert.deepEqual(f.call('poolload',{refresh:'false'}).workflow.boardPlan,r.workflow.boardPlan);
+ assert.equal(f.call('poolstartprepare',{}).success,false);
+});
+test('running pool board edits reject absent or stale versions and changed membership without saving',()=>{
+ for(const change of ['missing','revision','membership','concurrent-plan']){
+  const f=savedNative();f.event.status=30;const w=f.call('poolload',{refresh:'false'}).workflow;
+  const input={available:[5,6],choices:w.draw.pools.map((p,i)=>({poolId:p.id,boards:[5+i]}))};
+  const request={boardPlan:JSON.stringify(input),...(change==='missing'?{}:{boardVersion:w.boardVersion})};
+  if(change==='revision')f.event.updateTime++;
+  if(change==='membership')f.event.rr_table[0].reverse();
+  if(change==='concurrent-plan')assert.equal(f.call('poolboardplan',request).success,true);
+  const stored=f.values.get('BEAUTY_POOL_BOARDS_t_QHaG_7792'),writes=f.calls.filter(c=>c.payload).length;
+  assert.equal(f.call('poolboardplan',request).success,false);
+  assert.equal(f.values.get('BEAUTY_POOL_BOARDS_t_QHaG_7792'),stored);assert.equal(f.calls.filter(c=>c.payload).length,writes);
+ }
+});
+
+test('private native pool board capture performs one target read without names credentials or writes',()=>{
+ const f=savedNative();f.event.status=40;f.event.rr_board=[2,1];f.event.rr_memo=['Bana 5 + 6','Bana 2'];
+ f.event.admin_id='PRIVATE_ADMIN';f.event.join_pass='PRIVATE_PASS';f.calls.length=0;
+ const r=copy(f.context.beautyPoolBoardReadback_());
+ assert.deepEqual(r.rr_board,[2,1]);assert.equal(r.status,40);assert.equal(f.calls.length,1);assert.equal(f.calls[0].payload,null);
+ assert.doesNotMatch(JSON.stringify(r),/PRIVATE|entry_list|Player 0|rr_result/);
+ f.event.tdid='other';assert.throws(()=>f.context.beautyPoolBoardReadback_(),/Unsupported/);
+});
+
+
+test('automatic sparse board defaults survive pool review send and saved workflow reload',()=>{
+ const f=nativeRobinFixture();f.players[6].status='IN';
+ const l=f.load(),d=f.call('pooldraw',{bindings:JSON.stringify(l.mappings.map(p=>({id:p.id,lpid:p.lpid,tpid:p.tpid}))),reviewed:'true',sizes:'[3,4]'});
+ assert.equal(d.success,true,JSON.stringify(d));
+ const defaultPlan=copy(f.context.BeautyPoolBoards.defaults(d.draw.pools,[1,4,6]));
+ const boardPlan={available:[1,4,6],choices:defaultPlan.assignments.map(a=>({poolId:a.poolId,boards:a.boards}))};
+ const p=f.call('poolprepare',{ticket:d.ticket,format:'top2-rest',boardPlan:JSON.stringify(boardPlan)});
+ assert.equal(p.success,true,JSON.stringify(p));assert.equal(f.call('poolsave',{ticket:p.ticket,confirmed:'true'}).success,true);
+ const w=f.call('poolload',{refresh:'false'}).workflow;
+ assert.deepEqual(w.boardPlan,defaultPlan);assert.deepEqual(w.boardPlan.assignments.map(a=>a.boards),[[1],[4,6]]);assert.equal(w.canStart,true);
+});
+
+test('Date-selected pool handoff writes only the selected event and preserves original event journals',()=>{
+ const f=fixture({target:'t_SUNDAY_NEW'});f.values.set('BEAUTY_POOL_SEND_t_QHaG_7792','preserved-old-journal');
+ const {p}=f.prepare(),r=f.call('poolsave',{ticket:p.ticket,confirmed:'true'});assert.equal(r.success,true,JSON.stringify(r));
+ assert.equal(f.values.get('BEAUTY_POOL_SEND_t_QHaG_7792'),'preserved-old-journal');assert.ok(f.values.has('BEAUTY_POOL_SEND_t_SUNDAY_NEW'));
+ for(const call of f.calls.filter(c=>c.path.startsWith('tournament/')))assert.ok(!call.path.includes('t_QHaG_7792')&&call.payload?.tdid!=='t_QHaG_7792');
+});
+
+test('native two-player knockout disables third place while preserving chosen legs limits and final override',()=>{
+ const f=nativeRobinFixture(),o={tournament:1,t_player_count:16,t3:1,limit:1,limit_leg_count:1,drawMode:0,limit_rounds:1,rounds:13,game_setting:[{round:-1,limit:1,limit_leg_count:3,drawMode:0,roundLimit:1,maxRound:13}]};f.event.t_setting=copy(o);f.event.s2_setting=copy(o);f.event.t3_table=[['',''],['']];f.event.s2_3_table=[['',''],['']];
+ const five=f.players[5];five.status='OUT';const l=f.load(),d=f.call('pooldraw',{bindings:JSON.stringify(l.mappings.map(p=>({id:p.id,lpid:p.lpid,tpid:p.tpid}))),reviewed:'true',sizes:'[5]'});assert.equal(d.success,true,JSON.stringify(d));const p=f.call('poolprepare',{ticket:d.ticket,format:'top2-rest'});assert.equal(p.success,true,JSON.stringify(p));assert.equal(p.format.stage1.slots,2);assert.equal(p.format.set.t_setting.t3,0);assert.deepEqual(p.format.set.t3_table,[]);assert.equal(p.format.set.s2_setting.t3,1);assert.equal(p.format.set.t_setting.limit_leg_count,1);assert.equal(p.format.set.t_setting.rounds,13);assert.equal(p.format.set.t_setting.game_setting[0].limit_leg_count,3);
+ assert.equal(f.calls.filter(c=>c.payload).length,0);const r=f.call('poolsave',{ticket:p.ticket,confirmed:'true'});assert.equal(r.success,true,JSON.stringify(r));assert.equal(f.event.t_setting.t3,0);assert.deepEqual(f.event.t3_table,[]);assert.equal(f.event.s2_setting.t3,1);
+});
+
+test('Round Robin only reviews saves and starts without enabling knockouts or requiring qualifier rules',()=>{
+ const f=nativeRobinFixture();f.event.t_setting={tournament:0,t3:0};f.event.s2_setting={tournament:0,t3:0};const l=f.load();assert.equal(l.formatPreset,'preserve');assert.deepEqual(l.stages,{stage1:false,stage2:false});const d=f.draw(),p=f.call('poolprepare',{ticket:d.ticket,format:'top2-rest'});assert.equal(p.success,true,JSON.stringify(p));assert.equal(p.format,null);const r=f.call('poolsave',{ticket:p.ticket,confirmed:'true'});assert.equal(r.success,true,JSON.stringify(r));assert.equal(f.event.t_setting.tournament,0);assert.equal(f.event.s2_setting.tournament,0);assert.equal(f.calls.some(c=>c.path==='tournament/assign/update'),false);
+ const start=f.call('poolstartprepare',{});assert.equal(start.success,true,JSON.stringify(start));const done=f.call('poolstart',{ticket:start.ticket,confirmed:'true'});assert.equal(done.success,true,JSON.stringify(done));assert.equal(f.event.status,30);
+});
+test('Single enabled Slutspel receives top two qualifiers and handoff never enables the other bracket',()=>{
+ for(const enabled of ['t','s2']){const f=nativeRobinFixture(),disabled=enabled==='t'?'s2':'t';f.event[enabled+'_setting']={tournament:1,t_player_count:8,limit:1,limit_leg_count:3,drawMode:0};f.event[disabled+'_setting']={tournament:0,t3:0};const before=copy(f.event[disabled+'_setting']),d=f.draw(),p=f.call('poolprepare',{ticket:d.ticket,format:'top2-rest'});assert.equal(p.success,true,JSON.stringify(p));assert.equal(p.format[enabled==='t'?'stage1':'stage2'].qualifiers,4);assert.equal(p.format[disabled==='t'?'stage1':'stage2'].enabled,false);assert.equal(p.format.assignment[enabled+'_type'],'top');assert.equal(p.format.set[disabled+'_setting'],undefined);assert.equal(f.call('poolsave',{ticket:p.ticket,confirmed:'true'}).success,true);assert.deepEqual(f.event[disabled+'_setting'],before);assert.equal(f.event[disabled+'_table'],undefined);assert.equal(f.call('poolstartprepare',{}).success,true);}
+});
+test('Knockout-only pool load gives native setup guidance and rejects group mutation routes',()=>{
+ const f=nativeRobinFixture();f.event.rr_setting.round_robin=0;f.event.t_setting={tournament:0};f.event.s2_setting={tournament:1,t_player_count:16,limit:1,limit_leg_count:2,drawMode:0};let r=f.load();assert.equal(r.success,true,JSON.stringify(r));assert.equal(r.knockoutOnly,true);assert.deepEqual(r.stages,[{title:'Slutspel 2',slots:16}]);assert.equal(f.calls.some(c=>c.path.includes('stats_list')),false);assert.equal(f.call('pooldraw',{bindings:'[]',reviewed:'true',sizes:'[3,3]'}).success,false);assert.equal(f.calls.some(c=>c.payload),false);f.event.status=30;r=f.load();assert.equal(r.success,true);assert.equal(r.knockoutOnly,true);
+});
+
+test('Tournament assignment sends only the enabled Slutspel and takes top two when Slutspel 2 is the sole stage',()=>{
+ for(const enabled of ['t','s2']){const f=nativeRobinFixture(),disabled=enabled==='t'?'s2':'t';delete f.event.t_order;f.event[enabled+'_setting']={tournament:1,t_player_count:8,limit:1,limit_leg_count:2,drawMode:0};f.event[disabled+'_setting']={tournament:0,t3:0};const d=f.draw(),p=f.call('poolprepare',{ticket:d.ticket,format:'top2-rest'});assert.equal(f.call('poolsave',{ticket:p.ticket,confirmed:'true'}).success,true);f.event.status=30;
+ f.options.standings={result:0,tdid:f.event.tdid,groups:f.event.rr_table.map((table,index)=>({kind:'rr',index,players:table.filter(Boolean).map((tpid,i,arr)=>({tpid,rank:i+1,win:arr.length-1-i,lose:i}))}))};f.options.completion={result:0,tdid:f.event.tdid,groups:{rr_0:1,rr_1:1}};f.calls.length=0;
+ const review=f.call('poolqualifyprepare',{});assert.equal(review.success,true,JSON.stringify(review));assert.equal(review.control.stages.length,1);assert.equal(review.control.stages[0].key,enabled);assert.equal(review.control.stages[0].players.length,4);assert(review.control.stages[0].players.every(p=>p.rank<=2));assert.equal(f.calls.some(c=>c.payload),false);
+ const result=f.call('poolqualifysave',{ticket:review.ticket,confirmed:'true'});assert.equal(result.success,true,JSON.stringify(result));assert.equal(f.calls.filter(c=>c.payload).length,1);assert.deepEqual(Object.keys(f.calls.find(c=>c.payload).payload.set),[enabled+'_table']);assert.equal(f.event[disabled+'_setting'].tournament,0);
+ }
+});
+
+test('Native omitted knockout settings stay off through Round Robin handoff and Start',()=>{
+ const f=nativeRobinFixture();delete f.event.t_setting;delete f.event.s2_setting;const load=f.load();assert.deepEqual(load.stages,{stage1:false,stage2:false});assert.equal(load.formatPreset,'preserve');const d=f.draw(),p=f.call('poolprepare',{ticket:d.ticket,format:'top2-rest'});assert.equal(p.success,true);assert.equal(p.format,null);assert.equal(f.call('poolsave',{ticket:p.ticket,confirmed:'true'}).success,true);assert.equal(f.event.t_setting,undefined);assert.equal(f.event.s2_setting,undefined);assert.equal(f.calls.some(c=>c.path==='tournament/assign/update'),false);assert.equal(f.call('poolstartprepare',{}).success,true);
 });

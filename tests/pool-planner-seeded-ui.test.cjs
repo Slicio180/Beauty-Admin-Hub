@@ -204,10 +204,10 @@ test('pool main flow shows qualification without Advanced and resumes saved pool
  const confirm=g.find('CONFIRM START — TEST');assert.equal(confirm.disabled,true);const check=g.host.querySelector('[data-start-section]').querySelector('input');check.checked=true;await check.fire('change');await confirm.fire('click');await confirm.fire('click');assert.equal(g.requests.filter(r=>r.page==='poolstart').length,1);assert.match(g.host.querySelector('[data-start-section]').textContent,/Starting TEST event/);assert.doesNotMatch(g.host.querySelector('[data-start-section]').textContent,/Save boards first/);
  g.queue.shift().resolve({success:true,message:'TEST started'});await g.tick();assert.match(g.host.textContent,/Competition running/);assert.equal(g.find('CONFIRM START — TEST'),undefined);assert.equal(g.requests.some(r=>r.page==='poolsave'),false);
 });
-test('pool four-player board question blocks review until one or two available boards are selected',async()=>{
+test('pool four-player draft defaults to one board when scarce and rejects an unavailable second board',async()=>{
  const f=fixture();await f.load();await f.startGenerate();const draw=clone(f.draw);draw.pools[0].players.push(draw.pools[1].players.pop());draw.pools[0].capacity=4;
  f.queue.shift().resolve({success:true,ticket:'draw',draw});await f.tick();
- const count=f.host.querySelector('[data-pool-board-count]');assert.ok(count);assert.equal(f.find('REVIEW NAKKA HANDOFF — TEST').disabled,true);count.value='1';await count.fire('change');assert.equal(f.find('REVIEW NAKKA HANDOFF — TEST').disabled,false);
+ const count=f.host.querySelector('[data-pool-board-count]');assert.ok(count);assert.equal(count.value,'1');assert.equal(f.find('REVIEW NAKKA HANDOFF — TEST').disabled,false);count.value='1';await count.fire('change');assert.equal(f.find('REVIEW NAKKA HANDOFF — TEST').disabled,false);
  const first=f.host.querySelector('[data-pool-board-count]');first.value='2';await first.fire('change');assert.equal(f.find('REVIEW NAKKA HANDOFF — TEST').disabled,true);
 });
 
@@ -250,4 +250,64 @@ test('planner restoring the saved board selection clears the local dirty gate wi
 
 test('planner a late request from a locked session cannot unlock a new organiser request',async()=>{
  const f=fixture();await f.find('LOAD / REFRESH LEAGUE STATS').fire('click');f.lock();f.host.showModal();await f.find('LOAD / REFRESH LEAGUE STATS').fire('click');assert.equal(f.requests.length,2);f.queue.shift().resolve(clone(f.source));await f.tick();assert.equal(f.window.BeautySeededPoolUI.isBusy(),true);f.queue.shift().resolve(clone(f.source));await f.tick();assert.equal(f.window.BeautySeededPoolUI.isBusy(),false);
+});
+
+
+test('running pool cards hide Save and Start after the competition starts',async()=>{
+ const f=fixture();f.host.querySelector('[data-boards]').value='4,9';
+ f.window.BeautyTournamentControl={open(){throw Error('Removed command must not open');}};const workflow=savedWorkflow(f);workflow.running=true;workflow.canStart=false;workflow.canEditBoards=true;workflow.boardVersion='revision-1';
+ f.source.workflow=workflow;await f.load();
+ const id=f.draw.pools[0].id,field=f.host.querySelectorAll('[data-pool-board-number]').find(n=>n.dataset.poolBoardNumber===id+':0');
+ assert.equal(f.find('TOURNAMENT CONTROL'),undefined);assert.ok(field);field.value='9';await field.fire('change');
+ assert.match(f.host.textContent,/Save boards/);assert.equal(f.find('START EVENT — TEST'),undefined);
+ assert.equal(f.find('SAVE BOARDS & MATCH PLAN'),undefined);
+ assert.equal(f.requests.some(r=>r.page==='poolstart'||r.page==='poolsave'),false);
+});
+
+
+test('pool draft fills two-board four-player defaults and preserves manual one-board choice on redraw',async()=>{
+ const f=fixture();f.host.querySelector('[data-boards]').value='1,4,5';await f.load();await f.startGenerate();
+ const draw=clone(f.draw);draw.pools[0].players.push(draw.pools[1].players.pop());draw.pools[0].capacity=4;
+ f.queue.shift().resolve({success:true,ticket:'draw',draw});await f.tick();
+ let count=f.host.querySelector('[data-pool-board-count]');assert.equal(count.value,'2');
+ let fields=f.host.querySelectorAll('[data-pool-board-number]').filter(n=>n.dataset.poolBoardNumber.startsWith(draw.pools[0].id+':'));
+ assert.deepEqual(fields.map(n=>n.value),['1','4']);assert.equal(f.host.querySelector('[data-boards-needed]').textContent,'3');assert.equal(f.find('REVIEW NAKKA HANDOFF — TEST').disabled,false);
+ count.value='1';await count.fire('change');assert.equal(f.host.querySelector('[data-pool-board-count]').value,'1');assert.equal(f.host.querySelector('[data-boards-needed]').textContent,'2');
+ const review=f.find('REVIEW NAKKA HANDOFF — TEST');await review.fire('click');
+ const plan=JSON.parse(f.requests.at(-1).boardPlan);assert.deepEqual(plan.choices.find(c=>c.poolId===draw.pools[0].id).boards,[1]);
+});
+test('saved explicit boards survive default allocation and sparse draft queues explain later pools',async()=>{
+ const f=fixture();f.host.querySelector('[data-boards]').value='1,4';const w=savedWorkflow(f);
+ w.boardPlan.assignments[0].boards=[4];w.boardPlan.assignments[1].boards=[1];f.source.workflow=w;await f.load();
+ const fields=f.host.querySelectorAll('[data-pool-board-number]');assert.deepEqual(fields.map(n=>n.value),['4','1']);
+ const g=fixture();await g.load();await g.generate();assert.match(g.host.textContent,/Shared boards.*Pool 2.*row 4.*play later/);
+});
+
+
+test('planner board usage estimate includes a spare second board for each four-player pool',async()=>{
+ const f=fixture();f.data.players.push({player:'Player 6',status:'IN'});f.window.BeautySeededPoolUI.update(f.data);
+ const boards=f.host.querySelector('[data-boards]');boards.value='1,4,6';await boards.fire('input');
+ assert.equal(f.host.querySelector('[data-boards-needed]').textContent,'3');
+ boards.value='1,4';await boards.fire('input');assert.equal(f.host.querySelector('[data-boards-needed]').textContent,'2');
+});
+
+test('pool review Back retains the frozen draw and board choices while discarding the send approval',async()=>{
+ const f=fixture();await f.load();await f.generate();await f.prepare();const text=f.host.querySelector('[data-pool-draw]').textContent;const boards=f.host.querySelector('[data-boards]').value;
+ const staleSave=f.find('SEND APPROVED TEST POOLS'),oldCheck=f.host.querySelector('.pool-approval').querySelector('input');oldCheck.checked=true;oldCheck.fire('change');await f.find('BACK TO POOLS').fire('click');assert.equal(f.find('SEND APPROVED TEST POOLS'),undefined);assert.equal(f.host.querySelector('[data-pool-draw]').textContent,text);assert.equal(f.host.querySelector('[data-boards]').value,boards);assert.equal(f.requests.length,3);
+ await staleSave.fire('click');await f.tick();assert.equal(f.requests.filter(r=>r.page==='poolsave').length,0);await f.prepare();assert.equal(f.find('SEND APPROVED TEST POOLS').disabled,true);assert.equal(f.requests.at(-1).page,'poolprepare');
+});
+
+test('start review Back preserves saved pools and boards and requires a fresh start approval',async()=>{
+ const f=fixture();f.source.workflow=savedWorkflow(f);await f.load();const boards=f.host.querySelector('[data-boards]').value;
+ await f.find('START EVENT — TEST').fire('click');f.queue.shift().resolve({success:true,ticket:'old-start',workflow:f.source.workflow});await f.tick();const stale=f.find('CONFIRM START — TEST');
+ await f.find('BACK TO BOARDS').fire('click');assert.equal(f.find('CONFIRM START — TEST'),undefined);assert.equal(f.host.querySelector('[data-boards]').value,boards);assert(f.find('START EVENT — TEST'));await stale.fire('click');assert.equal(f.requests.filter(r=>r.page==='poolstart').length,0);
+ await f.find('START EVENT — TEST').fire('click');f.queue.shift().resolve({success:true,ticket:'new-start',workflow:f.source.workflow});await f.tick();assert.equal(f.find('CONFIRM START — TEST').disabled,true);assert.equal(f.requests.filter(r=>r.page==='poolstartprepare').length,2);
+});
+
+test('Pool UI follows Round Robin only and single Slutspel qualification choices',async()=>{
+ const f=fixture();f.source.stages={stage1:false,stage2:false};f.source.formatPreset='preserve';await f.load();await f.generate();const select=f.host.querySelector('[data-event-format]');assert.equal(select.value,'preserve');assert.equal(select.children.length,1);assert.match(f.host.textContent,/Round Robin only/);assert.doesNotMatch(f.host.textContent,/First 2 up → Slutspel 1/);
+ const g=fixture();g.source.stages={stage1:false,stage2:true};await g.load();await g.generate();assert.match(g.host.textContent,/Top 2 per group → Slutspel 2/);assert.doesNotMatch(g.host.textContent,/remaining players down → Slutspel 2/);
+});
+test('Pool UI explains native knockout-only setup and disables group generation',async()=>{
+ const f=fixture();Object.assign(f.source,{knockoutOnly:true,stats:null,stages:[{title:'Slutspel 2',slots:16}],event:{title:'AIK Hub TEST knockout',date:f.data.eventDate,url:'https://n01darts.com/n01/league/season.php?id=t_TEST'}});await f.load();assert.equal(f.host.querySelector('.pool-setup').hidden,true);assert.equal(f.host.querySelector('[data-generate]').disabled,true);assert.match(f.host.textContent,/assign them to the chosen brackets and start in Nakka Control/);const link=f.host.all().find(n=>n.tag==='a'&&n._text==='OPEN NAKKA EVENT ↗');assert.equal(link.href,f.source.event.url);assert.equal(f.requests.length,1);
 });

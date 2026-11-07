@@ -1,0 +1,7 @@
+node_modules/
+.env
+.env.*
+audit-data/
+*.log
+playwright-report/
+evidence/*-internal.png

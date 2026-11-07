@@ -55,7 +55,7 @@
    const right=el('div',null,header,'pool-card-meta');
    if(pool.shared||!pool.board)el('h3','Grupp '+value(pool.group??pool.number),header,'pool-group-title');
    const averages=el('div',null,right,'group-averages');
-   for(const [label,value,css,title]of [['START',pool.startAverage,'start-average','Fryst gruppsnitt vid gruppindelningen'],['NU',pool.currentAverage,'current-average','Poäng / kastade pilar × 3 i gruppspelet hittills']]){const pair=el('span',null,averages,css);pair.setAttribute('title',title);el('span',label,pair,'average-caption');el('strong',average(value),pair,'average-value');}
+   for(const [label,value,css,title]of [['START',pool.startAverage,'start-average','Fryst gruppsnitt vid gruppindelningen'],['NU',pool.currentAverage,'current-average','Poäng / kastade pilar × 3 i gruppspelet hittills']]){const pair=el('span',null,averages,css);pair.setAttribute('title',title+(label==='NU'&&pool.currentAveragePartial?' · Endast matcher med poäng och kastade pilar':''));el('span',label,pair,'average-caption');el('strong',average(value)+(label==='NU'&&value!=null&&pool.currentAveragePartial?'*':''),pair,'average-value');}
    if(!Array.isArray(pool.matrix)){
     el('p','Matchmatris saknas från Nakka.',card,'empty-state');continue;
    }
@@ -67,7 +67,7 @@
    for(const title of ['#','Spelare',...pool.matrix.map(p=>p.position),'V–F','Legs','Rank'])el('th',title,head).setAttribute('scope','col');
    const body=el('tbody',null,table);
    for(const p of pool.matrix){
-    const row=el('tr',null,body);el('td',p.position,row,'position number');const player=el('td',null,row,'pool-player'),identity=el('div',null,player,'pool-player-line');el('span',p.name,identity,'player-name');el('small',average(p.overallAverage),identity,'overall-average').setAttribute('aria-label','Gruppspelssnitt '+average(p.overallAverage));
+    const row=el('tr',null,body);el('td',p.position,row,'position number');const player=el('td',null,row,'pool-player'),identity=el('div',null,player,'pool-player-line');el('span',p.name,identity,'player-name');el('small',average(p.overallAverage)+(p.overallAverage!=null&&p.overallAveragePartial?'*':''),identity,'overall-average').setAttribute('aria-label','Gruppspelssnitt '+average(p.overallAverage)+(p.overallAveragePartial?' · Endast matcher med poäng och kastade pilar':''));
     for(const c of p.cells){
      const td=el('td',null,row,c.state==='self'?'self-cell':'number'+(c.live?' live-cell':''));
      if(['result','live'].includes(c.state)){

@@ -1,6 +1,6 @@
 
 // Authorized fixture for existing feature tests; auth itself is tested separately.
-const authFixture={beautyHubAuthRequire_:()=>({uid:'fixture'}),beautyHubRequestToken_:'fixture',BeautyHubAuth:{token:()=> 'fixture',generation:()=>0,isCurrent:()=>true,expired(){}}};
+const authFixture={beautyHubActiveTestTarget_:()=>({id:'t_QHaG_7792',title:'Beauty Registration TEST event DO NOT USE LIVE'}),beautyHubCastHtml_:file=>({file,setTitle(){return this;}}),beautyHubAuthRequire_:()=>({uid:'fixture'}),beautyHubRequestToken_:'fixture',BeautyHubAuth:{token:()=> 'fixture',generation:()=>0,isCurrent:()=>true,expired(){}}};
 process.chdir(require('node:path').resolve(__dirname, '..'));
 const test=require('node:test'), assert=require('node:assert/strict'), fs=require('node:fs'),vm=require('node:vm'),cp=require('node:child_process');
 const base='apps-script/registration-identity-test/remote-app/';
@@ -45,4 +45,25 @@ test('Hub TEST tournament routes preserve audit guidance and reject caller suppl
  }
  assert.deepEqual(calls.map(c=>c.action),['poolcontrol','poolqualifyprepare','poolqualifysave']);
  const bridge=server({beautyHubPool_:(action,input)=>({action,input})});for(const action of calls.map(c=>c.action))assert.equal(bridge.call(action,{}).action,action);
+});
+
+
+test('Hub TEST pool board requests carry draft plans and running revision through the real client route',async()=>{
+ const calls=[],s=client((action,input)=>{calls.push({action,input});return {success:true};});
+ const plan=JSON.stringify({available:[1,4,6],choices:[{poolId:'a',boards:[1]},{poolId:'b',boards:[4,6]}]});
+ for(const [page,input]of [['poolprepare',{ticket:'ticket',format:'top2-rest',boardPlan:plan}],['poolboardplan',{boardPlan:plan,boardVersion:'revision'}]]){
+  const u=new URL('https://beauty.invalid/hub');u.searchParams.set('page',page);for(const [k,v]of Object.entries(input))u.searchParams.set(k,v);
+  assert.equal((await(await s.request(u.toString())).json()).success,true);
+  assert.deepEqual(JSON.parse(JSON.stringify(calls.at(-1))),{action:page,input});
+  u.searchParams.set('tdid','production');await assert.rejects(s.request(u.toString()),/Blocked TEST route/);
+ }
+ assert.equal(calls.length,2);
+});
+
+
+test('generated Hub omits tournament assignment commands while retaining Live navigation and event date controls',()=>{
+ const html=fs.readFileSync(base+'HubTest.html','utf8');
+ assert.doesNotMatch(html,/ASSIGN KNOCKOUTS|REVIEW QUALIFIERS|TOURNAMENT CONTROL|BeautyTournamentControl/);
+ assert.match(html,/CONFIRM DATE CHANGE/);assert.match(html,/START EVENT — TEST/);assert.match(html,/SAVE BOARDS & MATCH PLAN/);
+ assert.match(html,/openBeautyLive|Live/);
 });

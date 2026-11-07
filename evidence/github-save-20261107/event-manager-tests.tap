@@ -1,0 +1,376 @@
+TAP version 13
+# Subtest: automatic rehearsal assigns distinct boards and retains waiting queue
+ok 1 - automatic rehearsal assigns distinct boards and retains waiting queue
+  ---
+  duration_ms: 8.121776
+  type: 'test'
+  ...
+# Subtest: repeated automatic tick does not duplicate or reshuffle existing badges
+ok 2 - repeated automatic tick does not duplicate or reshuffle existing badges
+  ---
+  duration_ms: 4.427245
+  type: 'test'
+  ...
+# Subtest: finished match releases board to the next waiting match
+ok 3 - finished match releases board to the next waiting match
+  ---
+  duration_ms: 1.588955
+  type: 'test'
+  ...
+# Subtest: board and player break prevents early reuse and expires on rehearsal clock
+ok 4 - board and player break prevents early reuse and expires on rehearsal clock
+  ---
+  duration_ms: 2.746901
+  type: 'test'
+  ...
+# Subtest: pause stops new assignment and preserves matches already assigned
+ok 5 - pause stops new assignment and preserves matches already assigned
+  ---
+  duration_ms: 2.334821
+  type: 'test'
+  ...
+# Subtest: busy players cannot receive another badge
+ok 6 - busy players cannot receive another badge
+  ---
+  duration_ms: 1.718361
+  type: 'test'
+  ...
+# Subtest: unresolved opponents byes and finals are never auto-badged
+ok 7 - unresolved opponents byes and finals are never auto-badged
+  ---
+  duration_ms: 1.049943
+  type: 'test'
+  ...
+# Subtest: boards occupied in round robin or another stage are not reused
+ok 8 - boards occupied in round robin or another stage are not reused
+  ---
+  duration_ms: 2.415782
+  type: 'test'
+  ...
+# Subtest: rehearsal scheduler refuses real events and missing active identities
+ok 9 - rehearsal scheduler refuses real events and missing active identities
+  ---
+  duration_ms: 1.558019
+  type: 'test'
+  ...
+# Subtest: enabled config is not reported as running without recent service status
+ok 10 - enabled config is not reported as running without recent service status
+  ---
+  duration_ms: 0.660125
+  type: 'test'
+  ...
+# Subtest: pause patch changes only the chosen enable flag
+ok 11 - pause patch changes only the chosen enable flag
+  ---
+  duration_ms: 0.730992
+  type: 'test'
+  ...
+# Subtest: resume allows shared stages while pause preserves invalid legacy configuration
+ok 12 - resume allows shared stages while pause preserves invalid legacy configuration
+  ---
+  duration_ms: 0.641056
+  type: 'test'
+  ...
+# Subtest: manual badge updates require pausing the owning autopilot
+ok 13 - manual badge updates require pausing the owning autopilot
+  ---
+  duration_ms: 0.934109
+  type: 'test'
+  ...
+# Subtest: existing assigned badge keeps its players busy in later candidate matches
+ok 14 - existing assigned badge keeps its players busy in later candidate matches
+  ---
+  duration_ms: 0.554446
+  type: 'test'
+  ...
+# Subtest: selected round limit holds later matches and final stays manual
+ok 15 - selected round limit holds later matches and final stays manual
+  ---
+  duration_ms: 0.487035
+  type: 'test'
+  ...
+# Subtest: finished badges can clear without losing recorded match completion
+ok 16 - finished badges can clear without losing recorded match completion
+  ---
+  duration_ms: 1.354082
+  type: 'test'
+  ...
+# Subtest: shared stage ranges never double book and alternate when one board is released
+ok 17 - shared stage ranges never double book and alternate when one board is released
+  ---
+  duration_ms: 0.638132
+  type: 'test'
+  ...
+# Subtest: identical and partially shared ranges respect occupied boards and stage pause independently
+ok 18 - identical and partially shared ranges respect occupied boards and stage pause independently
+  ---
+  duration_ms: 1.191196
+  type: 'test'
+  ...
+# Subtest: review is read-only; confirmed operation is written and audited once
+ok 19 - review is read-only; confirmed operation is written and audited once
+  ---
+  duration_ms: 6.420891
+  type: 'test'
+  ...
+# Subtest: missing approval expired session and changed event never write
+ok 20 - missing approval expired session and changed event never write
+  ---
+  duration_ms: 3.381198
+  type: 'test'
+  ...
+# Subtest: uncertain operation blocks all further writes for event even after coordinator restart
+ok 21 - uncertain operation blocks all further writes for event even after coordinator restart
+  ---
+  duration_ms: 2.663766
+  type: 'test'
+  ...
+# Subtest: two prepared tickets serialize and stale second confirmation refuses mutation
+ok 22 - two prepared tickets serialize and stale second confirmation refuses mutation
+  ---
+  duration_ms: 3.882534
+  type: 'test'
+  ...
+# Subtest: file store atomically blocks competing claims for the same event
+ok 23 - file store atomically blocks competing claims for the same event
+  ---
+  duration_ms: 2.286007
+  type: 'test'
+  ...
+# Subtest: audit failure prevents provider write and native qualification gate cannot be bypassed
+ok 24 - audit failure prevents provider write and native qualification gate cannot be bypassed
+  ---
+  duration_ms: 2.222311
+  type: 'test'
+  ...
+# Subtest: unexpected provider readback retains uncertain journal and event lock
+ok 25 - unexpected provider readback retains uncertain journal and event lock
+  ---
+  duration_ms: 1.354362
+  type: 'test'
+  ...
+# Subtest: a new reviewed revision can repeat a verified configuration without audit-key collision
+ok 26 - a new reviewed revision can repeat a verified configuration without audit-key collision
+  ---
+  duration_ms: 4.10539
+  type: 'test'
+  ...
+# Subtest: manual guide swap preserves members rules and bracket state
+ok 27 - manual guide swap preserves members rules and bracket state
+  ---
+  duration_ms: 4.276398
+  type: 'test'
+  ...
+# Subtest: guide editing rejects stale revision and duplicate missing or wrong-stage qualifier
+ok 28 - guide editing rejects stale revision and duplicate missing or wrong-stage qualifier
+  ---
+  duration_ms: 1.226298
+  type: 'test'
+  ...
+# Subtest: matches with assigned players active games or results cannot be re-guided
+ok 29 - matches with assigned players active games or results cannot be re-guided
+  ---
+  duration_ms: 5.035372
+  type: 'test'
+  ...
+# Subtest: guide cannot silently adopt changed membership or settings
+ok 30 - guide cannot silently adopt changed membership or settings
+  ---
+  duration_ms: 1.573712
+  type: 'test'
+  ...
+# Subtest: guide readback checks revision content and unchanged native event
+ok 31 - guide readback checks revision content and unchanged native event
+  ---
+  duration_ms: 3.325123
+  type: 'test'
+  ...
+# Subtest: guide store survives reopening with immutable history and stale-write refusal
+ok 32 - guide store survives reopening with immutable history and stale-write refusal
+  ---
+  duration_ms: 5.874537
+  type: 'test'
+  ...
+# Subtest: guide store rejects another event or actor and refuses an existing lock
+ok 33 - guide store rejects another event or actor and refuses an existing lock
+  ---
+  duration_ms: 0.78283
+  type: 'test'
+  ...
+# Subtest: result proposal uses native result API and remains blocked pending qualification
+ok 34 - result proposal uses native result API and remains blocked pending qualification
+  ---
+  duration_ms: 1.360591
+  type: 'test'
+  ...
+# Subtest: unfinished tied invalid and excessive result scores are rejected
+ok 35 - unfinished tied invalid and excessive result scores are rejected
+  ---
+  duration_ms: 0.449557
+  type: 'test'
+  ...
+# Subtest: active and already recorded match requires separate correction review
+ok 36 - active and already recorded match requires separate correction review
+  ---
+  duration_ms: 0.30523
+  type: 'test'
+  ...
+# Subtest: unsupported round overrides and set formats never guess a result format
+ok 37 - unsupported round overrides and set formats never guess a result format
+  ---
+  duration_ms: 0.335206
+  type: 'test'
+  ...
+# Subtest: release proposal requires exact provider-owned match identity
+ok 38 - release proposal requires exact provider-owned match identity
+  ---
+  duration_ms: 0.443188
+  type: 'test'
+  ...
+# Subtest: numeric board parsing rejects overlap malformed descending and out of range
+ok 39 - numeric board parsing rejects overlap malformed descending and out of range
+  ---
+  duration_ms: 3.417984
+  type: 'test'
+  ...
+# Subtest: badge plan targets exact match and real occupied boards block another match
+ok 40 - badge plan targets exact match and real occupied boards block another match
+  ---
+  duration_ms: 0.847648
+  type: 'test'
+  ...
+# Subtest: badge cannot target unresolved bye odd slot or active match
+ok 41 - badge cannot target unresolved bye odd slot or active match
+  ---
+  duration_ms: 0.749971
+  type: 'test'
+  ...
+# Subtest: autopilot patch preserves other stages and allows shared enabled board sets
+ok 42 - autopilot patch preserves other stages and allows shared enabled board sets
+  ---
+  duration_ms: 0.579874
+  type: 'test'
+  ...
+# Subtest: autopilot rejects invalid break round and wrong target reads
+ok 43 - autopilot rejects invalid break round and wrong target reads
+  ---
+  duration_ms: 0.609419
+  type: 'test'
+  ...
+# Subtest: badge readback verifies changed match and preserves unrelated data
+ok 44 - badge readback verifies changed match and preserves unrelated data
+  ---
+  duration_ms: 1.147019
+  type: 'test'
+  ...
+# Subtest: autopilot readback preserves per-stage extensions and unrelated settings
+ok 45 - autopilot readback preserves per-stage extensions and unrelated settings
+  ---
+  duration_ms: 0.718283
+  type: 'test'
+  ...
+# Subtest: one finished pool fills only its reserved positions while other pools play
+ok 46 - one finished pool fills only its reserved positions while other pools play
+  ---
+  duration_ms: 5.058286
+  type: 'test'
+  ...
+# Subtest: later completed pools preserve earlier players and progression
+ok 47 - later completed pools preserve earlier players and progression
+  ---
+  duration_ms: 2.6929
+  type: 'test'
+  ...
+# Subtest: unresolved pool positions are never promoted as structural byes
+ok 48 - unresolved pool positions are never promoted as structural byes
+  ---
+  duration_ms: 2.682835
+  type: 'test'
+  ...
+# Subtest: real bye advances only to the next required round
+ok 49 - real bye advances only to the next required round
+  ---
+  duration_ms: 2.671208
+  type: 'test'
+  ...
+# Subtest: unfinished selected pool cannot be assigned
+ok 50 - unfinished selected pool cannot be assigned
+  ---
+  duration_ms: 5.460774
+  type: 'test'
+  ...
+# Subtest: duplicate completion clicks do not produce another mutation
+ok 51 - duplicate completion clicks do not produce another mutation
+  ---
+  duration_ms: 0.74941
+  type: 'test'
+  ...
+# Subtest: changed membership ambiguous ranks and conflicting existing positions are refused
+ok 52 - changed membership ambiguous ranks and conflicting existing positions are refused
+  ---
+  duration_ms: 1.865573
+  type: 'test'
+  ...
+# Subtest: started match prevents filling its pair
+ok 53 - started match prevents filling its pair
+  ---
+  duration_ms: 0.983473
+  type: 'test'
+  ...
+# Subtest: guides retain all qualifiers exactly once across mixed larger draws
+ok 54 - guides retain all qualifiers exactly once across mixed larger draws
+  ---
+  duration_ms: 8.736392
+  type: 'test'
+  ...
+# Subtest: invalid guide duplicates missing qualifiers and wrong stage refuse assignment
+ok 55 - invalid guide duplicates missing qualifiers and wrong stage refuse assignment
+  ---
+  duration_ms: 1.581555
+  type: 'test'
+  ...
+# Subtest: approved guide rejects another event reordered pools or changed settings
+ok 56 - approved guide rejects another event reordered pools or changed settings
+  ---
+  duration_ms: 0.762659
+  type: 'test'
+  ...
+# Subtest: result-bearing pairs cannot receive new qualifiers
+ok 57 - result-bearing pairs cannot receive new qualifiers
+  ---
+  duration_ms: 0.573274
+  type: 'test'
+  ...
+# Subtest: loopback rehearsal requires session and same-origin JSON; no external target accepted
+ok 58 - loopback rehearsal requires session and same-origin JSON; no external target accepted
+  ---
+  duration_ms: 54.32584
+  type: 'test'
+  ...
+# Subtest: late pool finish can be reviewed and appended without clearing earlier assignment
+ok 59 - late pool finish can be reviewed and appended without clearing earlier assignment
+  ---
+  duration_ms: 19.486991
+  type: 'test'
+  ...
+# Subtest: manual guide review saves revision, survives reopening and blocks editing assigned matches
+ok 60 - manual guide review saves revision, survives reopening and blocks editing assigned matches
+  ---
+  duration_ms: 20.056791
+  type: 'test'
+  ...
+# Subtest: automatic rehearsal assigns queues reuses boards and pauses without clearing active badges
+ok 61 - automatic rehearsal assigns queues reuses boards and pauses without clearing active badges
+  ---
+  duration_ms: 1057.438509
+  type: 'test'
+  ...
+1..61
+# tests 61
+# suites 0
+# pass 61
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1349.050558

@@ -6,7 +6,7 @@
   let checkedDate='',checking=false,clock=null,started=0;
   const diagnose=get('nakkaDiagnose'),status=get('nakkaDiagnosis'),progress=get('nakkaCheckProgress');
   const errorSteps={
-    EVENT_DATE_MISMATCH:'The dedicated TEST event was not found on the Hub date. Check the date in Event Control and the date of TEST event t_QHaG_7792 in Nakka. Do not change the live Monday tournament. Then check again.',
+    EVENT_DATE_MISMATCH:'No TEST event was found for the selected date. Open Nakka event check to review creating one.',
     EVENT_AMBIGUOUS:'The TEST event appears more than once in the response. No target was selected. Inspect the TEST event in Nakka before checking again.',
     EVENT_UNAVAILABLE:'The TEST event could not be verified. Automatic checks will continue. Connection details are available under Advanced. No player action is available from this result.',
     STALE_CHECK:'The Hub date or players changed during the check. Check again to get a current result.',

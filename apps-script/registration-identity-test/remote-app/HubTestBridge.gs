@@ -13,6 +13,10 @@ function beautyHubTest(action, input, token) {
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Invalid TEST input.');
   const allowed = ['eventDate','selectedName', 'newName', 'consent', 'message', 'identityChoice',
     'identityBase', 'identityDetail', 'identityConfirmedName'];
+  if(action==='cleanuppreview'||action==='cleanupsave')return beautyHubCleanup_(action==='cleanuppreview'?'preview':'save',input);
+  if(['eveningsetup','eveningprepare','eveningsave'].includes(action))return beautyHubEveningSetup_(({eveningsetup:'read',eveningprepare:'prepare',eveningsave:'confirm'})[action],input);
+  if(action==='nakkacreaterecover')return beautyHubReviewCreatedEvent_(input);
+  if(action==='nakkacreateprepare'||action==='nakkacreateconfirm')return beautyHubCreateEvent_(action==='nakkacreateprepare'?'prepare':'confirm',input);
   if (action === 'eventprepare' || action === 'eventsave') return beautyHubTestEventTransition_(action === 'eventprepare' ? 'prepare' : 'save', input);
   if (action === 'eventload') return Object.assign({}, beautyHubTestEventPreview_(input), {
     eventSavingEnabled: typeof BEAUTY_HUB_EVENT_WRITES_ENABLED_ !== 'undefined' && BEAUTY_HUB_EVENT_WRITES_ENABLED_ === true

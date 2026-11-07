@@ -12,18 +12,18 @@ function doGet(e) {
   if (Object.keys(e?.parameter || {}).some(key => key !== 'page')) throw new Error('Candidate configuration rejected.');
   const page = e?.parameter?.page || '';
   if (!['', 'remote', 'kiosk', 'hub', 'live', 'stages'].includes(page)) throw new Error('Candidate serves registration pages only.');
-  if(page==='stages'){beautyHubTestGuard_();return HtmlService.createHtmlOutputFromFile('StageTest').setTitle('Beauty pool and knockout play — TEST');}
+  if(page==='stages'){beautyHubTestGuard_();return beautyHubCastHtml_('StageTest').setTitle('Pool and knockout play — TEST');}
   if(page==='kiosk'){
     beautyHubTestGuard_();
-    return HtmlService.createHtmlOutputFromFile('KioskTest').addMetaTag('viewport', 'width=device-width, initial-scale=1').setTitle('Beauty — Kiosk Identity TEST');
+    return HtmlService.createHtmlOutputFromFile('KioskTest').addMetaTag('viewport', 'width=device-width, initial-scale=1').setTitle('Kiosk Identity TEST');
   }
   if (page === 'live') {
     beautyHubTestGuard_();
-    return HtmlService.createHtmlOutputFromFile('BeautyLiveTest').setTitle('Kvällens spelare — Beauty Live TEST');
+    return beautyHubCastHtml_('BeautyLiveTest').setTitle('Kvällens spelare — Live TEST');
   }
   if (page === 'hub') {
     beautyHubTestGuard_();
-    return HtmlService.createHtmlOutputFromFile('HubTest').setTitle('Beauty Hub — IDENTITY TEST');
+    return HtmlService.createHtmlOutputFromFile('HubTest').setTitle('Hub — IDENTITY TEST');
   }
   return HtmlService.createHtmlOutputFromFile('RemoteRegistration').addMetaTag('viewport', 'width=device-width, initial-scale=1');
 }
@@ -3830,4 +3830,10 @@ function nakkaHealthResult_(status, message) {
     message: message,
     timestamp: new Date().toISOString()
   };
+}
+
+function beautyHubCastHtml_(name){
+ const target=beautyHubActiveTestTarget_(),html=HtmlService.createHtmlOutputFromFile(name);
+ html.setContent(html.getContent().replace('<head>','<head><script>window.BeautySelectedEventId='+JSON.stringify(target.id)+';</script>'));
+ return html;
 }
