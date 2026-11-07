@@ -1,0 +1,28 @@
+{
+  "result": "LOCAL_LEAGUE_STATS_INSTALL_PASS",
+  "finishedUTC": "2026-11-05T18:16:27.086Z",
+  "before": {
+    "tests": 724,
+    "pass": 724,
+    "failed": []
+  },
+  "after": {
+    "tests": 726,
+    "pass": 726,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/league-stats-before-2026-11-05T18-15-21-674Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/league-stats-install-2026-11-05T18-15-21-674Z",
+  "files": [
+    "server/pool-service.js",
+    "tests/pool-service.test.cjs",
+    "docs/handoff/test-inventory.json",
+    "apps-script/registration-identity-test/remote-app/HubTestPools.gs",
+    "evidence/league-list-20261105/README.md"
+  ],
+  "googleUpload": "PENDING — upload HubTestPools.gs to Identity TEST only",
+  "deviceAcceptance": "PENDING — fresh statistics load and player identity review pending",
+  "production": "UNCHANGED"
+}

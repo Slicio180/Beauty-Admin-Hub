@@ -1,0 +1,62 @@
+{
+  "result": "PASS",
+  "finishedUTC": "2026-11-07T17:42:07.399Z",
+  "scriptId": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/automatic-sequence-2026-11-07T17-41-41-890Z",
+  "tests": "Full regression suite and requirement inventory passed before packaging",
+  "googleSource": "READBACK_VERIFIED",
+  "originalAssets": true,
+  "production": "UNCHANGED",
+  "deployment": "UNCHANGED",
+  "browserVisualCheck": "PENDING",
+  "files": [
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTestAutoRegister.gs",
+      "sha256": "6c03b6750848e1f12aa269805a14b273d23536e8064ec2d706a7f61d4c67cd25"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTestNakkaTransfer.gs",
+      "sha256": "4bf8312146eb1e1ffced8a9e0141a9d5c99f0a7652a507c8c2bc3c89791890e8"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTestAttention.gs",
+      "sha256": "1c3ce3a8c7560d705b16143e30c7ec0b3c97ddd503e9f7bc3c8b728baa34ade9"
+    },
+    {
+      "path": "tests/automatic-sequence.test.cjs",
+      "sha256": "17f86ed4a59f9185add93b2ca8af32159504bc4f039163ccc63364aa51ef08dc"
+    },
+    {
+      "path": "tests/hub-auto-registration.test.cjs",
+      "sha256": "db9ef8cf9dbdc1c4f0a20654483d430a6d96aa9b871f27f36976795618bb70d1"
+    },
+    {
+      "path": "tests/player-registration-routes.test.cjs",
+      "sha256": "a4d5aa3985c26ab1c31978d6669079cf4db07551d6adcf9b534f2ca3b4fc7336"
+    },
+    {
+      "path": "tests/auto-registration-contention.test.cjs",
+      "sha256": "59ac5aa020d7427ce93be1141f536fbf8cd1cd5ae77ef49f5e9507e56695f263"
+    },
+    {
+      "path": "docs/handoff/test-inventory.json",
+      "sha256": "0bdd2d3a4d178cf9e537b39a8bcf0749a3f120d972fbca6a46398721a3c44169"
+    },
+    {
+      "path": "evidence/automatic-sequence-20261107/checks.tap",
+      "sha256": "047841d54b108f7efae9ef01d0e7a53a8f7e39d637cb097fa9759d86737ffe29"
+    },
+    {
+      "path": "evidence/automatic-sequence-20261107/inventory.txt",
+      "sha256": "80d003e2bbe6b7644bebef4e936507436f7ad884b0a40428a318a55710265643"
+    },
+    {
+      "path": "evidence/automatic-sequence-20261107/review.json",
+      "sha256": "8c741ef0c39207c73c4b84f29b67af513acaabe60b29c996362fee3e47117be6"
+    },
+    {
+      "path": "evidence/automatic-sequence-20261107/reproduction-before.txt",
+      "sha256": "6c7c7cf25fe316dfc4d5a39c2e781b9ccd76d406e8d9795f2b6e0c3d2a718cd7"
+    }
+  ]
+}

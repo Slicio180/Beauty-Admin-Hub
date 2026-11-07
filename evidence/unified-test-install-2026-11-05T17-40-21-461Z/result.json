@@ -1,0 +1,49 @@
+{
+  "result": "LOCAL_UNIFIED_TEST_EVENT_INSTALL_PASS",
+  "finishedUTC": "2026-11-05T17:41:30.060Z",
+  "before": {
+    "tests": 717,
+    "pass": 717,
+    "failed": []
+  },
+  "after": {
+    "tests": 718,
+    "pass": 718,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/unified-test-before-2026-11-05T17-40-21-461Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/unified-test-install-2026-11-05T17-40-21-461Z",
+  "files": [
+    "apps-script/registration-identity-test/remote-app/BeautyLiveTest.gs",
+    "apps-script/registration-identity-test/remote-app/BeautyLiveTest.html",
+    "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "apps-script/registration-identity-test/remote-app/HubTestPools.gs",
+    "apps-script/registration-identity-test/remote-app/StageTest.html",
+    "docs/handoff/test-inventory.json",
+    "public/js/competition-preview.js",
+    "public/js/nakka-pool-live.js",
+    "public/js/nakka-stage-feed.js",
+    "public/js/nakka-stage-model.js",
+    "public/js/pool-board-plan.js",
+    "scripts/inspect-stage-readonly.cjs",
+    "server/board-handoff.cjs",
+    "server/handoff-journal.cjs",
+    "server/pool-service.js",
+    "server/release-profile.cjs",
+    "tests/board-handoff.test.cjs",
+    "tests/live-shell.test.cjs",
+    "tests/nakka-stage-badges.test.cjs",
+    "tests/nakka-stage-model.test.cjs",
+    "tests/pool-service.test.cjs",
+    "tests/release-profile.test.cjs",
+    "tests/stage-integration.test.cjs",
+    "tests/stage-readonly-diagnostic.test.cjs",
+    "tests/venue-cast.test.cjs",
+    "evidence/unified-test-20261105/README.md"
+  ],
+  "googleUpload": "PENDING — upload HubTestPools.gs, BeautyLiveTest.gs, HubTest.html, StageTest.html and BeautyLiveTest.html to Identity TEST only",
+  "deviceAcceptance": "PENDING — read-only planner load against accepting registration TEST; reviewed format send and cast feed acceptance pending",
+  "production": "UNCHANGED"
+}

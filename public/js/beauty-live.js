@@ -54,7 +54,7 @@
       }
     }
   }
-  function apply(data){BeautyLiveModel.project(data,sort.value); latest=data;window.BeautyCastShell?.playersUpdated(data);
+  function apply(data){BeautyLiveModel.project(data,sort.value); latest=data;window.BeautyLiveBranding?.apply(data);window.BeautyCastShell?.playersUpdated(data);
     document.getElementById('rankingOrder').disabled=!data.rankingAvailable;stats.disabled=!(data.statsAvailable||data.rankingAvailable);
     if(!data.rankingAvailable&&sort.value==='ranking')sort.value='alphabetical';
     draw();const note=document.getElementById('liveStatsSource');if(note)note.textContent=(data.statsFetchedAt?'Statistik '+new Date(data.statsFetchedAt).toLocaleString('sv-SE')+' · ':'')+(data.rankingAvailable?'Verifierad Nakka-ranking':data.statsAvailable?(data.statsStale?'Senast hämtade värden · inte uppdaterade':'Snitt anslutet · ranking ej verifierad'):'Statistik ej tillgänglig');status.textContent='Uppdaterad '+new Date().toLocaleTimeString('sv-SE')+' · TEST';status.dataset.state='ok';}

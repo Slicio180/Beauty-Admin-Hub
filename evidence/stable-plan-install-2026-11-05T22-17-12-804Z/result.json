@@ -1,0 +1,30 @@
+{
+  "result": "LOCAL_STABLE_PLAN_INSTALL_PASS",
+  "finishedUTC": "2026-11-05T22:18:18.520Z",
+  "before": {
+    "tests": 752,
+    "pass": 752,
+    "failed": []
+  },
+  "after": {
+    "tests": 752,
+    "pass": 752,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/stable-plan-before-2026-11-05T22-17-12-804Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/stable-plan-install-2026-11-05T22-17-12-804Z",
+  "files": [
+    "public/css/venue-live.css",
+    "public/js/nakka-stage-feed.js",
+    "tests/venue-cast.test.cjs",
+    "apps-script/registration-identity-test/remote-app/BeautyLiveTest.gs",
+    "apps-script/registration-identity-test/remote-app/StageTest.html",
+    "apps-script/registration-identity-test/remote-app/BeautyLiveTest.html",
+    "evidence/stable-plan-20261105/README.md"
+  ],
+  "googleUpload": "PENDING — save BeautyLiveTest.gs into existing BeautyLiveServer.gs, StageTest.html and BeautyLiveTest.html to Identity TEST only",
+  "deviceAcceptance": "PENDING — verify restored saved boards and START through repeated refreshes, plus uniform score and standings sizes; the TEST event is running, do not resend pools or repeat Start; do not resend pools or start yet",
+  "production": "UNCHANGED"
+}

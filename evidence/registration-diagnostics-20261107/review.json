@@ -1,0 +1,28 @@
+{
+  "result": "LOCAL_PASS",
+  "recordedUTC": "2026-11-07T16:39:36.711567+00:00",
+  "tests": 925,
+  "scope": "TEST diagnostics only",
+  "changes": [
+    "Record AUTO_STARTED after registration is committed and before provider work",
+    "Save final automatic outcome code with source, phase and UTC time in a separate property",
+    "Show Original registration diagnostic within each staff attention alert",
+    "Attention refresh and manual recovery leave diagnostic unchanged",
+    "Record no raw exceptions, provider responses or credentials"
+  ],
+  "limits": [
+    "Cannot reconstruct earlier failed registrations",
+    "Does not change provider retries or fix the unresolved automatic registration failure",
+    "Google installation and fresh registration reproduction pending"
+  ],
+  "production": "UNCHANGED",
+  "github": "No commit or push performed",
+  "inventory": "PASS: 925 cases across 66 files",
+  "installerChecks": [
+    "Package and embedded script syntax PASS",
+    "Simulated Google TEST install and readback PASS",
+    "Repeat install does not upload again",
+    "Unknown local and remote source blocked",
+    "Unrelated Google files preserved"
+  ]
+}

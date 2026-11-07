@@ -1,0 +1,27 @@
+{
+  "result": "LOCAL_ATTENTION_LOOK_INSTALL_PASS",
+  "finishedUTC": "2026-11-02T19:43:28.240Z",
+  "before": {
+    "tests": 695,
+    "pass": 695,
+    "failed": []
+  },
+  "after": {
+    "tests": 695,
+    "pass": 695,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/attention-look-before-2026-11-02T19-42-24-643Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/attention-look-install-2026-11-02T19-42-24-643Z",
+  "files": [
+    "public/css/beauty-dashboard.css",
+    "public/index.html",
+    "public/preview.html",
+    "apps-script/registration-identity-test/remote-app/HubTest.html"
+  ],
+  "googleUpload": "PENDING — upload HubTest.html to Identity TEST only",
+  "deviceAcceptance": "PENDING — original attention tile appearance and existing whole-tile navigation",
+  "production": "UNCHANGED"
+}

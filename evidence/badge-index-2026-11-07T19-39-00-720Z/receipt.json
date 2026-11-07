@@ -1,0 +1,54 @@
+{
+  "result": "PASS",
+  "finishedUTC": "2026-11-07T19:39:27.133Z",
+  "scriptId": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/badge-index-2026-11-07T19-39-00-720Z",
+  "tests": "Full regression suite and requirement inventory passed before packaging",
+  "googleSource": "READBACK_VERIFIED",
+  "originalAssets": true,
+  "production": "UNCHANGED",
+  "deployment": "UNCHANGED",
+  "browserVisualCheck": "PENDING",
+  "files": [
+    {
+      "path": "public/js/nakka-stage-model.js",
+      "sha256": "7d921e35f16c2c2fd96949ce910032d6b267438d3586aa5d5857fde43472673e"
+    },
+    {
+      "path": "tests/nakka-stage-badges.test.cjs",
+      "sha256": "998aca1722eb3b7be44f41bb2f53416c107c2a10673738a77445c1d8183a8855"
+    },
+    {
+      "path": "docs/handoff/test-inventory.json",
+      "sha256": "30bdeafa03d5da131f18f27d694f67f0704cf97e7371d568061544292b8c5150"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/StageTest.html",
+      "sha256": "7a199dd2104f333b2800b53eff7f7a00ff729bdc43845c2553b6babb2e9411b7"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/BeautyLiveTest.html",
+      "sha256": "7a199dd2104f333b2800b53eff7f7a00ff729bdc43845c2553b6babb2e9411b7"
+    },
+    {
+      "path": "docs/handoff/badge-index-20261107.md",
+      "sha256": "5596074af8a2f127e77d2fb63bf9fabe33b7fb537eb92cfc9dcaa2681901720c"
+    },
+    {
+      "path": "evidence/badge-index-20261107/installer.txt",
+      "sha256": "c733ba828f4a4a386ba226a8437cd59c0b8f3f61190ea8fbf53621297817fdbd"
+    },
+    {
+      "path": "evidence/badge-index-20261107/inventory.txt",
+      "sha256": "d7fb8ef0e42a62f3f46fb3334547e06eba988d6c0598b8ef0a6a8ac596dfa29c"
+    },
+    {
+      "path": "evidence/badge-index-20261107/provider-badges.json",
+      "sha256": "0d9d1709978afc1ac0a3d1a455300e2a3fbca5058927a04472400d77e033e365"
+    },
+    {
+      "path": "evidence/badge-index-20261107/regression.txt",
+      "sha256": "12130c276068abc69a5d1f30d88f5c65c29bdafa7edc34989a61e7b179a1fd8d"
+    }
+  ]
+}

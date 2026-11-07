@@ -1,0 +1,58 @@
+{
+  "result": "PASS",
+  "finishedUTC": "2026-11-07T16:02:11.654Z",
+  "scriptId": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/registration-reliability-2026-11-07T16-02-08-981Z",
+  "tests": "Full regression suite and requirement inventory passed before packaging",
+  "googleSource": "READBACK_VERIFIED",
+  "originalAssets": true,
+  "production": "UNCHANGED",
+  "deployment": "UNCHANGED",
+  "browserVisualCheck": "PENDING",
+  "files": [
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTestAutoRegister.gs",
+      "sha256": "f59f11c058304dcc310fe48b7f219d835a0f0ee5dce2ded153ba829129e39145"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTestNakkaTransfer.gs",
+      "sha256": "bd838960089f91da82324dc295b985b1f340571b56b72f8291cae0fce3398c61"
+    },
+    {
+      "path": "public/js/hub-nakka-transfer.js",
+      "sha256": "040eed4ac7160a15d209e7330a54d94bcb8bd5a3979440e18ae90094dc7566ca"
+    },
+    {
+      "path": "tests/fixtures/nakka-transfer-runtime.cjs",
+      "sha256": "5f0fdec8b03466d41878ba302bba02fc048353bf0ff2b18de30176efe3e50591"
+    },
+    {
+      "path": "tests/registration-reliability.test.cjs",
+      "sha256": "91db5c847c32d3fc53cae7bc2a53fe7350492719d1db4a7efbdf78e44d99ea8d"
+    },
+    {
+      "path": "tests/hub-nakka-transfer-ui.test.cjs",
+      "sha256": "2dc1126910c657fcf87d4e5b51f9b61af9a8250024dceddc5112a015c8441d47"
+    },
+    {
+      "path": "docs/handoff/test-inventory.json",
+      "sha256": "4e6310b33de133bb7d32a95852e2845c2bab5c7f84b37f7cae62f95a2d34534b"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+      "sha256": "0950390fb2d582aa4801f829eb3d2c37dec8351fa22372218b8ea43a2694da76"
+    },
+    {
+      "path": "evidence/registration-reliability-20261107/checks.tap",
+      "sha256": "91a251fe7e3843ee4fbbf5dd5b02ec8f171e425cf2da8982df8ddd24fdf0bfbe"
+    },
+    {
+      "path": "evidence/registration-reliability-20261107/inventory.txt",
+      "sha256": "7de78c98a55e0c21c247868ddd32f751d37f442db1f3802a7eb32ddecb89b8a4"
+    },
+    {
+      "path": "evidence/registration-reliability-20261107/review.json",
+      "sha256": "52b2aa19e55e1550950a2f8f6e11378482cd78cb19f499b20c72572ceb07c77b"
+    }
+  ]
+}

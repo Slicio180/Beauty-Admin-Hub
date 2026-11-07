@@ -7,15 +7,15 @@ for(const [file,rpc]of [['RemoteRegistration.html','submitRegistration'],['Kiosk
   const runner={withSuccessHandler:f=>{ok=f;return runner;},withFailureHandler:()=>runner,getTestRegistrationContext:()=>{}};
   const c=vm.createContext({document:{getElementById:id=>nodes[id]},google:{script:{run:runner}},buildPlayerList:n=>loaded=n});
   const a=html.indexOf('function loadPlayers()'),b=html.indexOf('function buildPlayerList(',a);vm.runInContext("let registrationEventDate='';\n"+html.slice(a,b),c);
-  c.loadPlayers();ok({success:true,eventDate:'2026-10-27',registrationAvailable:true,names:['Anna']});assert.deepEqual(loaded,['Anna']);assert.equal(nodes.formArea.style.display,'block');assert.ok(nodes.registrationEventLabel.textContent.includes('2026-10-27'));
+  c.loadPlayers();ok({success:true,eventDate:'2026-10-27',eventTitle:'AIK Måndagsdartarna 2026-10-27',registrationAvailable:true,names:['Anna']});assert.deepEqual(loaded,['Anna']);assert.equal(nodes.formArea.style.display,'block');assert.equal(nodes.registrationEventLabel.textContent,'AIK Måndagsdartarna 2026-10-27');
   c.loadPlayers();ok({success:true,registrationAvailable:false,eventDate:'2026-10-28',names:['Anna']});assert.equal(nodes.formArea.style.display,'none');assert.match(nodes.loading.innerText,/SPELDATUMET/);
  });
  test(file+' actual submit sends date through its own RPC with no client source or staff credential',async()=>{
   let pending,captured,registered;const ids={playerName:{value:'Anna'},newPlayerName:{value:''},message:{value:'hello'},submitButton:{disabled:false,innerText:''}};
   const runner={withSuccessHandler:f=>{pending=f;return runner;},withFailureHandler:()=>runner,[rpc]:data=>{captured=data;pending({success:true,player:'Anna',nakka:{entryConfirmed:true}});}};
   const c=vm.createContext({document:{getElementById:id=>ids[id],querySelector:()=>({value:'JA, JAG GODKÄNNER'})},google:{script:{run:runner}},hideError(){},showError:s=>{throw Error(s);},showSuccess:(p,n)=>registered={p,n},BeautyIdentityDialog:{submit:(send,data)=>send(data)}});
-  const a=html.indexOf('async function submitForm()'),b=html.indexOf('function showSuccess(',a);vm.runInContext(html.slice(html.indexOf('function beautyPlayerError('),html.indexOf('function loadPlayers()'))+"const NEW_PLAYER_OPTION='MITT NAMN FINNS INTE I LISTAN';let registrationEventDate='2026-10-27';\n"+html.slice(a,b),c);
-  await c.submitForm();assert.equal(captured.eventDate,'2026-10-27');assert.equal(captured.selectedName,'Anna');assert.equal(captured.source,undefined);assert.equal(captured.token,undefined);assert.equal(registered.p,'Anna');assert.equal(registered.n.entryConfirmed,true);assert.equal(ids.submitButton.disabled,false);
+  const a=html.indexOf('async function submitForm()'),b=html.indexOf('function showSuccess(',a);vm.runInContext(html.slice(html.indexOf('function beautyPlayerError('),html.indexOf('function loadPlayers()'))+"const NEW_PLAYER_OPTION='MITT NAMN FINNS INTE I LISTAN';let registrationEventDate='2026-10-27';let registrationEventContext='event-revision-1';\n"+html.slice(a,b),c);
+  await c.submitForm();assert.equal(captured.eventDate,'2026-10-27');assert.equal(captured._context,'event-revision-1');assert.equal(captured.selectedName,'Anna');assert.equal(captured.source,undefined);assert.equal(captured.token,undefined);assert.equal(registered.p,'Anna');assert.equal(registered.n.entryConfirmed,true);assert.equal(ids.submitButton.disabled,false);
  });
  test(file+' success distinguishes saved registration from Nakka attention and keeps five-second next-player return',()=>{
   const ids={registrationOutcome:{textContent:''},registeredPlayer:{textContent:''},registrationScreen:{style:{}},successScreen:{style:{}}};let timer,delay;

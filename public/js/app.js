@@ -40,7 +40,7 @@ async function loadBeautyHubData() {
     if (!data.success) {
       throw new Error(
         data.error ||
-        'Beauty backend returned an error.'
+        'The service returned an error.'
       );
     }
 
@@ -50,7 +50,7 @@ async function loadBeautyHubData() {
   } catch (error) {
 
     console.error(
-      'Beauty Hub connection error:',
+      'Hub connection error:',
       error
     );
 
@@ -111,7 +111,7 @@ function updateEvent(data) {
 
     eventStatus.textContent =
       data.eventDate
-        ? (BeautyHubServices.mode === 'mock' ? 'Preview with fictional players' : 'Beauty event connected')
+        ? (BeautyHubServices.mode === 'mock' ? 'Preview with fictional players' : 'Event connected')
         : 'No event selected';
   }
 }
@@ -888,6 +888,7 @@ if (registerPlayerButton) {
 
 function openRegisterPlayerPopup() {
 
+  const registrationEventContext=window.beautyHubData?.eventContext||'legacy';
   const registrationEventDate=BeautyHubServices.mode==='test'?(window.beautyHubData?.eventDate||''):'';
   const registrationGeneration=BeautyHubServices.mode==='test'?BeautyHubAuth.generation():null;
 
@@ -925,7 +926,7 @@ function openRegisterPlayerPopup() {
     'register-popup-label';
 
   label.textContent =
-    'BEAUTY REGISTRATION';
+    'REGISTRATION';
 
 
   const title =
@@ -942,7 +943,7 @@ function openRegisterPlayerPopup() {
     'register-popup-description';
 
   description.textContent =
-    'Register a player directly from the Beauty Hub.';
+    'Register a player directly from the Hub.';
 
 
   const errorBox =
@@ -1673,7 +1674,7 @@ function openRegisterPlayerPopup() {
 
       const initial = { selectedName: playerValue.value, newName: newNameInput.value.trim(),
         consent: selectedConsent, message: messageInput.value.trim(),
-        ...(BeautyHubServices.mode==='test'?{eventDate:registrationEventDate}:{}) };
+        ...(BeautyHubServices.mode==='test'?{eventDate:registrationEventDate,_context:registrationEventContext}:{}) };
       const result = await BeautyIdentityDialog.submit(async payload => {
         const url = new URL(BEAUTY_HUB_URL);
         url.searchParams.set('page', 'hubregister');
@@ -1699,7 +1700,7 @@ function openRegisterPlayerPopup() {
 
       await loadBeautyHubData();
 
-      BeautyHubServices.registrationSaved?.(result,registrationGeneration);
+      BeautyHubServices.registrationSaved?.(result,registrationGeneration,registrationEventContext);
 
 
     } catch (error) {
@@ -1783,3 +1784,4 @@ setInterval(
   loadBeautyHubData,
   5000
 );
+

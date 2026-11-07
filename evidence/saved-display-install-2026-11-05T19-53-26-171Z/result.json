@@ -1,0 +1,28 @@
+{
+  "result": "LOCAL_SAVED_DISPLAY_INSTALL_PASS",
+  "finishedUTC": "2026-11-05T19:54:29.118Z",
+  "before": {
+    "tests": 744,
+    "pass": 744,
+    "failed": []
+  },
+  "after": {
+    "tests": 746,
+    "pass": 746,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/saved-display-before-2026-11-05T19-53-26-171Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/saved-display-install-2026-11-05T19-53-26-171Z",
+  "files": [
+    "public/js/pool-planner-seeded.js",
+    "tests/pool-planner-seeded-ui.test.cjs",
+    "docs/handoff/test-inventory.json",
+    "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "evidence/saved-display-20261105/README.md"
+  ],
+  "googleUpload": "PENDING — save HubTest.html to Identity TEST only",
+  "deviceAcceptance": "PENDING — verify saved Hub groups show START 46.21 and 40.83, select available boards and review the board plan; do not resend pools or start yet",
+  "production": "UNCHANGED"
+}

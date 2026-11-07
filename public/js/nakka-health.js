@@ -21,6 +21,7 @@
   let nextAllowedAt = 0;
   let lastStartedAt = 0;
   let cooldownTimer;
+  let busyRetryTimer;
 
   function updateRefreshButton() {
     clearTimeout(cooldownTimer);
@@ -41,6 +42,20 @@
     if(nav){nav.setAttribute('data-health',state);nav.setAttribute('title','Nakka — '+label);nav.setAttribute('aria-label','Nakka — '+label);}
   }
   function renderHealth(health) {
+    clearTimeout(busyRetryTimer);
+    // The legacy endpoint reports lock contention as DEGRADED, without
+    // checking provider health. Only this exact response is a pending check.
+    if (health.status === 'DEGRADED' && health.message === 'A Nakka check is already running. Refresh shortly.') {
+      status.textContent = 'CHECKING…';
+      updateNavigation('waiting', 'Check already running');
+      dot.classList.remove('ok', 'degraded', 'problem');
+      dot.classList.add('waiting');
+      message.textContent = 'A check is already running. Checking again shortly…';
+      timestamp.dateTime = '';
+      timestamp.textContent = 'Waiting for a completed check';
+      busyRetryTimer = setTimeout(loadNakkaHealth, Math.max(MANUAL_COOLDOWN_MS, nextAllowedAt - Date.now()));
+      return;
+    }
     status.textContent = health.status;
     updateNavigation({OK:'ok',DEGRADED:'degraded',UNAVAILABLE:'problem'}[health.status],health.status+': '+health.message);
     dot.classList.remove('waiting', 'ok', 'degraded', 'problem');
@@ -125,6 +140,7 @@
 
   document.addEventListener('beauty-hub-locked', () => {
     epoch++;
+    clearTimeout(busyRetryTimer);
     controllerInFlight?.abort();
     controllerInFlight = null;
     inFlight = false;

@@ -1,0 +1,31 @@
+{
+  "result": "LOCAL_LIVE_BADGES_INSTALL_PASS",
+  "finishedUTC": "2026-11-06T20:27:43.646Z",
+  "before": {
+    "tests": 797,
+    "pass": 797,
+    "failed": []
+  },
+  "after": {
+    "tests": 798,
+    "pass": 798,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/live-badges-before-2026-11-06T20-26-37-112Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/live-badges-install-2026-11-06T20-26-37-112Z",
+  "files": [
+    "apps-script/registration-identity-test/remote-app/BeautyLiveTest.html",
+    "apps-script/registration-identity-test/remote-app/StageTest.html",
+    "docs/handoff/acceptance-20261106.md",
+    "docs/handoff/test-inventory.json",
+    "evidence/live-badges-20261106/checks.tap",
+    "public/css/venue-live.css",
+    "public/js/knockout-bracket.js",
+    "tests/live-shell.test.cjs"
+  ],
+  "googleUpload": "PENDING — copy changed Google files listed in READ-ME.txt to existing Identity TEST files only",
+  "deviceAcceptance": "PENDING — verify completed finals, partial averages, board badges, mobile digits and running controls; no production changes",
+  "production": "UNCHANGED"
+}

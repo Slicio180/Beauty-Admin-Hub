@@ -1,0 +1,40 @@
+{
+  "result": "LOCAL_TOURNAMENT_CONTROL_INSTALL_PASS",
+  "finishedUTC": "2026-11-05T22:59:17.135Z",
+  "before": {
+    "tests": 752,
+    "pass": 752,
+    "failed": []
+  },
+  "after": {
+    "tests": 766,
+    "pass": 766,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/tournament-control-before-2026-11-05T22-58-07-732Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/tournament-control-install-2026-11-05T22-58-07-732Z",
+  "files": [
+    "server/pool-service.js",
+    "scripts/build-pool-service.cjs",
+    "scripts/build-hub-test.cjs",
+    "public/js/hub-test-services.js",
+    "public/js/hub-test-event-control.js",
+    "public/js/pool-planner-seeded.js",
+    "public/css/beauty-dashboard.css",
+    "tests/pool-service.test.cjs",
+    "docs/handoff/test-inventory.json",
+    "apps-script/registration-identity-test/remote-app/HubTestPools.gs",
+    "apps-script/registration-identity-test/remote-app/HubTestBridge.gs",
+    "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "server/tournament-control.js",
+    "public/js/hub-tournament-control.js",
+    "tests/hub-tournament-control.test.cjs",
+    "evidence/tournament-control-20261105/README.md",
+    "tests/hub-test-connection.test.cjs"
+  ],
+  "googleUpload": "PENDING — save HubTestPools.gs, HubTestBridge.gs and HubTest.html to Identity TEST only",
+  "deviceAcceptance": "PENDING — open Tournament Control and review qualifiers and proposed matches; assignment requires a separate checkbox and confirmation; do not resend pools or repeat Start",
+  "production": "UNCHANGED"
+}

@@ -1,0 +1,35 @@
+{
+  "result": "LOCAL_CREATE_READBACK_FIX_INSTALL_PASS",
+  "finishedUTC": "2026-11-06T22:03:08.442Z",
+  "before": {
+    "tests": 824,
+    "pass": 824,
+    "failed": []
+  },
+  "after": {
+    "tests": 829,
+    "pass": 829,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/create-readback-fix-before-2026-11-06T22-01-48-018Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/create-readback-fix-install-2026-11-06T22-01-48-018Z",
+  "files": [
+    "server/pool-service.js",
+    "tests/date-event-creation.test.cjs",
+    "tests/pool-service.test.cjs",
+    "apps-script/registration-identity-test/remote-app/HubTestNakkaEvent.gs",
+    "apps-script/registration-identity-test/remote-app/HubTestPools.gs",
+    "apps-script/registration-identity-test/remote-app/HubTestBridge.gs",
+    "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "docs/handoff/acceptance-20261106.md",
+    "docs/handoff/test-inventory.json",
+    "public/js/hub-nakka-event.js",
+    "public/js/hub-test-services.js",
+    "evidence/disabled-format-readback-20261106/checks.tap"
+  ],
+  "googleUpload": "PENDING — run upload-test.cjs to update existing Identity TEST source",
+  "deviceAcceptance": "PENDING — review existing November 8 event without recreation; no production changes",
+  "production": "UNCHANGED"
+}

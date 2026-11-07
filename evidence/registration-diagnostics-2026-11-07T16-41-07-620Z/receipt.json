@@ -1,0 +1,54 @@
+{
+  "result": "PASS",
+  "finishedUTC": "2026-11-07T16:41:33.211Z",
+  "scriptId": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/registration-diagnostics-2026-11-07T16-41-07-620Z",
+  "tests": "Full regression suite and requirement inventory passed before packaging",
+  "googleSource": "READBACK_VERIFIED",
+  "originalAssets": true,
+  "production": "UNCHANGED",
+  "deployment": "UNCHANGED",
+  "browserVisualCheck": "PENDING",
+  "files": [
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTestAutoRegister.gs",
+      "sha256": "4d3ac74cf713c6d84805b191b724700eb169ddb4a677b992630bdd891e247d20"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTestAttention.gs",
+      "sha256": "b839d7ff038560e870efd961ab1a0dd6d45f48d9f7464c107cd6cd5b1f223c86"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+      "sha256": "b0c5f60f473c4f081ddccafc3b9d2c75bc2f3b9e48b170444bc3f82bf9a8d8d9"
+    },
+    {
+      "path": "public/js/hub-dashboard.js",
+      "sha256": "b38316d4a8ba3b2976144b5a16c474436b6cbd9b3dff4262a3c1a265952f9a52"
+    },
+    {
+      "path": "tests/dashboard-attention.test.cjs",
+      "sha256": "616c2facd1c0bfdcce897e956ccc79297d02afee99f61d3db3e417460b712e08"
+    },
+    {
+      "path": "tests/dashboard-ui.test.cjs",
+      "sha256": "1d9d065bc46d48f50b314112418f8a4520a9a80682ffe1d05c89dbb522ed7d3a"
+    },
+    {
+      "path": "docs/handoff/test-inventory.json",
+      "sha256": "fbdd2fa66a47c8b6de72cfd495b3f18c566b2a545cad89314a7791d0821918f5"
+    },
+    {
+      "path": "evidence/registration-diagnostics-20261107/checks.tap",
+      "sha256": "fef503c2268dab1b88c1295a684fb94e273b8e51a7aa3be2c692924d8e323f2b"
+    },
+    {
+      "path": "evidence/registration-diagnostics-20261107/inventory.txt",
+      "sha256": "ac364de9994b87c62701a6a71cb9b913f6f2c3522fd9f54b22ea6d51557a61c8"
+    },
+    {
+      "path": "evidence/registration-diagnostics-20261107/review.json",
+      "sha256": "48718adf66961cf6e0f67967361e6f441ef793aca155abdbafa1b4594910d5c1"
+    }
+  ]
+}

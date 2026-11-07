@@ -8,7 +8,7 @@ class N{
 function all(n){return [n,...n.children.flatMap(all)];}const content=n=>all(n).map(n=>n.textContent).join(' ');
 function match(i=0){return {key:'t-0-'+i,board:{text:'',state:'unassigned'},left:{id:'aaaa',name:'Very Long Player Name That Must Remain Visible <img onerror=bad>',state:'player'},right:{id:'bbbb',name:'B',state:'player'},leftScore:0,rightScore:2,leftAverage:0,rightAverage:54.43,leftDrawNumber:1,rightDrawNumber:32};}
 function stage(kind='t',n=32){return {kind,rounds:Array.from({length:Math.log2(n)+1},(_,r)=>({round:r+1,slotCount:n/2**r,format:'First to '+(n/2**r===2?3:2)+' legs',matches:Array.from({length:Math.max(1,n/2**(r+1))},(_,i)=>match(i))})),thirdPlace:null};}
-function data(){return {eventId:'t_RqC2_2034',title:'Nakka TEST name',eventDate:1793059200,pools:Array.from({length:9},(_,i)=>({number:i+1,players:[]})),knockouts:[stage(),stage('s2',16)]};}
+function data(){return {eventId:'t_QHaG_7792',title:'Nakka TEST name',eventDate:1793059200,pools:Array.from({length:9},(_,i)=>({number:i+1,players:[]})),knockouts:[stage(),stage('s2',16)]};}
 function harness(){
  const ids=[...fs.readFileSync('public/competition-preview.html','utf8').matchAll(/id="([^"]+)"/g)].map(m=>m[1]),nodes=Object.fromEntries(ids.map(id=>[id,new N()]));
  for(const n of Object.values(nodes))n.parentElement=new N();nodes.stageView.parentElement=new N();nodes.previousPage.parentElement=new N();nodes.castPanel.hidden=false;nodes.autoRefresh.checked=true;nodes.rotatePages.checked=true;nodes.autoScroll.checked=true;nodes.pauseScroll.setAttribute('aria-pressed','false');nodes.castSettings.hidden=true;
@@ -55,18 +55,18 @@ test('knockout cards keep literal names every average and opening-only draw numb
  bracket.render(doc,host,s,{start:1,width:1500});assert.equal(all(host).filter(n=>n.className==='draw-number').length,0);assert.equal(nodes.filter(n=>n.className==='knockout-match').length,28);
 });
 test('knockout preserves missing averages pending slots byes third place and provider final format',()=>{
- const s=stage('t',4),host=new N(),doc={createElement:t=>new N(t)};s.rounds[0].matches[0].right.state='bye';s.rounds[1].matches[0].left.state='pending';s.rounds[1].matches[0].rightAverage=null;s.thirdPlace={...match(),format:'First to 2 legs'};bracket.render(doc,host,s,{width:1500});const text=content(host);assert.match(text,/Frirond/);assert.match(text,/Väntar på spelare/);assert.match(text,/3\s+:e\s+PLATS/);const third=all(host).find(n=>n.className==='knockout-third'),number=all(third).find(n=>n.className==='third-place-number');assert.equal(number.textContent,'3');const g=bracket.geometry([2,1],[[128,128],[128]],1500),lower=g.cards[0][1];assert.ok(parseFloat(third.style.top)>lower.y);assert.match(text,/—/);assert.match(text,/Först till 3 leg/);
+ const s=stage('t',4),host=new N(),doc={createElement:t=>new N(t)};s.rounds[0].matches[0].right.state='bye';s.rounds[1].matches[0].left.state='pending';s.rounds[1].matches[0].rightAverage=null;s.thirdPlace={...match(),format:'First to 2 legs'};bracket.render(doc,host,s,{width:1500});const text=content(host);assert.doesNotMatch(text,/Frirond|Väntar på spelare/);assert.match(text,/3\s+:e\s+PLATS/);const third=all(host).find(n=>n.className==='knockout-third'),number=all(third).find(n=>n.className==='third-place-number');assert.equal(number.textContent,'3');const g=bracket.geometry([2,1],[[128,128],[128]],1500),lower=g.cards[0][1];assert.ok(parseFloat(third.style.top)>lower.y);assert.match(text,/—/);assert.match(text,/Först till 3 leg/);
 });
 test('knockout draw numbers use only unique numeric provider opening guide and never league ranks',()=>{
- const t={tdid:'t_RqC2_2034',lgid:'lg_tM2v_3523',entry_list:[{tpid:'aaaa',name:'A',rank:99},{tpid:'bbbb',name:'B'}],t_table:[['aaaa','bbbb'],['aaaa']],t_init:[[1,2]]};let out=model.project({result:0,tournament:t},{result:0,tdid:t.tdid,groups:[]});assert.equal(out.knockouts[0].rounds[0].matches[0].leftDrawNumber,1);assert.equal(out.knockouts[0].rounds[1].matches[0].leftDrawNumber,null);t.t_init=[[1,1]];out=model.project({result:0,tournament:t},{result:0,tdid:t.tdid,groups:[]});assert.equal(out.knockouts[0].rounds[0].matches[0].leftDrawNumber,null);
+ const t={tdid:'t_QHaG_7792',lgid:'lg_M2wQ_4189',entry_list:[{tpid:'aaaa',name:'A',rank:99},{tpid:'bbbb',name:'B'}],t_table:[['aaaa','bbbb'],['aaaa']],t_init:[[1,2]]};let out=model.project({result:0,tournament:t},{result:0,tdid:t.tdid,groups:[]});assert.equal(out.knockouts[0].rounds[0].matches[0].leftDrawNumber,1);assert.equal(out.knockouts[0].rounds[1].matches[0].leftDrawNumber,null);t.t_init=[[1,1]];out=model.project({result:0,tournament:t},{result:0,tdid:t.tdid,groups:[]});assert.equal(out.knockouts[0].rounds[0].matches[0].leftDrawNumber,null);
 });
-function ko(){return {pools:[],knockouts:[{kind:'t',rounds:[{slotCount:2,matches:[match()]}]}]};}
-function koLive(){return {result:0,mid:'active',tdid:'t_RqC2_2034',tmid:'t_RqC2_2034_t_0_aaaa_bbbb',end_match:0,match_type:'01',show_sets:0,players:[{tpid:'bbbb'},{tpid:'aaaa'}],stats:[{score:200,darts:10},{score:100,darts:10}],legs:[0,1]};}
+function ko(){const pending={...match(),leftScore:null,rightScore:null};return {eventId:'t_QHaG_7792',pools:[],knockouts:[{kind:'t',rounds:[{slotCount:2,format:'First to 2 legs',matches:[pending]}]}]};}
+function koLive(){return {result:0,mid:'active',tdid:'t_QHaG_7792',tmid:'t_QHaG_7792_t_0_aaaa_bbbb',end_match:0,match_type:'01',show_sets:0,players:[{tpid:'bbbb'},{tpid:'aaaa'}],stats:[{score:200,darts:10},{score:100,darts:10}],legs:[0,1]};}
 test('knockout live cycle uses exact event round pair and maps reversed provider player order',async()=>{
  const l=koLive(),row={mid:'active',tdid:l.tdid,tmid:l.tmid,endMatch:0},get=async p=>p.startsWith('match/list')?{result:0,list:[row]}:l,snap=await live.collect(get,ko(),true),out=live.applyKnockouts(ko(),snap),m=out.knockouts[0].rounds[0].matches[0];assert.equal(m.leftAverage,30);assert.equal(m.rightAverage,60);assert.equal(m.leftScore,1);assert.equal(m.live,true);assert.equal(ko().knockouts[0].rounds[0].matches[0].live,undefined);l.end_match=1;assert.equal(live.applyKnockouts(ko(),snap).knockouts[0].rounds[0].matches[0].live,false);
 });
 test('knockout live collector excludes unrelated fixtures and refuses invalid identities sets and incomplete totals',async()=>{
- const d=ko();assert.equal(live.knockoutFixture('t_RqC2_2034_t_1_aaaa_bbbb',d),null);assert.equal(live.knockoutFixture('other_t_0_aaaa_bbbb',d),null);const l=koLive(),row={mid:'active',tdid:l.tdid,tmid:l.tmid,endMatch:0};l.players[0].tpid='zzzz';await assert.rejects(live.collect(async p=>p.startsWith('match/list')?{result:0,list:[row]}:l,d,true));for(const change of [l=>l.show_sets=1,l=>l.stats[0].darts=-1,l=>l.stats[0].score=null]){const current=koLive();change(current);const out=live.applyKnockouts(d,{rows:[row],live:new Map([['active',current]])});assert.equal(out.knockouts[0].rounds[0].matches[0].live,false);assert.equal(out.knockouts[0].rounds[0].matches[0].leftScore,0);}
+ const d=ko();assert.equal(live.knockoutFixture('t_QHaG_7792_t_1_aaaa_bbbb',d),null);assert.equal(live.knockoutFixture('other_t_0_aaaa_bbbb',d),null);const l=koLive(),row={mid:'active',tdid:l.tdid,tmid:l.tmid,endMatch:0};l.players[0].tpid='zzzz';await assert.rejects(live.collect(async p=>p.startsWith('match/list')?{result:0,list:[row]}:l,d,true));for(const change of [l=>l.show_sets=1,l=>l.stats[0].darts=-1,l=>l.stats[0].score=null]){const current=koLive();change(current);const out=live.applyKnockouts(d,{rows:[row],live:new Map([['active',current]])});assert.equal(out.knockouts[0].rounds[0].matches[0].live,false);assert.equal(out.knockouts[0].rounds[0].matches[0].leftScore,null);}
 });
 test('knockout CSS reserves two-line rows single one-pixel title accent and one connector layer',()=>{
  const css=fs.readFileSync('public/css/venue-live.css','utf8');assert.match(css,/knockout-player\{[^}]*min-height:62px/);assert.match(css,/match-average\{display:block/);assert.match(css,/height:1px;background:#ffd700;border:0;box-shadow:none/);assert.match(css,/bracket-connectors\{[^}]*stroke-width:1/);assert.match(css,/bracket-viewport\{[^}]*overflow:auto/);assert.match(css,/bracket-title\{text-align:center/);
@@ -78,21 +78,29 @@ function opener(){
  const events={},tabs=[],button=new N();let ok,fail,calls=0,current=true;
  const auth={token:()=> 'STAFF',generation:()=>1,isCurrent:()=>current},runner={withSuccessHandler(f){ok=f;return this;},withFailureHandler(f){fail=f;return this;},beautyLiveTestUrl(){calls++;}};
  const window={open:()=>{const tab={closed:false,document:{body:{}},location:{},close(){this.closed=true;}};tabs.push(tab);return tab;}};
- const document={addEventListener:(k,f)=>events[k]=f,querySelectorAll:()=>[Object.assign(button,{textContent:'Beauty Live'})]};
+ const document={addEventListener:(k,f)=>events[k]=f,querySelectorAll:()=>[Object.assign(button,{textContent:'Live'})]};
  vm.runInNewContext(fs.readFileSync('public/js/hub-test-services.js','utf8'),{URL,Promise,document,window,BeautyHubAuth:auth,google:{script:{run:runner}},alert(){}});events.DOMContentLoaded();
  return {tabs,button,calls:()=>calls,ok:url=>ok(url),fail:()=>fail(),expire:()=>current=false};
 }
-test('Hub Beauty Live clicks open new independent tabs and reject late signed-out callbacks',()=>{
+test('Hub Live clicks open new independent tabs and reject late signed-out callbacks',()=>{
  const h=opener();h.button.click();h.ok('https://script.google.com/macros/s/TEST/exec?page=live');h.button.click();h.ok('https://script.google.com/macros/s/TEST/exec?page=live');assert.equal(h.tabs.length,2);assert.equal(h.calls(),2);assert.ok(h.tabs.every(t=>t.opener===null));h.button.click();h.expire();h.ok('https://script.google.com/macros/s/TEST/exec?page=live');assert.equal(h.tabs[2].closed,true);assert.equal(h.tabs[2].location.href,undefined);
 });
-test('Hub Beauty Live opener rejects foreign unguarded duplicate-query and fragment URLs',()=>{
+test('Hub Live opener rejects foreign unguarded duplicate-query and fragment URLs',()=>{
  for(const url of ['https://evil.invalid/?page=live','https://script.google.com/test/dev?page=live','https://script.google.com/macros/s/TEST/exec?page=live&page=live','https://script.google.com/macros/s/TEST/exec?page=live#token']){const h=opener();h.button.click();h.ok(url);assert.equal(h.tabs[0].closed,true);assert.equal(h.tabs[0].location.href,undefined);}
 });
 test('combined live URL uses the selected event date guard rather than returning a bare route',()=>{
- let checks=0;const c=vm.createContext({beautyHubTestGuard_(){},beautyHubAuthRequire_(){}});vm.runInContext(fs.readFileSync('apps-script/registration-identity-test/remote-app/BeautyLiveTest.gs','utf8'),c);c.beautyStageTestUrl=t=>{assert.equal(t,'STAFF');checks++;return 'https://script.google.com/macros/s/TEST/exec?page=stages';};assert.equal(c.beautyLiveTestUrl('STAFF'),'https://script.google.com/macros/s/TEST/exec?page=live');assert.equal(checks,1);c.beautyStageTestUrl=()=>{throw Error('wrong date');};assert.throws(()=>c.beautyLiveTestUrl('STAFF'),/wrong date/);
+ function run(change={}){
+  let reads=0,auth=0;const calls=[];
+  const event={tdid:'t_QHaG_7792',lgid:'lg_M2wQ_4189',title:'Beauty Registration TEST event DO NOT USE LIVE',t_date:Date.parse('2026-11-02T18:00Z')/1000,...change.event};
+  const c=vm.createContext({beautyHubActiveTestTarget_:()=>({id:'t_QHaG_7792',title:'Beauty Registration TEST event DO NOT USE LIVE'}),beautyHubTestGuard_(){if(change.guard)throw Error('guard');},beautyHubAuthRequire_(token){assert.equal(token,'STAFF');auth++;if(change.expire&&auth===2)throw Error('expired');},getBeautyHubData_(){reads++;return {success:true,eventDate:change.stale&&reads===2?'2026-11-03':change.date||'2026-11-02'};},UrlFetchApp:{fetch(url,options){calls.push({url,options});return {getResponseCode:()=>change.http||200,getContentText:()=>JSON.stringify({result:0,tournament:event})};}},Utilities:{formatDate:()=>change.providerDate||'2026-11-02'},Session:{getScriptTimeZone:()=> 'Europe/Berlin'},ScriptApp:{getService:()=>({getUrl:()=> 'https://script.google.com/macros/s/TEST/exec'})}});
+  vm.runInContext(fs.readFileSync('apps-script/registration-identity-test/remote-app/BeautyLiveTest.gs','utf8'),c);
+  return {open:()=>c.beautyLiveTestUrl('STAFF'),calls,get auth(){return auth;},get reads(){return reads;}};
+ }
+ const h=run();assert.equal(h.open(),'https://script.google.com/macros/s/TEST/exec?page=live');assert.equal(h.auth,2);assert.equal(h.reads,2);assert.equal(h.calls.length,1);assert.match(h.calls[0].url,/tdid=t_QHaG_7792$/);assert.equal(h.calls[0].options.method,'get');assert.equal(h.calls[0].options.followRedirects,false);
+ for(const change of [{guard:true},{date:'invalid'},{http:503},{event:{tdid:'t_RqC2_2034'}},{event:{lgid:'other'}},{event:{title:'wrong'}},{event:{t_date:0}},{providerDate:'2026-11-03'},{stale:true},{expire:true}])assert.throws(()=>run(change).open());
 });
 test('feed knockout option reuses one match list and propagates live match data through full and fast cycles',async()=>{
- const tournament={result:0,tournament:{tdid:'t_RqC2_2034',lgid:'lg_tM2v_3523',updateTime:1,entry_list:[{tpid:'aaaa',name:'A'},{tpid:'bbbb',name:'B'}],t_table:[['aaaa','bbbb'],['']],t_setting:{limit:1,limit_leg_count:2,drawMode:0}}},l=koLive(),rows=[{mid:l.mid,tdid:l.tdid,tmid:l.tmid,endMatch:0}],paths=[],values=[];
+ const tournament={result:0,tournament:{tdid:'t_QHaG_7792',lgid:'lg_M2wQ_4189',updateTime:1,entry_list:[{tpid:'aaaa',name:'A'},{tpid:'bbbb',name:'B'}],t_table:[['aaaa','bbbb'],['']],t_setting:{limit:1,limit_leg_count:2,drawMode:0}}},l=koLive(),rows=[{mid:l.mid,tdid:l.tdid,tmid:l.tmid,endMatch:0}],paths=[],values=[];
  const f=require('../public/js/nakka-stage-feed.js').create({model,liveModel:live,includeLive:true,includeKnockouts:true,onData:d=>values.push(d),onError:e=>assert.fail(e),fetch:async url=>{paths.push(url);return {ok:true,json:async()=>url.includes('standings')?{result:0,tdid:l.tdid,groups:[]}:url.includes('match/list')?{result:0,list:rows}:url.includes('match/live')?l:tournament};}});
  await f.refresh();assert.equal(values[0].knockouts[0].rounds[0].matches[0].live,true);assert.equal(paths.filter(p=>p.includes('match/list')).length,1);l.legs=[1,1];await f.refreshLive();assert.equal(values.at(-1).knockouts[0].rounds[0].matches[0].rightScore,1);assert.equal(paths.filter(p=>p.includes('match/list')).length,2);
 });
@@ -128,5 +136,40 @@ test('approved title and action nodes dock into header and tab row then remain i
 
 
 test('finals winner uses provider champion and correct award without inferring a winner from scores',()=>{
- for(const kind of ['t','s2']){const s=stage(kind,4),host=new N(),doc={createElement:t=>new N(t)};s.rounds.at(-1).matches[0].left={state:'player',name:'Confirmed champion'};bracket.render(doc,host,s,{width:1500});assert.equal(all(host).find(n=>n.className==='winner-name').textContent,'Confirmed champion');const award=all(host).find(n=>n.className==='winner-award'),name=all(host).find(n=>n.className==='winner-name');assert.equal(award.textContent,kind==='s2'?'🥇':'🏆');assert.equal(award.parentElement.className,'winner-card');assert.equal(name.parentElement,award.parentElement);assert.equal(all(host).find(n=>n.className==='winner-logo').parentElement.className,'winner-header');assert.ok(all(host).some(n=>n.className.includes('semifinal-heading-docked')));assert.match(all(host).find(n=>n.className==='winner-logo').attributes.src,/^data:image\/png;base64,/);s.rounds.at(-1).matches[0].left={state:'pending'};bracket.render(doc,host,s,{width:1500});assert.equal(all(host).find(n=>n.className==='winner-name').textContent,'Väntar på vinnare');}
+ for(const kind of ['t','s2']){const s=stage(kind,4),host=new N(),doc={createElement:t=>new N(t)};s.rounds.at(-1).matches[0].left={state:'player',name:'Confirmed champion'};bracket.render(doc,host,s,{width:1500});assert.equal(all(host).find(n=>n.className==='winner-name').textContent,'Confirmed champion');const award=all(host).find(n=>n.className==='winner-award'),name=all(host).find(n=>n.className==='winner-name');assert.equal(award.textContent,kind==='s2'?'🥇':'🏆');assert.ok(award.parentElement.classList.contains('winner-card'));assert.equal(name.parentElement,award.parentElement);assert.equal(all(host).find(n=>n.className==='winner-logo').parentElement.className,'winner-header');assert.ok(all(host).some(n=>n.className.includes('semifinal-heading-docked')));assert.match(all(host).find(n=>n.className==='winner-logo').attributes.src,/^data:image\/png;base64,/);s.rounds.at(-1).matches[0].left={state:'pending'};bracket.render(doc,host,s,{width:1500});assert.equal(all(host).find(n=>n.className==='winner-name').textContent,'Väntar på vinnare');}
+});
+
+test('completed native knockout result survives stale active scorer and reload',()=>{
+ for(const kind of ['t','s2']){const d=ko();d.knockouts[0].kind=kind;const m=d.knockouts[0].rounds[0].matches[0];m.leftScore=2;m.rightScore=0;const l=koLive();l.tmid=l.tmid.replace('_t_','_'+kind+'_');l.legs=[0,0];const snap={rows:[{mid:l.mid,tmid:l.tmid}],live:new Map([[l.mid,l]])};for(let i=0;i<2;i++){const out=live.applyKnockouts(d,snap).knockouts[0].rounds[0].matches[0];assert.equal(out.live,false);assert.equal(out.leftScore,2);assert.equal(out.rightScore,0);}}
+});
+test('winner stays pending during an active or unresolved final despite provider champion slot',()=>{
+ const s=stage('s2',4),host=new N(),doc={createElement:t=>new N(t)},final=s.rounds.find(r=>r.slotCount===2).matches[0];s.rounds.at(-1).matches[0].left={state:'player',name:'Premature champion'};
+ for(const state of [{live:true,leftScore:0,rightScore:0},{live:true,leftScore:2,rightScore:0},{live:false,leftScore:null,rightScore:null},{live:false,leftScore:0,rightScore:0}]){Object.assign(final,state);bracket.render(doc,host,s,{width:1500});assert.equal(all(host).find(n=>n.className==='winner-name').textContent,'Väntar på vinnare');}
+ Object.assign(final,{live:false,leftScore:2,rightScore:0});bracket.render(doc,host,s,{width:1500});assert.equal(all(host).find(n=>n.className==='winner-name').textContent,'Premature champion');
+});
+test('two qualifier final hides empty bronze match and board badge keeps assigned text',()=>{
+ const s=stage('t',2),host=new N(),doc={createElement:t=>new N(t)};s.thirdPlace=match();s.rounds[0].matches[0].board={text:'1',state:'assigned'};s.rounds[0].matches[0].leftScore=null;s.rounds[0].matches[0].rightScore=null;bracket.render(doc,host,s,{width:1500});assert.equal(all(host).some(n=>n.className==='knockout-third'),false);assert.equal(all(host).find(n=>n.className==='knockout-board').textContent,'Bana 1');const semi=stage('s2',4);semi.thirdPlace={...match(),left:{state:'pending'},right:{state:'pending'}};bracket.render(doc,host,semi,{width:1500});assert.equal(all(host).some(n=>n.className==='knockout-third'),false);
+});
+
+test('finished knockout matches hide board badges and only confirmed winners receive gold outline',()=>{
+ for(const kind of ['t','s2']){
+  const s=stage(kind,2),host=new N(),doc={createElement:t=>new N(t)},m=s.rounds[0].matches[0];s.rounds.at(-1).matches[0].left={state:'player',name:'Confirmed champion'};
+  for(const state of [{live:false,leftScore:null,rightScore:null,board:{text:'1',state:'assigned'}},{live:true,leftScore:1,rightScore:0,board:{text:'1',state:'in-progress'}}]){Object.assign(m,state);bracket.render(doc,host,s,{width:1500});assert.equal(all(host).filter(n=>n.className==='knockout-board').length,1);assert.equal(all(host).some(n=>n.classList.contains('confirmed-winner')),false);}
+  Object.assign(m,{live:false,leftScore:3,rightScore:0,board:{text:'1',state:'assigned'}});bracket.render(doc,host,s,{width:1500});assert.equal(all(host).some(n=>n.className==='knockout-board'),false);assert.equal(all(host).filter(n=>n.classList.contains('confirmed-winner')).length,1);
+  Object.assign(m,{live:false,leftScore:null,rightScore:null,board:{text:'1',state:'finished'}});bracket.render(doc,host,s,{width:1500});assert.equal(all(host).some(n=>n.className==='knockout-board'),false);assert.equal(all(host).some(n=>n.classList.contains('confirmed-winner')),false);
+ }
+});
+
+test('Live hides disabled competition tabs and leaves a disabled selected stage for the player list',async()=>{
+ const h=harness();await h.click('loadTest');h.receive(data());await h.click('tabT');h.receive({...data(),views:{pools:true,t:false,s2:false},knockouts:[]});assert.equal(h.nodes.tabT.hidden,true);assert.equal(h.nodes.tabS2.hidden,true);assert.equal(h.nodes.tabGroup.hidden,false);assert.equal(h.nodes.playersPanel.hidden,false);
+ h.receive({...data(),views:{pools:false,t:false,s2:true},pools:[],knockouts:[stage('s2',16)]});assert.equal(h.nodes.tabGroup.hidden,true);assert.equal(h.nodes.tabS2.hidden,false);
+});
+
+test('Knockout live scoring survives intermediate leg results until the configured match target',()=>{
+ for(const target of [2,3])for(const kind of ['t','s2']){
+  const d=ko();d.knockouts[0].kind=kind;d.knockouts[0].rounds[0].format='First to '+target+' legs';const m=d.knockouts[0].rounds[0].matches[0];
+  const l=koLive();l.tmid=l.tmid.replace('_t_','_'+kind+'_');const snap={rows:[{mid:l.mid,tmid:l.tmid}],live:new Map([[l.mid,l]])};
+  for(let won=1;won<target;won++){m.leftScore=won;m.rightScore=0;l.legs=[0,won];l.stats[1]={score:501*won+120,darts:18*won+6};const out=live.applyKnockouts(d,snap).knockouts[0].rounds[0].matches[0];assert.equal(out.live,true);assert.equal(out.leftScore,won);assert.equal(out.leftAverage,3*l.stats[1].score/l.stats[1].darts);}
+  m.leftScore=target;l.legs=[0,0];const ended=live.applyKnockouts(d,snap).knockouts[0].rounds[0].matches[0];assert.equal(ended.live,false);assert.equal(ended.leftScore,target);
+ }
 });

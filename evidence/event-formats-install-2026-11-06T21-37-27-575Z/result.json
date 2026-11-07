@@ -1,0 +1,43 @@
+{
+  "result": "LOCAL_EVENT_FORMATS_INSTALL_PASS",
+  "finishedUTC": "2026-11-06T21:38:43.141Z",
+  "before": {
+    "tests": 813,
+    "pass": 813,
+    "failed": []
+  },
+  "after": {
+    "tests": 824,
+    "pass": 824,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/event-formats-before-2026-11-06T21-37-27-575Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/event-formats-install-2026-11-06T21-37-27-575Z",
+  "files": [
+    "server/pool-service.js",
+    "server/tournament-control.js",
+    "tests/pool-planner-seeded-ui.test.cjs",
+    "tests/live-shell.test.cjs",
+    "tests/nakka-stage-model.test.cjs",
+    "tests/date-event-creation.test.cjs",
+    "tests/pool-service.test.cjs",
+    "apps-script/registration-identity-test/remote-app/HubTestNakkaEvent.gs",
+    "apps-script/registration-identity-test/remote-app/HubTestPools.gs",
+    "apps-script/registration-identity-test/remote-app/BeautyLiveTest.html",
+    "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "apps-script/registration-identity-test/remote-app/StageTest.html",
+    "docs/handoff/acceptance-20261106.md",
+    "docs/handoff/test-inventory.json",
+    "public/js/nakka-stage-model.js",
+    "public/js/pool-planner-seeded.js",
+    "public/js/hub-nakka-event.js",
+    "public/js/venue-live.js",
+    "public/css/beauty-dashboard.css",
+    "evidence/event-format-modes-20261106/checks.tap"
+  ],
+  "googleUpload": "PENDING — run upload-test.cjs to update existing Identity TEST source",
+  "deviceAcceptance": "PENDING — verify selected event modes, single-stage qualification and Live tabs; no production changes",
+  "production": "UNCHANGED"
+}

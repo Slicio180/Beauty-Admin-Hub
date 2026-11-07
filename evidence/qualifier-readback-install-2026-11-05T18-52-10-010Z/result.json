@@ -1,0 +1,28 @@
+{
+  "result": "LOCAL_QUALIFIER_READBACK_INSTALL_PASS",
+  "finishedUTC": "2026-11-05T18:53:09.379Z",
+  "before": {
+    "tests": 728,
+    "pass": 728,
+    "failed": []
+  },
+  "after": {
+    "tests": 731,
+    "pass": 731,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/qualifier-readback-before-2026-11-05T18-52-10-010Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/qualifier-readback-install-2026-11-05T18-52-10-010Z",
+  "files": [
+    "server/pool-service.js",
+    "tests/pool-service.test.cjs",
+    "docs/handoff/test-inventory.json",
+    "apps-script/registration-identity-test/remote-app/HubTestPools.gs",
+    "evidence/qualifier-readback-20261105/README.md"
+  ],
+  "googleUpload": "PENDING — upload HubTestPools.gs to Identity TEST only",
+  "deviceAcceptance": "PENDING — private original-audit reconciliation of the already-saved TEST send pending; do not resend",
+  "production": "UNCHANGED"
+}

@@ -1,0 +1,5 @@
+
+> beauty-admin-hub@0.0.0-recovery test:inventory
+> node scripts/check-test-inventory.cjs
+
+PASS: 892 cases across 64 files map to known requirements and evidence.

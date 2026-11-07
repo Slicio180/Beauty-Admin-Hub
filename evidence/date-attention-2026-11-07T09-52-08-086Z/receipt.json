@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "finishedUTC": "2026-11-07T09:52:33.499Z",
+  "scriptId": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "googleFilesVerified": 20,
+  "changedGoogleFiles": 1,
+  "fixes": [
+    "Date control available without Nakka event",
+    "Attention warning retained through retry"
+  ],
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/date-attention-2026-11-07T09-52-08-086Z",
+  "production": "UNCHANGED",
+  "deployment": "UNCHANGED",
+  "hubSha256": "56a5249276fd140866fe0f7320ce17c50d2d7c40672fb49fd61e1074e589daa1"
+}

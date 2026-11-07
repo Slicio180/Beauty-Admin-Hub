@@ -29,6 +29,38 @@
   }
   return {version:1,mode:'sequential-pools',boards,assignments:boards.flatMap(b=>b.pools.map(p=>({...p,board:b.board}))).sort((a,b)=>a.poolNumber-b.poolNumber)};
  }
- const api=Object.freeze({parseBoards,allocate});
+ // Reserve one board per pool before spending spare capacity on four-player pools.
+ // Scarce venues use one board per pool and queue by earliest free board.
+ function defaults(pools,available){
+  allocate(pools,available);
+  const ready=new Map([...available].sort((a,b)=>a-b).map(b=>[b,1]));
+  let spare=Math.max(0,available.length-pools.length);
+  const choices=pools.map(pool=>{
+   const count=pool.players.length===4&&spare>0?2:1;if(count===2)spare--;
+   const boards=[...ready.keys()].sort((a,b)=>ready.get(a)-ready.get(b)||a-b).slice(0,count);
+   const start=Math.max(...boards.map(b=>ready.get(b)));
+   const end=start+Math.ceil(pool.players.length*(pool.players.length-1)/2/count);
+   for(const b of boards)ready.set(b,end);
+   return {poolId:pool.id,boards};
+  });
+  return matchPlan(pools,available,choices);
+ }
+ function matchPlan(pools,available,choices){
+  allocate(pools,available); // Validate the same venue and frozen pool boundaries.
+  if(!Array.isArray(choices)||choices.length!==pools.length)throw Error('Choose boards for every pool.');
+  const ready=new Map(available.map(n=>[n,1])),matches=[],assignments=[];
+  for(const pool of pools){
+   const choice=choices.find(c=>c.poolId===pool.id),n=pool.players.length;
+   if(!choice||Object.keys(choice).sort().join(',')!=='boards,poolId'||!Array.isArray(choice.boards)||![1,2].includes(choice.boards.length)||choice.boards.length===2&&n!==4||new Set(choice.boards).size!==choice.boards.length||choice.boards.some(b=>!available.includes(b)))throw Error('Choose one board, or two different available boards for a four-player pool.');
+   const boards=choice.boards,start=Math.max(...boards.map(b=>ready.get(b))),pairs=[];
+   if(n===4)pairs.push([0,3],[1,2],[0,2],[3,1],[0,1],[2,3]);
+   else for(let a=0;a<n;a++)for(let b=a+1;b<n;b++)pairs.push([a,b]);
+   pairs.forEach(([a,b],i)=>matches.push({poolId:pool.id,wave:start+Math.floor(i/boards.length),board:boards[i%boards.length],players:[pool.players[a].id,pool.players[b].id]}));
+   const end=start+Math.ceil(pairs.length/boards.length);for(const b of boards)ready.set(b,end);
+   assignments.push({poolId:pool.id,boards:boards.slice(),startWave:start,endWave:end-1});
+  }
+  return {version:1,assignments,matches};
+ }
+ const api=Object.freeze({parseBoards,allocate,defaults,matchPlan});
  if(typeof module==='object'&&module.exports)module.exports=api;else root.BeautyPoolBoards=api;
 })(typeof globalThis==='object'?globalThis:this);

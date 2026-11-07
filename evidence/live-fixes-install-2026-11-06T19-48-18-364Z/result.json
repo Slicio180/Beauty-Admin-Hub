@@ -1,0 +1,43 @@
+{
+  "result": "LOCAL_LIVE_FIXES_INSTALL_PASS",
+  "finishedUTC": "2026-11-06T19:49:43.331Z",
+  "before": {
+    "tests": 793,
+    "pass": 793,
+    "failed": []
+  },
+  "after": {
+    "tests": 797,
+    "pass": 797,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/live-fixes-before-2026-11-06T19-48-18-364Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/live-fixes-install-2026-11-06T19-48-18-364Z",
+  "files": [
+    "apps-script/registration-identity-test/remote-app/BeautyLiveTest.html",
+    "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "apps-script/registration-identity-test/remote-app/HubTestNakkaEvent.gs",
+    "apps-script/registration-identity-test/remote-app/RemoteRegistration.html",
+    "apps-script/registration-identity-test/remote-app/StageTest.html",
+    "docs/handoff/acceptance-20261106.md",
+    "docs/handoff/test-inventory.json",
+    "evidence/live-fixes-20261106/tests.tap",
+    "public/css/beauty-dashboard.css",
+    "public/css/beauty-player.css",
+    "public/css/venue-live.css",
+    "public/js/knockout-bracket.js",
+    "public/js/nakka-pool-live.js",
+    "public/js/pool-planner-seeded.js",
+    "public/js/venue-pool-cards.js",
+    "scripts/build-player-test.cjs",
+    "tests/date-event-creation.test.cjs",
+    "tests/live-shell.test.cjs",
+    "tests/pool-planner-seeded-ui.test.cjs",
+    "tests/venue-cast.test.cjs"
+  ],
+  "googleUpload": "PENDING — copy changed Google files listed in READ-ME.txt to existing Identity TEST files only",
+  "deviceAcceptance": "PENDING — verify completed finals, partial averages, board badges, mobile digits and running controls; no production changes",
+  "production": "UNCHANGED"
+}

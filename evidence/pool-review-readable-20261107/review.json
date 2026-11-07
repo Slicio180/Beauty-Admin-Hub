@@ -1,0 +1,13 @@
+{
+  "finishedUTC": "2026-11-07T18:45:58.984089+00:00",
+  "result": "PASS_LOCAL",
+  "tests": 951,
+  "failures": 0,
+  "inventory": "PASS",
+  "browser": "BLOCKED: Chromium socket creation not permitted; visual review pending",
+  "production": "UNCHANGED",
+  "googleTestUpload": "PENDING",
+  "github": "UNCHANGED",
+  "baseline": "Beauty-Review-20261107-193816.zip",
+  "fixture": "Excluded historical backup restored locally from docs/recovered-drive/evidence/Hub.html; exact SHA256 matched expected 4f91f27c627801b936721e4265a7f166d22a37b9957ff1c4552abe2f54593a41. Not included in installer."
+}

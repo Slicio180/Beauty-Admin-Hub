@@ -1,0 +1,23 @@
+✔ RemoteRegistration.html loads minimal registration context and hides form on wrong event day (3.993083ms)
+✔ RemoteRegistration.html actual submit sends date through its own RPC with no client source or staff credential (2.03548ms)
+✔ RemoteRegistration.html success distinguishes saved registration from Nakka attention and keeps five-second next-player return (1.407053ms)
+✔ RemoteRegistration.html Swedish error boundary preserves identity fields and never exposes unknown server prose (1.494194ms)
+✔ RemoteRegistration.html context-load failure shows Swedish help instead of raw service errors (5.807775ms)
+✔ KioskTest.html loads minimal registration context and hides form on wrong event day (1.427443ms)
+✔ KioskTest.html actual submit sends date through its own RPC with no client source or staff credential (1.767967ms)
+✔ KioskTest.html success distinguishes saved registration from Nakka attention and keeps five-second next-player return (1.93576ms)
+✔ KioskTest.html Swedish error boundary preserves identity fields and never exposes unknown server prose (1.772003ms)
+✔ KioskTest.html context-load failure shows Swedish help instead of raw service errors (1.462746ms)
+✔ Central player TEST pages preserve Swedish shared identity modules and parse all inline scripts (14.192178ms)
+✔ Shared player theme build is deterministic and leaves registration scripts unchanged (198.072001ms)
+✔ Hub remote and kiosk use the supplied original sponsor-free logo and embedded AIK font assets (31.368769ms)
+✔ Remote approved tonight list uses the bottom close button and number-only shared heading (5.185813ms)
+✔ Kiosk retains its original sizing and omits player list while remote keeps independent list and sizing (3.92488ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 364.559517

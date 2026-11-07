@@ -1,0 +1,29 @@
+{
+  "result": "LOCAL_EVENING_DIRECT_SETTINGS_INSTALL_PASS",
+  "finishedUTC": "2026-11-06T22:42:07.407Z",
+  "before": {
+    "tests": 840,
+    "pass": 840,
+    "failed": []
+  },
+  "after": {
+    "tests": 841,
+    "pass": 841,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/evening-direct-settings-before-2026-11-06T22-40-56-838Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/evening-direct-settings-install-2026-11-06T22-40-56-838Z",
+  "files": [
+    "tests/evening-setup-ui.test.cjs",
+    "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "docs/handoff/acceptance-20261106.md",
+    "docs/handoff/test-inventory.json",
+    "public/js/hub-evening-setup.js",
+    "evidence/evening-auto-check-20261106/checks.tap"
+  ],
+  "googleUpload": "PENDING — run upload-test.cjs to update existing Identity TEST source",
+  "deviceAcceptance": "PENDING — open Evening Setup and go directly to Change Settings; no production changes",
+  "production": "UNCHANGED"
+}

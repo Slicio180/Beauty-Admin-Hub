@@ -6,3 +6,10 @@
 .pool-planner input,.pool-planner select{font:inherit;background:#222;color:#fff;border:1px solid #aaa;padding:10px;width:200px;max-width:100%;box-sizing:border-box}
 .pool-planner .pool-close{float:right;background:#ffd700;color:#000;font:inherit;font-size:28px;border:0;padding:2px 14px;cursor:pointer}
 .pool-planner p{line-height:1.4}.pool-planner :focus-visible{outline:3px solid #ffd700;outline-offset:3px}
+
+.pool-readable-settings {margin:20px 0;display:grid;gap:12px}
+.pool-readable-settings h3,.pool-readable-settings>p {grid-column:1/-1;margin:0}
+.pool-rules-stage {border:1px solid #34383a;border-left:3px solid #ffd700;border-radius:6px;padding:14px 18px;min-width:0}
+.pool-rules-stage h4 {color:#ffd700;font-size:24px;margin:0 0 10px}
+.pool-rules-stage p {font-size:20px;line-height:1.4;margin:8px 0;overflow-wrap:anywhere}
+.pool-approval details pre {max-height:320px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}

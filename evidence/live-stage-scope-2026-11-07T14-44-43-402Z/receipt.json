@@ -1,0 +1,46 @@
+{
+  "result": "PASS",
+  "finishedUTC": "2026-11-07T14:45:09.819Z",
+  "scriptId": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/live-stage-scope-2026-11-07T14-44-43-402Z",
+  "tests": "Full regression suite and requirement inventory passed before packaging",
+  "googleSource": "READBACK_VERIFIED",
+  "originalAssets": true,
+  "production": "UNCHANGED",
+  "deployment": "UNCHANGED",
+  "browserVisualCheck": "PENDING",
+  "files": [
+    {
+      "path": "public/js/nakka-stage-model.js",
+      "sha256": "ac5dc60444bc70b80ea49e1b83057f64060765e2f59a292924bfa398c018bfdf"
+    },
+    {
+      "path": "tests/nakka-stage-model.test.cjs",
+      "sha256": "3777a8cd28bd7ca078610a0c54bfc57dec9f9ee2d587b92a4d62f67d54ad817d"
+    },
+    {
+      "path": "docs/handoff/test-inventory.json",
+      "sha256": "c4d310cbf4aebf0f4cdad49b062567fb2c20576c866503bbe7950c310e9bdd24"
+    },
+    {
+      "path": "evidence/live-stage-scope-20261107/checks.tap",
+      "sha256": "b554836483ceb7608dbcc69de96a9c8e1c323329a40d0771476badbc635ba1ec"
+    },
+    {
+      "path": "evidence/live-stage-scope-20261107/inventory.txt",
+      "sha256": "fad851e64c4e29b31c694cf9caef57a4856f47b5fb62bdcd3a3d852b4aa3a6cb"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/Code.js",
+      "sha256": "f05a899d4da6713bfa06b2162f726a0071d658c7eac877bd1b77d53f88dd96c1"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/BeautyLiveTest.html",
+      "sha256": "8a6db1d3a03ac5f38dcbe0580663f23a04b9b2d363bbedea9db43905d09d5da6"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/StageTest.html",
+      "sha256": "8a6db1d3a03ac5f38dcbe0580663f23a04b9b2d363bbedea9db43905d09d5da6"
+    }
+  ]
+}

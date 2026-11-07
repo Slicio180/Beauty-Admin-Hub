@@ -1,0 +1,26 @@
+/* Uses the original embedded AIK faces already supplied by the Hub. */
+body #hubCompetitionSelector{display:flex;flex-direction:column;align-items:flex-start;text-align:left;min-width:230px;max-width:360px;gap:3px;background:#080b0c!important;border:1px solid #ffd700!important;color:#f4f4f2!important;padding:10px 14px;font-family:'AIK Display',serif!important;}
+body #hubCompetitionSelector #nakkaTournamentTitle,body #hubCompetitionSelector #nakkaTournamentDate{color:#f4f4f2!important;-webkit-text-fill-color:#f4f4f2;font-family:'AIK Display',serif;white-space:normal;}
+body #hubCompetitionSelector .event-selector-label{color:#ffd700;font:14px 'AIK Display',serif;}
+body .event-selector{width:min(720px,calc(100vw - 40px));box-sizing:border-box;background:#101214;color:#f4f4f2;border:1px solid #ffd700;border-radius:16px;padding:28px;font:20px/1.5 'AIK Display',serif;}
+body .event-selector h2{color:#fff;font:28px 'AIK Condensed','AIK Display',serif;margin:0 44px 16px 0;}
+body .event-selector h3{color:#ffd700;font:23px 'AIK Display',serif;}
+body .event-selector p,body .event-selector label{color:#f4f4f2;}
+body .event-selector button{margin:8px 8px 0 0;background:#080b0c!important;color:#ffd700!important;border:1px solid #ffd700!important;font-family:'AIK Condensed','AIK Display',serif!important;}
+body .event-selector button.event-choice-selected,body .event-selector button:active{background:#ffd700!important;color:#101214!important;}
+body .event-selector .event-choice-list{display:grid;gap:12px;margin:20px 0;}
+body .event-selector .event-choice-list button{text-align:left;padding:18px;margin:0;}
+body .event-selector .event-selector-field{display:flex;flex-direction:column;gap:8px;margin:20px 0;}
+body .event-selector input,body .event-selector select{background:#080b0c;color:#f4f4f2;-webkit-text-fill-color:#f4f4f2;border:1px solid #ffd700;padding:12px;font:20px 'AIK Display',serif;box-sizing:border-box;max-width:100%;color-scheme:dark;}
+body .event-selector a{color:#ffd700;}
+body .event-selector button:disabled{opacity:.5;}
+body .evening-setup input,body .evening-setup select{color:#f4f4f2;-webkit-text-fill-color:#f4f4f2;}
+@media(max-width:760px){body #hubCompetitionSelector{min-width:0;max-width:100%;width:100%;}body .event-selector{padding:20px;}}
+
+/* Approved selector polish: original AIK Condensed Bold and translucent hover. */
+body #hubCompetitionSelector .event-selector-label{font:700 22px/1.2 'AIK Condensed','AIK Display',serif!important;}
+body #hubCompetitionSelector #nakkaTournamentTitle,body #hubCompetitionSelector #nakkaTournamentDate{font:400 20px/1.3 'AIK Display',serif!important;}
+body #hubCompetitionSelector:hover{background:rgba(255,215,0,.16)!important;}
+body .event-selector .event-found-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:24px;}
+body .event-selector .event-found-actions>button{margin:0!important;}
+body .event-selector .event-found-actions>.event-date-action{margin-left:auto!important;}

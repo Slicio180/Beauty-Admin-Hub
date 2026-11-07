@@ -3,7 +3,7 @@ const {registration,input}=require('./fixtures/hub-registration-runtime.cjs');
 const rpc=(h,route,data=input)=>h.context[route==='MOBIL'?'submitRegistration':'submitKioskRegistration'](data);
 for(const route of ['MOBIL','KIOSK']){
  test(route+' TEST registration saves and transfers with stamped source and no Hub staff session',()=>{
-  const h=registration({noAuth:true}),r=rpc(h,route);assert.equal(r.success,true);assert.equal(r.nakka.entryConfirmed,true);assert.equal(h.rows.length,1);assert.equal(h.rows[0].length,6);assert.equal(h.rows[0][5],route);assert.equal(h.posts().length,1);assert.equal(h.acquires,3);assert.equal(h.held,false);assert.equal(h.context.beautyHubPlayerContext_,null);
+  const h=registration({noAuth:true}),r=rpc(h,route);assert.equal(r.success,true);assert.equal(r.nakka.entryConfirmed,true);assert.equal(h.rows.length,1);assert.equal(h.rows[0].length,6);assert.equal(h.rows[0][5],route);assert.equal(h.posts().length,1);assert.equal(h.acquires,2);assert.equal(h.held,false);assert.equal(h.context.beautyHubPlayerContext_,null);
   assert.deepEqual(Object.keys(r.nakka).sort(),['entryConfirmed','identityVerified','needsAttention']);assert.doesNotMatch(JSON.stringify(r),/SECRET|journal|sessionBinding|test-registration:/);
  });
  test(route+' TEST registration retains Sheet success on timeout and blocks duplicate across sources',()=>{
@@ -23,7 +23,7 @@ for(const route of ['MOBIL','KIOSK']){
  });
 }
 test('Player registration context returns only bounded names date and availability without staff access',()=>{
- const h=registration({noAuth:true}),r=h.context.getTestRegistrationContext();assert.equal(r.eventDate,input.eventDate);assert.equal(r.registrationAvailable,true);assert.deepEqual(Array.from(r.names),['Anna','Other','MITT NAMN FINNS INTE I LISTAN']);assert.deepEqual(Object.keys(r).sort(),['eventDate','names','registrationAvailable','success']);assert.equal(h.calls.length,0);assert.equal(h.rows.length,0);
+ const h=registration({noAuth:true}),r=h.context.getTestRegistrationContext();assert.equal(r.eventDate,input.eventDate);assert.equal(r.registrationAvailable,true);assert.deepEqual(Array.from(r.names),['Anna','Other','MITT NAMN FINNS INTE I LISTAN']);assert.deepEqual(Object.keys(r).sort(),['eventContext','eventDate','eventTitle','names','registrationAvailable','success']);assert.equal(h.calls.length,0);assert.equal(h.rows.length,0);
  assert.throws(()=>h.context.getTestRegistrationContext({sheet:'wrong'}));h.state.date='2026-10-28';assert.equal(h.context.getTestRegistrationContext().registrationAvailable,false);
  assert.equal(h.context.beautyHubTest('read',{},'bad').code,'AUTH_REQUIRED');
 });
@@ -37,7 +37,7 @@ test('Player registration context always clears on core error and never becomes 
  assert.throws(()=>h.context.beautyHubPlayerTransferRequire_('Anna'),/AUTH_REQUIRED/);
 });
 test('Central TEST kiosk route uses owner-only existing project and rejects configuration injection',()=>{
- const h=registration();h.context.HtmlService={createHtmlOutputFromFile:file=>({file,setTitle(){return this;}})};
+ const h=registration();h.context.HtmlService={createHtmlOutputFromFile:file=>({file,addMetaTag(){return this;},setTitle(){return this;}})};
  assert.equal(h.context.doGet({parameter:{page:'kiosk'}}).file,'KioskTest');assert.equal(h.context.doGet({parameter:{page:'remote'}}).file,'RemoteRegistration');assert.throws(()=>h.context.doGet({parameter:{page:'kiosk',sheet:'wrong'}}));
  const manifest=JSON.parse(fs.readFileSync('apps-script/registration-identity-test/remote-app/appsscript.json'));assert.equal(manifest.webapp.access,'MYSELF');assert.equal(manifest.webapp.executeAs,'USER_ACCESSING');assert.deepEqual(manifest.oauthScopes,['https://www.googleapis.com/auth/spreadsheets','https://www.googleapis.com/auth/script.external_request']);
 });

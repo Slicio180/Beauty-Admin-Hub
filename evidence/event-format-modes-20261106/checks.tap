@@ -1,0 +1,1102 @@
+TAP version 13
+# Subtest: Date events select a new approved TEST event and refuse a stale binding after the Hub date changes
+ok 1 - Date events select a new approved TEST event and refuse a stale binding after the Hub date changes
+  ---
+  duration_ms: 19.14259
+  type: 'test'
+  ...
+# Subtest: Date creation review copies settings only and discloses public TEST visibility without any POST
+ok 2 - Date creation review copies settings only and discloses public TEST visibility without any POST
+  ---
+  duration_ms: 1.907224
+  type: 'test'
+  ...
+# Subtest: Date creation confirms once and verifies empty native entries plus settings before publishing the selection
+ok 3 - Date creation confirms once and verifies empty native entries plus settings before publishing the selection
+  ---
+  duration_ms: 2.39157
+  type: 'test'
+  ...
+# Subtest: Date creation rejects missing acknowledgement altered dates sessions users and expired tickets before POST
+ok 4 - Date creation rejects missing acknowledgement altered dates sessions users and expired tickets before POST
+  ---
+  duration_ms: 4.56954
+  type: 'test'
+  ...
+# Subtest: Date creation timeout leaves a durable uncertain marker and every later create attempt stays read only
+ok 5 - Date creation timeout leaves a durable uncertain marker and every later create attempt stays read only
+  ---
+  duration_ms: 1.188204
+  type: 'test'
+  ...
+# Subtest: Date creation blocks duplicate selection nonempty entries or changed native readbacks after its single POST
+ok 6 - Date creation blocks duplicate selection nonempty entries or changed native readbacks after its single POST
+  ---
+  duration_ms: 2.981787
+  type: 'test'
+  ...
+# Subtest: Date creation refuses an existing TEST event and cannot target same-date production or arbitrary input IDs
+ok 7 - Date creation refuses an existing TEST event and cannot target same-date production or arbitrary input IDs
+  ---
+  duration_ms: 1.421604
+  type: 'test'
+  ...
+# Subtest: Date creation cannot POST if project authorization lock audit or journal verification fails
+ok 8 - Date creation cannot POST if project authorization lock audit or journal verification fails
+  ---
+  duration_ms: 15.960802
+  type: 'test'
+  ...
+# Subtest: Cast staff opener forwards only its verified session to date selection and restores request context
+ok 9 - Cast staff opener forwards only its verified session to date selection and restores request context
+  ---
+  duration_ms: 16.938451
+  type: 'test'
+  ...
+# Subtest: Selected TEST Live feed requests only its injected event and rejects a different provider event
+ok 10 - Selected TEST Live feed requests only its injected event and rejects a different provider event
+  ---
+  duration_ms: 14.142923
+  type: 'test'
+  ...
+# Subtest: Missing-event UI reviews creation separately and sends exactly one explicitly acknowledged confirm
+ok 11 - Missing-event UI reviews creation separately and sends exactly one explicitly acknowledged confirm
+  ---
+  duration_ms: 56.497751
+  type: 'test'
+  ...
+# Subtest: Creation Back preserves the title and requires a fresh review ticket and acknowledgement
+ok 12 - Creation Back preserves the title and requires a fresh review ticket and acknowledgement
+  ---
+  duration_ms: 6.992909
+  type: 'test'
+  ...
+# Subtest: Creation expired approval returns an actionable review button without repeating the write
+ok 13 - Creation expired approval returns an actionable review button without repeating the write
+  ---
+  duration_ms: 1.371599
+  type: 'test'
+  ...
+# Subtest: Creation uncertain outcome offers no retry or Back path after its single confirm
+ok 14 - Creation uncertain outcome offers no retry or Back path after its single confirm
+  ---
+  duration_ms: 1.23207
+  type: 'test'
+  ...
+# Subtest: Creation validation exposes only safe actionable reasons and keeps unexpected backend details private
+ok 15 - Creation validation exposes only safe actionable reasons and keeps unexpected backend details private
+  ---
+  duration_ms: 1.83138
+  type: 'test'
+  ...
+# Subtest: Creation match settings freeze chosen legs final overrides dart limits and third-place flags before any write
+ok 16 - Creation match settings freeze chosen legs final overrides dart limits and third-place flags before any write
+  ---
+  duration_ms: 1.44553
+  type: 'test'
+  ...
+# Subtest: Creation confirms only frozen match options and verifies every native setting after one create
+ok 17 - Creation confirms only frozen match options and verifies every native setting after one create
+  ---
+  duration_ms: 2.483839
+  type: 'test'
+  ...
+# Subtest: Creation rejects malformed unknown fractional string or out-of-range match settings without a write or approval
+ok 18 - Creation rejects malformed unknown fractional string or out-of-range match settings without a write or approval
+  ---
+  duration_ms: 10.188496
+  type: 'test'
+  ...
+# Subtest: Creation replaces inherited per-round overrides and explicitly turns off old limits and bronze settings
+ok 19 - Creation replaces inherited per-round overrides and explicitly turns off old limits and bronze settings
+  ---
+  duration_ms: 1.266201
+  type: 'test'
+  ...
+# Subtest: Creation UI sends match settings only on review and Back retains every stage option with fresh acknowledgement
+ok 20 - Creation UI sends match settings only on review and Back retains every stage option with fresh acknowledgement
+  ---
+  duration_ms: 3.095127
+  type: 'test'
+  ...
+# Subtest: Creation UI displays server-reviewed match rules and restores editing after validation failure
+ok 21 - Creation UI displays server-reviewed match rules and restores editing after validation failure
+  ---
+  duration_ms: 1.486672
+  type: 'test'
+  ...
+# Subtest: Creation transport carries reviewed match settings and rejects unknown request parameters
+ok 22 - Creation transport carries reviewed match settings and rejects unknown request parameters
+  ---
+  duration_ms: 2.072271
+  type: 'test'
+  ...
+# Subtest: Creation format selection enables only chosen native stages and verifies each combination
+ok 23 - Creation format selection enables only chosen native stages and verifies each combination
+  ---
+  duration_ms: 6.276674
+  type: 'test'
+  ...
+# Subtest: Creation refuses all-disabled formats and invalid knockout capacities without approval or provider write
+ok 24 - Creation refuses all-disabled formats and invalid knockout capacities without approval or provider write
+  ---
+  duration_ms: 6.120709
+  type: 'test'
+  ...
+# Subtest: Creation UI hides disabled stages preserves format choices on Back and sends only enabled stage options
+ok 25 - Creation UI hides disabled stages preserves format choices on Back and sends only enabled stage options
+  ---
+  duration_ms: 2.308136
+  type: 'test'
+  ...
+# Subtest: live shell has four slim Swedish tabs and one selected shared panel with internal fullscreen
+ok 26 - live shell has four slim Swedish tabs and one selected shared panel with internal fullscreen
+  ---
+  duration_ms: 14.151586
+  type: 'test'
+  ...
+# Subtest: live shell requests fullscreen on selected panel and preserves chosen view when exiting
+ok 27 - live shell requests fullscreen on selected panel and preserves chosen view when exiting
+  ---
+  duration_ms: 4.252685
+  type: 'test'
+  ...
+# Subtest: live windows keep independent round choices scroll positions and continue refresh without resetting
+ok 28 - live windows keep independent round choices scroll positions and continue refresh without resetting
+  ---
+  duration_ms: 29.14775
+  type: 'test'
+  ...
+# Subtest: live pool paging and automatic rotation retain approved card renderer and pause outside pools
+ok 29 - live pool paging and automatic rotation retain approved card renderer and pause outside pools
+  ---
+  duration_ms: 8.438999
+  type: 'test'
+  ...
+# Subtest: live knockout scroll pauses for controls interaction hidden pages and reduced motion
+ok 30 - live knockout scroll pauses for controls interaction hidden pages and reduced motion
+  ---
+  duration_ms: 10.285101
+  type: 'test'
+  ...
+# Subtest: live shell failure pause offline and page exit remove current status and stop scheduled work
+ok 31 - live shell failure pause offline and page exit remove current status and stop scheduled work
+  ---
+  duration_ms: 6.456984
+  type: 'test'
+  ...
+# Subtest: live public list and stage event dates must agree before bracket content is displayed
+ok 32 - live public list and stage event dates must agree before bracket content is displayed
+  ---
+  duration_ms: 5.115851
+  type: 'test'
+  ...
+# Subtest: knockout layout aligns all source centres and target centres exactly with orthogonal paths
+ok 33 - knockout layout aligns all source centres and target centres exactly with orthogonal paths
+  ---
+  duration_ms: 0.534663
+  type: 'test'
+  ...
+# Subtest: knockout round navigation remains readable for full narrow and split windows without champion column
+ok 34 - knockout round navigation remains readable for full narrow and split windows without champion column
+  ---
+  duration_ms: 2.967475
+  type: 'test'
+  ...
+# Subtest: knockout cards keep literal names every average and opening-only draw numbers inside player identity
+ok 35 - knockout cards keep literal names every average and opening-only draw numbers inside player identity
+  ---
+  duration_ms: 2.451941
+  type: 'test'
+  ...
+# Subtest: knockout preserves missing averages pending slots byes third place and provider final format
+ok 36 - knockout preserves missing averages pending slots byes third place and provider final format
+  ---
+  duration_ms: 1.139681
+  type: 'test'
+  ...
+# Subtest: knockout draw numbers use only unique numeric provider opening guide and never league ranks
+ok 37 - knockout draw numbers use only unique numeric provider opening guide and never league ranks
+  ---
+  duration_ms: 1.195665
+  type: 'test'
+  ...
+# Subtest: knockout live cycle uses exact event round pair and maps reversed provider player order
+ok 38 - knockout live cycle uses exact event round pair and maps reversed provider player order
+  ---
+  duration_ms: 1.265009
+  type: 'test'
+  ...
+# Subtest: knockout live collector excludes unrelated fixtures and refuses invalid identities sets and incomplete totals
+ok 39 - knockout live collector excludes unrelated fixtures and refuses invalid identities sets and incomplete totals
+  ---
+  duration_ms: 0.640491
+  type: 'test'
+  ...
+# Subtest: knockout CSS reserves two-line rows single one-pixel title accent and one connector layer
+ok 40 - knockout CSS reserves two-line rows single one-pixel title accent and one connector layer
+  ---
+  duration_ms: 0.289034
+  type: 'test'
+  ...
+# Subtest: both TEST cast routes embed identical wired shell scripts without external asset dependencies
+ok 41 - both TEST cast routes embed identical wired shell scripts without external asset dependencies
+  ---
+  duration_ms: 7.984327
+  type: 'test'
+  ...
+# Subtest: Hub Live clicks open new independent tabs and reject late signed-out callbacks
+ok 42 - Hub Live clicks open new independent tabs and reject late signed-out callbacks
+  ---
+  duration_ms: 1.889006
+  type: 'test'
+  ...
+# Subtest: Hub Live opener rejects foreign unguarded duplicate-query and fragment URLs
+ok 43 - Hub Live opener rejects foreign unguarded duplicate-query and fragment URLs
+  ---
+  duration_ms: 3.096329
+  type: 'test'
+  ...
+# Subtest: combined live URL uses the selected event date guard rather than returning a bare route
+ok 44 - combined live URL uses the selected event date guard rather than returning a bare route
+  ---
+  duration_ms: 7.198137
+  type: 'test'
+  ...
+# Subtest: feed knockout option reuses one match list and propagates live match data through full and fast cycles
+ok 45 - feed knockout option reuses one match list and propagates live match data through full and fast cycles
+  ---
+  duration_ms: 2.041134
+  type: 'test'
+  ...
+# Subtest: pool paging arrows sit above cards and footer is absent below the player footer
+ok 46 - pool paging arrows sit above cards and footer is absent below the player footer
+  ---
+  duration_ms: 9.418741
+  type: 'test'
+  ...
+# Subtest: cast footer keeps fullscreen failure visible and reserves space without covering cards
+ok 47 - cast footer keeps fullscreen failure visible and reserves space without covering cards
+  ---
+  duration_ms: 1.495786
+  type: 'test'
+  ...
+# Subtest: live plan labels reload in existing windows and late callbacks are ignored after exit
+ok 48 - live plan labels reload in existing windows and late callbacks are ignored after exit
+  ---
+  duration_ms: 1.318309
+  type: 'test'
+  ...
+# Subtest: all shared live views keep icon buttons and one menu with list settings and count tile
+ok 49 - all shared live views keep icon buttons and one menu with list settings and count tile
+  ---
+  duration_ms: 3.374165
+  type: 'test'
+  ...
+# Subtest: display menu anchors under its icon closes outside or on Escape and keeps viewport space
+ok 50 - display menu anchors under its icon closes outside or on Escape and keeps viewport space
+  ---
+  duration_ms: 1.220862
+  type: 'test'
+  ...
+# Subtest: approved title and action nodes dock into header and tab row then remain inside selected fullscreen
+ok 51 - approved title and action nodes dock into header and tab row then remain inside selected fullscreen
+  ---
+  duration_ms: 1.442816
+  type: 'test'
+  ...
+# Subtest: finals winner uses provider champion and correct award without inferring a winner from scores
+ok 52 - finals winner uses provider champion and correct award without inferring a winner from scores
+  ---
+  duration_ms: 1.425109
+  type: 'test'
+  ...
+# Subtest: completed native knockout result survives stale active scorer and reload
+ok 53 - completed native knockout result survives stale active scorer and reload
+  ---
+  duration_ms: 0.31254
+  type: 'test'
+  ...
+# Subtest: winner stays pending during an active or unresolved final despite provider champion slot
+ok 54 - winner stays pending during an active or unresolved final despite provider champion slot
+  ---
+  duration_ms: 0.735374
+  type: 'test'
+  ...
+# Subtest: two qualifier final hides empty bronze match and board badge keeps assigned text
+ok 55 - two qualifier final hides empty bronze match and board badge keeps assigned text
+  ---
+  duration_ms: 0.300261
+  type: 'test'
+  ...
+# Subtest: finished knockout matches hide board badges and only confirmed winners receive gold outline
+ok 56 - finished knockout matches hide board badges and only confirmed winners receive gold outline
+  ---
+  duration_ms: 0.762615
+  type: 'test'
+  ...
+# Subtest: Live hides disabled competition tabs and leaves a disabled selected stage for the player list
+ok 57 - Live hides disabled competition tabs and leaves a disabled selected stage for the player list
+  ---
+  duration_ms: 4.481228
+  type: 'test'
+  ...
+# Subtest: stage model preserves provider standings scores and advancement without exposing secrets
+ok 58 - stage model preserves provider standings scores and advancement without exposing secrets
+  ---
+  duration_ms: 3.315688
+  type: 'test'
+  ...
+# Subtest: stage model distinguishes pending slots byes and unknown scores without manufacturing winners
+ok 59 - stage model distinguishes pending slots byes and unknown scores without manufacturing winners
+  ---
+  duration_ms: 0.325498
+  type: 'test'
+  ...
+# Subtest: stage model refuses cross-event data unknown identities and duplicate standings identities
+ok 60 - stage model refuses cross-event data unknown identities and duplicate standings identities
+  ---
+  duration_ms: 0.457096
+  type: 'test'
+  ...
+# Subtest: stage model omits explicitly disabled knockouts and publishes only enabled competition views
+ok 61 - stage model omits explicitly disabled knockouts and publishes only enabled competition views
+  ---
+  duration_ms: 0.423265
+  type: 'test'
+  ...
+# Subtest: pool UI reviews mappings, renders frozen group means, and does not send during generation
+ok 62 - pool UI reviews mappings, renders frozen group means, and does not send during generation
+  ---
+  duration_ms: 80.449561
+  type: 'test'
+  ...
+# Subtest: pool UI manual swaps request server adjustment and retain no old approval
+ok 63 - pool UI manual swaps request server adjustment and retain no old approval
+  ---
+  duration_ms: 40.328966
+  type: 'test'
+  ...
+# Subtest: pool UI only sends after final approval and cannot double click while saving
+ok 64 - pool UI only sends after final approval and cannot double click while saving
+  ---
+  duration_ms: 42.898625
+  type: 'test'
+  ...
+# Subtest: pool UI withdrawals invalidate review and preserve visible frozen draw without silently redrawing
+ok 65 - pool UI withdrawals invalidate review and preserve visible frozen draw without silently redrawing
+  ---
+  duration_ms: 42.973347
+  type: 'test'
+  ...
+# Subtest: pool UI lock drops late response and clears identities and previews
+ok 66 - pool UI lock drops late response and clears identities and previews
+  ---
+  duration_ms: 22.248442
+  type: 'test'
+  ...
+# Subtest: pool UI provider timeout blocks repeat send and retains inspect-before-retry guidance
+ok 67 - pool UI provider timeout blocks repeat send and retains inspect-before-retry guidance
+  ---
+  duration_ms: 32.292812
+  type: 'test'
+  ...
+# Subtest: pool UI automatic refresh preserves a frozen preview and its controls
+ok 68 - pool UI automatic refresh preserves a frozen preview and its controls
+  ---
+  duration_ms: 25.263078
+  type: 'test'
+  ...
+# Subtest: pool TEST transport routes authenticated exact payloads and rejects target or extra-key injection
+ok 69 - pool TEST transport routes authenticated exact payloads and rejects target or extra-key injection
+  ---
+  duration_ms: 2.419553
+  type: 'test'
+  ...
+# Subtest: pool UI closing and reopening drops an old handoff approval while retaining the frozen reference
+ok 70 - pool UI closing and reopening drops an old handoff approval while retaining the frozen reference
+  ---
+  duration_ms: 22.543155
+  type: 'test'
+  ...
+# Subtest: pool UI renders omitted and null RPC averages as Unseeded and keeps measured zero numeric
+ok 71 - pool UI renders omitted and null RPC averages as Unseeded and keeps measured zero numeric
+  ---
+  duration_ms: 10.764932
+  type: 'test'
+  ...
+# Subtest: pool UI normalizes omitted frozen averages before pool means colours and manual review
+ok 72 - pool UI normalizes omitted frozen averages before pool means colours and manual review
+  ---
+  duration_ms: 16.764028
+  type: 'test'
+  ...
+# Subtest: pool workspace automatically loads current data on entry and sidebar navigation makes no extra request
+ok 73 - pool workspace automatically loads current data on entry and sidebar navigation makes no extra request
+  ---
+  duration_ms: 19.00006
+  type: 'test'
+  ...
+# Subtest: pool workspace board and size changes invalidate an approved frozen draw without silently redrawing
+ok 74 - pool workspace board and size changes invalidate an approved frozen draw without silently redrawing
+  ---
+  duration_ms: 30.43318
+  type: 'test'
+  ...
+# Subtest: pool workspace advanced hypothetical count is isolated from actual roster and handoff approval
+ok 75 - pool workspace advanced hypothetical count is isolated from actual roster and handoff approval
+  ---
+  duration_ms: 19.217802
+  type: 'test'
+  ...
+# Subtest: pool workspace disables Nakka handoff for unresolved identities but preserves planning and swap controls
+ok 76 - pool workspace disables Nakka handoff for unresolved identities but preserves planning and swap controls
+  ---
+  duration_ms: 15.582745
+  type: 'test'
+  ...
+# Subtest: pool workspace colour bands only alter preview presentation and retain frozen values without RPC
+ok 77 - pool workspace colour bands only alter preview presentation and retain frozen values without RPC
+  ---
+  duration_ms: 15.546571
+  type: 'test'
+  ...
+# Subtest: pool workspace unavailable Hub data blocks generating and clears handoff approval until a new draw
+ok 78 - pool workspace unavailable Hub data blocks generating and clears handoff approval until a new draw
+  ---
+  duration_ms: 42.530301
+  type: 'test'
+  ...
+# Subtest: pool workspace selects physical boards and shows numbered pools sharing only available boards
+ok 79 - pool workspace selects physical boards and shows numbered pools sharing only available boards
+  ---
+  duration_ms: 31.773673
+  type: 'test'
+  ...
+# Subtest: pool workspace invalid board ranges block drawing and excluded Nakka entries block approval
+ok 80 - pool workspace invalid board ranges block drawing and excluded Nakka entries block approval
+  ---
+  duration_ms: 39.570488
+  type: 'test'
+  ...
+# Subtest: pool review orders unresolved identities first and confirms generation only through popup
+ok 81 - pool review orders unresolved identities first and confirms generation only through popup
+  ---
+  duration_ms: 30.219569
+  type: 'test'
+  ...
+# Subtest: pool invalidation retains group overview and disabled swaps with a specific reason
+ok 82 - pool invalidation retains group overview and disabled swaps with a specific reason
+  ---
+  duration_ms: 35.231043
+  type: 'test'
+  ...
+# Subtest: pool card picker excludes same group and marks exactly both exchanged players yellow
+ok 83 - pool card picker excludes same group and marks exactly both exchanged players yellow
+  ---
+  duration_ms: 25.483675
+  type: 'test'
+  ...
+# Subtest: pool card labels reject collisions and preserve the frozen players and RPC ticket
+ok 84 - pool card labels reject collisions and preserve the frozen players and RPC ticket
+  ---
+  duration_ms: 21.986484
+  type: 'test'
+  ...
+# Subtest: pool compact identity warning hides when resolved and scheme counts remain visible
+ok 85 - pool compact identity warning hides when resolved and scheme counts remain visible
+  ---
+  duration_ms: 15.197696
+  type: 'test'
+  ...
+# Subtest: pool estimate works before boards are selected and updates with selected board count
+ok 86 - pool estimate works before boards are selected and updates with selected board count
+  ---
+  duration_ms: 6.886068
+  type: 'test'
+  ...
+# Subtest: pool review is one expandable tab and calculation lives inside Advanced settings
+ok 87 - pool review is one expandable tab and calculation lives inside Advanced settings
+  ---
+  duration_ms: 10.223879
+  type: 'test'
+  ...
+# Subtest: pool toolbar orders review league advanced and buttons expand content without RPC or losing mappings
+ok 88 - pool toolbar orders review league advanced and buttons expand content without RPC or losing mappings
+  ---
+  duration_ms: 9.088415
+  type: 'test'
+  ...
+# Subtest: pool compact cards show groups only for shared boards and keep average in clickable player row
+ok 89 - pool compact cards show groups only for shared boards and keep average in clickable player row
+  ---
+  duration_ms: 14.102552
+  type: 'test'
+  ...
+# Subtest: pool compact Nakka step preserves handoff gates and opens review without sending
+ok 90 - pool compact Nakka step preserves handoff gates and opens review without sending
+  ---
+  duration_ms: 13.946728
+  type: 'test'
+  ...
+# Subtest: Hub board and group dialog picker and scheme are English while canonical draw metadata stays intact
+ok 91 - Hub board and group dialog picker and scheme are English while canonical draw metadata stays intact
+  ---
+  duration_ms: 14.411616
+  type: 'test'
+  ...
+# Subtest: pool cards are the only board editor and update a two-board heading immediately
+ok 92 - pool cards are the only board editor and update a two-board heading immediately
+  ---
+  duration_ms: 15.646861
+  type: 'test'
+  ...
+# Subtest: pool inline board save uses the existing plan route and an expired organiser cannot save
+ok 93 - pool inline board save uses the existing plan route and an expired organiser cannot save
+  ---
+  duration_ms: 10.048325
+  type: 'test'
+  ...
+# Subtest: planner scheme uses only needed pool-size tiles ordered by selected preference and hides redundant boards field
+ok 94 - planner scheme uses only needed pool-size tiles ordered by selected preference and hides redundant boards field
+  ---
+  duration_ms: 6.932127
+  type: 'test'
+  ...
+# Subtest: planner BOARDS tile counts used physical boards and retains only nonzero size chips
+ok 95 - planner BOARDS tile counts used physical boards and retains only nonzero size chips
+  ---
+  duration_ms: 11.251212
+  type: 'test'
+  ...
+# Subtest: pool main flow shows qualification without Advanced and resumes saved pools to an explicit Start confirmation
+ok 96 - pool main flow shows qualification without Advanced and resumes saved pools to an explicit Start confirmation
+  ---
+  duration_ms: 34.493646
+  type: 'test'
+  ...
+# Subtest: pool four-player draft defaults to one board when scarce and rejects an unavailable second board
+ok 97 - pool four-player draft defaults to one board when scarce and rejects an unavailable second board
+  ---
+  duration_ms: 17.057319
+  type: 'test'
+  ...
+# Subtest: planner automatic load failure leaves generation blocked and never starts or sends
+ok 98 - planner automatic load failure leaves generation blocked and never starts or sends
+  ---
+  duration_ms: 8.10601
+  type: 'test'
+  ...
+# Subtest: saved pool RPC omission stays Unseeded and frozen START excludes unknown averages
+ok 99 - saved pool RPC omission stays Unseeded and frozen START excludes unknown averages
+  ---
+  duration_ms: 8.181133
+  type: 'test'
+  ...
+# Subtest: saved pools preserve measured zero and explain empty board choices without inventing a selection
+ok 100 - saved pools preserve measured zero and explain empty board choices without inventing a selection
+  ---
+  duration_ms: 8.417787
+  type: 'test'
+  ...
+# Subtest: pool card group numbers appear only for separate pools sharing a selected board
+ok 101 - pool card group numbers appear only for separate pools sharing a selected board
+  ---
+  duration_ms: 9.855817
+  type: 'test'
+  ...
+# Subtest: compact pool status turns red on failed refresh and unsaved board edits block Start
+ok 102 - compact pool status turns red on failed refresh and unsaved board edits block Start
+  ---
+  duration_ms: 14.504706
+  type: 'test'
+  ...
+# Subtest: planner pending read deadline unlocks controls and drops a late saved-plan response
+ok 103 - planner pending read deadline unlocks controls and drops a late saved-plan response
+  ---
+  duration_ms: 12.986987
+  type: 'test'
+  ...
+# Subtest: planner reloading saved boards discards unsaved choices and restores Start without another save
+ok 104 - planner reloading saved boards discards unsaved choices and restores Start without another save
+  ---
+  duration_ms: 14.478978
+  type: 'test'
+  ...
+# Subtest: planner restoring the saved board selection clears the local dirty gate without a sticky false state
+ok 105 - planner restoring the saved board selection clears the local dirty gate without a sticky false state
+  ---
+  duration_ms: 10.961948
+  type: 'test'
+  ...
+# Subtest: planner a late request from a locked session cannot unlock a new organiser request
+ok 106 - planner a late request from a locked session cannot unlock a new organiser request
+  ---
+  duration_ms: 11.29619
+  type: 'test'
+  ...
+# Subtest: running pool cards hide Save and Start after the competition starts
+ok 107 - running pool cards hide Save and Start after the competition starts
+  ---
+  duration_ms: 10.857039
+  type: 'test'
+  ...
+# Subtest: pool draft fills two-board four-player defaults and preserves manual one-board choice on redraw
+ok 108 - pool draft fills two-board four-player defaults and preserves manual one-board choice on redraw
+  ---
+  duration_ms: 21.895007
+  type: 'test'
+  ...
+# Subtest: saved explicit boards survive default allocation and sparse draft queues explain later pools
+ok 109 - saved explicit boards survive default allocation and sparse draft queues explain later pools
+  ---
+  duration_ms: 35.532616
+  type: 'test'
+  ...
+# Subtest: planner board usage estimate includes a spare second board for each four-player pool
+ok 110 - planner board usage estimate includes a spare second board for each four-player pool
+  ---
+  duration_ms: 12.218053
+  type: 'test'
+  ...
+# Subtest: pool review Back retains the frozen draw and board choices while discarding the send approval
+ok 111 - pool review Back retains the frozen draw and board choices while discarding the send approval
+  ---
+  duration_ms: 41.80286
+  type: 'test'
+  ...
+# Subtest: start review Back preserves saved pools and boards and requires a fresh start approval
+ok 112 - start review Back preserves saved pools and boards and requires a fresh start approval
+  ---
+  duration_ms: 15.084561
+  type: 'test'
+  ...
+# Subtest: Pool UI follows Round Robin only and single Slutspel qualification choices
+ok 113 - Pool UI follows Round Robin only and single Slutspel qualification choices
+  ---
+  duration_ms: 26.318613
+  type: 'test'
+  ...
+# Subtest: Pool UI explains native knockout-only setup and disables group generation
+ok 114 - Pool UI explains native knockout-only setup and disables group generation
+  ---
+  duration_ms: 5.818425
+  type: 'test'
+  ...
+# Subtest: pool stats qualify score/darts keyed by LPID; points stay separate and unknown is not zero
+ok 115 - pool stats qualify score/darts keyed by LPID; points stay separate and unknown is not zero
+  ---
+  duration_ms: 20.75557
+  type: 'test'
+  ...
+# Subtest: pool stats retain durable last-good on outage and block fresh draw after refresh failure
+ok 116 - pool stats retain durable last-good on outage and block fresh draw after refresh failure
+  ---
+  duration_ms: 4.704674
+  type: 'test'
+  ...
+# Subtest: pool stats reject inconsistent points and invalid numeric totals without replacing last-good
+ok 117 - pool stats reject inconsistent points and invalid numeric totals without replacing last-good
+  ---
+  duration_ms: 9.187794
+  type: 'test'
+  ...
+# Subtest: pool league profiles read the full unpaginated list and reject repeated IDs
+ok 118 - pool league profiles read the full unpaginated list and reject repeated IDs
+  ---
+  duration_ms: 2.229678
+  type: 'test'
+  ...
+# Subtest: pool mappings expose ambiguity and missing entry without silently choosing a league identity
+ok 119 - pool mappings expose ambiguity and missing entry without silently choosing a league identity
+  ---
+  duration_ms: 5.609111
+  type: 'test'
+  ...
+# Subtest: pool handoff verifies all groups and cards, preserves settings and inactive entries, and blocks duplicate send
+ok 120 - pool handoff verifies all groups and cards, preserves settings and inactive entries, and blocks duplicate send
+  ---
+  duration_ms: 6.581542
+  type: 'test'
+  ...
+# Subtest: pool manual swap is server-owned, consumes old ticket, preserves frozen averages and invalidates approval
+ok 121 - pool manual swap is server-owned, consumes old ticket, preserves frozen averages and invalidates approval
+  ---
+  duration_ms: 4.732925
+  type: 'test'
+  ...
+# Subtest: pool source additions withdrawals renames and date changes invalidate a reviewed draw
+ok 122 - pool source additions withdrawals renames and date changes invalidate a reviewed draw
+  ---
+  duration_ms: 12.20944
+  type: 'test'
+  ...
+# Subtest: pool tickets expire and are bound to staff session; unconfirmed sends never mutate
+ok 123 - pool tickets expire and are bound to staff session; unconfirmed sends never mutate
+  ---
+  duration_ms: 18.332233
+  type: 'test'
+  ...
+# Subtest: pool existing groups results cards started events and unsupported formats block handoff
+ok 124 - pool existing groups results cards started events and unsupported formats block handoff
+  ---
+  duration_ms: 19.64265
+  type: 'test'
+  ...
+# Subtest: pool event concurrency or league identity changes after approval block every provider write
+ok 125 - pool event concurrency or league identity changes after approval block every provider write
+  ---
+  duration_ms: 16.91176
+  type: 'test'
+  ...
+# Subtest: pool failures in either provider phase retain attempted journal and block retry without leaking errors
+ok 126 - pool failures in either provider phase retain attempted journal and block retry without leaking errors
+  ---
+  duration_ms: 12.812796
+  type: 'test'
+  ...
+# Subtest: pool unexpected setting changes or missing duplicate foreign pairings fail full readback
+ok 127 - pool unexpected setting changes or missing duplicate foreign pairings fail full readback
+  ---
+  duration_ms: 30.66
+  type: 'test'
+  ...
+# Subtest: pool audit failure occurs before Nakka mutation and cannot report successful send
+ok 128 - pool audit failure occurs before Nakka mutation and cannot report successful send
+  ---
+  duration_ms: 4.899787
+  type: 'test'
+  ...
+# Subtest: pool structural comparison ignores JSON object order while preserving array order
+ok 129 - pool structural comparison ignores JSON object order while preserving array order
+  ---
+  duration_ms: 1.163327
+  type: 'test'
+  ...
+# Subtest: pool routes require exact inputs, staff authentication and the write gate
+ok 130 - pool routes require exact inputs, staff authentication and the write gate
+  ---
+  duration_ms: 6.716073
+  type: 'test'
+  ...
+# Subtest: pool five-player exception and mixed 4/3 divisions generate the exact rectangular table and pair coverage
+ok 131 - pool five-player exception and mixed 4/3 divisions generate the exact rectangular table and pair coverage
+  ---
+  duration_ms: 20.060247
+  type: 'test'
+  ...
+# Subtest: pool event started between group save and fixture generation blocks the second mutation and records uncertainty
+ok 132 - pool event started between group save and fixture generation blocks the second mutation and records uncertainty
+  ---
+  duration_ms: 5.460899
+  type: 'test'
+  ...
+# Subtest: pool bracket-building status25 permits statistics and frozen preview without a provider mutation
+ok 133 - pool bracket-building status25 permits statistics and frozen preview without a provider mutation
+  ---
+  duration_ms: 4.063991
+  type: 'test'
+  ...
+# Subtest: pool status25 approved handoff retains bracket-building state and boolean auto_schedule through full readback
+ok 134 - pool status25 approved handoff retains bracket-building state and boolean auto_schedule through full readback
+  ---
+  duration_ms: 6.691876
+  type: 'test'
+  ...
+# Subtest: pool status25 still refuses existing groups brackets results ranks and match cards before every provider write
+ok 135 - pool status25 still refuses existing groups brackets results ranks and match cards before every provider write
+  ---
+  duration_ms: 16.979412
+  type: 'test'
+  ...
+# Subtest: pool active finished unknown and string states cannot load or prepare despite status25 support
+ok 136 - pool active finished unknown and string states cannot load or prepare despite status25 support
+  ---
+  duration_ms: 18.966575
+  type: 'test'
+  ...
+# Subtest: pool unqualified excluded event entries block every write and retain explicit review list
+ok 137 - pool unqualified excluded event entries block every write and retain explicit review list
+  ---
+  duration_ms: 3.177912
+  type: 'test'
+  ...
+# Subtest: pool planning lasts thirty minutes while final approval retains five-minute expiry
+ok 138 - pool planning lasts thirty minutes while final approval retains five-minute expiry
+  ---
+  duration_ms: 4.885384
+  type: 'test'
+  ...
+# Subtest: competition format covers mixed groups without duplicate or excluded qualifiers and rounds bracket slots up
+ok 139 - competition format covers mixed groups without duplicate or excluded qualifiers and rounds bracket slots up
+  ---
+  duration_ms: 1.407293
+  type: 'test'
+  ...
+# Subtest: competition format preserves existing knockout match settings and blocks incomplete settings
+ok 140 - competition format preserves existing knockout match settings and blocks incomplete settings
+  ---
+  duration_ms: 0.967903
+  type: 'test'
+  ...
+# Subtest: competition format preview is read only and verified send binds groups brackets and assignment rules
+ok 141 - competition format preview is read only and verified send binds groups brackets and assignment rules
+  ---
+  duration_ms: 5.930263
+  type: 'test'
+  ...
+# Subtest: competition format mismatched assignment readback retains attempted journal and never generates cards or retries
+ok 142 - competition format mismatched assignment readback retains attempted journal and never generates cards or retries
+  ---
+  duration_ms: 4.867617
+  type: 'test'
+  ...
+# Subtest: competition format rejects invalid rule before mutation and event edits invalidate approval
+ok 143 - competition format rejects invalid rule before mutation and event edits invalidate approval
+  ---
+  duration_ms: 3.607366
+  type: 'test'
+  ...
+# Subtest: unified planner rejects completed old target and wrong registration event identity without provider writes
+ok 144 - unified planner rejects completed old target and wrong registration event identity without provider writes
+  ---
+  duration_ms: 9.432171
+  type: 'test'
+  ...
+# Subtest: native Round Robin loads draws and saves groups without any Fixtures API call
+ok 145 - native Round Robin loads draws and saves groups without any Fixtures API call
+  ---
+  duration_ms: 5.860669
+  type: 'test'
+  ...
+# Subtest: native Round Robin format review sizes both knockouts and preserves native match rules
+ok 146 - native Round Robin format review sizes both knockouts and preserves native match rules
+  ---
+  duration_ms: 5.826668
+  type: 'test'
+  ...
+# Subtest: native Round Robin rejects mixed formats disabled groups and unsupported modes before writes
+ok 147 - native Round Robin rejects mixed formats disabled groups and unsupported modes before writes
+  ---
+  duration_ms: 3.554226
+  type: 'test'
+  ...
+# Subtest: native Round Robin refuses occupied groups results and stale approvals before writes
+ok 148 - native Round Robin refuses occupied groups results and stale approvals before writes
+  ---
+  duration_ms: 10.135237
+  type: 'test'
+  ...
+# Subtest: native Round Robin readback mismatch retains attempt journal and never retries
+ok 149 - native Round Robin readback mismatch retains attempt journal and never retries
+  ---
+  duration_ms: 4.096561
+  type: 'test'
+  ...
+# Subtest: native Round Robin mixed group table pads empty slots and derives qualifiers from real players
+ok 150 - native Round Robin mixed group table pads empty slots and derives qualifiers from real players
+  ---
+  duration_ms: 6.359227
+  type: 'test'
+  ...
+# Subtest: league statistics refresh accepts the complete 105-player response without paging
+ok 151 - league statistics refresh accepts the complete 105-player response without paging
+  ---
+  duration_ms: 5.18907
+  type: 'test'
+  ...
+# Subtest: full league identity list still rejects unsupported size and invalid identity fields
+ok 152 - full league identity list still rejects unsupported size and invalid identity fields
+  ---
+  duration_ms: 2.813514
+  type: 'test'
+  ...
+# Subtest: native knockout settings may omit drawMode while preserving final override and round limit
+ok 153 - native knockout settings may omit drawMode while preserving final override and round limit
+  ---
+  duration_ms: 5.613217
+  type: 'test'
+  ...
+# Subtest: native knockout settings reject explicit invalid drawMode without external writes
+ok 154 - native knockout settings reject explicit invalid drawMode without external writes
+  ---
+  duration_ms: 11.594522
+  type: 'test'
+  ...
+# Subtest: native qualifier readback accepts decimal count strings but rejects changed rules
+ok 155 - native qualifier readback accepts decimal count strings but rejects changed rules
+  ---
+  duration_ms: 28.47528
+  type: 'test'
+  ...
+# Subtest: private attempted-send reconciliation verifies original audit without provider writes or retries
+ok 156 - private attempted-send reconciliation verifies original audit without provider writes or retries
+  ---
+  duration_ms: 7.150445
+  type: 'test'
+  ...
+# Subtest: attempted-send reconciliation keeps the lock on mismatched event roster or audit
+ok 157 - attempted-send reconciliation keeps the lock on mismatched event roster or audit
+  ---
+  duration_ms: 25.17778
+  type: 'test'
+  ...
+# Subtest: planner reload resumes verified native draw and Start changes only status once after explicit approval
+ok 158 - planner reload resumes verified native draw and Start changes only status once after explicit approval
+  ---
+  duration_ms: 12.012214
+  type: 'test'
+  ...
+# Subtest: planner Start blocks changed roster rules unauthenticated sessions expired tickets and missing confirmation
+ok 159 - planner Start blocks changed roster rules unauthenticated sessions expired tickets and missing confirmation
+  ---
+  duration_ms: 54.993583
+  type: 'test'
+  ...
+# Subtest: planner uncertain Start keeps a durable attempt and never repeats the provider mutation
+ok 160 - planner uncertain Start keeps a durable attempt and never repeats the provider mutation
+  ---
+  duration_ms: 11.652584
+  type: 'test'
+  ...
+# Subtest: planner stores a reviewed board match plan separately without re-sending saved pools
+ok 161 - planner stores a reviewed board match plan separately without re-sending saved pools
+  ---
+  duration_ms: 21.459934
+  type: 'test'
+  ...
+# Subtest: planner Start requires the four-player board decision and binds board edits into approval
+ok 162 - planner Start requires the four-player board decision and binds board edits into approval
+  ---
+  duration_ms: 21.783975
+  type: 'test'
+  ...
+# Subtest: planner Start denies write-disabled targets extra fields and unexpected readback changes
+ok 163 - planner Start denies write-disabled targets extra fields and unexpected readback changes
+  ---
+  duration_ms: 30.871618
+  type: 'test'
+  ...
+# Subtest: tournament review is read only and splits completed mixed pools using approved top two rules
+ok 164 - tournament review is read only and splits completed mixed pools using approved top two rules
+  ---
+  duration_ms: 12.832947
+  type: 'test'
+  ...
+# Subtest: tournament bye advances only past an empty subtree and never past an unresolved match
+ok 165 - tournament bye advances only past an empty subtree and never past an unresolved match
+  ---
+  duration_ms: 9.203257
+  type: 'test'
+  ...
+# Subtest: tournament confirmation assigns both brackets once and preserves every other event field
+ok 166 - tournament confirmation assigns both brackets once and preserves every other event field
+  ---
+  duration_ms: 22.656915
+  type: 'test'
+  ...
+# Subtest: tournament incomplete groups tied ranks foreign members and altered rules cannot prepare assignment
+ok 167 - tournament incomplete groups tied ranks foreign members and altered rules cannot prepare assignment
+  ---
+  duration_ms: 91.917067
+  type: 'test'
+  ...
+# Subtest: tournament refuses occupied brackets existing results guides and unverified attempts
+ok 168 - tournament refuses occupied brackets existing results guides and unverified attempts
+  ---
+  duration_ms: 45.917547
+  type: 'test'
+  ...
+# Subtest: tournament approval binds staff session expiry confirmation event and standings
+ok 169 - tournament approval binds staff session expiry confirmation event and standings
+  ---
+  duration_ms: 74.395397
+  type: 'test'
+  ...
+# Subtest: tournament provider failure or readback drift remains uncertain and cannot retry
+ok 170 - tournament provider failure or readback drift remains uncertain and cannot retry
+  ---
+  duration_ms: 25.257695
+  type: 'test'
+  ...
+# Subtest: tournament audit or concurrent prewrite changes block provider mutation
+ok 171 - tournament audit or concurrent prewrite changes block provider mutation
+  ---
+  duration_ms: 20.679957
+  type: 'test'
+  ...
+# Subtest: tournament routes reject wrong identity authentication unsupported inputs and prestart state
+ok 172 - tournament routes reject wrong identity authentication unsupported inputs and prestart state
+  ---
+  duration_ms: 29.17049
+  type: 'test'
+  ...
+# Subtest: running pool board edits persist with revision and no Nakka writes or Start
+ok 173 - running pool board edits persist with revision and no Nakka writes or Start
+  ---
+  duration_ms: 9.197849
+  type: 'test'
+  ...
+# Subtest: running pool board edits reject absent or stale versions and changed membership without saving
+ok 174 - running pool board edits reject absent or stale versions and changed membership without saving
+  ---
+  duration_ms: 28.84068
+  type: 'test'
+  ...
+# Subtest: private native pool board capture performs one target read without names credentials or writes
+ok 175 - private native pool board capture performs one target read without names credentials or writes
+  ---
+  duration_ms: 8.343832
+  type: 'test'
+  ...
+# Subtest: automatic sparse board defaults survive pool review send and saved workflow reload
+ok 176 - automatic sparse board defaults survive pool review send and saved workflow reload
+  ---
+  duration_ms: 8.294432
+  type: 'test'
+  ...
+# Subtest: Date-selected pool handoff writes only the selected event and preserves original event journals
+ok 177 - Date-selected pool handoff writes only the selected event and preserves original event journals
+  ---
+  duration_ms: 5.906688
+  type: 'test'
+  ...
+# Subtest: native two-player knockout disables third place while preserving chosen legs limits and final override
+ok 178 - native two-player knockout disables third place while preserving chosen legs limits and final override
+  ---
+  duration_ms: 7.598287
+  type: 'test'
+  ...
+# Subtest: Round Robin only reviews saves and starts without enabling knockouts or requiring qualifier rules
+ok 179 - Round Robin only reviews saves and starts without enabling knockouts or requiring qualifier rules
+  ---
+  duration_ms: 9.874165
+  type: 'test'
+  ...
+# Subtest: Single enabled Slutspel receives top two qualifiers and handoff never enables the other bracket
+ok 180 - Single enabled Slutspel receives top two qualifiers and handoff never enables the other bracket
+  ---
+  duration_ms: 19.886427
+  type: 'test'
+  ...
+# Subtest: Knockout-only pool load gives native setup guidance and rejects group mutation routes
+ok 181 - Knockout-only pool load gives native setup guidance and rejects group mutation routes
+  ---
+  duration_ms: 2.309096
+  type: 'test'
+  ...
+# Subtest: Tournament assignment sends only the enabled Slutspel and takes top two when Slutspel 2 is the sole stage
+ok 182 - Tournament assignment sends only the enabled Slutspel and takes top two when Slutspel 2 is the sole stage
+  ---
+  duration_ms: 29.158717
+  type: 'test'
+  ...
+1..182
+# tests 182
+# suites 0
+# pass 182
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1239.632151

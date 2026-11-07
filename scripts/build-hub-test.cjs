@@ -18,10 +18,12 @@ html=html.replace('<div class="masthead-session"></div>', '<div class="masthead-
 if (!html.includes('id="hubSignOut"')) throw Error('Account controls insertion failed');
 html=html.replace('<script src="js/hub-services.js"','<script src="js/hub-auth.js"></script>\n<script src="js/hub-services.js"');
 html=html.replace('</body>','<script src="js/login.js"></script><script src="js/hub-live-stats.js"></script></body>');
-html=html.replace('<h2 id="nakkaPanelTitle">Nakka</h2>', '<h2 id="nakkaPanelTitle">Nakka</h2><section class="health-card"><h3>Event connection</h3><p>Check the Hub date against Nakka. Read only; no player sync.</p><button id="nakkaEventCheck" type="button">CHECK EVENT</button> <button id="nakkaCompare" type="button">COMPARE PLAYERS</button><div id="nakkaEventResult" role="status" aria-live="polite"></div></section>');
-html=html.replace('</body>','<script src="js/hub-nakka-event.js"></script></body>');
-html=html.replace('</body>','<script src="js/hub-nakka-transfer.js"></script></body>');
-html=html.replace('</body>','<script src="js/hub-player-removal.js"></script></body>');
+html=html.replace('<h2 id="nakkaPanelTitle">Nakka</h2>', '<h2 id="nakkaPanelTitle">Nakka</h2>'+read('public/nakka-troubleshooting.html'));
+html=html.replace('</body>','<script src="js/hub-nakka-workflow.js"></script><script src="js/hub-nakka-event.js"></script></body>');
+html=html.replace('</body>','<script src="js/hub-nakka-transfer.js"></script><script src="js/hub-evening-setup.js"></script></body>');
+html=html.replace('<span>Event Control</span>','<span>Event Setup</span>');
+html=html.replace('</body>','<script src="js/hub-player-removal.js"></script><script src="js/hub-event-selector.js"></script></body>');
+html=html.replace('</head>','<link rel="stylesheet" href="css/hub-event-selector.css"></head>');
 html=html.replace('</head>','<style>#nakkaTransferOpen{background:#ffd700;color:#080808;border:0;border-radius:5px;font:inherit;font-size:20px;padding:10px 16px;margin:16px 0 4px;min-height:44px}</style></head>');
 
 
@@ -29,7 +31,7 @@ html=html.replace('<link rel="stylesheet" href="css/beauty-dashboard.css">','');
 html=html.replace('</head>','<link rel="stylesheet" href="css/beauty-dashboard.css"></head>');
 html = html.replace(/  <meta http-equiv="Content-Security-Policy"[^>]+>\n/, '');
 html = html.replace('<head>', '<head>\n  <base target="_top">');
-html = html.replace('Beauty Hub — local preview', 'Beauty Hub — IDENTITY TEST');
+html = html.replace('Hub — local preview', 'Hub — IDENTITY TEST');
 html = html.replace('LOCAL DEMO — fictional players. No Sheets or Nakka connection. Changes reset on reload.',
   'IDENTITY TEST — separate test spreadsheet. Registration and status changes are saved here. Event date saving requires review and a backup.');
 html = html.replace(/<link rel="stylesheet" href="([^"]+)">/g, (_, file) => {
@@ -41,6 +43,7 @@ html = html.replace(/<link rel="stylesheet" href="([^"]+)">/g, (_, file) => {
   return '<style>' + css + '</style>';
 });
 for (const asset of ['aik-dart-yellow.png', 'aik-mandagsdartarna.png', 'aik-crest.svg', 'aik-mandagsdartarna-clean.png']) {
+  if(!html.includes('assets/logo/'+asset))continue;
   html = html.replaceAll('assets/logo/' + asset, 'data:image/'+(asset.endsWith('.svg')?'svg+xml':'png')+';base64,' +
     fs.readFileSync(path.join(root, 'public/assets/logo', asset)).toString('base64'));
 }
@@ -61,3 +64,4 @@ html = html.replace(/<script src="js\/([^"]+)"[^>]*><\/script>/g, (_, file) => {
 html = html.replaceAll('assets/pool-scheme.html', 'data:text/html;base64,' + fs.readFileSync(path.join(root, 'public/assets/pool-scheme.html')).toString('base64'));
 fs.writeFileSync(path.join(root, 'apps-script/registration-identity-test/remote-app/HubTest.html'), html);
 console.log('Generated HubTest.html from shared Hub UI, AIK assets and TEST bridge.');
+

@@ -1,0 +1,1976 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> beauty-admin-hub@0.0.0-recovery test
+> node --test tests/*.test.cjs tests/recovery/*.test.cjs tests/handoff/*.test.cjs
+
+✔ Live Swedish order strips private fields without mutating input (2.082743ms)
+✔ Live timestamps sort earliest first with missing values last (0.209175ms)
+✔ Live ranking projection places unranked last and preserves zero points (0.270644ms)
+✔ Live feed exposes only public fields and earliest same-event registration (3.378567ms)
+✔ Live guard rejects feed and URL before service access (1.867569ms)
+✔ Live build reproduces and scripts parse with original AIK fonts (182.534969ms)
+✔ Live refresh updates count safely and retains names on connection failure (12.022833ms)
+✔ Live thirty-player pages rotate with stable numbering and retain page on unchanged refresh (3.465764ms)
+✔ Live empty and single page do not rotate or scroll (1.746839ms)
+✔ Live route is additive guarded TEST HTML and rejects configuration injection (1.887505ms)
+✔ Live thirty-player slot boundaries fit wide and narrow screens without duplicates (36.662817ms)
+✔ Live real ranking values and ties survive paging; statistics respect the selected sorting mode (3.984034ms)
+✔ Live cached statistics label stale or failed snapshots and reject old or ambiguous data (2.91569ms)
+✔ Live display shows only average without forcing rank sorting (1.800444ms)
+✔ Live settings pause page rotation and return keyboard focus on close (2.020617ms)
+✔ Live automatic stats refresh requires staff authorization and releases its lock (8.785025ms)
+✔ Live staff timer refreshes only unlocked visible sessions and prevents overlap (1.579754ms)
+✔ inline list submenu toggles inside display menu and preserves sort and statistics controls (2.199031ms)
+✔ board plan export records sparse boards sharing batches and no private roster data (6.56947ms)
+✔ board memo preparation binds exact TEST group order identities date and board batches (43.8276ms)
+✔ board notes stay closed without native qualification and never update badges or autopilot (2.15087ms)
+✔ board notes require durable attempt then single write and exact readback before success (3.199911ms)
+✔ board notes reject drift expired approvals and overlapping attempts before mutation (1.712931ms)
+✔ board notes uncertain write and audit failures never retry a provider mutation (1.661385ms)
+✔ board handoff durable revision journal refuses restart retries and competing plans (11.731522ms)
+✔ competition pool pages cover every numbered pool once and clamp after source shrinks (4.266876ms)
+✔ competition renderer preserves provider rank zero points and untrusted names as literal text (4.882149ms)
+✔ competition knockout renderer distinguishes byes missing averages winner and exact board state (1.878963ms)
+✔ competition view options reflect supplied stages and empty view remains honest (0.755613ms)
+✔ competition screen loads TEST explicitly clears synthetic content and recovers from failure (57.68855ms)
+✔ competition screen marks failed paused overdue and offline board views as last known (5.86918ms)
+✔ competition screen retains full screen options rotates pages and stops polling on page exit (7.684217ms)
+✔ competition-only preview policy allows the fixed API origin while Hub stays offline (68.721515ms)
+✔ competition all-stages screen has independent accessible section chevrons (1.303672ms)
+✔ competition arrows show only the chosen adjacent round pair and keep each stage independent (1.399177ms)
+✔ competition section and round choices survive new provider data and clamp safely if rounds disappear (0.366056ms)
+✔ competition screen preserves manual collapse during refresh and pauses rotation for hidden pools (9.92218ms)
+✔ deployed stage mode loads TEST immediately without ever rendering synthetic players (9.925826ms)
+✔ competition renderer shows pool matrices and third-place result without turning either into ranking (1.340022ms)
+✔ focus remaining play folds only complete matrices and stages and moves to first unrecorded round (0.960927ms)
+✔ focus remaining button leaves explicit stage controls usable and selection survives updates (7.297906ms)
+✔ Swedish cast presentation localizes match format and placeholders without translating player identities (1.133635ms)
+✔ overview initially folds all three provider stages and preserves independent choices through refresh (11.147721ms)
+✔ overview uses the provider group format and keeps keyboard accessible section controls visible (1.047759ms)
+✔ Verified removal clears its existing attention record without deleting provider journals (7.956801ms)
+✖ Uncertain removal retains organiser attention through read-only refresh even when event entry is present (4.661158ms)
+✔ Attention persists across server invocations and isolates dates without leaking credentials (3.513884ms)
+✔ Attention records failed Hub mobile and kiosk Nakka outcomes after Sheet success and keeps public responses private (51.562163ms)
+✖ Attention finds earlier missing IN entries using GET only and retains OUT issues (4.096848ms)
+✖ Attention flags duplicate league identity even when the name is already in the event (1.684799ms)
+✖ Attention verified entry clears its alert without claiming an unexposed league ID or deleting journals (2.492599ms)
+✖ Attention uncertain creation cannot clear through same-name event presence (3.185423ms)
+✖ Attention uncertain transfer reconciliation respects the saved fingerprint (2.999707ms)
+✔ Attention outage malformed data and wrong target retain alerts instead of clearing them (6.094858ms)
+✔ Attention refresh requires staff authorization and rejects injected input before provider calls (3.330332ms)
+✔ Attention stale Hub snapshot and busy lock do not publish a clear result (3.512456ms)
+✔ Attention corrupt records produce unavailable rather than a false white zero (2.497997ms)
+✖ Attention confirmed manual transfer clears an issue through existing guarded readback (5.885753ms)
+✔ Attention storage failure cannot turn a committed registration into a repeatable failure (3.546181ms)
+✔ Dashboard hides review for a verified clear event and shows it inside the attention card for alerts (43.36397ms)
+✔ Dashboard review displays literal player names and sends no transfer or retry (3.090071ms)
+✔ Dashboard failed refresh retains alert and explicit verified refresh clears it (3.987894ms)
+✔ Dashboard refresh is single flight and logout discards late private responses (2.530589ms)
+✔ Dashboard ignores a stale refresh after event or same-date player list changes (6.231894ms)
+✔ Dashboard unavailable storage is shown honestly rather than as an all-clear zero (2.146381ms)
+✔ Dashboard initializes from data that loaded before its external script (1.588166ms)
+✔ Hub player list filters and sorts Swedish names without changing source order or player identities (4.695109ms)
+✔ Hub player list requires verified ranking and complete timestamps and keeps unranked players last (0.735936ms)
+✔ Hub search persists across refresh and sorting keeps event records intact then resets on lock (3.211639ms)
+✔ event save: prepare is read-only and counts target-day registration before reset (29.431186ms)
+✔ event save: complete transition backs up first, preserves target message and correction names (69.855519ms)
+✔ event save: wrong identities, disabled gate and busy lock never mutate event sheets (5.931618ms)
+✔ event save: impossible dates, missing confirmation and client sheet selection are rejected (7.007323ms)
+✔ event save: changed registration invalidates reviewed version before backup or reset (19.849403ms)
+✔ event save: backup failures and drift during backup prevent reset (53.961935ms)
+✔ event save: failed mutation returns uncertainty and backup without retry (58.866138ms)
+✔ event save: duplicate target names and status formulas block the transition (35.760683ms)
+✔ event save: formula-like messages remain literal and retain exact content (62.278239ms)
+✔ event save: transport permits only bounded TEST prepare and save inputs (4.796076ms)
+✔ event save: calendar-day selection follows the TEST sheet timezone at midnight (49.673632ms)
+✔ event save: mismatched Hub readback fails closed after the backed-up transition (34.488076ms)
+✔ event save: real legacy reset-time formula is blocked during review before any write (13.373786ms)
+✔ status gate rejects non-boolean approval undefined (8.463533ms)
+✔ status gate rejects non-boolean approval null (4.023695ms)
+✔ status gate rejects non-boolean approval false (1.249696ms)
+✔ status gate rejects non-boolean approval 0 (1.878833ms)
+✔ status gate rejects non-boolean approval 1 (3.611621ms)
+✔ status gate rejects non-boolean approval true (1.030625ms)
+✔ status rejects wrong sheetId before accessing client (1.082219ms)
+✔ status rejects wrong title before accessing client (1.115757ms)
+✔ status rejects wrong locale before accessing client (1.446251ms)
+✔ status rejects wrong timeZone before accessing client (2.482961ms)
+✔ all TEST RPCs reject a different script project before service access (4.176044ms)
+✔ event load returns exact date/version with gate closed and no mutation (12.847941ms)
+✔ event save denies non-boolean approval false before I/O (7.003783ms)
+✔ event save denies non-boolean approval 1 before I/O (3.609185ms)
+✔ event save denies non-boolean approval true before I/O (3.277616ms)
+✔ event config rejects extra property before lock or reads (2.212094ms)
+✔ event rejects missing confirmation before I/O (2.250547ms)
+✔ event rejects impossible date before I/O (7.470027ms)
+✔ event rejects noncanonical version before I/O (1.946774ms)
+✔ event rejects version date mismatch before I/O (1.844683ms)
+✔ event rejects unexpected field before I/O (3.482894ms)
+✔ event lock contention returns BUSY without reading or releasing another lock (2.787338ms)
+✔ event stale baseline date releases lock without write (3.300171ms)
+✔ event B2 token drift rejects stale caller without write (5.290201ms)
+✔ event same date is no-op with no clock or write call (3.410817ms)
+✔ event capture rejects wrong spreadsheetId before mutation (3.215936ms)
+✔ event capture rejects wrong title before mutation (3.556177ms)
+✔ event capture rejects wrong locale before mutation (2.284165ms)
+✔ event capture rejects wrong timeZone before mutation (3.418944ms)
+✔ event rejects external formula reference before mutation (4.802381ms)
+✔ event rejects over-limit preflight before cell read (3.91855ms)
+✔ event successful fake reset emits exact bounded requests and preserves unrelated data (56.585292ms)
+✔ event canonical comparison accepts reordered object keys through all readbacks (46.141944ms)
+✔ event prewrite snapshot detects primitive type difference (7.135419ms)
+✔ event prewrite snapshot detects array order difference (5.706347ms)
+✔ event prewrite snapshot detects explicit undefined difference (7.405663ms)
+✔ event prewrite snapshot detects sparse array slot difference (5.514458ms)
+✔ event prewrite snapshot detects negative zero difference (8.060373ms)
+✔ event prewrite snapshot detects array length difference (6.119104ms)
+✔ event prewrite detects unrelated validation drift without mutation (9.065809ms)
+✔ event thrown writer returns SAVE_UNCERTAIN once and releases lock (22.708638ms)
+✔ event readback detects changed control value and never retries (9.145654ms)
+✔ event readback detects changed unrelated formula and never retries (13.581199ms)
+✔ event readback detects changed validation and never retries (16.608701ms)
+✔ event readback detects changed grid size and never retries (9.385485ms)
+✔ event unstable second readback returns SAVE_UNCERTAIN without retry (45.236072ms)
+✔ health menu: dashboard cards live inside separate labelled dialogs with sidebar indicators (13.343916ms)
+✔ health menu: actual buttons open their own dialog, close and restore focus (2.575476ms)
+✔ health menu: backend dot follows TEST success, failure and recovery; demo is never green (4.210352ms)
+✔ Hub auth client: password goes only to Firebase and approved server session opens Hub (7.990784ms)
+✔ Hub auth client: server denial or Firebase failure cannot unlock Hub (5.500871ms)
+✔ Hub auth client: logout hides Hub immediately, clears private UI and invalidates generations (2.126692ms)
+✔ Hub auth client: failed server logout stays locked and offers bounded explicit retry (3.37213ms)
+✔ Hub auth client: polling without user activity cannot keep session alive (4.353716ms)
+✔ Hub auth client: only visible user activity sends a throttled session touch (2.403875ms)
+✔ Hub auth client: returning from browser history locks cached page and reset reports actual request (4.256449ms)
+✔ Hub auth client: transport ignores pre-logout responses and refuses unsigned RPCs (11.740139ms)
+✔ Hub auth client: generated entry is locked before scripts and contains no server UID allowlist (4.520322ms)
+✔ Hub auth client: queued pre-logout writes cannot borrow a new login session (5.651506ms)
+✔ Hub auth client: busy renewal during a save retries without signing out or extending expiry (2.790769ms)
+✔ Hub auth client: denied renewal still locks immediately (1.05673ms)
+✔ Hub auth client: only approved verification codes reach the sign-in error (4.941091ms)
+✔ Hub auth client: six-hour open page stays signed in without activity and page close or reload loses credentials (3.837991ms)
+✔ Hub auth: missing session blocks every Hub action before reads or writes (7.041445ms)
+✔ Hub auth: exact TEST identity and missing account approval fail closed (5.272254ms)
+✔ Hub auth: malformed tokens and wrong issuer audience times or tenant never contact Firebase (4.790266ms)
+✔ Hub auth: decoded approved UID is insufficient without Firebase acceptance (16.536237ms)
+✔ Hub auth: valid Firebase login creates opaque expiring session without stored ID token (3.227371ms)
+✔ Hub auth: unapproved accounts and spoofed client roles never grant entry (1.79611ms)
+✔ Hub auth: logout revokes session idempotently and captured token cannot read again (1.978936ms)
+✔ Hub auth: refresh polling does not extend inactivity and touch cannot revive expired sessions (2.75935ms)
+✔ Hub auth: real activity renews idle limit but absolute token expiry still wins (2.008982ms)
+✔ Hub auth: removing approval revokes sessions while cache eviction retains the six-hour session (2.45012ms)
+✔ Hub auth: locked touch cannot resurrect a logged-out session (2.007854ms)
+✔ Hub auth: signing out revokes other sessions for the same account (2.762055ms)
+✔ Hub auth: old direct data RPC requires a session and admin maintenance RPCs are private (4.050565ms)
+✔ Hub auth: public registration cannot claim HUB source while Remote stays available (1.882121ms)
+✔ Hub auth: status and event handlers recheck session inside their write lock (13.78084ms)
+✔ Hub auth: TEST manifest adds only external HTTPS requests and retains owner-only access (0.371628ms)
+✔ Hub auth: unpadded Firebase JWT works with a strict native Base64 decoder (4.132997ms)
+✔ Hub auth: permission connection and HTTP failures retain bounded diagnostic codes (5.516783ms)
+✔ Hub auth: native environment probe exposes no account or token information (1.823868ms)
+✔ Hub auth: six-hour session outlives login ID token but never its absolute limit and prunes expired records (2.898152ms)
+✔ Hub auth: logout after cache eviction revokes durable session and its sibling sessions (1.310083ms)
+✔ Automatic Hub registration feedback renders saved and Nakka attention as literal text without another action (4.15448ms)
+✔ Automatic Hub registration feedback clears on logout and old generation cannot leak into new login (1.918351ms)
+✔ Automatic Hub registration transport preserves captured event date and separate Nakka result (3.12ms)
+✖ Automatic Hub registration saves once then sends one fixed TEST add without a manual transfer step (53.32961ms)
+✔ Automatic Hub registration preserves Sheet success when Nakka cannot be read and never resubmits (6.109678ms)
+✖ Automatic Hub registration handles missing LPID readback as entry confirmed with identity explicitly unverified (4.551768ms)
+✖ Automatic Hub registration existing Nakka entries are reused without a duplicate add (12.665498ms)
+✔ Automatic Hub registration target mismatch ambiguous league and OUT state retain registration and refuse transfer (23.229914ms)
+✖ Automatic Hub registration new-player and different-person nickname identities create verified league members (6.995453ms)
+✔ Automatic Hub registration conflict cancellation and stale dates never start a transfer or append (5.80883ms)
+✔ Automatic Hub registration rechecks selected day immediately before actual append (6.686794ms)
+✔ Automatic Hub registration request rejects spoofed source internal metadata and targets (12.81279ms)
+✖ Automatic Hub registration timeout after POST keeps Sheet entry and durable retry barrier (6.55035ms)
+✖ Automatic Hub registration confirms existing identity choice through the established name-conflict flow (5.527179ms)
+✔ Automatic registration date check uses Sweden calendar day and never fabricates submission dates (3.217793ms)
+✔ Automatic Hub registration disabled auto gate preserves registration without any provider request (7.586052ms)
+✔ Automatic Hub registration expired session after Sheet commit reports saved registration without another write (3.016605ms)
+✔ Header reads literal tournament title from authenticated service rather than a fixed branding label (22.229605ms)
+✔ Header clears old tournament immediately and rejects an old response after date changes (1.44946ms)
+✔ Header does not invent a title for ambiguous missing malformed or wrong-date events (7.488722ms)
+✔ Header failed read is sanitized and session lock discards late private event title (6.797792ms)
+✔ Header coalesces reads and periodic refresh runs only while visible with a selected event (5.956718ms)
+✔ Header initializes even when Hub data arrived before the chrome script (3.407496ms)
+✔ Sidebar active icon text marker and aria-current follow the current section exclusively (1.038867ms)
+✔ Sidebar returns to Dashboard on session lock and after returning from the separate Live tab (2.363773ms)
+✔ Header date comes only from the matched Nakka event and clears on mismatch and logout (2.192355ms)
+✔ Date review accepts real calendar dates and rejects impossible or malformed dates (4.906485ms)
+✔ Date review requires loaded unblocked baseline and acknowledgement checkbox (0.578122ms)
+✔ Date review cannot proceed for unchanged event date (0.65947ms)
+✔ English Event Control requires a changed date and checkbox without typed confirmation (6.363535ms)
+✔ Changing the proposed date clears checkbox and previous popup review (5.080887ms)
+✔ Final confirmation popup cannot save and cancellation requires acknowledgement again (3.503634ms)
+✔ Closing and reopening Event Control clears all date-change confirmation state (4.808965ms)
+✔ Event Control Details sidebar holds technical reset information outside the main control form (4.403016ms)
+✔ Unresolved Event Control Details blockers prevent date review (1.880102ms)
+✔ English Hub identity files reproduce from Swedish originals without changing identity decisions (166.671956ms)
+✔ Hub consent pills display English YES and NO while canonical data remains Swedish (2.428693ms)
+✔ English Hub transport localizes structured backend errors but preserves player-authored data (2.983711ms)
+✔ Legacy kiosk and unrelated qualified sources remain byte-for-byte unchanged (3.243389ms)
+✔ All Hub entrypoints select English and expose sidebar Event Control with English consent and registration controls (1.010335ms)
+✔ Offline English Event Control inspection is fictional read-only data with no player mutation (4.209546ms)
+✔ Enabled TEST date save requires server preparation and explicit confirmation before one save (3.519247ms)
+✔ Cancelling TEST date review ignores late preparation and cannot save (2.337751ms)
+✔ Uncertain TEST date save reports inspection required and never retries automatically (3.605732ms)
+✔ Sidebar Event Control retains its date form and can open and return from existing event details (3.609127ms)
+✔ Sidebar Event Control cannot switch panels while a confirmed date save is running (2.030698ms)
+✔ Event inspection wrong project and external input are rejected before reads (6.251456ms)
+✔ Event inspection busy lock does not access sheets (1.496164ms)
+✔ Event inspection reports current control and exact legacy reset counts without writes (4.239994ms)
+✔ Event inspection flags retained source column behavior for explicit review (2.677875ms)
+✔ Event inspection reports header timezone formula and date blockers without mutation (20.880942ms)
+✔ Event inspection handles missing and oversized layouts without suggesting write readiness (4.267763ms)
+✔ Event inspection wrong returned identity fails safely and releases lock (0.932516ms)
+✔ Event inspection save action is unsupported at the server boundary (1.237357ms)
+✔ Event popup loads read-only data and date editing plus close cannot save (3.964429ms)
+✔ Event popup ignores a late response after Escape closes it (1.856568ms)
+✔ Nakka comparison: projected lists preserve statuses and use only matched event GET (12.112315ms)
+✔ Nakka comparison: missing identity session and injected target fail before contact (6.46783ms)
+✔ Nakka comparison: unmatched event and missing credentials never request players (7.199318ms)
+✔ Nakka comparison: HTTP malformed and oversized provider lists fail without leaking raw data (13.794935ms)
+✔ Nakka comparison: changed date status snapshot and expiry invalidate result (5.729764ms)
+✔ Nakka comparison: normalized names match while duplicate and distinct names remain separate (17.977843ms)
+✔ Nakka comparison: Hub reader reads only names and status with bounded header validation (5.316571ms)
+✔ Nakka comparison UI: authenticated route renders names as literal text and clears on logout (30.306986ms)
+✔ Nakka comparison UI: logout and status changes discard in-flight responses (4.366349ms)
+✔ Nakka event: unique date match returns fixed safe link through read-only GET (48.597879ms)
+✔ Nakka event: wrong identity missing session and injected input stop before contact (3.574771ms)
+✔ Nakka event: bad Control date formula and missing credentials fail before contact (3.882302ms)
+✔ Nakka event: zero and multiple matches never choose a target (3.354299ms)
+✔ Nakka event: timezone matching uses event calendar date in Sweden (2.265899ms)
+✔ Nakka event: provider failures return safe bounded messages (9.464421ms)
+✔ Nakka event: truncated lists malformed dates and unsafe event identifiers fail closed (14.817106ms)
+✔ Nakka event: date changes and expired sessions invalidate an in-flight match (7.879689ms)
+✔ Nakka event: client uses authenticated route and safe DOM output (1.240363ms)
+✔ Nakka transfer UI offers only IN players and needs preview plus explicit identity acknowledgement (5.312671ms)
+✔ Nakka transfer UI status changes invalidate reviewed identity and prevent save (1.530008ms)
+✔ Nakka transfer UI logout removes dialog and discards an in-flight preview (1.4067ms)
+✔ Nakka transfer UI only sends once and uncertain failures never retry (4.609625ms)
+✔ Nakka transfer UI existing entry produces no confirmation or save request (4.461238ms)
+✔ existing-entry review UI shows exact tpid and explicit review-only confirmation without an add button (1.547548ms)
+✔ Nakka transfer transport uses authenticated allowlisted routes and rejects target injection (5.021571ms)
+✖ Nakka transfer preview proposes a unique league identity without POST or durable journal (9.492079ms)
+✖ Nakka transfer save sends only one approved TEST add and verifies LPID and preservation (3.248429ms)
+✔ Nakka transfer blocks other event IDs leagues titles and started tournaments (21.682181ms)
+✔ Nakka transfer identity and eligibility reject OUT STANDBY missing and ambiguous names (14.132402ms)
+✖ Nakka transfer already-present names or LPIDs never create a second entry (3.755927ms)
+✔ Nakka transfer guard gates busy and malformed inputs stop before network or journal (20.78171ms)
+✖ Nakka transfer confirmations are short-lived single-use and bound to user session and player (6.43064ms)
+✔ Nakka transfer stale preview state requires new review without writes (11.229133ms)
+✖ Nakka transfer rechecks Hub and event immediately before posting (1.866416ms)
+✖ Nakka transfer timeout after save retains attempt marker and blocks another POST (9.189472ms)
+✖ Nakka transfer changed old entries wrong league IDs and bad receipts remain uncertain (2.269808ms)
+✖ Nakka transfer verified journal blocks re-add after manual removal (2.779603ms)
+✖ Nakka transfer provider errors truncation and journal failure fail closed without secrets (11.684745ms)
+✖ Nakka transfer authentication is rechecked after reads and before mutation (1.762418ms)
+✖ Nakka transfer confirms entry separately when the API omits league link without claiming identity (1.770737ms)
+✖ Nakka transfer reconciles AUD-092 attempted marker read-only using prior count and fingerprint (1.202184ms)
+✖ Nakka transfer reconciliation fails closed for changed old data malformed markers and replacement entries (2.020079ms)
+✖ a new registration can add again only with matching verified removal proof retaining the previous transfer (2.590422ms)
+✖ removal preview is read-only and exposes exact event entry ID and league profile (8.719751ms)
+✖ removal targets exactly one Nakka event entry then clears only selected registration names and event metadata (2.071596ms)
+✖ removal permits OUT and STANDBY without treating either as IN (3.307059ms)
+✖ positively absent Nakka entry removes only the Hub registration with no provider POST (1.666515ms)
+✔ wrong target, started tournament, bracket placement and ambiguous identities block before writes (7.757026ms)
+✔ malformed removal, missing confirmation, extra fields and disabled gate reject without write (3.148813ms)
+✔ busy lock and expired auth do not read or write provider state (1.838933ms)
+✖ stale snapshot, status, date and Nakka version invalidate confirmation and consume ticket (1.765048ms)
+✖ confirmation is bound to session and owner; expired or reused tickets cannot remove twice (1.620815ms)
+✖ Nakka timeout and wrong receipt retain registration, save uncertain journal, never retry and raise attention (1.910682ms)
+✖ partial Sheet failure after verified Nakka removal remains uncertain with immutable recovery copy (1.835154ms)
+✔ removal numeric typography and standby orange override original grey theme (3.625206ms)
+✔ removal dialog requires checkbox then sends one confirmed save and blocks close while saving (3.076879ms)
+✔ late preview after sign-out cannot restore a confirmation or a player name (1.513243ms)
+✔ uncertain removal discards confirm button and never resends a save (1.91236ms)
+✔ preview defaults to blocked and never falls back to network (6.31401ms)
+✔ preview rejects mock mode on non-loopback hosts (1.181307ms)
+✔ preview refuses unknown mode and external endpoint configuration (3.703388ms)
+✔ preview returns fictional player data and defensive response copies (2.901864ms)
+✔ preview status mutation persists only in its in-memory instance (5.919593ms)
+✔ preview rejects unknown players and invalid statuses without mutation (7.474115ms)
+✔ preview registers existing master player with consent and message (2.58727ms)
+✔ preview registers a new fictional name and adds it to mock master (3.777192ms)
+✔ preview normalizes duplicate names through the new-player route (1.701381ms)
+✔ preview requires a valid name and explicit consent before registration (2.207321ms)
+✔ preview reports Nakka as uncontacted and unavailable (1.970553ms)
+✔ preview rejects remote URLs and non-GET methods (1.152133ms)
+✔ preview rejects unknown routes and duplicate query keys (2.010463ms)
+✔ preview respects aborted requests before mock mutation (1.477025ms)
+✔ desktop entrypoints load closed service boundary before application scripts (0.783275ms)
+✔ preview server serves mock entry with network-blocking policy (73.706757ms)
+Hub registration error: Error: You are already registered for this event.
+    at Object.click (evalmachine.<anonymous>:1691:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async Element.emit (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-preview.test.cjs:154:24)
+    at async TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-preview.test.cjs:208:3)
+    at async Test.run (node:internal/test_runner/test:1409:7)
+    at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+✔ preview server denies private source paths and write methods (31.869674ms)
+✔ actual dashboard renders mock data and identifies backend as demo (10.935153ms)
+✔ actual registration form sends long consent labels through mock boundary (6.76688ms)
+✔ actual registration errors open dismissible message popup and preserve the form (6.781181ms)
+✔ actual Hub form and identity dialog create a distinct mock player after confirmation (7.304114ms)
+✔ Hub TEST rejects wrong running script before backend access (5.533194ms)
+✔ Hub TEST rejects wrong configured project and spreadsheet before backend access (5.343727ms)
+✔ Hub TEST returns adapter data and TEST marker without registration (3.171013ms)
+✔ Hub TEST rejects incomplete status, spoofed source and malformed input before I/O (1.632544ms)
+✔ Hub TEST preserves confirmed identity and stamps HUB server-side (12.234679ms)
+✔ Hub TEST registration reuses Remote gate and lock with guaranteed release (5.824616ms)
+✔ Hub TEST client reads and registers through RPC (4.08195ms)
+✔ Hub TEST client blocks foreign URLs, duplicate keys and source spoofing (4.382027ms)
+✔ Hub TEST RPC failure is sanitized and registration is never retried automatically (2.846879ms)
+✔ Hub TEST Nakka health uses guarded read-only RPC (6.612097ms)
+✔ Hub TEST HTML is reproducible with parseable scripts and original AIK assets (341.902536ms)
+✔ Hub TEST route is additive and manifest stays owner-only with legacy status RPC private (5.507935ms)
+✔ Hub status rejects wrong project and non-boolean write gates before Sheets access (15.428352ms)
+✔ Hub status rejects malformed input and extra routing keys without I/O (3.106304ms)
+✔ Hub status busy lock performs no read or write (2.859487ms)
+✔ Hub status refuses wrong spreadsheet and stale event with no mutation (7.958729ms)
+✔ Hub status refuses missing or ambiguous player rows in either sheet (10.973079ms)
+✔ Hub status refuses changed previous status before any write (2.088449ms)
+✔ Hub status refuses formulas, incompatible headers and oversized layouts (4.043224ms)
+✔ Hub status changes exactly two C cells and preserves consent messages sources and other players (3.837093ms)
+✔ Hub status supports sequential IN OUT STANDBY transitions with matching readback (2.297062ms)
+✔ Hub status identical current status verifies without rewriting cells (2.788527ms)
+✔ Hub status partial write failure is uncertain, releases lock and never retries (2.188163ms)
+✔ Hub status mismatch in either cell or Hub readback cannot report success (11.903732ms)
+✔ Hub status UI holds pending value through refresh and clears only after verified response (6.247078ms)
+✔ Hub status UI failure shows popup, clears pending, reloads truth and never retries write (5.354712ms)
+✔ Hub TEST client serializes read and status RPCs and continues after failure (16.418399ms)
+✔ native ranking contract preserves supplied full league ordinal ranks ties and zero points (21.040179ms)
+✔ native ranking contract refuses guessed rankings subsets duplicate identities and wrong totals (1.201692ms)
+✔ native ranking contract expires invalidates changed totals and rejects tampered storage (1.102967ms)
+✔ live shell has four slim Swedish tabs and one selected shared panel with internal fullscreen (29.407355ms)
+✔ live shell requests fullscreen on selected panel and preserves chosen view when exiting (7.991901ms)
+✔ live windows keep independent round choices scroll positions and continue refresh without resetting (60.929852ms)
+✔ live pool paging and automatic rotation retain approved card renderer and pause outside pools (19.599585ms)
+✔ live knockout scroll pauses for controls interaction hidden pages and reduced motion (12.790754ms)
+✔ live shell failure pause offline and page exit remove current status and stop scheduled work (10.526204ms)
+✔ live public list and stage event dates must agree before bracket content is displayed (12.315035ms)
+✔ knockout layout aligns all source centres and target centres exactly with orthogonal paths (0.659235ms)
+✔ knockout round navigation remains readable for full narrow and split windows without champion column (3.415352ms)
+✔ knockout cards keep literal names every average and opening-only draw numbers inside player identity (6.73302ms)
+✔ knockout preserves missing averages pending slots byes third place and provider final format (1.053545ms)
+✔ knockout draw numbers use only unique numeric provider opening guide and never league ranks (2.188988ms)
+✔ knockout live cycle uses exact event round pair and maps reversed provider player order (2.769743ms)
+✔ knockout live collector excludes unrelated fixtures and refuses invalid identities sets and incomplete totals (1.409234ms)
+✔ knockout CSS reserves two-line rows single one-pixel title accent and one connector layer (0.426526ms)
+✔ both TEST cast routes embed identical wired shell scripts without external asset dependencies (14.084802ms)
+✔ Hub Beauty Live clicks open new independent tabs and reject late signed-out callbacks (6.112992ms)
+✔ Hub Beauty Live opener rejects foreign unguarded duplicate-query and fragment URLs (5.450925ms)
+✖ combined live URL uses the selected event date guard rather than returning a bare route (3.186964ms)
+✔ feed knockout option reuses one match list and propagates live match data through full and fast cycles (3.417237ms)
+✔ pool paging arrows sit above cards and footer is absent below the player footer (11.152076ms)
+✔ cast footer keeps fullscreen failure visible and reserves space without covering cards (6.208607ms)
+✔ live plan labels reload in existing windows and late callbacks are ignored after exit (4.721439ms)
+✔ all shared live views keep icon buttons and one menu with list settings and count tile (14.794363ms)
+✔ display menu anchors under its icon closes outside or on Escape and keeps viewport space (7.028153ms)
+✔ approved title and action nodes dock into header and tab row then remain inside selected fullscreen (5.688961ms)
+✔ finals winner uses provider champion and correct award without inferring a winner from scores (3.691396ms)
+✔ login page: disconnected default rejects entry and clears password (5.862702ms)
+✔ login page: show password, reset navigation and provider reset outcome (5.388107ms)
+✔ login page: authorization required; successful session and logout use service (3.352967ms)
+✔ login page: prevents duplicate sign-in and reports reset/signout failures truthfully (2.91517ms)
+✔ login page: failed Hub validation stays on login and never offers an unlocked session (1.842095ms)
+✔ Mobile total uses the displayed event list and includes a truthful zero state (5.422959ms)
+✔ Mobile list never presents a stale total after failure malformed data close or an older response (1.727281ms)
+✖ Long messages from Hub mobile and kiosk keep their full text in the Sheet without leaking into Nakka (41.445556ms)
+✔ Long Hub messages open from READ as literal multiline text in the scrollable popup (2.316908ms)
+✔ initial UI check calls only the read-only endpoint with an abort signal (20.940858ms)
+✔ UI renders OK with a clear indicator and checked time (2.067454ms)
+✔ UI renders DEGRADED with a clear indicator and checked time (1.968054ms)
+✔ UI renders UNAVAILABLE with a clear indicator and checked time (1.264279ms)
+✔ UI handles HTTP failure without exposing raw errors (2.117391ms)
+✔ UI handles network failure without exposing raw errors (4.362547ms)
+✔ UI handles invalid JSON without exposing raw errors (1.508569ms)
+✔ UI handles null response without exposing raw errors (4.785898ms)
+✔ UI handles unknown status without exposing raw errors (5.065258ms)
+✔ UI handles blank message without exposing raw errors (1.389542ms)
+✔ UI handles invalid timestamp without exposing raw errors (1.557353ms)
+✔ UI aborts after 15 seconds and can recover on a later manual refresh (1.697844ms)
+✔ manual refresh is limited to once per minute and resets the old OK indicator (1.889015ms)
+✔ automatic refresh uses five minutes, independent of Beauty polling (2.10655ms)
+✔ an unresolved request does not overlap manual or scheduled requests (1.462069ms)
+✔ hidden tabs skip polling and check overdue health when visible again (5.092989ms)
+✔ a tab initially hidden waits until it becomes visible (1.681152ms)
+✔ missing health markup does not affect the rest of the Hub (1.470156ms)
+✔ Nakka health auth: no request while signed out and immediate check when Hub opens (1.636175ms)
+✔ Nakka health auth: logout clears status and late response cannot repaint a new session (2.121242ms)
+✔ health route returns JSON and uses only one authenticated league GET (10.098621ms)
+✔ league health handles empty readable league (2.546025ms)
+✔ league health handles populated readable league (0.814985ms)
+✔ league health handles missing credentials (0.893892ms)
+✔ league health handles HTTP 401 (0.999544ms)
+✔ league health handles HTTP 403 (1.957761ms)
+✔ league health handles HTTP 500 (3.476234ms)
+✔ league health handles HTTP 429 (1.025109ms)
+✔ league health handles HTTP 408 (1.424281ms)
+✔ league health handles HTTP 504 (1.575581ms)
+✔ league health handles invalid JSON (1.38704ms)
+✔ league health handles API rejection (1.428243ms)
+✔ league health handles missing API result (0.961412ms)
+✔ league health handles missing list (1.396423ms)
+✔ league health handles non-array list (2.277598ms)
+✔ league health handles null API response (0.792554ms)
+✔ league health handles address unavailable (1.268264ms)
+✔ league health handles network error (1.410641ms)
+✔ league health handles native fetch timeout (0.851049ms)
+✔ health response is cached for 60 seconds across requests (0.905614ms)
+✔ cached degraded result is returned without another Nakka request (0.910245ms)
+✔ an in-flight health probe does not block or trigger a second request (0.890318ms)
+✔ cache failure prevents an unthrottled upstream probe (0.741305ms)
+✔ cache write failure preserves a successful result and releases the lock (0.82718ms)
+✔ failed upstream request also releases the health lock (0.738823ms)
+✔ stage badges map exact stage round and slot; reassignments and removals replace old values (3.130723ms)
+✔ stage badges empty values are unassigned and unsupported shapes unavailable; never infer from pool plan (1.366746ms)
+✔ stage feed uses only fixed public GETs and refuses torn snapshots or failed refreshes (2.622341ms)
+✔ stage feed suppresses overlapping polls and stopped late responses (0.570262ms)
+✔ stage model preserves provider standings scores and advancement without exposing secrets (4.402855ms)
+✔ stage model distinguishes pending slots byes and unknown scores without manufacturing winners (0.406193ms)
+✔ stage model refuses cross-event data unknown identities and duplicate standings identities (0.699846ms)
+✖ HUB new registration creates one league identity then links one TEST event entry (49.78893ms)
+✖ MOBIL new registration creates one league identity then links one TEST event entry (7.39262ms)
+✖ KIOSK new registration creates one league identity then links one TEST event entry (4.496089ms)
+✖ Different-person nickname creates its own league member without changing the base player (5.58852ms)
+✖ A new Beauty identity reuses a unique existing league member without another league add (7.731761ms)
+✔ New league creation fails closed for wrong target started event duplicate name oversized list and unlinked event entry (22.13935ms)
+✖ Uncertain league creation retains registration blocks event add and is never retried (13.372633ms)
+✖ Verified league creation is reusable read-only while mismatched journals block (16.520188ms)
+✔ Creation journal failure and stale date or source state prevent the league POST (13.470203ms)
+✖ League identity swaps after creation cannot substitute a different player ID in the event add (4.322455ms)
+✖ Event timeout after verified creation does not repeat either mutation (6.823951ms)
+✔ Creation helper requires enabled gates canonical saved input current day and valid authority (20.425982ms)
+✖ Existing Beauty master player absent from Nakka is created and entered using the same guarded flow (6.545778ms)
+✔ Remote and kiosk HtmlService outputs set device viewport while staff routes stay unchanged (6.417719ms)
+✔ Yellow new-player selector beats legacy button specificity and attendee panel grows to content (0.599249ms)
+✔ Opening either picker focuses its title without invoking search, locks background and sets dialog semantics (6.661542ms)
+✔ Picking a name closes, blurs search, clears filtering, restores scroll and original inert state (3.242782ms)
+✔ New-player action is outside results, stays visible while filtering and preserves canonical sentinel (2.22219ms)
+✔ Keyboard viewport resize keeps picker at visible top; Done dismisses input without submitting (2.182829ms)
+✔ Escape/backdrop close safely, and repeated closing cannot change restored scroll (2.290563ms)
+✔ Tab remains inside modal, and names and helper text are inserted literally (4.990616ms)
+✔ RemoteRegistration.html selection keeps canonical name, closes picker and continues existing new-player path (4.593212ms)
+✔ KioskTest.html selection keeps canonical name, closes picker and continues existing new-player path (7.729955ms)
+✔ RemoteRegistration.html loads minimal registration context and hides form on wrong event day (9.957569ms)
+✔ RemoteRegistration.html actual submit sends date through its own RPC with no client source or staff credential (3.45432ms)
+✔ RemoteRegistration.html success distinguishes saved registration from Nakka attention and keeps five-second next-player return (2.032422ms)
+✔ RemoteRegistration.html Swedish error boundary preserves identity fields and never exposes unknown server prose (2.488823ms)
+✔ RemoteRegistration.html context-load failure shows Swedish help instead of raw service errors (2.507309ms)
+✔ KioskTest.html loads minimal registration context and hides form on wrong event day (1.960623ms)
+✔ KioskTest.html actual submit sends date through its own RPC with no client source or staff credential (2.562826ms)
+✔ KioskTest.html success distinguishes saved registration from Nakka attention and keeps five-second next-player return (1.623341ms)
+✔ KioskTest.html Swedish error boundary preserves identity fields and never exposes unknown server prose (2.495522ms)
+✔ KioskTest.html context-load failure shows Swedish help instead of raw service errors (2.647181ms)
+✔ Central player TEST pages preserve Swedish shared identity modules and parse all inline scripts (10.502324ms)
+✖ MOBIL TEST registration saves and transfers with stamped source and no Hub staff session (37.619636ms)
+✖ MOBIL TEST registration retains Sheet success on timeout and blocks duplicate across sources (3.47803ms)
+✔ MOBIL TEST registration rejects target source context token and actor spoofing before writes (13.297837ms)
+✖ MOBIL TEST registration preserves nickname conflict and creates the resolved new league identity (5.33541ms)
+✔ MOBIL TEST registration stale day busy and invalid input cannot append or transfer (16.069551ms)
+✖ KIOSK TEST registration saves and transfers with stamped source and no Hub staff session (2.268433ms)
+✖ KIOSK TEST registration retains Sheet success on timeout and blocks duplicate across sources (3.073244ms)
+✔ KIOSK TEST registration rejects target source context token and actor spoofing before writes (22.44152ms)
+✖ KIOSK TEST registration preserves nickname conflict and creates the resolved new league identity (13.098006ms)
+✔ KIOSK TEST registration stale day busy and invalid input cannot append or transfer (10.371975ms)
+✔ Player registration context returns only bounded names date and availability without staff access (9.736686ms)
+✔ Player context cannot call transfers for a different player or unlock a Hub staff route (2.745043ms)
+✔ Player registration context always clears on core error and never becomes a reusable public credential (3.340757ms)
+✔ Central TEST kiosk route uses owner-only existing project and rejects configuration injection (4.096477ms)
+✖ Player registrations reuse existing Nakka entry and truthful unavailable league-ID state (3.812199ms)
+✔ Player registration project and write gates block service access and leave context empty (6.778515ms)
+✔ Shared player theme build is deterministic and leaves registration scripts unchanged (269.102915ms)
+✔ Hub remote and kiosk use the supplied original sponsor-free logo and embedded AIK font assets (26.923279ms)
+✔ Remote approved tonight list uses the bottom close button and number-only shared heading (6.452581ms)
+✔ Kiosk retains its original sizing and omits player list while remote keeps independent list and sizing (4.446783ms)
+✔ boards: sparse venue ranges allocate twenty pools exactly once on selected boards (6.051341ms)
+✔ boards: mixed sizes balance match workload and assign sequential board batches (0.528793ms)
+✔ boards: invalid ranges, empty selection and duplicate pool identities fail closed (1.17565ms)
+✔ pool UI reviews mappings, renders frozen group means, and does not send during generation (109.907347ms)
+✔ pool UI manual swaps request server adjustment and retain no old approval (67.042582ms)
+✔ pool UI only sends after final approval and cannot double click while saving (52.440373ms)
+✔ pool UI withdrawals invalidate review and preserve visible frozen draw without silently redrawing (49.566382ms)
+✔ pool UI lock drops late response and clears identities and previews (70.586839ms)
+✔ pool UI provider timeout blocks repeat send and retains inspect-before-retry guidance (46.673253ms)
+✔ pool UI automatic refresh preserves a frozen preview and its controls (66.837472ms)
+✔ pool TEST transport routes authenticated exact payloads and rejects target or extra-key injection (6.262806ms)
+✔ pool UI closing and reopening drops an old handoff approval while retaining the frozen reference (40.335576ms)
+✔ pool UI renders omitted and null RPC averages as Unseeded and keeps measured zero numeric (28.061146ms)
+✔ pool UI normalizes omitted frozen averages before pool means colours and manual review (27.76617ms)
+✔ pool approved workspace opens as one main-page section and sidebar navigation closes it without RPC (21.640895ms)
+✔ pool workspace board and size changes invalidate an approved frozen draw without silently redrawing (103.047678ms)
+✔ pool workspace advanced hypothetical count is isolated from actual roster and handoff approval (44.95993ms)
+✔ pool workspace disables Nakka handoff for unresolved identities but preserves planning and swap controls (26.992608ms)
+✔ pool workspace colour bands only alter preview presentation and retain frozen values without RPC (20.142595ms)
+✔ pool workspace unavailable Hub data blocks generating and clears handoff approval until a new draw (31.940435ms)
+✔ pool workspace selects physical boards and shows numbered pools sharing only available boards (31.995405ms)
+✔ pool workspace invalid board ranges block drawing and excluded Nakka entries block approval (49.479372ms)
+✔ pool review orders unresolved identities first and confirms generation only through popup (39.163466ms)
+✔ pool invalidation retains group overview and disabled swaps with a specific reason (46.191083ms)
+✔ pool card picker excludes same group and marks exactly both exchanged players yellow (35.962857ms)
+✔ pool card labels reject collisions and preserve the frozen players and RPC ticket (49.23564ms)
+✔ pool compact identity warning hides when resolved and scheme counts remain visible (95.936821ms)
+✔ pool estimate works before boards are selected and updates with selected board count (9.992609ms)
+✔ pool review is one expandable tab and calculation lives inside Advanced settings (18.519623ms)
+✔ pool toolbar orders review league advanced and buttons expand content without RPC or losing mappings (13.331788ms)
+✔ pool compact cards show groups only for shared boards and keep average in clickable player row (15.917449ms)
+✔ pool compact Nakka step preserves handoff gates and opens review without sending (14.826704ms)
+✔ Hub board and group dialog picker and scheme are English while canonical draw metadata stays intact (17.428025ms)
+✔ organiser moves a verified pool board without Setup dependency or resending Nakka pools (9.277272ms)
+✔ pool board edit validates duplicate labels and drops writes after the organiser locks (10.837853ms)
+✔ planner scheme uses only needed pool-size tiles ordered by selected preference and hides redundant boards field (9.471937ms)
+✔ planner BOARDS tile counts used physical boards and retains only nonzero size chips (12.979803ms)
+✔ pool planner: 37 players prefer three with ten boards (5.247974ms)
+✔ pool planner: 34 players with seven boards cannot fit one pool per board (0.297988ms)
+✔ pool planner: supplied 5–101 schemes match both preferences (4.453446ms)
+✔ pool planner: every arrangement preserves players and board limits (33.472259ms)
+✔ pool planner: rejects invalid inputs and marks counts beyond source scheme (0.435779ms)
+✔ pool planner: event count excludes OUT and STANDBY and rejects unknown snapshots (0.356706ms)
+✔ pool planner: real panel reacts to verified event refresh, controls and outages (23.016023ms)
+✔ pool planner: generated TEST download embeds exact original bytes after script inlining (10.549805ms)
+✔ mixed capacities spread first seeds and improve pool means without clustering the strongest (5.5316ms)
+✔ unseeded allocation remains even for all valid 3/4 pool schemes and boundary missing counts (6009.325271ms)
+✔ 101-player boundary respects capacities and even unseeded quotas (7.688338ms)
+✔ missing average is null while genuine measured zero remains a known average (3.471079ms)
+✔ deterministic tie shuffle uses the recorded seed and ignores incoming roster order (2.363309ms)
+✔ frozen draw is independent of future source roster and average changes and excludes private fields (0.934172ms)
+✔ IN-only membership signature changes on withdrawal arrival or rename but not averages or messages (11.710868ms)
+✔ manual swaps retain frozen values capacities membership and source draw (4.143105ms)
+✔ manual changes warn about clustered first seeds or uneven unseeded counts without inventing averages (2.010892ms)
+✔ invalid moves ambiguous identities unknown statuses string averages and altered snapshots are refused (7.633997ms)
+✔ adjustable bands use exact non-overlapping boundaries and keep unseeded separate (1.904116ms)
+✔ invalid pool schemes limits dates and missing statistics provenance cannot produce an approved-looking draw (3.352217ms)
+✔ pool stats qualify score/darts keyed by LPID; points stay separate and unknown is not zero (27.644645ms)
+✔ pool stats retain durable last-good on outage and block fresh draw after refresh failure (12.98802ms)
+✔ pool stats reject inconsistent points and invalid numeric totals without replacing last-good (18.192479ms)
+✔ pool league profiles paginate and reject repeated IDs or a truncated over-limit list (8.28803ms)
+✔ pool mappings expose ambiguity and missing entry without silently choosing a league identity (13.036897ms)
+✔ pool handoff verifies all groups and cards, preserves settings and inactive entries, and blocks duplicate send (17.12447ms)
+✔ pool manual swap is server-owned, consumes old ticket, preserves frozen averages and invalidates approval (13.487118ms)
+✔ pool source additions withdrawals renames and date changes invalidate a reviewed draw (49.710948ms)
+✔ pool tickets expire and are bound to staff session; unconfirmed sends never mutate (35.951281ms)
+✔ pool existing groups results cards started events and unsupported formats block handoff (56.163162ms)
+✔ pool event concurrency or league identity changes after approval block every provider write (36.446374ms)
+✔ pool failures in either provider phase retain attempted journal and block retry without leaking errors (20.081904ms)
+✔ pool unexpected setting changes or missing duplicate foreign pairings fail full readback (69.721918ms)
+✔ pool audit failure occurs before Nakka mutation and cannot report successful send (9.856415ms)
+✔ pool structural comparison ignores JSON object order while preserving array order (1.672153ms)
+✔ pool routes require exact inputs, staff authentication and the write gate (15.934041ms)
+✔ pool five-player exception and mixed 4/3 divisions generate the exact rectangular table and pair coverage (36.151617ms)
+✔ pool event started between group save and fixture generation blocks the second mutation and records uncertainty (12.77467ms)
+✔ pool bracket-building status25 permits statistics and frozen preview without a provider mutation (8.858325ms)
+✔ pool status25 approved handoff retains bracket-building state and boolean auto_schedule through full readback (10.079052ms)
+✔ pool status25 still refuses existing groups brackets results ranks and match cards before every provider write (79.548219ms)
+✔ pool active finished unknown and string states cannot load or prepare despite status25 support (146.967234ms)
+✔ pool unqualified excluded event entries block every write and retain explicit review list (6.374791ms)
+✔ pool planning lasts thirty minutes while final approval retains five-minute expiry (11.880604ms)
+✔ qualified Adapter hash is exact (3.234601ms)
+✔ original recovered Drive Hub remains preserved exactly (2.63373ms)
+✔ current TEST Hub contains the read-only Hub data bridge (3.291029ms)
+✔ DateEncoding hash matches recovered script body (0.420375ms)
+✔ DateEncoding round-trips supported dates (6.115847ms)
+✔ DateEncoding rejects impossible and fractional dates (3.620283ms)
+✔ TEST route is pinned and write gate is closed (1.043357ms)
+✔ TEST manifest remains owner-only and Sheets v4 (3.390627ms)
+✔ Preflight remains pinned to TEST identity and bounded reads (7.222409ms)
+✔ Adapter retains all stale diagnostics and no automatic retry (1.658531ms)
+✔ Recovered TEST Hub clearly identifies isolated view (7.511994ms)
+✔ TEST Hub data adapter is pinned to isolated sheet (2.297825ms)
+✔ TEST Hub data adapter contains no write API (0.478265ms)
+✔ TEST Hub data adapter reads bounded ranges only (1.076227ms)
+✔ Route exposes read-only TEST Hub RPC (0.456318ms)
+✔ Hub routes hubdata through TEST RPC (2.708066ms)
+✔ TEST status dropdown remains disabled (2.12132ms)
+✔ Event Control write gate remains closed (0.545512ms)
+✔ status write gate is false by default (1.916392ms)
+✔ Event Control write gate remains false (0.324143ms)
+✔ status adapter is pinned to TEST identity (1.024374ms)
+✔ status adapter only accepts IN OUT STANDBY (3.481107ms)
+✔ closed gate prevents client access entirely (2.192542ms)
+✔ Route exposes dedicated TEST status RPC (0.458418ms)
+✔ Hub has TEST status bridge but dropdown stays disabled while gated (3.405914ms)
+✔ identity conflict requires a choice before resolving an existing typed name (6.506104ms)
+✔ identity comparison normalizes case whitespace and Unicode accents (0.50181ms)
+✔ new unique name needs no identifying detail (3.857297ms)
+✔ existing player not registered tonight can be selected without extra prompt (0.235702ms)
+✔ already registered selected player receives the same identity popup contract (0.823201ms)
+✔ thats me reuses existing player and never creates a second master identity (0.302942ms)
+✔ thats me blocks a second registration tonight (0.272118ms)
+✔ different person gets a distinct confirmed display name (2.670409ms)
+✔ different person must confirm the exact proposed display name (0.525978ms)
+✔ blank excessive or unsafe detail is rejected (0.539756ms)
+✔ reused identifying detail is rejected even with case differences (2.796262ms)
+✔ stale or forged conflict bases are rejected (0.23536ms)
+✔ ambiguous identical master rows require organiser help (4.049119ms)
+✔ unknown selections and invalid identity choices cannot create players (0.329603ms)
+✔ identity dialog reveals detail only after choosing a different person (6.345362ms)
+✔ identity dialog requires review then explicit confirmation before sending detail (10.397211ms)
+✔ editing the detail after review requires confirmation again (5.256701ms)
+✔ identity dialog thats me returns the existing choice with canonical base (3.678433ms)
+✔ identity dialog cancel cancels without resubmission (3.485182ms)
+✔ identity dialog close cancels without resubmission (2.414726ms)
+✔ identity dialog escape cancels without resubmission (2.446689ms)
+✔ identity dialog backdrop cancels without resubmission (1.734399ms)
+✔ identity submission never retries a transport failure (2.558689ms)
+✔ identity dialog restores focus and traps keyboard tabbing (10.786355ms)
+✔ remote-app candidate gate blocks registration before any service access (3.51664ms)
+✔ remote-app candidate conflict preflight performs no mutation (7.007004ms)
+✔ remote-app candidate thats me blocks duplicate without mutation (2.477847ms)
+✔ remote-app candidate saves only distinct confirmed name preserving original identity (4.037912ms)
+✔ remote-app candidate invalid confirmation cannot mutate Sheets (1.891075ms)
+✔ automatic-nakka candidate gate blocks registration before any service access (3.512365ms)
+✔ automatic-nakka candidate conflict preflight performs no mutation (3.290233ms)
+✔ automatic-nakka candidate thats me blocks duplicate without mutation (2.606896ms)
+✔ automatic-nakka candidate saves only distinct confirmed name preserving original identity (5.119344ms)
+✔ automatic-nakka candidate invalid confirmation cannot mutate Sheets (2.76056ms)
+✔ remote-app/RemoteRegistration.html actual submit handler resolves collision before candidate save (6.664792ms)
+✔ automatic-nakka/Kiosk.html actual submit handler resolves collision before candidate save (5.182331ms)
+✔ automatic-nakka/RemoteRegistration.html actual submit handler resolves collision before candidate save (6.07027ms)
+✔ remote-app candidate disables Form and Nakka integrations and is owner-only (2.369908ms)
+✔ automatic-nakka candidate disables Form and Nakka integrations and is owner-only (2.440513ms)
+✔ remote and kiosk preserve shared Swedish identity sources while Hub loads English derivatives (4.041089ms)
+✔ production profile validates explicit isolated targets without enabling deployment or writes (8.412212ms)
+✔ production profile refuses TEST identities write activation duplicate staff and impossible dates (2.777543ms)
+✔ production profile refuses injected endpoints and missing approval fields without leaking values (0.717524ms)
+✔ unprovisioned production template fails offline readiness check without changing source (242.458908ms)
+✔ stage third-place tables remain separate and use their own results badges and leg override (6.573114ms)
+✔ stage format does not guess conflicting overrides and empty third-place table stays absent (0.70618ms)
+✔ stage round-robin matrix preserves table positions zero results and missing opponent scores (1.27315ms)
+✔ stage league matrices use schedule card ids and flag repeated fixtures without combining results (0.8655ms)
+✔ stage feed tolerates documented no-groups status only for knockout-only events (1.516462ms)
+✔ stage feed reads league fixtures inside its before and after revision check (7.223886ms)
+✔ stage URL requires staff twice and matches fixed TEST identity and Hub date before opening (74.989363ms)
+✔ stage opener prevents duplicate popups rejects foreign URLs and drops signed-out callbacks (10.707141ms)
+✔ stage route and deterministic generated page include real TEST mode and original assets (391.183566ms)
+✔ stage diagnostic collects fixed public schemas without player values or private fields (80.300941ms)
+✔ stage diagnostic marks changing revisions and records unsupported standings shape honestly (11.654546ms)
+✔ stage diagnostic stops on wrong event and HTTP failure without continuing reads (29.111265ms)
+✔ stage diagnostic bounds nested and wide shapes instead of exporting arbitrary payload values (74.790279ms)
+✖ grown roster after uncertain old add offers staff review only and sends no Nakka POST (19.706769ms)
+✖ confirmed current-entry review archives an explicit receipt and keeps the original ATTEMPTED record byte-for-byte (1.606561ms)
+✖ current review distinguishes exposed league link from unexposed exact identity (1.284797ms)
+✖ review ticket is single-use and bound to original session and user (1.570933ms)
+✖ changed journal entry ID roster league or event invalidates the review before any review write (1.750257ms)
+✖ review receipt does not enable a retry when the player later disappears from Nakka (1.407007ms)
+✖ replacement entry requires fresh review and cannot reuse the receipt for another player ID (1.499445ms)
+✖ public registration context cannot create a staff review or silently acknowledge uncertainty (1.425314ms)
+✖ review cannot turn into an add if the old journal is removed between preview and confirmation (3.474577ms)
+✖ review storage failure reports uncertainty without provider mutation or rewriting attempt history (1.493858ms)
+✖ attention clears only after confirmed current-entry review and reappears if that entry is replaced (1.275572ms)
+✔ venue running player and group averages weight points by darts and replace live totals without mutating input (6.189179ms)
+✔ venue completed live response removes both highlights and totals are counted once on transition to archive (1.268211ms)
+✔ venue missing totals incomplete archive duplicate fixture and set formats never invent group averages (1.978135ms)
+✔ venue zero throws remain unknown and corrected scores replace old totals without accumulation (0.706396ms)
+✔ venue matching requires exact TEST event pool and player identities and excludes knockout results (0.519229ms)
+✔ venue mismatched frozen membership suppresses starting average and board labels and shared boards sort together (3.143731ms)
+✔ venue collector uses public GET paths and rejects wrong live identity or failed endpoint (6.912218ms)
+✔ venue collector paginates completely and refuses duplicate match documents (1.050542ms)
+✔ venue public metadata reads verified audit baseline and exposes no private registration or staff fields (4.851537ms)
+✔ venue label publishing authenticates twice and validates frozen pool membership (3.116603ms)
+✔ venue generated layout retains six card grid matched header font and stale highlight suppression (0.617012ms)
+✔ venue live feed suppresses overlapping refreshes and drops late data after stopping (66.552575ms)
+✔ venue failed full snapshot cannot be revived by polling an old group membership (10.342324ms)
+✔ venue expired staff session cannot publish cast labels or change the frozen starting value (8.1223ms)
+✔ venue card renderer uses literal light player names paired group averages and only two live cells (7.875503ms)
+✔ pool display name split preserves multipart surnames and leaves single-name second line empty (3.437897ms)
+✔ pool display truncates to one full stop without changing fitting names or splitting graphemes (22.126132ms)
+✔ pool name rendering keeps two bounded lines full-name accessibility and separate average (1.740587ms)
+✔ approved pool cards show six three-player cards without fourth columns or blank rows (11.731442ms)
+✔ mixed pool page pads only the three-player neighbour of a four-player pool (5.23474ms)
+✔ pool card row count follows the visible page and ranking remains provider-owned (2.214885ms)
+✔ pool legs totals include exact result and live cells and refuse ambiguous totals (0.2659ms)
+✔ pool cards preserve paired live highlights averages and missing values without LIVE tags (1.652236ms)
+✔ approved pool layout uses two columns fixed name slots blank padding and internal fullscreen (0.462523ms)
+✔ pool layout fits mixed neighbours on the observed cast viewport and keeps lower rows shorter (0.416629ms)
+✔ pool layout does not stretch four-group last rows and limits padding to visible neighbours (0.148342ms)
+✔ approved larger two-line names stay within row budget at mixed narrow and compact viewport sizes (0.405742ms)
+✔ four-group mode fills available desktop height with bounded typography and preserves six-group sizing (1.266178ms)
+✔ four-group partial pages retain the same outer card size and complete pages keep all tracks equal (0.732491ms)
+ℹ tests 676
+ℹ suites 0
+ℹ pass 611
+ℹ fail 65
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8018.706797
+
+✖ failing tests:
+
+test at tests/dashboard-attention.test.cjs:21:1
+✖ Uncertain removal retains organiser attention through read-only refresh even when event entry is present (4.661158ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/dashboard-attention.test.cjs:23:29)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/dashboard-attention.test.cjs:40:1
+✖ Attention finds earlier missing IN entries using GET only and retains OUT issues (4.096848ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/dashboard-attention.test.cjs:42:29)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/dashboard-attention.test.cjs:44:1
+✖ Attention flags duplicate league identity even when the name is already in the event (1.684799ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/dashboard-attention.test.cjs:46:29)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/dashboard-attention.test.cjs:48:1
+✖ Attention verified entry clears its alert without claiming an unexposed league ID or deleting journals (2.492599ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/dashboard-attention.test.cjs:51:29)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/dashboard-attention.test.cjs:53:1
+✖ Attention uncertain creation cannot clear through same-name event presence (3.185423ms)
+  TypeError [Error]: Cannot read properties of undefined (reading 'items')
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/dashboard-attention.test.cjs:55:71)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests/dashboard-attention.test.cjs:57:1
+✖ Attention uncertain transfer reconciliation respects the saved fingerprint (2.999707ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/dashboard-attention.test.cjs:61:54)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/dashboard-attention.test.cjs:81:1
+✖ Attention confirmed manual transfer clears an issue through existing guarded readback (5.885753ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - true
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/dashboard-attention.test.cjs:82:147)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/hub-auto-registration.test.cjs:6:1
+✖ Automatic Hub registration saves once then sends one fixed TEST add without a manual transfer step (53.32961ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'ATTENTION'
+  - 'TRANSFERRED'
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-auto-registration.test.cjs:7:112)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'ATTENTION',
+    expected: 'TRANSFERRED',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/hub-auto-registration.test.cjs:13:1
+✖ Automatic Hub registration handles missing LPID readback as entry confirmed with identity explicitly unverified (4.551768ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'ATTENTION'
+  - 'ENTRY_VERIFIED_LINK_UNEXPOSED'
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-auto-registration.test.cjs:14:91)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'ATTENTION',
+    expected: 'ENTRY_VERIFIED_LINK_UNEXPOSED',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/hub-auto-registration.test.cjs:16:1
+✖ Automatic Hub registration existing Nakka entries are reused without a duplicate add (12.665498ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'ATTENTION'
+  - 'ALREADY_PRESENT'
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-auto-registration.test.cjs:17:121)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'ATTENTION',
+    expected: 'ALREADY_PRESENT',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/hub-auto-registration.test.cjs:23:1
+✖ Automatic Hub registration new-player and different-person nickname identities create verified league members (6.995453ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-auto-registration.test.cjs:25:134)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/hub-auto-registration.test.cjs:42:1
+✖ Automatic Hub registration timeout after POST keeps Sheet entry and durable retry barrier (6.55035ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'TEST_TARGET_ONLY'
+  - 'TRANSFER_UNCERTAIN'
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-auto-registration.test.cjs:43:94)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'TEST_TARGET_ONLY',
+    expected: 'TRANSFER_UNCERTAIN',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/hub-auto-registration.test.cjs:45:1
+✖ Automatic Hub registration confirms existing identity choice through the established name-conflict flow (5.527179ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-auto-registration.test.cjs:46:258)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/hub-nakka-transfer.test.cjs:4:1
+✖ Nakka transfer preview proposes a unique league identity without POST or durable journal (9.492079ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - 'PREVIEW'
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-nakka-transfer.test.cjs:4:141)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 'PREVIEW',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/hub-nakka-transfer.test.cjs:5:1
+✖ Nakka transfer save sends only one approved TEST add and verifies LPID and preservation (3.248429ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - 'TRANSFERRED'
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-nakka-transfer.test.cjs:5:210)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 'TRANSFERRED',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/hub-nakka-transfer.test.cjs:8:1
+✖ Nakka transfer already-present names or LPIDs never create a second entry (3.755927ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - 'ALREADY_PRESENT'
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-nakka-transfer.test.cjs:8:237)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 'ALREADY_PRESENT',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/hub-nakka-transfer.test.cjs:11:1
+✖ Nakka transfer confirmations are short-lived single-use and bound to user session and player (6.43064ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'INVALID_TRANSFER'
+  - 'STALE_TRANSFER'
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-nakka-transfer.test.cjs:11:363)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'INVALID_TRANSFER',
+    expected: 'STALE_TRANSFER',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/hub-nakka-transfer.test.cjs:13:1
+✖ Nakka transfer rechecks Hub and event immediately before posting (1.866416ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'INVALID_TRANSFER'
+  - 'STALE_TRANSFER'
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-nakka-transfer.test.cjs:13:319)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'INVALID_TRANSFER',
+    expected: 'STALE_TRANSFER',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/hub-nakka-transfer.test.cjs:14:1
+✖ Nakka transfer timeout after save retains attempt marker and blocks another POST (9.189472ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'INVALID_TRANSFER'
+  - 'TRANSFER_UNCERTAIN'
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-nakka-transfer.test.cjs:14:163)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'INVALID_TRANSFER',
+    expected: 'TRANSFER_UNCERTAIN',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/hub-nakka-transfer.test.cjs:15:1
+✖ Nakka transfer changed old entries wrong league IDs and bad receipts remain uncertain (2.269808ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'INVALID_TRANSFER'
+  - 'TRANSFER_UNCERTAIN'
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-nakka-transfer.test.cjs:15:273)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'INVALID_TRANSFER',
+    expected: 'TRANSFER_UNCERTAIN',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/hub-nakka-transfer.test.cjs:16:1
+✖ Nakka transfer verified journal blocks re-add after manual removal (2.779603ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - 'TRANSFERRED'
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-nakka-transfer.test.cjs:16:127)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 'TRANSFERRED',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/hub-nakka-transfer.test.cjs:17:1
+✖ Nakka transfer provider errors truncation and journal failure fail closed without secrets (11.684745ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'INVALID_TRANSFER'
+  - 'TRANSFER_FAILED'
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-nakka-transfer.test.cjs:17:494)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'INVALID_TRANSFER',
+    expected: 'TRANSFER_FAILED',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/hub-nakka-transfer.test.cjs:18:1
+✖ Nakka transfer authentication is rechecked after reads and before mutation (1.762418ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'TEST_TARGET_ONLY'
+  - 'AUTH_REQUIRED'
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-nakka-transfer.test.cjs:18:261)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'TEST_TARGET_ONLY',
+    expected: 'AUTH_REQUIRED',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/hub-nakka-transfer.test.cjs:20:1
+✖ Nakka transfer confirms entry separately when the API omits league link without claiming identity (1.770737ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - 'ENTRY_VERIFIED_LINK_UNEXPOSED'
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-nakka-transfer.test.cjs:21:64)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 'ENTRY_VERIFIED_LINK_UNEXPOSED',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/hub-nakka-transfer.test.cjs:26:1
+✖ Nakka transfer reconciles AUD-092 attempted marker read-only using prior count and fingerprint (1.202184ms)
+  Error [HubTransferError]: TEST_TARGET_ONLY
+      at beautyHubTransferError_ (evalmachine.<anonymous>:15:50)
+      at Object.beautyHubTransferState_ (evalmachine.<anonymous>:57:79)
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-nakka-transfer.test.cjs:27:82)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests/hub-nakka-transfer.test.cjs:32:1
+✖ Nakka transfer reconciliation fails closed for changed old data malformed markers and replacement entries (2.020079ms)
+  Error [HubTransferError]: TEST_TARGET_ONLY
+      at beautyHubTransferError_ (evalmachine.<anonymous>:15:50)
+      at Object.beautyHubTransferState_ (evalmachine.<anonymous>:57:79)
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-nakka-transfer.test.cjs:34:37)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests/hub-nakka-transfer.test.cjs:39:1
+✖ a new registration can add again only with matching verified removal proof retaining the previous transfer (2.590422ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'TEST_TARGET_ONLY'
+  - 'TRANSFER_REVIEW_REQUIRED'
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-nakka-transfer.test.cjs:41:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'TEST_TARGET_ONLY',
+    expected: 'TRANSFER_REVIEW_REQUIRED',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/hub-player-removal.test.cjs:55:1
+✖ removal preview is read-only and exposes exact event entry ID and league profile (8.719751ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-player-removal.test.cjs:55:133)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/hub-player-removal.test.cjs:56:1
+✖ removal targets exactly one Nakka event entry then clears only selected registration names and event metadata (2.071596ms)
+  AssertionError [ERR_ASSERTION]: {"success":false,"code":"INVALID_REMOVE","error":"Invalid removal request. Reload and review again."}
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-player-removal.test.cjs:56:226)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/hub-player-removal.test.cjs:57:1
+✖ removal permits OUT and STANDBY without treating either as IN (3.307059ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  undefined !== 'OUT'
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-player-removal.test.cjs:57:246)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 'OUT',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/hub-player-removal.test.cjs:58:1
+✖ positively absent Nakka entry removes only the Hub registration with no provider POST (1.666515ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - null
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-player-removal.test.cjs:58:151)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/hub-player-removal.test.cjs:62:1
+✖ stale snapshot, status, date and Nakka version invalidate confirmation and consume ticket (1.765048ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'INVALID_REMOVE'
+  - 'REMOVE_STALE'
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-player-removal.test.cjs:62:340)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'INVALID_REMOVE',
+    expected: 'REMOVE_STALE',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/hub-player-removal.test.cjs:63:1
+✖ confirmation is bound to session and owner; expired or reused tickets cannot remove twice (1.620815ms)
+  SyntaxError [Error]: "undefined" is not valid JSON
+      at JSON.parse (<anonymous>)
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-player-removal.test.cjs:63:180)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests/hub-player-removal.test.cjs:64:1
+✖ Nakka timeout and wrong receipt retain registration, save uncertain journal, never retry and raise attention (1.910682ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'INVALID_REMOVE'
+  - 'REMOVE_UNCERTAIN'
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-player-removal.test.cjs:64:245)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'INVALID_REMOVE',
+    expected: 'REMOVE_UNCERTAIN',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/hub-player-removal.test.cjs:65:1
+✖ partial Sheet failure after verified Nakka removal remains uncertain with immutable recovery copy (1.835154ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'INVALID_REMOVE'
+  - 'REMOVE_UNCERTAIN'
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/hub-player-removal.test.cjs:65:177)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'INVALID_REMOVE',
+    expected: 'REMOVE_UNCERTAIN',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/live-shell.test.cjs:91:1
+✖ combined live URL uses the selected event date guard rather than returning a bare route (3.186964ms)
+  ReferenceError [Error]: getBeautyHubData_ is not defined
+      at Object.beautyLiveTestUrl (evalmachine.<anonymous>:32:15)
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/live-shell.test.cjs:92:347)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests/mobile-player-count.test.cjs:19:1
+✖ Long messages from Hub mobile and kiosk keep their full text in the Sheet without leaking into Nakka (41.445556ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/mobile-player-count.test.cjs:21:320)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/new-league-registration.test.cjs:6:45
+✖ HUB new registration creates one league identity then links one TEST event entry (49.78893ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/new-league-registration.test.cjs:7:116)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/new-league-registration.test.cjs:6:45
+✖ MOBIL new registration creates one league identity then links one TEST event entry (7.39262ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/new-league-registration.test.cjs:7:116)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/new-league-registration.test.cjs:6:45
+✖ KIOSK new registration creates one league identity then links one TEST event entry (4.496089ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/new-league-registration.test.cjs:7:116)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/new-league-registration.test.cjs:10:1
+✖ Different-person nickname creates its own league member without changing the base player (5.58852ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/new-league-registration.test.cjs:11:233)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/new-league-registration.test.cjs:13:1
+✖ A new Beauty identity reuses a unique existing league member without another league add (7.731761ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/new-league-registration.test.cjs:14:117)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/new-league-registration.test.cjs:20:1
+✖ Uncertain league creation retains registration blocks event add and is never retried (13.372633ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'TEST_TARGET_ONLY'
+  - 'LEAGUE_CREATION_UNCERTAIN'
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/new-league-registration.test.cjs:22:146)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'TEST_TARGET_ONLY',
+    expected: 'LEAGUE_CREATION_UNCERTAIN',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/new-league-registration.test.cjs:26:1
+✖ Verified league creation is reusable read-only while mismatched journals block (16.520188ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/new-league-registration.test.cjs:27:66)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/new-league-registration.test.cjs:32:1
+✖ League identity swaps after creation cannot substitute a different player ID in the event add (4.322455ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/new-league-registration.test.cjs:33:260)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/new-league-registration.test.cjs:35:1
+✖ Event timeout after verified creation does not repeat either mutation (6.823951ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'TEST_TARGET_ONLY'
+  - 'TRANSFER_UNCERTAIN'
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/new-league-registration.test.cjs:36:114)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'TEST_TARGET_ONLY',
+    expected: 'TRANSFER_UNCERTAIN',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/new-league-registration.test.cjs:44:1
+✖ Existing Beauty master player absent from Nakka is created and entered using the same guarded flow (6.545778ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/new-league-registration.test.cjs:45:146)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/player-registration-routes.test.cjs:5:2
+✖ MOBIL TEST registration saves and transfers with stamped source and no Hub staff session (37.619636ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/player-registration-routes.test.cjs:6:90)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/player-registration-routes.test.cjs:9:2
+✖ MOBIL TEST registration retains Sheet success on timeout and blocks duplicate across sources (3.47803ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/player-registration-routes.test.cjs:10:179)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/player-registration-routes.test.cjs:16:2
+✖ MOBIL TEST registration preserves nickname conflict and creates the resolved new league identity (5.33541ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/player-registration-routes.test.cjs:18:276)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/player-registration-routes.test.cjs:5:2
+✖ KIOSK TEST registration saves and transfers with stamped source and no Hub staff session (2.268433ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/player-registration-routes.test.cjs:6:90)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/player-registration-routes.test.cjs:9:2
+✖ KIOSK TEST registration retains Sheet success on timeout and blocks duplicate across sources (3.073244ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/player-registration-routes.test.cjs:10:179)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/player-registration-routes.test.cjs:16:2
+✖ KIOSK TEST registration preserves nickname conflict and creates the resolved new league identity (13.098006ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/player-registration-routes.test.cjs:18:276)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/player-registration-routes.test.cjs:44:1
+✖ Player registrations reuse existing Nakka entry and truthful unavailable league-ID state (3.812199ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/player-registration-routes.test.cjs:45:120)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/transfer-current-entry-review.test.cjs:10:1
+✖ grown roster after uncertain old add offers staff review only and sends no Nakka POST (19.706769ms)
+  Error [HubTransferError]: TEST_TARGET_ONLY
+      at beautyHubTransferError_ (evalmachine.<anonymous>:15:50)
+      at Object.beautyHubTransferState_ (evalmachine.<anonymous>:57:79)
+      at pending (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/transfer-current-entry-review.test.cjs:6:24)
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/transfer-current-entry-review.test.cjs:11:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+
+test at tests/transfer-current-entry-review.test.cjs:13:1
+✖ confirmed current-entry review archives an explicit receipt and keeps the original ATTEMPTED record byte-for-byte (1.606561ms)
+  Error [HubTransferError]: TEST_TARGET_ONLY
+      at beautyHubTransferError_ (evalmachine.<anonymous>:15:50)
+      at Object.beautyHubTransferState_ (evalmachine.<anonymous>:57:79)
+      at pending (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/transfer-current-entry-review.test.cjs:6:24)
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/transfer-current-entry-review.test.cjs:14:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+
+test at tests/transfer-current-entry-review.test.cjs:17:1
+✖ current review distinguishes exposed league link from unexposed exact identity (1.284797ms)
+  Error [HubTransferError]: TEST_TARGET_ONLY
+      at beautyHubTransferError_ (evalmachine.<anonymous>:15:50)
+      at Object.beautyHubTransferState_ (evalmachine.<anonymous>:57:79)
+      at pending (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/transfer-current-entry-review.test.cjs:6:24)
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/transfer-current-entry-review.test.cjs:18:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests/transfer-current-entry-review.test.cjs:20:1
+✖ review ticket is single-use and bound to original session and user (1.570933ms)
+  Error [HubTransferError]: TEST_TARGET_ONLY
+      at beautyHubTransferError_ (evalmachine.<anonymous>:15:50)
+      at Object.beautyHubTransferState_ (evalmachine.<anonymous>:57:79)
+      at pending (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/transfer-current-entry-review.test.cjs:6:24)
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/transfer-current-entry-review.test.cjs:22:11)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests/transfer-current-entry-review.test.cjs:26:1
+✖ changed journal entry ID roster league or event invalidates the review before any review write (1.750257ms)
+  Error [HubTransferError]: TEST_TARGET_ONLY
+      at beautyHubTransferError_ (evalmachine.<anonymous>:15:50)
+      at Object.beautyHubTransferState_ (evalmachine.<anonymous>:57:79)
+      at pending (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/transfer-current-entry-review.test.cjs:6:24)
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/transfer-current-entry-review.test.cjs:28:11)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests/transfer-current-entry-review.test.cjs:31:1
+✖ review receipt does not enable a retry when the player later disappears from Nakka (1.407007ms)
+  Error [HubTransferError]: TEST_TARGET_ONLY
+      at beautyHubTransferError_ (evalmachine.<anonymous>:15:50)
+      at Object.beautyHubTransferState_ (evalmachine.<anonymous>:57:79)
+      at pending (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/transfer-current-entry-review.test.cjs:6:24)
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/transfer-current-entry-review.test.cjs:32:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests/transfer-current-entry-review.test.cjs:34:1
+✖ replacement entry requires fresh review and cannot reuse the receipt for another player ID (1.499445ms)
+  Error [HubTransferError]: TEST_TARGET_ONLY
+      at beautyHubTransferError_ (evalmachine.<anonymous>:15:50)
+      at Object.beautyHubTransferState_ (evalmachine.<anonymous>:57:79)
+      at pending (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/transfer-current-entry-review.test.cjs:6:24)
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/transfer-current-entry-review.test.cjs:35:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests/transfer-current-entry-review.test.cjs:38:1
+✖ public registration context cannot create a staff review or silently acknowledge uncertainty (1.425314ms)
+  Error [HubTransferError]: TEST_TARGET_ONLY
+      at beautyHubTransferError_ (evalmachine.<anonymous>:15:50)
+      at Object.beautyHubTransferState_ (evalmachine.<anonymous>:57:79)
+      at pending (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/transfer-current-entry-review.test.cjs:6:24)
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/transfer-current-entry-review.test.cjs:39:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests/transfer-current-entry-review.test.cjs:42:1
+✖ review cannot turn into an add if the old journal is removed between preview and confirmation (3.474577ms)
+  Error [HubTransferError]: TEST_TARGET_ONLY
+      at beautyHubTransferError_ (evalmachine.<anonymous>:15:50)
+      at Object.beautyHubTransferState_ (evalmachine.<anonymous>:57:79)
+      at pending (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/transfer-current-entry-review.test.cjs:6:24)
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/transfer-current-entry-review.test.cjs:43:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests/transfer-current-entry-review.test.cjs:45:1
+✖ review storage failure reports uncertainty without provider mutation or rewriting attempt history (1.493858ms)
+  Error [HubTransferError]: TEST_TARGET_ONLY
+      at beautyHubTransferError_ (evalmachine.<anonymous>:15:50)
+      at Object.beautyHubTransferState_ (evalmachine.<anonymous>:57:79)
+      at pending (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/transfer-current-entry-review.test.cjs:6:24)
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/transfer-current-entry-review.test.cjs:46:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests/transfer-current-entry-review.test.cjs:48:1
+✖ attention clears only after confirmed current-entry review and reappears if that entry is replaced (1.275572ms)
+  Error [HubTransferError]: TEST_TARGET_ONLY
+      at beautyHubTransferError_ (evalmachine.<anonymous>:15:50)
+      at Object.beautyHubTransferState_ (evalmachine.<anonymous>:57:79)
+      at pending (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/transfer-current-entry-review.test.cjs:6:24)
+      at TestContext.<anonymous> (/workspace/scratch/6127623e0efc/handover-integrated/Beauty-Programmer-Handover-20261102/Beauty-Admin-Hub/tests/transfer-current-entry-review.test.cjs:49:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)

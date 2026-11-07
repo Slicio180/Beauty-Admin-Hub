@@ -1,0 +1,31 @@
+{
+  "result": "LOCAL_SPEED_PASS_INSTALL_PASS",
+  "finishedUTC": "2026-11-02T21:16:58.574Z",
+  "before": {
+    "tests": 695,
+    "pass": 695,
+    "failed": []
+  },
+  "after": {
+    "tests": 697,
+    "pass": 697,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/speed-pass-before-2026-11-02T21-15-55-530Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/speed-pass-install-2026-11-02T21-15-55-530Z",
+  "files": [
+    "apps-script/registration-identity-test/remote-app/Code.js",
+    "apps-script/registration-identity-test/remote-app/HubTestNakkaEvent.gs",
+    "apps-script/registration-identity-test/remote-app/HubTestEventSave.gs",
+    "apps-script/registration-identity-test/remote-app/HubTestRemove.gs",
+    "tests/hub-nakka-compare.test.cjs",
+    "tests/nakka-workflow-engine.test.cjs",
+    "docs/handoff/test-inventory.json",
+    "evidence/speed-pass-20261102/README.md"
+  ],
+  "googleUpload": "PENDING — upload Code.js as Code.gs, HubTestNakkaEvent.gs, HubTestEventSave.gs and HubTestRemove.gs to Identity TEST only",
+  "deviceAcceptance": "PENDING — registration and removal timings, fresh roster and status readback",
+  "production": "UNCHANGED"
+}

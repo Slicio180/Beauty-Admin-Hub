@@ -1,0 +1,262 @@
+
+node:assert:150
+  throw new AssertionError(obj);
+  ^
+
+AssertionError [ERR_ASSERTION]: tests/dashboard-attention.test.cjs
+TAP version 13
+# Subtest: Verified removal clears its existing attention record without deleting provider journals
+ok 1 - Verified removal clears its existing attention record without deleting provider journals
+  ---
+  duration_ms: 7.628132
+  type: 'test'
+  ...
+# Subtest: Uncertain removal retains organiser attention through read-only refresh even when event entry is present
+not ok 2 - Uncertain removal retains organiser attention through read-only refresh even when event entry is present
+  ---
+  duration_ms: 3.184702
+  type: 'test'
+  location: '/private/var/folders/cy/r0qnx73x42zb8gqf48f8201h0000gp/T/beauty-ui-check-zG0caK/Beauty-Admin-Hub/tests/dashboard-attention.test.cjs:21:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/private/var/folders/cy/r0qnx73x42zb8gqf48f8201h0000gp/T/beauty-ui-check-zG0caK/Beauty-Admin-Hub/tests/dashboard-attention.test.cjs:23:29)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: Attention persists across server invocations and isolates dates without leaking credentials
+ok 3 - Attention persists across server invocations and isolates dates without leaking credentials
+  ---
+  duration_ms: 3.531375
+  type: 'test'
+  ...
+# Subtest: Attention records failed Hub mobile and kiosk Nakka outcomes after Sheet success and keeps public responses private
+ok 4 - Attention records failed Hub mobile and kiosk Nakka outcomes after Sheet success and keeps public responses private
+  ---
+  duration_ms: 42.611429
+  type: 'test'
+  ...
+# Subtest: Attention finds earlier missing IN entries using GET only and retains OUT issues
+not ok 5 - Attention finds earlier missing IN entries using GET only and retains OUT issues
+  ---
+  duration_ms: 1.688017
+  type: 'test'
+  location: '/private/var/folders/cy/r0qnx73x42zb8gqf48f8201h0000gp/T/beauty-ui-check-zG0caK/Beauty-Admin-Hub/tests/dashboard-attention.test.cjs:40:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/private/var/folders/cy/r0qnx73x42zb8gqf48f8201h0000gp/T/beauty-ui-check-zG0caK/Beauty-Admin-Hub/tests/dashboard-attention.test.cjs:42:29)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: Attention flags duplicate league identity even when the name is already in the event
+not ok 6 - Attention flags duplicate league identity even when the name is already in the event
+  ---
+  duration_ms: 1.559408
+  type: 'test'
+  location: '/private/var/folders/cy/r0qnx73x42zb8gqf48f8201h0000gp/T/beauty-ui-check-zG0caK/Beauty-Admin-Hub/tests/dashboard-attention.test.cjs:44:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/private/var/folders/cy/r0qnx73x42zb8gqf48f8201h0000gp/T/beauty-ui-check-zG0caK/Beauty-Admin-Hub/tests/dashboard-attention.test.cjs:46:29)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: Attention verified entry clears its alert without claiming an unexposed league ID or deleting journals
+not ok 7 - Attention verified entry clears its alert without claiming an unexposed league ID or deleting journals
+  ---
+  duration_ms: 1.511985
+  type: 'test'
+  location: '/private/var/folders/cy/r0qnx73x42zb8gqf48f8201h0000gp/T/beauty-ui-check-zG0caK/Beauty-Admin-Hub/tests/dashboard-attention.test.cjs:48:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/private/var/folders/cy/r0qnx73x42zb8gqf48f8201h0000gp/T/beauty-ui-check-zG0caK/Beauty-Admin-Hub/tests/dashboard-attention.test.cjs:51:29)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: Attention uncertain creation cannot clear through same-name event presence
+not ok 8 - Attention uncertain creation cannot clear through same-name event presence
+  ---
+  duration_ms: 1.303405
+  type: 'test'
+  location: '/private/var/folders/cy/r0qnx73x42zb8gqf48f8201h0000gp/T/beauty-ui-check-zG0caK/Beauty-Admin-Hub/tests/dashboard-attention.test.cjs:53:1'
+  failureType: 'testCodeFailure'
+  error: "Cannot read properties of undefined (reading 'items')"
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    TestContext.<anonymous> (/private/var/folders/cy/r0qnx73x42zb8gqf48f8201h0000gp/T/beauty-ui-check-zG0caK/Beauty-Admin-Hub/tests/dashboard-attention.test.cjs:55:71)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: Attention uncertain transfer reconciliation respects the saved fingerprint
+not ok 9 - Attention uncertain transfer reconciliation respects the saved fingerprint
+  ---
+  duration_ms: 1.792589
+  type: 'test'
+  location: '/private/var/folders/cy/r0qnx73x42zb8gqf48f8201h0000gp/T/beauty-ui-check-zG0caK/Beauty-Admin-Hub/tests/dashboard-attention.test.cjs:57:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/private/var/folders/cy/r0qnx73x42zb8gqf48f8201h0000gp/T/beauty-ui-check-zG0caK/Beauty-Admin-Hub/tests/dashboard-attention.test.cjs:61:54)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: Attention outage malformed data and wrong target retain alerts instead of clearing them
+ok 10 - Attention outage malformed data and wrong target retain alerts instead of clearing them
+  ---
+  duration_ms: 3.782977
+  type: 'test'
+  ...
+# Subtest: Attention refresh requires staff authorization and rejects injected input before provider calls
+ok 11 - Attention refresh requires staff authorization and rejects injected input before provider calls
+  ---
+  duration_ms: 3.551017
+  type: 'test'
+  ...
+# Subtest: Attention stale Hub snapshot and busy lock do not publish a clear result
+ok 12 - Attention stale Hub snapshot and busy lock do not publish a clear result
+  ---
+  duration_ms: 2.280401
+  type: 'test'
+  ...
+# Subtest: Attention corrupt records produce unavailable rather than a false white zero
+ok 13 - Attention corrupt records produce unavailable rather than a false white zero
+  ---
+  duration_ms: 1.136379
+  type: 'test'
+  ...
+# Subtest: Attention confirmed manual transfer clears an issue through existing guarded readback
+not ok 14 - Attention confirmed manual transfer clears an issue through existing guarded readback
+  ---
+  duration_ms: 1.648425
+  type: 'test'
+  location: '/private/var/folders/cy/r0qnx73x42zb8gqf48f8201h0000gp/T/beauty-ui-check-zG0caK/Beauty-Admin-Hub/tests/dashboard-attention.test.cjs:81:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + undefined
+    - true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/private/var/folders/cy/r0qnx73x42zb8gqf48f8201h0000gp/T/beauty-ui-check-zG0caK/Beauty-Admin-Hub/tests/dashboard-attention.test.cjs:82:147)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: Attention storage failure cannot turn a committed registration into a repeatable failure
+ok 15 - Attention storage failure cannot turn a committed registration into a repeatable failure
+  ---
+  duration_ms: 2.734663
+  type: 'test'
+  ...
+1..15
+# tests 15
+# suites 0
+# pass 8
+# fail 7
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 225.929127
+
+
+
+1 !== 0
+
+    at Object.<anonymous> (/private/var/folders/cy/r0qnx73x42zb8gqf48f8201h0000gp/T/beauty-ui-check-zG0caK/Beauty-Admin-Hub/scripts/check-test-inventory.cjs:26:10)
+    at Module._compile (node:internal/modules/cjs/loader:1781:14)
+    at Object..js (node:internal/modules/cjs/loader:1913:10)
+    at Module.load (node:internal/modules/cjs/loader:1505:32)
+    at Function._load (node:internal/modules/cjs/loader:1309:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:254:19)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+    at node:internal/main/run_main_module:36:49 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v22.23.2

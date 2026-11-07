@@ -1,0 +1,100 @@
+TAP version 13
+# Subtest: RemoteRegistration.html loads minimal registration context and hides form on wrong event day
+ok 1 - RemoteRegistration.html loads minimal registration context and hides form on wrong event day
+  ---
+  duration_ms: 2.714364
+  type: 'test'
+  ...
+# Subtest: RemoteRegistration.html actual submit sends date through its own RPC with no client source or staff credential
+ok 2 - RemoteRegistration.html actual submit sends date through its own RPC with no client source or staff credential
+  ---
+  duration_ms: 1.332385
+  type: 'test'
+  ...
+# Subtest: RemoteRegistration.html success distinguishes saved registration from Nakka attention and keeps five-second next-player return
+ok 3 - RemoteRegistration.html success distinguishes saved registration from Nakka attention and keeps five-second next-player return
+  ---
+  duration_ms: 1.167558
+  type: 'test'
+  ...
+# Subtest: RemoteRegistration.html Swedish error boundary preserves identity fields and never exposes unknown server prose
+ok 4 - RemoteRegistration.html Swedish error boundary preserves identity fields and never exposes unknown server prose
+  ---
+  duration_ms: 1.011855
+  type: 'test'
+  ...
+# Subtest: RemoteRegistration.html context-load failure shows Swedish help instead of raw service errors
+ok 5 - RemoteRegistration.html context-load failure shows Swedish help instead of raw service errors
+  ---
+  duration_ms: 0.856092
+  type: 'test'
+  ...
+# Subtest: KioskTest.html loads minimal registration context and hides form on wrong event day
+ok 6 - KioskTest.html loads minimal registration context and hides form on wrong event day
+  ---
+  duration_ms: 0.980448
+  type: 'test'
+  ...
+# Subtest: KioskTest.html actual submit sends date through its own RPC with no client source or staff credential
+ok 7 - KioskTest.html actual submit sends date through its own RPC with no client source or staff credential
+  ---
+  duration_ms: 1.15582
+  type: 'test'
+  ...
+# Subtest: KioskTest.html success distinguishes saved registration from Nakka attention and keeps five-second next-player return
+ok 8 - KioskTest.html success distinguishes saved registration from Nakka attention and keeps five-second next-player return
+  ---
+  duration_ms: 0.792025
+  type: 'test'
+  ...
+# Subtest: KioskTest.html Swedish error boundary preserves identity fields and never exposes unknown server prose
+ok 9 - KioskTest.html Swedish error boundary preserves identity fields and never exposes unknown server prose
+  ---
+  duration_ms: 0.997903
+  type: 'test'
+  ...
+# Subtest: KioskTest.html context-load failure shows Swedish help instead of raw service errors
+ok 10 - KioskTest.html context-load failure shows Swedish help instead of raw service errors
+  ---
+  duration_ms: 0.82823
+  type: 'test'
+  ...
+# Subtest: Central player TEST pages preserve Swedish shared identity modules and parse all inline scripts
+ok 11 - Central player TEST pages preserve Swedish shared identity modules and parse all inline scripts
+  ---
+  duration_ms: 4.867697
+  type: 'test'
+  ...
+# Subtest: Shared player theme build is deterministic and leaves registration scripts unchanged
+ok 12 - Shared player theme build is deterministic and leaves registration scripts unchanged
+  ---
+  duration_ms: 129.745967
+  type: 'test'
+  ...
+# Subtest: Hub remote and kiosk use the supplied original sponsor-free logo and embedded AIK font assets
+ok 13 - Hub remote and kiosk use the supplied original sponsor-free logo and embedded AIK font assets
+  ---
+  duration_ms: 31.634606
+  type: 'test'
+  ...
+# Subtest: Remote approved tonight list uses the bottom close button and number-only shared heading
+ok 14 - Remote approved tonight list uses the bottom close button and number-only shared heading
+  ---
+  duration_ms: 5.925541
+  type: 'test'
+  ...
+# Subtest: Kiosk retains its original sizing and omits player list while remote keeps independent list and sizing
+ok 15 - Kiosk retains its original sizing and omits player list while remote keeps independent list and sizing
+  ---
+  duration_ms: 3.880048
+  type: 'test'
+  ...
+1..15
+# tests 15
+# suites 0
+# pass 15
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 319.371396

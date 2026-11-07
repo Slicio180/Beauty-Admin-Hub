@@ -1,3 +1,10 @@
+// Invocation-local workbook handle only. No cell values or provider responses
+// are cached: each caller still performs its own fresh reads.
+var beautyHubSpreadsheetHandle_ = null;
+function beautyHubSpreadsheet_() {
+  if (!beautyHubSpreadsheetHandle_) beautyHubSpreadsheetHandle_ = SpreadsheetApp.openById(SHEET_ID);
+  return typeof beautyContextMasterWorkbook_==='function'?beautyContextMasterWorkbook_(beautyHubSpreadsheetHandle_):beautyHubSpreadsheetHandle_;
+}
 function doGet(e) {
   if (!BEAUTY_IDENTITY_APPROVED_SCRIPT_ || ScriptApp.getScriptId() !== BEAUTY_IDENTITY_APPROVED_SCRIPT_) {
     throw new Error('Identity candidate TEST project is not provisioned.');
@@ -5,20 +12,20 @@ function doGet(e) {
   if (Object.keys(e?.parameter || {}).some(key => key !== 'page')) throw new Error('Candidate configuration rejected.');
   const page = e?.parameter?.page || '';
   if (!['', 'remote', 'kiosk', 'hub', 'live', 'stages'].includes(page)) throw new Error('Candidate serves registration pages only.');
-  if(page==='stages'){beautyHubTestGuard_();return HtmlService.createHtmlOutputFromFile('StageTest').setTitle('Beauty pool and knockout play — TEST');}
+  if(page==='stages'){beautyHubTestGuard_();return beautyHubCastHtml_('StageTest').setTitle('Pool and knockout play — TEST');}
   if(page==='kiosk'){
     beautyHubTestGuard_();
-    return HtmlService.createHtmlOutputFromFile('KioskTest').setTitle('Beauty — Kiosk Identity TEST');
+    return HtmlService.createHtmlOutputFromFile('KioskTest').addMetaTag('viewport', 'width=device-width, initial-scale=1').setTitle('Kiosk Identity TEST');
   }
   if (page === 'live') {
     beautyHubTestGuard_();
-    return HtmlService.createHtmlOutputFromFile('BeautyLiveTest').setTitle('Kvällens spelare — Beauty Live TEST');
+    return beautyHubCastHtml_('BeautyLiveTest').setTitle('Kvällens spelare — Live TEST');
   }
   if (page === 'hub') {
     beautyHubTestGuard_();
-    return HtmlService.createHtmlOutputFromFile('HubTest').setTitle('Beauty Hub — IDENTITY TEST');
+    return HtmlService.createHtmlOutputFromFile('HubTest').setTitle('Hub — IDENTITY TEST');
   }
-  return HtmlService.createHtmlOutputFromFile('RemoteRegistration');
+  return HtmlService.createHtmlOutputFromFile('RemoteRegistration').addMetaTag('viewport', 'width=device-width, initial-scale=1');
 }
 /* CANDIDATE ONLY. No live deployment. Dedicated TEST provisioning and qualification pending. */
 const BEAUTY_IDENTITY_WRITES_ENABLED_ = true;
@@ -35,7 +42,7 @@ function submitRegistrationLocked_(data) {
     return { success: false, code: 'BLOCKED', error: 'TEST-kandidaten är inte aktiverad.' };
   }
   const lock = LockService.getScriptLock();
-  if (!lock.tryLock(5000)) return { success: false, code: 'BUSY', error: 'Försök igen om en stund.' };
+  if (!lock.tryLock(30000)) return { success: false, code: 'BUSY', error: 'Försök igen om en stund.' };
   try {
     if (data && data.source === 'HUB') {
       beautyHubAuthRequire_(beautyHubRequestToken_);
@@ -134,8 +141,7 @@ NEW REMOTE PLAYERS:
 */
 
 
-const SHEET_ID =
-  '1SIj4F8_WfWaeDVsdagRw8AoLsz0XsjhtdIn_OOxoDnU';
+const SHEET_ID = typeof beautyHubWorkspaceId_==='function'?beautyHubWorkspaceId_():'1SIj4F8_WfWaeDVsdagRw8AoLsz0XsjhtdIn_OOxoDnU';
 
 const FORM_ID =
   '1UxEr_KeHzhispG7Zu6E74Hh29OIqD6XxwR4UFwYEFOQ';
@@ -226,9 +232,7 @@ DO NOT run this during normal operation.
 function setupTrigger_() {
 
   const spreadsheet =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const triggers =
     ScriptApp.getProjectTriggers();
@@ -560,9 +564,7 @@ A2 downward = names
 function getPlayerNames() {
 
   const spreadsheet =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const sheet =
     spreadsheet.getSheetByName(
@@ -672,9 +674,7 @@ function submitRegistrationIdentityCandidate_(
 ) {
 
   const spreadsheet =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const sheet =
     spreadsheet.getSheetByName(
@@ -773,8 +773,9 @@ const source =
   const master = spreadsheet.getSheetByName(MASTER_SHEET);
   const tonight = spreadsheet.getSheetByName("TONIGHT'S PLAYERS");
   if (!master || !tonight) throw new Error('Spelarlistan kunde inte läsas.');
-  const masterNames = master.getLastRow() < 2 ? [] : master.getRange(2, 1, master.getLastRow() - 1, 1).getDisplayValues().flat();
-  const tonightNames = tonight.getLastRow() < 2 ? [] : tonight.getRange(2, 1, tonight.getLastRow() - 1, 2).getDisplayValues().flat().filter(Boolean);
+  const masterLast = master.getLastRow(), tonightLast = tonight.getLastRow();
+  const masterNames = masterLast < 2 ? [] : master.getRange(2, 1, masterLast - 1, 1).getDisplayValues().flat();
+  const tonightNames = tonightLast < 2 ? [] : tonight.getRange(2, 1, tonightLast - 1, 2).getDisplayValues().flat().filter(Boolean);
   const decision = BeautyNameResolution.resolve({ ...data, selectedName, newName }, masterNames, tonightNames);
   if (!decision.success) return decision;
   selectedName = decision.isNew ? NEW_PLAYER_OPTION : decision.player;
@@ -950,9 +951,7 @@ function addPlayerToMasterList_(
   }
 
   const spreadsheet =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const sheet =
     spreadsheet.getSheetByName(
@@ -1264,9 +1263,7 @@ deleted in the future.
 function setupMasterListEditTrigger_() {
 
   const spreadsheet =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const triggers =
     ScriptApp.getProjectTriggers();
@@ -1316,9 +1313,7 @@ automatically.
 function originalSyncMasterListToGoogleForm_() {
 
   const spreadsheet =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const masterSheet =
     spreadsheet.getSheetByName(
@@ -1802,9 +1797,7 @@ needs to be rebuilt from the Google Form.
 function importPlayersToMasterList_() {
 
   const spreadsheet =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const sheet =
     spreadsheet.getSheetByName(
@@ -1888,7 +1881,7 @@ function originalRegisterPlayerWithN01_(
     getN01EventIdFromControlDate_();
 
   const LEAGUE_ID =
-    'lg_tM2v_3523';
+    (''+(typeof beautyHubLeagueId_==='function'?beautyHubLeagueId_():'lg_M2wQ_4189')+'');
 
   const cleanName =
     String(
@@ -2273,9 +2266,7 @@ REMOTE registrations are added to.
 function getN01EventIdFromControlDate_() {
 
   const ss =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const controlSheet =
     ss.getSheetByName(
@@ -2336,7 +2327,7 @@ function findN01EventIdByDate_(
 ) {
 
   const LEAGUE_ID =
-    'lg_tM2v_3523';
+    (''+(typeof beautyHubLeagueId_==='function'?beautyHubLeagueId_():'lg_M2wQ_4189')+'');
 
   const properties =
     PropertiesService
@@ -2525,9 +2516,7 @@ function updatePlayerStatusData_(
 ) {
 
   const ss =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const sheet =
     ss.getSheetByName(
@@ -2813,9 +2802,7 @@ function updatePlayerStatusOnly_(
 ) {
 
   const ss =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const sheet =
     ss.getSheetByName(
@@ -2984,9 +2971,7 @@ function syncTonightStatusDisplay_(
 ) {
 
   const ss =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const tonight =
     ss.getSheetByName(
@@ -3199,21 +3184,12 @@ function syncTonightStatusDisplay_(
     REBUILD STATUS COLUMN
     ====================================================
 
-    clearContent() removes VALUES ONLY.
+    One setValues replaces all 99 status cells, including blank rows.
 
-    It does NOT remove the dropdown validation.
+    It preserves dropdown validation without an intermediate empty column.
 
     ====================================================
     */
-
-    tonight
-      .getRange(
-        2,
-        3,
-        99,
-        1
-      )
-      .clearContent();
 
     tonight
       .getRange(
@@ -3266,9 +3242,7 @@ survives between events.
 function resetPlayerEventData_() {
 
   const ss =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const sheet =
     ss.getSheetByName(
@@ -3401,9 +3375,7 @@ the source of truth.
 function getTonightsPlayerNames() {
 
   const spreadsheet =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const sheet =
     spreadsheet.getSheetByName(
@@ -3470,9 +3442,7 @@ function getBeautyHubData(token) {
 function getBeautyHubData_() {
 
   const spreadsheet =
-    SpreadsheetApp.openById(
-      SHEET_ID
-    );
+    beautyHubSpreadsheet_();
 
   const controlSheet =
     spreadsheet.getSheetByName(
@@ -3709,8 +3679,8 @@ function updateBeautyHubPlayerStatus_(
 NAKKA HEALTH — READ ONLY
 
 One fixed league GET, no retries and no Sheets/Form access.
-Cache all outcomes for 60 seconds across Hub clients. Only health
-checks take this lock; they never wait for another check to finish.
+Cache all outcomes for 60 seconds across Hub clients. The script lock is
+held only while claiming a health probe, never during its network request.
 */
 function getNakkaHealth_() {
   let lock;
@@ -3741,10 +3711,15 @@ function getNakkaHealth_() {
       return JSON.parse(latest);
     }
 
+    // Cache a short-lived in-flight result before releasing the script lock.
+    // Other health callers reuse it; registration is free to proceed during GET.
+    const pending=JSON.stringify(nakkaHealthResult_('DEGRADED','A Nakka health check is running. Refresh shortly.'));
+    cache.put(cacheKey,pending,60);
+    lock.releaseLock();locked=false;
     const health = checkNakkaLeagueHealth_();
 
     try {
-      cache.put(cacheKey, JSON.stringify(health), 60);
+      if(cache.get(cacheKey)===pending)cache.put(cacheKey, JSON.stringify(health), 60);
     } catch (error) {
       // A cache write failure must not discard the observed health result.
     }
@@ -3783,7 +3758,7 @@ function checkNakkaLeagueHealth_() {
 
   try {
     response = UrlFetchApp.fetch(
-      'https://push.n01darts.com/api/v1/league/entry/list?lgid=lg_tM2v_3523',
+      (typeof beautyContextStandalone_==='function'&&beautyContextStandalone_()?'https://push.n01darts.com/api/v1/tournament/entry/list?tdid='+beautyHubActiveTestTarget_().id:('https://push.n01darts.com/api/v1/league/entry/list?lgid='+(typeof beautyHubLeagueId_==='function'?beautyHubLeagueId_():'lg_M2wQ_4189')+'')),
       {
         method: 'get',
         headers: {
@@ -3860,3 +3835,10 @@ function nakkaHealthResult_(status, message) {
     timestamp: new Date().toISOString()
   };
 }
+
+function beautyHubCastHtml_(name){
+ const target=beautyHubActiveTestTarget_(),html=HtmlService.createHtmlOutputFromFile(name);
+ html.setContent(html.getContent().replace('<head>','<head><script>window.BeautySelectedEventId='+JSON.stringify(target.id)+';window.BeautySelectedLeagueId='+JSON.stringify(typeof beautyHubLeagueId_==='function'?beautyHubLeagueId_():'lg_M2wQ_4189')+';</script>'));
+ return html;
+}
+

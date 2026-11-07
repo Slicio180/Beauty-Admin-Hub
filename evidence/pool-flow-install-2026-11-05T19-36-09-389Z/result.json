@@ -1,0 +1,44 @@
+{
+  "result": "LOCAL_POOL_FLOW_INSTALL_PASS",
+  "finishedUTC": "2026-11-05T19:37:11.918Z",
+  "before": {
+    "tests": 731,
+    "pass": 731,
+    "failed": []
+  },
+  "after": {
+    "tests": 744,
+    "pass": 744,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/pool-flow-before-2026-11-05T19-36-09-389Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/pool-flow-install-2026-11-05T19-36-09-389Z",
+  "files": [
+    "server/pool-service.js",
+    "scripts/build-pool-service.cjs",
+    "tests/venue-cast.test.cjs",
+    "tests/pool-planner-seeded-ui.test.cjs",
+    "tests/pool-board-allocation.test.cjs",
+    "tests/pool-service.test.cjs",
+    "docs/handoff/test-inventory.json",
+    "public/js/nakka-pool-live.js",
+    "public/js/pool-board-allocation.js",
+    "public/js/competition-view.js",
+    "public/js/pool-planner-seeded.js",
+    "public/js/hub-test-services.js",
+    "public/css/beauty-dashboard.css",
+    "apps-script/registration-identity-test/remote-app/BeautyLiveTest.html",
+    "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "apps-script/registration-identity-test/remote-app/BeautyLiveTest.gs",
+    "apps-script/registration-identity-test/remote-app/HubTestPools.gs",
+    "apps-script/registration-identity-test/remote-app/StageTest.html",
+    "apps-script/registration-identity-test/remote-app/HubTestBridge.gs",
+    "evidence/start-average-20261105/README.md",
+    "evidence/planner-flow-20261105/README.md"
+  ],
+  "googleUpload": "PENDING — save HubTestPools.gs, HubTestBridge.gs, HubTest.html, BeautyLiveTest.gs (existing BeautyLiveServer.gs), StageTest.html and BeautyLiveTest.html to Identity TEST only",
+  "deviceAcceptance": "PENDING — main-screen workflow, START averages, board choices and explicit TEST Start acceptance pending; do not resend existing pools",
+  "production": "UNCHANGED"
+}

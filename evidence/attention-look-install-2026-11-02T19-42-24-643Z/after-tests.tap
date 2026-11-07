@@ -1,0 +1,4188 @@
+TAP version 13
+# Subtest: Live Swedish order strips private fields without mutating input
+ok 1 - Live Swedish order strips private fields without mutating input
+  ---
+  duration_ms: 3.199261
+  type: 'test'
+  ...
+# Subtest: Live timestamps sort earliest first with missing values last
+ok 2 - Live timestamps sort earliest first with missing values last
+  ---
+  duration_ms: 7.43883
+  type: 'test'
+  ...
+# Subtest: Live ranking projection places unranked last and preserves zero points
+ok 3 - Live ranking projection places unranked last and preserves zero points
+  ---
+  duration_ms: 0.518272
+  type: 'test'
+  ...
+# Subtest: Live feed exposes only public fields and earliest same-event registration
+ok 4 - Live feed exposes only public fields and earliest same-event registration
+  ---
+  duration_ms: 8.206444
+  type: 'test'
+  ...
+# Subtest: Live guard rejects feed and URL before service access
+ok 5 - Live guard rejects feed and URL before service access
+  ---
+  duration_ms: 1.904315
+  type: 'test'
+  ...
+# Subtest: Live build reproduces and scripts parse with original AIK fonts
+ok 6 - Live build reproduces and scripts parse with original AIK fonts
+  ---
+  duration_ms: 168.680219
+  type: 'test'
+  ...
+# Subtest: Live refresh updates count safely and retains names on connection failure
+ok 7 - Live refresh updates count safely and retains names on connection failure
+  ---
+  duration_ms: 19.746207
+  type: 'test'
+  ...
+# Subtest: Live thirty-player pages rotate with stable numbering and retain page on unchanged refresh
+ok 8 - Live thirty-player pages rotate with stable numbering and retain page on unchanged refresh
+  ---
+  duration_ms: 4.485884
+  type: 'test'
+  ...
+# Subtest: Live empty and single page do not rotate or scroll
+ok 9 - Live empty and single page do not rotate or scroll
+  ---
+  duration_ms: 8.929354
+  type: 'test'
+  ...
+# Subtest: Live route is additive guarded TEST HTML and rejects configuration injection
+ok 10 - Live route is additive guarded TEST HTML and rejects configuration injection
+  ---
+  duration_ms: 8.946599
+  type: 'test'
+  ...
+# Subtest: Live thirty-player slot boundaries fit wide and narrow screens without duplicates
+ok 11 - Live thirty-player slot boundaries fit wide and narrow screens without duplicates
+  ---
+  duration_ms: 54.245698
+  type: 'test'
+  ...
+# Subtest: Live real ranking values and ties survive paging; statistics respect the selected sorting mode
+ok 12 - Live real ranking values and ties survive paging; statistics respect the selected sorting mode
+  ---
+  duration_ms: 1.797966
+  type: 'test'
+  ...
+# Subtest: Live cached statistics label stale or failed snapshots and reject old or ambiguous data
+ok 13 - Live cached statistics label stale or failed snapshots and reject old or ambiguous data
+  ---
+  duration_ms: 2.568395
+  type: 'test'
+  ...
+# Subtest: Live display shows only average without forcing rank sorting
+ok 14 - Live display shows only average without forcing rank sorting
+  ---
+  duration_ms: 1.729264
+  type: 'test'
+  ...
+# Subtest: Live settings pause page rotation and return keyboard focus on close
+ok 15 - Live settings pause page rotation and return keyboard focus on close
+  ---
+  duration_ms: 21.002639
+  type: 'test'
+  ...
+# Subtest: Live automatic stats refresh requires staff authorization and releases its lock
+ok 16 - Live automatic stats refresh requires staff authorization and releases its lock
+  ---
+  duration_ms: 1.632821
+  type: 'test'
+  ...
+# Subtest: Live staff timer refreshes only unlocked visible sessions and prevents overlap
+ok 17 - Live staff timer refreshes only unlocked visible sessions and prevents overlap
+  ---
+  duration_ms: 1.561344
+  type: 'test'
+  ...
+# Subtest: inline list submenu toggles inside display menu and preserves sort and statistics controls
+ok 18 - inline list submenu toggles inside display menu and preserves sort and statistics controls
+  ---
+  duration_ms: 1.571243
+  type: 'test'
+  ...
+# Subtest: board plan export records sparse boards sharing batches and no private roster data
+ok 19 - board plan export records sparse boards sharing batches and no private roster data
+  ---
+  duration_ms: 8.016738
+  type: 'test'
+  ...
+# Subtest: board memo preparation binds exact TEST group order identities date and board batches
+ok 20 - board memo preparation binds exact TEST group order identities date and board batches
+  ---
+  duration_ms: 97.623401
+  type: 'test'
+  ...
+# Subtest: board notes stay closed without native qualification and never update badges or autopilot
+ok 21 - board notes stay closed without native qualification and never update badges or autopilot
+  ---
+  duration_ms: 1.980274
+  type: 'test'
+  ...
+# Subtest: board notes require durable attempt then single write and exact readback before success
+ok 22 - board notes require durable attempt then single write and exact readback before success
+  ---
+  duration_ms: 1.455581
+  type: 'test'
+  ...
+# Subtest: board notes reject drift expired approvals and overlapping attempts before mutation
+ok 23 - board notes reject drift expired approvals and overlapping attempts before mutation
+  ---
+  duration_ms: 1.919225
+  type: 'test'
+  ...
+# Subtest: board notes uncertain write and audit failures never retry a provider mutation
+ok 24 - board notes uncertain write and audit failures never retry a provider mutation
+  ---
+  duration_ms: 44.80166
+  type: 'test'
+  ...
+# Subtest: board handoff durable revision journal refuses restart retries and competing plans
+ok 25 - board handoff durable revision journal refuses restart retries and competing plans
+  ---
+  duration_ms: 72.076033
+  type: 'test'
+  ...
+# Subtest: competition pool pages cover every numbered pool once and clamp after source shrinks
+ok 26 - competition pool pages cover every numbered pool once and clamp after source shrinks
+  ---
+  duration_ms: 12.80684
+  type: 'test'
+  ...
+# Subtest: competition renderer preserves provider rank zero points and untrusted names as literal text
+ok 27 - competition renderer preserves provider rank zero points and untrusted names as literal text
+  ---
+  duration_ms: 1.98173
+  type: 'test'
+  ...
+# Subtest: competition knockout renderer distinguishes byes missing averages winner and exact board state
+ok 28 - competition knockout renderer distinguishes byes missing averages winner and exact board state
+  ---
+  duration_ms: 1.13399
+  type: 'test'
+  ...
+# Subtest: competition view options reflect supplied stages and empty view remains honest
+ok 29 - competition view options reflect supplied stages and empty view remains honest
+  ---
+  duration_ms: 0.584891
+  type: 'test'
+  ...
+# Subtest: competition screen loads TEST explicitly clears synthetic content and recovers from failure
+ok 30 - competition screen loads TEST explicitly clears synthetic content and recovers from failure
+  ---
+  duration_ms: 181.198609
+  type: 'test'
+  ...
+# Subtest: competition screen marks failed paused overdue and offline board views as last known
+ok 31 - competition screen marks failed paused overdue and offline board views as last known
+  ---
+  duration_ms: 10.397447
+  type: 'test'
+  ...
+# Subtest: competition screen retains full screen options rotates pages and stops polling on page exit
+ok 32 - competition screen retains full screen options rotates pages and stops polling on page exit
+  ---
+  duration_ms: 6.481822
+  type: 'test'
+  ...
+# Subtest: competition-only preview policy allows the fixed API origin while Hub stays offline
+ok 33 - competition-only preview policy allows the fixed API origin while Hub stays offline
+  ---
+  duration_ms: 266.598732
+  type: 'test'
+  ...
+# Subtest: competition all-stages screen has independent accessible section chevrons
+ok 34 - competition all-stages screen has independent accessible section chevrons
+  ---
+  duration_ms: 1.180459
+  type: 'test'
+  ...
+# Subtest: competition arrows show only the chosen adjacent round pair and keep each stage independent
+ok 35 - competition arrows show only the chosen adjacent round pair and keep each stage independent
+  ---
+  duration_ms: 1.184002
+  type: 'test'
+  ...
+# Subtest: competition section and round choices survive new provider data and clamp safely if rounds disappear
+ok 36 - competition section and round choices survive new provider data and clamp safely if rounds disappear
+  ---
+  duration_ms: 0.48655
+  type: 'test'
+  ...
+# Subtest: competition screen preserves manual collapse during refresh and pauses rotation for hidden pools
+ok 37 - competition screen preserves manual collapse during refresh and pauses rotation for hidden pools
+  ---
+  duration_ms: 73.470146
+  type: 'test'
+  ...
+# Subtest: deployed stage mode loads TEST immediately without ever rendering synthetic players
+ok 38 - deployed stage mode loads TEST immediately without ever rendering synthetic players
+  ---
+  duration_ms: 10.372204
+  type: 'test'
+  ...
+# Subtest: competition renderer shows pool matrices and third-place result without turning either into ranking
+ok 39 - competition renderer shows pool matrices and third-place result without turning either into ranking
+  ---
+  duration_ms: 2.910412
+  type: 'test'
+  ...
+# Subtest: focus remaining play folds only complete matrices and stages and moves to first unrecorded round
+ok 40 - focus remaining play folds only complete matrices and stages and moves to first unrecorded round
+  ---
+  duration_ms: 1.071471
+  type: 'test'
+  ...
+# Subtest: focus remaining button leaves explicit stage controls usable and selection survives updates
+ok 41 - focus remaining button leaves explicit stage controls usable and selection survives updates
+  ---
+  duration_ms: 10.997018
+  type: 'test'
+  ...
+# Subtest: Swedish cast presentation localizes match format and placeholders without translating player identities
+ok 42 - Swedish cast presentation localizes match format and placeholders without translating player identities
+  ---
+  duration_ms: 1.286867
+  type: 'test'
+  ...
+# Subtest: overview initially folds all three provider stages and preserves independent choices through refresh
+ok 43 - overview initially folds all three provider stages and preserves independent choices through refresh
+  ---
+  duration_ms: 46.642029
+  type: 'test'
+  ...
+# Subtest: overview uses the provider group format and keeps keyboard accessible section controls visible
+ok 44 - overview uses the provider group format and keeps keyboard accessible section controls visible
+  ---
+  duration_ms: 4.301217
+  type: 'test'
+  ...
+# Subtest: Verified removal clears its existing attention record without deleting provider journals
+ok 45 - Verified removal clears its existing attention record without deleting provider journals
+  ---
+  duration_ms: 10.573363
+  type: 'test'
+  ...
+# Subtest: Uncertain removal retains organiser attention through read-only refresh even when event entry is present
+ok 46 - Uncertain removal retains organiser attention through read-only refresh even when event entry is present
+  ---
+  duration_ms: 158.88811
+  type: 'test'
+  ...
+# Subtest: Attention persists across server invocations and isolates dates without leaking credentials
+ok 47 - Attention persists across server invocations and isolates dates without leaking credentials
+  ---
+  duration_ms: 4.940109
+  type: 'test'
+  ...
+# Subtest: Attention records failed Hub mobile and kiosk Nakka outcomes after Sheet success and keeps public responses private
+ok 48 - Attention records failed Hub mobile and kiosk Nakka outcomes after Sheet success and keeps public responses private
+  ---
+  duration_ms: 64.067141
+  type: 'test'
+  ...
+# Subtest: Attention finds earlier missing IN entries using GET only and retains OUT issues
+ok 49 - Attention finds earlier missing IN entries using GET only and retains OUT issues
+  ---
+  duration_ms: 4.961285
+  type: 'test'
+  ...
+# Subtest: Attention flags duplicate league identity even when the name is already in the event
+ok 50 - Attention flags duplicate league identity even when the name is already in the event
+  ---
+  duration_ms: 10.787207
+  type: 'test'
+  ...
+# Subtest: Attention verified entry clears its alert without claiming an unexposed league ID or deleting journals
+ok 51 - Attention verified entry clears its alert without claiming an unexposed league ID or deleting journals
+  ---
+  duration_ms: 3.089643
+  type: 'test'
+  ...
+# Subtest: Attention uncertain creation cannot clear through same-name event presence
+ok 52 - Attention uncertain creation cannot clear through same-name event presence
+  ---
+  duration_ms: 2.616678
+  type: 'test'
+  ...
+# Subtest: Attention uncertain transfer reconciliation respects the saved fingerprint
+ok 53 - Attention uncertain transfer reconciliation respects the saved fingerprint
+  ---
+  duration_ms: 27.266239
+  type: 'test'
+  ...
+# Subtest: Attention outage malformed data and wrong target retain alerts instead of clearing them
+ok 54 - Attention outage malformed data and wrong target retain alerts instead of clearing them
+  ---
+  duration_ms: 5.763182
+  type: 'test'
+  ...
+# Subtest: Attention refresh requires staff authorization and rejects injected input before provider calls
+ok 55 - Attention refresh requires staff authorization and rejects injected input before provider calls
+  ---
+  duration_ms: 3.207035
+  type: 'test'
+  ...
+# Subtest: Attention stale Hub snapshot and busy lock do not publish a clear result
+ok 56 - Attention stale Hub snapshot and busy lock do not publish a clear result
+  ---
+  duration_ms: 3.139639
+  type: 'test'
+  ...
+# Subtest: Attention corrupt records produce unavailable rather than a false white zero
+ok 57 - Attention corrupt records produce unavailable rather than a false white zero
+  ---
+  duration_ms: 1.836281
+  type: 'test'
+  ...
+# Subtest: Attention confirmed manual transfer clears an issue through existing guarded readback
+ok 58 - Attention confirmed manual transfer clears an issue through existing guarded readback
+  ---
+  duration_ms: 4.176123
+  type: 'test'
+  ...
+# Subtest: Attention storage failure cannot turn a committed registration into a repeatable failure
+ok 59 - Attention storage failure cannot turn a committed registration into a repeatable failure
+  ---
+  duration_ms: 5.494311
+  type: 'test'
+  ...
+# Subtest: Dashboard keeps the whole attention tile available for clear events and alerts
+ok 60 - Dashboard keeps the whole attention tile available for clear events and alerts
+  ---
+  duration_ms: 112.998155
+  type: 'test'
+  ...
+# Subtest: Dashboard review displays literal player names and sends no transfer or retry
+ok 61 - Dashboard review displays literal player names and sends no transfer or retry
+  ---
+  duration_ms: 6.098758
+  type: 'test'
+  ...
+# Subtest: Dashboard failed refresh retains alert and explicit verified refresh clears it
+ok 62 - Dashboard failed refresh retains alert and explicit verified refresh clears it
+  ---
+  duration_ms: 3.108975
+  type: 'test'
+  ...
+# Subtest: Dashboard refresh is single flight and logout discards late private responses
+ok 63 - Dashboard refresh is single flight and logout discards late private responses
+  ---
+  duration_ms: 2.956165
+  type: 'test'
+  ...
+# Subtest: Dashboard ignores a stale refresh after event or same-date player list changes
+ok 64 - Dashboard ignores a stale refresh after event or same-date player list changes
+  ---
+  duration_ms: 6.938301
+  type: 'test'
+  ...
+# Subtest: Dashboard unavailable storage is shown honestly rather than as an all-clear zero
+ok 65 - Dashboard unavailable storage is shown honestly rather than as an all-clear zero
+  ---
+  duration_ms: 1.880094
+  type: 'test'
+  ...
+# Subtest: Dashboard initializes from data that loaded before its external script
+ok 66 - Dashboard initializes from data that loaded before its external script
+  ---
+  duration_ms: 1.819497
+  type: 'test'
+  ...
+# Subtest: Hub player list filters and sorts Swedish names without changing source order or player identities
+ok 67 - Hub player list filters and sorts Swedish names without changing source order or player identities
+  ---
+  duration_ms: 7.844525
+  type: 'test'
+  ...
+# Subtest: Hub player list requires verified ranking and complete timestamps and keeps unranked players last
+ok 68 - Hub player list requires verified ranking and complete timestamps and keeps unranked players last
+  ---
+  duration_ms: 1.472476
+  type: 'test'
+  ...
+# Subtest: Hub search persists across refresh and sorting keeps event records intact then resets on lock
+ok 69 - Hub search persists across refresh and sorting keeps event records intact then resets on lock
+  ---
+  duration_ms: 3.682688
+  type: 'test'
+  ...
+# Subtest: Whole attention tile routes directly into existing Nakka troubleshooting without another dialog
+ok 70 - Whole attention tile routes directly into existing Nakka troubleshooting without another dialog
+  ---
+  duration_ms: 2.097088
+  type: 'test'
+  ...
+# Subtest: Guided attention offers only guarded IN-player review and blocks removal or creation retries
+ok 71 - Guided attention offers only guarded IN-player review and blocks removal or creation retries
+  ---
+  duration_ms: 4.564409
+  type: 'test'
+  ...
+# Subtest: A completed operation schedules a fresh attention check after an older check finishes without retrying a save
+ok 72 - A completed operation schedules a fresh attention check after an older check finishes without retrying a save
+  ---
+  duration_ms: 44.012945
+  type: 'test'
+  ...
+# Subtest: event save: prepare is read-only and counts target-day registration before reset
+ok 73 - event save: prepare is read-only and counts target-day registration before reset
+  ---
+  duration_ms: 36.247012
+  type: 'test'
+  ...
+# Subtest: event save: complete transition backs up first, preserves target message and correction names
+ok 74 - event save: complete transition backs up first, preserves target message and correction names
+  ---
+  duration_ms: 143.236076
+  type: 'test'
+  ...
+# Subtest: event save: wrong identities, disabled gate and busy lock never mutate event sheets
+ok 75 - event save: wrong identities, disabled gate and busy lock never mutate event sheets
+  ---
+  duration_ms: 6.002686
+  type: 'test'
+  ...
+# Subtest: event save: impossible dates, missing confirmation and client sheet selection are rejected
+ok 76 - event save: impossible dates, missing confirmation and client sheet selection are rejected
+  ---
+  duration_ms: 25.889212
+  type: 'test'
+  ...
+# Subtest: event save: changed registration invalidates reviewed version before backup or reset
+ok 77 - event save: changed registration invalidates reviewed version before backup or reset
+  ---
+  duration_ms: 54.28138
+  type: 'test'
+  ...
+# Subtest: event save: backup failures and drift during backup prevent reset
+ok 78 - event save: backup failures and drift during backup prevent reset
+  ---
+  duration_ms: 75.280793
+  type: 'test'
+  ...
+# Subtest: event save: failed mutation returns uncertainty and backup without retry
+ok 79 - event save: failed mutation returns uncertainty and backup without retry
+  ---
+  duration_ms: 68.964865
+  type: 'test'
+  ...
+# Subtest: event save: duplicate target names and status formulas block the transition
+ok 80 - event save: duplicate target names and status formulas block the transition
+  ---
+  duration_ms: 23.184796
+  type: 'test'
+  ...
+# Subtest: event save: formula-like messages remain literal and retain exact content
+ok 81 - event save: formula-like messages remain literal and retain exact content
+  ---
+  duration_ms: 63.89719
+  type: 'test'
+  ...
+# Subtest: event save: transport permits only bounded TEST prepare and save inputs
+ok 82 - event save: transport permits only bounded TEST prepare and save inputs
+  ---
+  duration_ms: 7.165038
+  type: 'test'
+  ...
+# Subtest: event save: calendar-day selection follows the TEST sheet timezone at midnight
+ok 83 - event save: calendar-day selection follows the TEST sheet timezone at midnight
+  ---
+  duration_ms: 70.994826
+  type: 'test'
+  ...
+# Subtest: event save: mismatched Hub readback fails closed after the backed-up transition
+ok 84 - event save: mismatched Hub readback fails closed after the backed-up transition
+  ---
+  duration_ms: 61.500856
+  type: 'test'
+  ...
+# Subtest: event save: real legacy reset-time formula is blocked during review before any write
+ok 85 - event save: real legacy reset-time formula is blocked during review before any write
+  ---
+  duration_ms: 17.542176
+  type: 'test'
+  ...
+# Subtest: status gate rejects non-boolean approval undefined
+ok 86 - status gate rejects non-boolean approval undefined
+  ---
+  duration_ms: 28.000288
+  type: 'test'
+  ...
+# Subtest: status gate rejects non-boolean approval null
+ok 87 - status gate rejects non-boolean approval null
+  ---
+  duration_ms: 1.327047
+  type: 'test'
+  ...
+# Subtest: status gate rejects non-boolean approval false
+ok 88 - status gate rejects non-boolean approval false
+  ---
+  duration_ms: 4.874797
+  type: 'test'
+  ...
+# Subtest: status gate rejects non-boolean approval 0
+ok 89 - status gate rejects non-boolean approval 0
+  ---
+  duration_ms: 1.295543
+  type: 'test'
+  ...
+# Subtest: status gate rejects non-boolean approval 1
+ok 90 - status gate rejects non-boolean approval 1
+  ---
+  duration_ms: 1.469827
+  type: 'test'
+  ...
+# Subtest: status gate rejects non-boolean approval true
+ok 91 - status gate rejects non-boolean approval true
+  ---
+  duration_ms: 1.37569
+  type: 'test'
+  ...
+# Subtest: status rejects wrong sheetId before accessing client
+ok 92 - status rejects wrong sheetId before accessing client
+  ---
+  duration_ms: 1.428965
+  type: 'test'
+  ...
+# Subtest: status rejects wrong title before accessing client
+ok 93 - status rejects wrong title before accessing client
+  ---
+  duration_ms: 1.258459
+  type: 'test'
+  ...
+# Subtest: status rejects wrong locale before accessing client
+ok 94 - status rejects wrong locale before accessing client
+  ---
+  duration_ms: 1.817235
+  type: 'test'
+  ...
+# Subtest: status rejects wrong timeZone before accessing client
+ok 95 - status rejects wrong timeZone before accessing client
+  ---
+  duration_ms: 2.145165
+  type: 'test'
+  ...
+# Subtest: all TEST RPCs reject a different script project before service access
+ok 96 - all TEST RPCs reject a different script project before service access
+  ---
+  duration_ms: 1.759799
+  type: 'test'
+  ...
+# Subtest: event load returns exact date/version with gate closed and no mutation
+ok 97 - event load returns exact date/version with gate closed and no mutation
+  ---
+  duration_ms: 14.387965
+  type: 'test'
+  ...
+# Subtest: event save denies non-boolean approval false before I/O
+ok 98 - event save denies non-boolean approval false before I/O
+  ---
+  duration_ms: 5.01204
+  type: 'test'
+  ...
+# Subtest: event save denies non-boolean approval 1 before I/O
+ok 99 - event save denies non-boolean approval 1 before I/O
+  ---
+  duration_ms: 2.43828
+  type: 'test'
+  ...
+# Subtest: event save denies non-boolean approval true before I/O
+ok 100 - event save denies non-boolean approval true before I/O
+  ---
+  duration_ms: 5.413966
+  type: 'test'
+  ...
+# Subtest: event config rejects extra property before lock or reads
+ok 101 - event config rejects extra property before lock or reads
+  ---
+  duration_ms: 2.232391
+  type: 'test'
+  ...
+# Subtest: event rejects missing confirmation before I/O
+ok 102 - event rejects missing confirmation before I/O
+  ---
+  duration_ms: 10.191683
+  type: 'test'
+  ...
+# Subtest: event rejects impossible date before I/O
+ok 103 - event rejects impossible date before I/O
+  ---
+  duration_ms: 19.65786
+  type: 'test'
+  ...
+# Subtest: event rejects noncanonical version before I/O
+ok 104 - event rejects noncanonical version before I/O
+  ---
+  duration_ms: 1.935856
+  type: 'test'
+  ...
+# Subtest: event rejects version date mismatch before I/O
+ok 105 - event rejects version date mismatch before I/O
+  ---
+  duration_ms: 2.313605
+  type: 'test'
+  ...
+# Subtest: event rejects unexpected field before I/O
+ok 106 - event rejects unexpected field before I/O
+  ---
+  duration_ms: 2.388677
+  type: 'test'
+  ...
+# Subtest: event lock contention returns BUSY without reading or releasing another lock
+ok 107 - event lock contention returns BUSY without reading or releasing another lock
+  ---
+  duration_ms: 14.853163
+  type: 'test'
+  ...
+# Subtest: event stale baseline date releases lock without write
+ok 108 - event stale baseline date releases lock without write
+  ---
+  duration_ms: 4.790729
+  type: 'test'
+  ...
+# Subtest: event B2 token drift rejects stale caller without write
+ok 109 - event B2 token drift rejects stale caller without write
+  ---
+  duration_ms: 3.172099
+  type: 'test'
+  ...
+# Subtest: event same date is no-op with no clock or write call
+ok 110 - event same date is no-op with no clock or write call
+  ---
+  duration_ms: 4.559354
+  type: 'test'
+  ...
+# Subtest: event capture rejects wrong spreadsheetId before mutation
+ok 111 - event capture rejects wrong spreadsheetId before mutation
+  ---
+  duration_ms: 6.611894
+  type: 'test'
+  ...
+# Subtest: event capture rejects wrong title before mutation
+ok 112 - event capture rejects wrong title before mutation
+  ---
+  duration_ms: 13.26199
+  type: 'test'
+  ...
+# Subtest: event capture rejects wrong locale before mutation
+ok 113 - event capture rejects wrong locale before mutation
+  ---
+  duration_ms: 2.059058
+  type: 'test'
+  ...
+# Subtest: event capture rejects wrong timeZone before mutation
+ok 114 - event capture rejects wrong timeZone before mutation
+  ---
+  duration_ms: 2.010227
+  type: 'test'
+  ...
+# Subtest: event rejects external formula reference before mutation
+ok 115 - event rejects external formula reference before mutation
+  ---
+  duration_ms: 2.966548
+  type: 'test'
+  ...
+# Subtest: event rejects over-limit preflight before cell read
+ok 116 - event rejects over-limit preflight before cell read
+  ---
+  duration_ms: 3.325775
+  type: 'test'
+  ...
+# Subtest: event successful fake reset emits exact bounded requests and preserves unrelated data
+ok 117 - event successful fake reset emits exact bounded requests and preserves unrelated data
+  ---
+  duration_ms: 107.088525
+  type: 'test'
+  ...
+# Subtest: event canonical comparison accepts reordered object keys through all readbacks
+ok 118 - event canonical comparison accepts reordered object keys through all readbacks
+  ---
+  duration_ms: 83.825175
+  type: 'test'
+  ...
+# Subtest: event prewrite snapshot detects primitive type difference
+ok 119 - event prewrite snapshot detects primitive type difference
+  ---
+  duration_ms: 5.174841
+  type: 'test'
+  ...
+# Subtest: event prewrite snapshot detects array order difference
+ok 120 - event prewrite snapshot detects array order difference
+  ---
+  duration_ms: 14.282275
+  type: 'test'
+  ...
+# Subtest: event prewrite snapshot detects explicit undefined difference
+ok 121 - event prewrite snapshot detects explicit undefined difference
+  ---
+  duration_ms: 5.156768
+  type: 'test'
+  ...
+# Subtest: event prewrite snapshot detects sparse array slot difference
+ok 122 - event prewrite snapshot detects sparse array slot difference
+  ---
+  duration_ms: 8.293222
+  type: 'test'
+  ...
+# Subtest: event prewrite snapshot detects negative zero difference
+ok 123 - event prewrite snapshot detects negative zero difference
+  ---
+  duration_ms: 16.800804
+  type: 'test'
+  ...
+# Subtest: event prewrite snapshot detects array length difference
+ok 124 - event prewrite snapshot detects array length difference
+  ---
+  duration_ms: 4.504005
+  type: 'test'
+  ...
+# Subtest: event prewrite detects unrelated validation drift without mutation
+ok 125 - event prewrite detects unrelated validation drift without mutation
+  ---
+  duration_ms: 32.051759
+  type: 'test'
+  ...
+# Subtest: event thrown writer returns SAVE_UNCERTAIN once and releases lock
+ok 126 - event thrown writer returns SAVE_UNCERTAIN once and releases lock
+  ---
+  duration_ms: 6.332926
+  type: 'test'
+  ...
+# Subtest: event readback detects changed control value and never retries
+ok 127 - event readback detects changed control value and never retries
+  ---
+  duration_ms: 12.505961
+  type: 'test'
+  ...
+# Subtest: event readback detects changed unrelated formula and never retries
+ok 128 - event readback detects changed unrelated formula and never retries
+  ---
+  duration_ms: 8.273919
+  type: 'test'
+  ...
+# Subtest: event readback detects changed validation and never retries
+ok 129 - event readback detects changed validation and never retries
+  ---
+  duration_ms: 13.398084
+  type: 'test'
+  ...
+# Subtest: event readback detects changed grid size and never retries
+ok 130 - event readback detects changed grid size and never retries
+  ---
+  duration_ms: 17.735025
+  type: 'test'
+  ...
+# Subtest: event unstable second readback returns SAVE_UNCERTAIN without retry
+ok 131 - event unstable second readback returns SAVE_UNCERTAIN without retry
+  ---
+  duration_ms: 79.528585
+  type: 'test'
+  ...
+# Subtest: health menu: dashboard cards live inside separate labelled dialogs with sidebar indicators
+ok 132 - health menu: dashboard cards live inside separate labelled dialogs with sidebar indicators
+  ---
+  duration_ms: 27.67275
+  type: 'test'
+  ...
+# Subtest: health menu: actual buttons open their own dialog, close and restore focus
+ok 133 - health menu: actual buttons open their own dialog, close and restore focus
+  ---
+  duration_ms: 2.637868
+  type: 'test'
+  ...
+# Subtest: health menu: backend dot follows TEST success, failure and recovery; demo is never green
+ok 134 - health menu: backend dot follows TEST success, failure and recovery; demo is never green
+  ---
+  duration_ms: 4.666229
+  type: 'test'
+  ...
+# Subtest: Hub auth client: password goes only to Firebase and approved server session opens Hub
+ok 135 - Hub auth client: password goes only to Firebase and approved server session opens Hub
+  ---
+  duration_ms: 6.825016
+  type: 'test'
+  ...
+# Subtest: Hub auth client: server denial or Firebase failure cannot unlock Hub
+ok 136 - Hub auth client: server denial or Firebase failure cannot unlock Hub
+  ---
+  duration_ms: 3.461591
+  type: 'test'
+  ...
+# Subtest: Hub auth client: logout hides Hub immediately, clears private UI and invalidates generations
+ok 137 - Hub auth client: logout hides Hub immediately, clears private UI and invalidates generations
+  ---
+  duration_ms: 2.024053
+  type: 'test'
+  ...
+# Subtest: Hub auth client: failed server logout stays locked and offers bounded explicit retry
+ok 138 - Hub auth client: failed server logout stays locked and offers bounded explicit retry
+  ---
+  duration_ms: 2.425535
+  type: 'test'
+  ...
+# Subtest: Hub auth client: polling without user activity cannot keep session alive
+ok 139 - Hub auth client: polling without user activity cannot keep session alive
+  ---
+  duration_ms: 1.974042
+  type: 'test'
+  ...
+# Subtest: Hub auth client: only visible user activity sends a throttled session touch
+ok 140 - Hub auth client: only visible user activity sends a throttled session touch
+  ---
+  duration_ms: 5.815307
+  type: 'test'
+  ...
+# Subtest: Hub auth client: returning from browser history locks cached page and reset reports actual request
+ok 141 - Hub auth client: returning from browser history locks cached page and reset reports actual request
+  ---
+  duration_ms: 1.936729
+  type: 'test'
+  ...
+# Subtest: Hub auth client: transport ignores pre-logout responses and refuses unsigned RPCs
+ok 142 - Hub auth client: transport ignores pre-logout responses and refuses unsigned RPCs
+  ---
+  duration_ms: 34.132133
+  type: 'test'
+  ...
+# Subtest: Hub auth client: generated entry is locked before scripts and contains no server UID allowlist
+ok 143 - Hub auth client: generated entry is locked before scripts and contains no server UID allowlist
+  ---
+  duration_ms: 6.32116
+  type: 'test'
+  ...
+# Subtest: Hub auth client: queued pre-logout writes cannot borrow a new login session
+ok 144 - Hub auth client: queued pre-logout writes cannot borrow a new login session
+  ---
+  duration_ms: 14.328516
+  type: 'test'
+  ...
+# Subtest: Hub auth client: busy renewal during a save retries without signing out or extending expiry
+ok 145 - Hub auth client: busy renewal during a save retries without signing out or extending expiry
+  ---
+  duration_ms: 2.212783
+  type: 'test'
+  ...
+# Subtest: Hub auth client: denied renewal still locks immediately
+ok 146 - Hub auth client: denied renewal still locks immediately
+  ---
+  duration_ms: 1.618538
+  type: 'test'
+  ...
+# Subtest: Hub auth client: only approved verification codes reach the sign-in error
+ok 147 - Hub auth client: only approved verification codes reach the sign-in error
+  ---
+  duration_ms: 3.863638
+  type: 'test'
+  ...
+# Subtest: Hub auth client: six-hour open page stays signed in without activity and page close or reload loses credentials
+ok 148 - Hub auth client: six-hour open page stays signed in without activity and page close or reload loses credentials
+  ---
+  duration_ms: 8.712522
+  type: 'test'
+  ...
+# Subtest: Hub auth: missing session blocks every Hub action before reads or writes
+ok 149 - Hub auth: missing session blocks every Hub action before reads or writes
+  ---
+  duration_ms: 5.9076
+  type: 'test'
+  ...
+# Subtest: Hub auth: exact TEST identity and missing account approval fail closed
+ok 150 - Hub auth: exact TEST identity and missing account approval fail closed
+  ---
+  duration_ms: 4.055533
+  type: 'test'
+  ...
+# Subtest: Hub auth: malformed tokens and wrong issuer audience times or tenant never contact Firebase
+ok 151 - Hub auth: malformed tokens and wrong issuer audience times or tenant never contact Firebase
+  ---
+  duration_ms: 2.739947
+  type: 'test'
+  ...
+# Subtest: Hub auth: decoded approved UID is insufficient without Firebase acceptance
+ok 152 - Hub auth: decoded approved UID is insufficient without Firebase acceptance
+  ---
+  duration_ms: 10.813353
+  type: 'test'
+  ...
+# Subtest: Hub auth: valid Firebase login creates opaque expiring session without stored ID token
+ok 153 - Hub auth: valid Firebase login creates opaque expiring session without stored ID token
+  ---
+  duration_ms: 8.711613
+  type: 'test'
+  ...
+# Subtest: Hub auth: unapproved accounts and spoofed client roles never grant entry
+ok 154 - Hub auth: unapproved accounts and spoofed client roles never grant entry
+  ---
+  duration_ms: 48.947656
+  type: 'test'
+  ...
+# Subtest: Hub auth: logout revokes session idempotently and captured token cannot read again
+ok 155 - Hub auth: logout revokes session idempotently and captured token cannot read again
+  ---
+  duration_ms: 2.246316
+  type: 'test'
+  ...
+# Subtest: Hub auth: refresh polling does not extend inactivity and touch cannot revive expired sessions
+ok 156 - Hub auth: refresh polling does not extend inactivity and touch cannot revive expired sessions
+  ---
+  duration_ms: 1.732693
+  type: 'test'
+  ...
+# Subtest: Hub auth: real activity renews idle limit but absolute token expiry still wins
+ok 157 - Hub auth: real activity renews idle limit but absolute token expiry still wins
+  ---
+  duration_ms: 2.400747
+  type: 'test'
+  ...
+# Subtest: Hub auth: removing approval revokes sessions while cache eviction retains the six-hour session
+ok 158 - Hub auth: removing approval revokes sessions while cache eviction retains the six-hour session
+  ---
+  duration_ms: 15.497174
+  type: 'test'
+  ...
+# Subtest: Hub auth: locked touch cannot resurrect a logged-out session
+ok 159 - Hub auth: locked touch cannot resurrect a logged-out session
+  ---
+  duration_ms: 1.737724
+  type: 'test'
+  ...
+# Subtest: Hub auth: signing out revokes other sessions for the same account
+ok 160 - Hub auth: signing out revokes other sessions for the same account
+  ---
+  duration_ms: 2.105206
+  type: 'test'
+  ...
+# Subtest: Hub auth: old direct data RPC requires a session and admin maintenance RPCs are private
+ok 161 - Hub auth: old direct data RPC requires a session and admin maintenance RPCs are private
+  ---
+  duration_ms: 1.763028
+  type: 'test'
+  ...
+# Subtest: Hub auth: public registration cannot claim HUB source while Remote stays available
+ok 162 - Hub auth: public registration cannot claim HUB source while Remote stays available
+  ---
+  duration_ms: 1.611083
+  type: 'test'
+  ...
+# Subtest: Hub auth: status and event handlers recheck session inside their write lock
+ok 163 - Hub auth: status and event handlers recheck session inside their write lock
+  ---
+  duration_ms: 17.947706
+  type: 'test'
+  ...
+# Subtest: Hub auth: TEST manifest adds only external HTTPS requests and retains owner-only access
+ok 164 - Hub auth: TEST manifest adds only external HTTPS requests and retains owner-only access
+  ---
+  duration_ms: 0.44017
+  type: 'test'
+  ...
+# Subtest: Hub auth: unpadded Firebase JWT works with a strict native Base64 decoder
+ok 165 - Hub auth: unpadded Firebase JWT works with a strict native Base64 decoder
+  ---
+  duration_ms: 1.566435
+  type: 'test'
+  ...
+# Subtest: Hub auth: permission connection and HTTP failures retain bounded diagnostic codes
+ok 166 - Hub auth: permission connection and HTTP failures retain bounded diagnostic codes
+  ---
+  duration_ms: 4.1756
+  type: 'test'
+  ...
+# Subtest: Hub auth: native environment probe exposes no account or token information
+ok 167 - Hub auth: native environment probe exposes no account or token information
+  ---
+  duration_ms: 2.008433
+  type: 'test'
+  ...
+# Subtest: Hub auth: six-hour session outlives login ID token but never its absolute limit and prunes expired records
+ok 168 - Hub auth: six-hour session outlives login ID token but never its absolute limit and prunes expired records
+  ---
+  duration_ms: 3.624839
+  type: 'test'
+  ...
+# Subtest: Hub auth: logout after cache eviction revokes durable session and its sibling sessions
+ok 169 - Hub auth: logout after cache eviction revokes durable session and its sibling sessions
+  ---
+  duration_ms: 1.951189
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration feedback renders saved and Nakka attention as literal text without another action
+ok 170 - Automatic Hub registration feedback renders saved and Nakka attention as literal text without another action
+  ---
+  duration_ms: 4.147018
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration feedback clears on logout and old generation cannot leak into new login
+ok 171 - Automatic Hub registration feedback clears on logout and old generation cannot leak into new login
+  ---
+  duration_ms: 1.587824
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration transport preserves captured event date and separate Nakka result
+ok 172 - Automatic Hub registration transport preserves captured event date and separate Nakka result
+  ---
+  duration_ms: 16.577459
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration saves once then sends one fixed TEST add without a manual transfer step
+ok 173 - Automatic Hub registration saves once then sends one fixed TEST add without a manual transfer step
+  ---
+  duration_ms: 58.672411
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration preserves Sheet success when Nakka cannot be read and never resubmits
+ok 174 - Automatic Hub registration preserves Sheet success when Nakka cannot be read and never resubmits
+  ---
+  duration_ms: 4.18049
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration handles missing LPID readback as entry confirmed with identity explicitly unverified
+ok 175 - Automatic Hub registration handles missing LPID readback as entry confirmed with identity explicitly unverified
+  ---
+  duration_ms: 11.057044
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration existing Nakka entries are reused without a duplicate add
+ok 176 - Automatic Hub registration existing Nakka entries are reused without a duplicate add
+  ---
+  duration_ms: 3.882401
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration target mismatch ambiguous league and OUT state retain registration and refuse transfer
+ok 177 - Automatic Hub registration target mismatch ambiguous league and OUT state retain registration and refuse transfer
+  ---
+  duration_ms: 16.620346
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration new-player and different-person nickname identities create verified league members
+ok 178 - Automatic Hub registration new-player and different-person nickname identities create verified league members
+  ---
+  duration_ms: 32.867686
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration conflict cancellation and stale dates never start a transfer or append
+ok 179 - Automatic Hub registration conflict cancellation and stale dates never start a transfer or append
+  ---
+  duration_ms: 13.014092
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration rechecks selected day immediately before actual append
+ok 180 - Automatic Hub registration rechecks selected day immediately before actual append
+  ---
+  duration_ms: 12.275043
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration request rejects spoofed source internal metadata and targets
+ok 181 - Automatic Hub registration request rejects spoofed source internal metadata and targets
+  ---
+  duration_ms: 14.75715
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration timeout after POST keeps Sheet entry and durable retry barrier
+ok 182 - Automatic Hub registration timeout after POST keeps Sheet entry and durable retry barrier
+  ---
+  duration_ms: 6.103515
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration confirms existing identity choice through the established name-conflict flow
+ok 183 - Automatic Hub registration confirms existing identity choice through the established name-conflict flow
+  ---
+  duration_ms: 5.5988
+  type: 'test'
+  ...
+# Subtest: Automatic registration date check uses Sweden calendar day and never fabricates submission dates
+ok 184 - Automatic registration date check uses Sweden calendar day and never fabricates submission dates
+  ---
+  duration_ms: 7.94256
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration disabled auto gate preserves registration without any provider request
+ok 185 - Automatic Hub registration disabled auto gate preserves registration without any provider request
+  ---
+  duration_ms: 5.535525
+  type: 'test'
+  ...
+# Subtest: Automatic Hub registration expired session after Sheet commit reports saved registration without another write
+ok 186 - Automatic Hub registration expired session after Sheet commit reports saved registration without another write
+  ---
+  duration_ms: 8.901459
+  type: 'test'
+  ...
+# Subtest: Header reads literal tournament title from authenticated service rather than a fixed branding label
+ok 187 - Header reads literal tournament title from authenticated service rather than a fixed branding label
+  ---
+  duration_ms: 63.48437
+  type: 'test'
+  ...
+# Subtest: Header clears old tournament immediately and rejects an old response after date changes
+ok 188 - Header clears old tournament immediately and rejects an old response after date changes
+  ---
+  duration_ms: 7.27922
+  type: 'test'
+  ...
+# Subtest: Header does not invent a title for ambiguous missing malformed or wrong-date events
+ok 189 - Header does not invent a title for ambiguous missing malformed or wrong-date events
+  ---
+  duration_ms: 5.050186
+  type: 'test'
+  ...
+# Subtest: Header failed read is sanitized and session lock discards late private event title
+ok 190 - Header failed read is sanitized and session lock discards late private event title
+  ---
+  duration_ms: 1.935484
+  type: 'test'
+  ...
+# Subtest: Header coalesces reads and periodic refresh runs only while visible with a selected event
+ok 191 - Header coalesces reads and periodic refresh runs only while visible with a selected event
+  ---
+  duration_ms: 9.05609
+  type: 'test'
+  ...
+# Subtest: Header initializes even when Hub data arrived before the chrome script
+ok 192 - Header initializes even when Hub data arrived before the chrome script
+  ---
+  duration_ms: 3.071588
+  type: 'test'
+  ...
+# Subtest: Sidebar active icon text marker and aria-current follow the current section exclusively
+ok 193 - Sidebar active icon text marker and aria-current follow the current section exclusively
+  ---
+  duration_ms: 1.634537
+  type: 'test'
+  ...
+# Subtest: Sidebar returns to Dashboard on session lock and after returning from the separate Live tab
+ok 194 - Sidebar returns to Dashboard on session lock and after returning from the separate Live tab
+  ---
+  duration_ms: 1.313427
+  type: 'test'
+  ...
+# Subtest: Header date comes only from the matched Nakka event and clears on mismatch and logout
+ok 195 - Header date comes only from the matched Nakka event and clears on mismatch and logout
+  ---
+  duration_ms: 2.315398
+  type: 'test'
+  ...
+# Subtest: Date review accepts real calendar dates and rejects impossible or malformed dates
+ok 196 - Date review accepts real calendar dates and rejects impossible or malformed dates
+  ---
+  duration_ms: 3.929211
+  type: 'test'
+  ...
+# Subtest: Date review requires loaded unblocked baseline and acknowledgement checkbox
+ok 197 - Date review requires loaded unblocked baseline and acknowledgement checkbox
+  ---
+  duration_ms: 0.867419
+  type: 'test'
+  ...
+# Subtest: Date review cannot proceed for unchanged event date
+ok 198 - Date review cannot proceed for unchanged event date
+  ---
+  duration_ms: 0.291985
+  type: 'test'
+  ...
+# Subtest: English Event Control requires a changed date and checkbox without typed confirmation
+ok 199 - English Event Control requires a changed date and checkbox without typed confirmation
+  ---
+  duration_ms: 5.458679
+  type: 'test'
+  ...
+# Subtest: Changing the proposed date clears checkbox and previous popup review
+ok 200 - Changing the proposed date clears checkbox and previous popup review
+  ---
+  duration_ms: 11.402335
+  type: 'test'
+  ...
+# Subtest: Final confirmation popup cannot save and cancellation requires acknowledgement again
+ok 201 - Final confirmation popup cannot save and cancellation requires acknowledgement again
+  ---
+  duration_ms: 2.486104
+  type: 'test'
+  ...
+# Subtest: Closing and reopening Event Control clears all date-change confirmation state
+ok 202 - Closing and reopening Event Control clears all date-change confirmation state
+  ---
+  duration_ms: 2.4818
+  type: 'test'
+  ...
+# Subtest: Event Control Details sidebar holds technical reset information outside the main control form
+ok 203 - Event Control Details sidebar holds technical reset information outside the main control form
+  ---
+  duration_ms: 16.434238
+  type: 'test'
+  ...
+# Subtest: Unresolved Event Control Details blockers prevent date review
+ok 204 - Unresolved Event Control Details blockers prevent date review
+  ---
+  duration_ms: 2.420452
+  type: 'test'
+  ...
+# Subtest: English Hub identity files reproduce from Swedish originals without changing identity decisions
+ok 205 - English Hub identity files reproduce from Swedish originals without changing identity decisions
+  ---
+  duration_ms: 113.553666
+  type: 'test'
+  ...
+# Subtest: Hub consent pills display English YES and NO while canonical data remains Swedish
+ok 206 - Hub consent pills display English YES and NO while canonical data remains Swedish
+  ---
+  duration_ms: 1.863888
+  type: 'test'
+  ...
+# Subtest: English Hub transport localizes structured backend errors but preserves player-authored data
+ok 207 - English Hub transport localizes structured backend errors but preserves player-authored data
+  ---
+  duration_ms: 3.226711
+  type: 'test'
+  ...
+# Subtest: Legacy kiosk and unrelated qualified sources remain byte-for-byte unchanged
+ok 208 - Legacy kiosk and unrelated qualified sources remain byte-for-byte unchanged
+  ---
+  duration_ms: 14.650955
+  type: 'test'
+  ...
+# Subtest: All Hub entrypoints select English and expose sidebar Event Control with English consent and registration controls
+ok 209 - All Hub entrypoints select English and expose sidebar Event Control with English consent and registration controls
+  ---
+  duration_ms: 1.117257
+  type: 'test'
+  ...
+# Subtest: Offline English Event Control inspection is fictional read-only data with no player mutation
+ok 210 - Offline English Event Control inspection is fictional read-only data with no player mutation
+  ---
+  duration_ms: 3.147511
+  type: 'test'
+  ...
+# Subtest: Enabled TEST date save requires server preparation and explicit confirmation before one save
+ok 211 - Enabled TEST date save requires server preparation and explicit confirmation before one save
+  ---
+  duration_ms: 3.000827
+  type: 'test'
+  ...
+# Subtest: Cancelling TEST date review ignores late preparation and cannot save
+ok 212 - Cancelling TEST date review ignores late preparation and cannot save
+  ---
+  duration_ms: 2.369174
+  type: 'test'
+  ...
+# Subtest: Uncertain TEST date save reports inspection required and never retries automatically
+ok 213 - Uncertain TEST date save reports inspection required and never retries automatically
+  ---
+  duration_ms: 2.73117
+  type: 'test'
+  ...
+# Subtest: Sidebar Event Control retains its date form and can open and return from existing event details
+ok 214 - Sidebar Event Control retains its date form and can open and return from existing event details
+  ---
+  duration_ms: 8.455464
+  type: 'test'
+  ...
+# Subtest: Sidebar Event Control cannot switch panels while a confirmed date save is running
+ok 215 - Sidebar Event Control cannot switch panels while a confirmed date save is running
+  ---
+  duration_ms: 2.096966
+  type: 'test'
+  ...
+# Subtest: Event inspection wrong project and external input are rejected before reads
+ok 216 - Event inspection wrong project and external input are rejected before reads
+  ---
+  duration_ms: 16.383785
+  type: 'test'
+  ...
+# Subtest: Event inspection busy lock does not access sheets
+ok 217 - Event inspection busy lock does not access sheets
+  ---
+  duration_ms: 5.900757
+  type: 'test'
+  ...
+# Subtest: Event inspection reports current control and exact legacy reset counts without writes
+ok 218 - Event inspection reports current control and exact legacy reset counts without writes
+  ---
+  duration_ms: 13.256717
+  type: 'test'
+  ...
+# Subtest: Event inspection flags retained source column behavior for explicit review
+ok 219 - Event inspection flags retained source column behavior for explicit review
+  ---
+  duration_ms: 1.886972
+  type: 'test'
+  ...
+# Subtest: Event inspection reports header timezone formula and date blockers without mutation
+ok 220 - Event inspection reports header timezone formula and date blockers without mutation
+  ---
+  duration_ms: 6.300775
+  type: 'test'
+  ...
+# Subtest: Event inspection handles missing and oversized layouts without suggesting write readiness
+ok 221 - Event inspection handles missing and oversized layouts without suggesting write readiness
+  ---
+  duration_ms: 4.646514
+  type: 'test'
+  ...
+# Subtest: Event inspection wrong returned identity fails safely and releases lock
+ok 222 - Event inspection wrong returned identity fails safely and releases lock
+  ---
+  duration_ms: 1.276879
+  type: 'test'
+  ...
+# Subtest: Event inspection save action is unsupported at the server boundary
+ok 223 - Event inspection save action is unsupported at the server boundary
+  ---
+  duration_ms: 1.419576
+  type: 'test'
+  ...
+# Subtest: Event popup loads read-only data and date editing plus close cannot save
+ok 224 - Event popup loads read-only data and date editing plus close cannot save
+  ---
+  duration_ms: 5.250109
+  type: 'test'
+  ...
+# Subtest: Event popup ignores a late response after Escape closes it
+ok 225 - Event popup ignores a late response after Escape closes it
+  ---
+  duration_ms: 2.234
+  type: 'test'
+  ...
+# Subtest: Nakka comparison: projected lists preserve statuses and use only matched event GET
+ok 226 - Nakka comparison: projected lists preserve statuses and use only matched event GET
+  ---
+  duration_ms: 6.571674
+  type: 'test'
+  ...
+# Subtest: Nakka comparison: missing identity session and injected target fail before contact
+ok 227 - Nakka comparison: missing identity session and injected target fail before contact
+  ---
+  duration_ms: 4.189113
+  type: 'test'
+  ...
+# Subtest: Nakka comparison: unmatched event and missing credentials never request players
+ok 228 - Nakka comparison: unmatched event and missing credentials never request players
+  ---
+  duration_ms: 4.417114
+  type: 'test'
+  ...
+# Subtest: Nakka comparison: HTTP malformed and oversized provider lists fail without leaking raw data
+ok 229 - Nakka comparison: HTTP malformed and oversized provider lists fail without leaking raw data
+  ---
+  duration_ms: 8.209188
+  type: 'test'
+  ...
+# Subtest: Nakka comparison: changed date status snapshot and expiry invalidate result
+ok 230 - Nakka comparison: changed date status snapshot and expiry invalidate result
+  ---
+  duration_ms: 3.663838
+  type: 'test'
+  ...
+# Subtest: Nakka comparison: normalized names match while duplicate and distinct names remain separate
+ok 231 - Nakka comparison: normalized names match while duplicate and distinct names remain separate
+  ---
+  duration_ms: 18.521193
+  type: 'test'
+  ...
+# Subtest: Nakka comparison: Hub reader reads only names and status with bounded header validation
+ok 232 - Nakka comparison: Hub reader reads only names and status with bounded header validation
+  ---
+  duration_ms: 7.023964
+  type: 'test'
+  ...
+# Subtest: Nakka comparison UI: authenticated route renders names as literal text and clears on logout
+ok 233 - Nakka comparison UI: authenticated route renders names as literal text and clears on logout
+  ---
+  duration_ms: 22.021695
+  type: 'test'
+  ...
+# Subtest: Nakka comparison UI: logout and status changes discard in-flight responses
+ok 234 - Nakka comparison UI: logout and status changes discard in-flight responses
+  ---
+  duration_ms: 12.956621
+  type: 'test'
+  ...
+# Subtest: Nakka event: unique date match returns fixed safe link through read-only GET
+ok 235 - Nakka event: unique date match returns fixed safe link through read-only GET
+  ---
+  duration_ms: 51.49021
+  type: 'test'
+  ...
+# Subtest: Nakka event: wrong identity missing session and injected input stop before contact
+ok 236 - Nakka event: wrong identity missing session and injected input stop before contact
+  ---
+  duration_ms: 6.493831
+  type: 'test'
+  ...
+# Subtest: Nakka event: bad Control date formula and missing credentials fail before contact
+ok 237 - Nakka event: bad Control date formula and missing credentials fail before contact
+  ---
+  duration_ms: 3.49756
+  type: 'test'
+  ...
+# Subtest: Nakka event: zero and multiple matches never choose a target
+ok 238 - Nakka event: zero and multiple matches never choose a target
+  ---
+  duration_ms: 5.342812
+  type: 'test'
+  ...
+# Subtest: Nakka event: timezone matching uses event calendar date in Sweden
+ok 239 - Nakka event: timezone matching uses event calendar date in Sweden
+  ---
+  duration_ms: 2.044555
+  type: 'test'
+  ...
+# Subtest: Nakka event: provider failures return safe bounded messages
+ok 240 - Nakka event: provider failures return safe bounded messages
+  ---
+  duration_ms: 7.717532
+  type: 'test'
+  ...
+# Subtest: Nakka event: truncated lists malformed dates and unsafe event identifiers fail closed
+ok 241 - Nakka event: truncated lists malformed dates and unsafe event identifiers fail closed
+  ---
+  duration_ms: 15.859127
+  type: 'test'
+  ...
+# Subtest: Nakka event: date changes and expired sessions invalidate an in-flight match
+ok 242 - Nakka event: date changes and expired sessions invalidate an in-flight match
+  ---
+  duration_ms: 5.030593
+  type: 'test'
+  ...
+# Subtest: Nakka event: client uses authenticated route and safe DOM output
+ok 243 - Nakka event: client uses authenticated route and safe DOM output
+  ---
+  duration_ms: 1.373822
+  type: 'test'
+  ...
+# Subtest: Nakka event: same-date live Monday tournament never overrides the dedicated TEST event
+ok 244 - Nakka event: same-date live Monday tournament never overrides the dedicated TEST event
+  ---
+  duration_ms: 6.20439
+  type: 'test'
+  ...
+# Subtest: Nakka event: dedicated ID still requires the exact title league and selected date
+ok 245 - Nakka event: dedicated ID still requires the exact title league and selected date
+  ---
+  duration_ms: 12.850593
+  type: 'test'
+  ...
+# Subtest: Nakka transfer UI offers only IN players and needs preview plus explicit identity acknowledgement
+ok 246 - Nakka transfer UI offers only IN players and needs preview plus explicit identity acknowledgement
+  ---
+  duration_ms: 29.716895
+  type: 'test'
+  ...
+# Subtest: Nakka transfer UI status changes invalidate reviewed identity and prevent save
+ok 247 - Nakka transfer UI status changes invalidate reviewed identity and prevent save
+  ---
+  duration_ms: 2.216562
+  type: 'test'
+  ...
+# Subtest: Nakka transfer UI logout removes dialog and discards an in-flight preview
+ok 248 - Nakka transfer UI logout removes dialog and discards an in-flight preview
+  ---
+  duration_ms: 1.995152
+  type: 'test'
+  ...
+# Subtest: Nakka transfer UI only sends once and uncertain failures never retry
+ok 249 - Nakka transfer UI only sends once and uncertain failures never retry
+  ---
+  duration_ms: 2.411145
+  type: 'test'
+  ...
+# Subtest: Nakka transfer UI existing entry produces no confirmation or save request
+ok 250 - Nakka transfer UI existing entry produces no confirmation or save request
+  ---
+  duration_ms: 16.116027
+  type: 'test'
+  ...
+# Subtest: existing-entry review UI shows exact tpid and explicit review-only confirmation without an add button
+ok 251 - existing-entry review UI shows exact tpid and explicit review-only confirmation without an add button
+  ---
+  duration_ms: 2.229729
+  type: 'test'
+  ...
+# Subtest: Nakka transfer transport uses authenticated allowlisted routes and rejects target injection
+ok 252 - Nakka transfer transport uses authenticated allowlisted routes and rejects target injection
+  ---
+  duration_ms: 3.656452
+  type: 'test'
+  ...
+# Subtest: Named troubleshooting opens one preselected guarded preview without an automatic save
+ok 253 - Named troubleshooting opens one preselected guarded preview without an automatic save
+  ---
+  duration_ms: 26.160998
+  type: 'test'
+  ...
+# Subtest: Nakka transfer preview proposes a unique league identity without POST or durable journal
+ok 254 - Nakka transfer preview proposes a unique league identity without POST or durable journal
+  ---
+  duration_ms: 41.864609
+  type: 'test'
+  ...
+# Subtest: Nakka transfer save sends only one approved TEST add and verifies LPID and preservation
+ok 255 - Nakka transfer save sends only one approved TEST add and verifies LPID and preservation
+  ---
+  duration_ms: 13.624934
+  type: 'test'
+  ...
+# Subtest: Nakka transfer blocks other event IDs leagues titles and started tournaments
+ok 256 - Nakka transfer blocks other event IDs leagues titles and started tournaments
+  ---
+  duration_ms: 37.781908
+  type: 'test'
+  ...
+# Subtest: Nakka transfer identity and eligibility reject OUT STANDBY missing and ambiguous names
+ok 257 - Nakka transfer identity and eligibility reject OUT STANDBY missing and ambiguous names
+  ---
+  duration_ms: 56.009975
+  type: 'test'
+  ...
+# Subtest: Nakka transfer already-present names or LPIDs never create a second entry
+ok 258 - Nakka transfer already-present names or LPIDs never create a second entry
+  ---
+  duration_ms: 18.938827
+  type: 'test'
+  ...
+# Subtest: Nakka transfer guard gates busy and malformed inputs stop before network or journal
+ok 259 - Nakka transfer guard gates busy and malformed inputs stop before network or journal
+  ---
+  duration_ms: 19.625481
+  type: 'test'
+  ...
+# Subtest: Nakka transfer confirmations are short-lived single-use and bound to user session and player
+ok 260 - Nakka transfer confirmations are short-lived single-use and bound to user session and player
+  ---
+  duration_ms: 20.115546
+  type: 'test'
+  ...
+# Subtest: Nakka transfer stale preview state requires new review without writes
+ok 261 - Nakka transfer stale preview state requires new review without writes
+  ---
+  duration_ms: 26.372981
+  type: 'test'
+  ...
+# Subtest: Nakka transfer rechecks Hub and event immediately before posting
+ok 262 - Nakka transfer rechecks Hub and event immediately before posting
+  ---
+  duration_ms: 3.535996
+  type: 'test'
+  ...
+# Subtest: Nakka transfer timeout after save retains attempt marker and blocks another POST
+ok 263 - Nakka transfer timeout after save retains attempt marker and blocks another POST
+  ---
+  duration_ms: 37.564368
+  type: 'test'
+  ...
+# Subtest: Nakka transfer changed old entries wrong league IDs and bad receipts remain uncertain
+ok 264 - Nakka transfer changed old entries wrong league IDs and bad receipts remain uncertain
+  ---
+  duration_ms: 13.58232
+  type: 'test'
+  ...
+# Subtest: Nakka transfer verified journal blocks re-add after manual removal
+ok 265 - Nakka transfer verified journal blocks re-add after manual removal
+  ---
+  duration_ms: 15.138957
+  type: 'test'
+  ...
+# Subtest: Nakka transfer provider errors truncation and journal failure fail closed without secrets
+ok 266 - Nakka transfer provider errors truncation and journal failure fail closed without secrets
+  ---
+  duration_ms: 25.934559
+  type: 'test'
+  ...
+# Subtest: Nakka transfer authentication is rechecked after reads and before mutation
+ok 267 - Nakka transfer authentication is rechecked after reads and before mutation
+  ---
+  duration_ms: 7.190349
+  type: 'test'
+  ...
+# Subtest: Nakka transfer confirms entry separately when the API omits league link without claiming identity
+ok 268 - Nakka transfer confirms entry separately when the API omits league link without claiming identity
+  ---
+  duration_ms: 11.862341
+  type: 'test'
+  ...
+# Subtest: Nakka transfer reconciles AUD-092 attempted marker read-only using prior count and fingerprint
+ok 269 - Nakka transfer reconciles AUD-092 attempted marker read-only using prior count and fingerprint
+  ---
+  duration_ms: 2.778555
+  type: 'test'
+  ...
+# Subtest: Nakka transfer reconciliation fails closed for changed old data malformed markers and replacement entries
+ok 270 - Nakka transfer reconciliation fails closed for changed old data malformed markers and replacement entries
+  ---
+  duration_ms: 28.430045
+  type: 'test'
+  ...
+# Subtest: a new registration can add again only with matching verified removal proof retaining the previous transfer
+ok 271 - a new registration can add again only with matching verified removal proof retaining the previous transfer
+  ---
+  duration_ms: 16.648585
+  type: 'test'
+  ...
+# Subtest: removal preview is read-only and exposes exact event entry ID and league profile
+ok 272 - removal preview is read-only and exposes exact event entry ID and league profile
+  ---
+  duration_ms: 29.412264
+  type: 'test'
+  ...
+# Subtest: removal targets exactly one Nakka event entry then clears only selected registration names and event metadata
+ok 273 - removal targets exactly one Nakka event entry then clears only selected registration names and event metadata
+  ---
+  duration_ms: 27.922928
+  type: 'test'
+  ...
+# Subtest: removal permits OUT and STANDBY without treating either as IN
+ok 274 - removal permits OUT and STANDBY without treating either as IN
+  ---
+  duration_ms: 23.095643
+  type: 'test'
+  ...
+# Subtest: positively absent Nakka entry removes only the Hub registration with no provider POST
+ok 275 - positively absent Nakka entry removes only the Hub registration with no provider POST
+  ---
+  duration_ms: 8.3023
+  type: 'test'
+  ...
+# Subtest: wrong target, started tournament, bracket placement and ambiguous identities block before writes
+ok 276 - wrong target, started tournament, bracket placement and ambiguous identities block before writes
+  ---
+  duration_ms: 14.654617
+  type: 'test'
+  ...
+# Subtest: malformed removal, missing confirmation, extra fields and disabled gate reject without write
+ok 277 - malformed removal, missing confirmation, extra fields and disabled gate reject without write
+  ---
+  duration_ms: 6.532685
+  type: 'test'
+  ...
+# Subtest: busy lock and expired auth do not read or write provider state
+ok 278 - busy lock and expired auth do not read or write provider state
+  ---
+  duration_ms: 3.745427
+  type: 'test'
+  ...
+# Subtest: stale snapshot, status, date and Nakka version invalidate confirmation and consume ticket
+ok 279 - stale snapshot, status, date and Nakka version invalidate confirmation and consume ticket
+  ---
+  duration_ms: 28.448996
+  type: 'test'
+  ...
+# Subtest: confirmation is bound to session and owner; expired or reused tickets cannot remove twice
+ok 280 - confirmation is bound to session and owner; expired or reused tickets cannot remove twice
+  ---
+  duration_ms: 21.175115
+  type: 'test'
+  ...
+# Subtest: Nakka timeout and wrong receipt retain registration, save uncertain journal, never retry and raise attention
+ok 281 - Nakka timeout and wrong receipt retain registration, save uncertain journal, never retry and raise attention
+  ---
+  duration_ms: 27.118797
+  type: 'test'
+  ...
+# Subtest: partial Sheet failure after verified Nakka removal remains uncertain with immutable recovery copy
+ok 282 - partial Sheet failure after verified Nakka removal remains uncertain with immutable recovery copy
+  ---
+  duration_ms: 23.90392
+  type: 'test'
+  ...
+# Subtest: removal numeric typography and standby orange override original grey theme
+ok 283 - removal numeric typography and standby orange override original grey theme
+  ---
+  duration_ms: 5.654768
+  type: 'test'
+  ...
+# Subtest: removal dialog requires checkbox then sends one confirmed save and blocks close while saving
+ok 284 - removal dialog requires checkbox then sends one confirmed save and blocks close while saving
+  ---
+  duration_ms: 4.260892
+  type: 'test'
+  ...
+# Subtest: late preview after sign-out cannot restore a confirmation or a player name
+ok 285 - late preview after sign-out cannot restore a confirmation or a player name
+  ---
+  duration_ms: 1.874121
+  type: 'test'
+  ...
+# Subtest: uncertain removal discards confirm button and never resends a save
+ok 286 - uncertain removal discards confirm button and never resends a save
+  ---
+  duration_ms: 2.19951
+  type: 'test'
+  ...
+# Subtest: Removal preview reuses the validated Sheet snapshot instead of rereading the Hub and master list
+ok 287 - Removal preview reuses the validated Sheet snapshot instead of rereading the Hub and master list
+  ---
+  duration_ms: 15.98544
+  type: 'test'
+  ...
+# Subtest: preview defaults to blocked and never falls back to network
+ok 288 - preview defaults to blocked and never falls back to network
+  ---
+  duration_ms: 7.114299
+  type: 'test'
+  ...
+# Subtest: preview rejects mock mode on non-loopback hosts
+ok 289 - preview rejects mock mode on non-loopback hosts
+  ---
+  duration_ms: 1.609671
+  type: 'test'
+  ...
+# Subtest: preview refuses unknown mode and external endpoint configuration
+ok 290 - preview refuses unknown mode and external endpoint configuration
+  ---
+  duration_ms: 3.353858
+  type: 'test'
+  ...
+# Subtest: preview returns fictional player data and defensive response copies
+ok 291 - preview returns fictional player data and defensive response copies
+  ---
+  duration_ms: 10.798751
+  type: 'test'
+  ...
+# Subtest: preview status mutation persists only in its in-memory instance
+ok 292 - preview status mutation persists only in its in-memory instance
+  ---
+  duration_ms: 3.757448
+  type: 'test'
+  ...
+# Subtest: preview rejects unknown players and invalid statuses without mutation
+ok 293 - preview rejects unknown players and invalid statuses without mutation
+  ---
+  duration_ms: 10.453448
+  type: 'test'
+  ...
+# Subtest: preview registers existing master player with consent and message
+ok 294 - preview registers existing master player with consent and message
+  ---
+  duration_ms: 2.524157
+  type: 'test'
+  ...
+# Subtest: preview registers a new fictional name and adds it to mock master
+ok 295 - preview registers a new fictional name and adds it to mock master
+  ---
+  duration_ms: 2.015418
+  type: 'test'
+  ...
+# Subtest: preview normalizes duplicate names through the new-player route
+ok 296 - preview normalizes duplicate names through the new-player route
+  ---
+  duration_ms: 2.211583
+  type: 'test'
+  ...
+# Subtest: preview requires a valid name and explicit consent before registration
+ok 297 - preview requires a valid name and explicit consent before registration
+  ---
+  duration_ms: 2.776255
+  type: 'test'
+  ...
+# Subtest: preview reports Nakka as uncontacted and unavailable
+ok 298 - preview reports Nakka as uncontacted and unavailable
+  ---
+  duration_ms: 13.731849
+  type: 'test'
+  ...
+# Subtest: preview rejects remote URLs and non-GET methods
+ok 299 - preview rejects remote URLs and non-GET methods
+  ---
+  duration_ms: 1.920201
+  type: 'test'
+  ...
+# Subtest: preview rejects unknown routes and duplicate query keys
+ok 300 - preview rejects unknown routes and duplicate query keys
+  ---
+  duration_ms: 1.587371
+  type: 'test'
+  ...
+# Subtest: preview respects aborted requests before mock mutation
+ok 301 - preview respects aborted requests before mock mutation
+  ---
+  duration_ms: 2.012527
+  type: 'test'
+  ...
+# Subtest: desktop entrypoints load closed service boundary before application scripts
+ok 302 - desktop entrypoints load closed service boundary before application scripts
+  ---
+  duration_ms: 10.868484
+  type: 'test'
+  ...
+# Subtest: preview server serves mock entry with network-blocking policy
+ok 303 - preview server serves mock entry with network-blocking policy
+  ---
+  duration_ms: 166.123476
+  type: 'test'
+  ...
+# Hub registration error: Error: You are already registered for this event.
+#     at Object.click (evalmachine.<anonymous>:1691:15)
+#     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+#     at async Element.emit (/private/var/folders/cy/r0qnx73x42zb8gqf48f8201h0000gp/T/beauty-ui-check-9FdSpQ/Beauty-Admin-Hub/tests/hub-preview.test.cjs:154:24)
+#     at async TestContext.<anonymous> (/private/var/folders/cy/r0qnx73x42zb8gqf48f8201h0000gp/T/beauty-ui-check-9FdSpQ/Beauty-Admin-Hub/tests/hub-preview.test.cjs:208:3)
+#     at async Test.run (node:internal/test_runner/test:1054:7)
+#     at async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+# Subtest: preview server denies private source paths and write methods
+ok 304 - preview server denies private source paths and write methods
+  ---
+  duration_ms: 63.124274
+  type: 'test'
+  ...
+# Subtest: actual dashboard renders mock data and identifies backend as demo
+ok 305 - actual dashboard renders mock data and identifies backend as demo
+  ---
+  duration_ms: 4.513291
+  type: 'test'
+  ...
+# Subtest: actual registration form sends long consent labels through mock boundary
+ok 306 - actual registration form sends long consent labels through mock boundary
+  ---
+  duration_ms: 8.240161
+  type: 'test'
+  ...
+# Subtest: actual registration errors open dismissible message popup and preserve the form
+ok 307 - actual registration errors open dismissible message popup and preserve the form
+  ---
+  duration_ms: 4.931945
+  type: 'test'
+  ...
+# Subtest: actual Hub form and identity dialog create a distinct mock player after confirmation
+ok 308 - actual Hub form and identity dialog create a distinct mock player after confirmation
+  ---
+  duration_ms: 14.940902
+  type: 'test'
+  ...
+# Subtest: Hub TEST rejects wrong running script before backend access
+ok 309 - Hub TEST rejects wrong running script before backend access
+  ---
+  duration_ms: 4.544398
+  type: 'test'
+  ...
+# Subtest: Hub TEST rejects wrong configured project and spreadsheet before backend access
+ok 310 - Hub TEST rejects wrong configured project and spreadsheet before backend access
+  ---
+  duration_ms: 5.456113
+  type: 'test'
+  ...
+# Subtest: Hub TEST returns adapter data and TEST marker without registration
+ok 311 - Hub TEST returns adapter data and TEST marker without registration
+  ---
+  duration_ms: 2.694129
+  type: 'test'
+  ...
+# Subtest: Hub TEST rejects incomplete status, spoofed source and malformed input before I/O
+ok 312 - Hub TEST rejects incomplete status, spoofed source and malformed input before I/O
+  ---
+  duration_ms: 1.960877
+  type: 'test'
+  ...
+# Subtest: Hub TEST preserves confirmed identity and stamps HUB server-side
+ok 313 - Hub TEST preserves confirmed identity and stamps HUB server-side
+  ---
+  duration_ms: 9.458228
+  type: 'test'
+  ...
+# Subtest: Hub TEST registration reuses Remote gate and lock with guaranteed release
+ok 314 - Hub TEST registration reuses Remote gate and lock with guaranteed release
+  ---
+  duration_ms: 8.803753
+  type: 'test'
+  ...
+# Subtest: Hub TEST client reads and registers through RPC
+ok 315 - Hub TEST client reads and registers through RPC
+  ---
+  duration_ms: 3.650695
+  type: 'test'
+  ...
+# Subtest: Hub TEST client blocks foreign URLs, duplicate keys and source spoofing
+ok 316 - Hub TEST client blocks foreign URLs, duplicate keys and source spoofing
+  ---
+  duration_ms: 2.262537
+  type: 'test'
+  ...
+# Subtest: Hub TEST RPC failure is sanitized and registration is never retried automatically
+ok 317 - Hub TEST RPC failure is sanitized and registration is never retried automatically
+  ---
+  duration_ms: 2.168917
+  type: 'test'
+  ...
+# Subtest: Hub TEST Nakka health uses guarded read-only RPC
+ok 318 - Hub TEST Nakka health uses guarded read-only RPC
+  ---
+  duration_ms: 4.362418
+  type: 'test'
+  ...
+# Subtest: Hub TEST HTML is reproducible with parseable scripts and original AIK assets
+ok 319 - Hub TEST HTML is reproducible with parseable scripts and original AIK assets
+  ---
+  duration_ms: 338.721082
+  type: 'test'
+  ...
+# Subtest: Hub TEST route is additive and manifest stays owner-only with legacy status RPC private
+ok 320 - Hub TEST route is additive and manifest stays owner-only with legacy status RPC private
+  ---
+  duration_ms: 2.108352
+  type: 'test'
+  ...
+# Subtest: Hub status rejects wrong project and non-boolean write gates before Sheets access
+ok 321 - Hub status rejects wrong project and non-boolean write gates before Sheets access
+  ---
+  duration_ms: 23.782598
+  type: 'test'
+  ...
+# Subtest: Hub status rejects malformed input and extra routing keys without I/O
+ok 322 - Hub status rejects malformed input and extra routing keys without I/O
+  ---
+  duration_ms: 2.368679
+  type: 'test'
+  ...
+# Subtest: Hub status busy lock performs no read or write
+ok 323 - Hub status busy lock performs no read or write
+  ---
+  duration_ms: 2.444236
+  type: 'test'
+  ...
+# Subtest: Hub status refuses wrong spreadsheet and stale event with no mutation
+ok 324 - Hub status refuses wrong spreadsheet and stale event with no mutation
+  ---
+  duration_ms: 10.252104
+  type: 'test'
+  ...
+# Subtest: Hub status refuses missing or ambiguous player rows in either sheet
+ok 325 - Hub status refuses missing or ambiguous player rows in either sheet
+  ---
+  duration_ms: 8.600153
+  type: 'test'
+  ...
+# Subtest: Hub status refuses changed previous status before any write
+ok 326 - Hub status refuses changed previous status before any write
+  ---
+  duration_ms: 15.269864
+  type: 'test'
+  ...
+# Subtest: Hub status refuses formulas, incompatible headers and oversized layouts
+ok 327 - Hub status refuses formulas, incompatible headers and oversized layouts
+  ---
+  duration_ms: 4.03122
+  type: 'test'
+  ...
+# Subtest: Hub status changes exactly two C cells and preserves consent messages sources and other players
+ok 328 - Hub status changes exactly two C cells and preserves consent messages sources and other players
+  ---
+  duration_ms: 5.483049
+  type: 'test'
+  ...
+# Subtest: Hub status supports sequential IN OUT STANDBY transitions with matching readback
+ok 329 - Hub status supports sequential IN OUT STANDBY transitions with matching readback
+  ---
+  duration_ms: 2.634542
+  type: 'test'
+  ...
+# Subtest: Hub status identical current status verifies without rewriting cells
+ok 330 - Hub status identical current status verifies without rewriting cells
+  ---
+  duration_ms: 1.997275
+  type: 'test'
+  ...
+# Subtest: Hub status partial write failure is uncertain, releases lock and never retries
+ok 331 - Hub status partial write failure is uncertain, releases lock and never retries
+  ---
+  duration_ms: 1.58389
+  type: 'test'
+  ...
+# Subtest: Hub status mismatch in either cell or Hub readback cannot report success
+ok 332 - Hub status mismatch in either cell or Hub readback cannot report success
+  ---
+  duration_ms: 2.720516
+  type: 'test'
+  ...
+# Subtest: Hub status UI holds pending value through refresh and clears only after verified response
+ok 333 - Hub status UI holds pending value through refresh and clears only after verified response
+  ---
+  duration_ms: 5.134726
+  type: 'test'
+  ...
+# Subtest: Hub status UI failure shows popup, clears pending, reloads truth and never retries write
+ok 334 - Hub status UI failure shows popup, clears pending, reloads truth and never retries write
+  ---
+  duration_ms: 1.939121
+  type: 'test'
+  ...
+# Subtest: Hub TEST client serializes read and status RPCs and continues after failure
+ok 335 - Hub TEST client serializes read and status RPCs and continues after failure
+  ---
+  duration_ms: 3.822409
+  type: 'test'
+  ...
+# Subtest: native ranking contract preserves supplied full league ordinal ranks ties and zero points
+ok 336 - native ranking contract preserves supplied full league ordinal ranks ties and zero points
+  ---
+  duration_ms: 40.589094
+  type: 'test'
+  ...
+# Subtest: native ranking contract refuses guessed rankings subsets duplicate identities and wrong totals
+ok 337 - native ranking contract refuses guessed rankings subsets duplicate identities and wrong totals
+  ---
+  duration_ms: 1.322204
+  type: 'test'
+  ...
+# Subtest: native ranking contract expires invalidates changed totals and rejects tampered storage
+ok 338 - native ranking contract expires invalidates changed totals and rejects tampered storage
+  ---
+  duration_ms: 0.930431
+  type: 'test'
+  ...
+# Subtest: live shell has four slim Swedish tabs and one selected shared panel with internal fullscreen
+ok 339 - live shell has four slim Swedish tabs and one selected shared panel with internal fullscreen
+  ---
+  duration_ms: 29.346099
+  type: 'test'
+  ...
+# Subtest: live shell requests fullscreen on selected panel and preserves chosen view when exiting
+ok 340 - live shell requests fullscreen on selected panel and preserves chosen view when exiting
+  ---
+  duration_ms: 17.3249
+  type: 'test'
+  ...
+# Subtest: live windows keep independent round choices scroll positions and continue refresh without resetting
+ok 341 - live windows keep independent round choices scroll positions and continue refresh without resetting
+  ---
+  duration_ms: 112.50174
+  type: 'test'
+  ...
+# Subtest: live pool paging and automatic rotation retain approved card renderer and pause outside pools
+ok 342 - live pool paging and automatic rotation retain approved card renderer and pause outside pools
+  ---
+  duration_ms: 38.128662
+  type: 'test'
+  ...
+# Subtest: live knockout scroll pauses for controls interaction hidden pages and reduced motion
+ok 343 - live knockout scroll pauses for controls interaction hidden pages and reduced motion
+  ---
+  duration_ms: 26.767801
+  type: 'test'
+  ...
+# Subtest: live shell failure pause offline and page exit remove current status and stop scheduled work
+ok 344 - live shell failure pause offline and page exit remove current status and stop scheduled work
+  ---
+  duration_ms: 27.57555
+  type: 'test'
+  ...
+# Subtest: live public list and stage event dates must agree before bracket content is displayed
+ok 345 - live public list and stage event dates must agree before bracket content is displayed
+  ---
+  duration_ms: 17.074228
+  type: 'test'
+  ...
+# Subtest: knockout layout aligns all source centres and target centres exactly with orthogonal paths
+ok 346 - knockout layout aligns all source centres and target centres exactly with orthogonal paths
+  ---
+  duration_ms: 0.736909
+  type: 'test'
+  ...
+# Subtest: knockout round navigation remains readable for full narrow and split windows without champion column
+ok 347 - knockout round navigation remains readable for full narrow and split windows without champion column
+  ---
+  duration_ms: 3.619145
+  type: 'test'
+  ...
+# Subtest: knockout cards keep literal names every average and opening-only draw numbers inside player identity
+ok 348 - knockout cards keep literal names every average and opening-only draw numbers inside player identity
+  ---
+  duration_ms: 2.427697
+  type: 'test'
+  ...
+# Subtest: knockout preserves missing averages pending slots byes third place and provider final format
+ok 349 - knockout preserves missing averages pending slots byes third place and provider final format
+  ---
+  duration_ms: 45.22078
+  type: 'test'
+  ...
+# Subtest: knockout draw numbers use only unique numeric provider opening guide and never league ranks
+ok 350 - knockout draw numbers use only unique numeric provider opening guide and never league ranks
+  ---
+  duration_ms: 1.652973
+  type: 'test'
+  ...
+# Subtest: knockout live cycle uses exact event round pair and maps reversed provider player order
+ok 351 - knockout live cycle uses exact event round pair and maps reversed provider player order
+  ---
+  duration_ms: 2.925883
+  type: 'test'
+  ...
+# Subtest: knockout live collector excludes unrelated fixtures and refuses invalid identities sets and incomplete totals
+ok 352 - knockout live collector excludes unrelated fixtures and refuses invalid identities sets and incomplete totals
+  ---
+  duration_ms: 1.427119
+  type: 'test'
+  ...
+# Subtest: knockout CSS reserves two-line rows single one-pixel title accent and one connector layer
+ok 353 - knockout CSS reserves two-line rows single one-pixel title accent and one connector layer
+  ---
+  duration_ms: 0.561357
+  type: 'test'
+  ...
+# Subtest: both TEST cast routes embed identical wired shell scripts without external asset dependencies
+ok 354 - both TEST cast routes embed identical wired shell scripts without external asset dependencies
+  ---
+  duration_ms: 25.281739
+  type: 'test'
+  ...
+# Subtest: Hub Beauty Live clicks open new independent tabs and reject late signed-out callbacks
+ok 355 - Hub Beauty Live clicks open new independent tabs and reject late signed-out callbacks
+  ---
+  duration_ms: 8.205521
+  type: 'test'
+  ...
+# Subtest: Hub Beauty Live opener rejects foreign unguarded duplicate-query and fragment URLs
+ok 356 - Hub Beauty Live opener rejects foreign unguarded duplicate-query and fragment URLs
+  ---
+  duration_ms: 7.367634
+  type: 'test'
+  ...
+# Subtest: combined live URL uses the selected event date guard rather than returning a bare route
+ok 357 - combined live URL uses the selected event date guard rather than returning a bare route
+  ---
+  duration_ms: 23.635408
+  type: 'test'
+  ...
+# Subtest: feed knockout option reuses one match list and propagates live match data through full and fast cycles
+ok 358 - feed knockout option reuses one match list and propagates live match data through full and fast cycles
+  ---
+  duration_ms: 3.794926
+  type: 'test'
+  ...
+# Subtest: pool paging arrows sit above cards and footer is absent below the player footer
+ok 359 - pool paging arrows sit above cards and footer is absent below the player footer
+  ---
+  duration_ms: 124.15897
+  type: 'test'
+  ...
+# Subtest: cast footer keeps fullscreen failure visible and reserves space without covering cards
+ok 360 - cast footer keeps fullscreen failure visible and reserves space without covering cards
+  ---
+  duration_ms: 4.945266
+  type: 'test'
+  ...
+# Subtest: live plan labels reload in existing windows and late callbacks are ignored after exit
+ok 361 - live plan labels reload in existing windows and late callbacks are ignored after exit
+  ---
+  duration_ms: 2.786441
+  type: 'test'
+  ...
+# Subtest: all shared live views keep icon buttons and one menu with list settings and count tile
+ok 362 - all shared live views keep icon buttons and one menu with list settings and count tile
+  ---
+  duration_ms: 8.722831
+  type: 'test'
+  ...
+# Subtest: display menu anchors under its icon closes outside or on Escape and keeps viewport space
+ok 363 - display menu anchors under its icon closes outside or on Escape and keeps viewport space
+  ---
+  duration_ms: 3.65794
+  type: 'test'
+  ...
+# Subtest: approved title and action nodes dock into header and tab row then remain inside selected fullscreen
+ok 364 - approved title and action nodes dock into header and tab row then remain inside selected fullscreen
+  ---
+  duration_ms: 11.551278
+  type: 'test'
+  ...
+# Subtest: finals winner uses provider champion and correct award without inferring a winner from scores
+ok 365 - finals winner uses provider champion and correct award without inferring a winner from scores
+  ---
+  duration_ms: 1.932503
+  type: 'test'
+  ...
+# Subtest: login page: disconnected default rejects entry and clears password
+ok 366 - login page: disconnected default rejects entry and clears password
+  ---
+  duration_ms: 10.884029
+  type: 'test'
+  ...
+# Subtest: login page: show password, reset navigation and provider reset outcome
+ok 367 - login page: show password, reset navigation and provider reset outcome
+  ---
+  duration_ms: 4.304637
+  type: 'test'
+  ...
+# Subtest: login page: authorization required; successful session and logout use service
+ok 368 - login page: authorization required; successful session and logout use service
+  ---
+  duration_ms: 3.61846
+  type: 'test'
+  ...
+# Subtest: login page: prevents duplicate sign-in and reports reset/signout failures truthfully
+ok 369 - login page: prevents duplicate sign-in and reports reset/signout failures truthfully
+  ---
+  duration_ms: 5.049623
+  type: 'test'
+  ...
+# Subtest: login page: failed Hub validation stays on login and never offers an unlocked session
+ok 370 - login page: failed Hub validation stays on login and never offers an unlocked session
+  ---
+  duration_ms: 2.660172
+  type: 'test'
+  ...
+# Subtest: Mobile total uses the displayed event list and includes a truthful zero state
+ok 371 - Mobile total uses the displayed event list and includes a truthful zero state
+  ---
+  duration_ms: 9.849556
+  type: 'test'
+  ...
+# Subtest: Mobile list never presents a stale total after failure malformed data close or an older response
+ok 372 - Mobile list never presents a stale total after failure malformed data close or an older response
+  ---
+  duration_ms: 1.595671
+  type: 'test'
+  ...
+# Subtest: Long messages from Hub mobile and kiosk keep their full text in the Sheet without leaking into Nakka
+ok 373 - Long messages from Hub mobile and kiosk keep their full text in the Sheet without leaking into Nakka
+  ---
+  duration_ms: 101.65431
+  type: 'test'
+  ...
+# Subtest: Long Hub messages open from READ as literal multiline text in the scrollable popup
+ok 374 - Long Hub messages open from READ as literal multiline text in the scrollable popup
+  ---
+  duration_ms: 2.331099
+  type: 'test'
+  ...
+# Subtest: initial UI check calls only the read-only endpoint with an abort signal
+ok 375 - initial UI check calls only the read-only endpoint with an abort signal
+  ---
+  duration_ms: 49.998632
+  type: 'test'
+  ...
+# Subtest: UI renders OK with a clear indicator and checked time
+ok 376 - UI renders OK with a clear indicator and checked time
+  ---
+  duration_ms: 2.344254
+  type: 'test'
+  ...
+# Subtest: UI renders DEGRADED with a clear indicator and checked time
+ok 377 - UI renders DEGRADED with a clear indicator and checked time
+  ---
+  duration_ms: 1.909729
+  type: 'test'
+  ...
+# Subtest: UI renders UNAVAILABLE with a clear indicator and checked time
+ok 378 - UI renders UNAVAILABLE with a clear indicator and checked time
+  ---
+  duration_ms: 1.758252
+  type: 'test'
+  ...
+# Subtest: UI handles HTTP failure without exposing raw errors
+ok 379 - UI handles HTTP failure without exposing raw errors
+  ---
+  duration_ms: 2.309726
+  type: 'test'
+  ...
+# Subtest: UI handles network failure without exposing raw errors
+ok 380 - UI handles network failure without exposing raw errors
+  ---
+  duration_ms: 1.841228
+  type: 'test'
+  ...
+# Subtest: UI handles invalid JSON without exposing raw errors
+ok 381 - UI handles invalid JSON without exposing raw errors
+  ---
+  duration_ms: 1.933939
+  type: 'test'
+  ...
+# Subtest: UI handles null response without exposing raw errors
+ok 382 - UI handles null response without exposing raw errors
+  ---
+  duration_ms: 2.212301
+  type: 'test'
+  ...
+# Subtest: UI handles unknown status without exposing raw errors
+ok 383 - UI handles unknown status without exposing raw errors
+  ---
+  duration_ms: 2.928701
+  type: 'test'
+  ...
+# Subtest: UI handles blank message without exposing raw errors
+ok 384 - UI handles blank message without exposing raw errors
+  ---
+  duration_ms: 2.22046
+  type: 'test'
+  ...
+# Subtest: UI handles invalid timestamp without exposing raw errors
+ok 385 - UI handles invalid timestamp without exposing raw errors
+  ---
+  duration_ms: 1.879715
+  type: 'test'
+  ...
+# Subtest: UI aborts after 15 seconds and can recover on a later manual refresh
+ok 386 - UI aborts after 15 seconds and can recover on a later manual refresh
+  ---
+  duration_ms: 2.898877
+  type: 'test'
+  ...
+# Subtest: manual refresh is limited to once per minute and resets the old OK indicator
+ok 387 - manual refresh is limited to once per minute and resets the old OK indicator
+  ---
+  duration_ms: 2.528047
+  type: 'test'
+  ...
+# Subtest: automatic refresh uses five minutes, independent of Beauty polling
+ok 388 - automatic refresh uses five minutes, independent of Beauty polling
+  ---
+  duration_ms: 3.186862
+  type: 'test'
+  ...
+# Subtest: an unresolved request does not overlap manual or scheduled requests
+ok 389 - an unresolved request does not overlap manual or scheduled requests
+  ---
+  duration_ms: 6.280292
+  type: 'test'
+  ...
+# Subtest: hidden tabs skip polling and check overdue health when visible again
+ok 390 - hidden tabs skip polling and check overdue health when visible again
+  ---
+  duration_ms: 2.59285
+  type: 'test'
+  ...
+# Subtest: a tab initially hidden waits until it becomes visible
+ok 391 - a tab initially hidden waits until it becomes visible
+  ---
+  duration_ms: 1.614137
+  type: 'test'
+  ...
+# Subtest: missing health markup does not affect the rest of the Hub
+ok 392 - missing health markup does not affect the rest of the Hub
+  ---
+  duration_ms: 1.033745
+  type: 'test'
+  ...
+# Subtest: Nakka health auth: no request while signed out and immediate check when Hub opens
+ok 393 - Nakka health auth: no request while signed out and immediate check when Hub opens
+  ---
+  duration_ms: 4.509771
+  type: 'test'
+  ...
+# Subtest: Nakka health auth: logout clears status and late response cannot repaint a new session
+ok 394 - Nakka health auth: logout clears status and late response cannot repaint a new session
+  ---
+  duration_ms: 2.321222
+  type: 'test'
+  ...
+# Subtest: health route returns JSON and uses only one authenticated league GET
+ok 395 - health route returns JSON and uses only one authenticated league GET
+  ---
+  duration_ms: 8.568216
+  type: 'test'
+  ...
+# Subtest: league health handles empty readable league
+ok 396 - league health handles empty readable league
+  ---
+  duration_ms: 1.330487
+  type: 'test'
+  ...
+# Subtest: league health handles populated readable league
+ok 397 - league health handles populated readable league
+  ---
+  duration_ms: 1.208067
+  type: 'test'
+  ...
+# Subtest: league health handles missing credentials
+ok 398 - league health handles missing credentials
+  ---
+  duration_ms: 1.22627
+  type: 'test'
+  ...
+# Subtest: league health handles HTTP 401
+ok 399 - league health handles HTTP 401
+  ---
+  duration_ms: 1.481517
+  type: 'test'
+  ...
+# Subtest: league health handles HTTP 403
+ok 400 - league health handles HTTP 403
+  ---
+  duration_ms: 1.266025
+  type: 'test'
+  ...
+# Subtest: league health handles HTTP 500
+ok 401 - league health handles HTTP 500
+  ---
+  duration_ms: 3.657642
+  type: 'test'
+  ...
+# Subtest: league health handles HTTP 429
+ok 402 - league health handles HTTP 429
+  ---
+  duration_ms: 1.027495
+  type: 'test'
+  ...
+# Subtest: league health handles HTTP 408
+ok 403 - league health handles HTTP 408
+  ---
+  duration_ms: 1.693784
+  type: 'test'
+  ...
+# Subtest: league health handles HTTP 504
+ok 404 - league health handles HTTP 504
+  ---
+  duration_ms: 1.643971
+  type: 'test'
+  ...
+# Subtest: league health handles invalid JSON
+ok 405 - league health handles invalid JSON
+  ---
+  duration_ms: 1.244995
+  type: 'test'
+  ...
+# Subtest: league health handles API rejection
+ok 406 - league health handles API rejection
+  ---
+  duration_ms: 1.036327
+  type: 'test'
+  ...
+# Subtest: league health handles missing API result
+ok 407 - league health handles missing API result
+  ---
+  duration_ms: 1.00653
+  type: 'test'
+  ...
+# Subtest: league health handles missing list
+ok 408 - league health handles missing list
+  ---
+  duration_ms: 1.218572
+  type: 'test'
+  ...
+# Subtest: league health handles non-array list
+ok 409 - league health handles non-array list
+  ---
+  duration_ms: 0.995962
+  type: 'test'
+  ...
+# Subtest: league health handles null API response
+ok 410 - league health handles null API response
+  ---
+  duration_ms: 1.32991
+  type: 'test'
+  ...
+# Subtest: league health handles address unavailable
+ok 411 - league health handles address unavailable
+  ---
+  duration_ms: 1.257671
+  type: 'test'
+  ...
+# Subtest: league health handles network error
+ok 412 - league health handles network error
+  ---
+  duration_ms: 1.098964
+  type: 'test'
+  ...
+# Subtest: league health handles native fetch timeout
+ok 413 - league health handles native fetch timeout
+  ---
+  duration_ms: 1.059377
+  type: 'test'
+  ...
+# Subtest: health response is cached for 60 seconds across requests
+ok 414 - health response is cached for 60 seconds across requests
+  ---
+  duration_ms: 1.240652
+  type: 'test'
+  ...
+# Subtest: cached degraded result is returned without another Nakka request
+ok 415 - cached degraded result is returned without another Nakka request
+  ---
+  duration_ms: 1.853488
+  type: 'test'
+  ...
+# Subtest: an in-flight health probe does not block or trigger a second request
+ok 416 - an in-flight health probe does not block or trigger a second request
+  ---
+  duration_ms: 1.353915
+  type: 'test'
+  ...
+# Subtest: cache failure prevents an unthrottled upstream probe
+ok 417 - cache failure prevents an unthrottled upstream probe
+  ---
+  duration_ms: 2.089235
+  type: 'test'
+  ...
+# Subtest: cache write failure preserves a successful result and releases the lock
+ok 418 - cache write failure preserves a successful result and releases the lock
+  ---
+  duration_ms: 29.281821
+  type: 'test'
+  ...
+# Subtest: failed upstream request also releases the health lock
+ok 419 - failed upstream request also releases the health lock
+  ---
+  duration_ms: 1.171861
+  type: 'test'
+  ...
+# Subtest: stage badges map exact stage round and slot; reassignments and removals replace old values
+ok 420 - stage badges map exact stage round and slot; reassignments and removals replace old values
+  ---
+  duration_ms: 3.175957
+  type: 'test'
+  ...
+# Subtest: stage badges empty values are unassigned and unsupported shapes unavailable; never infer from pool plan
+ok 421 - stage badges empty values are unassigned and unsupported shapes unavailable; never infer from pool plan
+  ---
+  duration_ms: 1.078777
+  type: 'test'
+  ...
+# Subtest: stage feed uses only fixed public GETs and refuses torn snapshots or failed refreshes
+ok 422 - stage feed uses only fixed public GETs and refuses torn snapshots or failed refreshes
+  ---
+  duration_ms: 3.422405
+  type: 'test'
+  ...
+# Subtest: stage feed suppresses overlapping polls and stopped late responses
+ok 423 - stage feed suppresses overlapping polls and stopped late responses
+  ---
+  duration_ms: 2.313694
+  type: 'test'
+  ...
+# Subtest: stage model preserves provider standings scores and advancement without exposing secrets
+ok 424 - stage model preserves provider standings scores and advancement without exposing secrets
+  ---
+  duration_ms: 4.039312
+  type: 'test'
+  ...
+# Subtest: stage model distinguishes pending slots byes and unknown scores without manufacturing winners
+ok 425 - stage model distinguishes pending slots byes and unknown scores without manufacturing winners
+  ---
+  duration_ms: 0.393082
+  type: 'test'
+  ...
+# Subtest: stage model refuses cross-event data unknown identities and duplicate standings identities
+ok 426 - stage model refuses cross-event data unknown identities and duplicate standings identities
+  ---
+  duration_ms: 0.763717
+  type: 'test'
+  ...
+# Subtest: Nakka engine batches fixed-target GETs and every preview obtains fresh provider data
+ok 427 - Nakka engine batches fixed-target GETs and every preview obtains fresh provider data
+  ---
+  duration_ms: 46.584081
+  type: 'test'
+  ...
+# Subtest: Nakka engine batch failures never fall back to duplicate requests or send a mutation
+ok 428 - Nakka engine batch failures never fall back to duplicate requests or send a mutation
+  ---
+  duration_ms: 9.277177
+  type: 'test'
+  ...
+# Subtest: Nakka engine fresh batches retain stale-state and wrong-event write barriers
+ok 429 - Nakka engine fresh batches retain stale-state and wrong-event write barriers
+  ---
+  duration_ms: 4.168176
+  type: 'test'
+  ...
+# Subtest: Nakka engine reports bounded timing labels without credentials names or provider bodies
+ok 430 - Nakka engine reports bounded timing labels without credentials names or provider bodies
+  ---
+  duration_ms: 2.303946
+  type: 'test'
+  ...
+# Subtest: Hub transport starts independent reads together and coalesces only identical in-flight reads
+ok 431 - Hub transport starts independent reads together and coalesces only identical in-flight reads
+  ---
+  duration_ms: 23.481273
+  type: 'test'
+  ...
+# Subtest: Hub transport keeps writes behind earlier reads and later reads behind the write
+ok 432 - Hub transport keeps writes behind earlier reads and later reads behind the write
+  ---
+  duration_ms: 27.174923
+  type: 'test'
+  ...
+# Subtest: Hub transport rejects concurrent late responses after logout without releasing an old write into a new session
+ok 433 - Hub transport rejects concurrent late responses after logout without releasing an old write into a new session
+  ---
+  duration_ms: 4.11399
+  type: 'test'
+  ...
+# Subtest: Nakka troubleshooting uses the existing menu and opens the attention section before checks finish
+ok 434 - Nakka troubleshooting uses the existing menu and opens the attention section before checks finish
+  ---
+  duration_ms: 4.1096
+  type: 'test'
+  ...
+# Subtest: Nakka troubleshooting explains event failures without claiming a verified connection or empty alerts
+ok 435 - Nakka troubleshooting explains event failures without claiming a verified connection or empty alerts
+  ---
+  duration_ms: 10.903466
+  type: 'test'
+  ...
+# Subtest: Nakka troubleshooting shows current event player next step and measured server duration
+ok 436 - Nakka troubleshooting shows current event player next step and measured server duration
+  ---
+  duration_ms: 1.71637
+  type: 'test'
+  ...
+# Subtest: Nakka troubleshooting clears private event and timing state on logout and stops progress updates
+ok 437 - Nakka troubleshooting clears private event and timing state on logout and stops progress updates
+  ---
+  duration_ms: 1.867807
+  type: 'test'
+  ...
+# Subtest: Generated TEST entry makes the entire attention label and number one button inside the existing Nakka menu
+ok 438 - Generated TEST entry makes the entire attention label and number one button inside the existing Nakka menu
+  ---
+  duration_ms: 7.927524
+  type: 'test'
+  ...
+# Subtest: HUB new registration creates one league identity then links one TEST event entry
+ok 439 - HUB new registration creates one league identity then links one TEST event entry
+  ---
+  duration_ms: 62.092833
+  type: 'test'
+  ...
+# Subtest: MOBIL new registration creates one league identity then links one TEST event entry
+ok 440 - MOBIL new registration creates one league identity then links one TEST event entry
+  ---
+  duration_ms: 41.613965
+  type: 'test'
+  ...
+# Subtest: KIOSK new registration creates one league identity then links one TEST event entry
+ok 441 - KIOSK new registration creates one league identity then links one TEST event entry
+  ---
+  duration_ms: 7.283194
+  type: 'test'
+  ...
+# Subtest: Different-person nickname creates its own league member without changing the base player
+ok 442 - Different-person nickname creates its own league member without changing the base player
+  ---
+  duration_ms: 8.204324
+  type: 'test'
+  ...
+# Subtest: A new Beauty identity reuses a unique existing league member without another league add
+ok 443 - A new Beauty identity reuses a unique existing league member without another league add
+  ---
+  duration_ms: 6.373959
+  type: 'test'
+  ...
+# Subtest: New league creation fails closed for wrong target started event duplicate name oversized list and unlinked event entry
+ok 444 - New league creation fails closed for wrong target started event duplicate name oversized list and unlinked event entry
+  ---
+  duration_ms: 40.668035
+  type: 'test'
+  ...
+# Subtest: Uncertain league creation retains registration blocks event add and is never retried
+ok 445 - Uncertain league creation retains registration blocks event add and is never retried
+  ---
+  duration_ms: 57.301674
+  type: 'test'
+  ...
+# Subtest: Verified league creation is reusable read-only while mismatched journals block
+ok 446 - Verified league creation is reusable read-only while mismatched journals block
+  ---
+  duration_ms: 9.159605
+  type: 'test'
+  ...
+# Subtest: Creation journal failure and stale date or source state prevent the league POST
+ok 447 - Creation journal failure and stale date or source state prevent the league POST
+  ---
+  duration_ms: 18.057948
+  type: 'test'
+  ...
+# Subtest: League identity swaps after creation cannot substitute a different player ID in the event add
+ok 448 - League identity swaps after creation cannot substitute a different player ID in the event add
+  ---
+  duration_ms: 43.735074
+  type: 'test'
+  ...
+# Subtest: Event timeout after verified creation does not repeat either mutation
+ok 449 - Event timeout after verified creation does not repeat either mutation
+  ---
+  duration_ms: 27.237565
+  type: 'test'
+  ...
+# Subtest: Creation helper requires enabled gates canonical saved input current day and valid authority
+ok 450 - Creation helper requires enabled gates canonical saved input current day and valid authority
+  ---
+  duration_ms: 18.364239
+  type: 'test'
+  ...
+# Subtest: Existing Beauty master player absent from Nakka is created and entered using the same guarded flow
+ok 451 - Existing Beauty master player absent from Nakka is created and entered using the same guarded flow
+  ---
+  duration_ms: 7.92993
+  type: 'test'
+  ...
+# Subtest: Remote and kiosk HtmlService outputs set device viewport while staff routes stay unchanged
+ok 452 - Remote and kiosk HtmlService outputs set device viewport while staff routes stay unchanged
+  ---
+  duration_ms: 5.314854
+  type: 'test'
+  ...
+# Subtest: Yellow new-player selector beats legacy button specificity and attendee panel grows to content
+ok 453 - Yellow new-player selector beats legacy button specificity and attendee panel grows to content
+  ---
+  duration_ms: 0.797995
+  type: 'test'
+  ...
+# Subtest: Opening either picker focuses its title without invoking search, locks background and sets dialog semantics
+ok 454 - Opening either picker focuses its title without invoking search, locks background and sets dialog semantics
+  ---
+  duration_ms: 4.841685
+  type: 'test'
+  ...
+# Subtest: Picking a name closes, blurs search, clears filtering, restores scroll and original inert state
+ok 455 - Picking a name closes, blurs search, clears filtering, restores scroll and original inert state
+  ---
+  duration_ms: 6.788158
+  type: 'test'
+  ...
+# Subtest: New-player action is outside results, stays visible while filtering and preserves canonical sentinel
+ok 456 - New-player action is outside results, stays visible while filtering and preserves canonical sentinel
+  ---
+  duration_ms: 1.85583
+  type: 'test'
+  ...
+# Subtest: Keyboard viewport resize keeps picker at visible top; Done dismisses input without submitting
+ok 457 - Keyboard viewport resize keeps picker at visible top; Done dismisses input without submitting
+  ---
+  duration_ms: 2.097148
+  type: 'test'
+  ...
+# Subtest: Escape/backdrop close safely, and repeated closing cannot change restored scroll
+ok 458 - Escape/backdrop close safely, and repeated closing cannot change restored scroll
+  ---
+  duration_ms: 1.918298
+  type: 'test'
+  ...
+# Subtest: Tab remains inside modal, and names and helper text are inserted literally
+ok 459 - Tab remains inside modal, and names and helper text are inserted literally
+  ---
+  duration_ms: 1.893238
+  type: 'test'
+  ...
+# Subtest: RemoteRegistration.html selection keeps canonical name, closes picker and continues existing new-player path
+ok 460 - RemoteRegistration.html selection keeps canonical name, closes picker and continues existing new-player path
+  ---
+  duration_ms: 4.807293
+  type: 'test'
+  ...
+# Subtest: KioskTest.html selection keeps canonical name, closes picker and continues existing new-player path
+ok 461 - KioskTest.html selection keeps canonical name, closes picker and continues existing new-player path
+  ---
+  duration_ms: 6.296505
+  type: 'test'
+  ...
+# Subtest: RemoteRegistration.html loads minimal registration context and hides form on wrong event day
+ok 462 - RemoteRegistration.html loads minimal registration context and hides form on wrong event day
+  ---
+  duration_ms: 8.751258
+  type: 'test'
+  ...
+# Subtest: RemoteRegistration.html actual submit sends date through its own RPC with no client source or staff credential
+ok 463 - RemoteRegistration.html actual submit sends date through its own RPC with no client source or staff credential
+  ---
+  duration_ms: 2.484218
+  type: 'test'
+  ...
+# Subtest: RemoteRegistration.html success distinguishes saved registration from Nakka attention and keeps five-second next-player return
+ok 464 - RemoteRegistration.html success distinguishes saved registration from Nakka attention and keeps five-second next-player return
+  ---
+  duration_ms: 1.523816
+  type: 'test'
+  ...
+# Subtest: RemoteRegistration.html Swedish error boundary preserves identity fields and never exposes unknown server prose
+ok 465 - RemoteRegistration.html Swedish error boundary preserves identity fields and never exposes unknown server prose
+  ---
+  duration_ms: 1.998311
+  type: 'test'
+  ...
+# Subtest: RemoteRegistration.html context-load failure shows Swedish help instead of raw service errors
+ok 466 - RemoteRegistration.html context-load failure shows Swedish help instead of raw service errors
+  ---
+  duration_ms: 1.56583
+  type: 'test'
+  ...
+# Subtest: KioskTest.html loads minimal registration context and hides form on wrong event day
+ok 467 - KioskTest.html loads minimal registration context and hides form on wrong event day
+  ---
+  duration_ms: 1.756673
+  type: 'test'
+  ...
+# Subtest: KioskTest.html actual submit sends date through its own RPC with no client source or staff credential
+ok 468 - KioskTest.html actual submit sends date through its own RPC with no client source or staff credential
+  ---
+  duration_ms: 2.126109
+  type: 'test'
+  ...
+# Subtest: KioskTest.html success distinguishes saved registration from Nakka attention and keeps five-second next-player return
+ok 469 - KioskTest.html success distinguishes saved registration from Nakka attention and keeps five-second next-player return
+  ---
+  duration_ms: 1.673641
+  type: 'test'
+  ...
+# Subtest: KioskTest.html Swedish error boundary preserves identity fields and never exposes unknown server prose
+ok 470 - KioskTest.html Swedish error boundary preserves identity fields and never exposes unknown server prose
+  ---
+  duration_ms: 2.082178
+  type: 'test'
+  ...
+# Subtest: KioskTest.html context-load failure shows Swedish help instead of raw service errors
+ok 471 - KioskTest.html context-load failure shows Swedish help instead of raw service errors
+  ---
+  duration_ms: 2.242824
+  type: 'test'
+  ...
+# Subtest: Central player TEST pages preserve Swedish shared identity modules and parse all inline scripts
+ok 472 - Central player TEST pages preserve Swedish shared identity modules and parse all inline scripts
+  ---
+  duration_ms: 11.638384
+  type: 'test'
+  ...
+# Subtest: MOBIL TEST registration saves and transfers with stamped source and no Hub staff session
+ok 473 - MOBIL TEST registration saves and transfers with stamped source and no Hub staff session
+  ---
+  duration_ms: 50.321
+  type: 'test'
+  ...
+# Subtest: MOBIL TEST registration retains Sheet success on timeout and blocks duplicate across sources
+ok 474 - MOBIL TEST registration retains Sheet success on timeout and blocks duplicate across sources
+  ---
+  duration_ms: 10.946124
+  type: 'test'
+  ...
+# Subtest: MOBIL TEST registration rejects target source context token and actor spoofing before writes
+ok 475 - MOBIL TEST registration rejects target source context token and actor spoofing before writes
+  ---
+  duration_ms: 28.626171
+  type: 'test'
+  ...
+# Subtest: MOBIL TEST registration preserves nickname conflict and creates the resolved new league identity
+ok 476 - MOBIL TEST registration preserves nickname conflict and creates the resolved new league identity
+  ---
+  duration_ms: 14.409311
+  type: 'test'
+  ...
+# Subtest: MOBIL TEST registration stale day busy and invalid input cannot append or transfer
+ok 477 - MOBIL TEST registration stale day busy and invalid input cannot append or transfer
+  ---
+  duration_ms: 22.191091
+  type: 'test'
+  ...
+# Subtest: KIOSK TEST registration saves and transfers with stamped source and no Hub staff session
+ok 478 - KIOSK TEST registration saves and transfers with stamped source and no Hub staff session
+  ---
+  duration_ms: 5.04016
+  type: 'test'
+  ...
+# Subtest: KIOSK TEST registration retains Sheet success on timeout and blocks duplicate across sources
+ok 479 - KIOSK TEST registration retains Sheet success on timeout and blocks duplicate across sources
+  ---
+  duration_ms: 5.527537
+  type: 'test'
+  ...
+# Subtest: KIOSK TEST registration rejects target source context token and actor spoofing before writes
+ok 480 - KIOSK TEST registration rejects target source context token and actor spoofing before writes
+  ---
+  duration_ms: 26.126058
+  type: 'test'
+  ...
+# Subtest: KIOSK TEST registration preserves nickname conflict and creates the resolved new league identity
+ok 481 - KIOSK TEST registration preserves nickname conflict and creates the resolved new league identity
+  ---
+  duration_ms: 36.774887
+  type: 'test'
+  ...
+# Subtest: KIOSK TEST registration stale day busy and invalid input cannot append or transfer
+ok 482 - KIOSK TEST registration stale day busy and invalid input cannot append or transfer
+  ---
+  duration_ms: 13.828987
+  type: 'test'
+  ...
+# Subtest: Player registration context returns only bounded names date and availability without staff access
+ok 483 - Player registration context returns only bounded names date and availability without staff access
+  ---
+  duration_ms: 3.939442
+  type: 'test'
+  ...
+# Subtest: Player context cannot call transfers for a different player or unlock a Hub staff route
+ok 484 - Player context cannot call transfers for a different player or unlock a Hub staff route
+  ---
+  duration_ms: 11.182235
+  type: 'test'
+  ...
+# Subtest: Player registration context always clears on core error and never becomes a reusable public credential
+ok 485 - Player registration context always clears on core error and never becomes a reusable public credential
+  ---
+  duration_ms: 2.26979
+  type: 'test'
+  ...
+# Subtest: Central TEST kiosk route uses owner-only existing project and rejects configuration injection
+ok 486 - Central TEST kiosk route uses owner-only existing project and rejects configuration injection
+  ---
+  duration_ms: 2.631102
+  type: 'test'
+  ...
+# Subtest: Player registrations reuse existing Nakka entry and truthful unavailable league-ID state
+ok 487 - Player registrations reuse existing Nakka entry and truthful unavailable league-ID state
+  ---
+  duration_ms: 9.723658
+  type: 'test'
+  ...
+# Subtest: Player registration project and write gates block service access and leave context empty
+ok 488 - Player registration project and write gates block service access and leave context empty
+  ---
+  duration_ms: 12.529473
+  type: 'test'
+  ...
+# Subtest: Shared player theme build is deterministic and leaves registration scripts unchanged
+ok 489 - Shared player theme build is deterministic and leaves registration scripts unchanged
+  ---
+  duration_ms: 207.362885
+  type: 'test'
+  ...
+# Subtest: Hub remote and kiosk use the supplied original sponsor-free logo and embedded AIK font assets
+ok 490 - Hub remote and kiosk use the supplied original sponsor-free logo and embedded AIK font assets
+  ---
+  duration_ms: 17.94056
+  type: 'test'
+  ...
+# Subtest: Remote approved tonight list uses the bottom close button and number-only shared heading
+ok 491 - Remote approved tonight list uses the bottom close button and number-only shared heading
+  ---
+  duration_ms: 3.887808
+  type: 'test'
+  ...
+# Subtest: Kiosk retains its original sizing and omits player list while remote keeps independent list and sizing
+ok 492 - Kiosk retains its original sizing and omits player list while remote keeps independent list and sizing
+  ---
+  duration_ms: 6.613151
+  type: 'test'
+  ...
+# Subtest: boards: sparse venue ranges allocate twenty pools exactly once on selected boards
+ok 493 - boards: sparse venue ranges allocate twenty pools exactly once on selected boards
+  ---
+  duration_ms: 5.004445
+  type: 'test'
+  ...
+# Subtest: boards: mixed sizes balance match workload and assign sequential board batches
+ok 494 - boards: mixed sizes balance match workload and assign sequential board batches
+  ---
+  duration_ms: 0.70499
+  type: 'test'
+  ...
+# Subtest: boards: invalid ranges, empty selection and duplicate pool identities fail closed
+ok 495 - boards: invalid ranges, empty selection and duplicate pool identities fail closed
+  ---
+  duration_ms: 1.263388
+  type: 'test'
+  ...
+# Subtest: pool UI reviews mappings, renders frozen group means, and does not send during generation
+ok 496 - pool UI reviews mappings, renders frozen group means, and does not send during generation
+  ---
+  duration_ms: 208.577173
+  type: 'test'
+  ...
+# Subtest: pool UI manual swaps request server adjustment and retain no old approval
+ok 497 - pool UI manual swaps request server adjustment and retain no old approval
+  ---
+  duration_ms: 80.943402
+  type: 'test'
+  ...
+# Subtest: pool UI only sends after final approval and cannot double click while saving
+ok 498 - pool UI only sends after final approval and cannot double click while saving
+  ---
+  duration_ms: 53.706744
+  type: 'test'
+  ...
+# Subtest: pool UI withdrawals invalidate review and preserve visible frozen draw without silently redrawing
+ok 499 - pool UI withdrawals invalidate review and preserve visible frozen draw without silently redrawing
+  ---
+  duration_ms: 74.248405
+  type: 'test'
+  ...
+# Subtest: pool UI lock drops late response and clears identities and previews
+ok 500 - pool UI lock drops late response and clears identities and previews
+  ---
+  duration_ms: 75.575885
+  type: 'test'
+  ...
+# Subtest: pool UI provider timeout blocks repeat send and retains inspect-before-retry guidance
+ok 501 - pool UI provider timeout blocks repeat send and retains inspect-before-retry guidance
+  ---
+  duration_ms: 109.209051
+  type: 'test'
+  ...
+# Subtest: pool UI automatic refresh preserves a frozen preview and its controls
+ok 502 - pool UI automatic refresh preserves a frozen preview and its controls
+  ---
+  duration_ms: 41.82155
+  type: 'test'
+  ...
+# Subtest: pool TEST transport routes authenticated exact payloads and rejects target or extra-key injection
+ok 503 - pool TEST transport routes authenticated exact payloads and rejects target or extra-key injection
+  ---
+  duration_ms: 3.836282
+  type: 'test'
+  ...
+# Subtest: pool UI closing and reopening drops an old handoff approval while retaining the frozen reference
+ok 504 - pool UI closing and reopening drops an old handoff approval while retaining the frozen reference
+  ---
+  duration_ms: 84.348412
+  type: 'test'
+  ...
+# Subtest: pool UI renders omitted and null RPC averages as Unseeded and keeps measured zero numeric
+ok 505 - pool UI renders omitted and null RPC averages as Unseeded and keeps measured zero numeric
+  ---
+  duration_ms: 65.021294
+  type: 'test'
+  ...
+# Subtest: pool UI normalizes omitted frozen averages before pool means colours and manual review
+ok 506 - pool UI normalizes omitted frozen averages before pool means colours and manual review
+  ---
+  duration_ms: 25.751335
+  type: 'test'
+  ...
+# Subtest: pool approved workspace opens as one main-page section and sidebar navigation closes it without RPC
+ok 507 - pool approved workspace opens as one main-page section and sidebar navigation closes it without RPC
+  ---
+  duration_ms: 19.111156
+  type: 'test'
+  ...
+# Subtest: pool workspace board and size changes invalidate an approved frozen draw without silently redrawing
+ok 508 - pool workspace board and size changes invalidate an approved frozen draw without silently redrawing
+  ---
+  duration_ms: 54.051065
+  type: 'test'
+  ...
+# Subtest: pool workspace advanced hypothetical count is isolated from actual roster and handoff approval
+ok 509 - pool workspace advanced hypothetical count is isolated from actual roster and handoff approval
+  ---
+  duration_ms: 54.265939
+  type: 'test'
+  ...
+# Subtest: pool workspace disables Nakka handoff for unresolved identities but preserves planning and swap controls
+ok 510 - pool workspace disables Nakka handoff for unresolved identities but preserves planning and swap controls
+  ---
+  duration_ms: 53.377319
+  type: 'test'
+  ...
+# Subtest: pool workspace colour bands only alter preview presentation and retain frozen values without RPC
+ok 511 - pool workspace colour bands only alter preview presentation and retain frozen values without RPC
+  ---
+  duration_ms: 52.220915
+  type: 'test'
+  ...
+# Subtest: pool workspace unavailable Hub data blocks generating and clears handoff approval until a new draw
+ok 512 - pool workspace unavailable Hub data blocks generating and clears handoff approval until a new draw
+  ---
+  duration_ms: 77.65124
+  type: 'test'
+  ...
+# Subtest: pool workspace selects physical boards and shows numbered pools sharing only available boards
+ok 513 - pool workspace selects physical boards and shows numbered pools sharing only available boards
+  ---
+  duration_ms: 83.877389
+  type: 'test'
+  ...
+# Subtest: pool workspace invalid board ranges block drawing and excluded Nakka entries block approval
+ok 514 - pool workspace invalid board ranges block drawing and excluded Nakka entries block approval
+  ---
+  duration_ms: 45.756354
+  type: 'test'
+  ...
+# Subtest: pool review orders unresolved identities first and confirms generation only through popup
+ok 515 - pool review orders unresolved identities first and confirms generation only through popup
+  ---
+  duration_ms: 33.049705
+  type: 'test'
+  ...
+# Subtest: pool invalidation retains group overview and disabled swaps with a specific reason
+ok 516 - pool invalidation retains group overview and disabled swaps with a specific reason
+  ---
+  duration_ms: 53.545438
+  type: 'test'
+  ...
+# Subtest: pool card picker excludes same group and marks exactly both exchanged players yellow
+ok 517 - pool card picker excludes same group and marks exactly both exchanged players yellow
+  ---
+  duration_ms: 41.061911
+  type: 'test'
+  ...
+# Subtest: pool card labels reject collisions and preserve the frozen players and RPC ticket
+ok 518 - pool card labels reject collisions and preserve the frozen players and RPC ticket
+  ---
+  duration_ms: 38.729359
+  type: 'test'
+  ...
+# Subtest: pool compact identity warning hides when resolved and scheme counts remain visible
+ok 519 - pool compact identity warning hides when resolved and scheme counts remain visible
+  ---
+  duration_ms: 40.887424
+  type: 'test'
+  ...
+# Subtest: pool estimate works before boards are selected and updates with selected board count
+ok 520 - pool estimate works before boards are selected and updates with selected board count
+  ---
+  duration_ms: 40.391502
+  type: 'test'
+  ...
+# Subtest: pool review is one expandable tab and calculation lives inside Advanced settings
+ok 521 - pool review is one expandable tab and calculation lives inside Advanced settings
+  ---
+  duration_ms: 59.828994
+  type: 'test'
+  ...
+# Subtest: pool toolbar orders review league advanced and buttons expand content without RPC or losing mappings
+ok 522 - pool toolbar orders review league advanced and buttons expand content without RPC or losing mappings
+  ---
+  duration_ms: 34.678525
+  type: 'test'
+  ...
+# Subtest: pool compact cards show groups only for shared boards and keep average in clickable player row
+ok 523 - pool compact cards show groups only for shared boards and keep average in clickable player row
+  ---
+  duration_ms: 36.133503
+  type: 'test'
+  ...
+# Subtest: pool compact Nakka step preserves handoff gates and opens review without sending
+ok 524 - pool compact Nakka step preserves handoff gates and opens review without sending
+  ---
+  duration_ms: 29.776315
+  type: 'test'
+  ...
+# Subtest: Hub board and group dialog picker and scheme are English while canonical draw metadata stays intact
+ok 525 - Hub board and group dialog picker and scheme are English while canonical draw metadata stays intact
+  ---
+  duration_ms: 31.688156
+  type: 'test'
+  ...
+# Subtest: organiser moves a verified pool board without Setup dependency or resending Nakka pools
+ok 526 - organiser moves a verified pool board without Setup dependency or resending Nakka pools
+  ---
+  duration_ms: 10.477023
+  type: 'test'
+  ...
+# Subtest: pool board edit validates duplicate labels and drops writes after the organiser locks
+ok 527 - pool board edit validates duplicate labels and drops writes after the organiser locks
+  ---
+  duration_ms: 12.427732
+  type: 'test'
+  ...
+# Subtest: planner scheme uses only needed pool-size tiles ordered by selected preference and hides redundant boards field
+ok 528 - planner scheme uses only needed pool-size tiles ordered by selected preference and hides redundant boards field
+  ---
+  duration_ms: 17.365925
+  type: 'test'
+  ...
+# Subtest: planner BOARDS tile counts used physical boards and retains only nonzero size chips
+ok 529 - planner BOARDS tile counts used physical boards and retains only nonzero size chips
+  ---
+  duration_ms: 20.675753
+  type: 'test'
+  ...
+# Subtest: pool planner: 37 players prefer three with ten boards
+ok 530 - pool planner: 37 players prefer three with ten boards
+  ---
+  duration_ms: 2.803863
+  type: 'test'
+  ...
+# Subtest: pool planner: 34 players with seven boards cannot fit one pool per board
+ok 531 - pool planner: 34 players with seven boards cannot fit one pool per board
+  ---
+  duration_ms: 0.415388
+  type: 'test'
+  ...
+# Subtest: pool planner: supplied 5–101 schemes match both preferences
+ok 532 - pool planner: supplied 5–101 schemes match both preferences
+  ---
+  duration_ms: 20.630817
+  type: 'test'
+  ...
+# Subtest: pool planner: every arrangement preserves players and board limits
+ok 533 - pool planner: every arrangement preserves players and board limits
+  ---
+  duration_ms: 62.689824
+  type: 'test'
+  ...
+# Subtest: pool planner: rejects invalid inputs and marks counts beyond source scheme
+ok 534 - pool planner: rejects invalid inputs and marks counts beyond source scheme
+  ---
+  duration_ms: 0.443597
+  type: 'test'
+  ...
+# Subtest: pool planner: event count excludes OUT and STANDBY and rejects unknown snapshots
+ok 535 - pool planner: event count excludes OUT and STANDBY and rejects unknown snapshots
+  ---
+  duration_ms: 0.594155
+  type: 'test'
+  ...
+# Subtest: pool planner: real panel reacts to verified event refresh, controls and outages
+ok 536 - pool planner: real panel reacts to verified event refresh, controls and outages
+  ---
+  duration_ms: 25.617324
+  type: 'test'
+  ...
+# Subtest: pool planner: generated TEST download embeds exact original bytes after script inlining
+ok 537 - pool planner: generated TEST download embeds exact original bytes after script inlining
+  ---
+  duration_ms: 10.337423
+  type: 'test'
+  ...
+# Subtest: mixed capacities spread first seeds and improve pool means without clustering the strongest
+ok 538 - mixed capacities spread first seeds and improve pool means without clustering the strongest
+  ---
+  duration_ms: 6.428286
+  type: 'test'
+  ...
+# Subtest: unseeded allocation remains even for all valid 3/4 pool schemes and boundary missing counts
+ok 539 - unseeded allocation remains even for all valid 3/4 pool schemes and boundary missing counts
+  ---
+  duration_ms: 6068.576351
+  type: 'test'
+  ...
+# Subtest: 101-player boundary respects capacities and even unseeded quotas
+ok 540 - 101-player boundary respects capacities and even unseeded quotas
+  ---
+  duration_ms: 7.556929
+  type: 'test'
+  ...
+# Subtest: missing average is null while genuine measured zero remains a known average
+ok 541 - missing average is null while genuine measured zero remains a known average
+  ---
+  duration_ms: 0.9493
+  type: 'test'
+  ...
+# Subtest: deterministic tie shuffle uses the recorded seed and ignores incoming roster order
+ok 542 - deterministic tie shuffle uses the recorded seed and ignores incoming roster order
+  ---
+  duration_ms: 1.092885
+  type: 'test'
+  ...
+# Subtest: frozen draw is independent of future source roster and average changes and excludes private fields
+ok 543 - frozen draw is independent of future source roster and average changes and excludes private fields
+  ---
+  duration_ms: 0.609808
+  type: 'test'
+  ...
+# Subtest: IN-only membership signature changes on withdrawal arrival or rename but not averages or messages
+ok 544 - IN-only membership signature changes on withdrawal arrival or rename but not averages or messages
+  ---
+  duration_ms: 0.565689
+  type: 'test'
+  ...
+# Subtest: manual swaps retain frozen values capacities membership and source draw
+ok 545 - manual swaps retain frozen values capacities membership and source draw
+  ---
+  duration_ms: 0.764306
+  type: 'test'
+  ...
+# Subtest: manual changes warn about clustered first seeds or uneven unseeded counts without inventing averages
+ok 546 - manual changes warn about clustered first seeds or uneven unseeded counts without inventing averages
+  ---
+  duration_ms: 0.999697
+  type: 'test'
+  ...
+# Subtest: invalid moves ambiguous identities unknown statuses string averages and altered snapshots are refused
+ok 547 - invalid moves ambiguous identities unknown statuses string averages and altered snapshots are refused
+  ---
+  duration_ms: 3.58874
+  type: 'test'
+  ...
+# Subtest: adjustable bands use exact non-overlapping boundaries and keep unseeded separate
+ok 548 - adjustable bands use exact non-overlapping boundaries and keep unseeded separate
+  ---
+  duration_ms: 0.870203
+  type: 'test'
+  ...
+# Subtest: invalid pool schemes limits dates and missing statistics provenance cannot produce an approved-looking draw
+ok 549 - invalid pool schemes limits dates and missing statistics provenance cannot produce an approved-looking draw
+  ---
+  duration_ms: 1.033319
+  type: 'test'
+  ...
+# Subtest: pool stats qualify score/darts keyed by LPID; points stay separate and unknown is not zero
+ok 550 - pool stats qualify score/darts keyed by LPID; points stay separate and unknown is not zero
+  ---
+  duration_ms: 45.498721
+  type: 'test'
+  ...
+# Subtest: pool stats retain durable last-good on outage and block fresh draw after refresh failure
+ok 551 - pool stats retain durable last-good on outage and block fresh draw after refresh failure
+  ---
+  duration_ms: 47.361315
+  type: 'test'
+  ...
+# Subtest: pool stats reject inconsistent points and invalid numeric totals without replacing last-good
+ok 552 - pool stats reject inconsistent points and invalid numeric totals without replacing last-good
+  ---
+  duration_ms: 15.305516
+  type: 'test'
+  ...
+# Subtest: pool league profiles paginate and reject repeated IDs or a truncated over-limit list
+ok 553 - pool league profiles paginate and reject repeated IDs or a truncated over-limit list
+  ---
+  duration_ms: 4.39023
+  type: 'test'
+  ...
+# Subtest: pool mappings expose ambiguity and missing entry without silently choosing a league identity
+ok 554 - pool mappings expose ambiguity and missing entry without silently choosing a league identity
+  ---
+  duration_ms: 8.613822
+  type: 'test'
+  ...
+# Subtest: pool handoff verifies all groups and cards, preserves settings and inactive entries, and blocks duplicate send
+ok 555 - pool handoff verifies all groups and cards, preserves settings and inactive entries, and blocks duplicate send
+  ---
+  duration_ms: 21.73429
+  type: 'test'
+  ...
+# Subtest: pool manual swap is server-owned, consumes old ticket, preserves frozen averages and invalidates approval
+ok 556 - pool manual swap is server-owned, consumes old ticket, preserves frozen averages and invalidates approval
+  ---
+  duration_ms: 28.185724
+  type: 'test'
+  ...
+# Subtest: pool source additions withdrawals renames and date changes invalidate a reviewed draw
+ok 557 - pool source additions withdrawals renames and date changes invalidate a reviewed draw
+  ---
+  duration_ms: 23.260833
+  type: 'test'
+  ...
+# Subtest: pool tickets expire and are bound to staff session; unconfirmed sends never mutate
+ok 558 - pool tickets expire and are bound to staff session; unconfirmed sends never mutate
+  ---
+  duration_ms: 81.978967
+  type: 'test'
+  ...
+# Subtest: pool existing groups results cards started events and unsupported formats block handoff
+ok 559 - pool existing groups results cards started events and unsupported formats block handoff
+  ---
+  duration_ms: 67.60837
+  type: 'test'
+  ...
+# Subtest: pool event concurrency or league identity changes after approval block every provider write
+ok 560 - pool event concurrency or league identity changes after approval block every provider write
+  ---
+  duration_ms: 35.252518
+  type: 'test'
+  ...
+# Subtest: pool failures in either provider phase retain attempted journal and block retry without leaking errors
+ok 561 - pool failures in either provider phase retain attempted journal and block retry without leaking errors
+  ---
+  duration_ms: 58.35725
+  type: 'test'
+  ...
+# Subtest: pool unexpected setting changes or missing duplicate foreign pairings fail full readback
+ok 562 - pool unexpected setting changes or missing duplicate foreign pairings fail full readback
+  ---
+  duration_ms: 97.725725
+  type: 'test'
+  ...
+# Subtest: pool audit failure occurs before Nakka mutation and cannot report successful send
+ok 563 - pool audit failure occurs before Nakka mutation and cannot report successful send
+  ---
+  duration_ms: 17.999786
+  type: 'test'
+  ...
+# Subtest: pool structural comparison ignores JSON object order while preserving array order
+ok 564 - pool structural comparison ignores JSON object order while preserving array order
+  ---
+  duration_ms: 1.628605
+  type: 'test'
+  ...
+# Subtest: pool routes require exact inputs, staff authentication and the write gate
+ok 565 - pool routes require exact inputs, staff authentication and the write gate
+  ---
+  duration_ms: 28.112112
+  type: 'test'
+  ...
+# Subtest: pool five-player exception and mixed 4/3 divisions generate the exact rectangular table and pair coverage
+ok 566 - pool five-player exception and mixed 4/3 divisions generate the exact rectangular table and pair coverage
+  ---
+  duration_ms: 47.65418
+  type: 'test'
+  ...
+# Subtest: pool event started between group save and fixture generation blocks the second mutation and records uncertainty
+ok 567 - pool event started between group save and fixture generation blocks the second mutation and records uncertainty
+  ---
+  duration_ms: 16.784642
+  type: 'test'
+  ...
+# Subtest: pool bracket-building status25 permits statistics and frozen preview without a provider mutation
+ok 568 - pool bracket-building status25 permits statistics and frozen preview without a provider mutation
+  ---
+  duration_ms: 10.983202
+  type: 'test'
+  ...
+# Subtest: pool status25 approved handoff retains bracket-building state and boolean auto_schedule through full readback
+ok 569 - pool status25 approved handoff retains bracket-building state and boolean auto_schedule through full readback
+  ---
+  duration_ms: 10.82295
+  type: 'test'
+  ...
+# Subtest: pool status25 still refuses existing groups brackets results ranks and match cards before every provider write
+ok 570 - pool status25 still refuses existing groups brackets results ranks and match cards before every provider write
+  ---
+  duration_ms: 121.015215
+  type: 'test'
+  ...
+# Subtest: pool active finished unknown and string states cannot load or prepare despite status25 support
+ok 571 - pool active finished unknown and string states cannot load or prepare despite status25 support
+  ---
+  duration_ms: 23.494659
+  type: 'test'
+  ...
+# Subtest: pool unqualified excluded event entries block every write and retain explicit review list
+ok 572 - pool unqualified excluded event entries block every write and retain explicit review list
+  ---
+  duration_ms: 14.491406
+  type: 'test'
+  ...
+# Subtest: pool planning lasts thirty minutes while final approval retains five-minute expiry
+ok 573 - pool planning lasts thirty minutes while final approval retains five-minute expiry
+  ---
+  duration_ms: 19.903916
+  type: 'test'
+  ...
+# Subtest: qualified Adapter hash is exact
+ok 574 - qualified Adapter hash is exact
+  ---
+  duration_ms: 4.461644
+  type: 'test'
+  ...
+# Subtest: original recovered Drive Hub remains preserved exactly
+ok 575 - original recovered Drive Hub remains preserved exactly
+  ---
+  duration_ms: 2.146524
+  type: 'test'
+  ...
+# Subtest: current TEST Hub contains the read-only Hub data bridge
+ok 576 - current TEST Hub contains the read-only Hub data bridge
+  ---
+  duration_ms: 2.679675
+  type: 'test'
+  ...
+# Subtest: DateEncoding hash matches recovered script body
+ok 577 - DateEncoding hash matches recovered script body
+  ---
+  duration_ms: 0.518645
+  type: 'test'
+  ...
+# Subtest: DateEncoding round-trips supported dates
+ok 578 - DateEncoding round-trips supported dates
+  ---
+  duration_ms: 3.099864
+  type: 'test'
+  ...
+# Subtest: DateEncoding rejects impossible and fractional dates
+ok 579 - DateEncoding rejects impossible and fractional dates
+  ---
+  duration_ms: 1.812261
+  type: 'test'
+  ...
+# Subtest: TEST route is pinned and write gate is closed
+ok 580 - TEST route is pinned and write gate is closed
+  ---
+  duration_ms: 0.681238
+  type: 'test'
+  ...
+# Subtest: TEST manifest remains owner-only and Sheets v4
+ok 581 - TEST manifest remains owner-only and Sheets v4
+  ---
+  duration_ms: 2.298534
+  type: 'test'
+  ...
+# Subtest: Preflight remains pinned to TEST identity and bounded reads
+ok 582 - Preflight remains pinned to TEST identity and bounded reads
+  ---
+  duration_ms: 1.07159
+  type: 'test'
+  ...
+# Subtest: Adapter retains all stale diagnostics and no automatic retry
+ok 583 - Adapter retains all stale diagnostics and no automatic retry
+  ---
+  duration_ms: 0.953875
+  type: 'test'
+  ...
+# Subtest: Recovered TEST Hub clearly identifies isolated view
+ok 584 - Recovered TEST Hub clearly identifies isolated view
+  ---
+  duration_ms: 5.49055
+  type: 'test'
+  ...
+# Subtest: TEST Hub data adapter is pinned to isolated sheet
+ok 585 - TEST Hub data adapter is pinned to isolated sheet
+  ---
+  duration_ms: 2.258089
+  type: 'test'
+  ...
+# Subtest: TEST Hub data adapter contains no write API
+ok 586 - TEST Hub data adapter contains no write API
+  ---
+  duration_ms: 0.725289
+  type: 'test'
+  ...
+# Subtest: TEST Hub data adapter reads bounded ranges only
+ok 587 - TEST Hub data adapter reads bounded ranges only
+  ---
+  duration_ms: 0.448975
+  type: 'test'
+  ...
+# Subtest: Route exposes read-only TEST Hub RPC
+ok 588 - Route exposes read-only TEST Hub RPC
+  ---
+  duration_ms: 0.511462
+  type: 'test'
+  ...
+# Subtest: Hub routes hubdata through TEST RPC
+ok 589 - Hub routes hubdata through TEST RPC
+  ---
+  duration_ms: 2.529794
+  type: 'test'
+  ...
+# Subtest: TEST status dropdown remains disabled
+ok 590 - TEST status dropdown remains disabled
+  ---
+  duration_ms: 8.99702
+  type: 'test'
+  ...
+# Subtest: Event Control write gate remains closed
+ok 591 - Event Control write gate remains closed
+  ---
+  duration_ms: 0.684781
+  type: 'test'
+  ...
+# Subtest: status write gate is false by default
+ok 592 - status write gate is false by default
+  ---
+  duration_ms: 1.715475
+  type: 'test'
+  ...
+# Subtest: Event Control write gate remains false
+ok 593 - Event Control write gate remains false
+  ---
+  duration_ms: 0.493123
+  type: 'test'
+  ...
+# Subtest: status adapter is pinned to TEST identity
+ok 594 - status adapter is pinned to TEST identity
+  ---
+  duration_ms: 0.643163
+  type: 'test'
+  ...
+# Subtest: status adapter only accepts IN OUT STANDBY
+ok 595 - status adapter only accepts IN OUT STANDBY
+  ---
+  duration_ms: 3.087167
+  type: 'test'
+  ...
+# Subtest: closed gate prevents client access entirely
+ok 596 - closed gate prevents client access entirely
+  ---
+  duration_ms: 2.956765
+  type: 'test'
+  ...
+# Subtest: Route exposes dedicated TEST status RPC
+ok 597 - Route exposes dedicated TEST status RPC
+  ---
+  duration_ms: 0.583182
+  type: 'test'
+  ...
+# Subtest: Hub has TEST status bridge but dropdown stays disabled while gated
+ok 598 - Hub has TEST status bridge but dropdown stays disabled while gated
+  ---
+  duration_ms: 2.782573
+  type: 'test'
+  ...
+# Subtest: identity conflict requires a choice before resolving an existing typed name
+ok 599 - identity conflict requires a choice before resolving an existing typed name
+  ---
+  duration_ms: 2.783292
+  type: 'test'
+  ...
+# Subtest: identity comparison normalizes case whitespace and Unicode accents
+ok 600 - identity comparison normalizes case whitespace and Unicode accents
+  ---
+  duration_ms: 0.548754
+  type: 'test'
+  ...
+# Subtest: new unique name needs no identifying detail
+ok 601 - new unique name needs no identifying detail
+  ---
+  duration_ms: 1.198523
+  type: 'test'
+  ...
+# Subtest: existing player not registered tonight can be selected without extra prompt
+ok 602 - existing player not registered tonight can be selected without extra prompt
+  ---
+  duration_ms: 0.394627
+  type: 'test'
+  ...
+# Subtest: already registered selected player receives the same identity popup contract
+ok 603 - already registered selected player receives the same identity popup contract
+  ---
+  duration_ms: 0.322498
+  type: 'test'
+  ...
+# Subtest: thats me reuses existing player and never creates a second master identity
+ok 604 - thats me reuses existing player and never creates a second master identity
+  ---
+  duration_ms: 0.289735
+  type: 'test'
+  ...
+# Subtest: thats me blocks a second registration tonight
+ok 605 - thats me blocks a second registration tonight
+  ---
+  duration_ms: 0.415705
+  type: 'test'
+  ...
+# Subtest: different person gets a distinct confirmed display name
+ok 606 - different person gets a distinct confirmed display name
+  ---
+  duration_ms: 0.518759
+  type: 'test'
+  ...
+# Subtest: different person must confirm the exact proposed display name
+ok 607 - different person must confirm the exact proposed display name
+  ---
+  duration_ms: 0.960683
+  type: 'test'
+  ...
+# Subtest: blank excessive or unsafe detail is rejected
+ok 608 - blank excessive or unsafe detail is rejected
+  ---
+  duration_ms: 1.028456
+  type: 'test'
+  ...
+# Subtest: reused identifying detail is rejected even with case differences
+ok 609 - reused identifying detail is rejected even with case differences
+  ---
+  duration_ms: 0.421548
+  type: 'test'
+  ...
+# Subtest: stale or forged conflict bases are rejected
+ok 610 - stale or forged conflict bases are rejected
+  ---
+  duration_ms: 0.249126
+  type: 'test'
+  ...
+# Subtest: ambiguous identical master rows require organiser help
+ok 611 - ambiguous identical master rows require organiser help
+  ---
+  duration_ms: 0.179865
+  type: 'test'
+  ...
+# Subtest: unknown selections and invalid identity choices cannot create players
+ok 612 - unknown selections and invalid identity choices cannot create players
+  ---
+  duration_ms: 2.695385
+  type: 'test'
+  ...
+# Subtest: identity dialog reveals detail only after choosing a different person
+ok 613 - identity dialog reveals detail only after choosing a different person
+  ---
+  duration_ms: 3.641192
+  type: 'test'
+  ...
+# Subtest: identity dialog requires review then explicit confirmation before sending detail
+ok 614 - identity dialog requires review then explicit confirmation before sending detail
+  ---
+  duration_ms: 3.066716
+  type: 'test'
+  ...
+# Subtest: editing the detail after review requires confirmation again
+ok 615 - editing the detail after review requires confirmation again
+  ---
+  duration_ms: 2.025119
+  type: 'test'
+  ...
+# Subtest: identity dialog thats me returns the existing choice with canonical base
+ok 616 - identity dialog thats me returns the existing choice with canonical base
+  ---
+  duration_ms: 7.735728
+  type: 'test'
+  ...
+# Subtest: identity dialog cancel cancels without resubmission
+ok 617 - identity dialog cancel cancels without resubmission
+  ---
+  duration_ms: 1.641841
+  type: 'test'
+  ...
+# Subtest: identity dialog close cancels without resubmission
+ok 618 - identity dialog close cancels without resubmission
+  ---
+  duration_ms: 2.01456
+  type: 'test'
+  ...
+# Subtest: identity dialog escape cancels without resubmission
+ok 619 - identity dialog escape cancels without resubmission
+  ---
+  duration_ms: 1.663582
+  type: 'test'
+  ...
+# Subtest: identity dialog backdrop cancels without resubmission
+ok 620 - identity dialog backdrop cancels without resubmission
+  ---
+  duration_ms: 1.549977
+  type: 'test'
+  ...
+# Subtest: identity submission never retries a transport failure
+ok 621 - identity submission never retries a transport failure
+  ---
+  duration_ms: 6.785977
+  type: 'test'
+  ...
+# Subtest: identity dialog restores focus and traps keyboard tabbing
+ok 622 - identity dialog restores focus and traps keyboard tabbing
+  ---
+  duration_ms: 4.231628
+  type: 'test'
+  ...
+# Subtest: remote-app candidate gate blocks registration before any service access
+ok 623 - remote-app candidate gate blocks registration before any service access
+  ---
+  duration_ms: 3.003077
+  type: 'test'
+  ...
+# Subtest: remote-app candidate conflict preflight performs no mutation
+ok 624 - remote-app candidate conflict preflight performs no mutation
+  ---
+  duration_ms: 2.698229
+  type: 'test'
+  ...
+# Subtest: remote-app candidate thats me blocks duplicate without mutation
+ok 625 - remote-app candidate thats me blocks duplicate without mutation
+  ---
+  duration_ms: 1.572883
+  type: 'test'
+  ...
+# Subtest: remote-app candidate saves only distinct confirmed name preserving original identity
+ok 626 - remote-app candidate saves only distinct confirmed name preserving original identity
+  ---
+  duration_ms: 2.093957
+  type: 'test'
+  ...
+# Subtest: remote-app candidate invalid confirmation cannot mutate Sheets
+ok 627 - remote-app candidate invalid confirmation cannot mutate Sheets
+  ---
+  duration_ms: 1.843743
+  type: 'test'
+  ...
+# Subtest: automatic-nakka candidate gate blocks registration before any service access
+ok 628 - automatic-nakka candidate gate blocks registration before any service access
+  ---
+  duration_ms: 2.897557
+  type: 'test'
+  ...
+# Subtest: automatic-nakka candidate conflict preflight performs no mutation
+ok 629 - automatic-nakka candidate conflict preflight performs no mutation
+  ---
+  duration_ms: 2.356854
+  type: 'test'
+  ...
+# Subtest: automatic-nakka candidate thats me blocks duplicate without mutation
+ok 630 - automatic-nakka candidate thats me blocks duplicate without mutation
+  ---
+  duration_ms: 1.660588
+  type: 'test'
+  ...
+# Subtest: automatic-nakka candidate saves only distinct confirmed name preserving original identity
+ok 631 - automatic-nakka candidate saves only distinct confirmed name preserving original identity
+  ---
+  duration_ms: 1.833852
+  type: 'test'
+  ...
+# Subtest: automatic-nakka candidate invalid confirmation cannot mutate Sheets
+ok 632 - automatic-nakka candidate invalid confirmation cannot mutate Sheets
+  ---
+  duration_ms: 1.662851
+  type: 'test'
+  ...
+# Subtest: remote-app/RemoteRegistration.html actual submit handler resolves collision before candidate save
+ok 633 - remote-app/RemoteRegistration.html actual submit handler resolves collision before candidate save
+  ---
+  duration_ms: 4.465561
+  type: 'test'
+  ...
+# Subtest: automatic-nakka/Kiosk.html actual submit handler resolves collision before candidate save
+ok 634 - automatic-nakka/Kiosk.html actual submit handler resolves collision before candidate save
+  ---
+  duration_ms: 6.026775
+  type: 'test'
+  ...
+# Subtest: automatic-nakka/RemoteRegistration.html actual submit handler resolves collision before candidate save
+ok 635 - automatic-nakka/RemoteRegistration.html actual submit handler resolves collision before candidate save
+  ---
+  duration_ms: 3.62006
+  type: 'test'
+  ...
+# Subtest: remote-app candidate disables Form and Nakka integrations and is owner-only
+ok 636 - remote-app candidate disables Form and Nakka integrations and is owner-only
+  ---
+  duration_ms: 1.718576
+  type: 'test'
+  ...
+# Subtest: automatic-nakka candidate disables Form and Nakka integrations and is owner-only
+ok 637 - automatic-nakka candidate disables Form and Nakka integrations and is owner-only
+  ---
+  duration_ms: 1.714107
+  type: 'test'
+  ...
+# Subtest: remote and kiosk preserve shared Swedish identity sources while Hub loads English derivatives
+ok 638 - remote and kiosk preserve shared Swedish identity sources while Hub loads English derivatives
+  ---
+  duration_ms: 2.989585
+  type: 'test'
+  ...
+# Subtest: production profile validates explicit isolated targets without enabling deployment or writes
+ok 639 - production profile validates explicit isolated targets without enabling deployment or writes
+  ---
+  duration_ms: 17.263992
+  type: 'test'
+  ...
+# Subtest: production profile refuses TEST identities write activation duplicate staff and impossible dates
+ok 640 - production profile refuses TEST identities write activation duplicate staff and impossible dates
+  ---
+  duration_ms: 1.297967
+  type: 'test'
+  ...
+# Subtest: production profile refuses injected endpoints and missing approval fields without leaking values
+ok 641 - production profile refuses injected endpoints and missing approval fields without leaking values
+  ---
+  duration_ms: 0.849125
+  type: 'test'
+  ...
+# Subtest: unprovisioned production template fails offline readiness check without changing source
+ok 642 - unprovisioned production template fails offline readiness check without changing source
+  ---
+  duration_ms: 139.511953
+  type: 'test'
+  ...
+# Subtest: stage third-place tables remain separate and use their own results badges and leg override
+ok 643 - stage third-place tables remain separate and use their own results badges and leg override
+  ---
+  duration_ms: 3.005906
+  type: 'test'
+  ...
+# Subtest: stage format does not guess conflicting overrides and empty third-place table stays absent
+ok 644 - stage format does not guess conflicting overrides and empty third-place table stays absent
+  ---
+  duration_ms: 0.741816
+  type: 'test'
+  ...
+# Subtest: stage round-robin matrix preserves table positions zero results and missing opponent scores
+ok 645 - stage round-robin matrix preserves table positions zero results and missing opponent scores
+  ---
+  duration_ms: 1.415528
+  type: 'test'
+  ...
+# Subtest: stage league matrices use schedule card ids and flag repeated fixtures without combining results
+ok 646 - stage league matrices use schedule card ids and flag repeated fixtures without combining results
+  ---
+  duration_ms: 0.828634
+  type: 'test'
+  ...
+# Subtest: stage feed tolerates documented no-groups status only for knockout-only events
+ok 647 - stage feed tolerates documented no-groups status only for knockout-only events
+  ---
+  duration_ms: 1.89359
+  type: 'test'
+  ...
+# Subtest: stage feed reads league fixtures inside its before and after revision check
+ok 648 - stage feed reads league fixtures inside its before and after revision check
+  ---
+  duration_ms: 1.321348
+  type: 'test'
+  ...
+# Subtest: stage URL requires staff twice and matches fixed TEST identity and Hub date before opening
+ok 649 - stage URL requires staff twice and matches fixed TEST identity and Hub date before opening
+  ---
+  duration_ms: 15.542232
+  type: 'test'
+  ...
+# Subtest: stage opener prevents duplicate popups rejects foreign URLs and drops signed-out callbacks
+ok 650 - stage opener prevents duplicate popups rejects foreign URLs and drops signed-out callbacks
+  ---
+  duration_ms: 4.449335
+  type: 'test'
+  ...
+# Subtest: stage route and deterministic generated page include real TEST mode and original assets
+ok 651 - stage route and deterministic generated page include real TEST mode and original assets
+  ---
+  duration_ms: 320.149054
+  type: 'test'
+  ...
+# Subtest: stage diagnostic collects fixed public schemas without player values or private fields
+ok 652 - stage diagnostic collects fixed public schemas without player values or private fields
+  ---
+  duration_ms: 3.327502
+  type: 'test'
+  ...
+# Subtest: stage diagnostic marks changing revisions and records unsupported standings shape honestly
+ok 653 - stage diagnostic marks changing revisions and records unsupported standings shape honestly
+  ---
+  duration_ms: 2.350349
+  type: 'test'
+  ...
+# Subtest: stage diagnostic stops on wrong event and HTTP failure without continuing reads
+ok 654 - stage diagnostic stops on wrong event and HTTP failure without continuing reads
+  ---
+  duration_ms: 1.181642
+  type: 'test'
+  ...
+# Subtest: stage diagnostic bounds nested and wide shapes instead of exporting arbitrary payload values
+ok 655 - stage diagnostic bounds nested and wide shapes instead of exporting arbitrary payload values
+  ---
+  duration_ms: 6.358035
+  type: 'test'
+  ...
+# Subtest: grown roster after uncertain old add offers staff review only and sends no Nakka POST
+ok 656 - grown roster after uncertain old add offers staff review only and sends no Nakka POST
+  ---
+  duration_ms: 42.569857
+  type: 'test'
+  ...
+# Subtest: confirmed current-entry review archives an explicit receipt and keeps the original ATTEMPTED record byte-for-byte
+ok 657 - confirmed current-entry review archives an explicit receipt and keeps the original ATTEMPTED record byte-for-byte
+  ---
+  duration_ms: 6.885962
+  type: 'test'
+  ...
+# Subtest: current review distinguishes exposed league link from unexposed exact identity
+ok 658 - current review distinguishes exposed league link from unexposed exact identity
+  ---
+  duration_ms: 6.853859
+  type: 'test'
+  ...
+# Subtest: review ticket is single-use and bound to original session and user
+ok 659 - review ticket is single-use and bound to original session and user
+  ---
+  duration_ms: 17.628978
+  type: 'test'
+  ...
+# Subtest: changed journal entry ID roster league or event invalidates the review before any review write
+ok 660 - changed journal entry ID roster league or event invalidates the review before any review write
+  ---
+  duration_ms: 17.826533
+  type: 'test'
+  ...
+# Subtest: review receipt does not enable a retry when the player later disappears from Nakka
+ok 661 - review receipt does not enable a retry when the player later disappears from Nakka
+  ---
+  duration_ms: 4.609113
+  type: 'test'
+  ...
+# Subtest: replacement entry requires fresh review and cannot reuse the receipt for another player ID
+ok 662 - replacement entry requires fresh review and cannot reuse the receipt for another player ID
+  ---
+  duration_ms: 5.964256
+  type: 'test'
+  ...
+# Subtest: public registration context cannot create a staff review or silently acknowledge uncertainty
+ok 663 - public registration context cannot create a staff review or silently acknowledge uncertainty
+  ---
+  duration_ms: 2.499252
+  type: 'test'
+  ...
+# Subtest: review cannot turn into an add if the old journal is removed between preview and confirmation
+ok 664 - review cannot turn into an add if the old journal is removed between preview and confirmation
+  ---
+  duration_ms: 3.938563
+  type: 'test'
+  ...
+# Subtest: review storage failure reports uncertainty without provider mutation or rewriting attempt history
+ok 665 - review storage failure reports uncertainty without provider mutation or rewriting attempt history
+  ---
+  duration_ms: 4.783529
+  type: 'test'
+  ...
+# Subtest: attention clears only after confirmed current-entry review and reappears if that entry is replaced
+ok 666 - attention clears only after confirmed current-entry review and reappears if that entry is replaced
+  ---
+  duration_ms: 13.31772
+  type: 'test'
+  ...
+# Subtest: venue running player and group averages weight points by darts and replace live totals without mutating input
+ok 667 - venue running player and group averages weight points by darts and replace live totals without mutating input
+  ---
+  duration_ms: 10.001592
+  type: 'test'
+  ...
+# Subtest: venue completed live response removes both highlights and totals are counted once on transition to archive
+ok 668 - venue completed live response removes both highlights and totals are counted once on transition to archive
+  ---
+  duration_ms: 1.357443
+  type: 'test'
+  ...
+# Subtest: venue missing totals incomplete archive duplicate fixture and set formats never invent group averages
+ok 669 - venue missing totals incomplete archive duplicate fixture and set formats never invent group averages
+  ---
+  duration_ms: 1.970162
+  type: 'test'
+  ...
+# Subtest: venue zero throws remain unknown and corrected scores replace old totals without accumulation
+ok 670 - venue zero throws remain unknown and corrected scores replace old totals without accumulation
+  ---
+  duration_ms: 0.728606
+  type: 'test'
+  ...
+# Subtest: venue matching requires exact TEST event pool and player identities and excludes knockout results
+ok 671 - venue matching requires exact TEST event pool and player identities and excludes knockout results
+  ---
+  duration_ms: 0.595159
+  type: 'test'
+  ...
+# Subtest: venue mismatched frozen membership suppresses starting average and board labels and shared boards sort together
+ok 672 - venue mismatched frozen membership suppresses starting average and board labels and shared boards sort together
+  ---
+  duration_ms: 1.821293
+  type: 'test'
+  ...
+# Subtest: venue collector uses public GET paths and rejects wrong live identity or failed endpoint
+ok 673 - venue collector uses public GET paths and rejects wrong live identity or failed endpoint
+  ---
+  duration_ms: 1.821515
+  type: 'test'
+  ...
+# Subtest: venue collector paginates completely and refuses duplicate match documents
+ok 674 - venue collector paginates completely and refuses duplicate match documents
+  ---
+  duration_ms: 9.64858
+  type: 'test'
+  ...
+# Subtest: venue public metadata reads verified audit baseline and exposes no private registration or staff fields
+ok 675 - venue public metadata reads verified audit baseline and exposes no private registration or staff fields
+  ---
+  duration_ms: 4.251884
+  type: 'test'
+  ...
+# Subtest: venue label publishing authenticates twice and validates frozen pool membership
+ok 676 - venue label publishing authenticates twice and validates frozen pool membership
+  ---
+  duration_ms: 3.172838
+  type: 'test'
+  ...
+# Subtest: venue generated layout retains six card grid matched header font and stale highlight suppression
+ok 677 - venue generated layout retains six card grid matched header font and stale highlight suppression
+  ---
+  duration_ms: 0.749333
+  type: 'test'
+  ...
+# Subtest: venue live feed suppresses overlapping refreshes and drops late data after stopping
+ok 678 - venue live feed suppresses overlapping refreshes and drops late data after stopping
+  ---
+  duration_ms: 23.47295
+  type: 'test'
+  ...
+# Subtest: venue failed full snapshot cannot be revived by polling an old group membership
+ok 679 - venue failed full snapshot cannot be revived by polling an old group membership
+  ---
+  duration_ms: 1.134532
+  type: 'test'
+  ...
+# Subtest: venue expired staff session cannot publish cast labels or change the frozen starting value
+ok 680 - venue expired staff session cannot publish cast labels or change the frozen starting value
+  ---
+  duration_ms: 1.759083
+  type: 'test'
+  ...
+# Subtest: venue card renderer uses literal light player names paired group averages and only two live cells
+ok 681 - venue card renderer uses literal light player names paired group averages and only two live cells
+  ---
+  duration_ms: 3.517378
+  type: 'test'
+  ...
+# Subtest: pool display name split preserves multipart surnames and leaves single-name second line empty
+ok 682 - pool display name split preserves multipart surnames and leaves single-name second line empty
+  ---
+  duration_ms: 2.761802
+  type: 'test'
+  ...
+# Subtest: pool display truncates to one full stop without changing fitting names or splitting graphemes
+ok 683 - pool display truncates to one full stop without changing fitting names or splitting graphemes
+  ---
+  duration_ms: 23.976665
+  type: 'test'
+  ...
+# Subtest: pool name rendering keeps two bounded lines full-name accessibility and separate average
+ok 684 - pool name rendering keeps two bounded lines full-name accessibility and separate average
+  ---
+  duration_ms: 1.63704
+  type: 'test'
+  ...
+# Subtest: approved pool cards show six three-player cards without fourth columns or blank rows
+ok 685 - approved pool cards show six three-player cards without fourth columns or blank rows
+  ---
+  duration_ms: 16.664347
+  type: 'test'
+  ...
+# Subtest: mixed pool page pads only the three-player neighbour of a four-player pool
+ok 686 - mixed pool page pads only the three-player neighbour of a four-player pool
+  ---
+  duration_ms: 8.649877
+  type: 'test'
+  ...
+# Subtest: pool card row count follows the visible page and ranking remains provider-owned
+ok 687 - pool card row count follows the visible page and ranking remains provider-owned
+  ---
+  duration_ms: 3.818243
+  type: 'test'
+  ...
+# Subtest: pool legs totals include exact result and live cells and refuse ambiguous totals
+ok 688 - pool legs totals include exact result and live cells and refuse ambiguous totals
+  ---
+  duration_ms: 0.449919
+  type: 'test'
+  ...
+# Subtest: pool cards preserve paired live highlights averages and missing values without LIVE tags
+ok 689 - pool cards preserve paired live highlights averages and missing values without LIVE tags
+  ---
+  duration_ms: 1.406121
+  type: 'test'
+  ...
+# Subtest: approved pool layout uses two columns fixed name slots blank padding and internal fullscreen
+ok 690 - approved pool layout uses two columns fixed name slots blank padding and internal fullscreen
+  ---
+  duration_ms: 0.808927
+  type: 'test'
+  ...
+# Subtest: pool layout fits mixed neighbours on the observed cast viewport and keeps lower rows shorter
+ok 691 - pool layout fits mixed neighbours on the observed cast viewport and keeps lower rows shorter
+  ---
+  duration_ms: 0.493231
+  type: 'test'
+  ...
+# Subtest: pool layout does not stretch four-group last rows and limits padding to visible neighbours
+ok 692 - pool layout does not stretch four-group last rows and limits padding to visible neighbours
+  ---
+  duration_ms: 0.274821
+  type: 'test'
+  ...
+# Subtest: approved larger two-line names stay within row budget at mixed narrow and compact viewport sizes
+ok 693 - approved larger two-line names stay within row budget at mixed narrow and compact viewport sizes
+  ---
+  duration_ms: 1.745224
+  type: 'test'
+  ...
+# Subtest: four-group mode fills available desktop height with bounded typography and preserves six-group sizing
+ok 694 - four-group mode fills available desktop height with bounded typography and preserves six-group sizing
+  ---
+  duration_ms: 1.752503
+  type: 'test'
+  ...
+# Subtest: four-group partial pages retain the same outer card size and complete pages keep all tracks equal
+ok 695 - four-group partial pages retain the same outer card size and complete pages keep all tracks equal
+  ---
+  duration_ms: 1.674898
+  type: 'test'
+  ...
+1..695
+# tests 695
+# suites 0
+# pass 695
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 11559.217184
+

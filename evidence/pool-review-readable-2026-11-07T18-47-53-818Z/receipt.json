@@ -1,0 +1,66 @@
+{
+  "result": "PASS",
+  "finishedUTC": "2026-11-07T18:48:19.547Z",
+  "scriptId": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/pool-review-readable-2026-11-07T18-47-53-818Z",
+  "tests": "Full regression suite and requirement inventory passed before packaging",
+  "googleSource": "READBACK_VERIFIED",
+  "originalAssets": true,
+  "production": "UNCHANGED",
+  "deployment": "UNCHANGED",
+  "browserVisualCheck": "PENDING",
+  "files": [
+    {
+      "path": "server/pool-service.js",
+      "sha256": "fbfa16dffddc074c06e877684504338d9edf688ece7baa79156b54201d69a731"
+    },
+    {
+      "path": "public/js/pool-planner-seeded.js",
+      "sha256": "20b002cff35b7cfce653e2414e046d20e2a50c8805c13b5aa23b46ca856863d8"
+    },
+    {
+      "path": "public/css/pool-planner.css",
+      "sha256": "4598d1ddd8ae8dba0d6de28b05944ff588a388ff4fe4f7268699ec3c1ead70f8"
+    },
+    {
+      "path": "tests/pool-service.test.cjs",
+      "sha256": "aaa331e60c092dff070eed885afe2ec0135bd5e895ac85cc0f68ee03b24a030b"
+    },
+    {
+      "path": "tests/pool-planner-seeded-ui.test.cjs",
+      "sha256": "0c69344e1e240a063e51efd558a7402d6344587b19c3d13e54b23452ee3c3ee7"
+    },
+    {
+      "path": "docs/handoff/test-inventory.json",
+      "sha256": "d1d497f37104434a575c9b5f4c3081353b2a209c25b2d14e6a41abeb91e93629"
+    },
+    {
+      "path": "docs/handoff/pool-review-readable-20261107.md",
+      "sha256": "4fa1af295581bfe725c9668e0b8ef4fdc32401f7aa3a8a36e91211a5bb298916"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+      "sha256": "0caaa03e556e6a9a277d6a1968667c8352c85791f15d2697c3e473c5a6bcea08"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTestPools.gs",
+      "sha256": "da121b17642660daa66f064c3bf9e96fd9fc53299d05970ca282bcf11ea11612"
+    },
+    {
+      "path": "evidence/pool-review-readable-20261107/installer.txt",
+      "sha256": "c733ba828f4a4a386ba226a8437cd59c0b8f3f61190ea8fbf53621297817fdbd"
+    },
+    {
+      "path": "evidence/pool-review-readable-20261107/inventory.txt",
+      "sha256": "b1a59078b28d2c0e41b8543e8d0081b17f7ffde60592a7f65ff0dfcc26b6ec4c"
+    },
+    {
+      "path": "evidence/pool-review-readable-20261107/regression.txt",
+      "sha256": "1b7dc12c8d41af54888f2c778819d5a57e7b6ece29c766e9cd633773b83d20de"
+    },
+    {
+      "path": "evidence/pool-review-readable-20261107/review.json",
+      "sha256": "d8858aee3741e47e5a5f2a05a67d0f38c9c10cc17edb557f88644b69388957ee"
+    }
+  ]
+}

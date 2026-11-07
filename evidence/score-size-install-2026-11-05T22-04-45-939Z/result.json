@@ -1,0 +1,29 @@
+{
+  "result": "LOCAL_SCORE_SIZE_INSTALL_PASS",
+  "finishedUTC": "2026-11-05T22:05:53.583Z",
+  "before": {
+    "tests": 752,
+    "pass": 752,
+    "failed": []
+  },
+  "after": {
+    "tests": 752,
+    "pass": 752,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/score-size-before-2026-11-05T22-04-45-939Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/score-size-install-2026-11-05T22-04-45-939Z",
+  "files": [
+    "public/css/venue-live.css",
+    "public/js/venue-pool-cards.js",
+    "tests/venue-pool-cards.test.cjs",
+    "apps-script/registration-identity-test/remote-app/StageTest.html",
+    "apps-script/registration-identity-test/remote-app/BeautyLiveTest.html",
+    "evidence/score-size-20261105/README.md"
+  ],
+  "googleUpload": "PENDING — save StageTest.html and BeautyLiveTest.html to Identity TEST only",
+  "deviceAcceptance": "PENDING — verify larger match scores and smaller match averages; the TEST event is already running, do not resend pools or repeat Start; do not resend pools or start yet",
+  "production": "UNCHANGED"
+}

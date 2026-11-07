@@ -1,6 +1,6 @@
 
 // Authorized fixture for existing feature tests; auth itself is tested separately.
-const authFixture={beautyHubAuthRequire_:()=>({uid:'fixture'}),beautyHubRequestToken_:'fixture',BeautyHubAuth:{token:()=> 'fixture',generation:()=>0,isCurrent:()=>true,expired(){}}};
+const authFixture={beautyHubActiveTestTarget_:()=>({id:'t_QHaG_7792',title:'Beauty Registration TEST event DO NOT USE LIVE'}),beautyHubCastHtml_:file=>({file,setTitle(){return this;}}),beautyHubAuthRequire_:()=>({uid:'fixture'}),beautyHubRequestToken_:'fixture',BeautyHubAuth:{token:()=> 'fixture',generation:()=>0,isCurrent:()=>true,expired(){}}};
 process.chdir(require('node:path').resolve(__dirname,'..'));
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),cp=require('node:child_process');
 const model=require('../public/js/beauty-live-model.js'),base='apps-script/registration-identity-test/remote-app/';
@@ -27,7 +27,7 @@ test('Live empty and single page do not rotate or scroll',()=>{
  c.timeouts.at(-1).fn();c.ok(feed([{name:'Adam'}]));c.intervals[0].fn();assert.match(c.nodes.livePage.textContent,/Sida 1 \/ 1/);assert.equal(c.nodes.liveScroll.scrollTop,0);
 });
 
-test('Live route is additive guarded TEST HTML and rejects configuration injection',()=>{const route=fs.readFileSync(base+'Code.js','utf8').split('/* CANDIDATE')[0];let guard=0;const c=vm.createContext({...authFixture,BEAUTY_IDENTITY_APPROVED_SCRIPT_:'TEST',ScriptApp:{getScriptId:()=> 'TEST'},beautyHubTestGuard_:()=>guard++,HtmlService:{createHtmlOutputFromFile:file=>({file,setTitle(){return this;}})}});vm.runInContext(route,c);assert.equal(c.doGet({parameter:{page:'live'}}).file,'BeautyLiveTest');assert.equal(guard,1);assert.equal(c.doGet({parameter:{page:'hub'}}).file,'HubTest');assert.equal(c.doGet({parameter:{}}).file,'RemoteRegistration');assert.throws(()=>c.doGet({parameter:{page:'live',sheet:'other'}}));});
+test('Live route is additive guarded TEST HTML and rejects configuration injection',()=>{const route=fs.readFileSync(base+'Code.js','utf8').split('/* CANDIDATE')[0];let guard=0;const c=vm.createContext({...authFixture,BEAUTY_IDENTITY_APPROVED_SCRIPT_:'TEST',ScriptApp:{getScriptId:()=> 'TEST'},beautyHubTestGuard_:()=>guard++,HtmlService:{createHtmlOutputFromFile:file=>({file,addMetaTag(){return this;},setTitle(){return this;}})}});vm.runInContext(route,c);assert.equal(c.doGet({parameter:{page:'live'}}).file,'BeautyLiveTest');assert.equal(guard,1);assert.equal(c.doGet({parameter:{page:'hub'}}).file,'HubTest');assert.equal(c.doGet({parameter:{}}).file,'RemoteRegistration');assert.throws(()=>c.doGet({parameter:{page:'live',sheet:'other'}}));});
 
 test('Live thirty-player slot boundaries fit wide and narrow screens without duplicates',()=>{
  for(const width of [1440,390])for(const n of [1,15,16,30,31,60,65,90]){
@@ -48,7 +48,7 @@ test('Live real ranking values and ties survive paging; statistics respect the s
 test('Live cached statistics label stale or failed snapshots and reject old or ambiguous data',()=>{
  const s=server();const now=new Date().toISOString();
  s.c.beautyPoolKey_=v=>v.toLowerCase();s.c.PropertiesService={getScriptProperties:()=>({getProperty:()=>null})};
- let snapshot={leagueId:'lg_tM2v_3523',fetchedAt:now,profiles:[{name:'Adam',average:40.83,points:25,secret:'PRIVATE'}]};
+ let snapshot={leagueId:'lg_M2wQ_4189',fetchedAt:now,profiles:[{name:'Adam',average:40.83,points:25,secret:'PRIVATE'}]};
  s.c.beautyPoolLastGood_=()=>snapshot;
  let out=JSON.parse(JSON.stringify(s.c.beautyLiveTestData()));assert.equal(out.statsAvailable,true);assert.equal(out.rankingAvailable,false);assert.equal(out.players[0].average,40.83);assert.equal(out.players[0].points,25);assert.doesNotMatch(JSON.stringify(out),/PRIVATE/);
  snapshot.profiles.push({name:'Adam',average:60,points:50});out=s.c.beautyLiveTestData();assert.equal(out.players[0].average,null);
@@ -83,4 +83,14 @@ test('Live staff timer refreshes only unlocked visible sessions and prevents ove
 });
 test('inline list submenu toggles inside display menu and preserves sort and statistics controls',()=>{
  const c=client();let focused=false;c.nodes.liveSettingsOpen.focus=()=>{focused=true;};c.nodes.liveSettingsOpen.events.click();assert.equal(c.nodes.liveSettings.hidden,false);assert.equal(c.nodes.liveSettings.open,true);c.nodes.liveSettingsOpen.events.click();assert.equal(c.nodes.liveSettings.hidden,true);assert.equal(c.nodes.liveSettings.open,false);assert.equal(focused,true);c.ok(feed([{name:'B',registeredAt:1},{name:'A',registeredAt:2}]));c.nodes.liveSort.value='registration';c.nodes.liveSort.events.change();assert.equal(c.nodes.liveNames.children[0].children[0].children[1].textContent,'B');
+});
+
+test('Live branding follows exact Monday league identity and switches both ways on an open display',()=>{
+ const s=server();let active=null;s.c.beautyContextRead_=()=>active;
+ const branding=require('../public/js/live-branding.js');const attributes={};const doc={body:{setAttribute:(k,v)=>attributes[k]=v}};
+ for(const [context,expected] of [[null,'club'],[{mode:'league',leagueId:'lg_tM2v_3523'},'monday'],[{mode:'tournament',leagueId:''},'club'],[{mode:'league',leagueId:'other'},'club'],[{mode:'league',leagueId:'lg_tM2v_3523'},'monday']]){
+  active=context;const data=s.c.beautyLiveTestData();assert.equal(data.brand,expected);branding.apply(data,doc);assert.equal(attributes['data-live-brand'],expected);
+  assert.equal(data.sheetId,undefined);assert.equal(data.activeEvent,undefined);
+ }
+ branding.apply({brand:'unknown'},doc);assert.equal(attributes['data-live-brand'],'club');
 });

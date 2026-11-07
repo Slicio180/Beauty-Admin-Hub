@@ -1,0 +1,31 @@
+{
+  "result": "LOCAL_EVENT_FORMAT_INSTALL_PASS",
+  "finishedUTC": "2026-11-05T17:17:14.935Z",
+  "before": {
+    "tests": 712,
+    "pass": 712,
+    "failed": []
+  },
+  "after": {
+    "tests": 717,
+    "pass": 717,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/event-format-before-2026-11-05T17-16-07-979Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/event-format-install-2026-11-05T17-16-07-979Z",
+  "files": [
+    "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "apps-script/registration-identity-test/remote-app/HubTestPools.gs",
+    "docs/handoff/test-inventory.json",
+    "public/js/hub-test-services.js",
+    "public/js/pool-planner-seeded.js",
+    "server/pool-service.js",
+    "tests/pool-service.test.cjs",
+    "evidence/event-format-20261105/README.md"
+  ],
+  "googleUpload": "PENDING — upload HubTestPools.gs and HubTest.html to Identity TEST only",
+  "deviceAcceptance": "PENDING — native qualifier settings readback, mixed groups, both brackets, byes and progression in dedicated planner TEST only",
+  "production": "UNCHANGED"
+}

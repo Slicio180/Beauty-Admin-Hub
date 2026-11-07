@@ -1,0 +1,28 @@
+{
+  "result": "LOCAL_KNOCKOUT_SETTINGS_INSTALL_PASS",
+  "finishedUTC": "2026-11-05T18:42:04.752Z",
+  "before": {
+    "tests": 726,
+    "pass": 726,
+    "failed": []
+  },
+  "after": {
+    "tests": 728,
+    "pass": 728,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/knockout-settings-before-2026-11-05T18-41-01-224Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/knockout-settings-install-2026-11-05T18-41-01-224Z",
+  "files": [
+    "server/pool-service.js",
+    "tests/pool-service.test.cjs",
+    "docs/handoff/test-inventory.json",
+    "apps-script/registration-identity-test/remote-app/HubTestPools.gs",
+    "evidence/knockout-settings-20261105/README.md"
+  ],
+  "googleUpload": "PENDING — upload HubTestPools.gs to Identity TEST only",
+  "deviceAcceptance": "PENDING — native knockout format approval and exact provider readback pending",
+  "production": "UNCHANGED"
+}

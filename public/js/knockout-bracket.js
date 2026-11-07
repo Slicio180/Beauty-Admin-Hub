@@ -33,13 +33,14 @@
   const canvas=el('div',null,viewport,'bracket-canvas'),boxes=[];
   function match(m,parent,opening=false){
    const box=el('article',null,parent,'knockout-match'+(m.live?' live-cell':''));
-   if(m.board?.text)el('small','Bana '+m.board.text,box,'knockout-board');
+   const finished=m.board?.state==='finished'||(!m.live&&Number.isFinite(m.leftScore)&&Number.isFinite(m.rightScore)&&m.leftScore!==m.rightScore);
+   if(m.board?.text&&!finished)el('small','Bana '+m.board.text,box,'knockout-board');
    if(m.live)el('small','LIVE',box,'live-tag');
    for(const [side,p,score,avg]of [['left',m.left,m.leftScore,m.leftAverage],['right',m.right,m.rightScore,m.rightAverage]]){
     const row=el('div',null,box,'knockout-player');
     if(opening&&Number.isInteger(m[side+'DrawNumber']))el('span',m[side+'DrawNumber'],row,'draw-number');
     const identity=el('div',null,row,'knockout-identity');
-    el('span',p.state==='bye'?'Frirond':p.state==='pending'?'Väntar på spelare':p.name,identity,'player-name');
+    el('span',p.state==='bye'||p.state==='pending'?'':p.name,identity,'player-name');
     if(p.state==='player')el('small',avg==null?'—':Number(avg).toFixed(2),identity,'match-average');
     el('strong',score==null?'—':score,row,'score');
    }return box;
@@ -59,11 +60,14 @@
     const logo=el('img',null,winnerHeader,'winner-logo');logo.setAttribute('src',LOGO);logo.setAttribute('alt','AIK DART');
     el('h3','VINNARE',winnerHeader,'winner-heading');const winnerCard=el('div',null,winner,'winner-card');el('span',stage.kind==='s2'?'🥇':'🏆',winnerCard,'winner-award');
     const champion=stage.rounds.find(r=>r.slotCount===1)?.matches?.[0]?.left;
-    el('span',champion?.state==='player'?champion.name:'Väntar på vinnare',winnerCard,'winner-name');
+    const final=stage.rounds.find(r=>r.slotCount===2)?.matches?.[0];
+    const completed=final&&!final.live&&Number.isFinite(final.leftScore)&&Number.isFinite(final.rightScore)&&final.leftScore!==final.rightScore;
+    winnerCard.classList.toggle('confirmed-winner',!!completed&&champion?.state==='player');
+    el('span',completed&&champion?.state==='player'?champion.name:'Väntar på vinnare',winnerCard,'winner-name');
    }
   }
   function layout(){
-   const fullWidth=viewport.clientWidth||options.width||1400,width=winner&&fullWidth>=760?fullWidth*.72:fullWidth;headings.style.width=width+'px';const columnWidth=Math.max(260,(width-56*(boxes.length-1))/Math.max(1,boxes.length));for(const row of boxes)for(const n of row)n.style.width=columnWidth+'px';const heights=boxes.map(row=>row.map(n=>Math.max(100,n.offsetHeight||100))),g=geometry(boxes.map(r=>r.length),heights,width);
+   const fullWidth=viewport.clientWidth||options.width||1400,width=winner&&fullWidth>=760?(state.rounds.length===1?Math.min(520,fullWidth*.60):fullWidth*.72):fullWidth;headings.style.width=width+'px';const columnWidth=Math.max(260,(width-56*(boxes.length-1))/Math.max(1,boxes.length));for(const row of boxes)for(const n of row)n.style.width=columnWidth+'px';const heights=boxes.map(row=>row.map(n=>Math.max(100,n.offsetHeight||100))),g=geometry(boxes.map(r=>r.length),heights,width);
    // Spread semifinals while preserving exact orthogonal connector centres.
    if(finalsOnly&&g.cards[0]?.length===2){
     const targetPitch=Math.max(180,Math.min(220,(viewport.clientHeight||600)*.36));
@@ -72,10 +76,14 @@
      for(const p of g.paths){const [a,b]=p.from,c=p.to,x=a.x+a.width,middle=x+28;p.d='M '+x+' '+a.y+' H '+middle+' V '+b.y+' H '+x+' M '+middle+' '+c.y+' H '+c.x;}}
     g.height=Math.max(...g.cards.flat().map(c=>c.y+c.height/2))+20;
    }
-   if((finalsOnly||lastEightView)&&semiHeading){const sc=g.cards[state.rounds.findIndex(r=>r.slotCount===4)]?.[0];if(sc){semiHeading.classList.toggle('semifinal-heading-docked',true);semiHeading.style.position='absolute';semiHeading.style.width=sc.width+'px';semiHeading.style.left=sc.x+'px';semiHeading.style.top=(sc.y-sc.height/2-48)+'px';canvas.appendChild(semiHeading);}}
+   if((finalsOnly||lastEightView)&&semiHeading){const sc=g.cards[state.rounds.findIndex(r=>r.slotCount===4)]?.[0];if(sc){semiHeading.classList.toggle('semifinal-heading-docked',true);semiHeading.style.position='absolute';semiHeading.style.width=sc.width+'px';semiHeading.style.left=sc.x+'px';semiHeading.style.top=(sc.y-sc.height/2-72)+'px';canvas.appendChild(semiHeading);}}
    const finalColumn=state.rounds.findIndex(r=>r.slotCount===2),fc=g.cards[finalColumn]?.[0];
-   if(finalHeading&&fc){finalHeading.style.position='absolute';finalHeading.style.width=fc.width+'px';finalHeading.style.left=fc.x+'px';finalHeading.style.top=(fc.y-fc.height/2-48)+'px';canvas.appendChild(finalHeading);}
-   if(winner&&fc){winner.style.width=(fullWidth>=760?Math.max(160,fullWidth-width-40):fc.width)+'px';winner.style.left=(fullWidth>=760?width+32:fc.x)+'px';const headerHeight=winner.children[0].offsetHeight||86,cardHeight=winner.children[1].offsetHeight||90;winner.style.top=(fullWidth>=760?fc.y-headerHeight-8-cardHeight/2:fc.y+fc.height/2+280)+'px';g.width=fullWidth;g.height=Math.max(g.height,parseFloat(winner.style.top)+(winner.offsetHeight||280));}
+   if(finalHeading&&fc){finalHeading.style.position='absolute';finalHeading.style.width=fc.width+'px';finalHeading.style.left=fc.x+'px';finalHeading.style.top=(fc.y-fc.height/2-72)+'px';canvas.appendChild(finalHeading);}
+   if(winner&&fc){winner.style.width=(fullWidth>=760?Math.max(160,fullWidth-width-40):fc.width)+'px';winner.style.left=(fullWidth>=760?width+32:fc.x)+'px';const headerHeight=winner.children[0].offsetHeight||86,cardHeight=winner.children[1].offsetHeight||90;winner.style.top=(fullWidth>=760?fc.y-headerHeight-8-cardHeight/2:fc.y+fc.height/2+280)+'px';g.width=fullWidth;g.height=Math.max(g.height,parseFloat(winner.style.top)+(winner.offsetHeight||280));
+    const x=fc.x+fc.width,y=fc.y,wx=parseFloat(winner.style.left),wy=parseFloat(winner.style.top)+headerHeight+8+cardHeight/2;
+    const d=fullWidth>=760?'M '+x+' '+y+' H '+(x+wx)/2+' V '+wy+' H '+wx:'M '+(fc.x+fc.width/2)+' '+(fc.y+fc.height/2)+' V '+wy+' H '+wx;
+    g.paths.push({d,winner:true});
+   }
    // Bronze match below the lower semifinal connector.
    if(third){
     const column=state.rounds.findIndex(r=>r.slotCount===2),finalCard=g.cards[column]?.[0];
@@ -90,7 +98,7 @@
    return g;
   }
   if(!state.rounds.length)el('p','Inget slutspelsträd har hämtats ännu.',viewport,'empty-state');
-  if(stage.thirdPlace&&state.start+state.rounds.length>=state.total){third=el('section',null,canvas,'knockout-third');const thirdHeading=el('h3',null,third);el('span','3',thirdHeading,'third-place-number');el('span',':e',thirdHeading,'third-place-suffix');el('span',' PLATS',thirdHeading,'third-place-word');if(stage.thirdPlace.format)el('p',formatText(stage.thirdPlace.format),third);match(stage.thirdPlace,third);}
+  if(stage.thirdPlace&&stage.rounds.some(r=>r.slotCount>=4)&&[stage.thirdPlace.left,stage.thirdPlace.right].some(p=>p.state==='player')&&state.start+state.rounds.length>=state.total){third=el('section',null,canvas,'knockout-third');const thirdHeading=el('h3',null,third);el('span','3',thirdHeading,'third-place-number');el('span',':e',thirdHeading,'third-place-suffix');el('span',' PLATS',thirdHeading,'third-place-word');if(stage.thirdPlace.format)el('p',formatText(stage.thirdPlace.format),third);match(stage.thirdPlace,third);}
   layout();return {...state,viewport,layout};
  }
  const api=Object.freeze({title,playable,windowFor,geometry,render});if(typeof module==='object'&&module.exports)module.exports=api;else root.BeautyKnockoutBracket=api;

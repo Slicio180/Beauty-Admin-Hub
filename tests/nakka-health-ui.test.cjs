@@ -265,3 +265,21 @@ test('Nakka health auth: logout clears status and late response cannot repaint a
   assert.equal(h.elements.nakkaHealthText.textContent,'OK');
   assert.equal(h.elements.nakkaHealthRefresh.disabled,true);
 });
+
+
+test('Busy Nakka check uses a waiting indicator and retries after cooldown without hiding real degradation', async () => {
+ const ui=harness({fetchImpl:async(_u,_o,n)=>response(n===1?{...health('DEGRADED'),message:'A Nakka check is already running. Refresh shortly.'}:health('DEGRADED'))});
+ await settle();assert.equal(ui.elements.nakkaHealthText.textContent,'CHECKING…');
+ assert.equal(ui.elements.nakkaNavButton.getAttribute('data-health'),'waiting');
+ assert.equal(ui.elements.nakkaHealthDot.classList.contains('degraded'),false);
+ assert.equal(ui.elements.nakkaHealthTimestamp.dateTime,'');
+ await ui.advance(59999);assert.equal(ui.requests.length,1);
+ await ui.advance(1);assert.equal(ui.requests.length,2);
+ assert.equal(ui.elements.nakkaHealthText.textContent,'DEGRADED');
+ assert.equal(ui.elements.nakkaNavButton.getAttribute('data-health'),'degraded');
+});
+test('Busy Nakka retry is cancelled on logout and does not probe hidden tabs',async()=>{
+ const busy=async()=>response({...health('DEGRADED'),message:'A Nakka check is already running. Refresh shortly.'});
+ const ui=harness({fetchImpl:busy});await settle();await ui.emit('beauty-hub-locked');await ui.advance(60000);assert.equal(ui.requests.length,1);
+ const hidden=harness({fetchImpl:busy});await settle();await hidden.setHidden(true);await hidden.advance(60000);assert.equal(hidden.requests.length,1);
+});

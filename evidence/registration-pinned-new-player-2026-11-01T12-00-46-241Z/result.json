@@ -1,0 +1,23 @@
+{
+  "at": "2026-11-01T12:00:46.294Z",
+  "status": "PREPARED — TEST UPLOAD AND VISUAL REVIEW PENDING",
+  "files": [
+    {
+      "file": "apps-script/registration-identity-test/remote-app/RemoteRegistration.html",
+      "before": "509067b8695864b8ea36a2b61b471821a3b01e4cd1f8904d5885005568e3a1b3",
+      "after": "5c100cb168ea39bfe3e480c2410a5a8c9c4a2f419ddd8ab87ca6cb16e8c867a2"
+    },
+    {
+      "file": "apps-script/registration-identity-test/remote-app/KioskTest.html",
+      "before": "058e0bdb5f78ffca5b6c73a53555bb6378917e881b8a560535fd874152692e47",
+      "after": "edc3feb67c8cdcf2e634b06ee2405181876db882a8dc01ad21c9178db1a4cc14"
+    }
+  ],
+  "production": "UNCHANGED",
+  "checks": [
+    "both original hashes verified",
+    "both patched hashes verified"
+  ],
+  "visualReview": "PENDING",
+  "fullSuite": "PENDING"
+}

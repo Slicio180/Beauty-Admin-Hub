@@ -1,0 +1,26 @@
+{
+  "result": "LOCAL_LIVE_TEXT_INSTALL_PASS",
+  "finishedUTC": "2026-11-06T20:04:12.274Z",
+  "before": {
+    "tests": 797,
+    "pass": 797,
+    "failed": []
+  },
+  "after": {
+    "tests": 797,
+    "pass": 797,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/live-text-before-2026-11-06T20-02-54-807Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/live-text-install-2026-11-06T20-02-54-807Z",
+  "files": [
+    "apps-script/registration-identity-test/remote-app/BeautyLiveTest.html",
+    "apps-script/registration-identity-test/remote-app/StageTest.html",
+    "public/js/venue-pool-cards.js"
+  ],
+  "googleUpload": "PENDING — copy changed Google files listed in READ-ME.txt to existing Identity TEST files only",
+  "deviceAcceptance": "PENDING — verify completed finals, partial averages, board badges, mobile digits and running controls; no production changes",
+  "production": "UNCHANGED"
+}

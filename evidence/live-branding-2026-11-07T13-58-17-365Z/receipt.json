@@ -1,0 +1,66 @@
+{
+  "result": "PASS",
+  "finishedUTC": "2026-11-07T13:58:43.710Z",
+  "scriptId": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/live-branding-2026-11-07T13-58-17-365Z",
+  "tests": "Full regression suite and requirement inventory passed before packaging",
+  "googleSource": "READBACK_VERIFIED",
+  "originalAssets": true,
+  "production": "UNCHANGED",
+  "deployment": "UNCHANGED",
+  "browserVisualCheck": "PENDING",
+  "files": [
+    {
+      "path": "public/competition-preview.html",
+      "sha256": "c34836c905d69fde8c31ded48d29a5f32b4bb6689852454a7ca1d5c60e8ea17b"
+    },
+    {
+      "path": "public/beauty-live.html",
+      "sha256": "c34836c905d69fde8c31ded48d29a5f32b4bb6689852454a7ca1d5c60e8ea17b"
+    },
+    {
+      "path": "public/js/beauty-live.js",
+      "sha256": "e306f43de0aa9155b7f25d5c5c041a9cd6af8b0a1261b1618bb6b2054dfb84fe"
+    },
+    {
+      "path": "public/js/live-branding.js",
+      "sha256": "4a0d544873d47e9cc46198c338a3355407cdf4365072c38893f517ff3d3d9643"
+    },
+    {
+      "path": "public/css/venue-live.css",
+      "sha256": "209a67aa77af5a7f7e81a7da1be089deb7042998191fe620a7001d1cc7e55149"
+    },
+    {
+      "path": "scripts/build-stage-test.cjs",
+      "sha256": "93162d73e455ba6cb770a084885b3df66c388c90097070f93536cb129175929c"
+    },
+    {
+      "path": "tests/beauty-live.test.cjs",
+      "sha256": "86cea2041ba60222f93a638a137c9389c918f767979546a492e98e99253d3fc0"
+    },
+    {
+      "path": "docs/handoff/test-inventory.json",
+      "sha256": "36823a39c898c77c70a83f4394d496fe69b9e252790f7f655bbd100cc0fe0bda"
+    },
+    {
+      "path": "evidence/live-branding-20261107/checks.tap",
+      "sha256": "3db9bbe02afe93b3efa1ebb999f370e9e9ce2fa05192f04ad8932c661917304a"
+    },
+    {
+      "path": "evidence/live-branding-20261107/inventory.txt",
+      "sha256": "f6efa76ea40d85d94ffab62d70099c3fcd1ab0a014966d53b109f5155286ed86"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/BeautyLiveTest.gs",
+      "sha256": "8897da94a3028ed5253fbceee15ae0e30a9b3dc4b79a54dbcfcc798c20d2c294"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/BeautyLiveTest.html",
+      "sha256": "d4ad0ea332c511912aa3b2439d2c18545f10a93170be5fcbb1115f342e0a570b"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/StageTest.html",
+      "sha256": "d4ad0ea332c511912aa3b2439d2c18545f10a93170be5fcbb1115f342e0a570b"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "result": "LOCAL_PASS",
+  "recordedUTC": "2026-11-07T16:11:58.396685+00:00",
+  "tests": 920,
+  "scope": "TEST only; Google installation pending",
+  "observed": "User screenshots show six saved Hub registrations, three event entries and four league profiles including Alessio. Cevin Svanemar, Joel Larsson and Stuart Mineur absent from league and event.",
+  "cause": "Original failure code unavailable; shared lock contention and pre-send snapshot changes are plausible, reproducible code paths, not a proven historical cause.",
+  "changes": [
+    "One fresh automatic league creation attempt after pre-send busy or stale result only",
+    "Registration waits up to 30 seconds for the existing script lock instead of 5",
+    "Staff can preview and confirm missing league-profile recovery for an already saved IN registration",
+    "Recovery refuses duplicate identities, existing entries, previous creation or transfer records, stale tickets and changed event/player state",
+    "Recovery never appends another registration; journal barriers protect uncertain writes"
+  ],
+  "verification": [
+    "920 offline regression tests passed",
+    "Explicit confirmation UI exercised with simulated Apps Script responses",
+    "No public player access to staff recovery",
+    "No replay after creation timeout or event transfer timeout",
+    "Inventory PASS: 920 cases across 66 files",
+    "Installer simulated TEST upload and readback PASS; unchanged Google files preserved",
+    "Second installation sends no second upload",
+    "Unknown local and remote source block upload"
+  ],
+  "pending": [
+    "Google TEST installation",
+    "Recovery of three named players and fresh simultaneous-registration trial"
+  ],
+  "production": "UNCHANGED",
+  "github": "No commit or push performed"
+}

@@ -1,0 +1,532 @@
+TAP version 13
+# Subtest: Date events select a new approved TEST event and refuse a stale binding after the Hub date changes
+ok 1 - Date events select a new approved TEST event and refuse a stale binding after the Hub date changes
+  ---
+  duration_ms: 16.457326
+  type: 'test'
+  ...
+# Subtest: Date creation review copies settings only and discloses public TEST visibility without any POST
+ok 2 - Date creation review copies settings only and discloses public TEST visibility without any POST
+  ---
+  duration_ms: 1.841775
+  type: 'test'
+  ...
+# Subtest: Date creation confirms once and verifies empty native entries plus settings before publishing the selection
+ok 3 - Date creation confirms once and verifies empty native entries plus settings before publishing the selection
+  ---
+  duration_ms: 2.236948
+  type: 'test'
+  ...
+# Subtest: Date creation rejects missing acknowledgement altered dates sessions users and expired tickets before POST
+ok 4 - Date creation rejects missing acknowledgement altered dates sessions users and expired tickets before POST
+  ---
+  duration_ms: 3.35735
+  type: 'test'
+  ...
+# Subtest: Date creation timeout leaves a durable uncertain marker and every later create attempt stays read only
+ok 5 - Date creation timeout leaves a durable uncertain marker and every later create attempt stays read only
+  ---
+  duration_ms: 1.034853
+  type: 'test'
+  ...
+# Subtest: Date creation blocks duplicate selection nonempty entries or changed native readbacks after its single POST
+ok 6 - Date creation blocks duplicate selection nonempty entries or changed native readbacks after its single POST
+  ---
+  duration_ms: 7.981923
+  type: 'test'
+  ...
+# Subtest: Date creation refuses an existing TEST event and cannot target same-date production or arbitrary input IDs
+ok 7 - Date creation refuses an existing TEST event and cannot target same-date production or arbitrary input IDs
+  ---
+  duration_ms: 1.530738
+  type: 'test'
+  ...
+# Subtest: Date creation cannot POST if project authorization lock audit or journal verification fails
+ok 8 - Date creation cannot POST if project authorization lock audit or journal verification fails
+  ---
+  duration_ms: 4.164662
+  type: 'test'
+  ...
+# Subtest: Cast staff opener forwards only its verified session to date selection and restores request context
+ok 9 - Cast staff opener forwards only its verified session to date selection and restores request context
+  ---
+  duration_ms: 1.355164
+  type: 'test'
+  ...
+# Subtest: Selected TEST Live feed requests only its injected event and rejects a different provider event
+ok 10 - Selected TEST Live feed requests only its injected event and rejects a different provider event
+  ---
+  duration_ms: 3.472092
+  type: 'test'
+  ...
+# Subtest: Missing-event UI reviews creation separately and sends exactly one explicitly acknowledged confirm
+ok 11 - Missing-event UI reviews creation separately and sends exactly one explicitly acknowledged confirm
+  ---
+  duration_ms: 2.926012
+  type: 'test'
+  ...
+# Subtest: Creation Back preserves the title and requires a fresh review ticket and acknowledgement
+ok 12 - Creation Back preserves the title and requires a fresh review ticket and acknowledgement
+  ---
+  duration_ms: 1.532872
+  type: 'test'
+  ...
+# Subtest: Creation expired approval returns an actionable review button without repeating the write
+ok 13 - Creation expired approval returns an actionable review button without repeating the write
+  ---
+  duration_ms: 2.76411
+  type: 'test'
+  ...
+# Subtest: Creation uncertain outcome offers no retry or Back path after its single confirm
+ok 14 - Creation uncertain outcome offers no retry or Back path after its single confirm
+  ---
+  duration_ms: 1.135315
+  type: 'test'
+  ...
+# Subtest: Creation validation exposes only safe actionable reasons and keeps unexpected backend details private
+ok 15 - Creation validation exposes only safe actionable reasons and keeps unexpected backend details private
+  ---
+  duration_ms: 1.962657
+  type: 'test'
+  ...
+# Subtest: Date review accepts real calendar dates and rejects impossible or malformed dates
+ok 16 - Date review accepts real calendar dates and rejects impossible or malformed dates
+  ---
+  duration_ms: 1.681694
+  type: 'test'
+  ...
+# Subtest: Date review requires loaded unblocked baseline and acknowledgement checkbox
+ok 17 - Date review requires loaded unblocked baseline and acknowledgement checkbox
+  ---
+  duration_ms: 0.189515
+  type: 'test'
+  ...
+# Subtest: Date review cannot proceed for unchanged event date
+ok 18 - Date review cannot proceed for unchanged event date
+  ---
+  duration_ms: 0.198387
+  type: 'test'
+  ...
+# Subtest: English Event Control requires a changed date and checkbox without typed confirmation
+ok 19 - English Event Control requires a changed date and checkbox without typed confirmation
+  ---
+  duration_ms: 2.617129
+  type: 'test'
+  ...
+# Subtest: Changing the proposed date clears checkbox and previous popup review
+ok 20 - Changing the proposed date clears checkbox and previous popup review
+  ---
+  duration_ms: 2.175005
+  type: 'test'
+  ...
+# Subtest: Final confirmation popup cannot save and cancellation requires acknowledgement again
+ok 21 - Final confirmation popup cannot save and cancellation requires acknowledgement again
+  ---
+  duration_ms: 1.534453
+  type: 'test'
+  ...
+# Subtest: Closing and reopening Event Control clears all date-change confirmation state
+ok 22 - Closing and reopening Event Control clears all date-change confirmation state
+  ---
+  duration_ms: 1.567103
+  type: 'test'
+  ...
+# Subtest: Event Control Details sidebar holds technical reset information outside the main control form
+ok 23 - Event Control Details sidebar holds technical reset information outside the main control form
+  ---
+  duration_ms: 1.778149
+  type: 'test'
+  ...
+# Subtest: Unresolved Event Control Details blockers prevent date review
+ok 24 - Unresolved Event Control Details blockers prevent date review
+  ---
+  duration_ms: 1.904008
+  type: 'test'
+  ...
+# Subtest: English Hub identity files reproduce from Swedish originals without changing identity decisions
+ok 25 - English Hub identity files reproduce from Swedish originals without changing identity decisions
+  ---
+  duration_ms: 86.495323
+  type: 'test'
+  ...
+# Subtest: Hub consent pills display English YES and NO while canonical data remains Swedish
+ok 26 - Hub consent pills display English YES and NO while canonical data remains Swedish
+  ---
+  duration_ms: 1.413943
+  type: 'test'
+  ...
+# Subtest: English Hub transport localizes structured backend errors but preserves player-authored data
+ok 27 - English Hub transport localizes structured backend errors but preserves player-authored data
+  ---
+  duration_ms: 1.733582
+  type: 'test'
+  ...
+# Subtest: Legacy kiosk and unrelated qualified sources remain byte-for-byte unchanged
+ok 28 - Legacy kiosk and unrelated qualified sources remain byte-for-byte unchanged
+  ---
+  duration_ms: 2.046582
+  type: 'test'
+  ...
+# Subtest: All Hub entrypoints select English and expose sidebar Event Control with English consent and registration controls
+ok 29 - All Hub entrypoints select English and expose sidebar Event Control with English consent and registration controls
+  ---
+  duration_ms: 0.508183
+  type: 'test'
+  ...
+# Subtest: Offline English Event Control inspection is fictional read-only data with no player mutation
+ok 30 - Offline English Event Control inspection is fictional read-only data with no player mutation
+  ---
+  duration_ms: 1.621574
+  type: 'test'
+  ...
+# Subtest: Enabled TEST date save requires server preparation and explicit confirmation before one save
+ok 31 - Enabled TEST date save requires server preparation and explicit confirmation before one save
+  ---
+  duration_ms: 1.446421
+  type: 'test'
+  ...
+# Subtest: Cancelling TEST date review ignores late preparation and cannot save
+ok 32 - Cancelling TEST date review ignores late preparation and cannot save
+  ---
+  duration_ms: 0.96646
+  type: 'test'
+  ...
+# Subtest: Uncertain TEST date save reports inspection required and never retries automatically
+ok 33 - Uncertain TEST date save reports inspection required and never retries automatically
+  ---
+  duration_ms: 1.263727
+  type: 'test'
+  ...
+# Subtest: Sidebar Event Control retains its date form and can open and return from existing event details
+ok 34 - Sidebar Event Control retains its date form and can open and return from existing event details
+  ---
+  duration_ms: 1.061033
+  type: 'test'
+  ...
+# Subtest: Sidebar Event Control cannot switch panels while a confirmed date save is running
+ok 35 - Sidebar Event Control cannot switch panels while a confirmed date save is running
+  ---
+  duration_ms: 1.070427
+  type: 'test'
+  ...
+# Subtest: Event Control checks Nakka in place and suspends lookup while a different date is unsaved
+ok 36 - Event Control checks Nakka in place and suspends lookup while a different date is unsaved
+  ---
+  duration_ms: 0.965189
+  type: 'test'
+  ...
+# Subtest: pool UI reviews mappings, renders frozen group means, and does not send during generation
+ok 37 - pool UI reviews mappings, renders frozen group means, and does not send during generation
+  ---
+  duration_ms: 63.251374
+  type: 'test'
+  ...
+# Subtest: pool UI manual swaps request server adjustment and retain no old approval
+ok 38 - pool UI manual swaps request server adjustment and retain no old approval
+  ---
+  duration_ms: 24.453069
+  type: 'test'
+  ...
+# Subtest: pool UI only sends after final approval and cannot double click while saving
+ok 39 - pool UI only sends after final approval and cannot double click while saving
+  ---
+  duration_ms: 24.878448
+  type: 'test'
+  ...
+# Subtest: pool UI withdrawals invalidate review and preserve visible frozen draw without silently redrawing
+ok 40 - pool UI withdrawals invalidate review and preserve visible frozen draw without silently redrawing
+  ---
+  duration_ms: 24.956945
+  type: 'test'
+  ...
+# Subtest: pool UI lock drops late response and clears identities and previews
+ok 41 - pool UI lock drops late response and clears identities and previews
+  ---
+  duration_ms: 11.55019
+  type: 'test'
+  ...
+# Subtest: pool UI provider timeout blocks repeat send and retains inspect-before-retry guidance
+ok 42 - pool UI provider timeout blocks repeat send and retains inspect-before-retry guidance
+  ---
+  duration_ms: 19.411792
+  type: 'test'
+  ...
+# Subtest: pool UI automatic refresh preserves a frozen preview and its controls
+ok 43 - pool UI automatic refresh preserves a frozen preview and its controls
+  ---
+  duration_ms: 19.994766
+  type: 'test'
+  ...
+# Subtest: pool TEST transport routes authenticated exact payloads and rejects target or extra-key injection
+ok 44 - pool TEST transport routes authenticated exact payloads and rejects target or extra-key injection
+  ---
+  duration_ms: 2.208836
+  type: 'test'
+  ...
+# Subtest: pool UI closing and reopening drops an old handoff approval while retaining the frozen reference
+ok 45 - pool UI closing and reopening drops an old handoff approval while retaining the frozen reference
+  ---
+  duration_ms: 18.187624
+  type: 'test'
+  ...
+# Subtest: pool UI renders omitted and null RPC averages as Unseeded and keeps measured zero numeric
+ok 46 - pool UI renders omitted and null RPC averages as Unseeded and keeps measured zero numeric
+  ---
+  duration_ms: 9.926813
+  type: 'test'
+  ...
+# Subtest: pool UI normalizes omitted frozen averages before pool means colours and manual review
+ok 47 - pool UI normalizes omitted frozen averages before pool means colours and manual review
+  ---
+  duration_ms: 13.70882
+  type: 'test'
+  ...
+# Subtest: pool workspace automatically loads current data on entry and sidebar navigation makes no extra request
+ok 48 - pool workspace automatically loads current data on entry and sidebar navigation makes no extra request
+  ---
+  duration_ms: 15.379568
+  type: 'test'
+  ...
+# Subtest: pool workspace board and size changes invalidate an approved frozen draw without silently redrawing
+ok 49 - pool workspace board and size changes invalidate an approved frozen draw without silently redrawing
+  ---
+  duration_ms: 24.915999
+  type: 'test'
+  ...
+# Subtest: pool workspace advanced hypothetical count is isolated from actual roster and handoff approval
+ok 50 - pool workspace advanced hypothetical count is isolated from actual roster and handoff approval
+  ---
+  duration_ms: 17.292951
+  type: 'test'
+  ...
+# Subtest: pool workspace disables Nakka handoff for unresolved identities but preserves planning and swap controls
+ok 51 - pool workspace disables Nakka handoff for unresolved identities but preserves planning and swap controls
+  ---
+  duration_ms: 11.761657
+  type: 'test'
+  ...
+# Subtest: pool workspace colour bands only alter preview presentation and retain frozen values without RPC
+ok 52 - pool workspace colour bands only alter preview presentation and retain frozen values without RPC
+  ---
+  duration_ms: 13.824093
+  type: 'test'
+  ...
+# Subtest: pool workspace unavailable Hub data blocks generating and clears handoff approval until a new draw
+ok 53 - pool workspace unavailable Hub data blocks generating and clears handoff approval until a new draw
+  ---
+  duration_ms: 34.478976
+  type: 'test'
+  ...
+# Subtest: pool workspace selects physical boards and shows numbered pools sharing only available boards
+ok 54 - pool workspace selects physical boards and shows numbered pools sharing only available boards
+  ---
+  duration_ms: 17.136935
+  type: 'test'
+  ...
+# Subtest: pool workspace invalid board ranges block drawing and excluded Nakka entries block approval
+ok 55 - pool workspace invalid board ranges block drawing and excluded Nakka entries block approval
+  ---
+  duration_ms: 18.893914
+  type: 'test'
+  ...
+# Subtest: pool review orders unresolved identities first and confirms generation only through popup
+ok 56 - pool review orders unresolved identities first and confirms generation only through popup
+  ---
+  duration_ms: 39.59769
+  type: 'test'
+  ...
+# Subtest: pool invalidation retains group overview and disabled swaps with a specific reason
+ok 57 - pool invalidation retains group overview and disabled swaps with a specific reason
+  ---
+  duration_ms: 18.556853
+  type: 'test'
+  ...
+# Subtest: pool card picker excludes same group and marks exactly both exchanged players yellow
+ok 58 - pool card picker excludes same group and marks exactly both exchanged players yellow
+  ---
+  duration_ms: 17.811209
+  type: 'test'
+  ...
+# Subtest: pool card labels reject collisions and preserve the frozen players and RPC ticket
+ok 59 - pool card labels reject collisions and preserve the frozen players and RPC ticket
+  ---
+  duration_ms: 15.178136
+  type: 'test'
+  ...
+# Subtest: pool compact identity warning hides when resolved and scheme counts remain visible
+ok 60 - pool compact identity warning hides when resolved and scheme counts remain visible
+  ---
+  duration_ms: 12.012293
+  type: 'test'
+  ...
+# Subtest: pool estimate works before boards are selected and updates with selected board count
+ok 61 - pool estimate works before boards are selected and updates with selected board count
+  ---
+  duration_ms: 5.729671
+  type: 'test'
+  ...
+# Subtest: pool review is one expandable tab and calculation lives inside Advanced settings
+ok 62 - pool review is one expandable tab and calculation lives inside Advanced settings
+  ---
+  duration_ms: 8.304366
+  type: 'test'
+  ...
+# Subtest: pool toolbar orders review league advanced and buttons expand content without RPC or losing mappings
+ok 63 - pool toolbar orders review league advanced and buttons expand content without RPC or losing mappings
+  ---
+  duration_ms: 7.531687
+  type: 'test'
+  ...
+# Subtest: pool compact cards show groups only for shared boards and keep average in clickable player row
+ok 64 - pool compact cards show groups only for shared boards and keep average in clickable player row
+  ---
+  duration_ms: 12.538633
+  type: 'test'
+  ...
+# Subtest: pool compact Nakka step preserves handoff gates and opens review without sending
+ok 65 - pool compact Nakka step preserves handoff gates and opens review without sending
+  ---
+  duration_ms: 12.476099
+  type: 'test'
+  ...
+# Subtest: Hub board and group dialog picker and scheme are English while canonical draw metadata stays intact
+ok 66 - Hub board and group dialog picker and scheme are English while canonical draw metadata stays intact
+  ---
+  duration_ms: 13.94165
+  type: 'test'
+  ...
+# Subtest: pool cards are the only board editor and update a two-board heading immediately
+ok 67 - pool cards are the only board editor and update a two-board heading immediately
+  ---
+  duration_ms: 16.871418
+  type: 'test'
+  ...
+# Subtest: pool inline board save uses the existing plan route and an expired organiser cannot save
+ok 68 - pool inline board save uses the existing plan route and an expired organiser cannot save
+  ---
+  duration_ms: 11.105192
+  type: 'test'
+  ...
+# Subtest: planner scheme uses only needed pool-size tiles ordered by selected preference and hides redundant boards field
+ok 69 - planner scheme uses only needed pool-size tiles ordered by selected preference and hides redundant boards field
+  ---
+  duration_ms: 6.373528
+  type: 'test'
+  ...
+# Subtest: planner BOARDS tile counts used physical boards and retains only nonzero size chips
+ok 70 - planner BOARDS tile counts used physical boards and retains only nonzero size chips
+  ---
+  duration_ms: 6.681831
+  type: 'test'
+  ...
+# Subtest: pool main flow shows qualification without Advanced and resumes saved pools to an explicit Start confirmation
+ok 71 - pool main flow shows qualification without Advanced and resumes saved pools to an explicit Start confirmation
+  ---
+  duration_ms: 26.796047
+  type: 'test'
+  ...
+# Subtest: pool four-player draft defaults to one board when scarce and rejects an unavailable second board
+ok 72 - pool four-player draft defaults to one board when scarce and rejects an unavailable second board
+  ---
+  duration_ms: 17.514533
+  type: 'test'
+  ...
+# Subtest: planner automatic load failure leaves generation blocked and never starts or sends
+ok 73 - planner automatic load failure leaves generation blocked and never starts or sends
+  ---
+  duration_ms: 6.10882
+  type: 'test'
+  ...
+# Subtest: saved pool RPC omission stays Unseeded and frozen START excludes unknown averages
+ok 74 - saved pool RPC omission stays Unseeded and frozen START excludes unknown averages
+  ---
+  duration_ms: 8.348803
+  type: 'test'
+  ...
+# Subtest: saved pools preserve measured zero and explain empty board choices without inventing a selection
+ok 75 - saved pools preserve measured zero and explain empty board choices without inventing a selection
+  ---
+  duration_ms: 6.837053
+  type: 'test'
+  ...
+# Subtest: pool card group numbers appear only for separate pools sharing a selected board
+ok 76 - pool card group numbers appear only for separate pools sharing a selected board
+  ---
+  duration_ms: 9.034122
+  type: 'test'
+  ...
+# Subtest: compact pool status turns red on failed refresh and unsaved board edits block Start
+ok 77 - compact pool status turns red on failed refresh and unsaved board edits block Start
+  ---
+  duration_ms: 12.785614
+  type: 'test'
+  ...
+# Subtest: planner pending read deadline unlocks controls and drops a late saved-plan response
+ok 78 - planner pending read deadline unlocks controls and drops a late saved-plan response
+  ---
+  duration_ms: 11.574235
+  type: 'test'
+  ...
+# Subtest: planner reloading saved boards discards unsaved choices and restores Start without another save
+ok 79 - planner reloading saved boards discards unsaved choices and restores Start without another save
+  ---
+  duration_ms: 13.59594
+  type: 'test'
+  ...
+# Subtest: planner restoring the saved board selection clears the local dirty gate without a sticky false state
+ok 80 - planner restoring the saved board selection clears the local dirty gate without a sticky false state
+  ---
+  duration_ms: 9.901644
+  type: 'test'
+  ...
+# Subtest: planner a late request from a locked session cannot unlock a new organiser request
+ok 81 - planner a late request from a locked session cannot unlock a new organiser request
+  ---
+  duration_ms: 19.32076
+  type: 'test'
+  ...
+# Subtest: running pool cards hide Save and Start after the competition starts
+ok 82 - running pool cards hide Save and Start after the competition starts
+  ---
+  duration_ms: 11.246083
+  type: 'test'
+  ...
+# Subtest: pool draft fills two-board four-player defaults and preserves manual one-board choice on redraw
+ok 83 - pool draft fills two-board four-player defaults and preserves manual one-board choice on redraw
+  ---
+  duration_ms: 19.660775
+  type: 'test'
+  ...
+# Subtest: saved explicit boards survive default allocation and sparse draft queues explain later pools
+ok 84 - saved explicit boards survive default allocation and sparse draft queues explain later pools
+  ---
+  duration_ms: 21.041888
+  type: 'test'
+  ...
+# Subtest: planner board usage estimate includes a spare second board for each four-player pool
+ok 85 - planner board usage estimate includes a spare second board for each four-player pool
+  ---
+  duration_ms: 8.532308
+  type: 'test'
+  ...
+# Subtest: pool review Back retains the frozen draw and board choices while discarding the send approval
+ok 86 - pool review Back retains the frozen draw and board choices while discarding the send approval
+  ---
+  duration_ms: 25.168373
+  type: 'test'
+  ...
+# Subtest: start review Back preserves saved pools and boards and requires a fresh start approval
+ok 87 - start review Back preserves saved pools and boards and requires a fresh start approval
+  ---
+  duration_ms: 15.190694
+  type: 'test'
+  ...
+1..87
+# tests 87
+# suites 0
+# pass 87
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 953.027286

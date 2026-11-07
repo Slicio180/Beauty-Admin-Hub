@@ -1,0 +1,42 @@
+{
+  "result": "PASS",
+  "finishedUTC": "2026-11-07T16:49:11.155Z",
+  "scriptId": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/auto-registration-contention-2026-11-07T16-48-45-468Z",
+  "tests": "Full regression suite and requirement inventory passed before packaging",
+  "googleSource": "READBACK_VERIFIED",
+  "originalAssets": true,
+  "production": "UNCHANGED",
+  "deployment": "UNCHANGED",
+  "browserVisualCheck": "PENDING",
+  "files": [
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTestAutoRegister.gs",
+      "sha256": "9a2ece0b5acf85fc0b9c461831339f5eb648f9bd71fa0e56b40aadb081f95997"
+    },
+    {
+      "path": "tests/auto-registration-contention.test.cjs",
+      "sha256": "70496a7f43669f67b167881201911f148f7d44f2114966644c186f877d88d7d2"
+    },
+    {
+      "path": "docs/handoff/test-inventory.json",
+      "sha256": "a637f780f62e26aeb114a00d6fcd9a3ba33d3853fb48448199bd9cd316fb15e6"
+    },
+    {
+      "path": "evidence/auto-registration-contention-20261107/checks.tap",
+      "sha256": "e448c2c66773650c5657edd9207d8d93dd3a11db3ddbe4ac86a9028d36e87ce7"
+    },
+    {
+      "path": "evidence/auto-registration-contention-20261107/inventory.txt",
+      "sha256": "581d2bea2890f4a2ac8619fea6a07fea09cb06ee8be3970fbbf845ee7c525cbd"
+    },
+    {
+      "path": "evidence/auto-registration-contention-20261107/review.json",
+      "sha256": "7b7129229edea7a8886d9d9303b0e25203338fd1270ec536895d3389fd7b8133"
+    },
+    {
+      "path": "evidence/auto-registration-contention-20261107/reproduction-before.txt",
+      "sha256": "a11e975d89df850aacbc30c838b4873fc083d2c6b59ff8865d564cd415102f24"
+    }
+  ]
+}

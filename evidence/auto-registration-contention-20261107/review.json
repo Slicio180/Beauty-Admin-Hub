@@ -1,0 +1,31 @@
+{
+  "result": "LOCAL_PASS",
+  "recordedUTC": "2026-11-07T16:46:47.136757+00:00",
+  "tests": 928,
+  "evidence": "User diagnostics: Evert MOBIL LEAGUE_LOCK TRANSFER_BUSY; Linus KIOSK EVENT_PREVIEW_RETRY LEAGUE_IDENTITY_REVIEW",
+  "changes": [
+    "League creation lock wait 5 to 30 seconds; still at most two pre-send attempts",
+    "Missing league-profile handling runs after initial and retried preview, at most one successful identity establishment",
+    "Existing uncertain-write barriers and diagnostic recording preserved"
+  ],
+  "verification": [
+    "Three new regressions fail before and pass after the change",
+    "Simulated competing lock lasts twelve seconds; all three registration sources create one profile and one event entry",
+    "Ambiguous identity and post-write uncertainty remain blocked"
+  ],
+  "limitations": [
+    "Bounded wait can still expire under prolonged contention",
+    "Does not automatically recover existing saved registrations",
+    "Google TEST installation and fresh device trial pending"
+  ],
+  "production": "UNCHANGED",
+  "github": "No commit or push performed",
+  "inventory": "PASS: 928 cases across 67 files",
+  "installerChecks": [
+    "Package syntax and approved local source verified",
+    "Simulated TEST upload and readback passed",
+    "Second installation sends no repeat upload",
+    "Unknown local or Google sources block upload",
+    "Unrelated Google source preserved"
+  ]
+}

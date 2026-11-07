@@ -1,0 +1,23 @@
+✔ removal preview is read-only and exposes exact event entry ID and league profile (26.148027ms)
+✔ removal targets exactly one Nakka event entry then clears only selected registration names and event metadata (9.651618ms)
+✔ removal permits OUT and STANDBY without treating either as IN (10.277461ms)
+✔ positively absent Nakka entry removes only the Hub registration with no provider POST (6.875814ms)
+✔ wrong target, started tournament, bracket placement and ambiguous identities block before writes (12.178297ms)
+✔ malformed removal, missing confirmation, extra fields and disabled gate reject without write (3.300696ms)
+✔ busy lock and expired auth do not read or write provider state (2.187033ms)
+✔ stale snapshot, status, date and Nakka version invalidate confirmation and consume ticket (5.840531ms)
+✔ confirmation is bound to session and owner; expired or reused tickets cannot remove twice (6.026724ms)
+✔ Nakka timeout and wrong receipt retain registration, save uncertain journal, never retry and raise attention (8.402349ms)
+✔ partial Sheet failure after verified Nakka removal remains uncertain with immutable recovery copy (4.00648ms)
+✔ removal numeric typography and standby orange override original grey theme (6.361293ms)
+✔ removal dialog requires checkbox then sends one confirmed save and blocks close while saving (3.243915ms)
+✔ late preview after sign-out cannot restore a confirmation or a player name (1.150359ms)
+✔ uncertain removal discards confirm button and never resends a save (3.406139ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 287.279054

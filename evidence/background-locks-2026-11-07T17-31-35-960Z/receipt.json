@@ -1,0 +1,46 @@
+{
+  "result": "PASS",
+  "finishedUTC": "2026-11-07T17:32:01.362Z",
+  "scriptId": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/background-locks-2026-11-07T17-31-35-960Z",
+  "tests": "Full regression suite and requirement inventory passed before packaging",
+  "googleSource": "READBACK_VERIFIED",
+  "originalAssets": true,
+  "production": "UNCHANGED",
+  "deployment": "UNCHANGED",
+  "browserVisualCheck": "PENDING",
+  "files": [
+    {
+      "path": "apps-script/registration-identity-test/remote-app/Code.js",
+      "sha256": "94508749636655c134c4a7a3ca63561e1029462a3a9949adfbda833e98271831"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTestAttention.gs",
+      "sha256": "1a4b161cd6fe727a958b154638c96960f6f8d26eb792d1925abcf19fe6040f40"
+    },
+    {
+      "path": "tests/dashboard-attention.test.cjs",
+      "sha256": "b813fb4392269e236e280405cfe5102a60aaedfdb375217f18842e41c86c467c"
+    },
+    {
+      "path": "tests/test-health-lock.test.cjs",
+      "sha256": "540bce5b17bf967e21b334e23d7bb5dce8dc9959b4cf3ff5c4485dfbba514109"
+    },
+    {
+      "path": "docs/handoff/test-inventory.json",
+      "sha256": "6ce94aa0f7d9c51abeecc02bd735edf770668f40b50428535a0ae640017daa67"
+    },
+    {
+      "path": "evidence/background-locks-20261107/checks.tap",
+      "sha256": "a2e4d06b240b94ec77ef16d3070b158d92497e425a926f14496ad16e5658040e"
+    },
+    {
+      "path": "evidence/background-locks-20261107/inventory.txt",
+      "sha256": "505e96d17f0d20ccabecd5eeaa425ee4310bcab7b05d7be9cfe3887d83eacb3f"
+    },
+    {
+      "path": "evidence/background-locks-20261107/review.json",
+      "sha256": "af893b5a377bd63dcfe61673e1b08886f7c7035cef4f0471cdf83b75bc4b72d0"
+    }
+  ]
+}

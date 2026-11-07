@@ -1,0 +1,30 @@
+{
+  "result": "PASS",
+  "finishedUTC": "2026-11-07T13:36:04.558Z",
+  "scriptId": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/attached-title-2026-11-07T13-35-39-332Z",
+  "tests": "15 focused player-page and registration checks passed before packaging",
+  "googleSource": "READBACK_VERIFIED",
+  "originalAssets": true,
+  "production": "UNCHANGED",
+  "deployment": "UNCHANGED",
+  "browserVisualCheck": "PENDING",
+  "files": [
+    {
+      "path": "public/css/beauty-branding.css",
+      "sha256": "5fb54a5686d258896b6cca3db508c98aa39a94fd0806265ec3af7659a27f713f"
+    },
+    {
+      "path": "evidence/attached-title-20261107/checks.tap",
+      "sha256": "99cb47dfa763a6b372b7eeeaf8a9881c1c551d8947968b773496b53f5991e785"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/RemoteRegistration.html",
+      "sha256": "64fd89495ba8042f81dad40835bff6b714327e65cb231c98faad61898fd4f8f1"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/KioskTest.html",
+      "sha256": "468bf3b76ebfb42958fa0c04d64349a541dccf9b3d03a42c3402fa7683600727"
+    }
+  ]
+}

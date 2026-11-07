@@ -1,6 +1,6 @@
 
 // Authorized fixture for existing feature tests; auth itself is tested separately.
-const authFixture={beautyHubAuthRequire_:()=>({uid:'fixture'}),beautyHubRequestToken_:'fixture',BeautyHubAuth:{token:()=> 'fixture',generation:()=>0,isCurrent:()=>true,expired(){}}};
+const authFixture={beautyHubActiveTestTarget_:()=>({id:'t_QHaG_7792',title:'Beauty Registration TEST event DO NOT USE LIVE'}),beautyHubCastHtml_:file=>({file,setTitle(){return this;}}),beautyHubAuthRequire_:()=>({uid:'fixture'}),beautyHubRequestToken_:'fixture',BeautyHubAuth:{token:()=> 'fixture',generation:()=>0,isCurrent:()=>true,expired(){}}};
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),path=require('node:path');
 process.chdir(path.resolve(__dirname,'..'));
 const base='apps-script/registration-identity-test/remote-app/',id='1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N',sheetId='1SIj4F8_WfWaeDVsdagRw8AoLsz0XsjhtdIn_OOxoDnU';

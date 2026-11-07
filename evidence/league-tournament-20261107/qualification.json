@@ -1,0 +1,17 @@
+{
+  "result": "LOCAL_PASS",
+  "finishedUTC": "2026-11-07T12:06:23.239627+00:00",
+  "baseCommit": "0f9fcf0a2b03a392edc34106b389e99822157a8b",
+  "testCases": 889,
+  "testFiles": 64,
+  "newCases": 34,
+  "scope": "League and standalone tournament selection, event-isolated registration, AIK UI and TEST installer",
+  "browser": "NOT_VERIFIED: workspace Chromium launch failed",
+  "googleTestInstall": "PENDING",
+  "liveNakka": "PENDING",
+  "production": "UNCHANGED",
+  "githubPush": "NOT_PERFORMED",
+  "inventory": "PASS: 889 cases across 64 files map to known requirements and evidence.",
+  "installerFix": "Match both file name and Apps Script type; preserve BeautyLiveTest HTML while updating BeautyLiveServer SERVER_JS.",
+  "installedSourceReview": "Uploaded HubTestBridge and HubTest differ by removed cleanup routes/UI plus existing date, attention and sign-out patches. Preserve installed behaviour; accept exact reviewed hashes only."
+}

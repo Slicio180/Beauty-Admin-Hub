@@ -106,6 +106,7 @@ function beautyHubAuthProbe() {
   console.log(JSON.stringify(result));return result;
 }
 function beautyHubAuthRequire_(token) {
+  if(typeof beautyContextAssert_==='function')beautyContextAssert_();
   beautyHubTestGuard_();
   const key=beautyHubAuthKey_(token),record=beautyHubAuthLoad_(key);
   const now=Date.now();
@@ -131,3 +132,4 @@ function beautyHubAuth(action,input) {
     });
   }catch(e){return {success:false,code:e.name==='HubAuthError'?e.message:'AUTH_UNAVAILABLE'};}
 }
+

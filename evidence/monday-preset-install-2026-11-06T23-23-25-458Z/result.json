@@ -1,0 +1,31 @@
+{
+  "result": "LOCAL_MONDAY_PRESET_INSTALL_PASS",
+  "finishedUTC": "2026-11-06T23:24:36.801Z",
+  "before": {
+    "tests": 841,
+    "pass": 841,
+    "failed": []
+  },
+  "after": {
+    "tests": 843,
+    "pass": 843,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/monday-preset-before-2026-11-06T23-23-25-458Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/monday-preset-install-2026-11-06T23-23-25-458Z",
+  "files": [
+    "tests/date-event-creation.test.cjs",
+    "tests/evening-setup-ui.test.cjs",
+    "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "docs/handoff/acceptance-20261106.md",
+    "docs/handoff/test-inventory.json",
+    "public/js/hub-evening-setup.js",
+    "public/js/hub-nakka-event.js",
+    "evidence/monday-preset-20261107/checks.tap"
+  ],
+  "googleUpload": "PENDING — run upload-test.cjs to update existing Identity TEST source",
+  "deviceAcceptance": "PENDING — verify Monday preset, editable 39-dart defaults and native limit/tie-break handling; no production changes",
+  "production": "UNCHANGED"
+}

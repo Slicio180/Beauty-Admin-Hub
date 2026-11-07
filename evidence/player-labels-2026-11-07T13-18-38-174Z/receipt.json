@@ -1,0 +1,38 @@
+{
+  "result": "PASS",
+  "finishedUTC": "2026-11-07T13:19:03.016Z",
+  "scriptId": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/player-labels-2026-11-07T13-18-38-174Z",
+  "tests": "15 focused player-page and registration checks passed before packaging",
+  "googleSource": "READBACK_VERIFIED",
+  "originalAssets": true,
+  "production": "UNCHANGED",
+  "deployment": "UNCHANGED",
+  "browserVisualCheck": "PENDING",
+  "files": [
+    {
+      "path": "public/css/beauty-branding.css",
+      "sha256": "caa8d08b2a439dd209ec8aafab3906f126544f0347901f0b2ac382b1854dcfb2"
+    },
+    {
+      "path": "tests/player-registration-pages.test.cjs",
+      "sha256": "2b254daafe44d49a47eb38959041c159656afa20f554f609176f5b765daf5c68"
+    },
+    {
+      "path": "tests/player-theme.test.cjs",
+      "sha256": "6840af5cc2bfda87f15d8b36969dead591c1ed2eb130a05edf4c87a2537d08c8"
+    },
+    {
+      "path": "evidence/player-labels-20261107/checks.tap",
+      "sha256": "8bab223762b34539419461547cc8ecf3657da22cf5918d656f60ffd794460cdc"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/RemoteRegistration.html",
+      "sha256": "4f97f9bb4f29433723cd3e428e0cca367be0ba947e7cf5f3621f8803121ec38c"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/KioskTest.html",
+      "sha256": "2edb9f77f5c24f1d2f95e000f915f98b9a8367c39d0ee44a978f4a4cef464f60"
+    }
+  ]
+}

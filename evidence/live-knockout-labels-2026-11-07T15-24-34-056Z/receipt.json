@@ -1,0 +1,50 @@
+{
+  "result": "PASS",
+  "finishedUTC": "2026-11-07T15:24:59.934Z",
+  "scriptId": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/live-knockout-labels-2026-11-07T15-24-34-056Z",
+  "tests": "Full regression suite and requirement inventory passed before packaging",
+  "googleSource": "READBACK_VERIFIED",
+  "originalAssets": true,
+  "production": "UNCHANGED",
+  "deployment": "UNCHANGED",
+  "browserVisualCheck": "PENDING",
+  "files": [
+    {
+      "path": "public/js/nakka-stage-model.js",
+      "sha256": "4d6a055c957ec3711f3198cc81912fa7d75eb5ca5d8024c813873d426df43d46"
+    },
+    {
+      "path": "public/js/knockout-bracket.js",
+      "sha256": "c8b185720f92bb56687bc219660433773a7ebbdb9e245d97e3964e1904ec345a"
+    },
+    {
+      "path": "public/css/venue-live.css",
+      "sha256": "6af1236889ca26574f23b25ad8450312aa1ae29337db35aa46a9c1a2d2cb042f"
+    },
+    {
+      "path": "tests/nakka-stage-badges.test.cjs",
+      "sha256": "612f4e8a040bb8110ecf93933c944e10917e07019186b55e23435115e341e3fc"
+    },
+    {
+      "path": "docs/handoff/test-inventory.json",
+      "sha256": "cb0ee64cc9557ae3bc3dd95036ea684b78c8687c56b8bd8eefc9346acb9bfa19"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/BeautyLiveTest.html",
+      "sha256": "b2a868e1068f4533801cb645f55870b04dc937670e28258df71a26e326862f79"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/StageTest.html",
+      "sha256": "b2a868e1068f4533801cb645f55870b04dc937670e28258df71a26e326862f79"
+    },
+    {
+      "path": "evidence/live-knockout-labels-20261107/checks.tap",
+      "sha256": "fe4bf6008577b16b5b0819134bb990a04d734777eb93890dc4b8d336b2624349"
+    },
+    {
+      "path": "evidence/live-knockout-labels-20261107/inventory.txt",
+      "sha256": "d57cc8ac4cb1ce26986016225e98a6b056f367739778e024395218edba8a3fb3"
+    }
+  ]
+}

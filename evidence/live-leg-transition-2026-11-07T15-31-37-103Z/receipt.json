@@ -1,0 +1,42 @@
+{
+  "result": "PASS",
+  "finishedUTC": "2026-11-07T15:32:03.209Z",
+  "scriptId": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/live-leg-transition-2026-11-07T15-31-37-103Z",
+  "tests": "Full regression suite and requirement inventory passed before packaging",
+  "googleSource": "READBACK_VERIFIED",
+  "originalAssets": true,
+  "production": "UNCHANGED",
+  "deployment": "UNCHANGED",
+  "browserVisualCheck": "PENDING",
+  "files": [
+    {
+      "path": "public/js/nakka-pool-live.js",
+      "sha256": "22df2a7a55525e5cf12b1dd38b73f7d250505b7249efb759eef967deed394e5f"
+    },
+    {
+      "path": "tests/live-shell.test.cjs",
+      "sha256": "70cb0a6284665e4229c7e83f7627a0e52388cc8a5bf064e255eee58a0c365ad2"
+    },
+    {
+      "path": "docs/handoff/test-inventory.json",
+      "sha256": "fb996b0ea7ae58a425af583c973c07eae2d0768788bb2091229846b112ea8529"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/BeautyLiveTest.html",
+      "sha256": "f3818cd090280dd947f48e5f478931a6bdf1893a54852e5f9dbfc37b235b9983"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/StageTest.html",
+      "sha256": "f3818cd090280dd947f48e5f478931a6bdf1893a54852e5f9dbfc37b235b9983"
+    },
+    {
+      "path": "evidence/live-leg-transition-20261107/checks.tap",
+      "sha256": "45eae7b272bc3f7a5d75e567e7f005c99d408d3f5a7c20fecd8564bb890171a3"
+    },
+    {
+      "path": "evidence/live-leg-transition-20261107/inventory.txt",
+      "sha256": "1a0e5ea0309fe970601e1ca9ecb7541882ba26cdb888e7156c747399bb0184e3"
+    }
+  ]
+}

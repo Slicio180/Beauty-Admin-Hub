@@ -1,0 +1,38 @@
+{
+  "result": "PASS",
+  "finishedUTC": "2026-11-07T13:52:55.747Z",
+  "scriptId": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/health-checking-2026-11-07T13-52-30-462Z",
+  "tests": "Full regression suite and requirement inventory passed before packaging",
+  "googleSource": "READBACK_VERIFIED",
+  "originalAssets": true,
+  "production": "UNCHANGED",
+  "deployment": "UNCHANGED",
+  "browserVisualCheck": "PENDING",
+  "files": [
+    {
+      "path": "public/js/nakka-health.js",
+      "sha256": "dc8f7f92016307ea984432deee57fa7bee5f65b0f531e724596594b34ac7828f"
+    },
+    {
+      "path": "tests/nakka-health-ui.test.cjs",
+      "sha256": "5db1381ae2a063430d9263e8500f6f5e9d7f184736ed0a2a74ce8be8110c0361"
+    },
+    {
+      "path": "docs/handoff/test-inventory.json",
+      "sha256": "68cb146350b8b9c846f6d6a44d24eb3015fee2e602bbac1be09c94d2fb5eeab6"
+    },
+    {
+      "path": "evidence/health-checking-20261107/checks.tap",
+      "sha256": "7a5738c6457b02ef611b0bec5ae19c4a3520e48e8df8ca9a3491e0ccd8925f2b"
+    },
+    {
+      "path": "evidence/health-checking-20261107/inventory.txt",
+      "sha256": "ac5be9cf0d2629e0423a3438bcc11f2598c658547d263582c7dd42e7227dfd2c"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+      "sha256": "d4ffd62530c8dc36623cbc9cbeafa283d539e015ff2eec1790afbb999ad9c09c"
+    }
+  ]
+}

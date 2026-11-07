@@ -1,0 +1,27 @@
+{
+  "result": "LOCAL_ATTENTION_RED_LINE_INSTALL_PASS",
+  "finishedUTC": "2026-11-02T22:55:35.962Z",
+  "before": {
+    "tests": 712,
+    "pass": 712,
+    "failed": []
+  },
+  "after": {
+    "tests": 712,
+    "pass": 712,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/attention-red-line-before-2026-11-02T22-54-33-880Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/attention-red-line-install-2026-11-02T22-54-33-880Z",
+  "files": [
+    "public/css/beauty-dashboard.css",
+    "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "tests/nakka-workflow-ui.test.cjs",
+    "evidence/attention-red-line-20261102/README.md"
+  ],
+  "googleUpload": "PENDING — upload HubTest.html to Identity TEST only",
+  "deviceAcceptance": "PENDING — active red top line and red number only; no active rectangular outline",
+  "production": "UNCHANGED"
+}

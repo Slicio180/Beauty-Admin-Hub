@@ -1,0 +1,28 @@
+{
+  "result": "LOCAL_SIMPLE_START_INSTALL_PASS",
+  "finishedUTC": "2026-11-05T21:15:07.656Z",
+  "before": {
+    "tests": 752,
+    "pass": 752,
+    "failed": []
+  },
+  "after": {
+    "tests": 752,
+    "pass": 752,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/simple-start-before-2026-11-05T21-14-04-432Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/simple-start-install-2026-11-05T21-14-04-432Z",
+  "files": [
+    "public/js/pool-planner-seeded.js",
+    "public/css/beauty-dashboard.css",
+    "tests/pool-planner-seeded-ui.test.cjs",
+    "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "evidence/simple-start-20261105/README.md"
+  ],
+  "googleUpload": "PENDING — save HubTest.html to Identity TEST only",
+  "deviceAcceptance": "PENDING — verify Advanced contains rules and match order, with only Save and Start actions in step 4; do not resend pools or start yet",
+  "production": "UNCHANGED"
+}

@@ -1,0 +1,70 @@
+{
+  "result": "PASS",
+  "finishedUTC": "2026-11-07T16:14:13.596Z",
+  "scriptId": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/league-recovery-2026-11-07T16-13-48-104Z",
+  "tests": "Full regression suite and requirement inventory passed before packaging",
+  "googleSource": "READBACK_VERIFIED",
+  "originalAssets": true,
+  "production": "UNCHANGED",
+  "deployment": "UNCHANGED",
+  "browserVisualCheck": "PENDING",
+  "files": [
+    {
+      "path": "apps-script/registration-identity-test/remote-app/Code.js",
+      "sha256": "c29de1f4ea1d0cf6c3893a3af61c262121c5ea96ef06a8e10fba9d860f57fb50"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTestAutoRegister.gs",
+      "sha256": "69704e98983aacae19e7b76bb68c04fe1813b20f9bfdb3e3c406fc593dcdefdc"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTestBridge.gs",
+      "sha256": "2fbbd09b2c81edb68d640f11e4e25ab4549f1b2a911cec46c79f230f1dcf1fbd"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+      "sha256": "aff3920e2ce365996726df8d605bb0e87eaa0c289c200cfc346d6fe786cc1099"
+    },
+    {
+      "path": "public/js/hub-dashboard.js",
+      "sha256": "208a27232e49c98a90863d750f6663984c253624ae9407344fb9a76c545fc449"
+    },
+    {
+      "path": "public/js/hub-nakka-transfer.js",
+      "sha256": "e89cc63fd1cd419c6a8c0d123ea86db92d4a4facef4f9998385316cdcb077e92"
+    },
+    {
+      "path": "public/js/hub-test-services.js",
+      "sha256": "863c6e2e985e3992d93858d2ac0e94b6437af9f36b3d4796c9737cc025c16041"
+    },
+    {
+      "path": "tests/fixtures/nakka-transfer-runtime.cjs",
+      "sha256": "31e297ba198e8f24d7926cc138d5c6f89d55ec2641eaa95ab316e48e0b6219f4"
+    },
+    {
+      "path": "tests/league-recovery.test.cjs",
+      "sha256": "4a63ef58d5bdb06a429ce94ca1f89b207b4800b61fc212b04472faed69cdca2d"
+    },
+    {
+      "path": "tests/hub-nakka-transfer-ui.test.cjs",
+      "sha256": "5ff83c410b95acf30852f7084d490059d809a6f841a0d7c87d9bb796f99a89fe"
+    },
+    {
+      "path": "docs/handoff/test-inventory.json",
+      "sha256": "44a5202e99b56b73aebd27117fa8eb21d99c3ca1d99fb8adbde0d1f1ddb883b3"
+    },
+    {
+      "path": "evidence/league-recovery-20261107/checks.tap",
+      "sha256": "d4aa97c21383af283e6347b87fed2d63d3948b1ec378bd7c6441251c300853c6"
+    },
+    {
+      "path": "evidence/league-recovery-20261107/inventory.txt",
+      "sha256": "4728ac28be3a03b3debb163a208bfc44bb43f588444db3dbca0f593e799a64de"
+    },
+    {
+      "path": "evidence/league-recovery-20261107/review.json",
+      "sha256": "7faa14377bb72221695c0dc0948ab717d08527049d192b15b212bf652908edfc"
+    }
+  ]
+}

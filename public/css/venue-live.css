@@ -228,3 +228,40 @@ body{border-top:1px solid #ffd700}
 /* V6: retain yellow accent on fixed and docked round headings. */
 .bracket-title h3>span{position:relative;display:inline-block;padding-top:5px}
 .bracket-title h3>span::before{content:"";display:block;position:absolute;top:0;left:0;width:100%;height:1px;background:#ffd700}
+
+/* Match result leads; secondary averages use the smaller size. */
+.venue-pool-card .pool-matrix td .match-cell-score{display:block;font-size:var(--pool-average-font,26px);line-height:1;white-space:nowrap}
+.venue-pool-card .pool-matrix td .match-cell-average{font-size:16px;line-height:1;margin-top:0}
+
+.venue-pool-card .pool-matrix .pool-player .overall-average{font-size:16px;line-height:1}
+
+/* One primary number size: START/NU, match scores and standings totals. */
+.venue-pool-card .pool-matrix td .match-cell-score,.venue-pool-card .pool-matrix td.number:not(.position){font-size:var(--pool-header-average-font,24px);line-height:1}
+
+/* Primary values share the same face as NU, including Rank. */
+.venue-pool-card .pool-matrix td .match-cell-score,.venue-pool-card .pool-matrix td.number:not(.position),.venue-pool-card .group-averages .average-value{font:400 24px/1 "AIK Display",sans-serif}
+
+/* Clear AIK board badge, with room above the player names. */
+.knockout-board{width:max-content;margin:7px 10px 3px auto;padding:4px 10px;background:#ffd700;color:#000;border-radius:4px;font:700 18px/1.15 "AIK Condensed",sans-serif;text-align:center}
+
+/* Round headings match VINNARE; bracket links use AIK yellow. */
+.bracket-title h3,.bracket-heading .bracket-title h3,.bracket-canvas>.final-heading-docked h3,.bracket-canvas>.semifinal-heading-docked h3,.bracket-canvas>.knockout-third>h3,.winner-header .winner-heading{font-size:30px;text-align:center}
+.bracket-connectors{stroke:#ffd700}
+.winner-header{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:10px}
+.winner-header .winner-logo{grid-column:1;justify-self:end}
+.winner-header .winner-heading{grid-column:2}
+
+.knockout-winner .winner-card.confirmed-winner{border-color:#ffd700}
+
+/* Same event branding as Dashboard, including the fullscreen toolbar. */
+.live-club-brand{display:flex;align-items:center;gap:10px;width:220px;max-width:100%;height:64px;color:#ffd700;white-space:nowrap;font:700 36px/1 'AIK Display',serif;}
+.live-club-brand img{width:48px;height:60px;object-fit:contain;flex:none;}
+.live-club-fullscreen{display:none;}
+body:not([data-live-brand="monday"]) .venue-logo,body:not([data-live-brand="monday"]) .fullscreen-logo{display:none!important;}
+body[data-live-brand="monday"] .live-club-brand{display:none!important;}
+.cast-panel:fullscreen .live-club-fullscreen{display:flex;grid-column:1;grid-row:1;}
+@media(max-width:1100px){.live-club-brand{width:180px;font-size:29px;gap:8px;}.live-club-brand img{width:40px;height:52px;}}
+@media(max-width:700px){.cast-panel:fullscreen .live-club-fullscreen{display:none;}}
+
+/* Readable match format below round headings, including docked finals. */
+.bracket-title p,.bracket-canvas>.knockout-third>p{font:700 22px/1.2 'AIK Condensed',sans-serif;color:#fff;margin:6px 0 8px;}

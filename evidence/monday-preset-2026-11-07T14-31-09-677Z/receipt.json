@@ -1,0 +1,46 @@
+{
+  "result": "PASS",
+  "finishedUTC": "2026-11-07T14:31:35.133Z",
+  "scriptId": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/monday-preset-2026-11-07T14-31-09-677Z",
+  "tests": "Full regression suite and requirement inventory passed before packaging",
+  "googleSource": "READBACK_VERIFIED",
+  "originalAssets": true,
+  "production": "UNCHANGED",
+  "deployment": "UNCHANGED",
+  "browserVisualCheck": "PENDING",
+  "files": [
+    {
+      "path": "public/js/hub-evening-setup.js",
+      "sha256": "7de8a8fe03da0a0e39a25b483231659ba68862fa80b1fb7dfbb8193989360b7b"
+    },
+    {
+      "path": "public/js/hub-nakka-event.js",
+      "sha256": "54b664141adf29801e67b09a43d60c51d762b603f15a50606f867b75ae6a9212"
+    },
+    {
+      "path": "tests/evening-setup-ui.test.cjs",
+      "sha256": "511078c8636c2533483dd1fb2558381de44ae165e74a0d0ac697bdc40fdae39a"
+    },
+    {
+      "path": "tests/date-event-creation.test.cjs",
+      "sha256": "df9dfeafe833f60cd4bc80afe92a31e87a07c7ef222ed65b05cd9d61b8b8e0a3"
+    },
+    {
+      "path": "docs/handoff/test-inventory.json",
+      "sha256": "4685b575c90f564c0c693defeacb7f5121f353033f0e69164328ffde26b93950"
+    },
+    {
+      "path": "evidence/monday-preset-20261107/checks.tap",
+      "sha256": "9216eaa0797233625d2c6acbdb64230a883bbbf8d3950de8bb45d52c83c4ab0d"
+    },
+    {
+      "path": "evidence/monday-preset-20261107/inventory.txt",
+      "sha256": "f6efa76ea40d85d94ffab62d70099c3fcd1ab0a014966d53b109f5155286ed86"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+      "sha256": "240e7ca978ef65ed4448cb19d13461382a362051ac6e4b35537d53bd9602655d"
+    }
+  ]
+}

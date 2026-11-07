@@ -1,0 +1,1 @@
+PASS: original-baseline install and readback, installer idempotence, Google baseline guard, local baseline guard and unrelated file preservation (offline mocked Google).

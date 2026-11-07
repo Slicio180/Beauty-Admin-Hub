@@ -1,0 +1,36 @@
+{
+  "result": "LOCAL_WORKFLOW_REVIEW_INSTALL_PASS",
+  "finishedUTC": "2026-11-06T20:45:01.003Z",
+  "before": {
+    "tests": 798,
+    "pass": 798,
+    "failed": []
+  },
+  "after": {
+    "tests": 805,
+    "pass": 805,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/workflow-review-before-2026-11-06T20-43-43-559Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/workflow-review-install-2026-11-06T20-43-43-559Z",
+  "files": [
+    "tests/pool-planner-seeded-ui.test.cjs",
+    "tests/date-event-creation.test.cjs",
+    "tests/hub-english-date-review.test.cjs",
+    "public/nakka-troubleshooting.html",
+    "apps-script/registration-identity-test/remote-app/HubTestNakkaEvent.gs",
+    "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "docs/handoff/acceptance-20261106.md",
+    "docs/handoff/test-inventory.json",
+    "public/js/pool-planner-seeded.js",
+    "public/js/hub-nakka-event.js",
+    "public/js/hub-test-event-control.js",
+    "public/css/beauty-dashboard.css",
+    "evidence/workflow-review-20261106/checks.tap"
+  ],
+  "googleUpload": "PENDING — run upload-test.cjs to update existing Identity TEST source",
+  "deviceAcceptance": "PENDING — verify inline Event Control lookup, Back paths and renewed approvals; no production changes",
+  "production": "UNCHANGED"
+}

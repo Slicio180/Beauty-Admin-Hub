@@ -76,6 +76,6 @@ test('pool planner: generated TEST download embeds exact original bytes after sc
  const workbook=page.match(/base64,([^"]+)/)[1];
  assert.deepEqual(Buffer.from(workbook,'base64'),fs.readFileSync('public/assets/pool-scheme.xlsx'));
  assert.equal((page.match(/data-players=/g)||[]).length,97);
- assert.match(page,/download="Beauty-Original-Pool-Scheme.xlsx"/);
+ assert.match(page,/download="Original-Pool-Scheme.xlsx"/);
  assert.match(html,/reference.target='_blank'/);assert.match(html,/reference.rel='noopener noreferrer'/);
 });

@@ -1,0 +1,32 @@
+{
+  "result": "LOCAL_PASS",
+  "recordedUTC": "2026-11-07T15:47:39.880484+00:00",
+  "scope": "Google TEST only; installation pending",
+  "tests": 908,
+  "historicalCause": "Three earlier registration misses cannot be attributed from the available evidence. A pre-send roster race was reproduced locally.",
+  "change": "At most one fresh preview/save cycle after TRANSFER_BUSY or STALE_TRANSFER; no resend after uncertain POST. Standalone recovery omits league identity claims.",
+  "verified": [
+    "Hub/mobile/kiosk single registration and one provider POST after concurrent roster arrival",
+    "Bounded busy and stale retries",
+    "Event ID/date switch blocks further add",
+    "Fresh eligibility and identity checks",
+    "Post timeout and review barriers never retry",
+    "Standalone provider calls omit league endpoints and LPID claims",
+    "Existing league behavior passes regression suite"
+  ],
+  "limitations": [
+    "Google TEST source installation pending",
+    "Real mobile/kiosk simultaneous-registration trial pending",
+    "No production changes",
+    "No GitHub commit or push performed"
+  ],
+  "inventory": "PASS: 908 cases across 65 files",
+  "installerChecks": [
+    "Packaged JavaScript and embedded HTML syntax verified",
+    "Mock Google TEST install and full readback PASS",
+    "Repeated installation sends no second upload",
+    "Unknown local source blocks all network requests",
+    "Unknown Google source blocks upload",
+    "Unrelated Google source preserved"
+  ]
+}

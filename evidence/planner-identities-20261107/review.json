@@ -1,0 +1,31 @@
+{
+  "change": "Independent current league identities for Pool Planner; explicit empty statistics collections remain unseeded; safe failure phase diagnostics",
+  "scope": "Google TEST installer only; production unchanged",
+  "tests": {
+    "passed": 947,
+    "failed": 0,
+    "newRegressionTests": 6
+  },
+  "limitations": [
+    "Provider failure cause not yet captured from installed TEST Hub",
+    "Google upload and browser/Nakka verification pending user installation"
+  ],
+  "guardrails": [
+    "No registration writes or event changes from loading planner",
+    "Failed/malformed statistics still block draw and send",
+    "Changed identity list invalidates cached statistics for planning",
+    "No invented averages",
+    "Strict local and Google source hashes with backups and readback"
+  ],
+  "result": "PASS",
+  "finishedUTC": "2026-11-07T18:00:56.139317+00:00",
+  "inventory": "PASS",
+  "installerChecks": [
+    "mock install and full readback",
+    "idempotent reinstall",
+    "unknown local source refused",
+    "unknown Google source refused",
+    "unrelated Google file preserved",
+    "local source hashes and syntax check"
+  ]
+}

@@ -14,6 +14,7 @@ function validate(profile){
  if(typeof profile.eventDate!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(profile.eventDate)||!Number.isFinite(Date.parse(profile.eventDate))||new Date(profile.eventDate).toISOString().slice(0,10)!==profile.eventDate)problems.push('eventDate must be a valid calendar date');
  if(profile.writesEnabled!==false)problems.push('Production writes must remain disabled in this preparation profile');
  if(!Array.isArray(profile.allowedStaffUids)||!profile.allowedStaffUids.length||profile.allowedStaffUids.some(v=>typeof v!=='string'||!/^[A-Za-z0-9_-]{1,128}$/.test(v))||new Set(profile.allowedStaffUids).size!==profile.allowedStaffUids.length)problems.push('allowedStaffUids must explicitly list unique approved staff');
+ if(profile.eventId==='t_QHaG_7792')problems.push('eventId must be isolated from registration TEST');
  for(const key of Object.keys(TEST))if(profile[key]===TEST[key])problems.push(key+' must be isolated from TEST');
  if(problems.length){const error=Error(problems.join('; '));error.code='PROFILE_NOT_READY';throw error;}
  const copy=JSON.parse(JSON.stringify(profile));copy.allowedStaffUids=Object.freeze(copy.allowedStaffUids);return Object.freeze(copy);

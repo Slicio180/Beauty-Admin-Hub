@@ -1,0 +1,58 @@
+{
+  "result": "PASS",
+  "finishedUTC": "2026-11-07T13:06:33.632Z",
+  "scriptId": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/aik-branding-2026-11-07T13-06-08-005Z",
+  "tests": "890 inventoried cases passed before packaging",
+  "googleSource": "READBACK_VERIFIED",
+  "originalAssets": true,
+  "production": "UNCHANGED",
+  "deployment": "UNCHANGED",
+  "browserVisualCheck": "PENDING",
+  "files": [
+    {
+      "path": "public/js/hub-chrome.js",
+      "sha256": "c6bcb94119a8cb6e30f91e77d9289bdada66c052e654a64508046045bd7bc220"
+    },
+    {
+      "path": "public/css/beauty-dashboard.css",
+      "sha256": "b7c5f626186f09424a081fbe3edfb0c52c029d87cfb4bdc44ace30de6a5f723a"
+    },
+    {
+      "path": "public/css/beauty-branding.css",
+      "sha256": "ca05a98fd9fcb10370eca2ee82b4aa052aa175949fc73c2e84fdddb621a15085"
+    },
+    {
+      "path": "scripts/build-player-test.cjs",
+      "sha256": "923d45a7c79d1a15ece06eb996fc9123a3fdf66d3e2001f7ef56521c6f60ec8f"
+    },
+    {
+      "path": "tests/hub-chrome.test.cjs",
+      "sha256": "5f97363e8e84050f3035bfb1a3bbba60f6c901defdcf4eb5ece4d55be69b89b4"
+    },
+    {
+      "path": "tests/player-theme.test.cjs",
+      "sha256": "0db2bd50d3fe18232cc26c11da1c77951ac7815ce916e0076e1ec89df0abfbce"
+    },
+    {
+      "path": "docs/handoff/test-inventory.json",
+      "sha256": "a453ff9dc824613e1e7ba688b0736b6efe0373a3317e65f931ce4b23a93bc717"
+    },
+    {
+      "path": "evidence/branding-20261107/checks.tap",
+      "sha256": "01e6cb4a9b28f58a1276e3236a5535411f9987076949ef37c3803c0c72511d07"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+      "sha256": "9b4e43d58729691143245583e677d0bd73cfacb71e0043da908230fbb733ba17"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/RemoteRegistration.html",
+      "sha256": "dc4a95df0b1c7512b2297b189a08fc0a3b255212649b44c7e04dd1b824e29065"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/KioskTest.html",
+      "sha256": "ab40e078bc4aeabd62af98cc58a0cad57ea1b87343d3c00129c3a440aacbca76"
+    }
+  ]
+}

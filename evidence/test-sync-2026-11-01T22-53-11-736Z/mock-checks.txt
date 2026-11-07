@@ -1,0 +1,51 @@
+nakka-date-fix
+PASS one dated match
+PASS undated undefined
+PASS undated null
+PASS undated 
+PASS undated 0
+PASS multiple dated matches
+PASS no dated match
+PASS malformed 0
+PASS malformed bad
+PASS malformed -1
+PASS malformed true
+PASS malformed [object Object]
+PASS malformed 1e+99
+PASS null record
+PASS incomplete response
+PASS HTTP failure
+PASS date changes during lookup
+17 checks passed; mocked services only.
+
+
+
+nakka-transfer-fix
+PASS new target accepting entries
+PASS new target preparing
+PASS old matched target blocked
+PASS old raw target blocked
+PASS wrong title blocked
+PASS wrong league blocked
+PASS status 30 blocked
+PASS status 40 blocked
+PASS status 50 blocked
+PASS wrong date blocked
+PASS OUT player blocked
+PASS duplicate identity blocked
+PASS confirmed transfer uses new target, one linked player, verified readback
+PASS reused confirmation cannot send another add
+14 checks passed; mocked services only, no external writes.
+
+
+
+nakka-attention-fix
+PASS new TEST clears
+PASS old ID rejected
+PASS old title rejected
+PASS wrong league rejected
+PASS stale date rejected
+PASS missing entry retained
+PASS uncertain journal retained
+7 checks passed; GET-only Nakka mocks; journals unchanged.
+

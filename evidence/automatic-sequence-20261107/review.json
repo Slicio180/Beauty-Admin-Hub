@@ -1,0 +1,34 @@
+{
+  "result": "LOCAL_PASS",
+  "recordedUTC": "2026-11-07T17:39:29.466536+00:00",
+  "tests": 941,
+  "trigger": "Katja mobile diagnostic EVENT_SAVE / TRANSFER_BUSY after separate automatic preview and save locks",
+  "changes": [
+    "Automatic Nakka sequence takes one bounded script lock before profile lookup or creation and retains it through event preview, save and readback",
+    "Creation and transfer helpers borrow invocation-local ownership only for the same player; manual calls retain their own locks",
+    "Ownership is cleared and lock released for success, exception and uncertain outcomes",
+    "Target, date and authority are rechecked after lock acquisition",
+    "AUTO_LOCK added to preserved registration diagnostics"
+  ],
+  "evidence": [
+    "Two new regressions fail against prior source and pass after correction",
+    "Simulated competing twelve-second operation cannot take lock between automatic preview and save on Hub mobile or kiosk",
+    "Full regression suite 941 PASS"
+  ],
+  "limitations": [
+    "No Google TEST install performed here",
+    "Actual device concurrency and response time still require verification",
+    "Initial ownership wait remains bounded at thirty seconds; prolonged contention can still return a visible busy result",
+    "No automatic replay of existing failed registrations"
+  ],
+  "production": "UNCHANGED",
+  "github": "No commit or push performed",
+  "inventory": "PASS: 941 cases across 69 files",
+  "installerChecks": [
+    "Packaged source syntax and approved local baseline verified",
+    "Simulated TEST upload and readback passed",
+    "Repeated install sends no duplicate upload",
+    "Unknown local or Google source blocks upload",
+    "Unrelated Google source preserved"
+  ]
+}

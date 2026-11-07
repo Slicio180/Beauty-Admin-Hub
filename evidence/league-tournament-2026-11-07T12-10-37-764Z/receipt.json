@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "startedUTC": "2026-11-07T12:10:40.433Z",
+  "scriptId": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/league-tournament-2026-11-07T12-10-37-764Z",
+  "production": "UNCHANGED",
+  "deployments": "UNCHANGED",
+  "browserAndLiveNakka": "PENDING",
+  "baseCommit": "0f9fcf0a2b03a392edc34106b389e99822157a8b",
+  "googleSource": "VERIFIED",
+  "finishedUTC": "2026-11-07T12:11:02.321Z",
+  "files": 41
+}

@@ -1,0 +1,196 @@
+TAP version 13
+# Subtest: live shell has four slim Swedish tabs and one selected shared panel with internal fullscreen
+ok 1 - live shell has four slim Swedish tabs and one selected shared panel with internal fullscreen
+  ---
+  duration_ms: 12.640037
+  type: 'test'
+  ...
+# Subtest: live shell requests fullscreen on selected panel and preserves chosen view when exiting
+ok 2 - live shell requests fullscreen on selected panel and preserves chosen view when exiting
+  ---
+  duration_ms: 3.81057
+  type: 'test'
+  ...
+# Subtest: live windows keep independent round choices scroll positions and continue refresh without resetting
+ok 3 - live windows keep independent round choices scroll positions and continue refresh without resetting
+  ---
+  duration_ms: 28.62826
+  type: 'test'
+  ...
+# Subtest: live pool paging and automatic rotation retain approved card renderer and pause outside pools
+ok 4 - live pool paging and automatic rotation retain approved card renderer and pause outside pools
+  ---
+  duration_ms: 8.146487
+  type: 'test'
+  ...
+# Subtest: live knockout scroll pauses for controls interaction hidden pages and reduced motion
+ok 5 - live knockout scroll pauses for controls interaction hidden pages and reduced motion
+  ---
+  duration_ms: 5.802069
+  type: 'test'
+  ...
+# Subtest: live shell failure pause offline and page exit remove current status and stop scheduled work
+ok 6 - live shell failure pause offline and page exit remove current status and stop scheduled work
+  ---
+  duration_ms: 6.617652
+  type: 'test'
+  ...
+# Subtest: live public list and stage event dates must agree before bracket content is displayed
+ok 7 - live public list and stage event dates must agree before bracket content is displayed
+  ---
+  duration_ms: 4.853445
+  type: 'test'
+  ...
+# Subtest: knockout layout aligns all source centres and target centres exactly with orthogonal paths
+ok 8 - knockout layout aligns all source centres and target centres exactly with orthogonal paths
+  ---
+  duration_ms: 0.398588
+  type: 'test'
+  ...
+# Subtest: knockout round navigation remains readable for full narrow and split windows without champion column
+ok 9 - knockout round navigation remains readable for full narrow and split windows without champion column
+  ---
+  duration_ms: 3.293153
+  type: 'test'
+  ...
+# Subtest: knockout cards keep literal names every average and opening-only draw numbers inside player identity
+ok 10 - knockout cards keep literal names every average and opening-only draw numbers inside player identity
+  ---
+  duration_ms: 2.266042
+  type: 'test'
+  ...
+# Subtest: knockout preserves missing averages pending slots byes third place and provider final format
+ok 11 - knockout preserves missing averages pending slots byes third place and provider final format
+  ---
+  duration_ms: 0.836596
+  type: 'test'
+  ...
+# Subtest: knockout draw numbers use only unique numeric provider opening guide and never league ranks
+ok 12 - knockout draw numbers use only unique numeric provider opening guide and never league ranks
+  ---
+  duration_ms: 0.837507
+  type: 'test'
+  ...
+# Subtest: knockout live cycle uses exact event round pair and maps reversed provider player order
+ok 13 - knockout live cycle uses exact event round pair and maps reversed provider player order
+  ---
+  duration_ms: 1.758059
+  type: 'test'
+  ...
+# Subtest: knockout live collector excludes unrelated fixtures and refuses invalid identities sets and incomplete totals
+ok 14 - knockout live collector excludes unrelated fixtures and refuses invalid identities sets and incomplete totals
+  ---
+  duration_ms: 0.608844
+  type: 'test'
+  ...
+# Subtest: knockout CSS reserves two-line rows single one-pixel title accent and one connector layer
+ok 15 - knockout CSS reserves two-line rows single one-pixel title accent and one connector layer
+  ---
+  duration_ms: 0.403756
+  type: 'test'
+  ...
+# Subtest: both TEST cast routes embed identical wired shell scripts without external asset dependencies
+ok 16 - both TEST cast routes embed identical wired shell scripts without external asset dependencies
+  ---
+  duration_ms: 8.000688
+  type: 'test'
+  ...
+# Subtest: Hub Live clicks open new independent tabs and reject late signed-out callbacks
+ok 17 - Hub Live clicks open new independent tabs and reject late signed-out callbacks
+  ---
+  duration_ms: 1.746612
+  type: 'test'
+  ...
+# Subtest: Hub Live opener rejects foreign unguarded duplicate-query and fragment URLs
+ok 18 - Hub Live opener rejects foreign unguarded duplicate-query and fragment URLs
+  ---
+  duration_ms: 2.902847
+  type: 'test'
+  ...
+# Subtest: combined live URL uses the selected event date guard rather than returning a bare route
+ok 19 - combined live URL uses the selected event date guard rather than returning a bare route
+  ---
+  duration_ms: 7.916402
+  type: 'test'
+  ...
+# Subtest: feed knockout option reuses one match list and propagates live match data through full and fast cycles
+ok 20 - feed knockout option reuses one match list and propagates live match data through full and fast cycles
+  ---
+  duration_ms: 2.407384
+  type: 'test'
+  ...
+# Subtest: pool paging arrows sit above cards and footer is absent below the player footer
+ok 21 - pool paging arrows sit above cards and footer is absent below the player footer
+  ---
+  duration_ms: 9.574691
+  type: 'test'
+  ...
+# Subtest: cast footer keeps fullscreen failure visible and reserves space without covering cards
+ok 22 - cast footer keeps fullscreen failure visible and reserves space without covering cards
+  ---
+  duration_ms: 1.815746
+  type: 'test'
+  ...
+# Subtest: live plan labels reload in existing windows and late callbacks are ignored after exit
+ok 23 - live plan labels reload in existing windows and late callbacks are ignored after exit
+  ---
+  duration_ms: 1.900222
+  type: 'test'
+  ...
+# Subtest: all shared live views keep icon buttons and one menu with list settings and count tile
+ok 24 - all shared live views keep icon buttons and one menu with list settings and count tile
+  ---
+  duration_ms: 4.166693
+  type: 'test'
+  ...
+# Subtest: display menu anchors under its icon closes outside or on Escape and keeps viewport space
+ok 25 - display menu anchors under its icon closes outside or on Escape and keeps viewport space
+  ---
+  duration_ms: 1.527493
+  type: 'test'
+  ...
+# Subtest: approved title and action nodes dock into header and tab row then remain inside selected fullscreen
+ok 26 - approved title and action nodes dock into header and tab row then remain inside selected fullscreen
+  ---
+  duration_ms: 1.587562
+  type: 'test'
+  ...
+# Subtest: finals winner uses provider champion and correct award without inferring a winner from scores
+ok 27 - finals winner uses provider champion and correct award without inferring a winner from scores
+  ---
+  duration_ms: 1.156426
+  type: 'test'
+  ...
+# Subtest: completed native knockout result survives stale active scorer and reload
+ok 28 - completed native knockout result survives stale active scorer and reload
+  ---
+  duration_ms: 0.281233
+  type: 'test'
+  ...
+# Subtest: winner stays pending during an active or unresolved final despite provider champion slot
+ok 29 - winner stays pending during an active or unresolved final despite provider champion slot
+  ---
+  duration_ms: 0.625459
+  type: 'test'
+  ...
+# Subtest: two qualifier final hides empty bronze match and board badge keeps assigned text
+ok 30 - two qualifier final hides empty bronze match and board badge keeps assigned text
+  ---
+  duration_ms: 0.286971
+  type: 'test'
+  ...
+# Subtest: finished knockout matches hide board badges and only confirmed winners receive gold outline
+ok 31 - finished knockout matches hide board badges and only confirmed winners receive gold outline
+  ---
+  duration_ms: 0.754803
+  type: 'test'
+  ...
+1..31
+# tests 31
+# suites 0
+# pass 31
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 216.668306

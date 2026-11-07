@@ -12,8 +12,10 @@ function beautyHubEventSnapshot_(ss) {
   const expected=[['START DATE','LAST RESET'],['PLAYER','OLD NAME','STATUS','FOTO&VIDEO','MEDDELANDE'],['PLAYERS','NEW PLAYERS','STATUS','FOTO&VIDEO','MEDDELANDE','WHERE FROM'],['PLAYERS'],['Timestamp','VÄLJ DITT NAMN','Skriv ditt fullständiga namn','Foto- och videomedgivande','Meddelande','WHERE FROM']];
   const result={};
   titles.forEach((title,i)=>{
-    const sheet=ss.getSheetByName(title);if(!sheet || sheet.getLastRow()>limits[i] || sheet.getLastColumn()>widths[i])throw Error('LAYOUT');
-    const rows=['PLAYER STATUS DATA',"TONIGHT'S PLAYERS"].includes(title)?Math.min(1000,sheet.getMaxRows()):Math.max(2,sheet.getLastRow());
+    const sheet=ss.getSheetByName(title);if(!sheet)throw Error('LAYOUT');
+    const lastRow=sheet.getLastRow();
+    if(lastRow>limits[i] || sheet.getLastColumn()>widths[i])throw Error('LAYOUT');
+    const rows=['PLAYER STATUS DATA',"TONIGHT'S PLAYERS"].includes(title)?Math.min(1000,sheet.getMaxRows()):Math.max(2,lastRow);
     if(rows<2 || (title==="TONIGHT'S PLAYERS" && rows<100))throw Error('LAYOUT');
     const range=sheet.getRange(1,1,rows,widths[i]);
     const values=range.getValues(),display=range.getDisplayValues(),formulas=range.getFormulas(),formats=range.getNumberFormats();
@@ -25,7 +27,9 @@ function beautyHubEventSnapshot_(ss) {
   // The real workbook historically filtered from LAST RESET (B2), which
   // excludes registrations already made earlier on the selected event day.
   // Require the reviewed day-based spill formula before any backup or reset.
-  if(result["TONIGHT'S PLAYERS"].formulas[1][0] !== "=IFERROR(SORT(UNIQUE(FILTER({IF('Form responses 2'!B2:B=\"MITT NAMN FINNS INTE I LISTAN\",'Form responses 2'!C2:C,'Form responses 2'!B2:B),IF('Form responses 2'!B2:B=\"MITT NAMN FINNS INTE I LISTAN\",'Form responses 2'!C2:C,\"\")},IF('Form responses 2'!B2:B=\"MITT NAMN FINNS INTE I LISTAN\",'Form responses 2'!C2:C,'Form responses 2'!B2:B)<>\"\",'Form responses 2'!A2:A>=Control!A2,'Form responses 2'!A2:A<Control!A2+1)),1,TRUE),\"\")")throw Error('DATE_FILTER');
+  const expectedFormula="=IFERROR(SORT(UNIQUE(FILTER({IF('Form responses 2'!B2:B=\"MITT NAMN FINNS INTE I LISTAN\",'Form responses 2'!C2:C,'Form responses 2'!B2:B),IF('Form responses 2'!B2:B=\"MITT NAMN FINNS INTE I LISTAN\",'Form responses 2'!C2:C,\"\")},IF('Form responses 2'!B2:B=\"MITT NAMN FINNS INTE I LISTAN\",'Form responses 2'!C2:C,'Form responses 2'!B2:B)<>\"\",'Form responses 2'!A2:A>=Control!A2,'Form responses 2'!A2:A<Control!A2+1)),1,TRUE),\"\")";
+  const eventFormula=expectedFormula.replace(",'Form responses 2'!A2:A>=Control!A2,'Form responses 2'!A2:A<Control!A2+1",'');
+  if(result["TONIGHT'S PLAYERS"].formulas[1][0] !== (typeof beautyContextRead_==='function'&&beautyContextRead_()?eventFormula:expectedFormula))throw Error('DATE_FILTER');
   return result;
 }
 function beautyHubEventPlan_(snap,date,zone) {
@@ -131,3 +135,4 @@ function beautyHubTestEventTransition_(action,input) {
   }catch(error){return fail(attempted?'SAVE_UNCERTAIN':'READ_FAILED',attempted?'Event save could not be fully verified. Do not retry. Inspect TEST sheets and backup.':'Event review failed. Check dates, headers, formulas or duplicate registrations before trying again.',backup);}
   finally{lock.releaseLock();}
 }
+

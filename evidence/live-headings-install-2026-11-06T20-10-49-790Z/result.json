@@ -1,0 +1,27 @@
+{
+  "result": "LOCAL_LIVE_HEADINGS_INSTALL_PASS",
+  "finishedUTC": "2026-11-06T20:12:05.982Z",
+  "before": {
+    "tests": 797,
+    "pass": 797,
+    "failed": []
+  },
+  "after": {
+    "tests": 797,
+    "pass": 797,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/live-headings-before-2026-11-06T20-10-49-790Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/live-headings-install-2026-11-06T20-10-49-790Z",
+  "files": [
+    "apps-script/registration-identity-test/remote-app/BeautyLiveTest.html",
+    "apps-script/registration-identity-test/remote-app/StageTest.html",
+    "public/css/venue-live.css",
+    "public/js/knockout-bracket.js"
+  ],
+  "googleUpload": "PENDING — copy changed Google files listed in READ-ME.txt to existing Identity TEST files only",
+  "deviceAcceptance": "PENDING — verify completed finals, partial averages, board badges, mobile digits and running controls; no production changes",
+  "production": "UNCHANGED"
+}

@@ -1,0 +1,45 @@
+{
+  "result": "LOCAL_NAKKA_FLOW_INSTALL_PASS",
+  "finishedUTC": "2026-11-02T19:14:44.220Z",
+  "before": {
+    "tests": 678,
+    "pass": 678,
+    "failed": []
+  },
+  "after": {
+    "tests": 695,
+    "pass": 695,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/nakka-flow-before-2026-11-02T19-13-44-812Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/nakka-flow-install-2026-11-02T19-13-44-812Z",
+  "files": [
+    "public/js/hub-dashboard.js",
+    "public/js/hub-nakka-transfer.js",
+    "public/js/hub-test-services.js",
+    "public/js/hub-player-removal.js",
+    "public/css/beauty-dashboard.css",
+    "public/index.html",
+    "public/preview.html",
+    "scripts/build-hub-test.cjs",
+    "apps-script/registration-identity-test/remote-app/HubTestNakkaTransfer.gs",
+    "apps-script/registration-identity-test/remote-app/HubTestAttention.gs",
+    "apps-script/registration-identity-test/remote-app/HubTestRemove.gs",
+    "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "docs/handoff/test-inventory.json",
+    "tests/dashboard-ui.test.cjs",
+    "tests/hub-nakka-transfer-ui.test.cjs",
+    "tests/hub-test-connection.test.cjs",
+    "tests/hub-player-removal.test.cjs",
+    "tests/nakka-workflow-engine.test.cjs",
+    "tests/nakka-workflow-ui.test.cjs",
+    "public/js/hub-nakka-workflow.js",
+    "public/nakka-troubleshooting.html",
+    "evidence/nakka-troubleshooting-20261102/README.md"
+  ],
+  "googleUpload": "PENDING — upload HubTestNakkaTransfer.gs, HubTestAttention.gs, HubTestRemove.gs and HubTest.html to Identity TEST only",
+  "deviceAcceptance": "PENDING — guided Nakka menu, controlled registration/removal and actual device timings",
+  "production": "UNCHANGED"
+}

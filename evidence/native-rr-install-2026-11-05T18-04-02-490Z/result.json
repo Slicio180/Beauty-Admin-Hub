@@ -1,0 +1,30 @@
+{
+  "result": "LOCAL_NATIVE_ROUND_ROBIN_INSTALL_PASS",
+  "finishedUTC": "2026-11-05T18:05:07.840Z",
+  "before": {
+    "tests": 718,
+    "pass": 718,
+    "failed": []
+  },
+  "after": {
+    "tests": 724,
+    "pass": 724,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/native-rr-before-2026-11-05T18-04-02-490Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/native-rr-install-2026-11-05T18-04-02-490Z",
+  "files": [
+    "server/pool-service.js",
+    "public/js/pool-planner-seeded.js",
+    "tests/pool-service.test.cjs",
+    "docs/handoff/test-inventory.json",
+    "apps-script/registration-identity-test/remote-app/HubTestPools.gs",
+    "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "evidence/native-rr-20261105/README.md"
+  ],
+  "googleUpload": "PENDING — upload HubTestPools.gs and HubTest.html to Identity TEST only",
+  "deviceAcceptance": "PENDING — native Round Robin planner load, mixed groups and reviewed format send/readback pending",
+  "production": "UNCHANGED"
+}

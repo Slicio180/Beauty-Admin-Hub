@@ -1,0 +1,42 @@
+{
+  "result": "PASS",
+  "finishedUTC": "2026-11-07T18:02:39.560Z",
+  "scriptId": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/planner-identities-2026-11-07T18-02-13-826Z",
+  "tests": "Full regression suite and requirement inventory passed before packaging",
+  "googleSource": "READBACK_VERIFIED",
+  "originalAssets": true,
+  "production": "UNCHANGED",
+  "deployment": "UNCHANGED",
+  "browserVisualCheck": "PENDING",
+  "files": [
+    {
+      "path": "server/pool-service.js",
+      "sha256": "2d5dcc02699587377afa962d27721945d9d1df29b796f5b83b98fe5bff8e37ab"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTestPools.gs",
+      "sha256": "b3b957bf35d6b836b64d3e72e2faaa0fde541dc6d0f3e5f479b6a7cdab9a4e26"
+    },
+    {
+      "path": "tests/pool-service.test.cjs",
+      "sha256": "1e4dda8c89c78bb0b6730325e6e888fb135ff333ef53ce99c741fda504286c8a"
+    },
+    {
+      "path": "docs/handoff/test-inventory.json",
+      "sha256": "d01eb2a90ad8cffa4753df13e69cba0bba877b39efcadbd7ca29fdaf29c17674"
+    },
+    {
+      "path": "evidence/planner-identities-20261107/checks.tap",
+      "sha256": "50b30bb9ec1b6e6de0420b4fb21e0ca736b0fd4db74b2b1d3b599323965fd874"
+    },
+    {
+      "path": "evidence/planner-identities-20261107/inventory.txt",
+      "sha256": "f81ba4ee6e69654dc85615fb37aa39bae65c21a6ab8614902db053b99b6c2ac2"
+    },
+    {
+      "path": "evidence/planner-identities-20261107/review.json",
+      "sha256": "6e38495420dea2690508724b85f1458455b222371ae8e86c7e46e64f0f9a6b33"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "result": "LOCAL_LIVE_BOARD_LABELS_INSTALL_PASS",
+  "finishedUTC": "2026-11-05T21:47:39.921Z",
+  "before": {
+    "tests": 752,
+    "pass": 752,
+    "failed": []
+  },
+  "after": {
+    "tests": 752,
+    "pass": 752,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/live-board-labels-before-2026-11-05T21-46-33-341Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/live-board-labels-install-2026-11-05T21-46-33-341Z",
+  "files": [
+    "public/js/venue-pool-cards.js",
+    "public/js/pool-planner-seeded.js",
+    "tests/venue-pool-cards.test.cjs",
+    "tests/pool-planner-seeded-ui.test.cjs",
+    "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "apps-script/registration-identity-test/remote-app/StageTest.html",
+    "evidence/live-board-labels-20261105/README.md",
+    "apps-script/registration-identity-test/remote-app/BeautyLiveTest.html"
+  ],
+  "googleUpload": "PENDING — save HubTest.html, StageTest.html and BeautyLiveTest.html to Identity TEST only",
+  "deviceAcceptance": "PENDING — verify Beauty Live shows Bana 5 + 6 and pending Start uses accurate progress text; do not resend pools or start yet",
+  "production": "UNCHANGED"
+}

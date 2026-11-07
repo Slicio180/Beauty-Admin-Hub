@@ -47,17 +47,17 @@ test('Attention flags duplicate league identity even when the name is already in
 });
 test('Attention verified entry clears its alert without claiming an unexposed league ID or deleting journals',()=>{
  const h=fixture({state:{entries:[{name:'Anna',tpid:'b123'}]}});h.context.beautyHubAttentionRemember_('Anna',h.state.date,{code:'ENTRY_UNCONFIRMED'});
- const key='BEAUTY_NAKKA_TRANSFER_t_RqC2_2034_a123',record=JSON.stringify({state:'ENTRY_VERIFIED_LINK_UNEXPOSED',event:{id:'t_RqC2_2034',date:h.state.date},identity:{name:'Anna',lpid:'a123'},tpid:'b123'});h.props.set(key,record);
+ const key='BEAUTY_NAKKA_TRANSFER_t_QHaG_7792_a123',record=JSON.stringify({state:'ENTRY_VERIFIED_LINK_UNEXPOSED',event:{id:'t_QHaG_7792',date:h.state.date},identity:{name:'Anna',lpid:'a123'},tpid:'b123'});h.props.set(key,record);
  const r=h.refresh();assert.equal(r.success,true);assert.equal(r.attention.items.length,0);assert.equal(h.props.get(key),record);assert.equal(h.posts().length,0);assert.doesNotMatch(JSON.stringify(r),/identityVerified":true/);
 });
 test('Attention uncertain creation cannot clear through same-name event presence',()=>{
- const h=fixture({state:{entries:[{name:'Anna',tpid:'b123',lpid:'a123'}]}}),key='BEAUTY_NAKKA_LEAGUE_CREATE_lg_tM2v_3523_'+h.context.beautyHubTransferHash_('anna');h.props.set(key,JSON.stringify({state:'ATTEMPTED',name:'Anna'}));
+ const h=fixture({state:{entries:[{name:'Anna',tpid:'b123',lpid:'a123'}]}}),key='BEAUTY_NAKKA_LEAGUE_CREATE_lg_M2wQ_4189_'+h.context.beautyHubTransferHash_('anna');h.props.set(key,JSON.stringify({state:'ATTEMPTED',name:'Anna'}));
  const before=h.props.get(key),r=h.refresh();assert.equal(r.attention.items[0].code,'LEAGUE_CREATION_REVIEW_REQUIRED');assert.equal(h.props.get(key),before);assert.equal(h.posts().length,0);
 });
 test('Attention uncertain transfer reconciliation respects the saved fingerprint',()=>{
  for(const correct of [false,true]){
-  const h=fixture({state:{entries:[{name:'Anna',tpid:'b123'}]}}),key='BEAUTY_NAKKA_TRANSFER_t_RqC2_2034_a123';
-  h.props.set(key,JSON.stringify({state:'ATTEMPTED',event:{id:'t_RqC2_2034',date:h.state.date},identity:{name:'Anna',lpid:'a123'},beforeCount:0,beforeHash:correct?h.context.beautyHubTransferHash_([]):'wrong'}));
+  const h=fixture({state:{entries:[{name:'Anna',tpid:'b123'}]}}),key='BEAUTY_NAKKA_TRANSFER_t_QHaG_7792_a123';
+  h.props.set(key,JSON.stringify({state:'ATTEMPTED',event:{id:'t_QHaG_7792',date:h.state.date},identity:{name:'Anna',lpid:'a123'},beforeCount:0,beforeHash:correct?h.context.beautyHubTransferHash_([]):'wrong'}));
   const before=h.props.get(key),r=h.refresh();assert.equal(r.success,true);assert.equal(r.attention.items.length,correct?0:1);assert.equal(h.props.get(key),before);assert.equal(h.posts().length,0);
  }
 });
@@ -83,3 +83,62 @@ test('Attention confirmed manual transfer clears an issue through existing guard
 });
 
 test('Attention storage failure cannot turn a committed registration into a repeatable failure',()=>{const h=attach(registration({journalFailure:true}));const r=h.register(input);assert.equal(r.success,true);assert.equal(h.rows.length,1);assert.equal(h.posts().length,0);assert.equal(h.context.beautyHubAttentionRemember_('Anna',input.eventDate,{code:'ENTRY_UNCONFIRMED'}),false);});
+
+test('Original registration diagnostic survives attention refresh and manual recovery without provider writes',()=>{
+ const h=fixture({state:{league:[]}}),c=h.context;
+ assert.equal(c.beautyHubRegistrationDiagnostic_('Anna',h.state.date,'MOBIL',{code:'TRANSFER_BUSY'},'LEAGUE_LOCK'),true);
+ c.beautyHubAttentionRemember_('Anna',h.state.date,{code:'TRANSFER_BUSY'});
+ const key=c.beautyHubRegistrationDiagnosticKey_('Anna',h.state.date),before=h.props.get(key);
+ const r=h.refresh();assert.equal(r.attention.items[0].code,'LEAGUE_IDENTITY_REVIEW');assert.equal(r.attention.items[0].registrationDiagnostic.code,'TRANSFER_BUSY');assert.equal(r.attention.items[0].registrationDiagnostic.stage,'LEAGUE_LOCK');
+ c.beautyHubAttentionRemember_('Anna',h.state.date,{entryConfirmed:true});assert.equal(h.props.get(key),before);assert.equal(h.read().items.length,0);assert.equal(h.posts().length,0);
+});
+test('Automatic registration stores bounded source phase and failure code for Hub mobile and kiosk',()=>{
+ for(const route of ['HUB','MOBIL','KIOSK']){
+  const h=attach(registration({newLeague:true,creationTimeout:true,state:{league:[]},noAuth:route!=='HUB'}));
+  const send=h.context.beautyHubAutoSend_;h.context.beautyHubAutoSend_=(...args)=>{assert.equal(h.context.beautyHubRegistrationDiagnosticRead_('Anna',input.eventDate).code,'AUTO_STARTED');return send(...args);};
+  const result=route==='HUB'?h.register():h.context[route==='MOBIL'?'submitRegistration':'submitKioskRegistration'](input);
+  assert.equal(result.success,true);assert.equal(h.rows.length,1);assert.equal(h.posts().length,1);
+  const d=h.context.beautyHubRegistrationDiagnosticRead_('Anna',input.eventDate);assert.equal(d.source,route);assert.equal(d.stage,'LEAGUE_WRITE');assert.equal(d.code,'LEAGUE_CREATION_UNCERTAIN');assert.doesNotMatch(JSON.stringify(d),/SECRET|password|token|Anna/);
+  if(route!=='HUB')assert.equal(result.nakka.registrationDiagnostic,undefined);
+ }
+});
+test('Diagnostic write failure does not invalidate committed registration or trigger another send',()=>{
+ const h=attach(registration()),original=h.context.PropertiesService.getScriptProperties;
+ h.context.PropertiesService.getScriptProperties=()=>{const p=original();return {...p,setProperty:(k,v)=>{if(k.startsWith('BEAUTY_TEST_REG_DIAGNOSTIC_'))throw Error('SECRET');return p.setProperty(k,v);}};};
+ const result=h.register();assert.equal(result.success,true);assert.equal(result.nakka.entryConfirmed,true);assert.equal(h.posts().length,1);assert.equal(h.rows.length,1);
+});
+test('Registration diagnostics isolate event scopes and dates and reject raw provider details',()=>{
+ const h=fixture(),c=h.context;c.beautyHubEventScopeId_=()=> 'event-one';
+ c.beautyHubRegistrationDiagnostic_('Anna',h.state.date,'KIOSK',{code:'SECRET request body'},'raw SECRET');
+ const d=c.beautyHubRegistrationDiagnosticRead_('Anna',h.state.date);assert.equal(d.code,'ENTRY_UNCONFIRMED');assert.equal(d.stage,'UNKNOWN');assert.doesNotMatch(JSON.stringify(d),/SECRET/);
+ assert.equal(c.beautyHubRegistrationDiagnosticRead_('Anna','2026-10-28'),null);c.beautyHubEventScopeId_=()=> 'event-two';assert.equal(c.beautyHubRegistrationDiagnosticRead_('Anna',h.state.date),null);
+});
+
+test('Attention monitoring releases the shared lock during Nakka reads and permits a concurrent registration lock',()=>{
+ let held=false;const h=fixture({onFetch:()=>{assert.equal(held,false,'provider GET outside registration lock');const other=h.context.LockService.getScriptLock();assert.equal(other.tryLock(0),true);other.releaseLock();}});
+ h.context.LockService.getScriptLock=()=>({tryLock:()=>{if(held)return false;held=true;return true;},releaseLock:()=>{assert.equal(held,true);held=false;}});
+ const r=h.refresh();assert.equal(r.success,true);assert.equal(held,false);assert.equal(h.posts().length,0);
+});
+test('Attention snapshot cannot overwrite a transfer result committed during its unlocked network reads',()=>{
+ let changed=false;const h=fixture({onFetch:()=>{if(!changed){changed=true;h.context.beautyHubAttentionRemember_('Anna',h.state.date,{entryConfirmed:true});}}});
+ h.context.beautyHubAttentionRemember_('Anna',h.state.date,{code:'MISSING_EVENT_ENTRY'});
+ const r=h.refresh();assert.equal(r.code,'STALE_CHECK');assert.equal(h.read().items.length,0);assert.equal(h.posts().length,0);
+});
+test('Attention snapshot detects journal writes even when Hub names and statuses have not changed',()=>{
+ let changed=false;const h=fixture({onFetch:()=>{if(!changed){changed=true;h.props.set('BEAUTY_NAKKA_TRANSFER_test','new operation');}}});
+ h.context.beautyHubAttentionRemember_('Anna',h.state.date,{code:'TRANSFER_UNCERTAIN'});
+ assert.equal(h.refresh().code,'STALE_CHECK');assert.equal(h.read().items[0].code,'TRANSFER_UNCERTAIN');assert.equal(h.posts().length,0);
+});
+test('Attention skips publishing while the commit lock is busy and retains saved alerts',()=>{
+ const h=fixture();let attempts=0,releases=0;h.context.LockService.getScriptLock=()=>({tryLock:()=>++attempts===1,releaseLock:()=>releases++});
+ h.context.beautyHubAttentionRemember_('Anna',h.state.date,{code:'TRANSFER_UNCERTAIN'});
+ assert.equal(h.refresh().code,'BUSY');assert.equal(releases,1);assert.equal(h.read().items[0].code,'TRANSFER_UNCERTAIN');
+});
+
+test('Mobile and kiosk registrations finish while an attention provider read is in progress and its stale result is discarded',()=>{
+ for(const route of ['MOBIL','KIOSK']){
+  let submitted=false,result;const h=attach(registration({onFetch:()=>{if(!submitted){submitted=true;result=h.context[route==='MOBIL'?'submitRegistration':'submitKioskRegistration'](input);}}}));
+  h.context.beautyHubNakkaEvent_=()=>({status:'MATCHED',eventDate:h.state.date,event:{id:h.state.event.tdid,title:h.state.event.title}});
+  const check=h.context.beautyHubAttentionRefresh_({});assert.equal(result.success,true);assert.equal(result.nakka.entryConfirmed,true);assert.equal(h.rows.length,1);assert.equal(h.posts().length,1);assert.equal(check.code,'STALE_CHECK');assert.equal(h.held,false);
+ }
+});

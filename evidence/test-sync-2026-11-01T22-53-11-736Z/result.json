@@ -1,0 +1,41 @@
+{
+  "result": "LOCAL_SYNC_PASS",
+  "finishedUTC": "2026-11-01T22:53:11.802Z",
+  "files": [
+    {
+      "name": "HubTestNakkaEvent.gs",
+      "changed": true,
+      "sha256": "81dba1a00f5ee0a6b9521dc364b2762b52a350b6a0b45f76b57537d26fba6f23"
+    },
+    {
+      "name": "HubTestNakkaTransfer.gs",
+      "changed": true,
+      "sha256": "fa68f8790fee0f1cbf7281bc8deef4cdba71ede2d2e01fddf064c212c89e72ae"
+    },
+    {
+      "name": "HubTestAttention.gs",
+      "changed": true,
+      "sha256": "c10133976f696e01cbaef69aa33f4f13b866ee6c3dfbdbb4c208668c1ed215fd"
+    },
+    {
+      "name": "RemoteRegistration.html",
+      "changed": true,
+      "sha256": "86e06959c9be5a6f8bfb9edc2b1316497ddccf152ebadcc75a7d04e10423b85e"
+    },
+    {
+      "name": "KioskTest.html",
+      "changed": true,
+      "sha256": "0ece6b284afee13fd8965960c1b30b66cef9c77d24baa08fac1b5276a2362d5e"
+    },
+    {
+      "name": "BeautyLiveTest.gs",
+      "changed": true,
+      "sha256": "7b68d1ed57d104fd8d71859fa372fcae777e814b0a1474dba036a31ca8d9d16a"
+    }
+  ],
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/test-sync-2026-11-01T22-53-11-736Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/test-sync-2026-11-01T22-53-11-736Z",
+  "googleUpload": "ALREADY MANUALLY APPLIED TO TEST — NO UPLOAD PERFORMED",
+  "projectRegression": "PENDING: npm test and npm run test:inventory",
+  "production": "UNCHANGED"
+}

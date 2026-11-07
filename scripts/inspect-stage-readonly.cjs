@@ -1,6 +1,6 @@
 /* Owner-run fixed TEST schema diagnostic. Public GET only; never collect credentials. */
 const fs=require('node:fs'),path=require('node:path');
-const target='t_RqC2_2034',league='lg_tM2v_3523',base='https://api.n01darts.com/api/v1/';
+const target='t_QHaG_7792',league='lg_tM2v_3523',base='https://api.n01darts.com/api/v1/';
 const fields=new Set(['result','tdid','groups','kind','index','players','tpid','name','rank','p','w','d','l','pts','r','a','str','st','limit','limit_leg_count','limit_set_count','limit_set_leg_count','drawMode','game_setting','round','tournament','league','round_robin','t3']);
 function shape(value,depth=0){
  if(value===null)return 'null';if(typeof value!=='object')return typeof value;if(depth>5)return Array.isArray(value)?'array':'object';

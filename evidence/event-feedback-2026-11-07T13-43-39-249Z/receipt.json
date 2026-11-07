@@ -1,0 +1,42 @@
+{
+  "result": "PASS",
+  "finishedUTC": "2026-11-07T13:44:04.036Z",
+  "scriptId": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/event-feedback-2026-11-07T13-43-39-249Z",
+  "tests": "Full regression suite and requirement inventory passed before packaging",
+  "googleSource": "READBACK_VERIFIED",
+  "originalAssets": true,
+  "production": "UNCHANGED",
+  "deployment": "UNCHANGED",
+  "browserVisualCheck": "PENDING",
+  "files": [
+    {
+      "path": "public/js/hub-test-services.js",
+      "sha256": "3cea5979076a1cfa04dbb1bdfbf3efb6fcb38c5b90fe6ad43480716b48837fe7"
+    },
+    {
+      "path": "public/js/app.js",
+      "sha256": "43467b76defb8138b5a3858f2fbc4c78db3f411fec47244c269b8b4400f8a12d"
+    },
+    {
+      "path": "tests/hub-auto-registration-ui.test.cjs",
+      "sha256": "6b390515f0cbf993e96bb2c0d7a41679e4fe2a06cdfce21cbecb15aa390653bc"
+    },
+    {
+      "path": "docs/handoff/test-inventory.json",
+      "sha256": "6a4958cc1b63577efb863f3fec5b555842af4f03f5a50a3b36b0d17996f159bd"
+    },
+    {
+      "path": "evidence/event-feedback-20261107/checks.tap",
+      "sha256": "1106b0ce90023ae6eba30c1cbb467d854ab76bcccb85cf62802e07420514b5c0"
+    },
+    {
+      "path": "evidence/event-feedback-20261107/inventory.txt",
+      "sha256": "b34cc3d49b36a9bfbc660f09bf6eb05bf827bee078f9b112c2166596a29b838d"
+    },
+    {
+      "path": "apps-script/registration-identity-test/remote-app/HubTest.html",
+      "sha256": "9f2fa4c0e28122a54fb1f6d267f507baabe5f6d1cc85fa0cc211630bd33d8a9b"
+    }
+  ]
+}

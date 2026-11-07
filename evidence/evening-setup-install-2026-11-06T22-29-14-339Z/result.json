@@ -1,0 +1,37 @@
+{
+  "result": "LOCAL_EVENING_SETUP_INSTALL_PASS",
+  "finishedUTC": "2026-11-06T22:30:22.887Z",
+  "before": {
+    "tests": 829,
+    "pass": 829,
+    "failed": []
+  },
+  "after": {
+    "tests": 840,
+    "pass": 840,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/backups/evening-setup-before-2026-11-06T22-29-14-339Z",
+  "evidence": "/Users/alessiotampella/Downloads/Beauty-Recovered-20261028/02-Prepared-Dashboard-Source/Beauty-Admin-Hub/evidence/evening-setup-install-2026-11-06T22-29-14-339Z",
+  "files": [
+    "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "apps-script/registration-identity-test/remote-app/HubTestBridge.gs",
+    "apps-script/registration-identity-test/remote-app/HubTestNakkaEvent.gs",
+    "docs/handoff/acceptance-20261106.md",
+    "docs/handoff/test-inventory.json",
+    "evidence/evening-setup-20261106/checks.tap",
+    "public/css/beauty-dashboard.css",
+    "public/js/hub-evening-setup.js",
+    "public/js/hub-test-event-control.js",
+    "public/js/hub-test-services.js",
+    "scripts/build-hub-test.cjs",
+    "tests/date-event-creation.test.cjs",
+    "tests/evening-setup-ui.test.cjs",
+    "tests/hub-test-connection.test.cjs"
+  ],
+  "googleUpload": "PENDING — run upload-test.cjs to update existing Identity TEST source",
+  "deviceAcceptance": "PENDING — verify Evening Setup overview and reviewed pre-draw editing; no production changes",
+  "production": "UNCHANGED"
+}

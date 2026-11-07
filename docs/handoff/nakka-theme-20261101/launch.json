@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "enabled": false,
+  "autoApply": false,
+  "targetEventId": null,
+  "releaseFile": "beauty-nakka-release-20261101-a6f74e3d1ef3.css",
+  "sha256": "a6f74e3d1ef35e35f7fac636592de7cbb102ffd1907e65b1013f70b2f0d8901a",
+  "cssUrl": "https://beauty-nakka-test-theme.racing-bull-4561.chatgpt.site/beauty-nakka-release-20261101-a6f74e3d1ef3.css",
+  "scope": "Staging only. Combined Hub launch requires explicit target approval.",
+  "normalMondayLayoutRequired": "2026-11-02"
+}

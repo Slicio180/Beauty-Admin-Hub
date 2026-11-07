@@ -1,7 +1,6 @@
 /* Read-only competition projection. Nakka alone supplies results/advancement. */
 (function(root){
  'use strict';
- const target='t_RqC2_2034';
  const fail=()=>{throw Error('Unsupported or mismatched TEST stage data.');};
  const number=v=>typeof v==='number'&&Number.isFinite(v)&&v>=0?v:null;
  function badge(t,key){
@@ -24,9 +23,11 @@
   if(!Number.isInteger(n)||n<1||n>99||![0,1].includes(selected.drawMode))return null;
   return selected.drawMode===1?'Limit '+n+' '+(selected.limit===1?'legs':'sets')+' · draws allowed':'First to '+n+' '+(selected.limit===1?'legs':'sets');
  }
- function project(tournament,standings,schedule){
+ function project(tournament,standings,schedule,target='t_QHaG_7792',league=root.BeautySelectedLeagueId??'lg_M2wQ_4189'){
+  if(!/^t_[A-Za-z0-9_]{1,80}$/.test(target))fail();
+  if(typeof league!=='string'||(league!==''&&!/^lg_[A-Za-z0-9_]{1,80}$/.test(league)))fail();
   const t=tournament?.tournament;
-  if(tournament?.result!==0||!t||t.tdid!==target||t.lgid!=='lg_tM2v_3523'||t.team_games===1||!Array.isArray(t.entry_list)||t.entry_list.length>1000)fail();
+  if(tournament?.result!==0||!t||t.tdid!==target||(t.lgid||'')!==league||t.team_games===1||!Array.isArray(t.entry_list)||t.entry_list.length>1000)fail();
   if(standings?.result!==0||standings.tdid!==target||!Array.isArray(standings.groups)||standings.groups.length>1000)fail();
   const names=new Map();
   for(const p of t.entry_list){if(typeof p.tpid!=='string'||names.has(p.tpid)||typeof p.name!=='string')fail();names.set(p.tpid,p.name);}
@@ -36,7 +37,7 @@
    if(!['lg','rr'].includes(g.kind)||!Number.isInteger(g.index)||g.index<0||!Array.isArray(g.players)||g.players.length>1000)fail();
    const ids=new Set();const pool={id:g.kind+'_'+g.index,number:g.index+1,players:g.players.map(p=>{
     if(!names.has(p.tpid)||ids.has(p.tpid))fail();ids.add(p.tpid);
-    return {...slot(p.tpid),rank:number(p.rank)>0?p.rank:null,played:number(p.p),wins:number(p.w),draws:number(p.d),losses:number(p.l),points:number(p.pts)};
+    return {...slot(p.tpid),rank:number(p.rank)>0?p.rank:null,played:number(p.p),wins:number(p.win??p.w),draws:number(p.d),losses:number(p.lose??p.l),points:number(p.pts)};
    })};
    const table=t[g.kind+'_table']?.[g.index];pool.matrix=null;pool.format=t[g.kind+'_setting']?.game_setting?.length?null:format(t[g.kind+'_setting'],g.index,0);
    if(table!=null){
@@ -62,6 +63,7 @@
   });
   const knockouts=[];
   for(const kind of ['t','s2']){
+   if(t[kind+'_setting']?.tournament===0)continue;
    const table=t[kind+'_table'];if(table==null)continue;if(!Array.isArray(table)||table.length>12)fail();
    const rounds=table.map((players,round)=>{
     if(!Array.isArray(players)||players.length>1024)fail();
@@ -69,9 +71,10 @@
     // Only explicit numeric opening guide values; never substitute league ranks.
     const guide=t[kind+'_init'],candidate=Array.isArray(guide?.[0])?guide[0]:guide;
     const drawNumbers=round===0&&Array.isArray(candidate)&&candidate.length===players.length&&candidate.every(n=>Number.isInteger(n)&&n>0&&n<=players.length)&&new Set(candidate).size===candidate.length?candidate:null;
+    // Nakka container indices preserve each block of four slots: 0,1,4,5,8,9,...
     for(let i=0;i<slots.length;i+=2){const left=slots[i],right=slots[i+1]||{id:null,name:'Awaiting player',state:'pending'};
      const results=t[kind+'_result']?.[round],a=left.id&&right.id?results?.[left.id]?.[right.id]:null,b=left.id&&right.id?results?.[right.id]?.[left.id]:null;
-     matches.push({leftDrawNumber:drawNumbers?.[i]??null,rightDrawNumber:drawNumbers?.[i+1]??null,key:kind+'-'+round+'-'+i,board:badge(t,kind+'-'+round+'-'+i),left,right,leftScore:number(a?.r),rightScore:number(b?.r),leftAverage:number(a?.a),rightAverage:number(b?.a)});
+     matches.push({leftDrawNumber:drawNumbers?.[i]??null,rightDrawNumber:drawNumbers?.[i+1]??null,key:kind+'-'+round+'-'+i,board:badge(t,kind+'-'+round+'-'+(i-i%4/2)),left,right,leftScore:number(a?.r),rightScore:number(b?.r),leftAverage:number(a?.a),rightAverage:number(b?.a)});
     }
     return {round:round+1,slotCount:players.length,format:format(t[kind+'_setting'],round,players.length),matches};
    });
@@ -82,7 +85,7 @@
    knockouts.push({kind,rounds,thirdPlace});
   }
   // No admin IDs, passwords, consent, messages or private provider fields.
-  return {eventId:target,title:String(t.title||''),eventDate:number(t.t_date),updateTime:number(t.updateTime),status:t.status,pools,knockouts};
+  return {eventId:target,title:String(t.title||''),eventDate:number(t.t_date),updateTime:number(t.updateTime),status:t.status,pools,knockouts,views:{pools:t.rr_setting?.round_robin===1||t.lg_setting?.league===1||((t.rr_setting?.round_robin!==0&&t.lg_setting?.league!==0)&&pools.length>0),t:t.t_setting?.tournament!==0&&(t.t_setting?.tournament===1||knockouts.some(s=>s.kind==='t')),s2:t.s2_setting?.tournament!==0&&(t.s2_setting?.tournament===1||knockouts.some(s=>s.kind==='s2'))}};
  }
  const api=Object.freeze({project});if(typeof module==='object'&&module.exports)module.exports=api;else root.BeautyNakkaStages=api;
 })(typeof globalThis==='object'?globalThis:this);

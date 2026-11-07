@@ -1,0 +1,3 @@
+# Native standings and consistent numeric type — TEST only
+
+5 November 2026. 5 November 2026 owner screenshots 23.23.10 and 23.23.30 show blank V-F in Beauty despite Nakka results, plus smaller-looking Rank. Read-only GET to the fixed TEST tournament/standings endpoint confirmed native players use win and lose fields. Projection now supports those documented-by-response fields with legacy w/l fallback, preserving numeric zero and provider-owned ranks. Primary score, V-F, Legs, Rank and START/NU numbers use the same 24px AIK Display face; secondary averages stay 16px. Existing same-event and membership guards retained. No provider writes, repeat Start or pool resend. Owner screen acceptance pending.

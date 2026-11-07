@@ -1,0 +1,34 @@
+{
+  "result": "LOCAL_PASS",
+  "recordedUTC": "2026-11-07T17:29:56.716076+00:00",
+  "tests": 935,
+  "scope": "TEST background attention and health locking",
+  "changes": [
+    "Attention captures event, Hub roster and script-property fingerprint under a short lock, then releases it before provider reads",
+    "Attention nonblocking commit lock revalidates target, roster and all operation records; stale or busy checks retain saved alerts",
+    "Health claims its cache entry briefly, releases script lock before provider read, and concurrent callers reuse in-flight status",
+    "All registration and provider mutation locks, duplicate checks and uncertain-write journals preserved"
+  ],
+  "verified": [
+    "Both mobile and kiosk can commit registration and event entry during an attention network read",
+    "Concurrent operation record changes invalidate older attention results",
+    "Busy commit does not overwrite alerts",
+    "Health probe does not hold registration lock; concurrent probes deduplicated",
+    "935 tests pass"
+  ],
+  "limitations": [
+    "Actual Nakka latency and simultaneous device verification pending",
+    "Concurrent mutation operations remain serialized",
+    "Does not automatically replay existing failed registrations"
+  ],
+  "production": "UNCHANGED",
+  "github": "No commit or push performed",
+  "inventory": "PASS: 935 cases across 68 files",
+  "installerChecks": [
+    "Package syntax verified",
+    "Simulated TEST upload and full readback passed",
+    "Idempotent installation sends no second upload",
+    "Unknown local and remote sources blocked",
+    "Unrelated Google files preserved"
+  ]
+}

@@ -29,9 +29,10 @@
  }
  function render(force=false){
   eventCaption();
+  if(data?.views){for(const [id,button]of Object.entries(tabs))if(id!=='players')$(button).hidden=data.views[id]===false;if(selected&&selected!=='players'&&data.views[selected]===false)selected='players';}
   for(const [id,button]of Object.entries(tabs)){$(button).setAttribute('aria-expanded',String(selected===id));$(button).classList.toggle('active',selected===id);}
   panel.hidden=selected===null;dockHeader();if(!selected)return;
-  text('screenTitle','BEAUTY LIVE');text('panelTitle',labels[selected].toLocaleUpperCase('sv-SE'));
+  text('screenTitle','LIVE');text('panelTitle',labels[selected].toLocaleUpperCase('sv-SE'));
   $('playerCountTile').hidden=selected!=='players';$('liveSettingsOpen').hidden=selected!=='players';
   $('castFooter').hidden=selected==='players'&&!$('displayMessage').textContent;
   $('playersPanel').hidden=selected!=='players';$('stageArea').hidden=selected==='players';
