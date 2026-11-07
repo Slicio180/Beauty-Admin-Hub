@@ -39,7 +39,7 @@ function beautyLiveTestUrl(token) {
   if (response.getResponseCode() !== 200) throw Error('TEST event unavailable.');
   const data = JSON.parse(response.getContentText()), event = data?.tournament;
   if (data.result !== 0 || event?.tdid !== (beautyHubActiveTestTarget_().id) ||
-      event.lgid !== 'lg_tM2v_3523' ||
+      event.lgid !== 'lg_M2wQ_4189' ||
       event.title !== beautyHubActiveTestTarget_().title ||
       !Number.isFinite(event.t_date) || event.t_date <= 0 ||
       Utilities.formatDate(new Date(event.t_date * 1000), Session.getScriptTimeZone(), 'yyyy-MM-dd') !== hub.eventDate)
@@ -58,9 +58,9 @@ function beautyLiveTestUrl(token) {
 function beautyLiveStatsSnapshot_() {
   try {
     const snapshot = beautyPoolLastGood_();
-    if (!snapshot || snapshot.leagueId !== 'lg_tM2v_3523' || !Array.isArray(snapshot.profiles)) return null;
+    if (!snapshot || snapshot.leagueId !== 'lg_M2wQ_4189' || !Array.isArray(snapshot.profiles)) return null;
     const at = Date.parse(snapshot.fetchedAt), age = Date.now() - at;
-    const failed = Number(PropertiesService.getScriptProperties().getProperty('BEAUTY_LEAGUE_STATS_FAILED') || 0);
+    const failed = Number(PropertiesService.getScriptProperties().getProperty('BEAUTY_LEAGUE_STATS_lg_M2wQ_4189_FAILED') || 0);
     if (!Number.isFinite(at) || age < 0 || age >= 604800000) return null;
     return Object.assign({}, snapshot, {fresh: age < 300000 && failed <= at});
   } catch (e) { return null; }
@@ -73,7 +73,7 @@ function beautyStageTestUrl(token){
   const hub=getBeautyHubData_();if(hub?.success!==true||!/^\d{4}-\d{2}-\d{2}$/.test(hub.eventDate))throw Error('Selected TEST date unavailable.');
   const response=UrlFetchApp.fetch(('https://api.n01darts.com/api/v1/tournament/get?tdid='+beautyHubActiveTestTarget_().id),{method:'get',muteHttpExceptions:true,followRedirects:false});
   if(response.getResponseCode()!==200)throw Error('TEST event unavailable.');const data=JSON.parse(response.getContentText()),t=data?.tournament;
-  if(data.result!==0||t?.tdid!==(beautyHubActiveTestTarget_().id)||t.lgid!=='lg_tM2v_3523'||t.title!==beautyHubActiveTestTarget_().title||!Number.isFinite(t.t_date)||t.t_date<=0||Utilities.formatDate(new Date(t.t_date*1000),Session.getScriptTimeZone(),'yyyy-MM-dd')!==hub.eventDate)throw Error('Stage display does not match the selected Hub event.');
+  if(data.result!==0||t?.tdid!==(beautyHubActiveTestTarget_().id)||t.lgid!=='lg_M2wQ_4189'||t.title!==beautyHubActiveTestTarget_().title||!Number.isFinite(t.t_date)||t.t_date<=0||Utilities.formatDate(new Date(t.t_date*1000),Session.getScriptTimeZone(),'yyyy-MM-dd')!==hub.eventDate)throw Error('Stage display does not match the selected Hub event.');
   beautyHubAuthRequire_(token);if(getBeautyHubData_()?.eventDate!==hub.eventDate)throw Error('Hub date changed while opening the display.');return ScriptApp.getService().getUrl()+'?page=stages';
 }
 

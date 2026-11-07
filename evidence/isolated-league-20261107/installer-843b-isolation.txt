@@ -1,0 +1,66 @@
+Checking existing tests and saving the baseline result…
+Verifying the TEST Hub build in an isolated copy…
+Checking updated tests…
+{
+  "result": "LOCAL_ISOLATED_LEAGUE_INSTALL_PASS",
+  "finishedUTC": "2026-11-07T09:23:54.647Z",
+  "before": {
+    "tests": 843,
+    "pass": 843,
+    "failed": []
+  },
+  "after": {
+    "tests": 855,
+    "pass": 855,
+    "failed": []
+  },
+  "newFailures": [],
+  "inventory": "PASS",
+  "backup": "/workspace/scratch/f7cd1d1ee1c4/install-check-843b/backups/isolated-league-before-2026-11-07T09-23-29-835Z",
+  "evidence": "/workspace/scratch/f7cd1d1ee1c4/install-check-843b/evidence/isolated-league-install-2026-11-07T09-23-29-835Z",
+  "files": [
+    "apps-script/registration-identity-test/remote-app/BeautyLiveTest.gs",
+    "apps-script/registration-identity-test/remote-app/BeautyLiveTest.html",
+    "apps-script/registration-identity-test/remote-app/Code.js",
+    "apps-script/registration-identity-test/remote-app/HubTest.html",
+    "apps-script/registration-identity-test/remote-app/HubTestAttention.gs",
+    "apps-script/registration-identity-test/remote-app/HubTestAutoRegister.gs",
+    "apps-script/registration-identity-test/remote-app/HubTestBridge.gs",
+    "apps-script/registration-identity-test/remote-app/HubTestNakkaEvent.gs",
+    "apps-script/registration-identity-test/remote-app/HubTestNakkaTransfer.gs",
+    "apps-script/registration-identity-test/remote-app/HubTestPools.gs",
+    "apps-script/registration-identity-test/remote-app/HubTestRemove.gs",
+    "apps-script/registration-identity-test/remote-app/StageTest.html",
+    "docs/handoff/ISOLATED-LEAGUE-20261107.md",
+    "docs/handoff/test-inventory.json",
+    "evidence/clean-creation-20261107/checks.tap",
+    "evidence/hub-cleanup-20261107/checks.tap",
+    "evidence/isolated-league-20261107/checks.tap",
+    "public/js/competition-preview.js",
+    "public/js/hub-evening-setup.js",
+    "public/js/hub-test-services.js",
+    "public/js/nakka-stage-model.js",
+    "public/js/pool-board-plan.js",
+    "server/board-handoff.cjs",
+    "server/pool-service.js",
+    "tests/beauty-live.test.cjs",
+    "tests/board-handoff.test.cjs",
+    "tests/dashboard-attention.test.cjs",
+    "tests/date-event-creation.test.cjs",
+    "tests/evening-setup-ui.test.cjs",
+    "tests/fixtures/nakka-transfer-runtime.cjs",
+    "tests/hub-cleanup.test.cjs",
+    "tests/hub-nakka-event.test.cjs",
+    "tests/hub-player-removal.test.cjs",
+    "tests/live-shell.test.cjs",
+    "tests/nakka-stage-badges.test.cjs",
+    "tests/nakka-stage-model.test.cjs",
+    "tests/new-league-registration.test.cjs",
+    "tests/pool-service.test.cjs",
+    "tests/stage-integration.test.cjs",
+    "tests/venue-cast.test.cjs"
+  ],
+  "googleUpload": "PENDING — run upload-test.cjs to update existing Identity TEST source",
+  "deviceAcceptance": "PENDING — verify the dedicated TEST league and fresh event; approved 843 interface retained in Google upload; no production changes",
+  "production": "UNCHANGED"
+}

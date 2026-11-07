@@ -22,7 +22,7 @@ function beautyHubNakkaEvent_(input) {
   if (!user || !password) return answer('UNAVAILABLE','Nakka API credentials are not configured.',selected.date);
   let response;
   try {
-    response = UrlFetchApp.fetch('https://push.n01darts.com/api/v1/league/tournament/list?lgid=lg_tM2v_3523&count=100', {
+    response = UrlFetchApp.fetch('https://push.n01darts.com/api/v1/league/tournament/list?lgid=lg_M2wQ_4189&count=100', {
       method:'get', headers:{Authorization:'Basic '+Utilities.base64Encode(user+':'+password)},
       muteHttpExceptions:true, followRedirects:false
     });
@@ -56,9 +56,9 @@ function beautyHubNakkaEvent_(input) {
   if(targets.length!==1)return answer('AMBIGUOUS','More than one TEST event matches this date. Select the intended event in Nakka before continuing.',selected.date);
   const match=targets[0];
   if(match.tdid==='t_QHaG_7792'&&match.title!=='Beauty Registration TEST event DO NOT USE LIVE')return answer('UNAVAILABLE','Original TEST identity changed.',selected.date);
-  if(data.list.filter(e=>e.tdid===match.tdid).length!==1||match.lgid!==undefined&&match.lgid!=='lg_tM2v_3523')return answer('UNAVAILABLE','Event identity needs review.',selected.date);
+  if(data.list.filter(e=>e.tdid===match.tdid).length!==1||match.lgid!==undefined&&match.lgid!=='lg_M2wQ_4189')return answer('UNAVAILABLE','Event identity needs review.',selected.date);
   const binding={id:match.tdid,title:match.title,date:selected.date};
-  props.setProperty('BEAUTY_SELECTED_TEST_EVENT',JSON.stringify(binding));
+  props.setProperty('BEAUTY_SELECTED_TEST_EVENTlg_M2wQ_4189',JSON.stringify(binding));
   const matchedAnswer=answer('MATCHED','The dedicated TEST event matches the selected Hub date. No players have been synced.',selected.date,
     {id:match.tdid,title:match.title,date:selected.date,url:'https://n01darts.com/n01/league/season.php?id='+encodeURIComponent(match.tdid)});
   matchedAnswer.creationReviewRequired=beautyHubCreationNeedsReview_(selected.date,binding);return matchedAnswer;
@@ -137,7 +137,7 @@ function beautyHubNakkaCompare_(input) {
 
 
 function beautyHubActiveTestTarget_(){
- const selected=beautyHubNakkaDate_(),v=JSON.parse(PropertiesService.getScriptProperties().getProperty('BEAUTY_SELECTED_TEST_EVENT')||'null');
+ const selected=beautyHubNakkaDate_(),v=JSON.parse(PropertiesService.getScriptProperties().getProperty('BEAUTY_SELECTED_TEST_EVENTlg_M2wQ_4189')||'null');
  if(!v||v.date!==selected.date||!/^t_[A-Za-z0-9_]{1,80}$/.test(v.id)||!(v.id==='t_QHaG_7792'&&v.title==='Beauty Registration TEST event DO NOT USE LIVE'||/^AIK Hub TEST(?: |$)/.test(v.title||'')))throw Error('Check the Nakka event for the selected Hub date before continuing.');
  return v;
 }
@@ -153,9 +153,9 @@ function beautyHubCreateFormatMatches_(event,expected){
 }
 function beautyHubCreationNeedsReview_(date,event){
  try{
- const props=PropertiesService.getScriptProperties(),raw=props.getProperty('BEAUTY_CREATE_EVENT_'+date),journal=JSON.parse(raw||'null');
+ const props=PropertiesService.getScriptProperties(),raw=props.getProperty('BEAUTY_CREATE_EVENT_lg_M2wQ_4189_'+date),journal=JSON.parse(raw||'null');
  if(journal?.state!=='ATTEMPTED'||journal.title!==event.title)return false;
- const reviewed=JSON.parse(props.getProperty('BEAUTY_CREATE_REVIEW_'+date)||'null');
+ const reviewed=JSON.parse(props.getProperty('BEAUTY_CREATE_REVIEW_lg_M2wQ_4189_'+date)||'null');
  return !(reviewed?.eventId===event.id&&reviewed.journalHash===beautyPoolHash_(journal));
  }catch(e){return true;}
 }
@@ -164,13 +164,13 @@ function beautyHubReviewCreatedEvent_(input){
  beautyHubTestGuard_();const lock=LockService.getScriptLock();if(!lock.tryLock(5000))return {success:false,error:'Another event operation is running.'};
  try{
   const account=beautyHubAuthRequire_(beautyHubRequestToken_);if(!input||Object.keys(input).length)throw Error('input');
-  const date=beautyHubNakkaDate_().date,props=PropertiesService.getScriptProperties(),raw=props.getProperty('BEAUTY_CREATE_EVENT_'+date),journal=JSON.parse(raw||'null');
+  const date=beautyHubNakkaDate_().date,props=PropertiesService.getScriptProperties(),raw=props.getProperty('BEAUTY_CREATE_EVENT_lg_M2wQ_4189_'+date),journal=JSON.parse(raw||'null');
   if(journal?.state!=='ATTEMPTED'||journal.date!==date)throw Error('journal');
   const before=beautyTournamentReadAudit_(journal.audit);
   if(before.kind!=='EVENT_CREATE_BEFORE'||before.uid!==account.uid||before.date!==date||before.title!==journal.title||!beautyPoolEqual_(before.matchSettings,journal.matchSettings))throw Error('audit');
   const found=beautyHubNakkaEvent_({});if(found.status!=='MATCHED'||found.event?.title!==journal.title)throw Error('selection');
   const auth=beautyPoolAuth_(),event=beautyHubTransferFetch_('tournament/get?tdid='+encodeURIComponent(found.event.id),auth).tournament;
-  const wanted={tdid:found.event.id,title:journal.title,status:20,t_date:Date.parse(date+'T12:00:00Z')/1000,lgid:'lg_tM2v_3523',team_games:0,game_type:5,private:0,join_pass:'AIK',common_join:1,individual_pass:0};
+  const wanted={tdid:found.event.id,title:journal.title,status:20,t_date:Date.parse(date+'T12:00:00Z')/1000,lgid:'lg_M2wQ_4189',team_games:0,game_type:5,private:0,join_pass:'AIK',common_join:1,individual_pass:0};
   for(const k of Object.keys(wanted))if(event?.[k]!==wanted[k])throw Error('metadata');
   const entries=beautyHubTransferFetch_('tournament/entry/list?tdid='+encodeURIComponent(event.tdid),auth).list;
   if(!Array.isArray(entries)||entries.length||event.entry_list?.length)throw Error('entries');
@@ -188,9 +188,9 @@ function beautyHubReviewCreatedEvent_(input){
   }
   beautyHubAuthRequire_(beautyHubRequestToken_);
   const again=beautyHubTransferFetch_('tournament/get?tdid='+encodeURIComponent(event.tdid),auth).tournament;
-  if(!beautyPoolEqual_(event,again)||beautyHubNakkaDate_().date!==date||props.getProperty('BEAUTY_CREATE_EVENT_'+date)!==raw)throw Error('changed');
+  if(!beautyPoolEqual_(event,again)||beautyHubNakkaDate_().date!==date||props.getProperty('BEAUTY_CREATE_EVENT_lg_M2wQ_4189_'+date)!==raw)throw Error('changed');
   const receipt=beautyPoolAudit_({kind:'EVENT_CREATE_EXISTING_REVIEW',uid:account.uid,beforeAudit:journal.audit,date,eventId:event.tdid,scope,matchSettings:before.matchSettings});
-  props.setProperty('BEAUTY_CREATE_REVIEW_'+date,JSON.stringify({eventId:event.tdid,journalHash:beautyPoolHash_(journal),receipt,scope}));
+  props.setProperty('BEAUTY_CREATE_REVIEW_lg_M2wQ_4189_'+date,JSON.stringify({eventId:event.tdid,journalHash:beautyPoolHash_(journal),receipt,scope}));
   return {success:true,readbackVerified:true,scope,receipt,message:scope==='FULL_FORMAT'?'Existing TEST event settings and empty registration verified. No event recreated.':'Existing TEST event reviewed match options and empty registration verified. The older audit cannot prove every inherited setting. No event recreated.'};
  }catch(e){return {success:false,error:'Existing event review did not match its original approval. No Nakka changes made. Keep the original creation journal and inspect the event.'};}
  finally{lock.releaseLock();}
@@ -249,25 +249,25 @@ function beautyHubCreateEvent_(action,input){
   const account=beautyHubAuthRequire_(beautyHubRequestToken_),props=PropertiesService.getScriptProperties(),cache=CacheService.getScriptCache();
   const keys=action==='prepare'?(Object.prototype.hasOwnProperty.call(input||{},'settings')?'settings,title':'title'):'confirmed,ticket';
   if(!input||Object.keys(input).sort().join(',')!==keys||Object.values(input).some(v=>typeof v!=='string'))fail('Invalid event request.');
-  const date=beautyHubNakkaDate_().date,key='BEAUTY_CREATE_EVENT_'+date;
+  const date=beautyHubNakkaDate_().date,key='BEAUTY_CREATE_EVENT_lg_M2wQ_4189_'+date;
   if(props.getProperty(key))fail('An event creation is already recorded for this date. Check Nakka and its audit; do not create again.');
   const found=beautyHubNakkaEvent_({});if(found.status!=='NOT_FOUND')fail('An event already exists or the lookup is incomplete. Check Nakka again.');
   const auth=beautyPoolAuth_(),session=beautyPoolHash_(account.sessionBinding||beautyHubRequestToken_);
   if(action==='prepare'){
    if(!/^AIK Hub TEST(?: |$)/.test(input.title)||input.title.length>60||/[\x00-\x1f<>]/.test(input.title))fail('Start the event name with "AIK Hub TEST" (maximum 60 characters).');
    const template=beautyHubCleanFormatBase_();
-   const set={title:input.title,status:20,t_date:Date.parse(date+'T12:00:00Z')/1000,lgid:'lg_tM2v_3523',kind:'darts',team_games:0,game_type:5,private:0,join_pass:'AIK',common_join:1,individual_pass:0};
+   const set={title:input.title,status:20,t_date:Date.parse(date+'T12:00:00Z')/1000,lgid:'lg_M2wQ_4189',kind:'darts',team_games:0,game_type:5,private:0,join_pass:'AIK',common_join:1,individual_pass:0};
    for(const k of ['rr_setting','t_setting','s2_setting'])if(template[k])set[k]=beautyPoolCopy_(template[k]);
    const configured=beautyHubCreateMatchSettings_(input.settings!==undefined?input.settings:JSON.stringify({groups:{legs:2,maxDarts:39},stage1:{legs:2,finalLegs:3,maxDarts:39,thirdPlace:false,thirdPlaceLegs:2},stage2:{legs:2,finalLegs:2,maxDarts:39,thirdPlace:false,thirdPlaceLegs:2}}),template);
    if(configured)Object.assign(set,configured.set);
-   const ticket=Utilities.getUuid().replace(/-/g,'');cache.put('beauty-create:'+ticket,JSON.stringify({uid:account.uid,session,date,set,matchSettings:configured?.summary||[],format:configured?.format||'Round Robin + Slutspel 1 and 2',expires:Date.now()+300000}),300);
+   const ticket=Utilities.getUuid().replace(/-/g,'');cache.put('beauty-create:lg_M2wQ_4189:'+ticket,JSON.stringify({uid:account.uid,session,date,set,matchSettings:configured?.summary||[],format:configured?.format||'Round Robin + Slutspel 1 and 2',expires:Date.now()+300000}),300);
    return {success:true,ticket,event:{title:set.title,date,format:configured?.format||'Round Robin + Slutspel 1 and 2',league:set.lgid,status:'Accepting entries',private:false,...(configured?{matchSettings:configured.summary}:{})},message:'Review this new TEST event. Existing players, results and brackets will not be copied.'};
   }
-  const review=JSON.parse(cache.get('beauty-create:'+input.ticket)||'null');
+  const review=JSON.parse(cache.get('beauty-create:lg_M2wQ_4189:'+input.ticket)||'null');
   if(input.confirmed!=='true'||!review||review.uid!==account.uid||review.session!==session||review.date!==date||Date.now()>=review.expires)fail('Review expired. Review again to continue.');
-  cache.remove('beauty-create:'+input.ticket);
+  cache.remove('beauty-create:lg_M2wQ_4189:'+input.ticket);
   beautyHubAuthRequire_(beautyHubRequestToken_);
-  const audit=beautyPoolAudit_({kind:'EVENT_CREATE_BEFORE',uid:account.uid,date,title:review.set.title,format:review.format||'RR_TWO_KNOCKOUTS',league:'lg_tM2v_3523',matchSettings:review.matchSettings||[],settings:{rr_setting:review.set.rr_setting,t_setting:review.set.t_setting,s2_setting:review.set.s2_setting}});
+  const audit=beautyPoolAudit_({kind:'EVENT_CREATE_BEFORE',uid:account.uid,date,title:review.set.title,format:review.format||'RR_TWO_KNOCKOUTS',league:'lg_M2wQ_4189',matchSettings:review.matchSettings||[],settings:{rr_setting:review.set.rr_setting,t_setting:review.set.t_setting,s2_setting:review.set.s2_setting}});
   const marker=JSON.stringify({state:'ATTEMPTED',audit,date,title:review.set.title,matchSettings:review.matchSettings||[]});props.setProperty(key,marker);if(props.getProperty(key)!==marker)throw Error('Could not verify the creation journal.');
   attempted=true;
   const result=beautyHubTransferFetch_('tournament/create',auth,{set:review.set});
@@ -291,7 +291,7 @@ function beautyHubCreateEvent_(action,input){
 function beautyHubEveningSnapshot_(auth){
  const found=beautyHubNakkaEvent_({});if(found.status!=='MATCHED')throw {reviewMessage:found.message||'Find the evening event first.'};
  const event=beautyHubTransferFetch_('tournament/get?tdid='+encodeURIComponent(found.event.id),auth).tournament,date=beautyHubNakkaDate_().date;
- if(event?.tdid!==found.event.id||event.title!==found.event.title||event.lgid!=='lg_tM2v_3523'||event.team_games!==0||!Number.isFinite(event.updateTime)||Utilities.formatDate(new Date(event.t_date*1000),'Europe/Berlin','yyyy-MM-dd')!==date)throw Error('event');
+ if(event?.tdid!==found.event.id||event.title!==found.event.title||event.lgid!=='lg_M2wQ_4189'||event.team_games!==0||!Number.isFinite(event.updateTime)||Utilities.formatDate(new Date(event.t_date*1000),'Europe/Berlin','yyyy-MM-dd')!==date)throw Error('event');
  const config={},rows=[],enabled=[];let supported=true;
  for(const [key,provider,title,flag]of [['groups','rr_setting','Groups','round_robin'],['stage1','t_setting','Slutspel 1','tournament'],['stage2','s2_setting','Slutspel 2','tournament']]){
   const s=event[provider];if(s?.[flag]!==1){config[key]=null;rows.push({title,text:'Off'});continue;}enabled.push(title);
@@ -327,12 +327,12 @@ function beautyHubEveningSetup_(action,input){
    const fallback={limit:1,limit_leg_count:2,drawMode:0,startScore:501,match_type:'01',limit_rounds:0,rounds:15,game_setting:[],schedule:[]};
    const template={rr_setting:snapshot.event.rr_setting||{...fallback,round_robin:0,robin_count:1,robin_player_count:4,point_w:2,point_d:1,point_l:0},t_setting:snapshot.event.t_setting||{...fallback,tournament:0,t_player_count:16,t3:0},s2_setting:snapshot.event.s2_setting||{...fallback,tournament:0,t_player_count:16,t3:0}};
    const configured=beautyHubCreateMatchSettings_(input.settings,template),ticket=Utilities.getUuid().replace(/-/g,'');
-   cache.put('beauty-evening:'+ticket,JSON.stringify({uid:account.uid,session,eventId:snapshot.event.tdid,date:snapshot.date,version:snapshot.version,set:configured.set,summary:configured.summary,format:configured.format,expires:Date.now()+300000}),300);
+   cache.put('beauty-evening:lg_M2wQ_4189:'+ticket,JSON.stringify({uid:account.uid,session,eventId:snapshot.event.tdid,date:snapshot.date,version:snapshot.version,set:configured.set,summary:configured.summary,format:configured.format,expires:Date.now()+300000}),300);
    return {success:true,ticket,title:snapshot.event.title,date:snapshot.date,format:configured.format,summary:configured.summary};
   }
-  const saved=JSON.parse(cache.get('beauty-evening:'+input.ticket)||'null');
+  const saved=JSON.parse(cache.get('beauty-evening:lg_M2wQ_4189:'+input.ticket)||'null');
   if(input.confirmed!=='true'||!saved||saved.uid!==account.uid||saved.session!==session||saved.eventId!==snapshot.event.tdid||saved.date!==snapshot.date||saved.version!==snapshot.version||Date.now()>=saved.expires)fail('Review expired or settings changed. Reload and review again.');
-  cache.remove('beauty-evening:'+input.ticket);beautyHubAuthRequire_(beautyHubRequestToken_);
+  cache.remove('beauty-evening:lg_M2wQ_4189:'+input.ticket);beautyHubAuthRequire_(beautyHubRequestToken_);
   const audit=beautyPoolAudit_({kind:'EVENT_SETTINGS_BEFORE',uid:account.uid,eventId:saved.eventId,date:saved.date,version:saved.version,before:{rr_setting:snapshot.event.rr_setting||null,t_setting:snapshot.event.t_setting||null,s2_setting:snapshot.event.s2_setting||null},set:saved.set,summary:saved.summary});
   if(beautyHubEveningSnapshot_(auth).version!==saved.version)fail('The event changed during review. Nothing saved.');
   if(Date.now()>=saved.expires)fail('Review expired. Review the changes again.');
@@ -351,8 +351,8 @@ function beautyHubEveningSetup_(action,input){
 
 /* One-time owner-authorised TEST copy cleanup. No Nakka write routes. */
 function beautyHubCleanupPlan_(ss,props,auth){
- const snap=beautyHubEventSnapshot_(ss),events=beautyHubTransferFetch_('league/tournament/list?lgid=lg_tM2v_3523&count=100',auth).list;
- if(!Array.isArray(events)||events.length>=100||events.some(e=>typeof e.tdid!=='string'||typeof e.title!=='string'||e.lgid!=='lg_tM2v_3523'))throw {reviewMessage:'Nakka event inventory is incomplete. Nothing cleaned.'};
+ const snap=beautyHubEventSnapshot_(ss),events=beautyHubTransferFetch_('league/tournament/list?lgid=lg_M2wQ_4189&count=100',auth).list;
+ if(!Array.isArray(events)||events.length>=100||events.some(e=>typeof e.tdid!=='string'||typeof e.title!=='string'||e.lgid!=='lg_M2wQ_4189'))throw {reviewMessage:'Nakka event inventory is incomplete. Nothing cleaned.'};
  if(events.some(e=>/\bTEST\b/i.test(e.title)))throw {reviewMessage:'TEST events still appear in Nakka. Finish removing those first, then reload this cleanup.'};
  const fake=name=>/^(?:beauty[\s-]+test\b|hub[\s-]+test\b|test[\s-]+(?:player|mobile|kiosk|hub|new)\b)/i.test(String(name||'').trim()),names=new Set();
  const master=snap["PLAYER'S MASTER LIST"],status=snap['PLAYER STATUS DATA'],responses=snap['Form responses 2'];
@@ -409,7 +409,7 @@ function beautyHubCleanup_(action,input){
   const expectedStatus=[plan.snap['PLAYER STATUS DATA'].values[0],...plan.statusRows];while(expectedStatus.length<plan.snap['PLAYER STATUS DATA'].values.length)expectedStatus.push(['','','','','','']);
   if(!beautyPoolEqual_(after['PLAYER STATUS DATA'].values,expectedStatus)||after['Form responses 2'].values.slice(1).some(r=>r.some(v=>v!==''&&v!==null))||after["TONIGHT'S PLAYERS"].values.slice(1).some(r=>String(r[2]||'').trim()))throw Error('content');
   if(Object.keys(plan.stored).some(k=>props.getProperty(k)!==null))throw Error('properties');
-  const events=beautyHubTransferFetch_('league/tournament/list?lgid=lg_tM2v_3523&count=100',auth).list;if(!beautyPoolEqual_(events,plan.events))throw Error('events');
+  const events=beautyHubTransferFetch_('league/tournament/list?lgid=lg_M2wQ_4189&count=100',auth).list;if(!beautyPoolEqual_(events,plan.events))throw Error('events');
   const receipt=beautyPoolAudit_({kind:'HUB_CLEANUP_READBACK',beforeAudit:backup,uid:account.uid,summary:plan.publicPlan});
   const verified=JSON.stringify({state:'VERIFIED',backup,receipt,recordedUTC:new Date().toISOString()});props.setProperty('BEAUTY_CLEANUP_LAST',verified);if(props.getProperty('BEAUTY_CLEANUP_LAST')!==verified)throw Error('receipt');props.deleteProperty('BEAUTY_CLEANUP_UNCERTAIN');if(props.getProperty('BEAUTY_CLEANUP_UNCERTAIN')!==null)throw Error('journal');
   // Refill from current native season data only. Failure leaves no obsolete fallback.

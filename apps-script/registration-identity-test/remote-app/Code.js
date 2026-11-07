@@ -1882,7 +1882,7 @@ function originalRegisterPlayerWithN01_(
     getN01EventIdFromControlDate_();
 
   const LEAGUE_ID =
-    'lg_tM2v_3523';
+    'lg_M2wQ_4189';
 
   const cleanName =
     String(
@@ -2328,7 +2328,7 @@ function findN01EventIdByDate_(
 ) {
 
   const LEAGUE_ID =
-    'lg_tM2v_3523';
+    'lg_M2wQ_4189';
 
   const properties =
     PropertiesService
@@ -3754,7 +3754,7 @@ function checkNakkaLeagueHealth_() {
 
   try {
     response = UrlFetchApp.fetch(
-      'https://push.n01darts.com/api/v1/league/entry/list?lgid=lg_tM2v_3523',
+      'https://push.n01darts.com/api/v1/league/entry/list?lgid=lg_M2wQ_4189',
       {
         method: 'get',
         headers: {

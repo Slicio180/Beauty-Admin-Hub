@@ -2,7 +2,7 @@
  * These records never replace, delete or bypass transfer/creation journals.
  */
 function beautyHubAttentionKey_(date,name) {
-  return 'BEAUTY_TEST_ATTENTION_'+date+'_'+beautyHubTransferHash_(name.normalize('NFC').trim().replace(/\s+/g,' ').toLocaleLowerCase('sv-SE'));
+  return 'BEAUTY_TEST_ATTENTION_lg_M2wQ_4189_'+date+'_'+beautyHubTransferHash_(name.normalize('NFC').trim().replace(/\s+/g,' ').toLocaleLowerCase('sv-SE'));
 }
 function beautyHubAttentionRemember_(name,date,result) {
   // Called only with the canonical committed registration or guarded transfer
@@ -23,14 +23,14 @@ function beautyHubAttentionRead_(data) {
   const date=data.eventDate,answer={available:true,eventDate:date,items:[],checkedAt:null,complete:false};
   if(!/^20\d\d-\d\d-\d\d$/.test(date||''))return {...answer,available:false};
   try {
-    const props=PropertiesService.getScriptProperties(),prefix='BEAUTY_TEST_ATTENTION_'+date+'_';
+    const props=PropertiesService.getScriptProperties(),prefix='BEAUTY_TEST_ATTENTION_lg_M2wQ_4189_'+date+'_';
     const all=props.getProperties();
     for(const key of Object.keys(all).filter(k=>k.startsWith(prefix))){
       const r=JSON.parse(all[key]);
       if(r.date!==date||typeof r.name!=='string'||!r.name||r.name.length>120||!['CLEAR','ATTENTION'].includes(r.state)||typeof r.code!=='string'||!/^[A-Z_]{1,60}$/.test(r.code))throw Error('record');
       if(r.state==='ATTENTION')answer.items.push({name:r.name,code:r.code});
     }
-    const raw=props.getProperty('BEAUTY_TEST_ATTENTION_CHECK_'+date);
+    const raw=props.getProperty('BEAUTY_TEST_ATTENTION_lg_M2wQ_4189_CHECK_'+date);
     if(raw){const meta=JSON.parse(raw);answer.checkedAt=meta.checkedAt;answer.complete=meta.signature===beautyHubTransferHash_((data.players||[]).map(p=>({name:p.player||p.newPlayer,status:p.status})));}
     answer.items.sort((a,b)=>a.name.localeCompare(b.name,'sv-SE'));
     return answer;
@@ -53,7 +53,7 @@ function beautyHubAttentionRefreshRun_(input) {
     if(!user||!password)throw Error('credentials');
     const auth='Basic '+Utilities.base64Encode(user+':'+password);
     const [eventData,entryData,leagueData]=beautyHubNakkaReads_(auth,true),event=eventData.tournament;
-    if(!event||event.tdid!==beautyHubTransferTarget_()||event.lgid!=='lg_tM2v_3523'||event.title!==match.event.title||Utilities.formatDate(new Date(event.t_date*1000),'Europe/Berlin','yyyy-MM-dd')!==date)throw Error('target');
+    if(!event||event.tdid!==beautyHubTransferTarget_()||event.lgid!=='lg_M2wQ_4189'||event.title!==match.event.title||Utilities.formatDate(new Date(event.t_date*1000),'Europe/Berlin','yyyy-MM-dd')!==date)throw Error('target');
     const entries=beautyHubTransferEntries_(entryData);
     const league=leagueData.list;
     if(!Array.isArray(league)||league.length>=1000)throw Error('league');
@@ -74,7 +74,7 @@ function beautyHubAttentionRefreshRun_(input) {
       else if(e.length!==1)code=e.length?'IDENTITY_CONFLICT':'MISSING_EVENT_ENTRY';
       else if(normalize(e[0].name)!==key||(e[0].lpid&&e[0].lpid!==l[0].lpid))code='IDENTITY_CONFLICT';
       if(!code){
-        const creation=props.getProperty('BEAUTY_NAKKA_LEAGUE_CREATE_lg_tM2v_3523_'+beautyHubTransferHash_(key));
+        const creation=props.getProperty('BEAUTY_NAKKA_LEAGUE_CREATE_lg_M2wQ_4189_'+beautyHubTransferHash_(key));
         if(creation){const c=JSON.parse(creation);if(c.state!=='VERIFIED'||c.name!==name||c.lpid!==l[0].lpid)code='LEAGUE_CREATION_REVIEW_REQUIRED';}
         const transfer=props.getProperty('BEAUTY_NAKKA_TRANSFER_'+beautyHubTransferTarget_()+'_'+l[0].lpid);
         if(transfer){
@@ -94,7 +94,7 @@ function beautyHubAttentionRefreshRun_(input) {
     if(beautyHubNakkaDate_().date!==date||JSON.stringify(beautyHubNakkaHubRows_())!==JSON.stringify(hub)){diagnosis='STALE_CHECK';throw Error('stale');}
     for(const d of decisions)if(!beautyHubAttentionRemember_(d.name,date,d.code?{code:d.code}:{entryConfirmed:true}))throw Error('save');
     const meta={checkedAt:new Date().toISOString(),signature:beautyHubTransferHash_(hub)};
-    props.setProperty('BEAUTY_TEST_ATTENTION_CHECK_'+date,JSON.stringify(meta));
+    props.setProperty('BEAUTY_TEST_ATTENTION_lg_M2wQ_4189_CHECK_'+date,JSON.stringify(meta));
     return {success:true,eventDate:date,event:match.event,hubCount:hub.length,nakkaCount:entries.length,attention:beautyHubAttentionRead_({eventDate:date,players:hub.map(p=>({player:p.name,status:p.status}))})};
   }catch(e){
     if(e.name==='HubAuthError')return {success:false,code:'AUTH_REQUIRED',message:'Sign in to continue.'};

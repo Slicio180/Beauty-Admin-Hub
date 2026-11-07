@@ -122,7 +122,7 @@ function beautyHubPlayerRegistration_(source,input) {
 }
 
 /* AUD-100: durable, no-retry new league identity creation. No public RPC.
- * This adds a permanent member to lg_tM2v_3523, then the caller uses the
+ * This adds a permanent member to lg_M2wQ_4189, then the caller uses the
  * existing guarded TEST event transfer. No update/remove/retry payloads.
  */
 function beautyHubNewLeagueIdentity_(saved,eventDate) {
@@ -141,7 +141,7 @@ function beautyHubNewLeagueIdentity_(saved,eventDate) {
     const state=beautyHubTransferState_(saved.player,auth,true);
     if(state.event.date!==eventDate)return fail('STALE_EVENT');
     const normalized=saved.player.normalize('NFC').trim().replace(/\s+/g,' ').toLocaleLowerCase('sv-SE');
-    journal='BEAUTY_NAKKA_LEAGUE_CREATE_lg_tM2v_3523_'+beautyHubTransferHash_(normalized);
+    journal='BEAUTY_NAKKA_LEAGUE_CREATE_lg_M2wQ_4189_'+beautyHubTransferHash_(normalized);
     const prior=props.getProperty(journal);
     if(prior){
       let old;try{old=JSON.parse(prior);}catch(e){}
@@ -157,10 +157,10 @@ function beautyHubNewLeagueIdentity_(saved,eventDate) {
     if(beautyHubTransferHash_(latest)!==beautyHubTransferHash_(state))return fail('STALE_TRANSFER');
     beautyHubNakkaAuthorize_(saved.player);
     if(beautyHubRegistrationDateCheck_(eventDate,new Date()).success!==true||JSON.stringify(beautyHubNakkaHubRows_())!==JSON.stringify(state.hub))return fail('STALE_EVENT');
-    const record={state:'ATTEMPTED',recordedUTC:new Date().toISOString(),uid:account.uid,event:state.event,name:saved.player,league:'lg_tM2v_3523',beforeHash:beautyHubTransferHash_(state.league),beforeCount:state.league.length};
+    const record={state:'ATTEMPTED',recordedUTC:new Date().toISOString(),uid:account.uid,event:state.event,name:saved.player,league:'lg_M2wQ_4189',beforeHash:beautyHubTransferHash_(state.league),beforeCount:state.league.length};
     props.setProperty(journal,JSON.stringify(record));if(props.getProperty(journal)!==JSON.stringify(record))throw Error('journal');
     attempted=true;
-    const result=beautyHubTransferFetch_('league/entry/update',auth,{lgid:'lg_tM2v_3523',add:[{name:saved.player}]});
+    const result=beautyHubTransferFetch_('league/entry/update',auth,{lgid:'lg_M2wQ_4189',add:[{name:saved.player}]});
     const added=result.added;
     if(!Array.isArray(added)||added.length!==1||added[0]?.name!==saved.player||typeof added[0]?.lpid!=='string'||!/^[A-Za-z0-9]{4}$/.test(added[0].lpid)||(result.updated||0)!==0||(result.removed||0)!==0||state.league.some(p=>p.lpid===added[0].lpid))throw Error('receipt');
     const after=beautyHubTransferState_(saved.player,auth,true),lpid=added[0].lpid;

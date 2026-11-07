@@ -1,10 +1,28 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),crypto=require('node:crypto');
 const source=fs.readFileSync('apps-script/registration-identity-test/remote-app/HubTestNakkaEvent.gs','utf8');
 const clone=x=>JSON.parse(JSON.stringify(x));
+
+test('isolated league creation preserves the old date journal and creates only in the new league',()=>{
+ const f=fixture(),key='BEAUTY_CREATE_EVENT_'+f.state.date,old=JSON.stringify({state:'VERIFIED',id:'t_OLD_REAL',date:f.state.date});
+ f.props.set(key,old);
+ f.props.set('BEAUTY_SELECTED_TEST_EVENT',JSON.stringify({id:'t_OLD_REAL',date:f.state.date,title:'AIK Hub TEST old'}));
+ assert.throws(()=>f.c.beautyHubActiveTestTarget_());
+ const p=f.prepare();assert.equal(p.success,true,JSON.stringify(p));const r=f.confirm(p);assert.equal(r.success,true,JSON.stringify(r));
+ assert.equal(f.props.get(key),old);assert.equal(f.posts().length,1);assert.equal(f.posts()[0].payload.set.lgid,'lg_M2wQ_4189');
+ assert.equal(f.props.has('BEAUTY_CREATE_EVENT_lg_M2wQ_4189_'+f.state.date),true);
+});
+test('isolated league refuses an old-league event returned by lookup before any creation write',()=>{
+ const f=fixture();f.state.events=[{tdid:'t_WRONG_LEAGUE',title:'AIK Hub TEST wrong league',lgid:'lg_tM2v_3523',t_date:Date.parse('2026-11-08T12:00Z')/1000}];
+ assert.equal(f.c.beautyHubNakkaEvent_({}).status,'UNAVAILABLE');assert.equal(f.prepare().success,false);assert.equal(f.posts().length,0);
+});
+test('isolated league cannot confirm a pre-migration creation ticket',()=>{
+ const f=fixture(),p=f.prepare(),key=[...f.cache.keys()][0],review=f.cache.get(key);f.cache.delete(key);f.cache.set(key.replace('lg_M2wQ_4189:',''),review);
+ assert.equal(f.confirm(p).success,false);assert.equal(f.posts().length,0);
+});
 function fixture(o={}){
  const props=new Map([['N01_API_USER','secret-user'],['N01_API_PASSWORD','secret-password']]),cache=new Map(),calls=[],audits=[];
  const state={date:'2026-11-08',uid:'owner',session:'session',events:[],created:null,serial:0};
- const template={tdid:'t_QHaG_7792',title:'Beauty Registration TEST event DO NOT USE LIVE',lgid:'lg_tM2v_3523',team_games:0,rr_setting:{round_robin:1,robin_count:2,robin_player_count:4},t_setting:{tournament:1,t_player_count:4,t3:1,limit_leg_count:3},s2_setting:{tournament:1,t_player_count:4,limit_leg_count:2},rr_table:[['OLD']],rr_result:{OLD:{score:2}},entry_list:[{tpid:'OLD'}]};
+ const template={tdid:'t_QHaG_7792',title:'Beauty Registration TEST event DO NOT USE LIVE',lgid:'lg_M2wQ_4189',team_games:0,rr_setting:{round_robin:1,robin_count:2,robin_player_count:4},t_setting:{tournament:1,t_player_count:4,t3:1,limit_leg_count:3},s2_setting:{tournament:1,t_player_count:4,limit_leg_count:2},rr_table:[['OLD']],rr_result:{OLD:{score:2}},entry_list:[{tpid:'OLD'}]};
  const c={Date,Map,JSON,Number,Object,Array,encodeURIComponent,SHEET_ID:'sheet',beautyHubRequestToken_:'token',
   beautyHubTestGuard_(){if(o.guard)throw Error('wrong project');},beautyHubNakkaAuthorize_(){if(o.auth)throw Error('not signed in');},
   beautyHubAuthRequire_(){if(o.auth)throw Error('secret');return {uid:state.uid,sessionBinding:state.session};},
@@ -21,7 +39,7 @@ function fixture(o={}){
    calls.push({path,payload:payload&&clone(payload)});
    if(path==='tournament/get?tdid=t_QHaG_7792'){if(o.templateMissing)throw Error('removed TEST event');return {tournament:clone(template)};}
    if(path==='tournament/create'){
-    assert.equal(JSON.parse(props.get('BEAUTY_CREATE_EVENT_'+state.date)).state,'ATTEMPTED');
+    assert.equal(JSON.parse(props.get('BEAUTY_CREATE_EVENT_lg_M2wQ_4189_'+state.date)).state,'ATTEMPTED');
     assert.deepEqual(Object.keys(payload),['set']);assert.equal(payload.set.private,0);assert.equal(payload.set.status,20);assert.equal(payload.set.join_pass,'AIK');assert.equal(payload.set.game_type,5);assert.equal(payload.set.common_join,1);assert.equal(payload.set.individual_pass,0);
     for(const k of Object.keys(payload.set))assert(!/table|result|rank|entry/.test(k));
     state.created={...clone(payload.set),tdid:'t_NEW_2026',rr_table:[],t_table:[],s2_table:[]};
@@ -46,27 +64,27 @@ function fixture(o={}){
  return {c,state,props,cache,calls,audits,template,prepare,confirm,posts:()=>calls.filter(v=>v.payload)};
 }
 test('Date events select a new approved TEST event and refuse a stale binding after the Hub date changes',()=>{
- const f=fixture();f.state.events=[{tdid:'t_NEW_2026',title:'AIK Hub TEST Sunday',lgid:'lg_tM2v_3523',t_date:Date.parse('2026-11-08T12:00Z')/1000}];
+ const f=fixture();f.state.events=[{tdid:'t_NEW_2026',title:'AIK Hub TEST Sunday',lgid:'lg_M2wQ_4189',t_date:Date.parse('2026-11-08T12:00Z')/1000}];
  assert.equal(f.c.beautyHubNakkaEvent_({}).event.id,'t_NEW_2026');assert.equal(f.c.beautyHubActiveTestTarget_().id,'t_NEW_2026');f.state.date='2026-11-09';assert.throws(()=>f.c.beautyHubActiveTestTarget_());assert.equal(f.posts().length,0);
 });
 test('Date creation review copies settings only and discloses public TEST visibility without any POST',()=>{
- const f=fixture(),p=f.prepare();assert.equal(p.success,true);assert.equal(p.event.private,false);assert.equal(p.event.status,'Accepting entries');assert.equal(f.posts().length,0);assert.equal(f.props.has('BEAUTY_CREATE_EVENT_'+f.state.date),false);assert.doesNotMatch(JSON.stringify(p),/secret|join_pass|OLD|Authorization/);
+ const f=fixture(),p=f.prepare();assert.equal(p.success,true);assert.equal(p.event.private,false);assert.equal(p.event.status,'Accepting entries');assert.equal(f.posts().length,0);assert.equal(f.props.has('BEAUTY_CREATE_EVENT_lg_M2wQ_4189_'+f.state.date),false);assert.doesNotMatch(JSON.stringify(p),/secret|join_pass|OLD|Authorization/);
 });
 test('Date creation confirms once and verifies empty native entries plus settings before publishing the selection',()=>{
- const f=fixture(),p=f.prepare(),before=clone(f.template),r=f.confirm(p);assert.equal(r.success,true,JSON.stringify(r));assert.equal(r.event.id,'t_NEW_2026');assert.equal(f.posts().length,1);assert.equal(f.c.beautyHubActiveTestTarget_().id,'t_NEW_2026');assert.equal(JSON.parse(f.props.get('BEAUTY_CREATE_EVENT_'+f.state.date)).state,'VERIFIED');assert.deepEqual(f.template,before);assert.equal(f.confirm(p).success,false);assert.equal(f.posts().length,1);assert.doesNotMatch(JSON.stringify(f.audits),/secret|join_pass/);
+ const f=fixture(),p=f.prepare(),before=clone(f.template),r=f.confirm(p);assert.equal(r.success,true,JSON.stringify(r));assert.equal(r.event.id,'t_NEW_2026');assert.equal(f.posts().length,1);assert.equal(f.c.beautyHubActiveTestTarget_().id,'t_NEW_2026');assert.equal(JSON.parse(f.props.get('BEAUTY_CREATE_EVENT_lg_M2wQ_4189_'+f.state.date)).state,'VERIFIED');assert.deepEqual(f.template,before);assert.equal(f.confirm(p).success,false);assert.equal(f.posts().length,1);assert.doesNotMatch(JSON.stringify(f.audits),/secret|join_pass/);
 });
 test('Date creation rejects missing acknowledgement altered dates sessions users and expired tickets before POST',()=>{
  for(const mutate of [f=>f.state.date='2026-11-09',f=>f.state.session='another',f=>f.state.uid='another',f=>{const [key,value]=[...f.cache][0];const r=JSON.parse(value);r.expires=0;f.cache.set(key,JSON.stringify(r));}]){const f=fixture(),p=f.prepare();mutate(f);assert.equal(f.confirm(p).success,false);assert.equal(f.posts().length,0);}
  const f=fixture(),p=f.prepare();assert.equal(f.c.beautyHubCreateEvent_('confirm',{ticket:p.ticket,confirmed:'false'}).success,false);assert.equal(f.posts().length,0);
 });
 test('Date creation timeout leaves a durable uncertain marker and every later create attempt stays read only',()=>{
- const f=fixture({timeout:true}),p=f.prepare(),r=f.confirm(p);assert.equal(r.uncertain,true);assert.match(r.error,/Do not retry/);assert.doesNotMatch(JSON.stringify(r),/secret/);assert.equal(JSON.parse(f.props.get('BEAUTY_CREATE_EVENT_'+f.state.date)).state,'ATTEMPTED');assert.equal(f.prepare().success,false);assert.equal(f.confirm(p).success,false);assert.equal(f.posts().length,1);
+ const f=fixture({timeout:true}),p=f.prepare(),r=f.confirm(p);assert.equal(r.uncertain,true);assert.match(r.error,/Do not retry/);assert.doesNotMatch(JSON.stringify(r),/secret/);assert.equal(JSON.parse(f.props.get('BEAUTY_CREATE_EVENT_lg_M2wQ_4189_'+f.state.date)).state,'ATTEMPTED');assert.equal(f.prepare().success,false);assert.equal(f.confirm(p).success,false);assert.equal(f.posts().length,1);
 });
 test('Date creation blocks duplicate selection nonempty entries or changed native readbacks after its single POST',()=>{
  for(const options of [{duplicate:true},{nonempty:true},{readbackMismatch:true}]){const f=fixture(options),r=f.confirm(f.prepare());assert.equal(r.success,false);assert.equal(r.uncertain,true);assert.equal(f.posts().length,1);assert.equal(f.prepare().success,false);}
 });
 test('Date creation refuses an existing TEST event and cannot target same-date production or arbitrary input IDs',()=>{
- const f=fixture();f.state.events=[{tdid:'t_PRODUCTION',title:'Monday competition',lgid:'lg_tM2v_3523',t_date:Date.parse('2026-11-08T12:00Z')/1000}];assert.equal(f.c.beautyHubNakkaEvent_({}).status,'NOT_FOUND');
+ const f=fixture();f.state.events=[{tdid:'t_PRODUCTION',title:'Monday competition',lgid:'lg_M2wQ_4189',t_date:Date.parse('2026-11-08T12:00Z')/1000}];assert.equal(f.c.beautyHubNakkaEvent_({}).status,'NOT_FOUND');
  assert.equal(f.c.beautyHubCreateEvent_('prepare',{title:'AIK Hub TEST',id:'t_PRODUCTION'}).success,false);assert.equal(f.c.beautyHubCreateEvent_('prepare',{title:'Production tournament'}).success,false);
  f.state.events.push({...f.state.events[0],tdid:'t_EXISTS',title:'AIK Hub TEST existing'});assert.equal(f.prepare().success,false);assert.equal(f.posts().length,0);
 });
@@ -82,7 +100,7 @@ test('Cast staff opener forwards only its verified session to date selection and
 test('Selected TEST Live feed requests only its injected event and rejects a different provider event',async()=>{
  const paths=[],id='t_SUNDAY_NEW',c={BeautySelectedEventId:id,BeautyNakkaStages:require('../public/js/nakka-stage-model.js'),AbortSignal,Date};vm.createContext(c);vm.runInContext(fs.readFileSync('public/js/nakka-stage-feed.js','utf8'),c);
  let shown,failed=false,wrong=false;
- const feed=c.BeautyNakkaStageFeed.create({fetch:async url=>{paths.push(url);return {ok:true,json:async()=>url.includes('standings?')?{result:0,tdid:id,groups:[]}:{result:0,tournament:{tdid:wrong?'t_QHaG_7792':id,lgid:'lg_tM2v_3523',title:'AIK Hub TEST Sunday',updateTime:1,entry_list:[]}}};},onData:d=>shown=d,onError:()=>failed=true});
+ const feed=c.BeautyNakkaStageFeed.create({fetch:async url=>{paths.push(url);return {ok:true,json:async()=>url.includes('standings?')?{result:0,tdid:id,groups:[]}:{result:0,tournament:{tdid:wrong?'t_QHaG_7792':id,lgid:'lg_M2wQ_4189',title:'AIK Hub TEST Sunday',updateTime:1,entry_list:[]}}};},onData:d=>shown=d,onError:()=>failed=true});
  await feed.refresh();assert.equal(failed,false);assert.equal(shown.eventId,id);assert(paths.every(p=>p.endsWith('tdid='+id)));wrong=true;await feed.refresh();assert.equal(failed,true);
 });
 function creationUI(options={}){
@@ -180,10 +198,10 @@ test('Creation accepts omitted disabled formats but still rejects altered or mis
 });
 function uncertainCreation(legacy=false){const f=fixture({timeout:true,omitDisabled:true}),v=matchOptions();v.stage1=null;v.stage2=null;Object.assign(f.template.rr_setting,{startScore:501,match_type:'01'});const p=f.prepare(v);assert.equal(f.confirm(p).uncertain,true);if(legacy)delete f.audits[0].settings;return f;}
 test('Existing creation recovery uses GETs only and retains original attempted journal with a separate receipt',()=>{
- for(const legacy of [false,true]){const f=uncertainCreation(legacy),key='BEAUTY_CREATE_EVENT_'+f.state.date,original=f.props.get(key);assert.equal(f.c.beautyHubNakkaEvent_({}).creationReviewRequired,true);const r=f.c.beautyHubReviewCreatedEvent_({});assert.equal(r.success,true,JSON.stringify(r));assert.equal(r.scope,legacy?'REVIEWED_OPTIONS_ONLY':'FULL_FORMAT');assert.equal(f.props.get(key),original);assert.equal(f.posts().length,1);assert.equal(f.c.beautyHubNakkaEvent_({}).creationReviewRequired,false);assert.equal(f.prepare().success,false);assert.equal(f.posts().length,1);assert.doesNotMatch(JSON.stringify(r),/secret|join_pass/);}
+ for(const legacy of [false,true]){const f=uncertainCreation(legacy),key='BEAUTY_CREATE_EVENT_lg_M2wQ_4189_'+f.state.date,original=f.props.get(key);assert.equal(f.c.beautyHubNakkaEvent_({}).creationReviewRequired,true);const r=f.c.beautyHubReviewCreatedEvent_({});assert.equal(r.success,true,JSON.stringify(r));assert.equal(r.scope,legacy?'REVIEWED_OPTIONS_ONLY':'FULL_FORMAT');assert.equal(f.props.get(key),original);assert.equal(f.posts().length,1);assert.equal(f.c.beautyHubNakkaEvent_({}).creationReviewRequired,false);assert.equal(f.prepare().success,false);assert.equal(f.posts().length,1);assert.doesNotMatch(JSON.stringify(r),/secret|join_pass/);}
 });
 test('Existing creation recovery rejects changed rules security identity registrations and staff without another provider write',()=>{
- for(const change of [f=>f.state.created.rr_setting.limit_leg_count=9,f=>f.state.created.join_pass='changed',f=>f.state.uid='someone-else',f=>f.state.created.rr_table=[['occupied']],f=>f.state.created.entry_list=[{tpid:'occupied'}],f=>f.state.date='2026-11-09',f=>f.audits[0].kind='wrong']){const f=uncertainCreation(true),key='BEAUTY_CREATE_EVENT_'+f.state.date,original=f.props.get(key);change(f);const r=f.c.beautyHubReviewCreatedEvent_({});assert.equal(r.success,false);assert.equal(f.props.get(key),original);assert.equal(f.posts().length,1);assert.equal([...f.props.keys()].some(k=>k.startsWith('BEAUTY_CREATE_REVIEW_')),false);}
+ for(const change of [f=>f.state.created.rr_setting.limit_leg_count=9,f=>f.state.created.join_pass='changed',f=>f.state.uid='someone-else',f=>f.state.created.rr_table=[['occupied']],f=>f.state.created.entry_list=[{tpid:'occupied'}],f=>f.state.date='2026-11-09',f=>f.audits[0].kind='wrong']){const f=uncertainCreation(true),key='BEAUTY_CREATE_EVENT_lg_M2wQ_4189_'+f.state.date,original=f.props.get(key);change(f);const r=f.c.beautyHubReviewCreatedEvent_({});assert.equal(r.success,false);assert.equal(f.props.get(key),original);assert.equal(f.posts().length,1);assert.equal([...f.props.keys()].some(k=>k.startsWith('BEAUTY_CREATE_REVIEW_lg_M2wQ_4189_')),false);}
  const f=uncertainCreation();f.state.created.rr_setting.startScore=301;assert.equal(f.c.beautyHubReviewCreatedEvent_({}).success,false);assert.equal(f.posts().length,1);
 });
 test('Matched-event UI offers explicit existing-event verification without a creation route',async()=>{
@@ -200,7 +218,7 @@ test('Evening Setup explicitly reviews and saves changed settings once with nati
  const r=f.c.beautyHubEveningSetup_('confirm',{ticket:p.ticket,confirmed:'true'});assert.equal(r.success,true,JSON.stringify(r));assert.equal(f.posts().length,2);assert.equal(f.state.created.rr_setting.limit_leg_count,2);assert.equal(f.state.created.rr_setting.limit_rounds,0);assert.equal(f.state.created.t_setting,undefined);assert.equal(f.read().setup.format,'Round Robin only');assert.equal(f.c.beautyHubEveningSetup_('confirm',{ticket:p.ticket,confirmed:'true'}).success,false);assert.equal(f.posts().length,2);
 });
 test('Evening Setup rejects stale expired unacknowledged and changed-session saves before provider writes',()=>{
- for(const change of [f=>f.state.created.updateTime++,f=>f.state.session='other',f=>{for(const [key,text]of f.cache)if(key.startsWith('beauty-evening:')){const v=JSON.parse(text);v.expires=0;f.cache.set(key,JSON.stringify(v));}}]){const f=eveningFixture(),r=f.read(),p=f.c.beautyHubEveningSetup_('prepare',{settings:JSON.stringify(matchOptions()),version:r.version});assert.equal(p.success,true);change(f);assert.equal(f.c.beautyHubEveningSetup_('confirm',{ticket:p.ticket,confirmed:'true'}).success,false);assert.equal(f.posts().length,1);}
+ for(const change of [f=>f.state.created.updateTime++,f=>f.state.session='other',f=>{for(const [key,text]of f.cache)if(key.startsWith('beauty-evening:lg_M2wQ_4189:')){const v=JSON.parse(text);v.expires=0;f.cache.set(key,JSON.stringify(v));}}]){const f=eveningFixture(),r=f.read(),p=f.c.beautyHubEveningSetup_('prepare',{settings:JSON.stringify(matchOptions()),version:r.version});assert.equal(p.success,true);change(f);assert.equal(f.c.beautyHubEveningSetup_('confirm',{ticket:p.ticket,confirmed:'true'}).success,false);assert.equal(f.posts().length,1);}
  const f=eveningFixture(),r=f.read();f.state.created.updateTime++;assert.equal(f.c.beautyHubEveningSetup_('prepare',{settings:JSON.stringify(matchOptions()),version:r.version}).success,false);assert.equal(f.posts().length,1);
 });
 test('Evening Setup shows but blocks edits after start sent pools or unresolved creation and preserves uncertain saves',()=>{

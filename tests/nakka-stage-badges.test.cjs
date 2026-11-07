@@ -1,6 +1,6 @@
 const {test}=require('node:test'),assert=require('node:assert/strict');
 const model=require('../public/js/nakka-stage-model.js'),feed=require('../public/js/nakka-stage-feed.js');
-function input(){return [{result:0,tournament:{tdid:'t_QHaG_7792',lgid:'lg_tM2v_3523',updateTime:1,entry_list:[{tpid:'aaaa',name:'A'},{tpid:'bbbb',name:'B'}],t_table:[['aaaa','bbbb']],s2_table:[['aaaa','bbbb']],badge:{'t-0-0':{str:'14',st:1},'s2-0-0':{str:'2',st:2}}}},{result:0,tdid:'t_QHaG_7792',groups:[]}];}
+function input(){return [{result:0,tournament:{tdid:'t_QHaG_7792',lgid:'lg_M2wQ_4189',updateTime:1,entry_list:[{tpid:'aaaa',name:'A'},{tpid:'bbbb',name:'B'}],t_table:[['aaaa','bbbb']],s2_table:[['aaaa','bbbb']],badge:{'t-0-0':{str:'14',st:1},'s2-0-0':{str:'2',st:2}}}},{result:0,tdid:'t_QHaG_7792',groups:[]}];}
 test('stage badges map exact stage round and slot; reassignments and removals replace old values',()=>{
  const f=input();let out=model.project(...f);assert.equal(out.knockouts[0].rounds[0].matches[0].board.text,'14');assert.equal(out.knockouts[1].rounds[0].matches[0].board.text,'2');
  f[0].tournament.badge['t-0-0']={str:'7',st:1};out=model.project(...f);assert.equal(out.knockouts[0].rounds[0].matches[0].board.text,'7');delete f[0].tournament.badge['t-0-0'];assert.equal(model.project(...f).knockouts[0].rounds[0].matches[0].board.state,'unassigned');

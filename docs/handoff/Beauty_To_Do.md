@@ -1,3 +1,11 @@
+# Dedicated TEST league — 7 November 2026
+
+- [x] Owner created Beauty TEST — DO NOT USE LIVE: lg_M2wQ_4189.
+- [x] Prepared Identity TEST league isolation: registration, event creation/settings, profiles, pools, statistics, attention and Live. Old league journals/statistics preserved under their old keys. 855 offline tests and inventory PASS.
+- [x] Owner installed 843→855 with inventory PASS at 10:28 Stockholm; Google TEST readback verified at 10:31 Stockholm: 20 files checked, 11 changed. Google UI remains approved Monday Preset843; cleanup UI is not uploaded.
+- [ ] Confirm API access and native event creation in lg_M2wQ_4189, then rehearse registration on today's TEST date. Unknown new-league averages remain unknown. Native 39-dart/tie-break and A/B progression acceptance remain pending.
+- [ ] No further scoring trials in the real Monday league. Do not delete the old date journal to bypass the duplicate guard.
+
 # Latest GitHub save — 7 November 2026
 
 See GITHUB-CHECKPOINT-20261107.md for confirmed installation versus prepared work, owner interface boundaries and cleanup status.

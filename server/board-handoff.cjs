@@ -3,7 +3,7 @@
  */
 'use strict';
 const crypto=require('node:crypto');
-const id='t_QHaG_7792',league='lg_tM2v_3523';
+const id='t_QHaG_7792',league='lg_M2wQ_4189';
 const copy=x=>JSON.parse(JSON.stringify(x));
 const hash=x=>crypto.createHash('sha256').update(JSON.stringify(x)).digest('hex');
 function target(t){if(!t||t.tdid!==id||t.lgid!==league||t.title!=='Beauty Registration TEST event DO NOT USE LIVE'||![10,20,25].includes(t.status)||t.team_games!==0||!Number.isSafeInteger(t.updateTime)||t.lg_setting?.turnaround!==0||t.lg_setting?.swiss)throw Error('Only the pre-start single round-robin TEST event is supported.');}

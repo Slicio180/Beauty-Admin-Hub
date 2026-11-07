@@ -6783,6 +6783,19 @@
     "evidence": "evidence/live-usability-20261031/tests.txt"
   },
   {
+    "id": "ISO-004",
+    "file": "tests/pool-service.test.cjs",
+    "name": "isolated league never reads the legacy statistics pointer or modifies its snapshot",
+    "requirement": "POOL-SEEDED-001",
+    "kind": "Executable synthetic service or DOM behavior",
+    "purpose": "Dedicated TEST league identity and state isolation",
+    "expected": "Named assertions pass",
+    "evidenceLabel": "LOCAL TESTS; NATIVE PENDING",
+    "origin": "Owner Pool Planner To Do, 28 October 2026",
+    "evidence": "evidence/isolated-league-20261107/checks.tap",
+    "limitations": "Synthetic offline verification; native upload and rehearsal pending"
+  },
+  {
     "id": "SEEDED-POOL-013",
     "file": "tests/pool-service.test.cjs",
     "name": "pool stats qualify score/darts keyed by LPID; points stay separate and unknown is not zero",
@@ -10063,6 +10076,45 @@
     "origin": "Owner request 6 November 2026",
     "evidence": "evidence/combined-hub-20261106/tests.tap",
     "limitations": "Hub venue plan; native Nakka pool board field connection remains unverified"
+  },
+  {
+    "id": "ISO-003",
+    "file": "tests/date-event-creation.test.cjs",
+    "name": "isolated league creation preserves the old date journal and creates only in the new league",
+    "requirement": "PROV-001",
+    "kind": "Executable synthetic integration",
+    "purpose": "Dedicated TEST league identity and state isolation",
+    "expected": "Assertions pass against synthetic provider responses",
+    "evidenceLabel": "LOCAL_ONLY",
+    "origin": "Date-event TEST update 2026-11-06",
+    "evidence": "evidence/isolated-league-20261107/checks.tap",
+    "limitations": "Synthetic offline verification; native upload and rehearsal pending"
+  },
+  {
+    "id": "ISO-002",
+    "file": "tests/date-event-creation.test.cjs",
+    "name": "isolated league refuses an old-league event returned by lookup before any creation write",
+    "requirement": "PROV-001",
+    "kind": "Executable synthetic integration",
+    "purpose": "Dedicated TEST league identity and state isolation",
+    "expected": "Assertions pass against synthetic provider responses",
+    "evidenceLabel": "LOCAL_ONLY",
+    "origin": "Date-event TEST update 2026-11-06",
+    "evidence": "evidence/isolated-league-20261107/checks.tap",
+    "limitations": "Synthetic offline verification; native upload and rehearsal pending"
+  },
+  {
+    "id": "ISO-001",
+    "file": "tests/date-event-creation.test.cjs",
+    "name": "isolated league cannot confirm a pre-migration creation ticket",
+    "requirement": "PROV-001",
+    "kind": "Executable synthetic integration",
+    "purpose": "Dedicated TEST league identity and state isolation",
+    "expected": "Assertions pass against synthetic provider responses",
+    "evidenceLabel": "LOCAL_ONLY",
+    "origin": "Date-event TEST update 2026-11-06",
+    "evidence": "evidence/isolated-league-20261107/checks.tap",
+    "limitations": "Synthetic offline verification; native upload and rehearsal pending"
   },
   {
     "id": "DATE-EVENT-001",

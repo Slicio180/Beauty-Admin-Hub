@@ -6,7 +6,7 @@ function fixture(o={}){
  const values={Control:[['START DATE','LAST RESET'],[stamp,stamp]],'PLAYER STATUS DATA':[['PLAYER','OLD NAME','STATUS','FOTO&VIDEO','MEDDELANDE','WHERE FROM'],['Test Player','Old Name','IN','JA','message','HUB'],['Other','','OUT','NEJ','other','MOBIL']],"PLAYER'S MASTER LIST":[['PLAYERS'],['Test Player'],['Other']],'Form responses 2':[['Timestamp','VÄLJ DITT NAMN','Skriv ditt fullständiga namn','Foto- och videomedgivande','Meddelande','WHERE FROM'],[stamp,'Test Player','','JA, JAG GODKÄNNER','message','HUB'],[stamp,'Other','','NEJ, JAG GODKÄNNER INTE','other','MOBIL']],"TONIGHT'S PLAYERS":[['PLAYERS','NEW PLAYERS','STATUS','FOTO&VIDEO','MEDDELANDE','WHERE FROM'],['Test Player','','IN','JA','message','HUB'],['Other','','OUT','NEJ','other','MOBIL'],...blank(97,6)]};
  let entries=[{tpid:'t001',name:'Test Player',lpid:'l001',index:1},{tpid:'t002',name:'Other',lpid:'l002',index:2}],released=0,authExpired=false;
  if(o.absent)entries=entries.slice(1);if(o.duplicateEntry)entries.push({tpid:'t003',name:'Test Player'});
- const raw={tdid:'t_QHaG_7792',lgid:'lg_tM2v_3523',title:'Beauty Registration TEST event DO NOT USE LIVE',status:20,t_date:stamp.getTime()/1000,updateTime:1};
+ const raw={tdid:'t_QHaG_7792',lgid:'lg_M2wQ_4189',title:'Beauty Registration TEST event DO NOT USE LIVE',status:20,t_date:stamp.getTime()/1000,updateTime:1};
  if(o.oldTitle)raw.title='Beauty Hub TEST — DO NOT USE LIVE';if(o.live)raw.tdid='t_live_9999';if(o.started)raw.status=30;if(o.bracket)raw.rr_table=[['t001','t002']];
  const sheets={};
  function range(name,r,c,h=1,w=1){return {

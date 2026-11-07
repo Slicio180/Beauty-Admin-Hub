@@ -3,9 +3,9 @@ const seeding=require('../public/js/pool-seeding.js'),planModule=require('../pub
 const now=Date.parse('2026-10-29T15:00:00Z');
 function fixture(){
  const players=Array.from({length:9},(_,i)=>({id:'p'+i,name:'Player '+i,status:'IN',average:50-i,privateMessage:'SECRET'}));
- const draw=seeding.draw({players,sizes:[3,3,3],seed:42,eventDate:'2026-10-27',frozenAt:new Date(now).toISOString(),source:{leagueId:'lg_tM2v_3523',fetchedAt:new Date(now).toISOString()}}),plan=planModule.create(draw,[1,7],'2026-10-27');
+ const draw=seeding.draw({players,sizes:[3,3,3],seed:42,eventDate:'2026-10-27',frozenAt:new Date(now).toISOString(),source:{leagueId:'lg_M2wQ_4189',fetchedAt:new Date(now).toISOString()}}),plan=planModule.create(draw,[1,7],'2026-10-27');
  const bindings=players.map((p,i)=>({id:p.id,tpid:'t00'+i})),map=new Map(bindings.map(p=>[p.id,p.tpid]));
- const event={tdid:'t_QHaG_7792',lgid:'lg_tM2v_3523',title:'Beauty Registration TEST event DO NOT USE LIVE',status:25,team_games:0,updateTime:1,t_date:1793124000,lg_setting:{turnaround:0},lg_table:plan.pools.map(p=>p.players.map(q=>map.get(q.id)))};
+ const event={tdid:'t_QHaG_7792',lgid:'lg_M2wQ_4189',title:'Beauty Registration TEST event DO NOT USE LIVE',status:25,team_games:0,updateTime:1,t_date:1793124000,lg_setting:{turnaround:0},lg_table:plan.pools.map(p=>p.players.map(q=>map.get(q.id)))};
  return {plan,event,bindings,draw};
 }
 test('board plan export records sparse boards sharing batches and no private roster data',()=>{

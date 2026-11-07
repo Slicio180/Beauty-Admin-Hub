@@ -1,13 +1,19 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs'),crypto=require('node:crypto');
 const root='apps-script/registration-identity-test/remote-app/';
 const copy=x=>JSON.parse(JSON.stringify(x));
+test('isolated league never reads the legacy statistics pointer or modifies its snapshot',()=>{
+ const f=fixture(),old=JSON.stringify({id:'old',n:1}),stats=JSON.stringify({leagueId:'lg_tM2v_3523',profiles:[{name:'Old Monday player',average:99}]});
+ f.values.set('BEAUTY_LEAGUE_STATS_CURRENT',old);f.values.set('BEAUTY_LEAGUE_STATS_old_0',stats);
+ assert.equal(f.context.beautyPoolLastGood_(),null);const r=f.load();assert.equal(r.success,true,JSON.stringify(r));assert.equal(r.stats.leagueId,'lg_M2wQ_4189');
+ assert.equal(f.values.get('BEAUTY_LEAGUE_STATS_CURRENT'),old);assert.equal(f.values.get('BEAUTY_LEAGUE_STATS_old_0'),stats);assert(f.calls.every(c=>!c.path.includes('lg_tM2v_3523')));
+});
 function fixture(options={}){
  let now=Date.parse('2026-10-28T22:00:00Z'),serial=0;const calls=[],values=new Map(),cache=new Map(),audits=[];
  const profiles=Array.from({length:8},(_,i)=>({lpid:'L'+String(i).padStart(3,'0'),name:'Player '+i}));
  const players=profiles.map((p,i)=>({player:p.name,newPlayer:'',status:i<6?'IN':i===6?'OUT':'STANDBY'}));
  const stats=Object.fromEntries(profiles.map((p,i)=>[p.lpid,{score:5000+i*300,darts:300,a:0,acnt:0,pt:3}]));
  const ranking=Object.fromEntries(profiles.map(p=>[p.lpid,{t_a:{pt:1},t_b:{pt:2}}]));
- let event={tdid:'t_QHaG_7792',lgid:'lg_tM2v_3523',title:'Beauty Registration TEST event DO NOT USE LIVE',status:20,t_date:1793124000,updateTime:100,league:1,team_games:0,
+ let event={tdid:'t_QHaG_7792',lgid:'lg_M2wQ_4189',title:'Beauty Registration TEST event DO NOT USE LIVE',status:20,t_date:1793124000,updateTime:100,league:1,team_games:0,
  lg_setting:{auto_schedule:1,league:1,robin_count:7,robin_player_count:4,turnaround:0,include_leg:0,include_set:0,include_set_leg:0,limit:1,low_win:0,limit_leg_count:2,drawMode:0,limit_set_count:2,limit_set_leg_count:2,startScore:501,match_type:'01',limit_rounds:0,overkill:0,rounds:15,changeFirst:0,exitResult:0,autoNext:1,setOrder:0,schedule:[],point_w:2,point_d:1,point_l:0,priority_win:0,exclude_from_stats:0,game_setting:[],pt_setting:[]},
  lg_table:[],lg_result:[],lg_rank:[],t_order:{preserved:true},badge:{},entry_list:profiles.map((p,i)=>({tpid:'E'+String(i).padStart(3,'0'),name:p.name,index:i,c:'SE'}))};
  // Standard fixtures explicitly enable both stages; absent native settings mean OFF.
@@ -31,8 +37,8 @@ function fixture(options={}){
   beautyHubTransferEntries_({list}){if(!Array.isArray(list))throw Error('entries');return list.map(p=>({tpid:p.tpid,name:p.name,lpid:p.lpid||''})).sort((a,b)=>a.tpid.localeCompare(b.tpid));},
   beautyHubTransferFetch_(path,auth,payload){
    calls.push({path,payload:copy(payload||null)});if(options.fail?.(path,payload,calls))throw Error('PRIVATE provider credentials');
-   if(path.startsWith('league/entry/list?')){assert.equal(path,'league/entry/list?lgid=lg_tM2v_3523');return {list:copy(profiles)};}
-   if(path.startsWith('league/get?'))return {league:{lgid:'lg_tM2v_3523',title:'AIK MÅNDAGSDARTARNA 2026/2027'}};
+   if(path.startsWith('league/entry/list?')){assert.equal(path,'league/entry/list?lgid=lg_M2wQ_4189');return {list:copy(profiles)};}
+   if(path.startsWith('league/get?'))return {league:{lgid:'lg_M2wQ_4189',title:'AIK MÅNDAGSDARTARNA 2026/2027'}};
    if(path.includes('kind=stats_list'))return {stats:copy(stats)};
    if(path.includes('kind=rank_list'))return {stats:copy(ranking)};
    if(path.startsWith('tournament/end_group?'))return copy(options.completion);
@@ -62,7 +68,7 @@ test('pool stats qualify score/darts keyed by LPID; points stay separate and unk
 });
 test('pool stats retain durable last-good on outage and block fresh draw after refresh failure',()=>{
  const f=fixture();const first=f.load();f.advance(60001);f.options.fail=path=>path.includes('stats_list');const r=f.load();assert.equal(r.stats.fresh,false);assert.deepEqual(r.stats.profiles,first.stats.profiles);assert.equal(f.context.beautyPoolStats_('auth',false).fresh,false);
- f.advance(60001);f.options.fail=null;assert.equal(f.load().stats.fresh,true);assert.ok([...f.values.keys()].filter(k=>/^BEAUTY_LEAGUE_STATS_[a-f0-9]/.test(k)).length<20);
+ f.advance(60001);f.options.fail=null;assert.equal(f.load().stats.fresh,true);assert.ok([...f.values.keys()].filter(k=>/^BEAUTY_LEAGUE_STATS_lg_M2wQ_4189_[a-f0-9]/.test(k)).length<20);
 });
 test('pool stats reject inconsistent points and invalid numeric totals without replacing last-good',()=>{
  for(const change of [f=>f.stats.L000.darts='300',f=>f.stats.L000.score=-1,f=>f.ranking.L000.t_b.pt=99]){const f=fixture();f.load();f.advance(60001);change(f);assert.equal(f.load().stats.fresh,false);}
@@ -263,7 +269,7 @@ test('native Round Robin mixed group table pads empty slots and derives qualifie
 test('league statistics refresh accepts the complete 105-player response without paging',()=>{
  const f=fixture();for(let i=8;i<105;i++)f.profiles.push({lpid:i.toString(36).padStart(4,'0'),name:'Additional '+i});
  const r=f.load();assert.equal(r.success,true);assert.equal(r.stats.fresh,true);assert.equal(r.stats.profiles.length,105);
- const reads=f.calls.filter(c=>c.path.startsWith('league/entry/list?'));assert.equal(reads.length,1);assert.equal(reads[0].path,'league/entry/list?lgid=lg_tM2v_3523');assert.equal(f.calls.filter(c=>c.payload).length,0);
+ const reads=f.calls.filter(c=>c.path.startsWith('league/entry/list?'));assert.equal(reads.length,1);assert.equal(reads[0].path,'league/entry/list?lgid=lg_M2wQ_4189');assert.equal(f.calls.filter(c=>c.payload).length,0);
 });
 test('full league identity list still rejects unsupported size and invalid identity fields',()=>{
  for(const change of [f=>{while(f.profiles.length<1000)f.profiles.push({lpid:f.profiles.length.toString(36).padStart(4,'0'),name:'Extra'});},f=>f.profiles[0].lpid=1000,f=>f.profiles[0].name='Bad\\nName'.replace('\\n','\n')]){

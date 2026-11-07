@@ -14,7 +14,7 @@ function beautyPoolAuth_(){
 }
 function beautyPoolProfiles_(auth){
   // league/entry/list returns the full list; it is not a paginated list API.
-  const page=beautyHubTransferFetch_('league/entry/list?lgid=lg_tM2v_3523',auth).list;
+  const page=beautyHubTransferFetch_('league/entry/list?lgid=lg_M2wQ_4189',auth).list;
   if(!Array.isArray(page)||page.length>=1000)beautyPoolError_('League identity list is invalid or exceeds the supported limit.');
   const ids=new Set(),all=[];
   for(const p of page){
@@ -43,32 +43,32 @@ function beautyPoolNormalizeStats_(profiles,stats,ranking){
 // Chunked last-good value: write new shards, publish the pointer last. Never
 // replace last-good data with an error or a partial provider response.
 function beautyPoolLastGood_(value){
-  const p=PropertiesService.getScriptProperties(),pointer='BEAUTY_LEAGUE_STATS_CURRENT';
+  const p=PropertiesService.getScriptProperties(),pointer='BEAUTY_LEAGUE_STATS_lg_M2wQ_4189_CURRENT';
   if(value){
     const old=JSON.parse(p.getProperty(pointer)||'null'),id=Utilities.getUuid().replace(/-/g,''),text=JSON.stringify(value),n=Math.ceil(text.length/1800);
     if(n>100)beautyPoolError_('Statistics snapshot too large.');
-    for(let i=0;i<n;i++)p.setProperty('BEAUTY_LEAGUE_STATS_'+id+'_'+i,text.slice(i*1800,(i+1)*1800));
+    for(let i=0;i<n;i++)p.setProperty('BEAUTY_LEAGUE_STATS_lg_M2wQ_4189_'+id+'_'+i,text.slice(i*1800,(i+1)*1800));
     p.setProperty(pointer,JSON.stringify({id,n}));
-    if(old)for(let i=0;i<old.n;i++)p.deleteProperty('BEAUTY_LEAGUE_STATS_'+old.id+'_'+i);
+    if(old)for(let i=0;i<old.n;i++)p.deleteProperty('BEAUTY_LEAGUE_STATS_lg_M2wQ_4189_'+old.id+'_'+i);
     return value;
   }
-  try{const old=JSON.parse(p.getProperty(pointer)||'null');if(!old||old.n>100)return null;let text='';for(let i=0;i<old.n;i++){const s=p.getProperty('BEAUTY_LEAGUE_STATS_'+old.id+'_'+i);if(s===null)return null;text+=s;}return JSON.parse(text);}catch(e){return null;}
+  try{const old=JSON.parse(p.getProperty(pointer)||'null');if(!old||old.n>100)return null;let text='';for(let i=0;i<old.n;i++){const s=p.getProperty('BEAUTY_LEAGUE_STATS_lg_M2wQ_4189_'+old.id+'_'+i);if(s===null)return null;text+=s;}return JSON.parse(text);}catch(e){return null;}
 }
 function beautyPoolStats_(auth,force){
   const p=PropertiesService.getScriptProperties(),now=Date.now(),last=beautyPoolLastGood_();
-  const failed=Number(p.getProperty('BEAUTY_LEAGUE_STATS_FAILED')||0);
+  const failed=Number(p.getProperty('BEAUTY_LEAGUE_STATS_lg_M2wQ_4189_FAILED')||0);
   if(last&&!force&&now-Date.parse(last.fetchedAt)<300000&&failed<=Date.parse(last.fetchedAt))return {...last,fresh:true};
-  const attempt=Number(p.getProperty('BEAUTY_LEAGUE_STATS_ATTEMPT')||0);
+  const attempt=Number(p.getProperty('BEAUTY_LEAGUE_STATS_lg_M2wQ_4189_ATTEMPT')||0);
   if(now-attempt<60000)return last?{...last,fresh:now-Date.parse(last.fetchedAt)<300000&&failed<=Date.parse(last.fetchedAt),message:'Refresh is limited to once per minute.'}:{fresh:false,profiles:[],message:'Wait one minute before refreshing.'};
-  p.setProperty('BEAUTY_LEAGUE_STATS_ATTEMPT',String(now));
+  p.setProperty('BEAUTY_LEAGUE_STATS_lg_M2wQ_4189_ATTEMPT',String(now));
   try{
-    const league=beautyHubTransferFetch_('league/get?lgid=lg_tM2v_3523',auth).league;
-    if(league?.lgid!=='lg_tM2v_3523'||typeof league.title!=='string')throw Error('league');
-    const profiles=beautyPoolProfiles_(auth),stats=beautyHubTransferFetch_('league/stats?lgid=lg_tM2v_3523&kind=stats_list',auth).stats,
-      ranking=beautyHubTransferFetch_('league/stats?lgid=lg_tM2v_3523&kind=rank_list',auth).stats;
-    const qualified=beautyPoolNormalizeStats_(profiles,stats,ranking);p.deleteProperty('BEAUTY_LEAGUE_STATS_FAILED');
+    const league=beautyHubTransferFetch_('league/get?lgid=lg_M2wQ_4189',auth).league;
+    if(league?.lgid!=='lg_M2wQ_4189'||typeof league.title!=='string')throw Error('league');
+    const profiles=beautyPoolProfiles_(auth),stats=beautyHubTransferFetch_('league/stats?lgid=lg_M2wQ_4189&kind=stats_list',auth).stats,
+      ranking=beautyHubTransferFetch_('league/stats?lgid=lg_M2wQ_4189&kind=rank_list',auth).stats;
+    const qualified=beautyPoolNormalizeStats_(profiles,stats,ranking);p.deleteProperty('BEAUTY_LEAGUE_STATS_lg_M2wQ_4189_FAILED');
     return {...beautyPoolLastGood_({leagueId:league.lgid,title:league.title,fetchedAt:new Date().toISOString(),method:'3 × total score / total darts; full precision for seeding, 2 decimals for display',profiles:qualified}),fresh:true};
-  }catch(e){p.setProperty('BEAUTY_LEAGUE_STATS_FAILED',String(Date.now()));return last?{...last,fresh:false,message:'Statistics unavailable. Last successful values retained; new draws and sending are blocked.'}:{fresh:false,profiles:[],message:'Statistics unavailable. No averages have been invented.'};}
+  }catch(e){p.setProperty('BEAUTY_LEAGUE_STATS_lg_M2wQ_4189_FAILED',String(Date.now()));return last?{...last,fresh:false,message:'Statistics unavailable. Last successful values retained; new draws and sending are blocked.'}:{fresh:false,profiles:[],message:'Statistics unavailable. No averages have been invented.'};}
 }
 function beautyPoolRoster_(){
   const data=getBeautyHubData_();if(data?.success!==true||!Array.isArray(data.players))beautyPoolError_('Hub roster unavailable.');
@@ -93,7 +93,7 @@ function beautyPoolGroupSet_(event,setting,table){
 function beautyPoolEvent_(auth,allowStarted=false,allowKnockoutOnly=false){
   const t=beautyHubTransferFetch_(('tournament/get?tdid='+beautyHubActiveTestTarget_().id),auth).tournament;
   const knockoutOnly=t?.rr_setting?.round_robin!==1&&t?.lg_setting?.league!==1&&(t?.t_setting?.tournament===1||t?.s2_setting?.tournament===1)&&t?.d_setting?.tournament!==1&&t?.m_setting?.matchs!==1;
-  if(!t||t.tdid!==(beautyHubActiveTestTarget_().id)||t.lgid!=='lg_tM2v_3523'||t.title!==beautyHubActiveTestTarget_().title||!((allowStarted||allowKnockoutOnly&&knockoutOnly)?[10,20,25,30]:[10,20,25]).includes(t.status)||!Number.isFinite(t.updateTime)||!Number.isFinite(t.t_date)||t.league!==1||t.team_games!==0)beautyPoolError_('Only the selected pre-start Registration TEST singles event is supported.');
+  if(!t||t.tdid!==(beautyHubActiveTestTarget_().id)||t.lgid!=='lg_M2wQ_4189'||t.title!==beautyHubActiveTestTarget_().title||!((allowStarted||allowKnockoutOnly&&knockoutOnly)?[10,20,25,30]:[10,20,25]).includes(t.status)||!Number.isFinite(t.updateTime)||!Number.isFinite(t.t_date)||t.league!==1||t.team_games!==0)beautyPoolError_('Only the selected pre-start Registration TEST singles event is supported.');
   if(allowKnockoutOnly&&knockoutOnly){const date=Utilities.formatDate(new Date(t.t_date*1000),'Europe/Berlin','yyyy-MM-dd');if(date!==beautyPoolRoster_().date||date!==beautyHubNakkaDate_().date)beautyPoolError_('Hub date and TEST event differ.');return t;}
   const mode=beautyPoolMode_(t),setting=t[mode+'_setting'];
   if(setting.match_type!=='01'||(setting.turnaround??0)!==0||(setting.swiss??0)!==0)beautyPoolError_('Only single Round Robin or non-Swiss Fixtures groups using 01 are supported.');
@@ -391,7 +391,7 @@ function beautyPoolBoardPlan_(draw,input){
 function beautyPoolBoardReadback_(){
  beautyHubTestGuard_();
  const t=beautyHubTransferFetch_(('tournament/get?tdid='+beautyHubActiveTestTarget_().id),beautyPoolAuth_()).tournament;
- if(!t||t.tdid!==(beautyHubActiveTestTarget_().id)||t.lgid!=='lg_tM2v_3523'||t.title!==beautyHubActiveTestTarget_().title||t.team_games!==0||t.rr_setting?.round_robin!==1)beautyPoolError_('Unsupported board readback target.');
+ if(!t||t.tdid!==(beautyHubActiveTestTarget_().id)||t.lgid!=='lg_M2wQ_4189'||t.title!==beautyHubActiveTestTarget_().title||t.team_games!==0||t.rr_setting?.round_robin!==1)beautyPoolError_('Unsupported board readback target.');
  const value={kind:'READ_ONLY_NATIVE_POOL_BOARD_CONTRACT',capturedUTC:new Date().toISOString(),tdid:t.tdid,status:t.status,updateTime:t.updateTime};
  for(const k of ['rr_table','rr_seq','rr_order','rr_board','rr_disable','rr_memo','badge'])value[k]=beautyPoolCopy_(t[k]??null);
  if(typeof Logger!=='undefined')Logger.log(JSON.stringify(value));

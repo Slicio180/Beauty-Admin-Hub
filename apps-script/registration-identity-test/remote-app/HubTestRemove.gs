@@ -24,7 +24,7 @@ function beautyHubRemoveState_(input, authorization) {
   const match=beautyHubNakkaEvent_({});
   if(match.status!=='MATCHED'||match.event?.id!==beautyHubTransferTarget_()||match.eventDate!==date)throw Error('TARGET');
   const [eventData,list,leagueData]=beautyHubNakkaReads_(authorization,true),raw=eventData.tournament;
-  if(!raw||raw.tdid!==beautyHubTransferTarget_()||raw.lgid!=='lg_tM2v_3523'||raw.title!==beautyHubActiveTestTarget_().title||![10,20].includes(raw.status)||
+  if(!raw||raw.tdid!==beautyHubTransferTarget_()||raw.lgid!=='lg_M2wQ_4189'||raw.title!==beautyHubActiveTestTarget_().title||![10,20].includes(raw.status)||
     !Number.isFinite(raw.t_date)||!Number.isFinite(raw.updateTime)||Utilities.formatDate(new Date(raw.t_date*1000),'Europe/Berlin','yyyy-MM-dd')!==date)throw Error('TARGET');
   const league=leagueData.list;
   if(!Array.isArray(league)||league.length>=1000)throw Error('IDENTITY');
@@ -93,7 +93,7 @@ function beautyHubRemoveRun_(action,input) {
     }
     const verifyNakka=()=>{
       const [eventData,list]=beautyHubNakkaReads_(authorization,false),latest=eventData.tournament;
-      if(!latest||latest.tdid!==state.event.id||latest.lgid!=='lg_tM2v_3523'||latest.title!==state.event.title||latest.status!==state.event.status||
+      if(!latest||latest.tdid!==state.event.id||latest.lgid!=='lg_M2wQ_4189'||latest.title!==state.event.title||latest.status!==state.event.status||
         Utilities.formatDate(new Date(latest.t_date*1000),'Europe/Berlin','yyyy-MM-dd')!==state.event.date)throw Error('TARGET_CHANGED');
       beautyHubTransferEntries_(list);
       const remaining=list.list.slice().sort((a,b)=>a.tpid.localeCompare(b.tpid));

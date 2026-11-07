@@ -54,7 +54,7 @@ function beautyHubTransferDecode_(response) {
 function beautyHubNakkaReads_(authorization,includeLeague) {
   const paths=['tournament/get?tdid='+beautyHubTransferTarget_()+'&entry=0',
     'tournament/entry/list?tdid='+beautyHubTransferTarget_()];
-  if(includeLeague)paths.push('league/entry/list?lgid=lg_tM2v_3523&count=1000');
+  if(includeLeague)paths.push('league/entry/list?lgid=lg_M2wQ_4189&count=1000');
   return beautyHubNakkaMeasure_('nakka-read-batch',()=>{
     if(typeof UrlFetchApp==='undefined'||typeof UrlFetchApp.fetchAll!=='function')return paths.map(path=>beautyHubTransferFetch_(path,authorization));
     const responses=UrlFetchApp.fetchAll(paths.map(path=>({url:'https://push.n01darts.com/api/v1/'+path,method:'get',headers:{Authorization:authorization},muteHttpExceptions:true,followRedirects:false})));
@@ -83,7 +83,7 @@ function beautyHubTransferState_(player,authorization,allowMissing) {
   const match=beautyHubNakkaEvent_({});
   if(match.status!=='MATCHED'||match.event?.id!==beautyHubTransferTarget_())beautyHubTransferError_('TEST_TARGET_ONLY');
   const [eventData,entryData,leagueData]=beautyHubNakkaReads_(authorization,true),raw=eventData.tournament;
-  if(!raw||raw.tdid!==beautyHubTransferTarget_()||raw.lgid!=='lg_tM2v_3523'||raw.title!==beautyHubActiveTestTarget_().title||
+  if(!raw||raw.tdid!==beautyHubTransferTarget_()||raw.lgid!=='lg_M2wQ_4189'||raw.title!==beautyHubActiveTestTarget_().title||
      ![10,20].includes(raw.status)||!Number.isFinite(raw.t_date)||!Number.isFinite(raw.updateTime))beautyHubTransferError_('TEST_TARGET_ONLY');
   if(Utilities.formatDate(new Date(raw.t_date*1000),'Europe/Berlin','yyyy-MM-dd')!==match.eventDate)beautyHubTransferError_('STALE_TRANSFER');
   const event={id:raw.tdid,title:raw.title,date:match.eventDate,status:raw.status,updateTime:raw.updateTime};
@@ -145,7 +145,7 @@ function beautyHubNakkaTransferRun_(action,input) {
     const state=beautyHubTransferState_(input.player,authorization);
     journal='BEAUTY_NAKKA_TRANSFER_'+beautyHubTransferTarget_()+'_'+state.identity.lpid;
     if(action==='save'&&reviewed.intent==='REVIEW_EXISTING'&&reviewed.version!==beautyHubTransferHash_({state,prior:props.getProperty(journal)}))return fail('STALE_TRANSFER');
-    const creation=props.getProperty('BEAUTY_NAKKA_LEAGUE_CREATE_lg_tM2v_3523_'+beautyHubTransferHash_(input.player.normalize('NFC').trim().replace(/\s+/g,' ').toLocaleLowerCase('sv-SE')));
+    const creation=props.getProperty('BEAUTY_NAKKA_LEAGUE_CREATE_lg_M2wQ_4189_'+beautyHubTransferHash_(input.player.normalize('NFC').trim().replace(/\s+/g,' ').toLocaleLowerCase('sv-SE')));
     if(creation){let old;try{old=JSON.parse(creation);}catch(e){}if(old?.state!=='VERIFIED'||old.name!==input.player||old.lpid!==state.identity.lpid)return fail('LEAGUE_CREATION_REVIEW_REQUIRED');}
     let prior=props.getProperty(journal);
     if(prior&&!state.existing){
@@ -239,7 +239,7 @@ function beautyHubNakkaTransferRun_(action,input) {
     // Check the event again immediately before posting. Nakka admin pages must
     // be closed during this operation: entry/add has no documented CAS token.
     const latest=beautyHubTransferFetch_('tournament/get?tdid='+beautyHubTransferTarget_()+'&entry=0',authorization).tournament;
-    if(!latest||latest.tdid!==state.event.id||latest.lgid!=='lg_tM2v_3523'||latest.title!==state.event.title||
+    if(!latest||latest.tdid!==state.event.id||latest.lgid!=='lg_M2wQ_4189'||latest.title!==state.event.title||
        latest.status!==state.event.status||latest.updateTime!==state.event.updateTime||Utilities.formatDate(new Date(latest.t_date*1000),'Europe/Berlin','yyyy-MM-dd')!==state.event.date)return fail('STALE_TRANSFER');
     beautyHubNakkaAuthorize_(input.player);
     if(beautyHubNakkaDate_().date!==state.event.date||JSON.stringify(beautyHubNakkaHubRows_())!==JSON.stringify(state.hub))return fail('STALE_TRANSFER');

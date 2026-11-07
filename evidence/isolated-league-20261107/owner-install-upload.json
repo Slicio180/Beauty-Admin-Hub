@@ -1,0 +1,21 @@
+{
+  "local": {
+    "result": "LOCAL_ISOLATED_LEAGUE_INSTALL_PASS",
+    "finishedUTC": "2026-11-07T09:28:21.943Z",
+    "before": 843,
+    "after": 855,
+    "failures": 0,
+    "inventory": "PASS"
+  },
+  "google": {
+    "result": "GOOGLE_TEST_READBACK_VERIFIED",
+    "finishedUTC": "2026-11-07T09:31:21.979Z",
+    "scriptId": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+    "filesVerified": 20,
+    "changedFiles": 11,
+    "production": "UNCHANGED",
+    "deployment": "UNCHANGED"
+  },
+  "source": "Owner pasted terminal receipts in this conversation.",
+  "nativeAcceptance": "PENDING"
+}

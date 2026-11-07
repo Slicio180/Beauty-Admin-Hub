@@ -350,7 +350,7 @@ body{border-top:1px solid #ffd700}
  function project(tournament,standings,schedule,target='t_QHaG_7792'){
   if(!/^t_[A-Za-z0-9_]{1,80}$/.test(target))fail();
   const t=tournament?.tournament;
-  if(tournament?.result!==0||!t||t.tdid!==target||t.lgid!=='lg_tM2v_3523'||t.team_games===1||!Array.isArray(t.entry_list)||t.entry_list.length>1000)fail();
+  if(tournament?.result!==0||!t||t.tdid!==target||t.lgid!=='lg_M2wQ_4189'||t.team_games===1||!Array.isArray(t.entry_list)||t.entry_list.length>1000)fail();
   if(standings?.result!==0||standings.tdid!==target||!Array.isArray(standings.groups)||standings.groups.length>1000)fail();
   const names=new Map();
   for(const p of t.entry_list){if(typeof p.tpid!=='string'||names.has(p.tpid)||typeof p.name!=='string')fail();names.set(p.tpid,p.name);}

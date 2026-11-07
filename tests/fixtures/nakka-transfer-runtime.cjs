@@ -2,7 +2,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('nod
 const base='apps-script/registration-identity-test/remote-app/';
 function harness(o={}){
  const props=new Map([['N01_API_USER','SECRET-USER'],['N01_API_PASSWORD','SECRET-PASS']]),cache=new Map(),calls=[];let releases=0,seq=0,authCalls=0;
- const state={uid:'owner',token:'session',date:'2026-10-27',hub:[{name:'Anna',status:'IN'}],league:[{name:'Anna',lpid:'a123'}],entries:[],event:{tdid:'t_QHaG_7792',lgid:'lg_tM2v_3523',title:'Beauty Registration TEST event DO NOT USE LIVE',status:10,t_date:Date.parse('2026-10-27T18:00Z')/1000,updateTime:1000},...o.state};
+ const state={uid:'owner',token:'session',date:'2026-10-27',hub:[{name:'Anna',status:'IN'}],league:[{name:'Anna',lpid:'a123'}],entries:[],event:{tdid:'t_QHaG_7792',lgid:'lg_M2wQ_4189',title:'Beauty Registration TEST event DO NOT USE LIVE',status:10,t_date:Date.parse('2026-10-27T18:00Z')/1000,updateTime:1000},...o.state};
  const target={id:'t_QHaG_7792',title:'Beauty Registration TEST event DO NOT USE LIVE'};
  const clone=v=>JSON.parse(JSON.stringify(v));
  const context={beautyHubActiveTestTarget_:()=>target,Date,console,Map,Set,JSON,Number,Object,Array,encodeURIComponent,BEAUTY_IDENTITY_WRITES_ENABLED_:o.writes!==false,
@@ -21,8 +21,8 @@ function harness(o={}){
    else if(url.includes('league/entry/list?'))data={result:0,list:clone(state.league)};
    else if(url.includes('tournament/entry/list?'))data={result:0,list:clone(state.entries)};
    else if(url.endsWith('league/entry/update')&&options.method==='post'&&o.newLeague){
-    assert.ok([...props.values()].some(v=>{try{return JSON.parse(v).state==='ATTEMPTED'&&JSON.parse(v).league==='lg_tM2v_3523';}catch{return false;}}),'league marker before POST');
-    const p=JSON.parse(options.payload);assert.deepEqual(Object.keys(p).sort(),['add','lgid']);assert.equal(p.lgid,'lg_tM2v_3523');assert.equal(p.add.length,1);assert.deepEqual(Object.keys(p.add[0]),['name']);
+    assert.ok([...props.values()].some(v=>{try{return JSON.parse(v).state==='ATTEMPTED'&&JSON.parse(v).league==='lg_M2wQ_4189';}catch{return false;}}),'league marker before POST');
+    const p=JSON.parse(options.payload);assert.deepEqual(Object.keys(p).sort(),['add','lgid']);assert.equal(p.lgid,'lg_M2wQ_4189');assert.equal(p.add.length,1);assert.deepEqual(Object.keys(p.add[0]),['name']);
     const added={name:p.add[0].name,lpid:'n123'};if(!o.creationMissing)state.league.push(added);
     if(o.creationTimeout)throw Error('SECRET timeout after league save');
     data={result:0,added:o.creationBadReceipt?[]:[clone(added)]};if(o.creationAlterOld)state.league[0].name='Altered';

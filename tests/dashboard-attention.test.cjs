@@ -51,7 +51,7 @@ test('Attention verified entry clears its alert without claiming an unexposed le
  const r=h.refresh();assert.equal(r.success,true);assert.equal(r.attention.items.length,0);assert.equal(h.props.get(key),record);assert.equal(h.posts().length,0);assert.doesNotMatch(JSON.stringify(r),/identityVerified":true/);
 });
 test('Attention uncertain creation cannot clear through same-name event presence',()=>{
- const h=fixture({state:{entries:[{name:'Anna',tpid:'b123',lpid:'a123'}]}}),key='BEAUTY_NAKKA_LEAGUE_CREATE_lg_tM2v_3523_'+h.context.beautyHubTransferHash_('anna');h.props.set(key,JSON.stringify({state:'ATTEMPTED',name:'Anna'}));
+ const h=fixture({state:{entries:[{name:'Anna',tpid:'b123',lpid:'a123'}]}}),key='BEAUTY_NAKKA_LEAGUE_CREATE_lg_M2wQ_4189_'+h.context.beautyHubTransferHash_('anna');h.props.set(key,JSON.stringify({state:'ATTEMPTED',name:'Anna'}));
  const before=h.props.get(key),r=h.refresh();assert.equal(r.attention.items[0].code,'LEAGUE_CREATION_REVIEW_REQUIRED');assert.equal(h.props.get(key),before);assert.equal(h.posts().length,0);
 });
 test('Attention uncertain transfer reconciliation respects the saved fingerprint',()=>{

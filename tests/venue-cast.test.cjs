@@ -1,7 +1,7 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 const live=require('../public/js/nakka-pool-live.js'),model=require('../public/js/nakka-stage-model.js');
 const event='t_QHaG_7792',ids=['aaaa','bbbb','cccc'];
-function base(){return model.project({result:0,tournament:{tdid:event,lgid:'lg_tM2v_3523',entry_list:ids.map((tpid,i)=>({tpid,name:'Player '+i})),rr_table:[ids],rr_result:[{aaaa:{bbbb:{r:2,a:30}},bbbb:{aaaa:{r:1,a:60}}}]}},{result:0,tdid:event,groups:[{kind:'rr',index:0,players:ids.map((tpid,i)=>({tpid,p:i<2?1:0,w:i===0?1:0,l:i===1?1:0}))}]});}
+function base(){return model.project({result:0,tournament:{tdid:event,lgid:'lg_M2wQ_4189',entry_list:ids.map((tpid,i)=>({tpid,name:'Player '+i})),rr_table:[ids],rr_result:[{aaaa:{bbbb:{r:2,a:30}},bbbb:{aaaa:{r:1,a:60}}}]}},{result:0,tdid:event,groups:[{kind:'rr',index:0,players:ids.map((tpid,i)=>({tpid,p:i<2?1:0,w:i===0?1:0,l:i===1?1:0}))}]});}
 function matches(){return [{mid:'done',tdid:event,tmid:event+'_rr_0_aaaa_bbbb',endMatch:1,statsData:[{tpid:'aaaa',allScore:100,allDarts:10},{tpid:'bbbb',allScore:200,allDarts:10}]},{mid:'now',tdid:event,tmid:event+'_rr_0_aaaa_cccc',endMatch:0,statsData:[]}];}
 function current(){return {result:0,tdid:event,mid:'now',tmid:event+'_rr_0_aaaa_cccc',end_match:0,players:[{tpid:'aaaa'},{tpid:'cccc'}],stats:[{score:150,darts:5},{score:50,darts:5}],legs:[1,0],show_sets:0};}
 function snapshot(){return {rows:matches(),live:new Map([['now',current()]])};}
@@ -49,12 +49,12 @@ test('venue generated layout retains six card grid matched header font and stale
 });
 test('venue live feed suppresses overlapping refreshes and drops late data after stopping',async()=>{
  const feed=require('../public/js/nakka-stage-feed.js'),calls=[],painted=[],errors=[];let resolve,hold=false;
- const input={result:0,tournament:{tdid:event,lgid:'lg_tM2v_3523',updateTime:1,entry_list:ids.map(tpid=>({tpid,name:tpid})),rr_table:[ids]}},standing={result:0,tdid:event,groups:[{kind:'rr',index:0,players:ids.map(tpid=>({tpid}))}]};
+ const input={result:0,tournament:{tdid:event,lgid:'lg_M2wQ_4189',updateTime:1,entry_list:ids.map(tpid=>({tpid,name:tpid})),rr_table:[ids]}},standing={result:0,tdid:event,groups:[{kind:'rr',index:0,players:ids.map(tpid=>({tpid}))}]};
  const fetch=async(url,opt)=>{calls.push(url);assert.equal(opt.method,'GET');assert.equal(opt.credentials,'omit');assert.equal(opt.redirect,'error');if(hold&&url.includes('match/list'))await new Promise(r=>resolve=r);return {ok:true,json:async()=>url.includes('standings')?standing:url.includes('match/list')?{result:0,list:matches()}:url.includes('match/live')?current():input};};
  const f=feed.create({fetch,model,includeLive:true,liveModel:live,onData:d=>painted.push(d),onError:e=>errors.push(e)});await f.refresh();assert.equal(painted.length,1);f.setPlan(plan());await f.refreshLive();assert.equal(painted.at(-1).pools[0].board,7);f.setPlan(null);await f.refreshLive();assert.equal(painted.at(-1).pools[0].board,7);assert.equal(painted.at(-1).pools[0].startAverage,48.5);f.setPlan({...plan(),eventId:'other'});await f.refreshLive();assert.equal(painted.at(-1).pools[0].board,7);hold=true;const promise=f.refreshLive();await new Promise(setImmediate);const count=calls.length;await f.refreshLive();assert.equal(calls.length,count);f.stop();resolve();await promise;assert.equal(painted.length,4);assert.equal(errors.length,0);
 });
 test('venue failed full snapshot cannot be revived by polling an old group membership',async()=>{
- const feed=require('../public/js/nakka-stage-feed.js');let bad=false,painted=0,errors=0;const input={result:0,tournament:{tdid:event,lgid:'lg_tM2v_3523',updateTime:1,entry_list:[]}};
+ const feed=require('../public/js/nakka-stage-feed.js');let bad=false,painted=0,errors=0;const input={result:0,tournament:{tdid:event,lgid:'lg_M2wQ_4189',updateTime:1,entry_list:[]}};
  const f=feed.create({model,includeLive:true,liveModel:live,onData:()=>painted++,onError:()=>errors++,fetch:async url=>({ok:true,json:async()=>url.includes('match/list')?{result:0,list:[]}:url.includes('standings')?{result:0,tdid:event,groups:[]}:bad?{result:-1}:input})});await f.refresh();assert.equal(painted,1);bad=true;await f.refresh();await f.refreshLive();assert.equal(painted,1);assert.equal(errors,1);
 });
 test('venue expired staff session cannot publish cast labels or change the frozen starting value',()=>{

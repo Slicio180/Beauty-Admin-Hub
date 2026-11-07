@@ -48,7 +48,7 @@ test('Live real ranking values and ties survive paging; statistics respect the s
 test('Live cached statistics label stale or failed snapshots and reject old or ambiguous data',()=>{
  const s=server();const now=new Date().toISOString();
  s.c.beautyPoolKey_=v=>v.toLowerCase();s.c.PropertiesService={getScriptProperties:()=>({getProperty:()=>null})};
- let snapshot={leagueId:'lg_tM2v_3523',fetchedAt:now,profiles:[{name:'Adam',average:40.83,points:25,secret:'PRIVATE'}]};
+ let snapshot={leagueId:'lg_M2wQ_4189',fetchedAt:now,profiles:[{name:'Adam',average:40.83,points:25,secret:'PRIVATE'}]};
  s.c.beautyPoolLastGood_=()=>snapshot;
  let out=JSON.parse(JSON.stringify(s.c.beautyLiveTestData()));assert.equal(out.statsAvailable,true);assert.equal(out.rankingAvailable,false);assert.equal(out.players[0].average,40.83);assert.equal(out.players[0].points,25);assert.doesNotMatch(JSON.stringify(out),/PRIVATE/);
  snapshot.profiles.push({name:'Adam',average:60,points:50});out=s.c.beautyLiveTestData();assert.equal(out.players[0].average,null);

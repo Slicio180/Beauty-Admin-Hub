@@ -14,7 +14,7 @@ test('A new Beauty identity reuses a unique existing league member without anoth
  const h=registration({newLeague:true,state:{league:[{name:'New Person',lpid:'a123'}]}}),r=h.register(fresh);assert.equal(r.nakka.entryConfirmed,true);assert.equal(h.posts().length,1);assert.equal(h.state.league.length,1);assert.equal(h.state.entries[0].lpid,'a123');
 });
 test('New league creation fails closed for wrong target started event duplicate name oversized list and unlinked event entry',()=>{
- const cases=[{otherTarget:true},{state:{event:{tdid:'t_QHaG_7792',lgid:'lg_tM2v_3523',title:'Beauty Registration TEST event DO NOT USE LIVE',status:30,t_date:1793124000,updateTime:1000}}},{state:{league:[{name:'New Person',lpid:'a123'},{name:'NEW PERSON',lpid:'z123'}]}},{state:{league:Array.from({length:1000},(_,i)=>({name:'P'+i,lpid:i.toString(36).padStart(4,'0')}))}},{state:{entries:[{name:'New Person',tpid:'b123'}]}}];
+ const cases=[{otherTarget:true},{state:{event:{tdid:'t_QHaG_7792',lgid:'lg_M2wQ_4189',title:'Beauty Registration TEST event DO NOT USE LIVE',status:30,t_date:1793124000,updateTime:1000}}},{state:{league:[{name:'New Person',lpid:'a123'},{name:'NEW PERSON',lpid:'z123'}]}},{state:{league:Array.from({length:1000},(_,i)=>({name:'P'+i,lpid:i.toString(36).padStart(4,'0')}))}},{state:{entries:[{name:'New Person',tpid:'b123'}]}}];
  for(const o of cases){const h=registration({...o,newLeague:true}),r=h.register(fresh);assert.equal(r.success,true);assert.equal(r.nakka.entryConfirmed,false);assert.equal(h.posts().length,0);assert.equal(h.rows.length,1);assert.equal(h.held,false);}
 });
 test('Uncertain league creation retains registration blocks event add and is never retried',()=>{
