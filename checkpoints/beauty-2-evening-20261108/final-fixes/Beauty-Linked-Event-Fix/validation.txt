@@ -1,0 +1,9 @@
+PASS source variant: login cleanup=false, matching panels=false
+PASS source variant: login cleanup=false, matching panels=true
+PASS source variant: login cleanup=true, matching panels=false
+PASS source variant: login cleanup=true, matching panels=true
+149 identity/registration/planner checks passed; all server files parse; only four intended files change.
+PASS installer retains URL and permissions, publishes Hub only
+PASS rerun makes no writes
+PASS concurrent edit blocks upload
+3 checks passed
