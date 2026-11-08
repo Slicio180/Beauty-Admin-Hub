@@ -17,3 +17,7 @@ Archive SHA-256: d04096ab40cfb1c93aad15cbdb4650bffe7c983c4ccf12e9d9a9070d3d2cb34
 Archive size: 6,767,580 bytes.
 
 This is a complete copy of the saved checkpoint, NOT a copy of unsupplied Mac files, live Sheet data, Nakka event data, credentials or Script Properties. Live deployment/event data were not changed during this save.
+
+## Final fixes saved after the evening archive
+
+Both final fixes are now included in [final-fixes](final-fixes/STATUS.md): complete source patches, installers, tests and native confirmation notes. All 14 added files were fetched at immutable commit `0ef6e09c0aa71e141d36e0d9da9ed27c0cdaa62d` and matched byte-for-byte. Restore the original archive together with this supplemental folder for the latest saved work. These supplements do not alter the archive checksum above.
