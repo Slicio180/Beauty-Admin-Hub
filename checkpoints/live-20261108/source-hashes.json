@@ -1,0 +1,50 @@
+[
+  {
+    "file": "source/LiveStatus.gs",
+    "sha256": "0b4bd8f72a5e9623dddd3de1c2c364b2528672bf2648941fd829b1614477c598"
+  },
+  {
+    "file": "source/LiveRemove.gs",
+    "sha256": "601cb3bd09d323d1ffe0ca1761f5b581403b04c15e5ba79ad191c97ef7bcc50f"
+  },
+  {
+    "file": "source/LiveHubView.html",
+    "sha256": "bbb0e92cb26a5f28bc5f34d78d917302b90d2765c05d3f2eecd3173b78b5adfb"
+  },
+  {
+    "file": "source/LiveRegister.gs",
+    "sha256": "a0500fa06260789821d354438045acd1a9ff0061a480caaed037f3b415ec85e8"
+  },
+  {
+    "file": "source/LiveLogin.html",
+    "sha256": "9cd91d49304e4ba88eb8b0163d9a23c0ebe8c55b70df4c26fe198f33c11895ad"
+  },
+  {
+    "file": "source/LiveLoginAuth.gs",
+    "sha256": "40a92ae87f07190890d007ed5396ef52eaba3d48b5d4f826c439af7b49768568"
+  },
+  {
+    "file": "source/LiveHub.gs",
+    "sha256": "7f67ea845325b8775ece121824d34ba879c8f53e4f7853ace38a940c3798461a"
+  },
+  {
+    "file": "source/LiveNakkaCheck.gs",
+    "sha256": "7ef74e9add2831d5d81fe81b90da3b05d0bd8e694bb0b38ddc54af7ceab4d7c5"
+  },
+  {
+    "file": "source/LivePreflight.gs",
+    "sha256": "4a1e76453eecc8d913d79fa846814c1b06dcb6343e0fc78b0a82d6a67d940239"
+  },
+  {
+    "file": "source/LiveLoginEntry.gs",
+    "sha256": "50dae6b3a5c169e231060006890c60477148fdf7aa26fe86b2010836a976f8c0"
+  },
+  {
+    "file": "source/appsscript.json",
+    "sha256": "55e9c3be3d01ef68aaf97b1e7c36f753b0256e723edf6a892c395e6cd222c8bb"
+  },
+  {
+    "file": "source/current-prepared.json",
+    "sha256": "022a6a841d35c628e182f647652789605542377b74a669249b4ea2bf846aaff8"
+  }
+]

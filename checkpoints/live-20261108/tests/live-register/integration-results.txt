@@ -1,0 +1,9 @@
+PASS installer preserves native status formatting and diagnostic file
+PASS installer refuses changed Hub, changed login and unknown files
+PASS installer refuses status without native row-limit fix
+PASS manifest retains owner-only access and requests Forms for backup choices
+PASS real transport uses fixed endpoints, RAW append and rejects redirects/errors
+PASS real event gate validates fixed identity, date, singles and unstarted state
+PASS RPC authenticates, rejects stale context, and blocks status during pending registration
+PASS Register button enabled; unrelated operation buttons remain gated
+{"result":"PASS","cases":8,"nativeServices":false}

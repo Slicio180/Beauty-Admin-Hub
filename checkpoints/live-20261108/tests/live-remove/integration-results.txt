@@ -1,0 +1,15 @@
+✔ installer preserves registration, native status, manifest and extra diagnostic (86.445837ms)
+✔ installer rejects changed registration/login/Hub and unknown files (26.916023ms)
+✔ routes authenticate, require fixed context, and block status/registration during removal (2.539115ms)
+✔ trash button enabled while event setup and casting remain gated (1.988778ms)
+✔ removal dialog requires checkbox then sends one confirmed save and blocks close while saving (6.699065ms)
+✔ late preview after sign-out cannot restore a confirmation or a player name (1.59058ms)
+✔ uncertain removal discards confirm button and never resends a save (2.815528ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 396.231087

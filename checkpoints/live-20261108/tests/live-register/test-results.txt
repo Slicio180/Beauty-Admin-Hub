@@ -1,0 +1,28 @@
+PASS existing player: response, status, display and linked Nakka entry
+PASS new player: Swedish capitalization, master append, backup form and league link
+PASS preserves OUT and OLD NAME
+PASS preserves STANDBY and OLD NAME
+PASS no writes: {"wrongDate":true}
+PASS no writes: {"formula":true}
+PASS no writes: {"started":true}
+PASS no writes: {"duplicateMaster":true}
+PASS no writes: {"duplicateLeague":true}
+PASS no writes: {"pending":true}
+PASS no writes: {"busy":true}
+PASS no writes: {"capacity":true}
+PASS authentication before service calls
+PASS rejects invalid or injected fields {"consent":""}
+PASS rejects invalid or injected fields {"message":"=IMPORTDATA(\"url\")"}
+PASS rejects invalid or injected fields {"source":"MOBILE"}
+PASS rejects invalid or injected fields {"eventDate":"2026-11-16"}
+PASS new-name duplicate offers existing identity without writing
+PASS already registered cannot append twice
+PASS different person requires confirmed disambiguated name
+PASS uncertain write blocks retry {"appendFailure":true}
+PASS uncertain write blocks retry {"nakkaTimeout":true}
+PASS uncertain write blocks retry {"concurrentStatus":true}
+PASS uncertain write blocks retry {"invisible":true}
+PASS hidden league link reports entry only without claiming link verification
+PASS conflicting league link leaves pending receipt
+PASS no master clearing or Tonight formula writes
+{"result":"PASS","cases":27,"services":"mocked","nativeRegistrationVerified":false,"allSourceSyntax":true}

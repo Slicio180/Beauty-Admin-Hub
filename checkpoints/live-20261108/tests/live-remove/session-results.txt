@@ -1,0 +1,17 @@
+✔ installer preserves registration, native status, manifest and extra diagnostic (75.014017ms)
+✔ installer rejects changed registration/login/Hub and unknown files (31.525505ms)
+✔ routes authenticate, require fixed context, and block status/registration during removal (2.547941ms)
+✔ trash button enabled while event setup and casting remain gated (1.163479ms)
+✔ LIVE login returns six-hour absolute and idle limits (6.338175ms)
+✔ cache eviction at ten minutes does not end session (4.589214ms)
+✔ session remains valid past old 15-minute cutoff (1.946937ms)
+✔ absolute six-hour expiry enforced even with recent activity (3.242619ms)
+✔ explicit logout still revokes durable session (3.011356ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 378.521987
