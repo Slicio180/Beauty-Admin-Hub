@@ -1,0 +1,7 @@
+PASS real Live feed with compact panels; all inline scripts parse
+PASS real Live feed with matching panels; all inline scripts parse
+14 feed identity checks passed; only LiveCastView changes.
+PASS installer retains URL and permissions, publishes Hub only
+PASS rerun makes no writes
+PASS concurrent edit blocks upload
+3 checks passed
