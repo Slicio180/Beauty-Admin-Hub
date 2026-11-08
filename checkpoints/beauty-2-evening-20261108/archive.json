@@ -1,0 +1,21 @@
+{
+  "archive": "Beauty-2.0-Checkpoint-20261108-Evening.tar.xz",
+  "bytes": 6767580,
+  "sha256": "d04096ab40cfb1c93aad15cbdb4650bffe7c983c4ccf12e9d9a9070d3d2cb349",
+  "parts": [
+    "archive.part000.b64",
+    "archive.part001.b64",
+    "archive.part002.b64",
+    "archive.part003.b64",
+    "archive.part004.b64",
+    "archive.part005.b64",
+    "archive.part006.b64",
+    "archive.part007.b64",
+    "archive.part008.b64",
+    "archive.part009.b64",
+    "archive.part010.b64",
+    "archive.part011.b64",
+    "archive.part012.b64"
+  ],
+  "encoding": "Each part is independently base64 encoded; decode separately, then concatenate in order."
+}
