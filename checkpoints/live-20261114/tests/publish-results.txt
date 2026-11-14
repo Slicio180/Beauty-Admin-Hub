@@ -1,0 +1,1 @@
+PASS hub: pinned existing deployment, immutable source verification, idempotence, no retry for lost version response, deployment lost-reply readback, concurrent-change stops and access verification.

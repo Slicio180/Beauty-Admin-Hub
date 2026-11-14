@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+  <base target="_top">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+
+    /* =====================================================
+       REAL AIK FONT FILES - CLOUDFLARE TEST
+       ===================================================== */
+
+    @font-face {
+  font-family: 'AIK Display';
+  src: url('https://aik-dart-fonts.alessiotampella.workers.dev/AIKDisplay-Bold.woff2%20copy')
+       format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AIK Display Light';
+  src: url('https://aik-dart-fonts.alessiotampella.workers.dev/AIKDisplay-Light.woff2%20copy')
+       format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AIK Condensed';
+  src: url('https://aik-dart-fonts.alessiotampella.workers.dev/AIKDisplay-CondensedBold.woff2%20copy')
+       format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+    /* =====================================================
+       PAGE
+       ===================================================== */
+
+    body {
+      margin: 0;
+      padding: 26px;
+
+      background: #000000;
+      color: #FFFFFF;
+
+      font-family: Arial, sans-serif;
+    }
+
+    .box {
+      margin-bottom: 35px;
+      padding: 26px;
+
+      border: 2px solid #FFD700;
+      background: #000000;
+    }
+
+    .title {
+      margin-bottom: 16px;
+
+      color: #FFD700;
+
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      font-weight: normal;
+    }
+
+
+    /* =====================================================
+       FONT 1
+       ===================================================== */
+
+    .bold {
+      font-family: 'TEST-BOLD', Arial, sans-serif;
+      font-size: 42px;
+      font-weight: normal;
+      line-height: 1.15;
+    }
+
+
+    /* =====================================================
+       FONT 2
+       ===================================================== */
+
+    .condensed {
+      font-family: 'TEST-CONDENSED', Arial, sans-serif;
+      font-size: 42px;
+      font-weight: normal;
+      line-height: 1.15;
+    }
+
+
+    /* =====================================================
+       FONT 3
+       ===================================================== */
+
+    .light {
+      font-family: 'TEST-LIGHT', Arial, sans-serif;
+      font-size: 42px;
+      font-weight: normal;
+      line-height: 1.15;
+    }
+
+
+    /* =====================================================
+       DIAGNOSTIC
+       ===================================================== */
+
+    #diagnostic {
+      color: #FFFFFF;
+
+      font-family: Arial, sans-serif;
+      font-size: 20px;
+      line-height: 1.8;
+    }
+
+    .yes {
+      color: #00FF66;
+      font-weight: bold;
+    }
+
+    .no {
+      color: #FF4444;
+      font-weight: bold;
+    }
+
+    .diagnostic-note {
+      margin-top: 20px;
+
+      color: #FFD700;
+
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- =====================================================
+       AIK DISPLAY BOLD
+       ===================================================== -->
+
+  <div class="box">
+
+    <div class="title">
+      1 — AIK DISPLAY BOLD
+    </div>
+
+    <div class="bold">
+      ANMÄLAN — Alessio Tampella — JA, JAG GODKÄNNER
+    </div>
+
+  </div>
+
+
+
+  <!-- =====================================================
+       AIK DISPLAY CONDENSED BOLD
+       ===================================================== -->
+
+  <div class="box">
+
+    <div class="title">
+      2 — AIK DISPLAY CONDENSED BOLD
+    </div>
+
+    <div class="condensed">
+      ANMÄLAN — Alessio Tampella — JA, JAG GODKÄNNER
+    </div>
+
+  </div>
+
+
+
+  <!-- =====================================================
+       AIK DISPLAY LIGHT
+       ===================================================== -->
+
+  <div class="box">
+
+    <div class="title">
+      3 — AIK DISPLAY LIGHT
+    </div>
+
+    <div class="light">
+      ANMÄLAN — Alessio Tampella — JA, JAG GODKÄNNER
+    </div>
+
+  </div>
+
+
+
+  <!-- =====================================================
+       FONT LOAD DIAGNOSTIC
+       ===================================================== -->
+
+  <div class="box">
+
+    <div class="title">
+      FONT LOAD DIAGNOSTIC
+    </div>
+
+    <div id="diagnostic">
+      CHECKING...
+    </div>
+
+    <div class="diagnostic-note">
+      This test checks whether the browser actually loaded each
+      AIK web font instead of silently using Arial.
+    </div>
+
+  </div>
+
+
+
+  <!-- =====================================================
+       JAVASCRIPT DIAGNOSTIC
+       ===================================================== -->
+
+  <script>
+
+    async function runFontTest() {
+
+      const diagnostic =
+        document.getElementById('diagnostic');
+
+
+      try {
+
+        /*
+         * Explicitly request all three fonts.
+         * This forces the browser to attempt to download them.
+         */
+
+        await Promise.allSettled([
+
+          document.fonts.load(
+            '42px "TEST-BOLD"',
+            'ANMÄLAN Alessio Tampella'
+          ),
+
+          document.fonts.load(
+            '42px "TEST-CONDENSED"',
+            'ANMÄLAN Alessio Tampella'
+          ),
+
+          document.fonts.load(
+            '42px "TEST-LIGHT"',
+            'ANMÄLAN Alessio Tampella'
+          )
+
+        ]);
+
+
+        await document.fonts.ready;
+
+
+        /*
+         * Check whether each family is available.
+         */
+
+        const boldLoaded =
+          document.fonts.check(
+            '42px "TEST-BOLD"',
+            'ANMÄLAN'
+          );
+
+
+        const condensedLoaded =
+          document.fonts.check(
+            '42px "TEST-CONDENSED"',
+            'ANMÄLAN'
+          );
+
+
+        const lightLoaded =
+          document.fonts.check(
+            '42px "TEST-LIGHT"',
+            'ANMÄLAN'
+          );
+
+
+        /*
+         * Display results.
+         */
+
+        diagnostic.innerHTML =
+
+          'TEST-BOLD: ' +
+
+          (
+            boldLoaded
+              ? '<span class="yes">LOADED ✓</span>'
+              : '<span class="no">NOT LOADED ✗</span>'
+          )
+
+          + '<br>' +
+
+
+          'TEST-CONDENSED: ' +
+
+          (
+            condensedLoaded
+              ? '<span class="yes">LOADED ✓</span>'
+              : '<span class="no">NOT LOADED ✗</span>'
+          )
+
+          + '<br>' +
+
+
+          'TEST-LIGHT: ' +
+
+          (
+            lightLoaded
+              ? '<span class="yes">LOADED ✓</span>'
+              : '<span class="no">NOT LOADED ✗</span>'
+          );
+
+
+      } catch (error) {
+
+        diagnostic.innerHTML =
+          '<span class="no">FONT TEST ERROR ✗</span><br>' +
+          String(error);
+
+      }
+
+    }
+
+
+    window.addEventListener(
+      'load',
+      runFontTest
+    );
+
+  </script>
+
+
+</body>
+</html>

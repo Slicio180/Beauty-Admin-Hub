@@ -1,0 +1,20 @@
+PASS real restored fixture archives all 253 responses, preserves master and restores OUT/consent/messages
+PASS same date different event is isolated and recoverable
+PASS same event has no archive or write
+PASS lost successful workbook reply is reconciled with exactly one apply
+PASS failed apply keeps journal and blocks app until authenticated recheck
+PASS partial context binding timeout recovers without rewriting sheet
+PASS external changes after failure stop recovery without overwrite
+PASS open linked Google Form blocks before history or active writes
+PASS corrupt archive prevents active overwrite
+PASS recovery rejects arbitrary requested target
+PASS new aliases survive returning without carrying new event status
+TOTAL 11 scenario tests passed; mocked Apps Script/Sheets, no network or production writes.
+PASS captured native archive is retained byte-for-byte while two new snapshots append
+PASS missing newly written archive rows stop before player mutation
+TOTAL 13 scenarios passed with stale SpreadsheetApp archive reads.
+PASS pending switch keeps real session renewal and authenticated recovery dispatch available
+PASS expired and revoked sessions cannot use recovery even when a switch is pending
+PASS read-only target validator rejects a target outside the journal
+PASS Nakka validation failure retains journal and prevents sheet mutation
+TOTAL 17 scenarios with actual auth/session/dispatcher and switch code; transport mocked only.

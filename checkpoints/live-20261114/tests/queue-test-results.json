@@ -1,0 +1,31 @@
+{
+  "result": "PASS",
+  "tests": [
+    "normal LIVE entry uses durable queue and verifies all effects",
+    "failed first player does not block a second player",
+    "lost response reply is reconciled without repeated write",
+    "lost status reply is reconciled without repeated write",
+    "lost league reply is reconciled without repeated write",
+    "lost event reply is reconciled without repeated write",
+    "uncertain response is never blindly retried",
+    "uncertain status is never blindly retried",
+    "uncertain league is never blindly retried",
+    "uncertain event is never blindly retried",
+    "display failure recovers existing response/status with no duplicate add",
+    "uncertain Nakka add later visible resolves without replay",
+    "duplicate request returns its receipt without another response",
+    "new requests accepted while worker is executing outside ScriptLock",
+    "active worker blocks status mutation guard; unrelated reviewer does not",
+    "foreign event and unauthenticated recovery cannot mutate",
+    "legacy receipt isolated and preserved; same player blocked",
+    "OUT never becomes a Nakka add",
+    "duplicate Nakka identity quarantines only that job",
+    "stale worker expires to review and next job can run",
+    "new player master/Form projection recovers without duplicate and retains another new name",
+    "review does not overwrite a later intentional OUT status or add to Nakka",
+    "completed receipt storage failure preserves recovery payload",
+    "unknown worker error keeps a lease if review receipt cannot be saved",
+    "oversized Unicode request is rejected before queue and external writes"
+  ],
+  "at": "2026-11-14T00:16:05.148Z"
+}

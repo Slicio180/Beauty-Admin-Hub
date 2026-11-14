@@ -1,0 +1,12 @@
+PASS processing mismatch is progress, not attention
+PASS review plus missing Nakka entry counts once
+PASS real duplicate remains visible while job is processing
+PASS unrelated mismatch and intentional OUT semantics retained
+PASS monitor uses lightweight stable snapshots, no heavy dashboard reads
+PASS concurrent roster change is CHECK_IN_PROGRESS, not failure
+PASS real read failure remains failure
+PASS mobile confirmation uses verified identity without extra network or statistics
+PASS mobile rejects stale identity without changing registration success
+PASS worker RPC starts independently of unresolved dashboard read, with captured session/context
+PASS dashboard single flight and stale-session error discarded
+PASS client deduplication, processing suppression, resolved review removal

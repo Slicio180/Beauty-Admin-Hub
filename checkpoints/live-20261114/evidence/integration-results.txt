@@ -1,0 +1,163 @@
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"COMPLETE","stage":"readback","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0,"readback":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"COMPLETE"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+PASS normal LIVE entry uses durable queue and verifies all effects
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"REVIEW","stage":"event","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"REVIEW"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000003","source":"HUB","state":"COMPLETE","stage":"readback","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0,"readback":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000003","source":"HUB","afterAcceptanceMs":0,"state":"COMPLETE"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+PASS failed first player does not block a second player
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"COMPLETE","stage":"readback","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0,"readback":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"COMPLETE"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+PASS lost response reply is reconciled without repeated write
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"COMPLETE","stage":"readback","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0,"readback":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"COMPLETE"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+PASS lost status reply is reconciled without repeated write
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"COMPLETE","stage":"readback","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0,"readback":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"COMPLETE"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+PASS lost league reply is reconciled without repeated write
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"COMPLETE","stage":"readback","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0,"readback":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"COMPLETE"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+PASS lost event reply is reconciled without repeated write
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"REVIEW","stage":"response","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"REVIEW"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"REVIEW","stage":"response","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0}}
+PASS uncertain response is never blindly retried
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"REVIEW","stage":"status","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"REVIEW"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"REVIEW","stage":"status","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0}}
+PASS uncertain status is never blindly retried
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"REVIEW","stage":"league","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"REVIEW"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"REVIEW","stage":"league","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0}}
+PASS uncertain league is never blindly retried
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"REVIEW","stage":"event","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"REVIEW"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"REVIEW","stage":"event","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0}}
+PASS uncertain event is never blindly retried
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"REVIEW","stage":"display","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"REVIEW"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"COMPLETE","stage":"readback","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0,"readback":0}}
+PASS display failure recovers existing response/status with no duplicate add
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"REVIEW","stage":"event","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"REVIEW"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"COMPLETE","stage":"readback","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0,"readback":0}}
+PASS uncertain Nakka add later visible resolves without replay
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"COMPLETE","stage":"readback","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0,"readback":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"COMPLETE"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+PASS duplicate request returns its receipt without another response
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000003","source":"HUB","afterAcceptanceMs":0,"state":"QUEUED"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"COMPLETE","stage":"readback","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0,"readback":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"COMPLETE"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000003","source":"HUB","state":"COMPLETE","stage":"readback","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0,"readback":0}}
+PASS new requests accepted while worker is executing outside ScriptLock
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"REVIEW","stage":"event","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"REVIEW"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+PASS active worker blocks status mutation guard; unrelated reviewer does not
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"REVIEW","stage":"display","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"REVIEW"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+PASS foreign event and unauthenticated recovery cannot mutate
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"COMPLETE","stage":"readback","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0,"readback":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"COMPLETE"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+PASS legacy receipt isolated and preserved; same player blocked
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"REVIEW","workerMs":0,"acceptedToStartMs":0,"phases":{}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"REVIEW"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+PASS OUT never becomes a Nakka add
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"REVIEW","workerMs":0,"acceptedToStartMs":0,"phases":{}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"REVIEW"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000003","source":"HUB","state":"COMPLETE","stage":"readback","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0,"readback":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000003","source":"HUB","afterAcceptanceMs":0,"state":"COMPLETE"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+PASS duplicate Nakka identity quarantines only that job
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"QUEUED"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000002","source":"HUB","state":"COMPLETE","stage":"readback","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0,"readback":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000002","source":"HUB","afterAcceptanceMs":0,"state":"COMPLETE"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+PASS stale worker expires to review and next job can run
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"REVIEW","stage":"display","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"master":0,"status":0,"display":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"REVIEW"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000003","source":"HUB","state":"COMPLETE","stage":"readback","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"master":0,"status":0,"display":0,"league":0,"event":0,"readback":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000003","source":"HUB","afterAcceptanceMs":0,"state":"COMPLETE"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"COMPLETE","stage":"readback","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"master":0,"status":0,"display":0,"league":0,"event":0,"readback":0}}
+PASS new player master/Form projection recovers without duplicate and retains another new name
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"REVIEW","stage":"display","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"REVIEW"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"REVIEW","stage":"status","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0}}
+PASS review does not overwrite a later intentional OUT status or add to Nakka
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"REVIEW","stage":"readback","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0,"readback":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"REVIEW"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"COMPLETE","stage":"readback","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0,"readback":0}}
+PASS completed receipt storage failure preserves recovery payload
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"REVIEW","stage":"event","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"PROCESSING"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+PASS unknown worker error keeps a lease if review receipt cannot be saved
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"COMPLETE","stage":"readback","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0,"readback":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"COMPLETE"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+PASS oversized Unicode request is rejected before queue and external writes
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"COMPLETE","stage":"readback","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0,"readback":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"COMPLETE"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+PASS integrated real staff authentication, event binding, dispatcher and registration wrapper
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000002","source":"KIOSK","state":"COMPLETE","stage":"readback","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0,"readback":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000002","source":"KIOSK","afterAcceptanceMs":0,"state":"COMPLETE"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000002","source":"MOBIL","state":"COMPLETE","stage":"readback","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0,"readback":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000002","source":"MOBIL","afterAcceptanceMs":0,"state":"COMPLETE"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+PASS integrated real public kiosk/mobile actor reaches same durable queue
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+PASS integrated public input cannot smuggle recovery, source or another event
+PASS integrated unauthenticated/stale staff queue requests rejected
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"REVIEW","stage":"display","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"REVIEW"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+PASS integrated event switch blocks with pending jobs and session heartbeat remains available
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"REVIEW","stage":"display","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"REVIEW"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+PASS integrated real status/consent/removal entrypoints block same queued player before writes
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"REVIEW","stage":"display","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"REVIEW"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"COMPLETE","stage":"readback","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0,"readback":0}}
+PASS integrated recovery from real dispatcher preserves one response and authenticated ownership
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000004","source":"MOBIL","afterAcceptanceMs":0,"state":"QUEUED"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","state":"COMPLETE","stage":"readback","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0,"readback":0}}
+{"kind":"BEAUTY_QUEUE_SUBMIT_TIMING","jobId":"00000000000000000000000000000001","source":"HUB","afterAcceptanceMs":0,"state":"COMPLETE"}
+{"kind":"BEAUTY_QUEUE_REQUEST_TIMING","totalMs":0}
+{"kind":"BEAUTY_QUEUE_WORKER_TIMING","jobId":"00000000000000000000000000000004","source":"MOBIL","state":"COMPLETE","stage":"readback","workerMs":0,"acceptedToStartMs":0,"phases":{"preflight":0,"response":0,"status":0,"display":0,"league":0,"event":0,"readback":0}}
+PASS integrated queued public result reports accepted and not Nakka-confirmed
+PASS integrated revoked session cannot pump queued work
+Integrated scenarios: 9 PASS. Real auth, context, dispatcher, public actor and mutation entrypoints; Sheets/Nakka transport simulated.

@@ -1,0 +1,3 @@
+PASS overlay: immediate colour state; absent at1999ms; shown at2000ms; fast success skips overlay; completion/failure clears; concurrent work; focus/inert restoration; fullscreen host; existing AIK crest; no visible waiting text.
+PASS modal overlay: correct top-layer host, delayed2000ms, trigger removal, dialog redraw, rehosting restores inert state, completion cleanup.
+PASS: new attempt clears previous alert/recovery action; success leaves no obsolete Form warning; controls re-enabled.
