@@ -1,0 +1,19 @@
+{
+  "scriptId": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "labName": "BeautyPartialRecoveryNativeTest20261114",
+  "labHash": "e37d7ec2fe89de91b201974849a4b263c2da559fea68b51e2f5753c190d1b777",
+  "baselineHash": "f31287dd1e41d544eba22ef0c4b2d8388d8533ca8457a00952251bfde59cbe50",
+  "deployments": [
+    {
+      "id": "AKfycbzxCh96nXkHmSzYJOiO3NI3l0UJvFCeAJv1t-eBgII",
+      "version": null,
+      "entries": [
+        {
+          "type": "WEB_APP",
+          "access": "MYSELF",
+          "executeAs": "USER_ACCESSING"
+        }
+      ]
+    }
+  ]
+}

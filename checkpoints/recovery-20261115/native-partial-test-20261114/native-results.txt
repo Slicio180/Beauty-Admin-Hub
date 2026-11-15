@@ -1,0 +1,12 @@
+PASS native adapter suite: nine scenarios and original records preserved
+PASS wrong project blocked before fixture creation
+PASS wrong owner blocked
+PASS changed event blocked
+PASS busy shared lock blocks writes
+PASS unmarked tab not adopted or overwritten
+PASS source preservation failure stops suite before fixture seed
+PASS staff API refuses unauthenticated request
+PASS staff preview/confirm session binding and exact input guards
+PASS partial journal record detected rather than accepted
+PASS intent journal failure prevents source mutation
+TOTAL 11 PASS (local Apps Script service simulation; native execution pending)

@@ -1,0 +1,12 @@
+const fs=require('node:fs'),vm=require('node:vm'),crypto=require('node:crypto');
+const dir=__dirname,prior=require('../../deliverables/Beauty-TEST-Partial-Recovery-Lab-20261114.cjs');
+const baseline=JSON.parse(fs.readFileSync('capture-work/native-partial-test-20261114/baseline.json'));
+baseline.files.push({name:prior.CONFIG.labName,type:'SERVER_JS',source:prior.LAB_SOURCE});
+const source=fs.readFileSync(dir+'/ProviderCheck.js','utf8');
+new vm.Script(baseline.files.filter(f=>f.type==='SERVER_JS').map(f=>f.source).join('\n')+'\n'+source);
+const config={...prior.CONFIG,labName:'BeautyNakkaRecoveryCheck20261114',labHash:crypto.createHash('sha256').update(source).digest('hex'),baselineHash:prior.hashFiles(baseline.files)};
+let template=fs.readFileSync('capture-work/registration-repro/test-lab-installer-template.cjs','utf8');
+template=template.replace('__BEAUTY_INSTALL_CONFIG__',JSON.stringify(config)).replace('__BEAUTY_LAB_SOURCE__',JSON.stringify(source)).replaceAll('Beauty-TEST-Install-Registration-Lab','Beauty-TEST-Nakka-Recovery-Check-20261114').replace('Return this output before the manual TEST run.','In the TEST editor run beautyTestNakkaRecoveryCheck20261114 and return the log. Provider GET only; no player changes.');
+fs.writeFileSync('deliverables/Beauty-TEST-Nakka-Recovery-Check-20261114.cjs',template);
+fs.writeFileSync(dir+'/baseline.json',JSON.stringify(baseline));
+console.log('Combined TEST server syntax PASS; preserves 29 existing files.');

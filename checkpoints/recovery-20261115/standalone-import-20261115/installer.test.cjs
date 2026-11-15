@@ -1,0 +1,10 @@
+const fs=require('node:fs'),assert=require('node:assert/strict');
+const tool=require('../../deliverables/Beauty-TEST-Standalone-Import-20261115.cjs'),binding=require('../../deliverables/Beauty-TEST-Recovery-Binding-Check-20261114.cjs');
+const baseline=JSON.parse(fs.readFileSync(__dirname+'/baseline.json')),report=JSON.parse(fs.readFileSync('upload/Beauty-TEST-Recovery-Preflight-Report.json'));
+async function run(mode){let content=structuredClone(baseline),puts=0,gets=0;let deployments=structuredClone(report.deployments);if(mode==='changed')content.files[0].source+='\n';if(mode==='access')deployments.deployments[0].entryPoints[0].webApp.entryPointConfig.access='ANYONE';if(mode==='already')content.files.push({name:tool.CONFIG.labName,type:'SERVER_JS',source:tool.LAB_SOURCE});if(mode==='foreign')content.files.push({name:tool.CONFIG.labName,type:'SERVER_JS',source:'other'});
+ const request=async(method,route,body)=>{if(method==='PUT'){puts++;if(mode!=='absent')content={scriptId:tool.CONFIG.scriptId,files:body.files};if(mode==='lost'||mode==='absent')throw Error('uncertain');return {}}if(route==='/content'){gets++;if(mode==='race'&&gets===2)content.files[1].source+='\n';return content;}return route==='/deployments'?deployments:report.project;};
+ try{const r=await tool.install(request,()=>{});assert.equal(r.sourceVerified,true);assert.equal(tool.baseHash(content.files),tool.CONFIG.baselineHash);assert.equal(content.files.find(f=>f.name===binding.CONFIG.labName).source,binding.LAB_SOURCE);assert.equal(puts,mode==='already'?0:1);if(mode==='lost')assert.equal(r.verifiedByFreshRead,true);if(['changed','access','foreign','race','absent'].includes(mode))assert.fail('must stop');}
+ catch(e){const errors={changed:'BASELINE_CHANGED',access:'DEPLOYMENTS_CHANGED',foreign:'FILE_EXISTS',race:'SOURCE_CHANGED_DURING_CHECK',absent:'NOT_INSTALLED'};assert.equal(e.code,errors[mode]);assert.equal(puts,mode==='absent'?1:0);}
+ console.log('PASS '+mode);
+}
+(async()=>{for(const m of ['normal','lost','already','changed','access','foreign','race','absent'])await run(m);console.log('TOTAL 8 PASS')})().catch(e=>{console.error(e);process.exitCode=1});

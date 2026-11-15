@@ -1,0 +1,52 @@
+PASS Transfer preview is read-only; confirmation adds one existing IN identity
+PASS lost Nakka reply reads back without another add
+PASS uncertain absent transfer is not replayed; later visible entry completes
+PASS double confirmation cannot send another transfer
+PASS already present player does not receive a transfer ticket
+PASS OUT cannot be transferred
+PASS STANDBY cannot be transferred
+PASS transfer cannot invent missing league identity
+PASS duplicate league identity blocked
+PASS started event blocks transfer
+PASS changed roster rejects stale preview before writes
+PASS preview is bound to authenticated session and context
+PASS unauthenticated and arbitrary actions cannot mutate
+PASS in-flight worker and event switch block recovery mutations
+PASS busy lock is not released by a nonowner
+PASS import preserves eight players and original messages; no master or Nakka write
+PASS lost Sheets batch reply verifies import once
+PASS uncertain absent import batch is never replayed
+PASS import display recovery finishes without repeating rows
+PASS import never overwrites OUT or previously removed status records
+PASS accepting Google Form blocks import before durable effects
+PASS standalone transfer needs no league write
+PASS unfinished transfer isolated to player but blocks event switch
+PASS legacy saved status rechecks derived display and preserves original receipt
+PASS unsaved status remains pending; no repeated status write
+PASS legacy current registration including trailing spaces verifies without replay
+PASS legacy missing entry cannot be silently cleared
+PASS old-event receipt cannot be cleared using current-event player
+PASS consent receipt retains historical journal and original pending pointer
+PASS malformed receipt stays visible and cannot be dismissed
+PASS status preview is read-only; confirmed completion preserves eight-player source except exact owned cells
+PASS consent preview is read-only; confirmed completion preserves eight-player source except exact owned cells
+PASS removal preview is read-only; confirmed completion preserves eight-player source except exact owned cells
+PASS status lost reply verifies without duplicate write
+PASS consent lost reply verifies without duplicate write
+PASS removal lost reply verifies without duplicate write
+PASS status absent uncertain effect remains REVIEW on recheck without repeating source writes
+PASS consent absent uncertain effect remains REVIEW on recheck without repeating source writes
+PASS removal absent uncertain effect remains REVIEW on recheck without repeating source writes
+PASS partly cleared removal plans only uncleared response/status cells
+PASS removal cannot repeat a Nakka deletion
+PASS removal rejects unrelated record changes
+PASS third status value refuses overwrite
+PASS source formula prevents mutation
+PASS wrong event/date/workbook and ambiguous identity are rejected
+PASS stale preview cannot write
+PASS expired ticket and changed session cannot write
+PASS duplicate confirmation cannot repeat cells
+PASS failed intent archive prevents data write
+PASS display recovery uses saved source without rewriting it
+PASS legacy registration without a complete plan is not guessed
+PASS event change blocks recheck before derived writes

@@ -1,0 +1,1 @@
+PASS recovery UI: real controls, read-only list/preview, one confirmation, disabled consumed ticket, uncertain feedback, event/session changes, logout and timeout without replay; all inline JavaScript parses.

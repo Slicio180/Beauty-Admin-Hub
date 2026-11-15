@@ -1,0 +1,12 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert/strict');
+const source=fs.readFileSync(__dirname+'/LiveHubView.html','utf8');
+const a=source.indexOf(" const ids=new Set(['nakkaSelectEvent'"),b=source.indexOf(" document.addEventListener('DOMContentLoaded'",a);
+const buttons=[],listeners={};let calls=[];
+const c={Set,document:{querySelectorAll:()=>buttons,addEventListener:(k,f)=>listeners[k]=f},row:{},j:{id:'review-job'},queueCheck:(...args)=>calls.push(args),requestRecheck:id=>calls.push(['recheck',id]),create(tag,text){const e={id:'',textContent:text,disabled:false,attrs:{},events:{},hasAttribute(k){return k in this.attrs},setAttribute(k,v){this.attrs[k]=v},matches(){return false},closest(s){return s==='button'?this:s==='#nakkaStatusPanel'?{}:null},addEventListener(k,f){this.events[k]=f}};buttons.push(e);return e}};
+vm.createContext(c);vm.runInContext(source.slice(a,b),c);
+const x=source.indexOf("const b=create('button','RECHECK REGISTRATION',row);"),y=source.indexOf(";}}",x)+1;
+assert(x>0&&y>x);vm.runInContext('{'+source.slice(x,y)+'}',c);
+const button=buttons[0];c.disable();assert.equal(button.disabled,false);assert(!button.title);assert.equal(c.blocked(button),false);
+let prevented=false;listeners.click({target:button,preventDefault(){prevented=true},stopImmediatePropagation(){prevented=true}});if(!prevented)button.events.click();assert.deepEqual(calls,[['recheck','review-job']]);
+delete button.attrs['data-live-nakka'];c.disable();assert.equal(button.disabled,true);assert.equal(button.title,'Not available yet');assert.equal(c.blocked(button),true);
+console.log('PASS actual legacy guard + actual recovery button: enabled marker permits one recheck; unmarked control reproduces reported disabled state. Backend recovery safety unchanged.');

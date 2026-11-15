@@ -1,0 +1,1 @@
+PASS actual legacy guard + actual recovery button: enabled marker permits one recheck; unmarked control reproduces reported disabled state. Backend recovery safety unchanged.

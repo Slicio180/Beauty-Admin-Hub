@@ -1,0 +1,30 @@
+{
+  "result": "PASS",
+  "tests": [
+    "status preview is read-only; confirmed completion preserves eight-player source except exact owned cells",
+    "consent preview is read-only; confirmed completion preserves eight-player source except exact owned cells",
+    "removal preview is read-only; confirmed completion preserves eight-player source except exact owned cells",
+    "status lost reply verifies without duplicate write",
+    "consent lost reply verifies without duplicate write",
+    "removal lost reply verifies without duplicate write",
+    "status absent uncertain effect remains REVIEW on recheck without repeating source writes",
+    "consent absent uncertain effect remains REVIEW on recheck without repeating source writes",
+    "removal absent uncertain effect remains REVIEW on recheck without repeating source writes",
+    "partly cleared removal plans only uncleared response/status cells",
+    "removal cannot repeat a Nakka deletion",
+    "removal rejects unrelated record changes",
+    "third status value refuses overwrite",
+    "source formula prevents mutation",
+    "wrong event/date/workbook and ambiguous identity are rejected",
+    "stale preview cannot write",
+    "expired ticket and changed session cannot write",
+    "duplicate confirmation cannot repeat cells",
+    "failed intent archive prevents data write",
+    "display recovery uses saved source without rewriting it",
+    "legacy registration without a complete plan is not guessed",
+    "event change blocks recheck before derived writes"
+  ],
+  "at": "2026-11-14T20:34:33.439Z",
+  "native": false,
+  "description": "Actual candidate planning/controller logic with injected adapters"
+}

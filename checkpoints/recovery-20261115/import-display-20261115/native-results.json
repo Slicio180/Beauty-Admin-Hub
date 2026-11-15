@@ -1,0 +1,26 @@
+{
+  "result": "PASS",
+  "count": 19,
+  "tests": [
+    "both current readers match; preview changes no sheet/provider data",
+    "display fault reaches planned stage, then recheck restores without source append",
+    "direct read mismatch stops without fault writes",
+    "direct read http stops without fault writes",
+    "direct read json stops without fault writes",
+    "direct read range stops without fault writes",
+    "repeated confirmation cannot clear twice",
+    "owner blocked before fault",
+    "project blocked before fault",
+    "binding blocked before fault",
+    "busy blocked before fault",
+    "expired preview blocked",
+    "changed original receipt blocks confirm",
+    "changed fixture source blocks confirm",
+    "changed original event rows block confirm",
+    "fault intent journal failure stops before cell change",
+    "wrong player entry receipt cannot start",
+    "changed source after fault stays REVIEW, no append",
+    "no display receipt cannot recheck"
+  ],
+  "scope": "Local simulations; native comparison and display test pending"
+}

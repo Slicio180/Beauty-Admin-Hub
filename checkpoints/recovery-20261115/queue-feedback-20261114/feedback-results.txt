@@ -1,0 +1,1 @@
+PASS queued click survives polling; repeated clicks deduplicated; progress shown; completion persists; REVIEW and NOT_STARTED explicit; logout cancels unsent request; live control marker retained.

@@ -1,0 +1,14 @@
+{
+  "result": "PASS",
+  "count": 7,
+  "tests": [
+    "opens panel and renders three completed test receipts",
+    "progress disables controls and double click sends one request",
+    "busy server error remains visible without auto retry",
+    "lost reply instructs readback and does not resend",
+    "signout closes panel and ignores late response",
+    "context change suppresses stale result",
+    "missing loaded event prevents RPC"
+  ],
+  "scope": "Local DOM simulation, not rendered-browser verification"
+}

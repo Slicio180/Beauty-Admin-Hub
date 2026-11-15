@@ -1,0 +1,9 @@
+PASS normal
+PASS lost
+PASS already
+PASS changed
+PASS access
+PASS foreign
+PASS race
+PASS absent
+TOTAL 8 PASS

@@ -1,0 +1,30 @@
+{
+  "result": "PASS",
+  "count": 23,
+  "tests": [
+    "preview checks existing real-shaped entry, creates separate import fixtures, no batch",
+    "lost Sheets reply plus deliberate display failure stays REVIEW; recheck verifies without append",
+    "repeated confirm and preview after job cannot append twice",
+    "absent batch stays REVIEW and recheck never repeats",
+    "partial batch stays REVIEW and recheck never repeats",
+    "lost transport reply still detects saved rows before display failure",
+    "wrong owner blocks before import writes",
+    "wrong project blocks before import writes",
+    "changed binding blocks before import writes",
+    "busy blocks before import writes",
+    "changed event blocks preview",
+    "missing verified transfer receipt blocks preview",
+    "different provider entry ID blocks preview",
+    "existing import tabs are never adopted or overwritten",
+    "original event record changes block confirm",
+    "transfer fixture changes block confirm",
+    "changed import source rejects stale preview",
+    "expired preview cannot append",
+    "attempt journal failure prevents Sheets request",
+    "job write failure prevents Sheets request",
+    "changed source after saved import stops display recheck without append",
+    "unplanned extra source row stops recheck",
+    "missing receipt cannot recheck"
+  ],
+  "scope": "Local simulated Apps Script/Sheets/Nakka; native import pending"
+}

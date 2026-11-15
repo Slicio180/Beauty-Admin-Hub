@@ -1,0 +1,1 @@
+{"result":"PASS","count":8,"cases":["normal","lost reply readback","already installed","changed baseline","changed access","conflicting file","concurrent source edit","absent upload"],"scope":"Local installer tests; native installation pending"}

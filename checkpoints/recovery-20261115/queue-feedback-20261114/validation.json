@@ -1,0 +1,12 @@
+{
+  "at": "2026-11-14T08:03:11.930389+00:00",
+  "status": "PREPARED_NOT_DEPLOYED",
+  "baselineHub": 32,
+  "mobile": 34,
+  "kiosk": 61,
+  "ownerReportedPlayers": 8,
+  "localChecks": "PASS",
+  "nativeCandidate": "PENDING",
+  "transferPlayers": "NOT_IMPLEMENTED_IN_CANDIDATE",
+  "nextWorkstream": "COMPLETE_RECOVERY_AFTER_CURRENT_UPDATE"
+}

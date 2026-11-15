@@ -1,0 +1,11 @@
+const fs=require('node:fs'),vm=require('node:vm'),crypto=require('node:crypto');
+const dir=__dirname,p=JSON.parse(fs.readFileSync('upload/Beauty-TEST-Recovery-Preflight-Report.json','utf8')),prior=require('../../deliverables/Beauty-TEST-Recovery-Binding-Check-20261114.cjs');
+const sha=x=>crypto.createHash('sha256').update(x).digest('hex');
+const baseline={scriptId:p.project.scriptId,files:[...p.content.files,{name:prior.CONFIG.labName,type:'SERVER_JS',source:prior.LAB_SOURCE}]};
+const source=fs.readFileSync(dir+'/PartialRecovery.js','utf8')+'\n'+fs.readFileSync(dir+'/NativeAdapter.js','utf8');
+new vm.Script(baseline.files.filter(f=>f.type==='SERVER_JS').map(f=>f.source).join('\n')+'\n'+source);
+const config={...prior.CONFIG,labName:'BeautyPartialRecoveryNativeTest20261114',labHash:sha(source),baselineHash:prior.hashFiles(baseline.files)};
+let template=fs.readFileSync('capture-work/registration-repro/test-lab-installer-template.cjs','utf8');
+template=template.replace('__BEAUTY_INSTALL_CONFIG__',JSON.stringify(config)).replace('__BEAUTY_LAB_SOURCE__',JSON.stringify(source)).replaceAll('Beauty-TEST-Install-Registration-Lab','Beauty-TEST-Partial-Recovery-Lab-20261114').replace('Return this output before the manual TEST run.','Next run beautyTestRecoveryFixtureSetup20261114, then beautyTestRecoveryNativeRun20261114 in the TEST editor. These functions write only marked TEST fixture tabs.');
+fs.writeFileSync('deliverables/Beauty-TEST-Partial-Recovery-Lab-20261114.cjs',template);fs.writeFileSync(dir+'/baseline.json',JSON.stringify(baseline));fs.writeFileSync(dir+'/config.json',JSON.stringify(config,null,2)+'\n');
+console.log('Combined TEST server syntax PASS. Installer preserves 28 files and adds one.');

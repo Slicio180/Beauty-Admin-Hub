@@ -1,0 +1,19 @@
+{
+  "source": "Hub34 LiveRecovery.js",
+  "functions": [
+    "beautyRecoverySame_",
+    "beautyRecoveryRequire_",
+    "beautyRecoverySave_",
+    "beautyRecoveryEvent_",
+    "beautyRecoveryEntries_",
+    "beautyRecoverySnapshot_",
+    "beautyRecoveryRows_",
+    "beautyRecoveryUnique_",
+    "beautyRecoveryState_",
+    "beautyRecoveryStep_",
+    "beautyRecoveryRun_"
+  ],
+  "sourceHash": "42e6afee99c439f945662018cacb2c3589f0895d83f8a7b98a49ea34b3c74372",
+  "extractedCoreHash": "e038ab9cb76827807d8a9b119d0d9d261750a5fc0cfaba377abb026c1f29800a",
+  "scope": "Unchanged selected transfer functions, isolated native adapters; not production Hub routes"
+}

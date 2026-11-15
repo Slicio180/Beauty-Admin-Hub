@@ -1,0 +1,28 @@
+PASS native preview uses only GET, five separate fixture tabs, no original writes
+PASS discarded successful response verified by actual transfer core; recheck sends zero adds
+PASS lost transport reply reads back saved entry once
+PASS absent provider save stays REVIEW; confirmation and recheck never replay
+PASS readback outage recovers with GET only after original add
+PASS wrong event rejected before fixture or provider writes
+PASS league event rejected before fixture or provider writes
+PASS wrong title rejected before fixture or provider writes
+PASS started event rejected before fixture or provider writes
+PASS wrong date rejected before fixture or provider writes
+PASS no admin rejected before fixture or provider writes
+PASS team game rejected before fixture or provider writes
+PASS wrong project blocked
+PASS wrong owner blocked
+PASS changed binding blocked
+PASS busy lock blocked
+PASS nonempty target blocked before fixture setup
+PASS existing unmarked fixture blocked, never overwritten
+PASS original workbook change after preview blocks confirmation
+PASS fixture change after preview blocks confirmation
+PASS provider changed after preview blocks confirmation
+PASS expired preview blocked
+PASS provider attempt journal failure blocks network mutation
+PASS initial job journal failure blocks network mutation
+PASS extra provider entry after transfer keeps receipt in REVIEW
+PASS binding changes during first read prevent fixture and provider writes
+PASS no receipt cannot recheck
+TOTAL 27 PASS; native provider execution pending

@@ -1,0 +1,1 @@
+PASS hub: exact backend/manifest preservation; syntax; single write; idempotence; lost reply reconciliation; concurrent source/deployment guards; wrong project and forbidden routes blocked.

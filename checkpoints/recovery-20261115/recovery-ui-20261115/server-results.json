@@ -1,0 +1,16 @@
+{
+  "result": "PASS",
+  "count": 9,
+  "checks": [
+    "authenticated receipt read makes no workbook or provider change",
+    "all three UI rechecks preserve original receipt bytes and avoid new source batches/adds",
+    "expired and incorrect session denied",
+    "stale context denied before recheck",
+    "client cannot select targets or invoke add/confirm/fault actions",
+    "missing provider entry cannot cause a repeat add",
+    "changed fixture source blocks UI import recheck",
+    "busy shared lock returns visible error",
+    "unfinished receipt not silently cleared by UI"
+  ],
+  "scope": "Local server/Google simulations; native UI pending"
+}

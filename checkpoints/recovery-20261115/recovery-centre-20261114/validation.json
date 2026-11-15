@@ -1,0 +1,20 @@
+{
+  "at": "2026-11-14T19:46:41.878068+00:00",
+  "state": "PREPARED_NOT_DEPLOYED",
+  "baselineHub": 33,
+  "mobile": 34,
+  "kiosk": 61,
+  "nativeBaseline": "owner screenshots Hub8/Nakka8 no differences/no jobs/no alerts",
+  "localChecks": "PASS",
+  "candidateNative": "PENDING",
+  "fullRecoveryWorkstream": "OPEN: see explicit remaining cases in README.md",
+  "changed": [
+    "LiveHub",
+    "LiveHubView",
+    "LiveNakkaMonitor",
+    "LiveRegistrationQueue"
+  ],
+  "added": [
+    "LiveRecovery"
+  ]
+}

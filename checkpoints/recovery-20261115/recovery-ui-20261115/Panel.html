@@ -1,0 +1,22 @@
+<style>
+#beautyRecoveryTestPanel{width:min(760px,calc(100vw - 32px));max-height:88vh;overflow:auto;background:#141719;color:#f5f5f5;border:2px solid #c6a54a;border-radius:14px;padding:28px;font:18px/1.5 Arial,sans-serif;box-sizing:border-box}
+#beautyRecoveryTestPanel::backdrop{background:rgba(0,0,0,.72)}
+#beautyRecoveryTestPanel h2{font-size:28px;margin:0 0 12px;color:#ecd075}
+#beautyRecoveryTestPanel p{margin:10px 0}#beautyRecoveryTestPanel .recovery-test-note{color:#bec4c9;font-size:16px}
+#beautyRecoveryTestPanel button,#beautyRecoveryTestOpen{background:#e2bf55;color:#131313;border:0;border-radius:7px;padding:12px 16px;font:bold 16px Arial,sans-serif;cursor:pointer}
+#beautyRecoveryTestPanel button:disabled{opacity:.5;cursor:wait}
+#beautyRecoveryTestPanel .recovery-test-card{border:1px solid #4b5054;padding:16px;margin:14px 0;border-radius:9px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+#beautyRecoveryTestPanel .recovery-test-card strong{display:block;font-size:20px}#beautyRecoveryTestPanel .recovery-test-state{font-size:16px;color:#c3cad0}
+#beautyRecoveryTestResult{padding:12px;background:#22282d;border-radius:7px;white-space:pre-line;min-height:28px}
+#beautyRecoveryTestPanel .recovery-test-footer{display:flex;justify-content:space-between;margin-top:18px;gap:12px}
+@media(max-width:540px){#beautyRecoveryTestPanel{padding:18px}.recovery-test-card{flex-direction:column;align-items:stretch!important}}
+</style>
+<dialog id="beautyRecoveryTestPanel" aria-labelledby="beautyRecoveryTestTitle">
+<h2 id="beautyRecoveryTestTitle">Recovery TEST</h2>
+<p><strong>Beauty Recovery TEST 2026-11-14.</strong><br>Player: BEAUTY TEST TRANSFER 1411</p>
+<p class="recovery-test-note">These controls recheck the saved test operations. They cannot add a Nakka player or append registration rows. The selected Hub event stays unchanged.</p>
+<div id="beautyRecoveryTestCards"></div>
+<p id="beautyRecoveryTestResult" role="status" aria-live="polite">Open this panel to read the saved test receipts.</p>
+<div class="recovery-test-footer"><button type="button" id="beautyRecoveryTestRefresh">REFRESH RECEIPTS</button><button type="button" id="beautyRecoveryTestClose">CLOSE</button></div>
+<p class="recovery-test-note">TEST fixtures only. Full production recovery is still under test.</p>
+</dialog>
