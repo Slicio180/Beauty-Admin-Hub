@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "count": 11,
+  "changed": [
+    "HubTest"
+  ],
+  "preserved": 37,
+  "added": 0,
+  "nativeUpload": false
+}

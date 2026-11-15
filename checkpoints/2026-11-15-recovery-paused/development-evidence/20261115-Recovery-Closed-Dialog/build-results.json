@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "changed": [
+    "HubTest"
+  ],
+  "preserved": 37,
+  "added": 0,
+  "htmlScriptsParsed": 27,
+  "nativeUpload": false
+}

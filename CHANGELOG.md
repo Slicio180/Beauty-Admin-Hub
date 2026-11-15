@@ -1,3 +1,7 @@
+# 15 November 2026 — save-only recovery checkpoint
+
+Preserved the installed TEST source, recovery test evidence, handbook and unresolved issues in checkpoints/2026-11-15-recovery-paused/. Owner stopped development. No application changes or LIVE deployment.
+
 # Changelog
 
 ## HANDOFF-2026-10-25 — local framework checkpoint

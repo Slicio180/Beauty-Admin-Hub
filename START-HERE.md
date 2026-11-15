@@ -1,3 +1,7 @@
+# Current checkpoint — 15 November 2026, PAUSED
+
+Read [the saved recovery checkpoint](checkpoints/2026-11-15-recovery-paused/README.md) before continuing. It contains the latest installed TEST source and current handbook. Development is stopped; diagnostics hidden-on-demand remains pending. This is not a LIVE release. Earlier instructions below are historical where they conflict with this checkpoint.
+
 # Latest checkpoint — 7 November 2026
 
 See [current checkpoint](docs/handoff/GITHUB-CHECKPOINT-20261107.md). This is saved development work, including unapproved cleanup UI; not a production release.

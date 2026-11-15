@@ -1,0 +1,5 @@
+{
+  "result": "PASS",
+  "count": 15,
+  "scope": "Actual source with mocked provider omission; native ID response still unobserved"
+}

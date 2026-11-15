@@ -1,3 +1,7 @@
+# Current checkpoint — 15 November 2026, PAUSED
+
+Read [the saved recovery checkpoint](checkpoints/2026-11-15-recovery-paused/README.md) before continuing. It contains the latest installed TEST source and current handbook. Development is stopped; diagnostics hidden-on-demand remains pending. This is not a LIVE release. Earlier instructions below are historical where they conflict with this checkpoint.
+
 # Beauty — START HERE
 
 This is the recovered Beauty Admin Hub repository. The current checkpoint establishes a human programmer handoff framework; **Beauty is not yet qualified as programmer-safe or release-ready**.

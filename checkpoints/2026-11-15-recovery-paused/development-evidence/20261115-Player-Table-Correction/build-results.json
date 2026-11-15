@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "changed": [
+    "HubTest"
+  ],
+  "preserved": 37,
+  "added": 0,
+  "serverFilesChanged": 0,
+  "parsedBrowserScripts": 27,
+  "nativeUpload": false
+}

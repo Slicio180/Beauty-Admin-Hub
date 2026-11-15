@@ -1,0 +1,5 @@
+{
+  "result": "PASS",
+  "count": 17,
+  "scope": "Actual core + new adapter, in-memory Sheets/provider; no native run"
+}

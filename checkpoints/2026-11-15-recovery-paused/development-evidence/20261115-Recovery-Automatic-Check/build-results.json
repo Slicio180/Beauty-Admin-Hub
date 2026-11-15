@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "changed": [
+    "HubTest",
+    "HubTestAttention",
+    "HubTestAutoRegister"
+  ],
+  "preserved": 35,
+  "added": 0,
+  "htmlScriptsParsed": 27,
+  "nativeUpload": false
+}
