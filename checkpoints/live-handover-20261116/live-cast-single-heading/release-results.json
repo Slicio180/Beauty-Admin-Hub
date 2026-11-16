@@ -1,0 +1,20 @@
+{
+  "result": "PASS",
+  "checks": [
+    {
+      "baseline": "Verified v40",
+      "onlyCastHtmlChanged": true,
+      "allOtherFilesPreserved": true,
+      "unrecognisedChangesBlocked": true,
+      "publicationReadbackVerified": true
+    },
+    {
+      "baseline": "Workbook repair already installed",
+      "onlyCastHtmlChanged": true,
+      "allOtherFilesPreserved": true,
+      "unrecognisedChangesBlocked": true,
+      "publicationReadbackVerified": true
+    }
+  ],
+  "remoteCalls": 0
+}

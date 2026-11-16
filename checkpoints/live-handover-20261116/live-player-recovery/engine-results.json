@@ -1,0 +1,21 @@
+{
+  "result": "PASS",
+  "checks": [
+    "Read-only diagnosis distinguishes missing entries, duplicate identities, OUT and closed events",
+    "Automatic missing-entry repair performs one guarded transfer and requires fresh readback",
+    "Lost transfer reply uses the existing saved operation; never creates a second transfer",
+    "Interrupted registration keeps its original queue identity and resumes only through queue recheck",
+    "Changed event, expired sign-in and unexpected input stop before mutations",
+    "Worker lease and repeated checks prevent overlapping repairs; transient retries stop after three attempts",
+    "League creation requires a bound explicit confirmation; a lost reply cannot replay creation",
+    "Confirmation cannot substitute a different player for the reviewed transfer ticket",
+    "Existing queue and transfer journals inspect uncertain effects without replaying them",
+    "Closed or unreachable event is rejected before registration source or queue acceptance",
+    "Missing stored fields are filled only from the unique original response; OUT and conflicts are preserved",
+    "Verified saved removal remains visible as solved after the player leaves the roster",
+    "Open-only registration guard preserves the existing removal status gate",
+    "Saved OUT status can be verified as solved without claiming an IN Nakka entry"
+  ],
+  "remoteCalls": 0,
+  "scope": "Focused local engine fixtures and real original journal step functions; no Google, sheet or Nakka operations."
+}

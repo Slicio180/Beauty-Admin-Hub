@@ -1,0 +1,36 @@
+{
+  "status": "PREPARED_NOT_PUBLISHED",
+  "baselinePublishedVersion": 39,
+  "baselineEvidence": "Owner PRODUCTION_DEPLOYED_VERIFIED, v39, audit Beauty-LIVE-Complete-Recovery-2026-11-16T13-21-56-982Z-T3je3z",
+  "scriptId": "1EU9dCgJ5NIhFjJ474gjX07WGQmouXCzSs4mRVKpZESwahVyR_DcenOo4",
+  "deploymentId": "AKfycbwEPJdO-DATlD0IfQtlsSw4SAhYURYgfPzKDIOxASI1eOibi-LhB6LaEnfKD6jorEaIwQ",
+  "changes": [
+    "LiveHub",
+    "LiveHubView",
+    "LiveEventContext"
+  ],
+  "adds": [
+    "LiveEventCreate"
+  ],
+  "preservedExistingFiles": 26,
+  "totalAfter": 30,
+  "installer": "Beauty-LIVE-Event-Creation-20261116.cjs",
+  "hashes": [
+    {
+      "name": "LiveHub",
+      "sha256": "d28943d0003487cb19f2a253b0181121afe574c8973d7d87ce189e4ea4658fc2"
+    },
+    {
+      "name": "LiveHubView",
+      "sha256": "193e22684e413d7774cbd19909b662c68fd2a4b0ce37eda3182ad0de050f69ea"
+    },
+    {
+      "name": "LiveEventContext",
+      "sha256": "eab92934296604a8161724cc8c466fc4f6136034d1000df772ac7fb2f91aca0b"
+    },
+    {
+      "name": "LiveEventCreate",
+      "sha256": "784a05c9283dcf9adec32ca86c7b4a83f2fb9446acb5151b65fbe89b806d02cb"
+    }
+  ]
+}

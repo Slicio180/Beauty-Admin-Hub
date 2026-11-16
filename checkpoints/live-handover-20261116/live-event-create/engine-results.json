@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "checks": [
+    "Draft and review retain the current event and perform no Nakka or worksheet writes",
+    "Confirm creates exactly the reviewed event then delegates selection to the existing LIVE archive/switch service",
+    "A lost creation reply remains unresolved until inspected; resolving reads the existing event and never posts again",
+    "Event settings mismatch or multiple matching dates prevent selection and retain the original creation record",
+    "Stale review, changed sign-in, queued registrations, linked form and invalid settings stop before creation",
+    "New arrivals after creation are retained; opening the created event requires the explicit Continue action",
+    "Interrupted switch resumes only the matching existing switch journal; no second event is created",
+    "The real LIVE archive projection leaves the old snapshot intact and empties only the new event registrations"
+  ],
+  "remoteCalls": 0,
+  "scope": "Focused local event-creation fixtures using the existing LIVE format parser and archive projection; no remote operations."
+}

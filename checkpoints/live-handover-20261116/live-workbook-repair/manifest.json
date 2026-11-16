@@ -1,0 +1,36 @@
+{
+  "status": "PREPARED_NOT_PUBLISHED",
+  "baselinePublishedVersion": 40,
+  "baselineEvidence": "Owner PRODUCTION_DEPLOYED_VERIFIED version 40, audit Beauty-LIVE-Event-Creation-2026-11-16T13-54-53-528Z-JdJsc7",
+  "scriptId": "1EU9dCgJ5NIhFjJ474gjX07WGQmouXCzSs4mRVKpZESwahVyR_DcenOo4",
+  "deploymentId": "AKfycbwEPJdO-DATlD0IfQtlsSw4SAhYURYgfPzKDIOxASI1eOibi-LhB6LaEnfKD6jorEaIwQ",
+  "changes": [
+    "LiveEventSwitch",
+    "LivePlanner",
+    "LiveRemove"
+  ],
+  "adds": [
+    "LiveWorkbookHistory"
+  ],
+  "preservedExistingFiles": 27,
+  "totalAfter": 31,
+  "installer": "Beauty-LIVE-Workbook-Repair-20261116.cjs",
+  "hashes": [
+    {
+      "name": "LiveEventSwitch",
+      "sha256": "285349d8f9d8bc9e9767f990f7b299439e5fb5ff9cfa1dd840ded5f43a41af36"
+    },
+    {
+      "name": "LivePlanner",
+      "sha256": "9b535a3a1cea7b92d7f7c20b00d109d76a0f261c01464da26bfe3c160d263631"
+    },
+    {
+      "name": "LiveRemove",
+      "sha256": "720c38b089cb33ca48792b4fd82f36b7c1b2c488658ab6c1edc5e20624386cc2"
+    },
+    {
+      "name": "LiveWorkbookHistory",
+      "sha256": "073e88a5851a2f7537146457ca6220caf989226fc9b43fc54ee30b4b2ee69394"
+    }
+  ]
+}

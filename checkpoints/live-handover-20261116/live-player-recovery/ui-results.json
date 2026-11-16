@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "checks": [
+    "Visible authenticated Hub schedules the automatic service and shows the verified green result",
+    "Hidden Hub and sign-out stop new automatic recovery requests",
+    "Issue dialog uses Checking then Issue solved / Issue not solved, Resolve issue and collapsed Advanced",
+    "Event changes and late replies after sign-out cannot restore a stale solved result",
+    "Real dashboard update publishes current context to recovery; compact navigation and approved Nakka layout remain in the final source"
+  ],
+  "scope": "Local DOM fixtures and syntax checks; no native visual acceptance or remote functions claimed."
+}

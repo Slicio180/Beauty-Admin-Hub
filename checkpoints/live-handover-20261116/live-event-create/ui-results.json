@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "checks": [
+    "Copied format form passes selected options, requires explicit create acknowledgement and prevents double-click submission",
+    "Uncertain creation offers Resolve issue with collapsed Advanced and never offers another Create action",
+    "Sign-out closes event setup and discards its late draft response",
+    "Final source retains v39 automatic recovery and compact layout and connects league/date selection to LIVE creation"
+  ],
+  "scope": "Local DOM fixtures; native visual acceptance after publication pending."
+}

@@ -1,0 +1,16 @@
+const fs=require('fs'),path=require('path'),crypto=require('crypto'),vm=require('vm');const dir=__dirname,sha=s=>crypto.createHash('sha256').update(s).digest('hex');
+const previous=path.join(dir,'../live-nakka-approved-layout/deliverables/Beauty-LIVE-Approved-Layout-20261116.cjs'),layout=require(previous).PACKAGES[0],config=structuredClone(layout.config);
+config.changes=['LiveHub','LiveHubView','LiveRegister','LiveRegistrationQueue'];config.adds=['LivePlayerRecovery'];
+config.releaseDescription='Approved LIVE layout and automatic player recovery — 2026-11-16';
+config.beforeFileAlternatives={LiveHubView:[layout.config.afterFiles.find(f=>f.name==='LiveHubView').sha256]};
+const updates=[...config.changes,...config.adds].map(name=>({name,type:name==='LiveHubView'?'HTML':'SERVER_JS',source:fs.readFileSync(path.join(dir,name+(name==='LiveHubView'?'.html':'.js')),'utf8')}));
+config.afterFiles=config.beforeFiles.map(f=>{const u=updates.find(u=>u.name===f.name);return u?{name:u.name,type:u.type,sha256:sha(u.source)}:f;}).concat(updates.filter(u=>config.adds.includes(u.name)).map(u=>({name:u.name,type:u.type,sha256:sha(u.source)})));
+let source=fs.readFileSync(previous,'utf8').replace(/^const PACKAGES=.*;$/m,()=> 'const PACKAGES='+JSON.stringify([{config,updates}])+';');
+source=source.replaceAll('Beauty-LIVE-Approved-Layout','Beauty-LIVE-Complete-Recovery').replace('Copying the approved Nakka layout and adding compact navigation with direct Recovery...','Installing the approved LIVE layout and automatic player recovery...');
+const old="!(phase==='before'&&((spec.name==='BeautyRecoveryInventory'";if(!source.includes(old))throw Error('Release baseline code changed');
+source=source.replace(old,"!(phase==='before'&&(CONFIG.beforeFileAlternatives?.[spec.name]?.includes(sha(f.source))||(spec.name==='BeautyRecoveryInventory'");
+new vm.Script(source);fs.mkdirSync(path.join(dir,'deliverables'),{recursive:true});fs.writeFileSync(path.join(dir,'deliverables/Beauty-LIVE-Complete-Recovery-20261116.cjs'),source);
+const installer=require(path.join(dir,'deliverables/Beauty-LIVE-Complete-Recovery-20261116.cjs')).installers[0],baseline=JSON.parse(fs.readFileSync(path.join(dir,'../live-nakka-approved-layout/verified-v37-baseline.json'))),layoutBase={...baseline,files:baseline.files.map(f=>layout.updates.find(u=>u.name===f.name)||f)};
+if(!installer.baseMatches(baseline.files,'before')||!installer.baseMatches(layoutBase.files,'before'))throw Error('Known LIVE sources rejected');
+const after=[...baseline.files.map(f=>updates.find(u=>u.name===f.name)||f),...updates.filter(u=>config.adds.includes(u.name))];if(!installer.baseMatches(after,'after'))throw Error('Combined package failed integrity check');
+const manifest={status:'PREPARED_NOT_PUBLISHED',latestConfirmedLiveVersion:37,scriptId:config.scriptId,deploymentId:config.primaryDeployment,changes:config.changes,adds:config.adds,preservedExistingFiles:baseline.files.length-config.changes.length,totalAfter:after.length,approvedLayoutBaselineAccepted:true,automaticWork:'Authenticated visible Hub only; no scheduled trigger',installer:'Beauty-LIVE-Complete-Recovery-20261116.cjs',hashes:updates.map(u=>({name:u.name,sha256:sha(u.source)}))};fs.writeFileSync(path.join(dir,'manifest.json'),JSON.stringify(manifest,null,2)+'\n');console.log(JSON.stringify(manifest,null,2));

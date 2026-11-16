@@ -1,0 +1,23 @@
+const fs=require('fs'),path=require('path'),vm=require('vm'),crypto=require('crypto');
+const dir=__dirname,sha=s=>crypto.createHash('sha256').update(s).digest('hex');
+const previous=path.join(dir,'../live-event-create/deliverables/Beauty-LIVE-Event-Creation-20261116.cjs');
+const event=require(previous).PACKAGES[0],workbook=require('../live-workbook-repair/deliverables/Beauty-LIVE-Workbook-Repair-20261116.cjs').PACKAGES[0];
+const update={name:'LiveCastView',type:'HTML',source:fs.readFileSync(path.join(dir,'LiveCastView.html'),'utf8')};
+const packages=[event,workbook].map((prior,index)=>{
+ const c=structuredClone(prior.config);c.beforeFiles=structuredClone(prior.config.afterFiles);delete c.beforeFileAlternatives;c.allowedPublishedHashes=[];c.changes=['LiveCastView'];c.adds=[];
+ c.releaseDescription='LIVE wider navigation and responsive player headings — 2026-11-16';
+ c.deployments=c.deployments.map(d=>d.id===c.primaryDeployment?{...d,version:index===0?40:41}:d);
+ c.afterFiles=c.beforeFiles.map(f=>f.name===update.name?{...f,sha256:sha(update.source)}:f);
+ return {config:c,updates:[update]};
+});
+let source=fs.readFileSync(previous,'utf8').replace(/^const PACKAGES=.*;$/m,()=> 'const PACKAGES='+JSON.stringify(packages)+';');
+source=source.replaceAll('Beauty-LIVE-Event-Creation','Beauty-LIVE-Cast-Headings').replace('Installing the approved LIVE event creation workflow...','Installing the approved LIVE cast headings and wider tabs...');
+source=source.replace('const installer=installers[0],config=installer.CONFIG;','let installer=installers[0];const config=installer.CONFIG;');
+source=source.replace('const client=installer.makeClient(credentials,fetch,audit.requests);','let client=installer.makeClient(credentials,fetch,audit.requests);');
+const marker="  const inspection=await inspectRelease(request,save,installer);audit.inspection=inspection;";
+if(!source.includes(marker))throw Error('Installer selection location changed');
+source=source.replace(marker,"  const selectionHead=await request('GET','/content');\n  const matching=installers.filter(i=>i.baseMatches(selectionHead.files,'before')||i.baseMatches(selectionHead.files,'after'));\n  if(matching.length!==1)throw Error('LIVE source changed since review. Nothing uploaded.');\n  installer=matching[0];client=installer.makeClient(credentials,fetch,audit.requests);\n"+marker);
+new vm.Script(source);fs.mkdirSync(path.join(dir,'deliverables'),{recursive:true});
+const filename='Beauty-LIVE-Cast-Headings-20261116.cjs';fs.writeFileSync(path.join(dir,'deliverables',filename),source);
+fs.writeFileSync(path.join(dir,'manifest.json'),JSON.stringify({status:'PREPARED_NOT_PUBLISHED',changes:['LiveCastView'],adds:[],sha256:sha(update.source),acceptedBaselines:['Verified v40 source','Exact workbook-repair source, only if already installed'],notes:'Only the display HTML changes. All other current source is preserved; unknown baselines stop. No registration, event or spreadsheet writes.'},null,2));
+console.log('Prepared one-file LIVE display update, preserving either known workbook baseline.');

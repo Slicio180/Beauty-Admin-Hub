@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "checks": [
+    "Inspection reads fixed LIVE source and published version without writing",
+    "Changed editor or published source stops before any upload",
+    "Four reviewed files change and the recovery module is added; all other files, fixed deployment and frozen source are verified",
+    "Lost upload and publication replies are read back, never replayed",
+    "Accepts either exact v37 or the exact approved layout, including prepared source with older published v37",
+    "Function execution and deployment deletion are blocked"
+  ],
+  "remoteCalls": 0
+}

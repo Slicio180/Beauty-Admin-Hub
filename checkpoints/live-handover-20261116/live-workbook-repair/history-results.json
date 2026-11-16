@@ -1,0 +1,14 @@
+{
+  "result": "PASS",
+  "checks": [
+    "Multi-part Unicode removal record round-trips in existing history columns",
+    "Identical record recheck does not append; conflicting reuse stops",
+    "Corrupt recovery content is rejected before use",
+    "Lost header/data replies verify saved cells without repeat writes",
+    "Readable history preserves repeated original rows and avoids re-adding saved snapshots",
+    "Existing unrelated history cells are protected",
+    "Pool recovery can read both existing tab receipts and new central records",
+    "All changed server files parse; removal and pool writers no longer create tabs"
+  ],
+  "remoteCalls": 0
+}

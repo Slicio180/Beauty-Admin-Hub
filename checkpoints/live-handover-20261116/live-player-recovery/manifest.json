@@ -1,0 +1,42 @@
+{
+  "status": "PREPARED_NOT_PUBLISHED",
+  "latestConfirmedLiveVersion": 37,
+  "scriptId": "1EU9dCgJ5NIhFjJ474gjX07WGQmouXCzSs4mRVKpZESwahVyR_DcenOo4",
+  "deploymentId": "AKfycbwEPJdO-DATlD0IfQtlsSw4SAhYURYgfPzKDIOxASI1eOibi-LhB6LaEnfKD6jorEaIwQ",
+  "changes": [
+    "LiveHub",
+    "LiveHubView",
+    "LiveRegister",
+    "LiveRegistrationQueue"
+  ],
+  "adds": [
+    "LivePlayerRecovery"
+  ],
+  "preservedExistingFiles": 24,
+  "totalAfter": 29,
+  "approvedLayoutBaselineAccepted": true,
+  "automaticWork": "Authenticated visible Hub only; no scheduled trigger",
+  "installer": "Beauty-LIVE-Complete-Recovery-20261116.cjs",
+  "hashes": [
+    {
+      "name": "LiveHub",
+      "sha256": "3a27e72a5cb0b9755e0f13f3590c865d06eccd6c7520fea48ad15ae37ad58123"
+    },
+    {
+      "name": "LiveHubView",
+      "sha256": "cd8bf530a41fa580f15adf0fafdbcdd965e921ef05561ddb1fd6dd93cc578566"
+    },
+    {
+      "name": "LiveRegister",
+      "sha256": "d4c05bbe414cb75900579af0ed807ff01a418daf2954ed9aa3b7b69cc16ecd4d"
+    },
+    {
+      "name": "LiveRegistrationQueue",
+      "sha256": "b5d84f845149aa4fa4c0cf921c71c04511a1febf395994ed3c90f6be319ab35e"
+    },
+    {
+      "name": "LivePlayerRecovery",
+      "sha256": "da62a55442932e8fbbdbf062b71fd1bd46fd461b1721f534f9348b85c7060a8b"
+    }
+  ]
+}

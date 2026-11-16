@@ -1,0 +1,13 @@
+{
+  "status": "PREPARED_NOT_PUBLISHED",
+  "changes": [
+    "LiveCastView"
+  ],
+  "adds": [],
+  "sha256": "05ba76066f0b21cb7f1da35044f0c4e360a48d4e7f0d7dd3435eccb7d6887518",
+  "acceptedBaselines": [
+    "Verified v40 source",
+    "Exact workbook-repair source, only if already installed"
+  ],
+  "notes": "Only the display HTML changes. All other current source is preserved; unknown baselines stop. No registration, event or spreadsheet writes."
+}

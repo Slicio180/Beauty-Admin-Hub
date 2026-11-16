@@ -1,0 +1,443 @@
+{
+  "files": [
+    {
+      "path": "HANDOVER-20261116.md",
+      "bytes": 12474,
+      "sha256": "047533646dd2c06e130aae2cda697465b5f52346d7b81c6f08b563c0e955ad47"
+    },
+    {
+      "path": "Manual/Beauty-Operator-Handbook-Draft.md",
+      "bytes": 47958,
+      "sha256": "ca8bc4130404df1aabda4f054d291d02f1ef33f1dfc66663c087a6c442c271d8"
+    },
+    {
+      "path": "confirmed-live-v40/BeautyRecoveryInventory.js",
+      "bytes": 4237,
+      "sha256": "408b079c59f80dc8e0069c3b58541a81420cb67313fad3f96313586b06c1d5bb"
+    },
+    {
+      "path": "confirmed-live-v40/BeautyRestoreOriginal.js",
+      "bytes": 16214,
+      "sha256": "1249e51bcc9df781c02cc9c6415f34a288bc0ac6885b1fc8ade0c5b328331d65"
+    },
+    {
+      "path": "confirmed-live-v40/Kiosk.html",
+      "bytes": 768794,
+      "sha256": "83d5c3342a25d0147355204498b8fbfdb2f643cf5599a16b4e9dd3a4f0930a92"
+    },
+    {
+      "path": "confirmed-live-v40/LiveCast.js",
+      "bytes": 8275,
+      "sha256": "3970f2134ec8ec3d967624f33bc01ef2a1a0a7fff7a4731bc524a5d2e277846e"
+    },
+    {
+      "path": "confirmed-live-v40/LiveCastView.html",
+      "bytes": 1048677,
+      "sha256": "b1292f5c5b1040b8d88ab415ed5e2f69a9713304e55c0acbc868c83d2a7af486"
+    },
+    {
+      "path": "confirmed-live-v40/LiveConsent.js",
+      "bytes": 5734,
+      "sha256": "dccb00e601b36c73d32ee476f3a361fe9cc22c7ea1fa19c3e8f888812405e1c6"
+    },
+    {
+      "path": "confirmed-live-v40/LiveEventContext.js",
+      "bytes": 13511,
+      "sha256": "eab92934296604a8161724cc8c466fc4f6136034d1000df772ac7fb2f91aca0b"
+    },
+    {
+      "path": "confirmed-live-v40/LiveEventCreate.js",
+      "bytes": 11289,
+      "sha256": "784a05c9283dcf9adec32ca86c7b4a83f2fb9446acb5151b65fbe89b806d02cb"
+    },
+    {
+      "path": "confirmed-live-v40/LiveEventSwitch.js",
+      "bytes": 19614,
+      "sha256": "7b766611741eb82e69f76052d6efd27a28f260686fc26e6e82565dc6d81bb3d7"
+    },
+    {
+      "path": "confirmed-live-v40/LiveHub.js",
+      "bytes": 8869,
+      "sha256": "d28943d0003487cb19f2a253b0181121afe574c8973d7d87ce189e4ea4658fc2"
+    },
+    {
+      "path": "confirmed-live-v40/LiveHubView.html",
+      "bytes": 1143846,
+      "sha256": "ae57ff033c2b7645e5246c5bc5a80846f6aaad5dc4bf66144311c130f3f7bfd6"
+    },
+    {
+      "path": "confirmed-live-v40/LiveLayoutCheck.js",
+      "bytes": 488,
+      "sha256": "71c86aaf8272abebfe795a4f44068633e3d995b214756ed805b558b6d52cafad"
+    },
+    {
+      "path": "confirmed-live-v40/LiveLogin.html",
+      "bytes": 44662,
+      "sha256": "c02edb2a94e813367335602f3d8a6bedc4eac32bf4fc673b023cba591867b633"
+    },
+    {
+      "path": "confirmed-live-v40/LiveLoginAuth.js",
+      "bytes": 7255,
+      "sha256": "6c0709c025ba9f25af568df1b580f36edde2046897dd2d8a4528df5dfa3e1f1a"
+    },
+    {
+      "path": "confirmed-live-v40/LiveLoginEntry.js",
+      "bytes": 1085,
+      "sha256": "153f10edb866e7260ba65338158fc1c7ba257c9160885e3905ab510a54de4a04"
+    },
+    {
+      "path": "confirmed-live-v40/LiveNakkaCheck.js",
+      "bytes": 3042,
+      "sha256": "21de747341ce56ada28f4126a2883bab3c6ea91015c18c07bed0be96f1842d45"
+    },
+    {
+      "path": "confirmed-live-v40/LiveNakkaMonitor.js",
+      "bytes": 5361,
+      "sha256": "64dc6359bf67b200fb32bc16919aeb7e6a5b8bde3bc9282f67858dbdeff33de4"
+    },
+    {
+      "path": "confirmed-live-v40/LivePlanner.js",
+      "bytes": 84697,
+      "sha256": "fa89ccf2c3c84d139c18e364f8b0d3f99bf1bf006698a83bcbd6c94d1926d250"
+    },
+    {
+      "path": "confirmed-live-v40/LivePlayerRecovery.js",
+      "bytes": 30788,
+      "sha256": "da62a55442932e8fbbdbf062b71fd1bd46fd461b1721f534f9348b85c7060a8b"
+    },
+    {
+      "path": "confirmed-live-v40/LivePlayerRegistration.js",
+      "bytes": 3059,
+      "sha256": "9fec0a49b48fff98cb1d494f8634c3f8d40bac762f78e23453ee48e2efbd98aa"
+    },
+    {
+      "path": "confirmed-live-v40/LivePreflight.js",
+      "bytes": 4366,
+      "sha256": "4b74d1fbb27ee2daff19456681c7ce155e472f3d406fa8397fb65bc4fd89153c"
+    },
+    {
+      "path": "confirmed-live-v40/LivePublicRegistration.js",
+      "bytes": 1893,
+      "sha256": "0831a14675bed3542b09aef92354fa7e19f74002fa5edcb4d38a5872aae42b10"
+    },
+    {
+      "path": "confirmed-live-v40/LiveRecovery.js",
+      "bytes": 27996,
+      "sha256": "42e6afee99c439f945662018cacb2c3589f0895d83f8a7b98a49ea34b3c74372"
+    },
+    {
+      "path": "confirmed-live-v40/LiveRegister.js",
+      "bytes": 22174,
+      "sha256": "d4c05bbe414cb75900579af0ed807ff01a418daf2954ed9aa3b7b69cc16ecd4d"
+    },
+    {
+      "path": "confirmed-live-v40/LiveRegistrationQueue.js",
+      "bytes": 23240,
+      "sha256": "b5d84f845149aa4fa4c0cf921c71c04511a1febf395994ed3c90f6be319ab35e"
+    },
+    {
+      "path": "confirmed-live-v40/LiveRegistrationRecovery.js",
+      "bytes": 5869,
+      "sha256": "5d06dc8e04b63428c0e7779b91a2c65d8f933c47e9bf95bfcae2bf171268e5cb"
+    },
+    {
+      "path": "confirmed-live-v40/LiveRemove.js",
+      "bytes": 19484,
+      "sha256": "a68a8781f64b9c660525caa24c4bc8470f751919d56d09db02b82af06c3e0cfb"
+    },
+    {
+      "path": "confirmed-live-v40/LiveStatus.js",
+      "bytes": 7273,
+      "sha256": "4ad72c36f499d640c4e7e475eac33b0b588212d9fa8914616b68d6ec58a78f8d"
+    },
+    {
+      "path": "confirmed-live-v40/RemoteRegistration.html",
+      "bytes": 802379,
+      "sha256": "76114578c12f9bea7328797852cf1113e07a498111fc349c153e2029e8b25c68"
+    },
+    {
+      "path": "confirmed-live-v40/appsscript.json",
+      "bytes": 439,
+      "sha256": "5f4f9b9b6abdd883afb388a81c3f93f22c307dd6ec739fdbd41c13f5eab5c56b"
+    },
+    {
+      "path": "live-cast-single-heading/LiveCastView.html",
+      "bytes": 1049405,
+      "sha256": "05ba76066f0b21cb7f1da35044f0c4e360a48d4e7f0d7dd3435eccb7d6887518"
+    },
+    {
+      "path": "live-cast-single-heading/README.md",
+      "bytes": 2748,
+      "sha256": "2975e52e1c63d7757499e25fc04c12d671021ac516e4afdc55f90fb2997ca9c9"
+    },
+    {
+      "path": "live-cast-single-heading/build.cjs",
+      "bytes": 3076,
+      "sha256": "c868e48bf7339cabcf31d10fa67668789aa58f317d272785eca414561cf6db3c"
+    },
+    {
+      "path": "live-cast-single-heading/check-layout.cjs",
+      "bytes": 4337,
+      "sha256": "cfc9ef6b0153bbece9f0f9c9008f672ae824f8b0aac96cb7d5c1a7e4c5f53112"
+    },
+    {
+      "path": "live-cast-single-heading/manifest.json",
+      "bytes": 446,
+      "sha256": "5597e9210751c62deee1c6c0b09cfb61a6273f4848b141863a5bcafc81d6013e"
+    },
+    {
+      "path": "live-cast-single-heading/release-check.cjs",
+      "bytes": 3073,
+      "sha256": "fa99cf4d088c1d8ac78e993da1400191d224e8f75c76a9712bf736855122f703"
+    },
+    {
+      "path": "live-cast-single-heading/release-results.json",
+      "bytes": 489,
+      "sha256": "b1c2089303429c3cfc066377cdf31fa86e32ece6283bb6ba51c1767bcba839d1"
+    },
+    {
+      "path": "live-cast-single-heading/source-check.json",
+      "bytes": 692,
+      "sha256": "bd2ff1a9de047a31305cf913e85fd87c00cda9563c7fbf7977021c6c0f1d91fa"
+    },
+    {
+      "path": "live-event-create/Handbook.md",
+      "bytes": 35274,
+      "sha256": "700078321cf0ad829345292e299c8dc99145568fae26192434e59dcaa32ca539"
+    },
+    {
+      "path": "live-event-create/LiveEventContext.js",
+      "bytes": 13511,
+      "sha256": "eab92934296604a8161724cc8c466fc4f6136034d1000df772ac7fb2f91aca0b"
+    },
+    {
+      "path": "live-event-create/LiveEventCreate.js",
+      "bytes": 11289,
+      "sha256": "784a05c9283dcf9adec32ca86c7b4a83f2fb9446acb5151b65fbe89b806d02cb"
+    },
+    {
+      "path": "live-event-create/LiveHub.js",
+      "bytes": 8869,
+      "sha256": "d28943d0003487cb19f2a253b0181121afe574c8973d7d87ce189e4ea4658fc2"
+    },
+    {
+      "path": "live-event-create/LiveHubView.html",
+      "bytes": 1143846,
+      "sha256": "ae57ff033c2b7645e5246c5bc5a80846f6aaad5dc4bf66144311c130f3f7bfd6"
+    },
+    {
+      "path": "live-event-create/README.md",
+      "bytes": 4739,
+      "sha256": "e0d9539dd8dece85d94688a73b6e26043c891671aa8135c802b2f091a7308cc2"
+    },
+    {
+      "path": "live-event-create/build.cjs",
+      "bytes": 3184,
+      "sha256": "4ef04c9bbba74de5476574667301d1b37b49d5ffa85240876d54546cd89b30c8"
+    },
+    {
+      "path": "live-event-create/dom-fixture.cjs",
+      "bytes": 4610,
+      "sha256": "5adc57a68a64e07254f26d592fa040528f58b864d678c932caf98c4ea3ae8414"
+    },
+    {
+      "path": "live-event-create/engine-results.json",
+      "bytes": 1091,
+      "sha256": "a400e81a7bda292e73a551aa786fd50448c7b17006b01c01a74956ecc91ede41"
+    },
+    {
+      "path": "live-event-create/engine.test.cjs",
+      "bytes": 10048,
+      "sha256": "7984f0e5c48085c3f80d90d09bc421a4256ccc63cbf22b8ec6ebb25a155b9190"
+    },
+    {
+      "path": "live-event-create/event-create-ui.js",
+      "bytes": 14304,
+      "sha256": "b589c2245c352318aab1f755a35e55bc028174101397272da07b92b8157bca21"
+    },
+    {
+      "path": "live-event-create/manifest.json",
+      "bytes": 1129,
+      "sha256": "b86cc1a3242230d3097711475bbf89f79e87be3af9ad58b4672097a2a14ded6f"
+    },
+    {
+      "path": "live-event-create/release-results.json",
+      "bytes": 485,
+      "sha256": "1107b6dd54585e9b2ed2caf7f1275da5b2883d40d1cd9e51e92a1334f2f5efa5"
+    },
+    {
+      "path": "live-event-create/release.test.cjs",
+      "bytes": 4047,
+      "sha256": "b0ef7d538525eb5ad1573e4db69ef6fc4acfc7ebd8f111b209f2e149af75a37c"
+    },
+    {
+      "path": "live-event-create/ui-results.json",
+      "bytes": 560,
+      "sha256": "1c2e8dd84b2a7dbf4c95ccdab2eae67bb612d430fe8723ea6d77149e4945a79a"
+    },
+    {
+      "path": "live-event-create/ui.test.cjs",
+      "bytes": 3563,
+      "sha256": "31af9907c3847c56ca7e6324d4dab739233820a1e931ef70b039897900d02845"
+    },
+    {
+      "path": "live-player-recovery/Handbook.md",
+      "bytes": 34322,
+      "sha256": "ab1f883510f32462bb9ab1b719de8b4be0ec0fc99c2ade7ee04b54283c242d73"
+    },
+    {
+      "path": "live-player-recovery/LiveHub.js",
+      "bytes": 8736,
+      "sha256": "3a27e72a5cb0b9755e0f13f3590c865d06eccd6c7520fea48ad15ae37ad58123"
+    },
+    {
+      "path": "live-player-recovery/LiveHubView.html",
+      "bytes": 1129087,
+      "sha256": "ca19247718fdf350077c6440d8e6413d51fa08cccfa0ecbcf14191493d799d16"
+    },
+    {
+      "path": "live-player-recovery/LivePlayerRecovery.js",
+      "bytes": 30788,
+      "sha256": "da62a55442932e8fbbdbf062b71fd1bd46fd461b1721f534f9348b85c7060a8b"
+    },
+    {
+      "path": "live-player-recovery/LiveRegister.js",
+      "bytes": 22174,
+      "sha256": "d4c05bbe414cb75900579af0ed807ff01a418daf2954ed9aa3b7b69cc16ecd4d"
+    },
+    {
+      "path": "live-player-recovery/LiveRegistrationQueue.js",
+      "bytes": 23240,
+      "sha256": "b5d84f845149aa4fa4c0cf921c71c04511a1febf395994ed3c90f6be319ab35e"
+    },
+    {
+      "path": "live-player-recovery/README.md",
+      "bytes": 5658,
+      "sha256": "8cbd17e2ae986333d190615939083135175b02a47bbc15a20cf20d58791bf3b3"
+    },
+    {
+      "path": "live-player-recovery/build.cjs",
+      "bytes": 3344,
+      "sha256": "365d98a27c710f3219b601130cf4fa5beadd190b025b2f133d8487c8751fadbb"
+    },
+    {
+      "path": "live-player-recovery/dom-fixture.cjs",
+      "bytes": 4473,
+      "sha256": "d0acf0cbd685f5dfa26530bb093eaddfdb537b319d1c55988d75d37a1976e944"
+    },
+    {
+      "path": "live-player-recovery/engine-results.json",
+      "bytes": 1519,
+      "sha256": "4b6983a7b0f33987555194ecfae3fefa3cbe8a200b62694a464e0f4618caac68"
+    },
+    {
+      "path": "live-player-recovery/engine.test.cjs",
+      "bytes": 14503,
+      "sha256": "ddb8d4b0cf37f7e7c165fdabdb97aea8afc120b4813acb6282d788d13af05545"
+    },
+    {
+      "path": "live-player-recovery/manifest.json",
+      "bytes": 1279,
+      "sha256": "ea49974dac609c69ce6c21d60448a0e04ea3fa8a2bf9a8cbd19b644a8552304f"
+    },
+    {
+      "path": "live-player-recovery/player-recovery-ui.html",
+      "bytes": 13837,
+      "sha256": "e31a21df7868fb4ffacd5b0dc216cf8184a086045dfa9f7786d723102c599978"
+    },
+    {
+      "path": "live-player-recovery/recovery-shell.js",
+      "bytes": 2428,
+      "sha256": "10c2a6dea2644e8ebc5b397042d9e95c32c96788533bfd7f960436648c329101"
+    },
+    {
+      "path": "live-player-recovery/release-results.json",
+      "bytes": 587,
+      "sha256": "12881a784ea9a1cc2c281c726ab52e3cf15f06d0ebe2014c10c9702b0a557929"
+    },
+    {
+      "path": "live-player-recovery/release.test.cjs",
+      "bytes": 4775,
+      "sha256": "451b75ea7699c194ac5624a16ecd64d20d018afc364c72fbf77bb0cbe6567f99"
+    },
+    {
+      "path": "live-player-recovery/ui-results.json",
+      "bytes": 658,
+      "sha256": "3a391b6e15548f48847579c1fe9ee6c2744ac76176ef808a3f8b24f79a19396d"
+    },
+    {
+      "path": "live-player-recovery/ui.test.cjs",
+      "bytes": 4056,
+      "sha256": "b0dd8815d2e9fec79164b2f717636ea25c9eb4651b1754d57c24fa8e8422e01c"
+    },
+    {
+      "path": "live-workbook-repair/LiveEventSwitch.js",
+      "bytes": 19658,
+      "sha256": "285349d8f9d8bc9e9767f990f7b299439e5fb5ff9cfa1dd840ded5f43a41af36"
+    },
+    {
+      "path": "live-workbook-repair/LiveHubView.html",
+      "bytes": 1143846,
+      "sha256": "ae57ff033c2b7645e5246c5bc5a80846f6aaad5dc4bf66144311c130f3f7bfd6"
+    },
+    {
+      "path": "live-workbook-repair/LivePlanner.js",
+      "bytes": 83819,
+      "sha256": "9b535a3a1cea7b92d7f7c20b00d109d76a0f261c01464da26bfe3c160d263631"
+    },
+    {
+      "path": "live-workbook-repair/LiveRemove.js",
+      "bytes": 19172,
+      "sha256": "720c38b089cb33ca48792b4fd82f36b7c1b2c488658ab6c1edc5e20624386cc2"
+    },
+    {
+      "path": "live-workbook-repair/LiveWorkbookHistory.js",
+      "bytes": 7188,
+      "sha256": "073e88a5851a2f7537146457ca6220caf989226fc9b43fc54ee30b4b2ee69394"
+    },
+    {
+      "path": "live-workbook-repair/README.md",
+      "bytes": 3903,
+      "sha256": "25e64c88673a24103e5c4fe4d577e46f97ef1aa4fdaf1938d60c64483596f7c9"
+    },
+    {
+      "path": "live-workbook-repair/build.cjs",
+      "bytes": 2809,
+      "sha256": "c22b75e1fec2c0a4bb0636059ac8f4350ebab05c0fe9e418dda03d34a590f0b3"
+    },
+    {
+      "path": "live-workbook-repair/history-results.json",
+      "bytes": 657,
+      "sha256": "be9c9c8444f31774e88b17f83133d0f4dc243b063aee8f6d97f02fbb36c024f8"
+    },
+    {
+      "path": "live-workbook-repair/history.test.cjs",
+      "bytes": 5470,
+      "sha256": "bfc07469523e12110ac36f65e45267f58dc35536ceca26e17830c19ec3b9c17d"
+    },
+    {
+      "path": "live-workbook-repair/manifest.json",
+      "bytes": 1145,
+      "sha256": "fa9d4d90f2d832ca4102bae95b331c79d56a01b03749aac2e5a6b2b0a072eddf"
+    },
+    {
+      "path": "live-workbook-repair/release-results.json",
+      "bytes": 503,
+      "sha256": "ea773c5da38f33b162a0ef68cd2bd6cdc9847322eec43974482a25dbe85e1f22"
+    },
+    {
+      "path": "live-workbook-repair/release.test.cjs",
+      "bytes": 4072,
+      "sha256": "6460ee5ee4bbf5e7f6ec9150a974124a6a728cb0d751b02b70e1499c87018d71"
+    }
+  ],
+  "firebaseLiteralRedactions": [
+    "confirmed-live-v40/LiveHubView.html",
+    "confirmed-live-v40/LiveLoginAuth.js",
+    "confirmed-live-v40/LiveLogin.html",
+    "live-event-create/LiveHubView.html",
+    "live-player-recovery/LiveHubView.html",
+    "live-workbook-repair/LiveHubView.html"
+  ],
+  "privateDataExcluded": true
+}
