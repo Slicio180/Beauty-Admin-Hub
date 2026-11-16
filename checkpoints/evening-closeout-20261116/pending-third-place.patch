@@ -1,0 +1,12 @@
+--- a/LiveCastView.html
++++ b/LiveCastView.html
+@@ -451,0 +452,6 @@
++ // A third-place participant may arrive before the other semifinal finishes.
++ // Nakka can encode that row as an indexed object; absent positions stay pending.
++ function thirdPair(row){
++  if(!row||typeof row!=='object'||Array.isArray(row)&&row.length>2||Object.keys(row).some(key=>key!=='0'&&key!=='1'))fail();
++  return [0,1].map(index=>Object.hasOwn(row,index)?row[index]:'');
++ }
+@@ -511 +517 @@
+-   if(third!=null&&!Array.isArray(third))fail();if(enabled&&third?.length){if(!Array.isArray(third[0])||third[0].length!==2)fail();const [left,right]=third[0].map(slot),results=t[thirdKind+'_result']?.[0],a=left.id&&right.id?results?.[left.id]?.[right.id]:null,b=left.id&&right.id?results?.[right.id]?.[left.id]:null;
++   if(third!=null&&!Array.isArray(third))fail();if(enabled&&third?.length){const [left,right]=thirdPair(third[0]).map(slot),results=t[thirdKind+'_result']?.[0],a=left.id&&right.id?results?.[left.id]?.[right.id]:null,b=left.id&&right.id?results?.[right.id]?.[left.id]:null;
