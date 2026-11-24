@@ -151,6 +151,10 @@ hub = replace_script(hub, "host=get('beautyLiveRecoveryEventControls'),old=get('
 display = (ORIGINAL / 'BeautyDisplayRepairView.html').read_text()
 display = display.replace('beautyDisplayRepairTestData()', 'beautyLiveCastData()')
 display = display.replace('beautyDisplayRepairTestPlan()', 'beautyStagePlanLive()')
+
+# Preserve null holes and indexed Nakka knockout rows (checkpoint90).
+display = replace_once(display, ' function project(tournament,standings,schedule', " // Preserve provider slot positions when JSON contains holes or indexed rows.\n // Missing positions remain pending; only Nakka supplies player IDs/advancement.\n function knockoutRow(row,width){\n  if(!Number.isInteger(width)||width<1||width>1024||!row||typeof row!=='object'||Array.isArray(row)&&row.length>width)fail();\n  if(Object.keys(row).some(key=>! /^(0|[1-9][0-9]*)$/.test(key)||Number(key)>=width))fail();\n  return Array.from({length:width},(_,index)=>Object.hasOwn(row,index)&&row[index]!==null?row[index]:'');\n }\n function project(tournament,standings,schedule")
+display = replace_once(display, '   const rounds=table.map((players,round)=>{\n    if(!Array.isArray(players)||players.length>1024)fail();\n    const slots=players.map(slot),matches=[];', "   const declared=t[kind+'_setting']?.t_player_count;\n   const opening=Number.isInteger(declared)&&declared>=2&&declared<=1024&&(declared&(declared-1))===0?declared:Array.isArray(table[0])?table[0].length:null;\n   if(!Number.isInteger(opening)||opening<2||opening>1024||(opening&(opening-1))!==0||table.length>Math.log2(opening)+1)fail();\n   const rounds=table.map((row,round)=>{\n    const players=knockoutRow(row,opening/2**round);\n    const slots=players.map(slot),matches=[];")
 (OUT / 'LiveCastView.html').write_text(display)
 
 # Carry the alternate pool server's saved-draft contract into the existing

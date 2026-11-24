@@ -1,0 +1,24 @@
+const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('assert/strict'),crypto=require('crypto');
+const root=path.resolve(__dirname,'../..'),source=fs.readFileSync(path.join(root,'application/LiveCastView.html'),'utf8');
+const code=[...source.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)].map(m=>m[1]).find(s=>s.includes('BeautyNakkaStages=api'));
+const ctx={module:{exports:{}}};vm.runInNewContext(code,ctx);const model=ctx.module.exports;
+const clone=x=>JSON.parse(JSON.stringify(x)),results=[];
+const fixture=()=>({result:0,tournament:{tdid:'t_synthetic',lgid:'lg_synthetic',team_games:0,title:'Synthetic',entry_list:['A001','B002','C003'].map((tpid,i)=>({tpid,name:'Player '+(i+1)})),t_setting:{tournament:1,t_player_count:4,t3:0},s2_setting:{tournament:0},t_table:[['A001','B002','C003','empty'],['A001','C003'],['A001']],t_result:[{A001:{B002:{r:2}},B002:{A001:{r:0}}},{A001:{C003:{r:3}},C003:{A001:{r:1}}}]}});
+const project=t=>model.project(t,{result:0,tdid:'t_synthetic',groups:[]},undefined,'t_synthetic','lg_synthetic');
+function test(name,fn){fn();results.push({name,result:'PASS'});}
+const canonical=clone(project(fixture()));
+test('Dense provider rounds retain exact results and champion',()=>{const p=project(fixture());assert.equal(p.knockouts[0].rounds[1].matches[0].leftScore,3);assert.equal(p.knockouts[0].rounds[2].matches[0].left.id,'A001');});
+test('Fully indexed rows match dense arrays exactly',()=>{const t=fixture();t.tournament.t_table=t.tournament.t_table.map(r=>Object.assign({},r));assert.deepEqual(clone(project(t)),canonical);});
+test('Null holes stay in position and never become byes',()=>{const t=fixture();t.tournament.t_table[0]=['A001',null,'C003'];const p=project(t).knockouts[0].rounds[0];assert.equal(p.slotCount,4);assert.equal(p.matches[0].left.id,'A001');assert.equal(p.matches[0].right.state,'pending');assert.equal(p.matches[1].left.id,'C003');assert.equal(p.matches[1].right.state,'pending');});
+test('Sparse indexed rows preserve right-side position',()=>{const t=fixture();t.tournament.t_table[0]={'1':'B002','3':'empty'};const p=project(t).knockouts[0].rounds[0];assert.equal(p.matches[0].left.state,'pending');assert.equal(p.matches[0].right.id,'B002');assert.equal(p.matches[1].right.state,'bye');});
+test('Empty arrays stay pending at the declared bracket width',()=>{const t=fixture();t.tournament.t_table[0]=[];const p=project(t).knockouts[0].rounds[0];assert.equal(p.slotCount,4);assert(p.matches.every(m=>m.left.state==='pending'&&m.right.state==='pending'));});
+test('Indexed final winner keeps provider champion',()=>{const t=fixture();t.tournament.t_table[2]={'0':'A001'};assert.deepEqual(clone(project(t)),canonical);});
+test('Empty winner row never invents a champion',()=>{const t=fixture();t.tournament.t_table[2]={};assert.equal(project(t).knockouts[0].rounds[2].matches[0].left.state,'pending');});
+test('Legacy dense row width remains supported without count',()=>{const t=fixture();delete t.tournament.t_setting.t_player_count;assert.deepEqual(clone(project(t)),canonical);});
+test('Unknown player is still rejected',()=>{const t=fixture();t.tournament.t_table[0]={'0':'WRNG'};assert.throws(()=>project(t));});
+for(const [name,row] of [['named key',{left:'A001'}],['negative index',{'-1':'A001'}],['leading zero index',{'01':'A001'}],['out-of-range index',{'4':'A001'}],['oversized array',['','','','','']],['numeric player',[42]],['nested object',[{}]],['null row',null]])test('Reject '+name,()=>{const t=fixture();t.tournament.t_table[0]=row;assert.throws(()=>project(t));});
+test('Extra round is rejected',()=>{const t=fixture();t.tournament.t_table.push(['A001']);assert.throws(()=>project(t));});
+test('Wrong event remains rejected',()=>{const t=fixture();t.tournament.tdid='t_other';assert.throws(()=>project(t));});
+test('Provider data is not mutated',()=>{const t=fixture();t.tournament.t_table[0]={'1':'B002'};const before=JSON.stringify(t);project(t);assert.equal(JSON.stringify(t),before);});
+const report={status:'PASS',checks:results.length,sourceSHA256:crypto.createHash('sha256').update(source).digest('hex'),scope:'Synthetic read-only bracket projection; no provider or workbook writes',results};
+fs.writeFileSync(path.join(__dirname,'indexed-rounds-results.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({status:report.status,checks:report.checks,sourceSHA256:report.sourceSHA256}));

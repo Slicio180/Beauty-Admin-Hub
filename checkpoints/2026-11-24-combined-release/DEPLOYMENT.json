@@ -1,0 +1,35 @@
+{
+  "status": "DEPLOYED_SOURCE_AND_PUBLIC_RUNTIME_VERIFIED_HUB_SIGN_IN_PENDING",
+  "recordedDate": "2026-11-24",
+  "liveVersion": 45,
+  "testVersion": 3,
+  "applicationIdentity": "06832416c2cceb9099c9f64ff1f9f33aa66e211de5ae9d5e12f26aeb96ca0131",
+  "applicationFilesByteIdentical": 37,
+  "totalFilesReadBackPerProject": 38,
+  "existingLiveUrlRetained": true,
+  "googleAuthorization": "COMPLETE",
+  "ownerClock": {
+    "count": 1,
+    "state": "ENABLED",
+    "unattendedRunState": "FINISHED"
+  },
+  "localBehaviorChecks": 343,
+  "displayChecks": 72,
+  "liveReadOnlyChecks": {
+    "registrationHealth": "PASS",
+    "playerList": "PASS",
+    "groups": "PASS",
+    "bothFinalsAndThirdPlace": "PASS",
+    "bothProviderWinners": "PASS",
+    "players": 19,
+    "occupiedFormulasVerified": 38,
+    "fiveWorkbookRangesUnchanged": true
+  },
+  "remaining": "Authenticated LIVE Hub screen/comparison requires normal staff sign-in",
+  "limits": [
+    "No new physical phone/tablet test",
+    "No promised speed target",
+    "No historical fixture replay or LIVE test registration"
+  ],
+  "privacy": "Raw native evidence and real player/consent/message records stay private"
+}

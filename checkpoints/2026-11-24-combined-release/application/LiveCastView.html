@@ -487,6 +487,13 @@ html[data-cast-flow="true"] .winner-card{min-height:64px;padding:10px}
   if(!row||typeof row!=='object'||Array.isArray(row)&&row.length>2||Object.keys(row).some(key=>key!=='0'&&key!=='1'))fail();
   return [0,1].map(index=>Object.hasOwn(row,index)?row[index]:'');
  }
+ // Preserve provider slot positions when JSON contains holes or indexed rows.
+ // Missing positions remain pending; only Nakka supplies player IDs/advancement.
+ function knockoutRow(row,width){
+  if(!Number.isInteger(width)||width<1||width>1024||!row||typeof row!=='object'||Array.isArray(row)&&row.length>width)fail();
+  if(Object.keys(row).some(key=>! /^(0|[1-9][0-9]*)$/.test(key)||Number(key)>=width))fail();
+  return Array.from({length:width},(_,index)=>Object.hasOwn(row,index)&&row[index]!==null?row[index]:'');
+ }
  function project(tournament,standings,schedule,target='t_UsRG_9574',league='lg_tM2v_3523'){
   if(!/^t_[A-Za-z0-9_]{1,80}$/.test(target))fail();
   if(typeof league!=='string'||(league!==''&&!/^lg_[A-Za-z0-9_]{1,80}$/.test(league)))fail();
@@ -529,8 +536,11 @@ html[data-cast-flow="true"] .winner-card{min-height:64px;padding:10px}
   for(const kind of ['t','s2']){
    if(t[kind+'_setting']?.tournament===0)continue;
    const table=t[kind+'_table'];if(table==null)continue;if(!Array.isArray(table)||table.length>12)fail();
-   const rounds=table.map((players,round)=>{
-    if(!Array.isArray(players)||players.length>1024)fail();
+   const declared=t[kind+'_setting']?.t_player_count;
+   const opening=Number.isInteger(declared)&&declared>=2&&declared<=1024&&(declared&(declared-1))===0?declared:Array.isArray(table[0])?table[0].length:null;
+   if(!Number.isInteger(opening)||opening<2||opening>1024||(opening&(opening-1))!==0||table.length>Math.log2(opening)+1)fail();
+   const rounds=table.map((row,round)=>{
+    const players=knockoutRow(row,opening/2**round);
     const slots=players.map(slot),matches=[];
     // Only explicit numeric opening guide values; never substitute league ranks.
     const guide=t[kind+'_init'],candidate=Array.isArray(guide?.[0])?guide[0]:guide;

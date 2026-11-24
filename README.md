@@ -2,14 +2,15 @@
 
 Updated 24 November 2026. Start with the [assembled release checkpoint](checkpoints/2026-11-24-combined-release/README.md).
 
-The fixed ten-item release combines sign-in, monitoring, recovery reports, background recovery, Nakka-to-Hub import, pool preservation, searchable instructions, display preservation, performance components and registration safeguards on LIVE v43. It is frozen in private TEST version 2; 323 local behavior checks pass. Native registration, import, recovery, removal and pool restoration checks passed. The eight-player pools and both knockout formats were sent once and verified in Nakka. The one-time Start is verified and the native Hub shows the competition running. All 38 immutable TEST files and all 38 staged LIVE files were read back; all 37 application files are byte-for-byte identical. Google now requires the new LIVE permission grant before the existing-URL deployment and one owner background clock can be completed.
+**LIVE v45 is deployed on the existing URL.** Its 37 application files are byte-for-byte identical to immutable private TEST v3. Google authorization is complete and one owner background clock is enabled; completed unattended runs were observed. The fixed ten-item release includes sign-in, monitoring, recovery reports, background recovery, Nakka-to-Hub import, pool preservation, searchable instructions, display preservation, performance components and registration safeguards.
 
-**LIVE remains v43. This GitHub save does not deploy the combined release.** Before staging, all 34 LIVE files matched v43. The new 38-file source is saved in the LIVE editor; the deployed URL still serves v43 and LIVE still has zero triggers.
+343 distinct local behavior checks underpin the combined release, including 72 display checks rerun for the final correction. Scoped native TEST workflows passed. LIVE verification confirms the current player list, real groups, both knockout finals, third place and provider winner panels. Five bounded workbook ranges remain unchanged; 19 players and 38 occupied consent/message formulas are verified. **The final authenticated LIVE Hub screen/comparison still requires normal staff sign-in.** Installation is complete; that read-only verification remains open.
 
-- [Current acceptance and remaining release steps](checkpoints/2026-11-24-combined-release/ACCEPTANCE.md)
-- [Public source coverage and exact private-file hashes](checkpoints/2026-11-24-combined-release/PUBLIC-COVERAGE.json)
+- [Acceptance and remaining verification](checkpoints/2026-11-24-combined-release/ACCEPTANCE.md)
+- [Public coverage and exact private-file hashes](checkpoints/2026-11-24-combined-release/PUBLIC-COVERAGE.json)
+- [Deployment evidence summary](checkpoints/2026-11-24-combined-release/DEPLOYMENT.json)
 - [Earlier 908-file source checkpoint](checkpoints/2026-11-24-source/README.md)
 
-The complete 37-file application is retained privately. This public checkpoint contains 35 unchanged application files plus the intended LIVE manifest; two historical recovery files containing captured player/account context remain private. Native fixtures, registration/consent/message records and actual credentials are excluded. The owner approved the existing owner identifier, Firebase client configuration and Google project IDs. Use the complete private artifact for deployment, preserving the accepted application bytes exactly.
+The complete 37-file application is retained privately. This public checkpoint contains 35 application files plus the intended LIVE manifest; two historical recovery files containing captured player/account context remain private. Native fixtures, registration/consent/message records and actual credentials are excluded. The owner approved the existing owner identifier, Firebase client configuration and Google project IDs. Use the complete private artifact for deployment, preserving accepted bytes exactly.
 
-Earlier folders and development branches are preserved. They are historical material and must not be substituted for the accepted release.
+Earlier folders and development branches are historical material. AIK Internal CP006 and multi-club work are outside this release. No speed target or new physical-device test is claimed.

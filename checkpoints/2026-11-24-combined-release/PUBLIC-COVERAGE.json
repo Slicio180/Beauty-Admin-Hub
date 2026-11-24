@@ -1,5 +1,5 @@
 {
-  "applicationIdentity": "52c9703a29d17620071384af399fddda562d81cefdecc62abab75415f4fe6fa9",
+  "applicationIdentity": "06832416c2cceb9099c9f64ff1f9f33aa66e211de5ae9d5e12f26aeb96ca0131",
   "applicationFiles": 37,
   "manifestFiles": 1,
   "excludedReason": "Two unchanged historical recovery files contain captured private player/account context. Complete deployment artifact remains in the owner private backup. No native helper or raw native evidence is published.",
@@ -66,8 +66,8 @@
     },
     {
       "file": "LiveCastView.html",
-      "sha256": "f4bb49f5afcd241c1a475ee34967661e45f68b24845900f2a389e958c4efb6b6",
-      "bytes": 1055338,
+      "sha256": "be3f9a2b083d5e5c89ae28f43e903532c4e3e093f867231cfc3f96a0deb370c7",
+      "bytes": 1056189,
       "published": true
     },
     {
@@ -233,10 +233,13 @@
       "published": true
     }
   ],
-  "frozenTestVersion": 2,
-  "immutableTestReadback": "38/38 matched; helper excluded",
-  "liveHeadReadback": "38/38 matched; application bytes identical to TEST",
-  "runningLiveVersion": 43,
-  "liveBackgroundTriggers": 0,
-  "remainingReleaseGate": "Actual Google LIVE OAuth consent, existing-URL deployment, one owner clock and deployed verification"
+  "frozenTestVersion": 3,
+  "immutableTestReadback": "38 files verified; all 37 application files exact; helper excluded",
+  "liveHeadReadback": "Immutable LIVE v45 independently read back; application bytes identical to TEST v3",
+  "runningLiveVersion": 45,
+  "liveBackgroundTriggers": 1,
+  "remainingReleaseGate": "Normal staff sign-in for final authenticated LIVE Hub screen/comparison",
+  "localBehaviorChecks": 343,
+  "displayChecks": 72,
+  "liveManifestNormalization": "JSON exact; Google omitted intended trailing newline"
 }

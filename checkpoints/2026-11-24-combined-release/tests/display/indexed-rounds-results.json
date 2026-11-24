@@ -1,0 +1,88 @@
+{
+  "status": "PASS",
+  "checks": 20,
+  "sourceSHA256": "be3f9a2b083d5e5c89ae28f43e903532c4e3e093f867231cfc3f96a0deb370c7",
+  "scope": "Synthetic read-only bracket projection; no provider or workbook writes",
+  "results": [
+    {
+      "name": "Dense provider rounds retain exact results and champion",
+      "result": "PASS"
+    },
+    {
+      "name": "Fully indexed rows match dense arrays exactly",
+      "result": "PASS"
+    },
+    {
+      "name": "Null holes stay in position and never become byes",
+      "result": "PASS"
+    },
+    {
+      "name": "Sparse indexed rows preserve right-side position",
+      "result": "PASS"
+    },
+    {
+      "name": "Empty arrays stay pending at the declared bracket width",
+      "result": "PASS"
+    },
+    {
+      "name": "Indexed final winner keeps provider champion",
+      "result": "PASS"
+    },
+    {
+      "name": "Empty winner row never invents a champion",
+      "result": "PASS"
+    },
+    {
+      "name": "Legacy dense row width remains supported without count",
+      "result": "PASS"
+    },
+    {
+      "name": "Unknown player is still rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "Reject named key",
+      "result": "PASS"
+    },
+    {
+      "name": "Reject negative index",
+      "result": "PASS"
+    },
+    {
+      "name": "Reject leading zero index",
+      "result": "PASS"
+    },
+    {
+      "name": "Reject out-of-range index",
+      "result": "PASS"
+    },
+    {
+      "name": "Reject oversized array",
+      "result": "PASS"
+    },
+    {
+      "name": "Reject numeric player",
+      "result": "PASS"
+    },
+    {
+      "name": "Reject nested object",
+      "result": "PASS"
+    },
+    {
+      "name": "Reject null row",
+      "result": "PASS"
+    },
+    {
+      "name": "Extra round is rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "Wrong event remains rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "Provider data is not mutated",
+      "result": "PASS"
+    }
+  ]
+}
