@@ -1,5 +1,5 @@
 {
-  "status": "DEPLOYED_SOURCE_AND_PUBLIC_RUNTIME_VERIFIED_HUB_SIGN_IN_PENDING",
+  "status": "DEPLOYED_VERIFIED_CLOSED",
   "recordedDate": "2026-11-24",
   "liveVersion": 45,
   "testVersion": 3,
@@ -23,13 +23,20 @@
     "bothProviderWinners": "PASS",
     "players": 19,
     "occupiedFormulasVerified": 38,
-    "fiveWorkbookRangesUnchanged": true
+    "fiveWorkbookRangesUnchanged": true,
+    "authenticatedHub": "PASS",
+    "allRenderedPlayerFields": "PASS",
+    "nakkaComparison": "PASS_WITH_PREEXISTING_COMPLETED_EVENT_DIFFERENCE",
+    "recoveryScreen": "PASS_NO_PLAYER_ISSUES",
+    "instructionsSwedishAndEnglishSearch": "PASS",
+    "fiveWorkbookRangesUnchangedAfterFinalHubCheck": true
   },
-  "remaining": "Authenticated LIVE Hub screen/comparison requires normal staff sign-in",
+  "remaining": [],
   "limits": [
     "No new physical phone/tablet test",
     "No promised speed target",
     "No historical fixture replay or LIVE test registration"
   ],
-  "privacy": "Raw native evidence and real player/consent/message records stay private"
+  "privacy": "Raw native evidence and real player/consent/message records stay private",
+  "closureCheckpoint": 91
 }

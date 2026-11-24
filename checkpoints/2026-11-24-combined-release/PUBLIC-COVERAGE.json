@@ -238,8 +238,11 @@
   "liveHeadReadback": "Immutable LIVE v45 independently read back; application bytes identical to TEST v3",
   "runningLiveVersion": 45,
   "liveBackgroundTriggers": 1,
-  "remainingReleaseGate": "Normal staff sign-in for final authenticated LIVE Hub screen/comparison",
+  "remainingReleaseGate": null,
   "localBehaviorChecks": 343,
   "displayChecks": 72,
-  "liveManifestNormalization": "JSON exact; Google omitted intended trailing newline"
+  "liveManifestNormalization": "JSON exact; Google omitted intended trailing newline",
+  "releaseStatus": "CLOSED",
+  "finalAuthenticatedLiveHub": "PASS",
+  "closureCheckpoint": 91
 }
