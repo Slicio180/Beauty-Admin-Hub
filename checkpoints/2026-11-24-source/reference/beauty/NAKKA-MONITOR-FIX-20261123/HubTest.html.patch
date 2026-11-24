@@ -1,0 +1,171 @@
+--- baseline/HubTest.html
++++ candidate/HubTest.html
+@@ -5708,7 +5708,7 @@
+ (() => {
+   'use strict';
+   const get=id=>document.getElementById(id);
+-  let data=null,attention=null,panel=null,requestId=0,busy=false,refreshQueued=false,requestError='',inFlight=false;
++  let data=null,attention=null,panel=null,requestId=0,busy=false,refreshQueued=false,requestError='',inFlight=false,deferred=false,lastVerifiedAt='';
+   const messages={
+     LEAGUE_IDENTITY_REVIEW:'The league identity is missing or has duplicate names. Review the player in Nakka.',
+     HUB_IDENTITY_REVIEW:'The Hub name is missing or appears more than once. Review the registrations.',
+@@ -5725,22 +5725,24 @@
+   function render() {
+     const items=attention?.items||[],count=items.length;
+     const available=attention?.available===true;
++    if(available&&attention.complete&&Number.isFinite(Date.parse(attention.checkedAt)))lastVerifiedAt=attention.checkedAt;
++    const waiting='Verification is waiting for another operation. Automatic checks will continue. '+(lastVerifiedAt?'Last verified '+new Date(lastVerifiedAt).toLocaleString('en-GB',{timeZone:'Europe/Stockholm'})+'.':'No completed event check is available yet.');
+     if(get('attentionCount'))get('attentionCount').textContent=count||available?String(count):'—';
+     const needsReview=!!data&&(count>0||!available||attention?.complete!==true||!!requestError);
+-    if(get('attentionCard'))get('attentionCard').dataset.active=String(count>0||!!requestError||!!data&&attention?.available===false);
++    if(get('attentionCard'))get('attentionCard').dataset.active=String(count>0||!!requestError||!!data&&attention?.available===false&&!deferred);
+     if(get('attentionTile')){
+       get('attentionTile').hidden=false;
+       get('attentionTile').disabled=!data;
+-      get('attentionTile').dataset.active=String(count>0||!!requestError||!!data&&attention?.available===false);
++      get('attentionTile').dataset.active=String(count>0||!!requestError||!!data&&attention?.available===false&&!deferred);
+       get('attentionTile').setAttribute('aria-label',available?`Needs attention: ${count} ${count===1?'player':'players'}. Open review.`:'Player attention status unavailable. Open review.');
+     }
+-    const status=requestError||(busy?'Checking player entries in Nakka…':!available?'Nakka check unavailable. Automatic checks will continue.':
++    const status=(requestError?(requestError+(deferred?' '+waiting:'')):'')||(busy?'Checking player entries in Nakka…':deferred?waiting:!available?'Nakka check unavailable. Automatic checks will continue.':
+       !attention.complete?'Checking the current event automatically. Saved alerts remain visible.':`Player entries checked ${new Date(attention.checkedAt).toLocaleString('en-GB',{timeZone:'Europe/Stockholm',day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})}.`);
+     if(get('attentionStatus'))get('attentionStatus').textContent=status;
+     get('attentionTile')?.setAttribute('title',status);
+     panel=get('nakkaAttentionPanel')||panel;
+     if(panel){
+-      panel.dataset.checkState=busy?'checking':available&&attention.complete&&!requestError?(items.length?'issues':'verified'):'unknown';const heading=panel.querySelector('[data-recovery-check-title]');if(heading)heading.textContent=busy?'Checking player entries…':available&&attention.complete&&!requestError?(items.length?'Player issues need review':'Player check verified'):'Player check incomplete';const list=panel.querySelector('.attention-list');list.replaceChildren();
++      panel.dataset.checkState=busy||deferred?'checking':available&&attention.complete&&!requestError?(items.length?'issues':'verified'):'unknown';const heading=panel.querySelector('[data-recovery-check-title]');if(heading)heading.textContent=busy?'Checking player entries…':deferred?'Verification waiting':available&&attention.complete&&!requestError?(items.length?'Player issues need review':'Player check verified'):'Player check incomplete';const list=panel.querySelector('.attention-list');list.replaceChildren();
+       const state=panel.querySelector('[data-attention-status]');state.textContent=status;
+       for(const item of items){
+         const row=document.createElement('li'),name=document.createElement('strong'),reason=document.createElement('p');
+@@ -5764,13 +5766,13 @@
+         }
+         list.append(row);
+       }
+-      if(!items.length){const row=document.createElement('li');row.textContent=busy?'No saved alerts. Current check in progress.':available&&attention.complete&&!requestError?'No players currently need review.':'No saved alerts. Current status is not confirmed.';list.append(row);}
++      if(!items.length){const row=document.createElement('li');row.textContent=busy?'No saved alerts. Current check in progress.':deferred?'No saved alerts. Verification is waiting; no new result is confirmed.':available&&attention.complete&&!requestError?'No players currently need review.':'No saved alerts. Current status is not confirmed.';list.append(row);}
+       const checkButton=panel.querySelector('[data-attention-refresh]');if(checkButton)checkButton.disabled=busy;
+     }
+   }
+   function update(next) {
+-    const changed=data?.eventDate!==next.eventDate||JSON.stringify((data?.players||[]).map(p=>[p.player||p.newPlayer,p.status]))!==JSON.stringify((next.players||[]).map(p=>[p.player||p.newPlayer,p.status]));
+-    if(changed){requestId++;requestError='';attention=null;document.dispatchEvent(new CustomEvent('beauty-nakka-invalidated'));}
++    const changed=data?.eventContext!==next.eventContext||data?.eventDate!==next.eventDate||JSON.stringify((data?.players||[]).map(p=>[p.player||p.newPlayer,p.status]))!==JSON.stringify((next.players||[]).map(p=>[p.player||p.newPlayer,p.status]));
++    if(changed){requestId++;requestError='';deferred=false;lastVerifiedAt='';attention=null;document.dispatchEvent(new CustomEvent('beauty-nakka-invalidated'));}
+     data=next;document.dispatchEvent(new CustomEvent('beauty-menu-data'));
+     if(get('inPlayerCount'))get('inPlayerCount').textContent=String((next.players||[]).filter(p=>p.status==='IN').length);
+     const saved=next.attention?.eventDate===next.eventDate?next.attention:{available:false,items:[],complete:false};
+@@ -5791,10 +5793,12 @@
+       const result=await(await BeautyHubServices.request('https://beauty.invalid/hub?page=attentionrefresh')).json();
+       if(ticket!==requestId||date!==data?.eventDate)return;
+       if(snapshot!==JSON.stringify((data.players||[]).map(p=>[p.player||p.newPlayer,p.status])))return;
+-      document.dispatchEvent(new CustomEvent('beauty-nakka-diagnosed',{detail:{...result,clientMs:Date.now()-started}}));
++      document.dispatchEvent(new CustomEvent('beauty-nakka-diagnosed',{detail:{...result,clientMs:Date.now()-started,lastVerifiedAt}}));
++      if(result.success===false&&result.code==='BUSY'){deferred=true;return;}
++      deferred=false;
+       if(!result.success||result.attention?.eventDate!==date||result.attention.available!==true||result.attention.complete!==true)throw Error('check');
+       attention=result.attention;requestError='';
+-    }catch(e){if(ticket===requestId){document.dispatchEvent(new CustomEvent('beauty-nakka-check-error'));requestError='Nakka could not be checked. Saved alerts are retained; automatic checks will continue.';}}
++    }catch(e){if(ticket===requestId){deferred=false;document.dispatchEvent(new CustomEvent('beauty-nakka-check-error'));requestError='Nakka could not be checked. Saved alerts are retained; automatic checks will continue.';}}
+     finally{inFlight=busy=false;render();if(refreshQueued&&data?.eventDate&&!document.hidden){refreshQueued=false;refresh();}}
+   }
+   function review() {
+@@ -5818,7 +5822,7 @@
+   get('dashboardNavButton')?.addEventListener('click',()=>document.querySelector('.main-content')?.scrollIntoView({behavior:'smooth',block:'start'}));
+   document.addEventListener('beauty-hub-opened',refresh);
+   document.addEventListener('beauty-hub-locked',()=>{
+-    requestId++;busy=false;refreshQueued=false;data=attention=null;requestError='';if(panel&&!get('nakkaAttentionPanel'))panel.remove();panel=null;
++    requestId++;busy=false;refreshQueued=false;data=attention=null;requestError='';deferred=false;lastVerifiedAt='';if(panel&&!get('nakkaAttentionPanel'))panel.remove();panel=null;
+     if(get('inPlayerCount'))get('inPlayerCount').textContent='0';render();
+   });
+   setInterval(()=>{if(BeautyHubServices.mode==='test'&&!document.hidden&&data?.eventDate)refresh();},30000);
+@@ -6277,7 +6281,7 @@
+   'use strict';
+   const get=id=>document.getElementById(id),menu=get('nakkaStatusPanel'),section=get('nakkaAttentionPanel');
+   if(!menu||!section)return;
+-  let checkedDate='',checking=false,clock=null,started=0;
++  let checkedDate='',checking=false,clock=null,started=0,lastVerified=null,lastFailure='';
+   const diagnose=get('nakkaDiagnose'),status=get('nakkaDiagnosis'),progress=get('nakkaCheckProgress');
+   const errorSteps={
+     EVENT_DATE_MISMATCH:'No TEST event was found for the selected date. Open Nakka event check to review creating one.',
+@@ -6297,21 +6301,32 @@
+     detail.hidden=false;
+     const line=text=>{const p=document.createElement('p');p.textContent=text;output.append(p);};
+     line('Total wait: '+(result.clientMs/1000).toFixed(1)+' s · Server: '+(result.timing.totalMs/1000).toFixed(1)+' s');
++    const check=result.check;
++    if(check&&/^[a-f0-9-]{36}$/.test(check.reference||'')){
++      if(result.code==='BUSY')line(check.phase==='INITIAL_LOCK'?'Verification deferred before Nakka reads.':check.phase==='COMMIT_LOCK'?'Verification deferred after reads, before saving the result.':'Verification deferred.');
++      line('Check reference: '+check.reference);
++    }
+     const names={'nakka-read-batch':'Parallel Nakka reads','nakka-read':'Nakka read'};
+     for(const step of result.timing.steps||[])if(Number.isFinite(step.ms))line((names[step.stage]||'Verification')+': '+(step.ms/1000).toFixed(1)+' s');
+   }
+   document.addEventListener('beauty-nakka-check-start',start);
+   document.addEventListener('beauty-nakka-diagnosed',event=>{
+     stop();const result=event.detail;showTiming(result);
+-    if(!result.success||result.attention?.available!==true||result.attention?.complete!==true||!result.event){checkedDate='';status.textContent=errorSteps[result.code]||errorSteps.CHECK_UNAVAILABLE;get('nakkaConnectedEvent').textContent='';progress.textContent='Check incomplete. Saved alerts are retained.';return;}
+-    checkedDate=result.eventDate;
++    if(result.success===false&&result.code==='BUSY'){
++      status.textContent='Verification is waiting for another operation. Automatic checks will continue.';
++      if(lastVerified)get('nakkaConnectedEvent').textContent=lastVerified.title+' · '+lastVerified.date;
++      const verifiedAt=lastVerified?.at||result.lastVerifiedAt;
++      progress.textContent=(Number.isFinite(Date.parse(verifiedAt))?'Last verified '+new Date(verifiedAt).toLocaleString('en-GB',{timeZone:'Europe/Stockholm'})+'. ':'No completed event check is available yet. ')+(lastFailure?lastFailure+' ':'')+'Saved player alerts remain visible in Recovery.';return;
++    }
++    if(!result.success||result.attention?.available!==true||result.attention?.complete!==true||!result.event){checkedDate='';lastFailure=errorSteps[result.code]||errorSteps.CHECK_UNAVAILABLE;status.textContent=lastFailure;get('nakkaConnectedEvent').textContent='';progress.textContent='Check incomplete. Saved alerts are retained.';return;}
++    checkedDate=result.eventDate;lastFailure='';lastVerified=Number.isFinite(Date.parse(result.attention.checkedAt))?{title:result.event.title,date:result.eventDate,at:result.attention.checkedAt}:null;
+     status.textContent=result.attention.items.length?'Player issues need attention.':'✓ Event and players checked.';
+     get('nakkaConnectedEvent').textContent=result.event.title+' · '+result.eventDate;
+     const count=result.attention?.items?.length??0;
+     progress.textContent=count?count+' player '+(count===1?'issue needs':'issues need')+' review. Open Recovery to choose a player.':'No player attention alerts found.';
+   });
+-  document.addEventListener('beauty-nakka-check-error',()=>{if(checking){stop();checkedDate='';status.textContent='The check did not complete. Automatic checks will continue; open Advanced to check sooner.';progress.textContent='No automatic add or removal was sent.';}});
+-  document.addEventListener('beauty-nakka-invalidated',()=>{stop();checkedDate='';status.textContent='The Hub date or players changed. Checking automatically…';get('nakkaConnectedEvent').textContent='';progress.textContent='';get('nakkaCheckTiming').hidden=true;get('nakkaCheckTimingResult').replaceChildren();});
++  document.addEventListener('beauty-nakka-check-error',()=>{if(checking){stop();checkedDate='';lastFailure='The check did not complete. Automatic checks will continue; open Advanced to check sooner.';status.textContent=lastFailure;progress.textContent='No automatic add or removal was sent.';}});
++  document.addEventListener('beauty-nakka-invalidated',()=>{stop();checkedDate='';lastVerified=null;lastFailure='';status.textContent='The Hub date or players changed. Checking automatically…';get('nakkaConnectedEvent').textContent='';progress.textContent='';get('nakkaCheckTiming').hidden=true;get('nakkaCheckTimingResult').replaceChildren();});
+   const refresh=()=>window.BeautyDashboard?.refresh();
+   diagnose.addEventListener('click',refresh);
+   get('nakkaNavButton')?.addEventListener('click',()=>{if(checkedDate!==window.beautyHubData?.eventDate)refresh();});
+@@ -6321,7 +6336,7 @@
+   }});
+   // API availability is supporting evidence, not proof that a player's entry is confirmed.
+   const health=get('nakkaHealthCard');if(health){const details=document.createElement('details'),summary=document.createElement('summary');details.className='nakka-api-details';summary.textContent='Nakka API status';get('nakkaComparisonDetails').append(details);details.append(summary,health);}
+-  document.addEventListener('beauty-hub-locked',()=>{stop();checkedDate='';status.textContent='Sign in to check the TEST event.';get('nakkaConnectedEvent').textContent='';progress.textContent='';get('nakkaCheckTimingResult').replaceChildren();get('nakkaCheckTiming').hidden=true;});
++  document.addEventListener('beauty-hub-locked',()=>{stop();checkedDate='';lastVerified=null;lastFailure='';status.textContent='Sign in to check the TEST event.';get('nakkaConnectedEvent').textContent='';progress.textContent='';get('nakkaCheckTimingResult').replaceChildren();get('nakkaCheckTiming').hidden=true;});
+ })();
+ 
+ </script><script>
+@@ -7858,7 +7873,7 @@
+  const dialog=document.createElement('dialog');dialog.id='beautyPlayerRecoveryDialog';dialog.className='beauty-simple-dialog';dialog.setAttribute('aria-labelledby','beautyPlayerRecoveryName');document.body.append(dialog);
+  const title=document.createElement('h2');title.id='beautyPlayerRecoveryName';const status=document.createElement('p');status.setAttribute('role','status');const steps=document.createElement('ol'),detail=document.createElement('p'),actions=document.createElement('div'),history=document.createElement('details'),historyTitle=document.createElement('summary'),report=document.createElement('pre');historyTitle.textContent='Advanced';history.className='beauty-simple-advanced';history.append(historyTitle,steps,report);
+  const close=document.createElement('button');close.type='button';close.textContent='Close';close.addEventListener('click',()=>dialog.close());const mark=document.createElement('div');mark.setAttribute('aria-hidden','true');status.className='beauty-simple-result';actions.className='beauty-simple-actions';const x=document.createElement('button');x.type='button';x.className='beauty-simple-close';x.textContent='×';x.setAttribute('aria-label','Close issue');x.addEventListener('click',()=>dialog.close());dialog.append(x,title,mark,status,detail,actions,history);dialog.addEventListener('close',()=>{history.open=false;});
+- let state=null,busy=false,epoch=0,selected='',guidance=null,lastRead=0,unlocked=false,queued=false,notice='',currentContext='',providerPaused=false;
++ let state=null,busy=false,epoch=0,selected='',guidance=null,lastRead=0,unlocked=false,queued=false,notice='',currentContext='',providerPaused=false,providerDeferred=false;
+  const labels={red:'Needs your help',orange:'Beauty is checking',green:'Verified',unknown:'Automatic check pending',neutral:'Not IN'};
+  function addButton(label,fn,parent=actions){const b=document.createElement('button');b.type='button';b.textContent=label;b.addEventListener('click',fn);parent.append(b);return b;}
+  function reportText(p){return ['Beauty player recovery', 'Event: '+state.title+' · '+state.eventDate,'Player: '+p.name,'Status: '+labels[p.tone],'Issue: '+p.code,(p.operation==='removal'?'Last removal check: ':'Last entry check: ')+(p.checkedAt||'Not confirmed'),(p.operation==='removal'?'Removal verification: '+(p.outcome||'Pending'):'Entry verification: '+(p.entry?JSON.stringify(p.entry):'See the current check; no recovery entry record')),'Original registration: '+(p.original?JSON.stringify(p.original):'No diagnostic available'),...(p.history||[]).map(h=>h.at+' · '+h.source+' · '+h.state+' · '+h.code)].join('\n');}
+@@ -7904,7 +7919,7 @@
+  }
+  function paintTable(){for(const cell of document.querySelectorAll('[data-beauty-health-player]'))paintCell(cell);}
+  function render(){cards.replaceChildren();if(!state){summary.textContent=notice||'Waiting for the current event check.';renderDialog();return;}const red=state.players.filter(p=>p.tone==='red').length,orange=state.players.filter(p=>p.tone==='orange').length,unknown=state.players.filter(p=>p.tone==='unknown').length;
+-  summary.textContent=notice||(providerPaused?'The event connection is not verified. Saved registrations are retained.':'')||state.system||(red?red+' player'+(red===1?' needs':'s need')+' your help. Other registrations can continue.':orange? 'Beauty is checking '+orange+' player'+(orange===1?'':'s')+'.':unknown?'Beauty is checking this event automatically. You do not need to verify players.':state.players.some(p=>p.status==='IN')?'No player issues found. No action needed.':'No IN players to check.');
++  summary.textContent=notice||(providerDeferred?'Event verification is waiting for another operation. Saved player results and alerts are retained.':providerPaused?'The event connection is not verified. Saved registrations are retained.':'')||state.system||(red?red+' player'+(red===1?' needs':'s need')+' your help. Other registrations can continue.':orange? 'Beauty is checking '+orange+' player'+(orange===1?'':'s')+'.':unknown?'Beauty is checking this event automatically. You do not need to verify players.':state.players.some(p=>p.status==='IN')?'No player issues found. No action needed.':'No IN players to check.');
+   for(const p of state.players.filter(p=>['red','orange'].includes(p.tone)||(p.tone==='green'&&p.history?.length)).sort((a,b)=>['red','orange','unknown','green','neutral'].indexOf(a.tone)-['red','orange','unknown','green','neutral'].indexOf(b.tone))){const b=addButton(p.name+' · '+(p.operation==='removal'&&p.tone==='green'?'Removed':labels[p.tone]),()=>open(p.name),cards);b.className='beauty-player-health';b.dataset.tone=p.tone;}
+   paintTable();renderDialog();
+  }
+@@ -7928,12 +7943,12 @@
+   }catch(e){if(valid())notice=e.message;}
+   finally{clearTimeout(timer);if(turn===epoch){busy=false;render();if(queued){queued=false;setTimeout(()=>run('read'),500);}else if(!notice&&unlocked&&!document.hidden){const next=state?.players.find(p=>p.autoEligible&&(!providerPaused||p.operation==='removal'));if(next)setTimeout(()=>run('auto',{player:next.name}),500);}}}
+  }
+- function sync(){const context=window.beautyHubData?.eventContext;if(context!==currentContext){epoch++;busy=false;state=null;guidance=null;selected='';notice='';currentContext=context;lastRead=0;providerPaused=false;queued=false;if(dialog.open)dialog.close();render();}if(unlocked&&!document.hidden&&Date.now()-lastRead>10000)run('read');}
++ function sync(){const context=window.beautyHubData?.eventContext;if(context!==currentContext){epoch++;busy=false;state=null;guidance=null;selected='';notice='';currentContext=context;lastRead=0;providerPaused=false;providerDeferred=false;queued=false;if(dialog.open)dialog.close();render();}if(unlocked&&!document.hidden&&Date.now()-lastRead>10000)run('read');}
+  document.addEventListener('beauty-menu-data',sync);
+- document.addEventListener('beauty-nakka-diagnosed',e=>{providerPaused=e.detail?.success!==true||e.detail?.attention?.available!==true||e.detail?.attention?.complete!==true;if(unlocked)run('read');});
+- document.addEventListener('beauty-nakka-check-error',()=>{providerPaused=true;notice='The event connection could not be checked. Saved registrations are retained; automatic checks will continue.';render();});
++ document.addEventListener('beauty-nakka-diagnosed',e=>{providerDeferred=e.detail?.success===false&&e.detail?.code==='BUSY';providerPaused=e.detail?.success!==true||e.detail?.attention?.available!==true||e.detail?.attention?.complete!==true;if(unlocked)run('read');});
++ document.addEventListener('beauty-nakka-check-error',()=>{providerDeferred=false;providerPaused=true;notice='The event connection could not be checked. Saved registrations are retained; automatic checks will continue.';render();});
+  document.addEventListener('beauty-hub-opened',()=>{unlocked=true;sync();});
+- document.addEventListener('beauty-hub-locked',()=>{unlocked=false;epoch++;busy=false;queued=false;state=null;guidance=null;selected='';notice='';currentContext='';if(dialog.open)dialog.close();cards.replaceChildren();report.textContent='';summary.textContent='Sign in to view player status.';});
++ document.addEventListener('beauty-hub-locked',()=>{unlocked=false;epoch++;busy=false;queued=false;state=null;guidance=null;selected='';notice='';currentContext='';providerDeferred=false;if(dialog.open)dialog.close();cards.replaceChildren();report.textContent='';summary.textContent='Sign in to view player status.';});
+  get('beautyRecoveryTestOpen')?.addEventListener('click',()=>{if(!unlocked)return;window.BeautyDashboard?.refresh();run('read');});
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&unlocked)sync();});
+  window.BeautyPlayerRecovery=Object.freeze({open,cell:(cell,name)=>{cell.dataset.beautyHealthPlayer=name;paintCell(cell);}});

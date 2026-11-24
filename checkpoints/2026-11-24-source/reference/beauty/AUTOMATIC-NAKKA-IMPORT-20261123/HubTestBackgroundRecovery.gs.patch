@@ -1,0 +1,38 @@
+--- baseline/HubTestBackgroundRecovery.gs
++++ candidate/HubTestBackgroundRecovery.gs
+@@ -458,9 +458,14 @@
+     const previousRaw=p.getProperty(c.runKey),previous=JSON.parse(previousRaw||'null');
+     if(previous?.state==='RUNNING'&&Date.now()<previous.leaseUntil&&
+       !beautyBackgroundRecheckRetire_(previousRaw,context,config,lock))return;
+-    const selectionStarted=Date.now(),items=beautyBackgroundCandidates_(selectionStarted),selectedAt=Date.now(),item=items[0];
++    const selectionStarted=Date.now(),items=beautyBackgroundCandidates_(selectionStarted),selectedAt=Date.now();
++    let item=items[0],recheck=item?.operation==='registration'?beautyBackgroundVerifiedPrepare_(item.name,context,lock):null;
++    // Actual repairs/removals keep priority. Periodic inbound discovery may
++    // precede a verified read-only recheck, so it cannot starve on a full roster.
++    if((!item||recheck)&&typeof beautyNakkaImportDue_==='function'&&beautyNakkaImportDue_(selectedAt)){
++      item={operation:'nakka-import',name:''};recheck=null;
++    }
+     if(!item){if(!previous||Date.now()-Date.parse(previous.finishedAt||previous.startedAt)>=300000)beautyBackgroundSave_(c.runKey,{state:'IDLE',triggerUid:event.triggerUid,finishedAt:new Date().toISOString()});return;}
+-    const recheck=item.operation==='registration'?beautyBackgroundVerifiedPrepare_(item.name,context,lock):null;
+     run={state:'RUNNING',owner:Utilities.getUuid(),triggerUid:event.triggerUid,context,
+       startedAt:new Date().toISOString(),leaseUntil:Date.now()+c.leaseMs,operation:recheck?'registration-recheck':item.operation,player:item.name,
+       timing:{clockStartedAt:new Date(clockStarted).toISOString(),authorityMs:lockStarted-clockStarted,lockWaitMs:lockAcquired-lockStarted,
+@@ -469,6 +474,7 @@
+     beautyBackgroundInvocation_={owner:run.owner,triggerUid:event.triggerUid,context,player:item.name,operation:run.operation,
+       expires:run.leaseUntil,lock,configRaw:p.getProperty(c.key)};
+     operationStarted=Date.now();run.timing.claimSetupMs=operationStarted-selectedAt;
++    if(item.operation==='nakka-import'){beautyNakkaImportRun_(run);return;}
+     if(recheck){beautyBackgroundInvocation_.recheckRunRaw=claimedRunRaw;beautyBackgroundVerifiedRun_(recheck,run,clockStarted,operationStarted);return;}
+     const result=item.operation==='registration-review'?beautyBackgroundExhaustedRun_(item):item.operation==='removal'?beautyBackgroundRemovalRun_(item):beautyBackgroundRegistrationRun_(item.name);
+     run.timing.operationMs=Date.now()-operationStarted;
+@@ -476,6 +482,10 @@
+     run.state='FINISHED';run.finishedAt=new Date().toISOString();run.result=result;run.timing.beforeResultSaveMs=Date.now()-clockStarted;beautyBackgroundSave_(c.runKey,run);
+     console.log(JSON.stringify({type:'BEAUTY_BACKGROUND_RESULT',...run}));
+   }catch(e){
++    if(run?.operation==='nakka-import'){
++      const current=JSON.parse(p.getProperty(c.runKey)||'null');
++      if(!lock.hasLock()||current?.owner!==run.owner||current.state!=='RUNNING')return;
++    }
+     const code=/^(BACKGROUND|REGISTRATION|REMOVE)_[A-Z_]+$/.test(e.message)?e.message:'BACKGROUND_CHECK_UNAVAILABLE';
+     if(run){run.state='NEEDS_HELP';run.code=code;run.finishedAt=new Date().toISOString();if(operationStarted!==undefined)run.timing.operationMs=Date.now()-operationStarted;run.timing.beforeResultSaveMs=Date.now()-clockStarted;beautyBackgroundSave_(c.runKey,run);}
+     else beautyBackgroundSave_(c.runKey,{state:'PAUSED_CHECK',code,triggerUid:event.triggerUid,finishedAt:new Date().toISOString()});

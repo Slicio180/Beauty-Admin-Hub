@@ -1,0 +1,8 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert/strict'),path=require('path');
+const root=path.resolve(__dirname,'../reconciliation-20261119/checkpoint/test-head');
+const context=fs.readFileSync(path.join(root,'HubEventContext.gs'),'utf8'),bridge=fs.readFileSync(path.join(root,'HubTestBridge.gs'),'utf8');
+const testId='1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N';
+const event={version:1,mode:'league',sheetId:'1qeV90AYjC73BLMah347JWIee5-PIGFY9d-gzmyvcpyM',revision:'a'.repeat(32),date:'2026-11-16',leagueId:'lg_tM2v_3523',eventId:'t_yIw0_7809'};
+function run(value,id=testId){const c={PropertiesService:{getScriptProperties:()=>({getProperty:()=>value?JSON.stringify(value):null})},ScriptApp:{getScriptId:()=>id},BEAUTY_IDENTITY_APPROVED_SCRIPT_:testId,SHEET_ID:value?.sheetId||'1SIj4F8_WfWaeDVsdagRw8AoLsz0XsjhtdIn_OOxoDnU'};vm.createContext(c);vm.runInContext(context+'\n'+bridge,c);return ()=>c.beautyHubTestGuard_();}
+assert.doesNotThrow(run(null));assert.doesNotThrow(run(event));assert.throws(run(event,'different-project'),/identity mismatch/);
+const result={status:'REPRODUCED_GUARD_GAP',checks:3,scope:'Actual captured context and guard functions with synthetic properties; no Google or Nakka calls. Does not establish that live IDs are currently configured in TEST.',finding:'TEST project identity is checked, but a syntactically valid saved context selecting the known LIVE workbook and league is accepted by this guard. Writes are enabled in captured TEST Code.gs.'};fs.writeFileSync(path.join(__dirname,'isolation-results.json'),JSON.stringify(result,null,2));console.log(JSON.stringify(result));

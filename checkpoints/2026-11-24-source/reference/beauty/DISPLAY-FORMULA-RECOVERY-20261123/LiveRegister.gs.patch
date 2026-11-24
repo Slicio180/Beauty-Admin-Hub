@@ -1,0 +1,24 @@
+--- baseline/LiveRegister.gs
++++ live-candidate/LiveRegister.gs
+@@ -127,7 +127,7 @@
+   if(r.getResponseCode()!==200)throw Error('Sheet append response uncertain.');
+   const data=JSON.parse(r.getContentText());if(data.updates?.updatedRows!==1)throw Error('Sheet append not confirmed.');
+ }
+-function beautyLiveRegistrationSync_(s,player) {
++function beautyLiveRegistrationSync_(s,player,authorizeDisplayRepair) {
+   const key=beautyLiveRegistrationKey_;
+   for(let pass=0;pass<5;pass++){
+     SpreadsheetApp.flush();if(pass)Utilities.sleep(1000);
+@@ -139,6 +139,12 @@
+     for(const r of snapshot)if(key(r[0])){
+       if(map.has(key(r[0])))throw Error('Duplicate status rows.');map.set(key(r[0]),['IN','OUT','STANDBY'].includes(r[2])?r[2]:'');
+     }
++    beautyDisplayLookupRepair_(s,player,names.findIndex(n=>key(n)===key(player))+2,()=>{
++      if(typeof authorizeDisplayRepair==='function')authorizeDisplayRepair();
++      beautyContextAssert_();const target=beautyLiveTarget_();
++      if(s.tonight.getParent().getId()!==target.sheetId||s.store.getParent().getId()!==target.sheetId)throw Error('REGISTRATION_CONTEXT_CHANGED');
++      return JSON.stringify(target);
++    });
+     const values=names.map(n=>[map.get(key(n))||'']);
+     s.tonight.getRange(2,3,99,1).setValues(values);SpreadsheetApp.flush();
+     const readback=beautyLiveRegistrationRows_(s.tonight,3);

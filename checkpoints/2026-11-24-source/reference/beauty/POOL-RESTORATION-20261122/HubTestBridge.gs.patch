@@ -1,0 +1,11 @@
+--- baseline/HubTestBridge.gs
++++ candidate/HubTestBridge.gs
+@@ -29,7 +29,7 @@
+     eventSavingEnabled: typeof BEAUTY_HUB_EVENT_WRITES_ENABLED_ !== 'undefined' && BEAUTY_HUB_EVENT_WRITES_ENABLED_ === true
+   });
+   if (action === 'removepreview' || action === 'removesave') return beautyHubRemove_(action === 'removepreview' ? 'preview' : 'save', input);
+-  if (['poolcontrol','poolqualifyprepare','poolqualifysave','poolload','pooldraw','pooladjust','poolprepare','poolsave','poolstartprepare','poolstart','poolboardplan'].includes(action)) return beautyHubPool_(action,input);
++  if (['poolcontrol','poolqualifyprepare','poolqualifysave','poolload','pooldraftchoices','pooldraw','pooladjust','poolprepare','poolsave','poolstartprepare','poolstart','poolboardplan'].includes(action)) return beautyHubPool_(action,input);
+   if (action === 'attentionrefresh') return beautyHubAttentionRefresh_(input);
+   if (action === 'nakkacompare') return beautyHubNakkaCompare_(input);
+   if (action === 'nakkaleaguepreview' || action === 'nakkaleaguesave') return beautyHubLeagueRecovery_(action === 'nakkaleaguepreview' ? 'preview' : 'save', input);

@@ -1,0 +1,59 @@
+--- baseline/HubTestBackgroundRecovery.gs
++++ candidate/HubTestBackgroundRecovery.gs
+@@ -97,7 +97,12 @@
+ function beautyBackgroundReceipt_(name) {
+   const raw=PropertiesService.getScriptProperties().getProperty(beautyRegistrationRecoveryKey_(name));let r;
+   try{r=JSON.parse(raw||'null');}catch(e){throw Error('REGISTRATION_RECEIPT_UNREADABLE');}
+-  const x=beautyBackgroundScope_();
++  return beautyBackgroundReceiptValidate_(r,name,beautyBackgroundScope_());
++}
++// Selection can validate its one property snapshot without re-reading every
++// receipt or resolving the same registration key a second time. Operation
++// admission still calls beautyBackgroundReceipt_ and all existing live guards.
++function beautyBackgroundReceiptValidate_(r,name,x) {
+   beautyBackgroundNeed_(r?.version===1&&r.name===name&&r.context===x.revision&&r.sheetId===x.sheetId&&
+     r.eventId===x.eventId&&r.date===x.date&&['INTENT','REVIEW','COMPLETE'].includes(r.state)&&
+     ['HUB','KIOSK','MOBIL'].includes(r.source)&&typeof r.existingPlayer==='boolean'&&
+@@ -186,12 +191,12 @@
+   const c=beautyBackgroundConfig_(),context=beautyBackgroundScope_(),p=PropertiesService.getScriptProperties();
+   const removalHistory=beautyRemovalRecoveryList_(),removals=beautyRemovalRecoveryRows_({players:[]});
+   const work=removals.filter(r=>r.autoEligible).map(r=>({operation:'removal',name:r.name,journal:r.journal,at:Date.parse(r.history[0].at)}));
+-  const prefix=beautyRegistrationRecoveryPrefix_(),keys=Object.keys(p.getProperties()).filter(k=>k.startsWith(prefix));
++  const prefix=beautyRegistrationRecoveryPrefix_(),snapshot=p.getProperties(),keys=Object.keys(snapshot).filter(k=>k.startsWith(prefix));
+   beautyBackgroundNeed_(keys.length<=100,'BACKGROUND_HISTORY_REVIEW');
+   for(const key of keys) {
+-    let raw;try{raw=JSON.parse(p.getProperty(key));}catch(e){throw Error('REGISTRATION_RECEIPT_UNREADABLE');}
++    let raw;try{raw=JSON.parse(snapshot[key]);}catch(e){throw Error('REGISTRATION_RECEIPT_UNREADABLE');}
+     beautyBackgroundNeed_(typeof raw?.name==='string'&&key===beautyRegistrationRecoveryKey_(raw.name),'REGISTRATION_RECEIPT_UNREADABLE');
+-    const r=beautyBackgroundReceipt_(raw.name),age=now-Date.parse(r.recordedAt);
++    const r=beautyBackgroundReceiptValidate_(raw,raw.name,context),age=now-Date.parse(r.recordedAt);
+     if(age<60000)continue; // let the original synchronous registration finish
+     if(removalHistory.some(x=>x.receipt.player===r.name&&(x.receipt.state==='ATTEMPTED'||Date.parse(x.receipt.recordedUTC)>=Date.parse(r.recordedAt))))continue;
+     const recovery=beautyPlayerRecoveryLoad_(r.name,context.date),w=recovery?.worker;
+@@ -208,7 +213,16 @@
+     if(recovery?.state==='VERIFIED'&&now-Date.parse(recovery.updatedAt)<300000)continue;
+     work.push({operation:'registration',name:r.name,at:Date.parse(recovery?.updatedAt||r.recordedAt)});
+   }
+-  return work.sort((a,b)=>a.at-b.at||a.name.localeCompare(b.name));
++  work.sort((a,b)=>a.at-b.at||a.name.localeCompare(b.name));
++  // Snapshot evidence never grants mutation authority. Reject a changed context
++  // or selected receipt before the clock creates its durable operation claim.
++  beautyBackgroundNeed_(beautyBackgroundEqual_(beautyBackgroundScope_(),context),'BACKGROUND_CONTEXT_CHANGED');
++  const selected=work[0];
++  if(selected&&selected.operation!=='removal'){
++    const key=beautyRegistrationRecoveryKey_(selected.name);
++    beautyBackgroundNeed_(p.getProperty(key)===snapshot[key],'BACKGROUND_SELECTION_CHANGED');
++  }
++  return work;
+ }
+ function beautyBackgroundRegistrationRun_(name) {
+   const i=beautyBackgroundInvocation_,r=beautyBackgroundReceipt_(name),date=i.context.date;
+@@ -268,7 +282,7 @@
+     run={state:'RUNNING',owner:Utilities.getUuid(),triggerUid:event.triggerUid,context,
+       startedAt:new Date().toISOString(),leaseUntil:Date.now()+c.leaseMs,operation:item.operation,player:item.name,
+       timing:{clockStartedAt:new Date(clockStarted).toISOString(),authorityMs:lockStarted-clockStarted,lockWaitMs:lockAcquired-lockStarted,
+-        lockedSetupMs:selectionStarted-lockAcquired,selectionMs:selectedAt-selectionStarted}};
++        lockedSetupMs:selectionStarted-lockAcquired,selectionMs:selectedAt-selectionStarted,selectionMode:'batched-receipts-v1'}};
+     beautyBackgroundSave_(c.runKey,run);
+     beautyBackgroundInvocation_={owner:run.owner,triggerUid:event.triggerUid,context,player:item.name,operation:item.operation,
+       expires:run.leaseUntil,lock,configRaw:p.getProperty(c.key)};

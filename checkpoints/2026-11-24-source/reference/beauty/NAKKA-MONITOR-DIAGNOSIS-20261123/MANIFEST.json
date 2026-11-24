@@ -1,0 +1,70 @@
+{
+  "README.md": {
+    "bytes": 6253,
+    "sha256": "b8e52573dff1d11ce1047ce7a2ee8059627dd0240e14812e2bdd5dee30a71d6a"
+  },
+  "before/Beauty-Complete-Handover-20261121.md": {
+    "bytes": 355688,
+    "sha256": "42ac1f26c08aa706aeb35f3be7ec907cfd5aaa140112c66ce7cfa7f3c4ce7eaa"
+  },
+  "before/Manual/Beauty-Operator-Handbook-Draft.md": {
+    "bytes": 168031,
+    "sha256": "95407e4fa16f6b215d3eb11e4eea9b90776b39ee1e85c3f00ffc4599f9875302"
+  },
+  "before/START-HERE.md": {
+    "bytes": 2182,
+    "sha256": "04cf9091e22f101af1244a533167cfdd65e5a6f3ed75c9e961de212a106d6f7d"
+  },
+  "checkpoint-summary.json": {
+    "bytes": 1941,
+    "sha256": "3c7bfe65b7e9d45db1ff7dcd18598425386673672194cd97daddc35c388d3462"
+  },
+  "evidence/HubTestAttention.gs": {
+    "bytes": 40869,
+    "sha256": "b058508c929d789072c4a0b9d2a0612cd14f32f408ced7f640d97a41ad528f8d"
+  },
+  "evidence/HubTestBackgroundRecovery.gs": {
+    "bytes": 21968,
+    "sha256": "785e2e358922c59bfacdbdb861241668b6f4006a409c4f53637c60cc6ee70413"
+  },
+  "evidence/hub-busy-observation.txt": {
+    "bytes": 3579,
+    "sha256": "89f1ae6955be87be27996717c777ba104a82375203b480a7df2dc2c71ef76116"
+  },
+  "evidence/hub-final-dashboard.txt": {
+    "bytes": 8037,
+    "sha256": "7e333809604f2ba98f82daa469488a5c3ad451439fea20745ecc5e0b7648e5f6"
+  },
+  "evidence/hub-final-recovery.txt": {
+    "bytes": 3073,
+    "sha256": "cb7479265f836965573ed39a3ecbc1ee2f9db092e416400d11feb2f2c5130cf1"
+  },
+  "evidence/hub-successful-check-between-busy-responses.txt": {
+    "bytes": 3800,
+    "sha256": "ed2f6ff011be699f0ce8a8c5ca6a70167dcdc5077858ecceaa8da39edcaac0e9"
+  },
+  "evidence/worker-completed.json": {
+    "bytes": 1080,
+    "sha256": "cbe86f3781234bc9de25edf57ae9da436c84c66fcd2cd5767ca4abd90715c9dc"
+  },
+  "evidence/worker-executions.txt": {
+    "bytes": 31489,
+    "sha256": "921981aa54ead6e4dcdbf100b57c0e246f62e5cda32ed93feee66db4392e9f19"
+  },
+  "evidence/worker-read-only-result.txt": {
+    "bytes": 10420,
+    "sha256": "c2f5028f298f2d69a0640d4ccef1f92f0c95adb211d23019053cfa6dceea0a14"
+  },
+  "handbook-after.json": {
+    "bytes": 239047,
+    "sha256": "0a852ea4a9abf4eb242b2401fb4517c5ceaa04d3f34f780f261f7eb57d5e63bc"
+  },
+  "handbook-before.json": {
+    "bytes": 238616,
+    "sha256": "650d5b62eb2ba9a1771b3b1d6011512366da2d04d37952a9a58a6ad2e6310c69"
+  },
+  "handbook-preservation.json": {
+    "bytes": 15353,
+    "sha256": "f177bc3d27e46505a3875768e3372965011f59e9a2476037ff99889c18e0c4e1"
+  }
+}

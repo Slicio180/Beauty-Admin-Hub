@@ -1,0 +1,33 @@
+{
+  "files": [
+    {
+      "file": "HubTestBackgroundRecovery.gs",
+      "sha256": "7b81eb02e784d5e141f30b69d42edbb9995a394efaa8f0ed6e9773aa063d7e8e",
+      "bytes": 41248,
+      "beforeSha256": "502db4b6ae9ccbe6d80f94bbe754bfe160ce9997be0a787fd43e2635b1db85ac",
+      "exact_native_readback": true
+    },
+    {
+      "file": "HubTestNakkaImport.gs",
+      "sha256": "2fb13ee609b5faaa03a8874faa7d4a1bcc4eb80407d90d62fc156453072ede50",
+      "bytes": 18241,
+      "beforeSha256": null,
+      "exact_native_readback": true
+    }
+  ],
+  "nativeAcceptance": "SCHEDULED_DISCOVERY_VERIFIED_POSITIVE_IMPORT_PENDING",
+  "localTests": 61,
+  "production": "UNCHANGED",
+  "nativeScan": {
+    "checkedAt": "2026-11-23T19:03:51.193Z",
+    "entries": 6,
+    "imported": 0,
+    "pending": 0,
+    "issues": 0,
+    "nakkaWrites": 0,
+    "masterWrites": 0,
+    "readbackAtStockholm": "2026-11-23 20:05:59",
+    "controlledHubTabsAtFinalInventory": 1,
+    "scope": "Scheduled discovery on existing registrations; positive native import and all-client-closed acceptance remain pending"
+  }
+}

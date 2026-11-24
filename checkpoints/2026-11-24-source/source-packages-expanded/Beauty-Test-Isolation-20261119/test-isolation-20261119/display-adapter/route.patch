@@ -1,0 +1,10 @@
+--- composed-review/Code.gs
++++ display-adapter/Code.gs
+@@ -12,6 +12,7 @@
+   if (Object.keys(e?.parameter || {}).some(key => key !== 'page')) throw new Error('Candidate configuration rejected.');
+   const page = e?.parameter?.page || '';
+   if(['queuehub','queuekiosk','queuemobile'].includes(page)){beautyQueueUiGuard_();return HtmlService.createHtmlOutputFromFile({queuehub:'QueueHubTest',queuekiosk:'QueueKioskTest',queuemobile:'QueueRemoteTest'}[page]).addMetaTag('viewport','width=device-width, initial-scale=1').setTitle('Beauty Queue TEST');}
++  if(page==='displayrepair')return beautyDisplayRepairTestPage_();
+   if (!['', 'remote', 'kiosk', 'hub', 'live', 'stages'].includes(page)) throw new Error('Candidate serves registration pages only.');
+   if(page==='stages'){beautyHubTestGuard_();return beautyHubCastHtml_('StageTest').setTitle('Pool and knockout play — TEST');}
+   if(page==='kiosk'){

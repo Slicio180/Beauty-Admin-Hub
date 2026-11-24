@@ -1,0 +1,13 @@
+{
+  "status": "READ_ONLY_VERIFIED",
+  "source_changed": false,
+  "readbacks": {
+    "HubTestBackgroundRecovery.gs": "68da45c5b1609b35a05d76c008ed98a0c882b930ace1eb72cc91b1189643c34d",
+    "BeautyBackgroundResilienceFixture20261121.gs": "20ccabc5dd65cf4b9d0cee9692990ef7706721de1556f17e5af01ce8b5886789",
+    "BeautyBackgroundFixture20261121.gs": "e087a659e5869672fb3966d7039e0da0c6202f9f38a9bacd7bbfcfe433c2253a"
+  },
+  "native_evidence": "NATIVE-RECOVERY-VERIFIED.json",
+  "evidence_consistency": "PASS",
+  "new_runtime_tests": 0,
+  "existing_tests_not_repeated": "68 pool checks and29 four-player helper checks retained; no source changed"
+}

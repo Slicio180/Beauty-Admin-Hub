@@ -1,0 +1,11 @@
+--- baseline/HubTestPools.gs
++++ candidate/HubTestPools.gs
+@@ -59,7 +59,7 @@
+   }
+   function draw(options){
+     const all=validatePlayers(options?.players),roster=all.filter(p=>p.status==='IN');
+-    if(roster.length<5||roster.length>101)fail('Seeded draws support 5–101 IN players.');
++    if(roster.length<3||roster.length>101)fail('Seeded draws support 3–101 IN players.');
+     const sizes=options.sizes;
+     if(!Array.isArray(sizes)||!sizes.length||sizes.some(n=>![3,4,5].includes(n))||sizes.includes(5)&&(sizes.length!==1||sizes[0]!==5)||sizes.reduce((a,b)=>a+b,0)!==roster.length)fail('Pool capacities must match the selected IN list and scheme.');
+     if(!Number.isInteger(options.seed)||options.seed<0||options.seed>0xFFFFFFFF)fail('A recorded unsigned 32-bit draw seed is required.');

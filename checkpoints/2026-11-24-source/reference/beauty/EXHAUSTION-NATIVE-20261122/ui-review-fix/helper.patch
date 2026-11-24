@@ -1,0 +1,70 @@
+--- section54-helper
++++ current-helper
+@@ -70,6 +70,18 @@
+  console.log(JSON.stringify({result:'EXHAUSTION_SYNTHETIC_SEEDED',provenance:r.provenance,player:r.player,context,
+   attemptCount:3,syntheticHistory:true,realTimeoutsInduced:0,sheetWrites:0,providerWrites:0,triggerWrites:0,createdUTC:r.createdUTC}));
+ });}
++// Hub attention diagnosis can refresh the alert for this property-only fixture.
++// Accept only its exact five-field identity-review shape after immutable capture;
++// the receipt and terminal recovery bytes must still match. Preserve both alerts.
++function beautyExhaustionAttentionValid_(r,raw,recoveryRaw){
++ let a;try{a=JSON.parse(raw||'null');}catch(e){return false;}
++ if(!a||a.name!==r.player||a.date!==r.context.date||a.state!=='ATTENTION')return false;
++ if(a.code==='BACKGROUND_RETRY_EXHAUSTED')return !r.capture||raw===r.capture.attentionRaw;
++ if(!r.capture||recoveryRaw!==r.capture.recoveryRaw||a.code!=='HUB_IDENTITY_REVIEW'||
++  Object.keys(a).sort().join(',')!=='checkedAt,code,date,name,state')return false;
++ const before=JSON.parse(r.capture.attentionRaw),at=Date.parse(a.checkedAt),captured=Date.parse(before.checkedAt);
++ return Number.isFinite(at)&&Number.isFinite(captured)&&new Date(at).toISOString()===a.checkedAt&&at>=captured&&at<=Date.now();
++}
+ function beautyExhaustionProof_(r){
+  const p=PropertiesService.getScriptProperties(),record=beautyPlayerRecoveryLoad_(r.player,r.context.date),raw=p.getProperty(r.keys.recovery),seed=JSON.parse(r.seedRaw);
+  beautyExhaustionNeed_(p.getProperty(r.keys.registration)===r.receiptRaw,'REGISTRATION_CHANGED');
+@@ -80,8 +92,8 @@
+  const worker={...record.worker};delete worker.exhaustedBackup;beautyExhaustionNeed_(beautyBackgroundEqual_(worker,seed.worker),'WORKER_METADATA_CHANGED');
+  const view=beautyPlayerRecoveryView_(getBeautyHubData_()).players.find(x=>x.name===r.player);
+  beautyExhaustionNeed_(view?.tone==='red'&&view.code==='BACKGROUND_RETRY_EXHAUSTED'&&view.autoEligible===false&&/Check after correction/.test(view.next),'GUIDANCE_NOT_VERIFIED');
+- const attentionRaw=p.getProperty(r.keys.attention),attention=JSON.parse(attentionRaw||'null');
+- beautyExhaustionNeed_(attention?.name===r.player&&attention.date===r.context.date&&attention.state==='ATTENTION'&&attention.code==='BACKGROUND_RETRY_EXHAUSTED','ATTENTION_NOT_VERIFIED');
++ const attentionRaw=p.getProperty(r.keys.attention);
++ beautyExhaustionNeed_(beautyExhaustionAttentionValid_(r,attentionRaw,raw),'ATTENTION_NOT_VERIFIED');
+  return {recoveryRaw:raw,attentionRaw,view:{name:view.name,status:view.status,tone:view.tone,code:view.code,problem:view.problem,next:view.next,autoEligible:view.autoEligible}};
+ }
+ function beautyReadExhaustionFixture20261122(){
+@@ -89,10 +101,11 @@
+  let proof=null,code='NOT_SEEDED';
+  if(r){beautyExhaustionNeed_(beautyPoolHash_(observed)===r.preservedHash,'PRESERVATION_CHANGED');
+   if(r.state==='RETIRED'){beautyExhaustionNeed_(Object.values(r.keys).every(k=>p.getProperty(k)===null)&&p.getProperty(r.backup)===r.seedRaw,'RETIREMENT_CHANGED');proof=r.capture;code='RETIRED';}
+-  else{try{proof=beautyExhaustionProof_(r);code='TERMINAL_VERIFIED';}catch(e){code=e.message;}}
++  else{try{proof=beautyExhaustionProof_(r);code=r.capture&&proof.attentionRaw!==r.capture.attentionRaw?'TERMINAL_VERIFIED_ATTENTION_REFRESHED':'TERMINAL_VERIFIED';}catch(e){code=e.message;}}
+  }
+  const report={result:'EXHAUSTION_READ_ONLY',context,player:c.player,provenance:c.provenance,markerState:r?.state||'ABSENT',
+   code,proof,preserved:!!r,observed,registrationRaw:r?p.getProperty(r.keys.registration):null,recoveryRaw:r?p.getProperty(r.keys.recovery):null,
++  attentionRaw:r?p.getProperty(r.keys.attention):null,capturedAttentionRaw:r?.capture?.attentionRaw||null,retirementAttentionRaw:r?.retirementAttentionRaw||null,
+   lastRun:JSON.parse(p.getProperty(beautyBackgroundConfig_().runKey)||'null'),writesPerformed:false};
+  Object.keys(report).forEach(key=>console.log('EXHAUSTION_FIELD '+JSON.stringify({key,value:report[key]})));return report;
+ }
+@@ -109,9 +122,13 @@
+  beautyExhaustionNeed_(r&&['CAPTURED','RETIRING','RETIRED'].includes(r.state)&&r.capture,'RETIRE_STATE');
+  beautyExhaustionNeed_(beautyPoolHash_(beautyExhaustionObserve_())===r.preservedHash,'PRESERVATION_CHANGED');
+  beautyExhaustionNeed_(p.getProperty(r.backup)===r.seedRaw,'BACKUP_CHANGED');
+- const expected={registration:r.receiptRaw,recovery:r.capture.recoveryRaw,attention:r.capture.attentionRaw};
++ const currentAttention=p.getProperty(r.keys.attention);
++ const expected={registration:r.receiptRaw,recovery:r.capture.recoveryRaw,attention:r.retirementAttentionRaw||r.capture.attentionRaw};
++ if(r.state==='CAPTURED'&&!r.retirementAttentionRaw&&currentAttention!==expected.attention){
++  beautyExhaustionNeed_(beautyExhaustionAttentionValid_(r,currentAttention,p.getProperty(r.keys.recovery)),'LATER_EDIT');expected.attention=currentAttention;
++ }
+  for(const name of Object.keys(r.keys)){const raw=p.getProperty(r.keys[name]);beautyExhaustionNeed_(raw===expected[name]||(r.state!=='CAPTURED'&&raw===null),'LATER_EDIT');}
+- if(r.state==='CAPTURED'){r.state='RETIRING';r.retiringUTC=new Date().toISOString();beautyBackgroundSave_(c.key,r);}
++ if(r.state==='CAPTURED'){r.retirementAttentionRaw=expected.attention;r.state='RETIRING';r.retiringUTC=new Date().toISOString();beautyBackgroundSave_(c.key,r);}
+  // All bytes remain in the one-shot archive plus the worker's immutable backup.
+  // Remove only these fresh fixture keys from active queues, guarded byte for byte.
+  for(const name of ['registration','attention','recovery']){const key=r.keys[name],raw=p.getProperty(key);
+@@ -126,7 +143,7 @@
+  const c=beautyExhaustionConfig_(),r=beautyExhaustionRead_(),p=PropertiesService.getScriptProperties();
+  beautyExhaustionNeed_(r&&['RETIRED','RETIRING','RESTORING'].includes(r.state)&&r.capture,'RESTORE_STATE');
+  beautyExhaustionNeed_(beautyPoolHash_(beautyExhaustionObserve_())===r.preservedHash&&p.getProperty(r.backup)===r.seedRaw,'RESTORE_PRESERVATION_CHANGED');
+- const expected={registration:r.receiptRaw,recovery:r.capture.recoveryRaw,attention:r.capture.attentionRaw};
++ const expected={registration:r.receiptRaw,recovery:r.capture.recoveryRaw,attention:r.retirementAttentionRaw||r.capture.attentionRaw};
+  for(const name of Object.keys(r.keys)){const raw=p.getProperty(r.keys[name]);beautyExhaustionNeed_(raw===null||raw===expected[name],'RESTORE_LATER_EDIT');}
+  r.state='RESTORING';beautyBackgroundSave_(c.key,r);
+  for(const name of ['recovery','attention','registration'])beautyExhaustionPutNew_(r.keys[name],expected[name]);

@@ -1,0 +1,25 @@
+const assert=require('node:assert/strict'),vm=require('node:vm'),crypto=require('node:crypto'),fs=require('node:fs');
+const {buildPreview,handler}=require('./preview.cjs');
+(async()=>{let count=0;const check=(name,fn)=>{fn();console.log('PASS '+name);count++;};
+const html=buildPreview(),scripts=[...html.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/g)].map(m=>m[1]);
+check('all preview scripts parse',()=>scripts.forEach(s=>new vm.Script(s)));
+const c={window:{},crypto};vm.createContext(c);vm.runInContext(scripts[0],c);const api=c.window.AikInternalClient;
+check('starts empty with no workbook',()=>assert.equal(api.mode,'preview'));
+assert.equal((await api.request('read')).configured,false);await api.request('setup');
+for(const name of ['Test Alfa','Test Beta','Test Gamma','Test Delta'])await api.request('addPlayer',{name});
+await assert.rejects(()=>api.request('addPlayer',{name:' TEST ALFA '}),/already/);console.log('PASS normalized duplicate refused');count++;
+let state=await api.request('read'),ids=state.players.map(p=>p.id);state.players.length=0;
+check('responses cannot mutate stored state',()=>assert.equal(ids.length,4));assert.equal((await api.request('read')).players.length,4);
+const draft={requestId:crypto.randomUUID(),title:'Test Dubbel-KM',kind:'km',format:'doubles',date:'2026-11-15',entries:[ids.slice(0,2),ids.slice(2)],tournamentUrl:''};
+await api.request('saveDraft',draft);assert.equal((await api.request('saveDraft',draft)).events.length,1);console.log('PASS doubles draft and repeat save');count++;
+await api.request('saveDraft',{...draft,requestId:crypto.randomUUID(),format:'singles',entries:ids.map(id=>[id])});assert.equal((await api.request('read')).events.length,2);console.log('PASS singles draft');count++;
+await assert.rejects(()=>api.request('saveDraft',{...draft,tournamentUrl:'https://n01darts.com/n01/league/season.php?id=t_test'}),/not a league/);console.log('PASS league URL rejected');count++;
+const fresh={window:{},crypto};vm.createContext(fresh);vm.runInContext(scripts[0],fresh);assert.equal((await fresh.window.AikInternalClient.request('read')).players.length,0);console.log('PASS reload model resets preview data');count++;
+function response(method,url,host){const r={};handler(html,4178)({method,url,headers:{host}},{writeHead:(status,headers)=>Object.assign(r,{status,headers}),end:body=>r.body=body});return r;}
+check('loopback host receives page with network blocked',()=>{const r=response('GET','/','127.0.0.1:4178');assert.equal(r.status,200);assert.ok(r.headers['Content-Security-Policy'].includes("connect-src 'none'"));});
+check('foreign host refused',()=>assert.equal(response('GET','/','evil.example').status,403));
+check('filesystem paths not served',()=>assert.equal(response('GET','/BeautyAikInternal.js','127.0.0.1:4178').status,404));
+check('POST refused',()=>assert.equal(response('POST','/','127.0.0.1:4178').status,404));
+check('UI has no Beauty auth or Google RPC dependency',()=>assert.ok(!/BeautyHubAuth|google\.script/.test(fs.readFileSync(__dirname+'/AIKInternal.html','utf8'))));
+console.log(count+' preview checks passed; browser interaction and native integrations not verified.');
+})().catch(e=>{console.error(e);process.exitCode=1;});

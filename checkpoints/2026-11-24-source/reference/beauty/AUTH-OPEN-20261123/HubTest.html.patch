@@ -1,0 +1,20 @@
+--- native-baseline/HubTest.html
++++ candidate/HubTest.html
+@@ -3030,7 +3030,7 @@
+    catch(e){throw Error('The reset request could not be completed. Please try again later.');}
+   },
+   async openHub(){
+-   const value=token(),ticket=generation;await rpc('touch',{token:value});
++   const value=token(),ticket=generation;await rpc('check',{token:value});
+    if(ticket!==generation)throw Error('Sign in to continue.');
+    document.body.classList.remove('beauty-auth-locked');
+    document.getElementById('hubSessionEmail').textContent=session.email;
+@@ -6236,7 +6236,7 @@
+   try{result=await service.signIn({email:$('loginEmail').value.trim(),password:$('loginPassword').value});}finally{clearPassword();}
+   if(!result||result.authorized!==true)throw Error('This account does not have access to the Hub.');
+   session=result;
+-  // Open through the existing server-validated touch; never unlock locally.
++  // Open through server-side session validation; never unlock locally.
+   try{await service.openHub();}
+   catch(error){session=null;view('signInView');throw error;}
+   message('');

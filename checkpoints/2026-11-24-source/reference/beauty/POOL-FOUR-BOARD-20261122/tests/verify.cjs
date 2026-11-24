@@ -1,0 +1,28 @@
+const assert=require('assert/strict'),{setup,clone}=require('./fixture.cjs'),fs=require('fs'),path=require('path');
+const results=[];function test(name,fn){try{fn();results.push({name,result:'PASS'});}catch(e){results.push({name,result:'FAIL',error:e.stack});}}
+test('Exact accepted draw returns after ordinary four-player draft, without send authority or provider writes',()=>{
+ const f=setup(),before=f.saved();f.baseline();f.four();f.statusesBack();f.restore();
+ assert.deepEqual(clone(f.c.beautyPoolFourCanonical_(f.saved())),clone(f.c.beautyPoolFourCanonical_(before)));
+ assert.equal(f.saved().ready,false);for(const k of ['version','boardPlan','formatMode'])assert.equal(f.saved()[k],undefined);
+ assert.ok(f.calls.every(x=>!x.write));assert.equal(f.logs.at(-1).protectedStable,true);
+ f.restore();assert.equal(f.logs.at(-1).result,'POOL_SIX_ALREADY_RESTORED');
+});
+test('Backup is idempotent and retains original immutable record',()=>{const f=setup();f.baseline();const before=clone(f.p);f.baseline();assert.deepEqual(f.p,before);});
+test('Automatic rendered group keeps its original fallback label unchanged',()=>{const f=setup(),r=f.saved();r.draftChoices.cardLabels[1]={board:2,group:1};f.overwrite(r);f.baseline();f.four();f.statusesBack();f.restore();assert.deepEqual(f.saved().draftChoices.cardLabels[1],{board:2,group:1});});
+for(const kind of ['owner','scope','trigger'])test('Rejects changed '+kind+' before backup',()=>{const f=setup(),before=clone(f.p);f.flags[kind]=kind==='trigger'?'different':false;assert.throws(f.baseline);assert.deepEqual(f.p,before);});
+test('Rejects an existing provider send receipt',()=>{const f=setup();f.p['BEAUTY_POOL_SEND_'+f.context.eventId]='{}';assert.throws(f.baseline,/SEND_RECORDED/);});
+test('Rejects backup of a prepared/approved draw',()=>{const f=setup(),r=f.saved();r.ready=true;r.version='approved';f.overwrite(r);assert.throws(f.baseline,/APPROVAL/);});
+test('Rejects changed original seed, settings or members',()=>{for(const alter of [r=>r.draw.seed++,r=>r.draftChoices.cardLabels[0].group=9,r=>r.draw.pools.reverse()]){const f=setup(),r=f.saved();alter(r);f.overwrite(r);assert.throws(f.baseline);}});
+test('Rejects missing draft shard without changing pointer',()=>{const f=setup(),ptr=f.pointer(),raw=f.p[f.key()];delete f.p[f.key()+'_'+ptr.ticket+'_0'];assert.throws(f.baseline,/SHARD_MISSING/);assert.equal(f.p[f.key()],raw);});
+test('Rejects corrupted backup before restore',()=>{const f=setup();f.baseline();f.four();f.statusesBack();const key=f.config.prefix+'_BASELINE',ptr=JSON.parse(f.p[key]),old=f.p[f.key()];f.p[key+'_'+ptr.ticket+'_0']+='x';assert.throws(f.restore,/HASH_MISMATCH/);assert.equal(f.p[f.key()],old);});
+test('Rejects changed UID or target on the four-player draft',()=>{for(const field of ['uid','target']){const f=setup();f.baseline();f.four();f.statusesBack();const r=f.saved();r[field]='different';f.overwrite(r);assert.throws(f.restore,/DRAFT_IDENTITY/);}});
+test('Rejects later legitimate draft changes and retains them',()=>{const f=setup();f.baseline();f.four();f.statusesBack();const r=f.saved();r.draftChoices.cardLabels[0].group=9;f.overwrite(r);const old=f.p[f.key()];assert.throws(f.restore,/LATER_DRAFT_CHANGED/);assert.equal(f.p[f.key()],old);});
+test('Rejects changed provider event or player identity',()=>{for(const alter of [f=>f.event.updateTime++,f=>f.event.entry_list[1].tpid='DIFF',f=>f.profiles[1].lpid='DIFF']){const f=setup();f.baseline();f.four();f.statusesBack();alter(f);const old=f.p[f.key()];assert.throws(f.restore);assert.equal(f.p[f.key()],old);}});
+test('Rejects any later sheet or protected recovery change',()=>{for(const kind of ['source','stable']){const f=setup();f.baseline();f.four();f.statusesBack();f.flags[kind]++;assert.throws(f.restore,/RESTORE_SOURCE_CHANGED/);}});
+test('Rejects protected terminal marker changes',()=>{const f=setup();f.baseline();f.four();f.statusesBack();f.p.timeout='changed';assert.throws(f.restore,/RESTORE_SOURCE_CHANGED/);});
+test('Rejects restore until both attendance statuses are IN again',()=>{const f=setup();f.baseline();f.four();assert.throws(f.restore,/IDENTITY_OR_STATUS/);});
+test('Storage failure before draft publish retains current four-player pointer and shards',()=>{const f=setup();f.baseline();f.four();f.statusesBack();const old=f.p[f.key()],saved=f.saved();f.faults.push(k=>k.startsWith(f.key()+'_'));assert.throws(f.restore,/storage failure/);assert.equal(f.p[f.key()],old);assert.deepEqual(f.saved(),saved);});
+test('Pointer write failure retains current draft and leaves durable review intent',()=>{const f=setup();f.baseline();f.four();f.statusesBack();const old=f.p[f.key()];f.faults.push(k=>k===f.key());assert.throws(f.restore,/storage failure/);assert.equal(f.p[f.key()],old);assert.ok(f.p[f.config.prefix+'_RESTORE_INTENT']);});
+test('Immutable baseline cannot be replaced by a different record',()=>{const f=setup();f.baseline();const base=f.c.beautyPoolFourGet_('BASELINE');base.draft.draw.seed++;assert.throws(()=>f.c.beautyPoolFourKeep_('BASELINE',base),/IMMUTABLE_RECORD/);});
+test('Wrong board choice cannot be captured as accepted four-player case',()=>{const f=setup();f.baseline();f.four();const r=f.saved();r.draftChoices.boardChoices[0].boards=[1,2];f.overwrite(r);assert.throws(()=>f.c.beautyCaptureFourPool20261122(),/FOUR_CHOICES_REVIEW/);});
+const report={result:results.every(x=>x.result==='PASS')?'PASS':'FAIL',checks:results.length,results};fs.writeFileSync(path.join(__dirname,'results.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));if(report.result!=='PASS')process.exitCode=1;

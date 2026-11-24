@@ -1,0 +1,318 @@
+--- installed/BeautyDisplayRepairView.html
++++ offline-candidate/BeautyDisplayRepairView.html
+@@ -671,7 +671,8 @@
+  function create({target,fetch,onData,onError,model=root.BeautyNakkaStages,includeLive=false,liveModel=root.BeautyNakkaPoolLive,plan=null,includeKnockouts=false}){
+   if(!target||!/^t_[A-Za-z0-9_]{1,80}$/.test(target.eventId)||typeof target.leagueId!=='string'||target.leagueId!==''&&!/^lg_[A-Za-z0-9_]{1,80}$/.test(target.leagueId)||!/^20\d\d-\d\d-\d\d$/.test(target.eventDate))throw Error('Invalid display event.');
+   const id=target.eventId,league=target.leagueId,eventDate=target.eventDate;
+-  let busy=false,revision=0,stopped=false,baseData=null,baseAt=0,retryAt=0,retryDelay=5000;
++  let busy=false,revision=0,stopped=false,baseData=null,baseAt=0,retryAt=0,retryDelay=5000,planAt=plan?Date.now():0;
++  const currentPlan=()=>plan&&Date.now()-planAt<30000?plan:null;
+   async function get(path){if(stopped)throw Error('Stopped');const response=await fetch(base+path,{method:'GET',credentials:'omit',cache:'no-store',referrerPolicy:'no-referrer',redirect:'error',signal:AbortSignal.timeout(15000)});const data=await response.json();if(path.startsWith('tournament/get?')){
+  const event=data?.tournament;
+  const date=Number.isFinite(event?.t_date)?new Date(event.t_date*1000).toLocaleDateString('en-CA',{timeZone:'Europe/Stockholm',year:'numeric',month:'2-digit',day:'2-digit'}):null;
+@@ -684,16 +685,21 @@
+     if(standings.result===-51&&!hasLeague&&!hasRobin)standings={result:0,tdid:id,groups:[]};
+     const schedule=hasLeague?await get('league/schedule/get?tdid='+id):undefined,after=await get('tournament/get?tdid='+id);
+     if(before.result!==0||after.result!==0||!Number.isFinite(before.tournament?.updateTime)||before.tournament.updateTime!==after.tournament?.updateTime)throw Error('Stage changed during refresh');
+-    baseData=model.project(after,standings,schedule,id,league);const snapshot=includeLive?await liveModel.collect(get,baseData,includeKnockouts):null;let data=includeLive?liveModel.apply(baseData,snapshot,plan):baseData;if(includeKnockouts&&snapshot)data=liveModel.applyKnockouts(data,snapshot);if(!stopped&&ticket===revision){baseAt=Date.now();retryAt=0;retryDelay=5000;onData(data);}
++    baseData=model.project(after,standings,schedule,id,league);
++    let snapshot=null,overlayFailed=false;
++    if(includeLive)try{snapshot=await liveModel.collect(get,baseData,includeKnockouts);}catch(e){overlayFailed=true;}
++    let data=includeLive?liveModel.apply(baseData,snapshot||{rows:[],live:new Map()},currentPlan()):baseData;
++    if(includeKnockouts&&snapshot)data=liveModel.applyKnockouts(data,snapshot);
++    if(!stopped&&ticket===revision){baseAt=Date.now();retryAt=0;retryDelay=5000;onData(data);if(overlayFailed)onError('Live scores unavailable. Verified competition data retained.');}
+    }catch(error){baseData=null;retryAt=Date.now()+retryDelay;retryDelay=Math.min(retryDelay*2,60000);if(!stopped&&ticket===revision)onError('Stage data unavailable or changed.');}
+    finally{busy=false;}
+   }
+   async function refreshLive(){
+    if(!includeLive||busy||stopped)return;if(!baseData||Date.now()-baseAt>15000){if(Date.now()<retryAt)return;return refresh();}busy=true;const ticket=revision;
+-   try{const snapshot=await liveModel.collect(get,baseData,includeKnockouts);if(!stopped&&ticket===revision)onData(includeKnockouts?liveModel.applyKnockouts(liveModel.apply(baseData,snapshot,plan),snapshot):liveModel.apply(baseData,snapshot,plan));}
++   try{const snapshot=await liveModel.collect(get,baseData,includeKnockouts);if(!stopped&&ticket===revision)onData(includeKnockouts?liveModel.applyKnockouts(liveModel.apply(baseData,snapshot,currentPlan()),snapshot):liveModel.apply(baseData,snapshot,currentPlan()));}
+    catch(e){if(!stopped&&ticket===revision)onError('Live pool data unavailable.');}finally{busy=false;}
+   }
+-  return Object.freeze({refresh,refreshLive,setPlan(next){if(next?.eventId===id&&Array.isArray(next.pools))plan=next;},stop(){stopped=true;revision++;}});
++  return Object.freeze({refresh,refreshLive,setPlan(next){plan=next?.eventId===id&&Array.isArray(next.pools)?next:null;planAt=Date.now();},stop(){stopped=true;revision++;}});
+  }
+  const api=Object.freeze({create});if(typeof module==='object'&&module.exports)module.exports=api;else root.BeautyNakkaStageFeed=api;
+ })(typeof globalThis==='object'?globalThis:this);
+@@ -1134,7 +1140,10 @@
+  }
+  function refreshPlan(){
+   if(planBusy||disposed||!feed||document.hidden||!navigator.onLine||!$('autoRefresh').checked||typeof google==='undefined'||!google.script?.run)return;
+-  planBusy=true;const requestedFeed=feed;try{google.script.run.withSuccessHandler(plan=>{planBusy=false;if(!disposed&&feed===requestedFeed)requestedFeed.setPlan(plan);}).withFailureHandler(()=>{planBusy=false;}).beautyDisplayRepairTestPlan();}catch{planBusy=false;}
++  planBusy=true;const requestedFeed=feed;let finished=false;
++  const done=plan=>{if(finished)return;finished=true;clearTimeout(deadline);planBusy=false;if(!disposed&&feed===requestedFeed)requestedFeed.setPlan(plan);};
++  const deadline=setTimeout(()=>done(null),20000);
++  try{google.script.run.withSuccessHandler(done).withFailureHandler(()=>done(null)).beautyDisplayRepairTestPlan();}catch{done(null);}
+  }
+  function closeMenu(focus=false){
+   const box=$('castSettings');if(box.hidden)return;box.hidden=true;$('displaySettings').setAttribute('aria-expanded','false');
+--- installed/Code.gs
++++ offline-candidate/Code.gs
+@@ -14,14 +14,14 @@
+   if(['queuehub','queuekiosk','queuemobile'].includes(page)){beautyQueueUiGuard_();return HtmlService.createHtmlOutputFromFile({queuehub:'QueueHubTest',queuekiosk:'QueueKioskTest',queuemobile:'QueueRemoteTest'}[page]).addMetaTag('viewport','width=device-width, initial-scale=1').setTitle('Beauty Queue TEST');}
+   if(page==='displayrepair')return beautyDisplayRepairTestPage_();
+   if (!['', 'remote', 'kiosk', 'hub', 'live', 'stages'].includes(page)) throw new Error('Candidate serves registration pages only.');
+-  if(page==='stages'){beautyHubTestGuard_();return beautyHubCastHtml_('StageTest').setTitle('Pool and knockout play — TEST');}
++  if(page==='stages')return beautyDisplayRepairTestPage_();
+   if(page==='kiosk'){
+     beautyHubTestGuard_();
+     return HtmlService.createHtmlOutputFromFile('KioskTest').addMetaTag('viewport', 'width=device-width, initial-scale=1').setTitle('Kiosk Identity TEST');
+   }
+   if (page === 'live') {
+     beautyHubTestGuard_();
+-    return beautyHubCastHtml_('BeautyLiveTest').setTitle('Kvällens spelare — Live TEST');
++    return beautyDisplayRepairTestPage_();
+   }
+   if (page === 'hub') {
+     beautyHubTestGuard_();
+@@ -781,6 +781,7 @@
+   SAVE REGISTRATION
+   ======================================================
+   */
++  if (message.startsWith('=')) return {success:false,code:'INVALID_MESSAGE',error:'Skriv meddelandet som vanlig text, utan = i början. Ingen anmälan sparades.'};
+   const master = spreadsheet.getSheetByName(MASTER_SHEET);
+   const tonight = spreadsheet.getSheetByName("TONIGHT'S PLAYERS");
+   if (!master || !tonight) throw new Error('Spelarlistan kunde inte läsas.');
+--- installed/HubTest.html
++++ offline-candidate/HubTest.html
+@@ -3079,7 +3079,7 @@
+   const mode = 'test';
+   const allowed = ['eventDate','selectedName', 'newName', 'consent', 'message', 'identityChoice',
+     'identityBase', 'identityDetail', 'identityConfirmedName'];
+-  const errors = {"READ_FAILED_EVENT":"Event review could not be completed. No event change was requested.","NAME_CONFLICT": "This name is already on the list.", "ALREADY_REGISTERED": "You are already registered for this event.", "INVALID_NAME": "Enter a valid full name.", "AMBIGUOUS_NAME": "Several player records have this name. Please ask the organiser for help.", "UNKNOWN_PLAYER": "Select your name or add a new player.", "INVALID_CHOICE": "Choose who you are.", "STALE_IDENTITY": "The selected name has changed. Start again.", "INVALID_DETAIL": "Enter a valid middle name, nickname or identifying detail.", "DETAIL_IN_USE": "This identifying detail is already in use. Select the existing player or use a different detail.", "CONFIRM_NAME": "Confirm how your name will be displayed.", "BLOCKED": "This TEST operation is not enabled.", "INVALID": "Invalid request. Check the fields and try again.", "BUSY": "Another operation is running. Reload before trying again.", "STALE_EVENT": "The event date has changed. Reload the Hub.", "STALE_STATUS": "The status has changed since the list loaded. Reload before another change.", "PLAYER_AMBIGUOUS_OR_MISSING": "The player is missing or appears more than once. Reload and check the list.", "FORMULA": "The status cell contains a formula. No change was saved.", "LAYOUT": "The TEST spreadsheet layout needs review.", "READ_FAILED": "The TEST data could not be checked. Reload and inspect the result.", "SAVE_UNCERTAIN": "The save could not be verified. Reload and inspect the result before another change."};
++  const errors = {"INVALID_MESSAGE":"Enter the message as plain text without = at the beginning. Nothing was saved.","REGISTRATION_CLOSED":"Registration is closed for this event. Nothing was saved. Select the intended event.","REGISTRATION_CHECK_UNAVAILABLE":"Event status could not be checked. Nothing was saved. Try again when the connection returns.","READ_FAILED_EVENT":"Event review could not be completed. No event change was requested.","NAME_CONFLICT": "This name is already on the list.", "ALREADY_REGISTERED": "You are already registered for this event.", "INVALID_NAME": "Enter a valid full name.", "AMBIGUOUS_NAME": "Several player records have this name. Please ask the organiser for help.", "UNKNOWN_PLAYER": "Select your name or add a new player.", "INVALID_CHOICE": "Choose who you are.", "STALE_IDENTITY": "The selected name has changed. Start again.", "INVALID_DETAIL": "Enter a valid middle name, nickname or identifying detail.", "DETAIL_IN_USE": "This identifying detail is already in use. Select the existing player or use a different detail.", "CONFIRM_NAME": "Confirm how your name will be displayed.", "BLOCKED": "This TEST operation is not enabled.", "INVALID": "Invalid request. Check the fields and try again.", "BUSY": "Another operation is running. Reload before trying again.", "STALE_EVENT": "The event date has changed. Reload the Hub.", "STALE_STATUS": "The status has changed since the list loaded. Reload before another change.", "PLAYER_AMBIGUOUS_OR_MISSING": "The player is missing or appears more than once. Reload and check the list.", "FORMULA": "The status cell contains a formula. No change was saved.", "LAYOUT": "The TEST spreadsheet layout needs review.", "READ_FAILED": "The TEST data could not be checked. Reload and inspect the result.", "SAVE_UNCERTAIN": "The save could not be verified. Reload and inspect the result before another change."};
+   const response = data => ({ ok: true, json: async () => data?.success === false && data.error ? { ...data, error: errors[data.code] || 'The TEST operation could not be completed. Reload and check the result.' } : data });
+   let queue = Promise.resolve(),epoch=0,eventContext='legacy';
+   const reads=new Set(),inflight=new Map();
+@@ -3100,21 +3100,31 @@
+     notice.textContent=result.player+' registered for '+result.registrationEventDate+'. '+(result.nakka?.message||'Check Nakka before registering this player again.');
+     header.after(notice);
+   }
++  let uncertainWrite=null;
++  const writeActions=new Set(['register','status','eventsave','removesave','nakkatransfersave','nakkaleaguesave','poolsave','poolstart','poolboardplan','poolqualifysave','eveningsave','nakkacreateconfirm','context:add','context:activate','context:draft']);
+   function rpcNow(action, input, authorization) {
+     return new Promise((resolve, reject) => {
+-      if (typeof google === 'undefined' || !google.script?.run) {
+-        reject(new Error('Open Hub TEST through Google Apps Script.')); return;
+-      }
+-      const { token, generation } = authorization;
+-      if (!BeautyHubAuth.isCurrent(generation)) { reject(new Error('Sign in to continue.')); return; }
+-      google.script.run.withSuccessHandler(data => {
+-        if (!BeautyHubAuth.isCurrent(generation)) { reject(new Error('Sign in to continue.')); return; }
+-        if (data?.code === 'AUTH_REQUIRED') { BeautyHubAuth.expired(); reject(new Error('Sign in to continue.')); return; }
++      if (typeof google === 'undefined' || !google.script?.run) {reject(new Error('Open Hub TEST through Google Apps Script.'));return;}
++      const {token,generation}=authorization;
++      if(!BeautyHubAuth.isCurrent(generation)){reject(new Error('Sign in to continue.'));return;}
++      if(writeActions.has(action)&&uncertainWrite){reject(new Error('A previous save has no confirmed reply. Check the saved result before any further change. No new save was sent.'));return;}
++      let finished=false;
++      const settle=(error,data)=>{if(finished)return;finished=true;clearTimeout(timer);if(error)reject(error);else resolve(data);};
++      const timer=setTimeout(()=>{
++        if(writeActions.has(action))uncertainWrite={action,generation,context:input._context};
++        settle(new Error(writeActions.has(action)?'No reply within 60 seconds. The save may have completed. Check the saved result; do not repeat it. Further saves in this tab are paused.':'No reply within 60 seconds. The read or preview can be checked again.'));
++      },60000);
++      try{google.script.run.withSuccessHandler(data=>{
++        if(finished)return;
++        if(!BeautyHubAuth.isCurrent(generation)){settle(new Error('Sign in to continue.'));return;}
++        if(data?.code==='AUTH_REQUIRED'){BeautyHubAuth.expired();settle(new Error('Sign in to continue.'));return;}
+         if(action==='read'&&data?.success===true)updateEventContext(data.eventContext);
+-        resolve(data);
+-      })
+-        .withFailureHandler(() => reject(new Error('The Google TEST request failed. Reload and check the result before trying to save again.')))
+-        .beautyHubTest(action, input, token);
++        settle(null,data);
++      }).withFailureHandler(()=>{
++        if(finished)return;
++        if(writeActions.has(action))uncertainWrite={action,generation,context:input._context};
++        settle(new Error('The Google TEST reply could not be verified. Check the saved result before trying to save again.'));
++      }).beautyHubTest(action,input,token);}catch(e){settle(new Error('The Google TEST request could not be started.'));}
+     });
+   }
+   function rpc(action, input) {
+@@ -7778,7 +7788,7 @@
+   if(busy&&!notice&&p?.code!=='EVENT_REGISTRATION_CLOSED'){status.textContent='Checking…';mark.className='beauty-simple-mark checking';mark.textContent='';detail.hidden=true;history.hidden=true;return;}
+   if(p?.tone==='green'&&!notice&&!providerPaused){title.hidden=true;status.textContent='Issue solved';mark.className='beauty-simple-mark success';mark.textContent='✓';detail.hidden=true;history.hidden=true;return;}
+   if(!p){detail.textContent='This player is no longer on the current list. Review the saved issue.';addButton('Resolve issue',()=>goToPlayer(selected));}
+-  else if(p.code==='EVENT_REGISTRATION_CLOSED'){detail.textContent=shortReasons.EVENT_REGISTRATION_CLOSED;addButton('Resolve issue',()=>goToPlayer(p.name));}
++  else if(p.code==='EVENT_REGISTRATION_CLOSED'){detail.textContent=shortReasons.EVENT_REGISTRATION_CLOSED;addButton('Check current entry',()=>run('review',{player:p.name}));addButton('Review attendance',()=>goToPlayer(p.name));}
+   else if(['REMOVE_REVIEW_REQUIRED','REMOVE_UNCERTAIN'].includes(p.code)){detail.textContent=shortReasons[p.code];addButton('Resolve issue',()=>goToPlayer(p.name));}
+   else if(notice||providerPaused){detail.textContent=busy?'Still waiting for a reply.':'The current result could not be confirmed.';const retry=addButton('Resolve issue',()=>run('read'));retry.disabled=busy;}
+   else if(p.tone==='unknown'||p.tone==='orange'){status.textContent='Checking…';mark.className='beauty-simple-mark checking';mark.textContent='';detail.hidden=true;history.hidden=true;return;}
+@@ -7797,7 +7807,7 @@
+   if(g?.event?.id&&/^t_[A-Za-z0-9_]+$/.test(g.event.id)){const a=document.createElement('a');a.href='https://n01darts.com/n01/league/season.php?id='+encodeURIComponent(g.event.id);a.target='_blank';a.rel='noopener noreferrer';a.textContent='Open event in Nakka';history.append(a);}
+   addButton('Copy report',async()=>{try{await navigator.clipboard.writeText(report.textContent);}catch(e){history.open=true;}},history);
+  }
+- function open(name){const target=state?.players.find(p=>p.name===name);if(!target||!(['red','orange'].includes(target.tone)||(target.tone==='green'&&target.history?.length)))return;selected=name;notice='';history.open=false;if(guidance?.player!==name)guidance=null;if(!dialog.open)dialog.showModal();renderDialog();const p=state?.players.find(p=>p.name===name);if(p?.tone==='red'&&p.code!=='EVENT_REGISTRATION_CLOSED'&&!guidance&&!busy)run('review',{player:name});}
++ function open(name){const target=state?.players.find(p=>p.name===name);if(!target||!(['red','orange'].includes(target.tone)||(target.tone==='green'&&target.history?.length)))return;selected=name;notice='';history.open=false;if(guidance?.player!==name)guidance=null;if(!dialog.open)dialog.showModal();renderDialog();const p=state?.players.find(p=>p.name===name);if(p?.tone==='red'&&!guidance&&!busy)run('review',{player:name});}
+  function paintCell(cell){
+   const name=cell.dataset.beautyHealthPlayer,p=state?.players.find(p=>p.name===name);let badge=cell.querySelector('.beauty-player-recovery-badge');
+   const visible=p&&['red','orange'].includes(p.tone);
+--- installed/HubTestAttention.gs
++++ offline-candidate/HubTestAttention.gs
+@@ -51,7 +51,7 @@
+   try {
+     const date=beautyHubNakkaDate_().date,hub=beautyHubNakkaHubRows_(),props=PropertiesService.getScriptProperties();
+     const target=beautyHubTransferTarget_();
+-    const fingerprint=()=>JSON.stringify(Object.entries(props.getProperties()).filter(([key])=>!/^beauty-hub-session:bhs_[a-f0-9]{64}$/.test(key)&&!key.startsWith('BEAUTY_PLAYER_RECOVERY_V1_')).sort(([a],[b])=>a.localeCompare(b)));
++    const fingerprint=()=>JSON.stringify(Object.entries(props.getProperties()).filter(([key])=>!/^beauty-hub-session:bhs_[a-f0-9]{64}$/.test(key)&&!key.startsWith('BEAUTY_PLAYER_RECOVERY_V1_')&&!key.startsWith('BEAUTY_LEAGUE_STATS_')).sort(([a],[b])=>a.localeCompare(b)));
+     const before=fingerprint();
+     // Nakka GETs must not hold up registration or transfer writes.
+     lock.releaseLock();locked=false;
+@@ -241,7 +241,6 @@
+   if(!player)return failure('PLAYER_NOT_FOUND');
+   if(action==='auto'&&!player.autoEligible)return {...view,skipped:true};
+   if(!['IN','PENDING'].includes(player.status))return {...view,guidance:{player:name,problem:player.problem,steps:['Check the player’s registration.','Set IN only if this player is attending.','Return here to check the entry.']}};
+-  if(player.code==='EVENT_REGISTRATION_CLOSED')return {...view,guidance:{player:name,code:player.code,problem:player.problem,steps:['Close this window and find this player in the Hub player list.','For a mistaken late registration, change IN to OUT. The original registration is retained.','Select the correct upcoming event before registering for it. Do not reopen this completed event.']}};
+   record=beautyPlayerRecoveryLoad_(name,date)||{version:1,eventId,name,date,state:'CHECKING',history:[]};
+   if(record.state==='CHECKING'&&record.owner&&Date.now()-Date.parse(record.updatedAt)<360000)return failure('BUSY','Beauty is already checking this player.');
+   if(action==='auto')record.autoAttempts=record.state==='VERIFIED'?1:(record.autoAttempts||0)+1;
+@@ -297,7 +296,16 @@
+  const ss=beautyHubSpreadsheet_(),sh=ss.getSheetByName(RESPONSE_SHEET),v=sh.getRange(r.row,1,1,6).getValues()[0];
+  if(!(v[0] instanceof Date)||v[0].toISOString()!==r.recordedAt||JSON.stringify(v.slice(1))!==JSON.stringify([r.selectedName,r.selectedName===NEW_PLAYER_OPTION?r.newName:'',r.consent,r.message,r.source]))throw Error('REGISTRATION_SOURCE_UNVERIFIED');return ss;
+ }
+-function beautyRegistrationRecoveryFinish_(){const r=beautyRegistrationRecoveryActive_;if(!r)return;beautyRegistrationRecoverySource_(r);r.state='COMPLETE';r.completedAt=new Date().toISOString();beautyRegistrationRecoveryWrite_(r);beautyRegistrationRecoveryActive_=null;}
++function beautyRegistrationProjectionVerified_(r,ss){
++ const key=BeautyNameResolution.key;
++ const rows=title=>{const sh=ss.getSheetByName(title);if(!sh)throw Error('REGISTRATION_SHEET_MISSING');const last=sh.getLastRow();if(!Number.isInteger(last)||last<1||last>10000)throw Error('REGISTRATION_LAYOUT_REVIEW');return last<2?[]:sh.getRange(2,1,last-1,6).getDisplayValues();};
++ if(!['JA, JAG GODKÄNNER','NEJ, JAG GODKÄNNER INTE'].includes(r.consent))throw Error('REGISTRATION_CONSENT_REVIEW');
++ if(rows(MASTER_SHEET).filter(x=>key(x[0])===key(r.name)).length!==1)throw Error('REGISTRATION_MASTER_CHANGED');
++ const expected=['IN',r.consent==='JA, JAG GODKÄNNER'?'JA':'NEJ',r.message,r.source];
++ for(const title of ['PLAYER STATUS DATA',"TONIGHT'S PLAYERS"]){const found=rows(title).filter(x=>key(x[0]||x[1])===key(r.name));if(found.length!==1||JSON.stringify(found[0].slice(2,6))!==JSON.stringify(expected))throw Error('REGISTRATION_DISPLAY_REVIEW');}
++ return true;
++}
++function beautyRegistrationRecoveryFinish_(){const r=beautyRegistrationRecoveryActive_;if(!r)return;const ss=beautyRegistrationRecoverySource_(r);beautyRegistrationProjectionVerified_(r,ss);beautyRegistrationRecoverySource_(r);r.state='COMPLETE';r.completedAt=new Date().toISOString();beautyRegistrationRecoveryWrite_(r);beautyRegistrationRecoveryActive_=null;}
+ function beautyRegistrationRecoveryCatch_(e){const r=beautyRegistrationRecoveryActive_;beautyRegistrationRecoveryActive_=null;if(!r)throw e;
+  let sourceVerified=false;try{beautyRegistrationRecoverySource_(r);sourceVerified=true;}catch(ignore){}
+  r.state='REVIEW';r.code=sourceVerified?'REGISTRATION_DISPLAY_PENDING':'REGISTRATION_SOURCE_UNVERIFIED';try{beautyRegistrationRecoveryWrite_(r);}catch(ignore){}
+--- installed/HubTestAutoRegister.gs
++++ offline-candidate/HubTestAutoRegister.gs
+@@ -106,7 +106,7 @@
+     }
+     if(result?.success!==false||!['TRANSFER_BUSY','STALE_TRANSFER'].includes(result.code))break;
+   }
+-  if(result?.success===true&&['TRANSFERRED','ENTRY_VERIFIED_LINK_UNEXPOSED','ALREADY_PRESENT','PRESENT_AFTER_ATTEMPT'].includes(result.status)&&result.readbackVerified===true){
++  if(result?.success===true&&['TRANSFERRED','ENTRY_VERIFIED_LINK_UNEXPOSED','ALREADY_PRESENT','PRESENT_AFTER_ATTEMPT','CURRENT_ENTRY_REVIEWED'].includes(result.status)&&result.readbackVerified===true){
+     return {status:result.status,entryConfirmed:true,identityVerified:result.identityVerified===true,
+       message:typeof beautyContextStandalone_==='function'&&beautyContextStandalone_()?'Nakka tournament entry confirmed.':result.identityVerified===true?'Nakka TEST entry confirmed with its existing league link.':'Nakka TEST entry confirmed. The exact league ID is not returned by the API, so link verification remains unavailable.',
+       ...(result.journal?{journal:result.journal}: {})};
+--- installed/HubTestNakkaTransfer.gs
++++ offline-candidate/HubTestNakkaTransfer.gs
+@@ -82,14 +82,14 @@
+     ids.add(row.tpid);return {tpid:row.tpid,name:row.name,lpid:row.lpid||''};
+   }).sort((a,b)=>a.tpid.localeCompare(b.tpid));
+ }
+-function beautyHubTransferState_(player,authorization,allowMissing) {
++function beautyHubTransferState_(player,authorization,allowMissing,allowClosed=false) {
+   const key=v=>v.normalize('NFC').trim().replace(/\s+/g,' ').toLocaleLowerCase('sv-SE');
+   const match=beautyHubNakkaEvent_({});
+   if(match.status!=='MATCHED'||match.event?.id!==beautyHubTransferTarget_())beautyHubTransferError_('TEST_TARGET_ONLY');
+   const [eventData,entryData,loadedLeague]=beautyHubNakkaReads_(authorization,true),raw=eventData.tournament;
+   const standalone=typeof beautyContextStandalone_==='function'&&beautyContextStandalone_(),leagueData=standalone?{list:[]}:loadedLeague;
+   if(!raw||raw.tdid!==beautyHubTransferTarget_()||(raw.lgid||'')!==(''+(typeof beautyHubLeagueId_==='function'?beautyHubLeagueId_():'lg_M2wQ_4189')+'')||raw.title!==beautyHubActiveTestTarget_().title||
+-     ![10,20].includes(raw.status)||!Number.isFinite(raw.t_date)||!Number.isFinite(raw.updateTime))beautyHubTransferError_('TEST_TARGET_ONLY');
++     !(allowClosed?[10,20,25,30,40]:[10,20]).includes(raw.status)||!Number.isFinite(raw.t_date)||!Number.isFinite(raw.updateTime))beautyHubTransferError_('TEST_TARGET_ONLY');
+   if(Utilities.formatDate(new Date(raw.t_date*1000),'Europe/Berlin','yyyy-MM-dd')!==match.eventDate)beautyHubTransferError_('STALE_TRANSFER');
+   const event={id:raw.tdid,title:raw.title,date:match.eventDate,status:raw.status,updateTime:raw.updateTime};
+   const hub=beautyHubNakkaHubRows_(),found=hub.filter(row=>key(row.name)===key(player));
+@@ -120,6 +120,7 @@
+ function beautyHubNakkaTransferRun_(action,input) {
+   beautyHubTestGuard_();
+   const messages={LEAGUE_CREATION_REVIEW_REQUIRED:'A previous league creation needs review. No add was sent; do not repeat the registration.',INVALID_TRANSFER:'Invalid transfer request. Reload the preview.',TRANSFER_DISABLED:'TEST transfers are disabled.',
++    EVENT_REGISTRATION_CLOSED:'The saved entry was checked. Registration is closed, so no new entry can be added. Keep the original registration and review the intended event.',
+     TEST_TARGET_ONLY:'Transfers require the unique approved TEST event for the selected Hub date, in Preparing or Accepting entries. Check or create that event first.',
+     PLAYER_NOT_ELIGIBLE:'Select exactly one Hub player with IN status.',LEAGUE_IDENTITY_REVIEW:'No unique existing league identity could be proposed. Review the player in Nakka; no new league player was created.',
+     IDENTITY_CONFLICT:'An existing Nakka entry has conflicting or duplicate identity details. Review it manually.',STALE_TRANSFER:'The event, player or Nakka list changed. Review a new preview.',
+@@ -147,7 +148,7 @@
+       cache.remove(key); // A confirmation is consumed once, even on failure.
+       if(!reviewed||reviewed.uid!==account.uid||reviewed.session!==session||reviewed.player!==input.player||Date.now()>=reviewed.expires)return fail('STALE_TRANSFER');
+     }
+-    const state=beautyHubTransferState_(input.player,authorization);
++    const state=beautyHubTransferState_(input.player,authorization,false,true);
+     journal='BEAUTY_NAKKA_TRANSFER_'+beautyHubTransferTarget_()+'_'+(state.identity.lpid||beautyHubTransferHash_(state.identity.name));
+     if(action==='save'&&reviewed.intent==='REVIEW_EXISTING'&&reviewed.version!==beautyHubTransferHash_({state,prior:props.getProperty(journal)}))return fail('STALE_TRANSFER');
+     const creation=props.getProperty(('BEAUTY_NAKKA_LEAGUE_CREATE_'+(typeof beautyHubLeagueId_==='function'?beautyHubLeagueId_():'lg_M2wQ_4189')+'_')+beautyHubTransferHash_(input.player.normalize('NFC').trim().replace(/\s+/g,' ').toLocaleLowerCase('sv-SE')));
+@@ -198,7 +199,7 @@
+               message:'This player is already in the TEST event. Review the exact entry ID below. Confirmation records your review only: no Nakka add, deletion or Sheet change. The earlier transfer record is retained.'};
+           }
+           if(reviewed.intent!=='REVIEW_EXISTING'||reviewed.version!==version)return fail('STALE_TRANSFER');
+-          const fresh=beautyHubTransferState_(input.player,authorization);
++          const fresh=beautyHubTransferState_(input.player,authorization,false,true);
+           if(beautyHubTransferHash_({state:fresh,prior:props.getProperty(journal)})!==version)return fail('STALE_TRANSFER');
+           beautyHubAuthRequire_(beautyHubRequestToken_);
+           const r={kind:'STAFF_REVIEWED_CURRENT_ENTRY',reviewedUTC:new Date().toISOString(),uid:account.uid,event:state.event,identity:state.identity,tpid:existing.tpid,
+@@ -233,6 +234,7 @@
+       identityVerified:!!state.identity.lpid&&state.existing.lpid===state.identity.lpid,
+       message:!state.identity.lpid?'Already present in this TEST tournament. Nothing added.':state.existing.lpid===state.identity.lpid?'Already in this TEST event with the same league link. Nothing added.':'Already present in this TEST event. Nothing added. The API does not expose the league link, so its exact ID is not verified here.'};
+     if(action==='save'&&reviewed.intent==='REVIEW_EXISTING')return fail('STALE_TRANSFER');
++    if(![10,20].includes(state.event.status))return fail('EVENT_REGISTRATION_CLOSED',journal);
+     const version=beautyHubTransferHash_(state);
+     if(action==='preview'){
+       const ticket=Utilities.getUuid().replace(/-/g,''),expires=Date.now()+300000;
+--- installed/HubTestPools.gs
++++ offline-candidate/HubTestPools.gs
+@@ -272,13 +272,14 @@
+   }
+   return {...stats,identityProfiles};
+ }
++function beautyPoolStatsTimeFresh_(stats,now=Date.now()){const at=Date.parse(stats?.fetchedAt);return Number.isFinite(at)&&at<=now&&now-at<300000;}
+ function beautyPoolStatsRun_(auth,force,identities){
+   if(typeof beautyContextStandalone_==='function'&&beautyContextStandalone_()){const profiles=beautyPoolProfiles_(auth).map(p=>({...p,average:null,points:null,reason:'Standalone event — no league ranking'}));return {...beautyPoolLastGood_({leagueId:beautyHubScopeId_(),title:beautyHubActiveTestTarget_().title,fetchedAt:new Date().toISOString(),method:'Standalone event entries; unseeded until event averages are available',profiles}),fresh:true};}
+   const p=PropertiesService.getScriptProperties(),now=Date.now(),last=beautyPoolLastGood_();
+   const failed=Number(p.getProperty(('BEAUTY_LEAGUE_STATS_'+(typeof beautyHubScopeId_==='function'?beautyHubScopeId_():'lg_M2wQ_4189')+'_FAILED'))||0);
+-  if(last&&!force&&now-Date.parse(last.fetchedAt)<300000&&failed<=Date.parse(last.fetchedAt))return {...last,fresh:true};
++  if(last&&!force&&beautyPoolStatsTimeFresh_(last,now)&&failed<=Date.parse(last.fetchedAt))return {...last,fresh:true};
+   const attempt=Number(p.getProperty(('BEAUTY_LEAGUE_STATS_'+(typeof beautyHubScopeId_==='function'?beautyHubScopeId_():'lg_M2wQ_4189')+'_ATTEMPT'))||0);
+-  if(now-attempt<60000)return last?{...last,fresh:now-Date.parse(last.fetchedAt)<300000&&failed<=Date.parse(last.fetchedAt),message:'Refresh is limited to once per minute.'}:{fresh:false,profiles:[],message:'Wait one minute before refreshing.'};
++  if(Number.isFinite(attempt)&&attempt<=now&&now-attempt<60000)return last?{...last,fresh:beautyPoolStatsTimeFresh_(last,now)&&failed<=Date.parse(last.fetchedAt),message:'Refresh is limited to once per minute.'}:{fresh:false,profiles:[],message:'Wait one minute before refreshing.'};
+   p.setProperty(('BEAUTY_LEAGUE_STATS_'+(typeof beautyHubScopeId_==='function'?beautyHubScopeId_():'lg_M2wQ_4189')+'_ATTEMPT'),String(now));
+   let diagnostic='LEAGUE_METADATA';
+   try{
+@@ -466,7 +467,7 @@
+       const stats=beautyPoolStats_(auth,action==='poolload'&&input.refresh==='true'),roster=beautyPoolRoster_(),entries=beautyPoolEntries_(event);
+       const bindings=action==='pooldraw'?JSON.parse(input.bindings):null,mappings=beautyPoolMappings_(roster,stats,entries,bindings);
+       if(action==='poolload')return {success:true,stats,roster,mappings,event:{id:event.tdid,title:event.title,date:roster.date},stages:{stage1:event.t_setting?.tournament===1,stage2:event.s2_setting?.tournament===1},formatPreset:event.t_setting?.tournament!==1&&event.s2_setting?.tournament!==1?'preserve':props.getProperty('BEAUTY_POOL_FORMAT_PRESET')||'top2-rest',journal:props.getProperty(journalKey)?'A previous pool send is recorded. Sending again is blocked.':''};
+-      if(!stats.fresh||Date.now()-Date.parse(stats.fetchedAt)>=300000)beautyPoolError_('Fresh statistics required. Refresh and review again.');
++      if(!stats.fresh||!beautyPoolStatsTimeFresh_(stats))beautyPoolError_('Fresh statistics required. Refresh and review again.');
+       if(input.reviewed!=='true')beautyPoolError_('Review the league and event identities before drawing.');
+       const draw=BeautyPoolSeeding.draw({players:mappings,sizes:JSON.parse(input.sizes),seed:parseInt(Utilities.getUuid().replace(/-/g,'').slice(0,8),16),eventDate:roster.date,frozenAt:new Date().toISOString(),source:{leagueId:stats.leagueId,fetchedAt:stats.fetchedAt}});
+       const frozen={draw,mappings:mappings.map(p=>({id:p.id,name:p.name,lpid:p.lpid,tpid:p.tpid,linkExposed:p.linkExposed})),rosterSignature:roster.signature,date:roster.date,eventHash:beautyPoolHash_(event),statsHash:beautyPoolHash_(stats.profiles)};
+@@ -483,8 +484,8 @@
+     if(beautyPoolHash_(event)!==frozen.eventHash)beautyPoolError_('Nakka event changed since the draw. Generate and review a new draw.');
+     // Refresh age without redrawing. Only identical profiles can reuse this draw.
+     let stats=beautyPoolStats_(auth,false);
+-    if(!stats.fresh||!Number.isFinite(Date.parse(stats.fetchedAt))||Date.now()-Date.parse(stats.fetchedAt)>=300000)stats=beautyPoolStats_(auth,true);
+-    if(!stats.fresh||!Number.isFinite(Date.parse(stats.fetchedAt))||Date.now()-Date.parse(stats.fetchedAt)>=300000)beautyPoolError_('Statistics could not be refreshed. Your draw is retained; retry review when the connection returns.');
++    if(!stats.fresh||!beautyPoolStatsTimeFresh_(stats))stats=beautyPoolStats_(auth,true);
++    if(!stats.fresh||!beautyPoolStatsTimeFresh_(stats))beautyPoolError_('Statistics could not be refreshed. Your draw is retained; retry review when the connection returns.');
+     if(beautyPoolHash_(stats.profiles)!==frozen.statsHash)beautyPoolError_('Statistics changed. Your draw is retained; review the changes before choosing a new draw.');
+     const liveProfiles=beautyPoolProfiles_(auth);if(!beautyPoolEqual_(liveProfiles,stats.profiles.map(p=>({lpid:p.lpid,name:p.name}))))beautyPoolError_('League identities changed. Reload statistics and review a new draw.');
+     const mappings=beautyPoolMappings_(roster,stats,beautyPoolEntries_(event),frozen.mappings.map(p=>({id:p.id,lpid:p.lpid,tpid:p.tpid})));
+--- installed/RemoteRegistration.html
++++ offline-candidate/RemoteRegistration.html
+@@ -1855,7 +1855,9 @@
+        SUCCESS + 5 SECOND AUTO RETURN
+        ===================================================== */
+ 
++    let nextPlayerTimer=null;
+     function showSuccess(player,nakka) {
++      clearTimeout(nextPlayerTimer);
+       document.getElementById('registrationOutcome').textContent=nakka?.entryConfirmed===true?'Anmälan är sparad. Din plats i Nakka är bekräftad.':'Anmälan är sparad. Be arrangören kontrollera Nakka. Anmäl dig inte igen.';
+ 
+       document
+@@ -1872,7 +1874,7 @@
+ 
+       window.scrollTo(0, 0);
+ 
+-      setTimeout(nextPlayer, 5000);
++      nextPlayerTimer=setTimeout(nextPlayer, 5000);
+     }
+ 
+     /* =====================================================
+@@ -1880,6 +1882,7 @@
+        ===================================================== */
+ 
+     function nextPlayer() {
++      clearTimeout(nextPlayerTimer);nextPlayerTimer=null;
+ 
+       document
+         .getElementById('playerName')

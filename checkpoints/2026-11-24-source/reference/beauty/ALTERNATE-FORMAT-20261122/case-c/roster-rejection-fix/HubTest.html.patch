@@ -1,0 +1,22 @@
+--- before/HubTest.html
++++ candidate/HubTest.html
+@@ -3588,8 +3588,8 @@
+    let result;
+    try{result=await send('pooldraftchoices',{ticket:p.ticket,choices:JSON.stringify(p.choices)});}
+    catch(e){
+-    if(e.code==='POOL_DRAFT_REPLACED'&&choicesCurrent(p)){
+-     clearChoices();approval=null;invalid=true;invalidReason='This tab has an older draft. Its changes were rejected. Reopen the planner to load the saved draw.';
++    if(['POOL_DRAFT_REPLACED','POOL_DRAFT_ROSTER_CHANGED'].includes(e.code)&&choicesCurrent(p)){
++     clearChoices();approval=null;invalid=true;invalidReason=e.code==='POOL_DRAFT_ROSTER_CHANGED'?'The IN roster or event date changed. These choices were rejected. Reopen the planner; the saved draw is retained for an explicit new draw.':'This tab has an older draft. Its changes were rejected. Reopen the planner to load the saved draw.';
+      if(state?.stats)state.stats.fresh=false;renderDraw();renderSettings();
+     }
+     throw e;
+@@ -3635,7 +3635,7 @@
+  async function request(page,input){
+   const url=new URL(BeautyHubServices.endpoint);url.search='';url.searchParams.set('page',page);for(const [k,v]of Object.entries(input))url.searchParams.set(k,v);
+   let deadline;const pending=BeautyHubServices.request(url.toString()).then(r=>r.json());
+-  const data=await(page==='poolload'&&typeof root.setTimeout==='function'?new Promise((resolve,reject)=>{deadline=root.setTimeout(()=>reject(Error('Loading timed out. Reload the Hub to check saved boards. Do not resend pools or repeat Start.')),45000);pending.then(resolve,reject);}):pending).finally(()=>{if(deadline!==undefined)root.clearTimeout(deadline);});if(!data.success){const error=Error((data.error||'Pool request failed.')+(data.audit?' Audit: '+data.audit:''));if(data.code==='POOL_DRAFT_REPLACED')error.code=data.code;throw error;}// Treat absent optional average fields as explicitly unknown at the RPC boundary.
++  const data=await(page==='poolload'&&typeof root.setTimeout==='function'?new Promise((resolve,reject)=>{deadline=root.setTimeout(()=>reject(Error('Loading timed out. Reload the Hub to check saved boards. Do not resend pools or repeat Start.')),45000);pending.then(resolve,reject);}):pending).finally(()=>{if(deadline!==undefined)root.clearTimeout(deadline);});if(!data.success){const error=Error((data.error||'Pool request failed.')+(data.audit?' Audit: '+data.audit:''));if(data.code==='POOL_DRAFT_REPLACED'||(data.code==='POOL_DRAFT_ROSTER_CHANGED'&&data.uncertain===false))error.code=data.code;throw error;}// Treat absent optional average fields as explicitly unknown at the RPC boundary.
+   for(const p of data.mappings||[])p.average=average(p.average);
+   for(const p of data.stats?.profiles||[])p.average=average(p.average);
+   for(const draw of [data.draw,data.workflow?.draw,data.restoredDraft?.draw]){

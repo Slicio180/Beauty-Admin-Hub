@@ -1,0 +1,28 @@
+{
+  "status": "DESKTOP_INSTRUCTIONS_PASS_FIELD_BATCH_INSTALLED_NATIVE_WRITE_PENDING",
+  "changedFiles": [
+    "Code.gs"
+  ],
+  "localChecks": 20,
+  "baseline": {
+    "bytes": 70543,
+    "sha256": "203ed1a0cec082d9b39f688b8903942d131863bbe6fd84733c6563e729dee120"
+  },
+  "candidate": {
+    "bytes": 70275,
+    "sha256": "194c47e754cf846454771407f5412cf0ae3dc0a9ae514364655e0f91b9239472"
+  },
+  "nativeReadback": {
+    "file": "Code.gs",
+    "checkedUTC": "2026-11-23T17:09:25.380Z",
+    "exact": true,
+    "bytes": 70275,
+    "sha256": "194c47e754cf846454771407f5412cf0ae3dc0a9ae514364655e0f91b9239472",
+    "savedToDriveObserved": true,
+    "editorReloaded": true,
+    "runClicked": false,
+    "deployClicked": false
+  },
+  "change": "Three adjacent field writes batched; all other source byte-exact.",
+  "nativeWritePath": "NOT_EXERCISED"
+}

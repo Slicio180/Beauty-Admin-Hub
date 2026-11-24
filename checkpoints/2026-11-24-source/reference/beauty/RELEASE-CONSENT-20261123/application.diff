@@ -1,0 +1,100 @@
+--- v42/LiveEventContext.gs
++++ release/LiveEventContext.gs
+@@ -3,12 +3,12 @@
+  * Paired kiosk/mobile routes share this context and the same ScriptLock.
+  */
+ const BEAUTY_LIVE_CONTEXT_KEY_='BEAUTY_LIVE_EVENT_CONTEXT_V1';
+-const BEAUTY_LIVE_BASE_ = Object.freeze({version:1,mode:'league',sheetId:'1qeV90AYjC73BLMah347JWIee5-PIGFY9d-gzmyvcpyM',eventId:'t_UsRG_9574',leagueId:'lg_tM2v_3523',date:'2026-11-09',title:'AIK MÅNDAGSDARTARNA 2026/11/09',revision:'live-20261109'});
++const BEAUTY_LIVE_BASE_ = Object.freeze(beautyReleaseEnvironment_().base);
+ var beautyLivePinned_;
+ function beautyLiveContextRead_(){
+  const raw=PropertiesService.getScriptProperties().getProperty(BEAUTY_LIVE_CONTEXT_KEY_);
+  if(!raw)return {...BEAUTY_LIVE_BASE_};
+- const c=JSON.parse(raw);
++ const c=JSON.parse(raw);beautyReleaseContextGuard_(c);
+  if(c.version!==1||!['league','tournament'].includes(c.mode)||!/^[-\w]{20,150}$/.test(c.sheetId||'')||!/^t_[\w]{1,80}$/.test(c.eventId||'')||!/^[-\w]{32}$/.test(c.revision||'')||!beautyHubEventDateValid_(c.date)||typeof c.title!=='string'||!c.title.trim()||c.title.length>300||c.mode==='league'&&!/^lg_[\w]{1,80}$/.test(c.leagueId||'')||c.mode==='tournament'&&c.leagueId!=='')throw Error('Invalid saved LIVE event context.');
+  if(c.sheetId===BEAUTY_LIVE_BASE_.sheetId&&(c.eventId!==BEAUTY_LIVE_BASE_.eventId||c.leagueId!==BEAUTY_LIVE_BASE_.leagueId||c.date!==BEAUTY_LIVE_BASE_.date)){const ready=JSON.parse(PropertiesService.getScriptProperties().getProperty('BEAUTY_ORIGINAL_WORKBOOK_READY_V1')||'null');if(!ready||ready.state!=='VERIFIED'||ready.eventId!==c.eventId||ready.date!==c.date||ready.sheetId!==c.sheetId||ready.revision!==c.revision)throw Error('Original workbook binding has not been verified.');}
+  return c;
+@@ -80,6 +80,7 @@
+  let lock;
+  try{
+   beautyLiveLoginGuard_();const user=beautyHubAuthSessionRequire_(token);
++  beautyReleaseContextActionGuard_(action);
+   if(!input||Array.isArray(input)||typeof input!=='object')throw Error('Invalid event selection.');
+   if(action==='recover'){
+    if(Object.keys(input).some(k=>k!=='_context'))throw Error('Invalid recovery request.');
+--- v42/LiveLoginEntry.gs
++++ release/LiveLoginEntry.gs
+@@ -1,6 +1,6 @@
+ /* Private LIVE dashboard review. No operational write routes. */
+ function beautyLiveLoginGuard_() {
+-  if (ScriptApp.getScriptId() !== '1EU9dCgJ5NIhFjJ474gjX07WGQmouXCzSs4mRVKpZESwahVyR_DcenOo4') throw Error('Wrong LIVE project.');
++  beautyReleaseEnvironment_();
+ }
+ function doGet(e) {
+   beautyLiveLoginGuard_();
+@@ -8,5 +8,10 @@
+   const page=e?.parameter?.page||'hub';
+   if(page==='registration-health')return beautyPublicRegistrationReply_(beautyPublicRegistrationHealth_());
+   if(!['hub','login-check','live','kiosk','remote'].includes(page))throw Error('This LIVE installation does not serve that page.');
+-  return HtmlService.createHtmlOutputFromFile(page==='hub'?'LiveHubView':page==='live'?'LiveCastView':page==='kiosk'?'Kiosk':page==='remote'?'RemoteRegistration':'LiveLogin').setTitle(page==='hub'?'Beauty 2.0 — Event Hub':page==='live'?'Beauty — LIVE players':page==='kiosk'?'Beauty — Kiosk':page==='remote'?'Beauty — Registration':'Beauty — LIVE login check').addMetaTag('viewport','width=device-width, initial-scale=1');
++  const output=HtmlService.createHtmlOutputFromFile(page==='hub'?'LiveHubView':page==='live'?'LiveCastView':page==='kiosk'?'Kiosk':page==='remote'?'RemoteRegistration':'LiveLogin').setTitle(page==='hub'?'Beauty 2.0 — Event Hub':page==='live'?'Beauty — LIVE players':page==='kiosk'?'Beauty — Kiosk':page==='remote'?'Beauty — Registration':'Beauty — LIVE login check').addMetaTag('viewport','width=device-width, initial-scale=1');
++  if(beautyReleaseEnvironment_().test){
++    output.setTitle('Beauty — Release TEST');
++    output.setContent(output.getContent().replace(/<body([^>]*)>/i,'<body$1><div class="environment-banner" style="padding:12px;background:#ffd700;color:#080808;text-align:center;font:700 16px Arial,sans-serif">RELEASE TEST — Consent and formula checks — synthetic players only</div>'));
++  }
++  return output;
+ }
+--- v42/LiveRegister.gs
++++ release/LiveRegister.gs
+@@ -88,7 +88,7 @@
+   return out;
+ }
+ function beautyLiveRegistrationApi_(path, payload) {
+-  beautyLiveLoginGuard_();beautyContextAssert_();
++  beautyLiveLoginGuard_();beautyContextAssert_();beautyReleaseProviderGuard_(path,payload);
+   if(payload){if(PropertiesService.getScriptProperties().getProperty(BEAUTY_QUEUE_LEASE_)&&!beautyQueueWorker_)throw Error("A registration worker is active.");const t=beautyLiveTarget_();if(payload.tdid!==undefined&&payload.tdid!==t.eventId||payload.lgid!==undefined&&(t.mode!=='league'||payload.lgid!==t.leagueId))throw Error('Wrong event write target.');}
+   const p=PropertiesService.getScriptProperties(),user=p.getProperty('N01_API_USER'),password=p.getProperty('N01_API_PASSWORD');
+   if(!user||!password)throw Error('Nakka credentials missing.');
+@@ -110,7 +110,7 @@
+   if(!Array.isArray(data.list))throw Error('Incomplete Nakka list.');return data.list;
+ }
+ function beautyLiveRegistrationForm_() {
+-  const form=FormApp.openById('1UxEr_KeHzhispG7Zu6E74Hh29OIqD6XxwR4UFwYEFOQ');
++  const form=FormApp.openById(beautyReleaseFormId_());
+   const questions=[];
+   for(const [type,cast] of [[FormApp.ItemType.LIST,'asListItem'],[FormApp.ItemType.MULTIPLE_CHOICE,'asMultipleChoiceItem']]){
+     for(const item of form.getItems(type)){const q=item[cast]();if(q.getTitle().trim()==='VÄLJ DITT NAMN')questions.push(q);}
+@@ -127,7 +127,7 @@
+   if(r.getResponseCode()!==200)throw Error('Sheet append response uncertain.');
+   const data=JSON.parse(r.getContentText());if(data.updates?.updatedRows!==1)throw Error('Sheet append not confirmed.');
+ }
+-function beautyLiveRegistrationSync_(s,player) {
++function beautyLiveRegistrationSync_(s,player,authorizeDisplayRepair) {
+   const key=beautyLiveRegistrationKey_;
+   for(let pass=0;pass<5;pass++){
+     SpreadsheetApp.flush();if(pass)Utilities.sleep(1000);
+@@ -139,6 +139,12 @@
+     for(const r of snapshot)if(key(r[0])){
+       if(map.has(key(r[0])))throw Error('Duplicate status rows.');map.set(key(r[0]),['IN','OUT','STANDBY'].includes(r[2])?r[2]:'');
+     }
++    beautyDisplayLookupRepair_(s,player,names.findIndex(n=>key(n)===key(player))+2,()=>{
++      if(typeof authorizeDisplayRepair==='function')authorizeDisplayRepair();
++      beautyContextAssert_();const target=beautyLiveTarget_();
++      if(s.tonight.getParent().getId()!==target.sheetId||s.store.getParent().getId()!==target.sheetId)throw Error('REGISTRATION_CONTEXT_CHANGED');
++      return JSON.stringify(target);
++    });
+     const values=names.map(n=>[map.get(key(n))||'']);
+     s.tonight.getRange(2,3,99,1).setValues(values);SpreadsheetApp.flush();
+     const readback=beautyLiveRegistrationRows_(s.tonight,3);
+--- v42/LiveRegistrationQueue.gs
++++ release/LiveRegistrationQueue.gs
+@@ -154,7 +154,7 @@
+  const expected=[j.player,j.alias||'',j.status,j.input.consent==='JA, JAG GODKÄNNER'?'JA':'NEJ',j.input.message||'',j.source];
+  beautyQueueStep_(j,'status',()=>{const rows=statusRows();if(rows.length>1)throw Error('Duplicate status.');return rows.length===1&&JSON.stringify(rows[0].r)===JSON.stringify(expected);},()=>{const rows=statusRows();if(beautyQueueHash_(rows[0]?.r||null)!==j.statusBeforeHash||rows.length>1)throw Error('Status changed.');if(rows[0])s.store.getRange(rows[0].row,3,1,4).setValues([expected.slice(2)]);else beautyLiveRegistrationAppend_("'PLAYER STATUS DATA'!A:F",expected);});
+  // Rebuild only derived status column from current records. Never replay an add.
+- beautyQueueAssertWorker_(j);j.stage='display';beautyQueueSave_(j);const displayStart=Date.now();try{beautyLiveRegistrationSync_(s,j.player);}finally{if(j.timing)j.timing.phases.display=Date.now()-displayStart;}j.steps.display='VERIFIED';beautyQueueSave_(j);
++ beautyQueueAssertWorker_(j);j.stage='display';beautyQueueSave_(j);const displayStart=Date.now();try{beautyLiveRegistrationSync_(s,j.player,()=>beautyQueueAssertWorker_(j));}finally{if(j.timing)j.timing.phases.display=Date.now()-displayStart;}j.steps.display='VERIFIED';beautyQueueSave_(j);
+  let member;const leagueRead=()=>{if(j.event.mode==='tournament'){member={lpid:''};return true;}const hits=beautyLiveRegistrationList_('league').filter(r=>key(r.name)===key(j.player));if(hits.length>1||hits.length===1&&!hits[0].lpid)throw Error('League identity ambiguous.');if(hits.length===1){if(j.lpid&&String(j.lpid)!==String(hits[0].lpid))throw Error('League identity changed.');member=hits[0];j.lpid=member.lpid;return true;}return false;};
+  beautyQueueStep_(j,'league',leagueRead,()=>beautyLiveRegistrationApi_('league/entry/update',{lgid:j.event.leagueId,add:[{name:j.player}]}));
+  beautyQueueStep_(j,'event',()=>{const hits=beautyLiveRegistrationList_('event').filter(r=>key(r.name)===key(j.player)||member.lpid&&String(r.lpid)===String(member.lpid));if(hits.length>1)throw Error('Ambiguous event entry.');if(!hits.length)return false;const r=hits[0];if(!r.tpid||key(r.name)!==key(j.player)||r.lpid&&String(r.lpid)!==String(member.lpid)||j.tpid&&String(j.tpid)!==String(r.tpid))throw Error('Event identity changed.');j.tpid=r.tpid;return true;},()=>{beautyLiveRegistrationEvent_(true);beautyLiveRegistrationApi_('tournament/entry/update',{tdid:j.event.eventId,add:[{name:j.player,...(j.event.mode==='league'?{lpid:member.lpid}:{})}]});});

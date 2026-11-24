@@ -1,0 +1,55 @@
+--- baseline/HubTestAttention.gs
++++ candidate/HubTestAttention.gs
+@@ -45,8 +45,16 @@
+ function beautyHubAttentionRefreshRun_(input) {
+   beautyHubTestGuard_();beautyHubAuthRequire_(beautyHubRequestToken_);
+   if(!input||typeof input!=='object'||Array.isArray(input)||Object.keys(input).length)throw Error('Unexpected attention input.');
++  const checkStarted=Date.now(),reference=Utilities.getUuid();let phase='INITIAL_LOCK';
++  // One small, non-sensitive terminal record per authenticated check; no property writes.
++  const finish=result=>{
++    const check={reference,phase,elapsedMs:Date.now()-checkStarted};
++    const verified=result.success===true&&result.attention?.available===true&&result.attention?.complete===true;
++    try{console.log(JSON.stringify({type:'BEAUTY_ATTENTION_CHECK',...check,success:verified,code:verified?'VERIFIED':result.code||'CHECK_UNAVAILABLE'}));}catch(ignore){}
++    return {...result,check};
++  };
+   const lock=LockService.getScriptLock();
+-  if(!lock.tryLock(0))return {success:false,code:'BUSY',message:'Another operation is running. The saved attention list is retained.'};
++  if(!lock.tryLock(0))return finish({success:false,code:'BUSY',message:'Another operation is running. The saved attention list is retained.'});
+   let locked=true,diagnosis='CHECK_UNAVAILABLE';
+   try {
+     const date=beautyHubNakkaDate_().date,hub=beautyHubNakkaHubRows_(),props=PropertiesService.getScriptProperties();
+@@ -54,7 +62,7 @@
+     const fingerprint=()=>JSON.stringify(Object.entries(props.getProperties()).filter(([key])=>!/^beauty-hub-session:bhs_[a-f0-9]{64}$/.test(key)&&!key.startsWith('BEAUTY_PLAYER_RECOVERY_V1_')&&!key.startsWith('BEAUTY_LEAGUE_STATS_')).sort(([a],[b])=>a.localeCompare(b)));
+     const before=fingerprint();
+     // Nakka GETs must not hold up registration or transfer writes.
+-    lock.releaseLock();locked=false;
++    lock.releaseLock();locked=false;phase='PROVIDER_READ';
+     const match=beautyHubNakkaEvent_({});
+     if(match.status!=='MATCHED'||match.event?.id!==beautyHubTransferTarget_()||match.event?.title!==beautyHubActiveTestTarget_().title||match.eventDate!==date){diagnosis=match.status==='NOT_FOUND'?'EVENT_DATE_MISMATCH':match.status==='STALE'?'STALE_CHECK':match.status==='AMBIGUOUS'?'EVENT_AMBIGUOUS':'EVENT_UNAVAILABLE';throw Error('target');}
+     const user=props.getProperty('N01_API_USER'),password=props.getProperty('N01_API_PASSWORD');
+@@ -99,18 +107,20 @@
+       if(retained.items.some(item=>normalize(item.name)===key&&['REMOVE_UNCERTAIN','REMOVE_REVIEW_REQUIRED'].includes(item.code)))code='REMOVE_REVIEW_REQUIRED';
+       decisions.push({name,code});
+     }
+-    if(!lock.tryLock(0))return {success:false,code:'BUSY',message:'Registration or another operation is running. Saved alerts are retained.'};
+-    locked=true;
++    phase='COMMIT_LOCK';
++    if(!lock.tryLock(0))return finish({success:false,code:'BUSY',message:'Registration or another operation is running. Saved alerts are retained.'});
++    locked=true;phase='COMMIT';
+     beautyHubTestGuard_();beautyHubAuthRequire_(beautyHubRequestToken_);
+     if(beautyHubTransferTarget_()!==target||fingerprint()!==before){diagnosis='STALE_CHECK';throw Error('stale');}
+     if(beautyHubNakkaDate_().date!==date||JSON.stringify(beautyHubNakkaHubRows_())!==JSON.stringify(hub)){diagnosis='STALE_CHECK';throw Error('stale');}
+     for(const d of decisions)if(!beautyHubAttentionRemember_(d.name,date,d.code?{code:d.code}:{entryConfirmed:true}))throw Error('save');
+     const meta={checkedAt:new Date().toISOString(),signature:beautyHubTransferHash_(hub),eventStatus:event.status};
+     props.setProperty(('BEAUTY_TEST_ATTENTION_'+(typeof beautyHubEventScopeId_==='function'?beautyHubEventScopeId_():'lg_M2wQ_4189')+'_CHECK_')+date,JSON.stringify(meta));
+-    return {success:true,eventDate:date,event:match.event,hubCount:hub.length,nakkaCount:entries.length,attention:beautyHubAttentionRead_({eventDate:date,players:hub.map(p=>({player:p.name,status:p.status}))})};
++    phase='COMPLETE';
++    return finish({success:true,eventDate:date,event:match.event,hubCount:hub.length,nakkaCount:entries.length,attention:beautyHubAttentionRead_({eventDate:date,players:hub.map(p=>({player:p.name,status:p.status}))})});
+   }catch(e){
+-    if(e.name==='HubAuthError')return {success:false,code:'AUTH_REQUIRED',message:'Sign in to continue.'};
+-    return {success:false,code:diagnosis,message:'The player check could not be completed. Saved alerts are retained. Check the event date and Nakka; no players were added.'};
++    if(e.name==='HubAuthError')return finish({success:false,code:'AUTH_REQUIRED',message:'Sign in to continue.'});
++    return finish({success:false,code:diagnosis,message:'The player check could not be completed. Saved alerts are retained. Check the event date and Nakka; no players were added.'});
+   }finally{if(locked)lock.releaseLock();}
+ }
+ 

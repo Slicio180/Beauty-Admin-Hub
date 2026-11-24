@@ -1,0 +1,29 @@
+{
+  "status": "PAUSED_BY_OWNER_NATIVE_SIGN_IN_STILL_BLOCKED",
+  "installed": {
+    "project": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+    "file": "HubTestAuth.gs",
+    "baselineSha256": "9efd000b1a5456b485584a94f72887f895475c1edbaf9c108650a5e1f15c36b9",
+    "installedSha256": "809690f762e839ef57fbe90f474f3e3136ad38966b61a96bcfd7eef238be3e6f",
+    "bytes": 9387,
+    "matchedAfterReload": true,
+    "checkedUTC": "2026-11-22T20:33:20.183Z",
+    "nativeSignIn": "PENDING",
+    "hubReloaded": false
+  },
+  "local_checks": 27,
+  "native_preservation": {
+    "code": "TERMINAL_VERIFIED_ATTENTION_REFRESHED",
+    "markerState": "CAPTURED",
+    "recoverySame": true,
+    "registrationSame": true,
+    "protectedSame": true,
+    "nativeSignIn": "PENDING"
+  },
+  "native_sign_in": "BLOCKED_AFTER_OWNER_RETRY",
+  "handbook_sequence": 126,
+  "handover_section": 57,
+  "speed_package_installed": false,
+  "next": "**Next action when Alessio resumes:** Read handover section57 before doing anything. Diagnose the remaining AUTH_BUSY response in the exact original TEST context before asking for another sign-in attempt. The installed login insertion no longer requests ScriptLock; touch/logout still do. Check the actual client authentication sequence, current saved source and matching execution evidence to identify which path failed. Touch contention or stale execution/source are possibilities, not established causes. Preserve authorization, token lifetime, revocation checks and all current fixtures. Once native sign-in succeeds, inspect the corrected exhausted-request dialog without triggering review, compare the protected state, then use the guarded archival procedure for synthetic12. Do not reseed, reset leases/attempts, replay06/09/10/11, redraw pools or change triggers. Keep the original and alternate C drafts, prior receipts, owner rules and separate speed work. No SEND, START, LIVE promotion or public GitHub publication.",
+  "previous_installation_and_preservation_observations_are_historical": true
+}

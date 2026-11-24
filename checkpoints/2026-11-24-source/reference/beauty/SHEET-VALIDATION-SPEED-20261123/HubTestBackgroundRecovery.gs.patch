@@ -1,0 +1,35 @@
+--- baseline/HubTestBackgroundRecovery.gs
++++ candidate/HubTestBackgroundRecovery.gs
+@@ -320,9 +320,11 @@
+   need(!beautyRemovalRecoveryList_().some(x=>x.receipt.player===s.name&&
+     (x.receipt.state==='ATTEMPTED'||Date.parse(x.receipt.recordedUTC)>=Date.parse(s.receipt.recordedAt))),'BACKGROUND_REMOVAL_PENDING');
+ }
+-function beautyBackgroundVerifiedLocal_(s) {
+-  const ss=beautyRegistrationRecoverySource_(s.receipt);
+-  beautyRegistrationProjectionVerified_(s.receipt,ss);
++function beautyBackgroundVerifiedLocal_(s,timing,phase) {
++  const steps=timing?(timing[phase+'SheetSteps']={}):{};
++  const measure=(label,fn)=>{const started=Date.now();try{return fn();}finally{steps[label]=(steps[label]||0)+Date.now()-started;}};
++  const ss=beautyRegistrationRecoverySource_(s.receipt,measure);
++  beautyRegistrationProjectionVerified_(s.receipt,ss,measure);
+ }
+ function beautyBackgroundVerifiedRead_(s) {
+   const i=beautyBackgroundInvocation_,need=beautyBackgroundNeed_;
+@@ -383,7 +385,7 @@
+   const measure=(field,fn)=>{const start=Date.now();try{return fn();}finally{timing[field]=(timing[field]||0)+Date.now()-start;}};
+   const localCheck=phase=>{
+     measure(phase+'GuardMs',()=>beautyBackgroundVerifiedGuard_(s));
+-    measure(phase+'SheetsMs',()=>beautyBackgroundVerifiedLocal_(s));
++    measure(phase+'SheetsMs',()=>beautyBackgroundVerifiedLocal_(s,timing,phase));
+     measure(phase+'GuardMs',()=>beautyBackgroundVerifiedGuard_(s));
+   };
+   try {
+@@ -451,7 +453,7 @@
+     run={state:'RUNNING',owner:Utilities.getUuid(),triggerUid:event.triggerUid,context,
+       startedAt:new Date().toISOString(),leaseUntil:Date.now()+c.leaseMs,operation:recheck?'registration-recheck':item.operation,player:item.name,
+       timing:{clockStartedAt:new Date(clockStarted).toISOString(),authorityMs:lockStarted-clockStarted,lockWaitMs:lockAcquired-lockStarted,
+-        lockedSetupMs:selectionStarted-lockAcquired,selectionMs:selectedAt-selectionStarted,selectionMode:'batched-keys-v2',workerMode:'verified-recheck-batched-v2'}};
++        lockedSetupMs:selectionStarted-lockAcquired,selectionMs:selectedAt-selectionStarted,selectionMode:'batched-keys-v2',workerMode:'verified-recheck-sheets-v3'}};
+     const claimedRunRaw=beautyBackgroundSave_(c.runKey,run);
+     beautyBackgroundInvocation_={owner:run.owner,triggerUid:event.triggerUid,context,player:item.name,operation:run.operation,
+       expires:run.leaseUntil,lock,configRaw:p.getProperty(c.key)};

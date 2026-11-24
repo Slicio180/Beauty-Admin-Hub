@@ -1,0 +1,120 @@
+--- LIVE-v42/LiveCastView.html
++++ candidate/LiveCastView.html
+@@ -449,6 +449,12 @@
+   if(!Number.isInteger(n)||n<1||n>99||![0,1].includes(selected.drawMode))return null;
+   return selected.drawMode===1?'Limit '+n+' '+(selected.limit===1?'legs':'sets')+' · draws allowed':'First to '+n+' '+(selected.limit===1?'legs':'sets');
+  }
++ // A third-place participant may arrive before the other semifinal finishes.
++ // Nakka can encode that row as an indexed object; absent positions stay pending.
++ function thirdPair(row){
++  if(!row||typeof row!=='object'||Array.isArray(row)&&row.length>2||Object.keys(row).some(key=>key!=='0'&&key!=='1'))fail();
++  return [0,1].map(index=>Object.hasOwn(row,index)?row[index]:'');
++ }
+  function project(tournament,standings,schedule,target='t_UsRG_9574',league='lg_tM2v_3523'){
+   if(!/^t_[A-Za-z0-9_]{1,80}$/.test(target))fail();
+   if(typeof league!=='string'||(league!==''&&!/^lg_[A-Za-z0-9_]{1,80}$/.test(league)))fail();
+@@ -508,7 +514,7 @@
+    const enabled=t[kind+'_setting']?.t3===1;
+    const suppliedThird=t[thirdKind+'_table'];
+    const third=enabled&&(suppliedThird==null||Array.isArray(suppliedThird)&&suppliedThird.length===0)?[['','']]:suppliedThird;
+-   if(third!=null&&!Array.isArray(third))fail();if(enabled&&third?.length){if(!Array.isArray(third[0])||third[0].length!==2)fail();const [left,right]=third[0].map(slot),results=t[thirdKind+'_result']?.[0],a=left.id&&right.id?results?.[left.id]?.[right.id]:null,b=left.id&&right.id?results?.[right.id]?.[left.id]:null;
++   if(third!=null&&!Array.isArray(third))fail();if(enabled&&third?.length){const [left,right]=thirdPair(third[0]).map(slot),results=t[thirdKind+'_result']?.[0],a=left.id&&right.id?results?.[left.id]?.[right.id]:null,b=left.id&&right.id?results?.[right.id]?.[left.id]:null;
+     thirdPlace={key:thirdKind+'-0-0',board:badge(t,thirdKind+'-0-0'),left,right,leftScore:number(a?.r),rightScore:number(b?.r),leftAverage:number(a?.a),rightAverage:number(b?.a),format:format(t[kind+'_setting'],0,2,true)};
+    }
+    knockouts.push({kind,rounds,thirdPlace});
+@@ -633,25 +639,25 @@
+  function create({target,fetch,onData,onError,model=root.BeautyNakkaStages,includeLive=false,liveModel=root.BeautyNakkaPoolLive,plan=null,includeKnockouts=false}){
+   if(!target||!/^t_[A-Za-z0-9_]{1,80}$/.test(target.eventId)||typeof target.leagueId!=='string'||target.leagueId!==''&&!/^lg_[A-Za-z0-9_]{1,80}$/.test(target.leagueId)||!/^20\d\d-\d\d-\d\d$/.test(target.eventDate))throw Error('Invalid display event.');
+   const id=target.eventId,league=target.leagueId,eventDate=target.eventDate;
+-  let busy=false,revision=0,stopped=false,baseData=null,baseAt=0;
++  let busy=false,revision=0,stopped=false,baseData=null,baseAt=0,retryAt=0,retryDelay=5000;
+   async function get(path){if(stopped)throw Error('Stopped');const response=await fetch(base+path,{method:'GET',credentials:'omit',cache:'no-store',referrerPolicy:'no-referrer',redirect:'error',signal:AbortSignal.timeout(15000)});const data=await response.json();if(path.startsWith('tournament/get?')){
+  const event=data?.tournament;
+  const date=Number.isFinite(event?.t_date)?new Date(event.t_date*1000).toLocaleDateString('en-CA',{timeZone:'Europe/Stockholm',year:'numeric',month:'2-digit',day:'2-digit'}):null;
+  if(data.result!==0||event?.tdid!==id||(event.lgid||'')!==league||event.team_games!==0||date!==eventDate)throw Error('LIVE event identity mismatch');
+ }/* fixed-live-identity */if(!response.ok&&!(path.startsWith('tournament/standings?')&&data.result===-51))throw Error('Stage unavailable');return data;}
+-  async function refresh(){
+-   if(busy||stopped)return;busy=true;const ticket=revision;
++  async function refresh({automatic=false}={}){
++   if(busy||stopped||(automatic&&Date.now()<retryAt))return;busy=true;const ticket=revision;
+    try{
+     const before=await get('tournament/get?tdid='+id);let standings=await get('tournament/standings?tdid='+id);const hasLeague=before.tournament?.lg_table?.some(g=>Array.isArray(g)&&g.length>0),hasRobin=before.tournament?.rr_table?.some(g=>Array.isArray(g)&&g.length>0);
+     if(standings.result===-51&&!hasLeague&&!hasRobin)standings={result:0,tdid:id,groups:[]};
+     const schedule=hasLeague?await get('league/schedule/get?tdid='+id):undefined,after=await get('tournament/get?tdid='+id);
+     if(before.result!==0||after.result!==0||!Number.isFinite(before.tournament?.updateTime)||before.tournament.updateTime!==after.tournament?.updateTime)throw Error('Stage changed during refresh');
+-    baseData=model.project(after,standings,schedule,id,league);const snapshot=includeLive?await liveModel.collect(get,baseData,includeKnockouts):null;let data=includeLive?liveModel.apply(baseData,snapshot,plan):baseData;if(includeKnockouts&&snapshot)data=liveModel.applyKnockouts(data,snapshot);if(!stopped&&ticket===revision){baseAt=Date.now();onData(data);}
+-   }catch(error){baseData=null;if(!stopped&&ticket===revision)onError('Stage data unavailable or changed.');}
++    baseData=model.project(after,standings,schedule,id,league);const snapshot=includeLive?await liveModel.collect(get,baseData,includeKnockouts):null;let data=includeLive?liveModel.apply(baseData,snapshot,plan):baseData;if(includeKnockouts&&snapshot)data=liveModel.applyKnockouts(data,snapshot);if(!stopped&&ticket===revision){baseAt=Date.now();retryAt=0;retryDelay=5000;onData(data);}
++   }catch(error){baseData=null;retryAt=Date.now()+retryDelay;retryDelay=Math.min(retryDelay*2,60000);if(!stopped&&ticket===revision)onError('Stage data unavailable or changed.');}
+    finally{busy=false;}
+   }
+   async function refreshLive(){
+-   if(!includeLive||!baseData||busy||stopped)return;if(Date.now()-baseAt>15000){onError('Full snapshot expired.');return;}busy=true;const ticket=revision;
++   if(!includeLive||busy||stopped)return;if(!baseData||Date.now()-baseAt>15000){if(Date.now()<retryAt)return;return refresh();}busy=true;const ticket=revision;
+    try{const snapshot=await liveModel.collect(get,baseData,includeKnockouts);if(!stopped&&ticket===revision)onData(includeKnockouts?liveModel.applyKnockouts(liveModel.apply(baseData,snapshot,plan),snapshot):liveModel.apply(baseData,snapshot,plan));}
+    catch(e){if(!stopped&&ticket===revision)onError('Live pool data unavailable.');}finally{busy=false;}
+   }
+@@ -1009,7 +1015,7 @@
+  'use strict';
+  const $=id=>document.getElementById(id),automatic=false;
+  const labels={players:'Deltagare i evenemanget',pools:'Gruppspel',t:'Slutspel 1',s2:'Slutspel 2'},tabs={players:'tabPlayers',pools:'tabGroup',t:'tabT',s2:'tabS2'};
+- let selected='players',data=null,feed=null,disposed=false,busy=false,failed=false,at=0,bracket=null,signature='',playerDate=null,castTarget=null,dateMismatch=false;
++ let selected='players',data=null,feed=null,disposed=false,busy=false,failed=false,rosterUnavailable=false,at=0,bracket=null,signature='',playerDate=null,castTarget=null,dateMismatch=false;
+  let poolState={view:'pools',size:6,index:0,collapsed:{pools:false}},starts={t:0,s2:0},tops={t:0,s2:0},direction=1,holdUntil=0,lastTick=0;
+  const panel=$('castPanel'),host=$('stagePreview'),timers=[];let planBusy=false;
+  function fullscreenElement(){return document.fullscreenElement||document.webkitFullscreenElement||null;}
+@@ -1030,11 +1036,12 @@
+  }
+  function remember(){if(bracket&&['t','s2'].includes(selected))tops[selected]=bracket.viewport.scrollTop||0;}
+  function freshness(){
+-  const stale=!!feed&&(failed||!at||Date.now()-at>=30000||!$('autoRefresh').checked||!navigator.onLine||disposed);
++  const stale=!!feed&&(rosterUnavailable||failed||!at||Date.now()-at>=30000||!$('autoRefresh').checked||!navigator.onLine||disposed);
+   host.classList.toggle('stage-stale',stale);$('staleNotice').hidden=!stale;
+   for(const cell of host.querySelectorAll('.live-cell'))cell.setAttribute('aria-label',stale?'Senast hämtad match · direktstatus ej bekräftad':'Pågående match');
+   if(feed&&!$('autoRefresh').checked)text('stageStatus','Automatisk uppdatering pausad · senast hämtade vy.');
+   else if(feed&&!navigator.onLine)text('stageStatus','Ingen anslutning · senast hämtade vy.');
++  else if(feed&&rosterUnavailable)text('stageStatus','Spelarlistans anslutning är bruten · visar senast bekräftade evenemang.');
+   else if(stale&&!busy&&!failed)text('stageStatus','Uppdateringen är försenad · senast hämtade vy.');
+  }
+  function render(force=false){
+@@ -1076,16 +1083,17 @@
+  }
+  function choose(id){closeMenu();remember();selected=selected===id?null:id;bracket=null;signature='';render(true);window.dispatchEvent(new Event('resize'));}
+  for(const [id,button]of Object.entries(tabs))$(button).addEventListener('click',()=>choose(id));
+- async function refresh(){if(!feed||busy||disposed||document.hidden||!navigator.onLine)return;busy=true;$('refreshStage').disabled=true;try{await feed.refresh();}finally{busy=false;$('refreshStage').disabled=false;freshness();}}
++ async function refresh(automatic=false){if(!feed||busy||disposed||document.hidden||!navigator.onLine)return;busy=true;$('refreshStage').disabled=true;try{await feed.refresh({automatic});}finally{busy=false;$('refreshStage').disabled=false;freshness();}}
+  function load(){
+   if(feed||disposed||!castTarget)return;text('sourceLabel','NAKKA · LIVE');text('stageStatus','Hämtar LIVE-data från Nakka…');$('loadTest').disabled=true;
+-  feed=BeautyNakkaStageFeed.create({target:castTarget,includeLive:true,includeKnockouts:true,fetch:window.fetch.bind(window),onData(next){if(disposed)return;data=next;at=Date.now();failed=false;render();text('stageStatus','Nakka LIVE · hämtat '+new Date(at).toLocaleTimeString('sv-SE',{timeZone:'Europe/Stockholm'})+' · endast visning');freshness();},onError(){if(disposed)return;failed=true;text('stageStatus',at?'Uppdateringen misslyckades · senast hämtade vy.':'LIVE-data kan inte visas. Kontrollera anslutningen och välj Uppdatera nu.');freshness();}});
++  const context=JSON.stringify(castTarget);
++  feed=BeautyNakkaStageFeed.create({target:castTarget,includeLive:true,includeKnockouts:true,fetch:window.fetch.bind(window),onData(next){if(disposed||JSON.stringify(castTarget)!==context)return;data=next;at=Date.now();failed=false;render();text('stageStatus','Nakka LIVE · hämtat '+new Date(at).toLocaleTimeString('sv-SE',{timeZone:'Europe/Stockholm'})+' · endast visning');freshness();},onError(){if(disposed||JSON.stringify(castTarget)!==context)return;failed=true;text('stageStatus',at?'Uppdateringen misslyckades · senast hämtade vy.':'LIVE-data kan inte visas. Kontrollera anslutningen och välj Uppdatera nu.');freshness();}});
+   refreshPlan();
+   refresh();
+  }
+  function refreshPlan(){
+   if(planBusy||disposed||!feed||document.hidden||!navigator.onLine||!$('autoRefresh').checked||typeof google==='undefined'||!google.script?.run)return;
+-  planBusy=true;try{google.script.run.withSuccessHandler(plan=>{planBusy=false;if(!disposed)feed.setPlan(plan);}).withFailureHandler(()=>{planBusy=false;}).beautyStagePlanLive();}catch{planBusy=false;}
++  planBusy=true;const requestedFeed=feed;try{google.script.run.withSuccessHandler(plan=>{planBusy=false;if(!disposed&&feed===requestedFeed)requestedFeed.setPlan(plan);}).withFailureHandler(()=>{planBusy=false;}).beautyStagePlanLive();}catch{planBusy=false;}
+  }
+  function closeMenu(focus=false){
+   const box=$('castSettings');if(box.hidden)return;box.hidden=true;$('displaySettings').setAttribute('aria-expanded','false');
+@@ -1108,15 +1116,15 @@
+  async function fullscreen(){closeMenu();try{if(fullscreenElement()){if(document.exitFullscreen)await document.exitFullscreen();else document.webkitExitFullscreen();}else if(panel.requestFullscreen)await panel.requestFullscreen();else if(panel.webkitRequestFullscreen)panel.webkitRequestFullscreen();else throw Error('Fullscreen unavailable');render(true);}catch{$('castFooter').hidden=false;text('displayMessage','Helskärm är inte tillgänglig här. Använd webbläsarens helskärmsläge.');}}
+  $('fullScreen').addEventListener('click',fullscreen);
+  for(const fullscreenEvent of ['fullscreenchange','webkitfullscreenchange'])document.addEventListener(fullscreenEvent,()=>{const label=fullscreenElement()?'Lämna helskärm':'Helskärm';$('fullScreen').setAttribute('aria-label',label);$('fullScreen').setAttribute('title',label);$('fullScreen').setAttribute('aria-pressed',String(!!fullscreenElement()));render(true);});
+- window.BeautyCastShell=Object.freeze({playersVisible:()=>selected==='players'&&!panel.hidden,fullscreen,playersUnavailable(){if(disposed)return;feed?.stop();feed=null;data=null;castTarget=null;host.replaceChildren();playerDate='unavailable';render(true);},playersUpdated(next){if(disposed)return;
+-   if(!next.eventId||!next.eventContext)return;
+-   if(castTarget?.eventContext!==next.eventContext){feed?.stop();feed=null;data=null;at=0;failed=false;signature='';bracket=null;host.replaceChildren();starts={t:0,s2:0};tops={t:0,s2:0};poolState.index=0;for(const button of Object.values(tabs))$(button).hidden=false;}
++ window.BeautyCastShell=Object.freeze({playersVisible:()=>selected==='players'&&!panel.hidden,fullscreen,playersUnavailable(){if(disposed)return;rosterUnavailable=true;freshness();},playersUpdated(next){if(disposed)return;
++   if(!next.eventId||!next.eventContext)return;rosterUnavailable=false;
++   if(castTarget&&(castTarget.eventContext!==next.eventContext||castTarget.eventId!==next.eventId||castTarget.leagueId!==next.leagueId||castTarget.eventDate!==next.eventDate)){feed?.stop();feed=null;data=null;at=0;failed=false;signature='';bracket=null;host.replaceChildren();starts={t:0,s2:0};tops={t:0,s2:0};poolState.index=0;for(const button of Object.values(tabs))$(button).hidden=false;}
+    castTarget={eventId:next.eventId,leagueId:next.leagueId,eventDate:next.eventDate,eventContext:next.eventContext};playerDate=next.eventDate;render();load();}});
+  window.addEventListener('resize',()=>{remember();render(true);});document.fonts?.ready.then(()=>render(true));
+  if(typeof ResizeObserver==='function')new ResizeObserver(()=>{bracket?.layout();if(selected==='pools'){BeautyVenuePools.fit(host,host.clientWidth,host.clientHeight);BeautyPoolNames.apply(host);}}).observe(host);
+  document.addEventListener('visibilitychange',()=>{freshness();lastTick=0;if(!document.hidden&&$('autoRefresh').checked)refresh();});
+  window.addEventListener('offline',freshness);window.addEventListener('online',()=>{freshness();if($('autoRefresh').checked)refresh();});
+- timers.push(window.setInterval(()=>{freshness();if($('autoRefresh').checked){refreshPlan();refresh();}},10000));
++ timers.push(window.setInterval(()=>{freshness();if($('autoRefresh').checked){refreshPlan();refresh(true);}},10000));
+  timers.push(window.setInterval(()=>{freshness();if(feed&&!disposed&&!document.hidden&&navigator.onLine&&$('autoRefresh').checked)feed.refreshLive();},2000));
+  timers.push(window.setInterval(()=>{if(selected==='pools'&&data&&!document.hidden&&$('rotatePages').checked&&poolState.total>1){poolState.index=(poolState.index+1)%poolState.total;render(true);}},12000));
+  timers.push(window.setInterval(()=>{

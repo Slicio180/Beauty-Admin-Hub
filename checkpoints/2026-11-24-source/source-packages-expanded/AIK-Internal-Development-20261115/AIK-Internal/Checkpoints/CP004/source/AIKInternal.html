@@ -1,0 +1,97 @@
+<style>
+#aikInternal{color:#fff;background:#050505;border:1px solid #ffd700;border-radius:18px;width:min(900px,92vw);max-height:88vh;padding:28px;font:20px/1.45 'AIK Display',Arial,sans-serif}
+#aikInternal::backdrop{background:#000c}#aikInternal h2,#aikInternal h3{color:#ffd700}#aikInternal button{background:#000;color:#ffd700;border:1px solid #ffd700;border-radius:8px;padding:10px 16px;margin:5px;cursor:pointer}#aikInternal button:active{background:#ffd700;color:#000}#aikInternal button:disabled{opacity:.5;cursor:wait}#aikInternal input,#aikInternal select{background:#141414;color:#fff;border:1px solid #777;padding:10px;max-width:100%;font:inherit}#aikInternal label{display:block;margin:10px 0}#aikInternal .aik-roster{max-height:240px;overflow:auto;border-block:1px solid #555;padding:10px}#aikInternal .aik-roster label{display:inline-block;width:46%;min-width:220px}#aikInternal :focus-visible{outline:3px solid #fff;outline-offset:3px}#aikInternal [role=alert]{color:#ffc56c}
+#aikInternal .aik-brand{display:flex;align-items:center;gap:18px;margin:18px 0}#aikInternal .aik-brand img{width:66px;height:83px;object-fit:contain}#aikInternal h2,#aikInternal h3,#aikInternal button{font-family:'AIK Condensed',Arial,sans-serif}#aikInternal h2{font-size:36px;margin:0}#aikInternal button{font-size:22px}#aikInternal input,#aikInternal select{font-family:'AIK Display',Arial,sans-serif}#aikInternal{overflow-wrap:anywhere}#aikInternal label{max-width:100%}@media(max-width:600px){#aikInternal{width:calc(100vw - 24px);padding:18px;font-size:18px}#aikInternal .aik-roster label{display:block;width:100%;min-width:0}#aikInternal input:not([type=checkbox]),#aikInternal select{width:100%}}
+#aikInternal{width:100%;max-width:1240px;max-height:none;min-height:100vh;margin:auto;border:0;border-radius:0;padding:24px;background:#050505}body{background:#050505!important;padding:0!important}#aikInternal .aik-brand{border-bottom:1px solid #ffd700;padding-bottom:18px}#aikInternal nav{display:flex;gap:12px;margin-bottom:24px}#aikInternal nav [aria-pressed=true]{background:#ffd700;color:#000}#aikInternal .aik-card{border:1px solid #5e531c;border-radius:12px;padding:20px;margin:16px 0;background:#0a0a0a}#aikInternal .aik-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}#aikInternal button:disabled{cursor:default}#aikInternal summary{cursor:pointer}#aikInternal input[type=checkbox]{width:auto}@media(max-width:600px){#aikInternal{width:100%;padding:16px}#aikInternal .aik-groups{grid-template-columns:1fr}}
+</style>
+<script>
+(()=>{
+'use strict';let dialog,busy=false,state,opener,epoch=0,message,section='tournaments';
+const el=(tag,text,parent)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;parent?.append(n);return n;};
+const button=(text,fn,parent=dialog)=>{const b=el('button',text,parent);b.type='button';b.onclick=()=>{if(!busy)fn();};return b;};
+function field(text,type,value='',parent=dialog){const l=el('label',text+' ',parent),n=el('input',undefined,l);n.type=type;n.value=value;return n;}
+function close(){if(busy)return;epoch++;dialog.remove();dialog=null;opener?.focus();}
+function frame(title){dialog.replaceChildren();const brand=el('div',undefined,dialog);brand.className='aik-brand';if(window.AikBranding?.crest){const crest=el('img',undefined,brand);crest.src=window.AikBranding.crest;crest.alt='AIK crest';}el('h2',title,brand);el('p',window.AikInternalClient?.mode==='preview'?'LOCAL PREVIEW · Test names only · Reload clears data · No Google/Nakka connection':'AIK INTERNAL · TEST · Separate player list · Nakka tournaments',dialog);const nav=el('nav',undefined,dialog);nav.setAttribute('aria-label','AIK Internal sections');for(const key of ['tournaments','players']){const b=button(key==='players'?'Players':'Tournaments',()=>{section=key;home();},nav);b.setAttribute('aria-pressed',String(section===key));}message=el('p','',dialog);message.setAttribute('role','alert');}
+async function call(action,input={},next=home){
+ const client=window.AikInternalClient,turn=epoch;if(!client?.valid())throw Error('No AIK session is available.');
+ busy=true;dialog.querySelectorAll('button,input,select').forEach(n=>n.disabled=true);message.textContent='Working…';
+ try{const r=await client.request(action,input);
+ if(!dialog||turn!==epoch)return;if(!client.valid()){busy=false;close();return;}
+ state=r;next();
+ }catch(e){if(dialog&&turn===epoch){if(!client.valid()){busy=false;close();return;}message.textContent=e.message+' If the save result is uncertain, reload the list before trying again.';}}
+ finally{busy=false;if(dialog)dialog.querySelectorAll('button,input,select').forEach(n=>n.disabled=n.dataset.disabled==='true');}
+}
+function home(){
+ frame('AIK Internal');
+ if(!state.configured){el('p',window.AikInternalClient.mode==='preview'?'Create an empty test list in this page. No real workbook is created.':'Create a separate empty workbook for AIK players and internal tournaments.',dialog);button(window.AikInternalClient.mode==='preview'?'Create local test list':'Create AIK workbook (TEST)',()=>call('setup'));return;}
+ if(section==='players'){
+ const card=el('section',undefined,dialog);card.className='aik-card';el('h3','AIK player list · '+state.players.length,card);
+ const names=el('ul',undefined,card);state.players.forEach(p=>el('li',p.name,names));
+ const name=field('New AIK player','text','',card);name.maxLength=100;button('Add player',()=>call('addPlayer',{name:name.value}),card);
+ button('Go to tournaments',()=>{section='tournaments';home();},card);return;
+ }
+ el('h3','Your internal tournaments',dialog);
+ button('New internal tournament',edit);button('Reload list',()=>call('read'));
+ if(!state.events.length)el('p','No tournaments yet. Add players in Players, then create a tournament.',dialog);
+ for(const event of state.events){const box=el('section',undefined,dialog);box.className='aik-card';el('h3',event.title,box);el('p',event.date+' · '+(event.format==='doubles'?'Doubles':'Singles')+' · '+event.entries.length+' entries',box);
+ el('p',state.plans?.[event.id]?'Pool plan reviewed locally · Not sent to Nakka':'Participant list saved · Ready for Pool Planner',box);
+ const details=el('details',undefined,box);el('summary','View participants',details);event.entries.forEach(team=>el('p',team.map(p=>p.name).join(' + '),details));
+ button('Open Pool Planner',()=>planner(event),box);}
+}
+function planner(event){
+ frame('Pool Planner · '+event.title);el('p','1. Participants saved → 2. Review groups → 3. Nakka connection pending',dialog);
+ el('p',event.entries.length+' '+(event.format==='doubles'?'teams; each pair stays together.':'individual players.')+' Random allocation only; no ranking or seeding applied.',dialog);
+ let plan=state.plans?.[event.id]?JSON.parse(JSON.stringify(state.plans[event.id])):null;
+ const count=field('Number of groups','number',String(plan?.groups.length||Math.max(1,Math.ceil(event.entries.length/4))));count.min='1';count.max=String(Math.floor(event.entries.length/2));count.step='1';
+ const area=el('div',undefined,dialog);
+ const label=id=>event.entries[id].map(p=>p.name).join(' + ');
+ function render(){area.replaceChildren();if(!plan){el('p','Choose the group count and generate a draw.',area);return;}
+ el('p',plan.status==='REVIEWED_LOCAL'?'Reviewed plan saved in this preview tab.':'Review every group before saving.',area);
+ const grid=el('div',undefined,area);grid.className='aik-groups';
+ plan.groups.forEach((group,i)=>{const card=el('section',undefined,grid);card.className='aik-card';el('h3','Group '+(i+1),card);group.forEach(id=>el('p',label(id),card));});
+ el('h3','Swap two entries',area);const selectors=[1,2].map(n=>{const l=el('label','Entry '+n+' ',area),sel=el('select',undefined,l);event.entries.forEach((_,id)=>{const o=el('option',label(id),sel);o.value=String(id);});sel.selectedIndex=n-1;return sel;});
+ button('Swap entries',()=>{try{plan=AikPoolPlanner.swap(event,plan,Number(selectors[0].value),Number(selectors[1].value));render();}catch(e){message.textContent=e.message;}},area);
+ const review=field('I have checked every group','checkbox','',area);review.checked=false;
+ const save=button('Save reviewed pool plan',()=>{if(!review.checked)return;call('savePlan',plan,()=>planner(state.events.find(e=>e.id===event.id)));},area);save.disabled=true;save.dataset.disabled='true';
+ review.onchange=()=>{save.disabled=!review.checked;save.dataset.disabled=String(!review.checked);};
+ }
+ count.oninput=()=>{plan=null;render();};
+ button('Generate new draw',()=>{try{plan=AikPoolPlanner.draw(event,Number(count.value),()=>crypto.getRandomValues(new Uint32Array(1))[0]/4294967296);message.textContent='';render();}catch(e){message.textContent=e.message;}});
+ button('Back to tournaments',()=>{section='tournaments';home();});
+ el('p','Local planning only. Group format, match rules, boards and Nakka transfer are not connected yet.',dialog);render();
+}
+
+function edit(){
+ frame('New internal tournament');
+ const title=field('Tournament name','text');title.maxLength=100;
+ const date=field('Date','date',new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Stockholm'}).format(new Date()));
+ const kindLabel=el('label','Competition type ',dialog),kind=el('select',undefined,kindLabel);
+ for(const [value,label] of [['km','Club championship (KM)'],['cup','Other internal cup']]){const o=el('option',label,kind);o.value=value;}
+ const formatLabel=el('label','Format ',dialog),format=el('select',undefined,formatLabel);
+ for(const [value,label] of [['singles','Singles'],['doubles','Doubles']]){const o=el('option',label,format);o.value=value;}
+ const url=field('Nakka tournament address (optional for draft)','url');url.placeholder='https://n01darts.com/n01/tournament/comp.php?id=t_…';
+ el('h3','Select players from the AIK list',dialog);
+ const roster=el('div',undefined,dialog);roster.className='aik-roster';
+ const chosen=new Set(),pairs=[];const pairing=el('div',undefined,dialog);let requestId=crypto.randomUUID();
+ function changed(){requestId=crypto.randomUUID();pairs.length=0;renderPairs();}
+ for(const p of state.players.filter(p=>p.active)){const label=el('label',undefined,roster),check=el('input',undefined,label);check.type='checkbox';label.append(document.createTextNode(' '+p.name));check.onchange=()=>{check.checked?chosen.add(p.id):chosen.delete(p.id);changed();};}
+ function renderPairs(){pairing.replaceChildren();if(format.value!=='doubles')return;
+ el('h3','Doubles teams',pairing);const used=new Set(pairs.flat()),remaining=[...chosen].filter(id=>!used.has(id));
+ for(const pair of pairs)el('p',pair.map(id=>state.players.find(p=>p.id===id).name).join(' + '),pairing);
+ el('p',remaining.length+' selected players still need a partner',pairing);
+ if(remaining.length>=2){const selectors=[0,1].map((_,i)=>{const label=el('label','Player '+(i+1)+' ',pairing),s=el('select',undefined,label);remaining.forEach(id=>{const o=el('option',state.players.find(p=>p.id===id).name,s);o.value=id;});s.selectedIndex=i;return s;});button('Add pair',()=>{if(selectors[0].value===selectors[1].value){message.textContent='Choose two different players.';return;}pairs.push(selectors.map(s=>s.value));requestId=crypto.randomUUID();renderPairs();},pairing);}
+ button('Reset pairs',changed,pairing);
+ }
+ format.onchange=changed;
+ [title,date,kind,url].forEach(n=>n.addEventListener('change',()=>requestId=crypto.randomUUID()));
+ button('Back',home);
+ button('Save and open Pool Planner',()=>{
+ if(format.value==='doubles'&&pairs.flat().length!==chosen.size){message.textContent='Every selected player must belong to a doubles team.';return;}
+ call('saveDraft',{requestId,title:title.value,date:date.value,kind:kind.value,format:format.value,tournamentUrl:url.value,entries:format.value==='doubles'?pairs:[...chosen].map(id=>[id])},()=>planner(state.events.find(e=>e.id===requestId)));
+ });
+ el('p','This saves the participant list only. Starting play and transferring to Nakka require separate TEST verification.',dialog);
+}
+setInterval(()=>{if(dialog){try{if(!window.AikInternalClient?.valid())throw Error('No AIK session is available.');}catch(e){busy=false;close();}}},1000);
+window.BeautyAikInternal={open(){if(dialog)return;if(!window.AikInternalClient?.valid())throw Error('No AIK session is available.');opener=document.activeElement;dialog=el('main');dialog.id='aikInternal';dialog.setAttribute('aria-label','AIK Internal');document.body.append(dialog);frame('AIK Internal');call('read');}};
+})();
+</script>

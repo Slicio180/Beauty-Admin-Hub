@@ -1,0 +1,66 @@
+{
+  "baseline/BeautyTestIsolation.gs": {
+    "bytes": 4990,
+    "sha256": "1dfa3772ac05dc5afe4e89d6ef48e5e99a4498662561e1f8f6d1d2ab8c584f61"
+  },
+  "baseline/Code.gs": {
+    "bytes": 70543,
+    "sha256": "203ed1a0cec082d9b39f688b8903942d131863bbe6fd84733c6563e729dee120"
+  },
+  "baseline/HubEventContext.gs": {
+    "bytes": 16400,
+    "sha256": "5498f307a31ed446f7ee801d76d964bd91a0a59fe97a2d3438819f115626f79e"
+  },
+  "baseline/HubTestAttention.gs": {
+    "bytes": 41943,
+    "sha256": "2fa41d6471805ef6e898416fc6e9d0be596a701010fea53f807ca42992fbcd44"
+  },
+  "baseline/HubTestBackgroundRecovery.gs": {
+    "bytes": 35223,
+    "sha256": "036c3c21b624be53df5013f224d6d455e773e9e2aae68cf224d2629e721a8cc8"
+  },
+  "baseline/HubTestBridge.gs": {
+    "bytes": 5132,
+    "sha256": "233333b6c7b53b927be9775a3e3272bdf5edb9ae1425acbc573336d636c0b00b"
+  },
+  "baseline/HubTestNakkaEvent.gs": {
+    "bytes": 46784,
+    "sha256": "cffc71598978c6cc3f6f4bfb487a68402a70bb00f1d0ecb86aa3b96991136db1"
+  },
+  "baseline/HubTestNakkaTransfer.gs": {
+    "bytes": 27804,
+    "sha256": "256faf6e85460cfc92617d456cbb88bfe3b64159c068f682a301240c8fb59fdc"
+  },
+  "candidate/BeautyTestIsolation.gs": {
+    "bytes": 4990,
+    "sha256": "1dfa3772ac05dc5afe4e89d6ef48e5e99a4498662561e1f8f6d1d2ab8c584f61"
+  },
+  "candidate/Code.gs": {
+    "bytes": 70543,
+    "sha256": "203ed1a0cec082d9b39f688b8903942d131863bbe6fd84733c6563e729dee120"
+  },
+  "candidate/HubEventContext.gs": {
+    "bytes": 16849,
+    "sha256": "b7c67b0de2f26d94f2b47da7c970e9386ffbec22b8a05f62fee53c599a3b9400"
+  },
+  "candidate/HubTestAttention.gs": {
+    "bytes": 42685,
+    "sha256": "82aaefa511307f52995a5fa52dc49c7caff034e42836ffe6fb5539ce5d233256"
+  },
+  "candidate/HubTestBackgroundRecovery.gs": {
+    "bytes": 35454,
+    "sha256": "b90b95cf8e949652578087c917032d69fd372e818c7cd8164240aec438b920d3"
+  },
+  "candidate/HubTestBridge.gs": {
+    "bytes": 5132,
+    "sha256": "233333b6c7b53b927be9775a3e3272bdf5edb9ae1425acbc573336d636c0b00b"
+  },
+  "candidate/HubTestNakkaEvent.gs": {
+    "bytes": 46784,
+    "sha256": "cffc71598978c6cc3f6f4bfb487a68402a70bb00f1d0ecb86aa3b96991136db1"
+  },
+  "candidate/HubTestNakkaTransfer.gs": {
+    "bytes": 27804,
+    "sha256": "256faf6e85460cfc92617d456cbb88bfe3b64159c068f682a301240c8fb59fdc"
+  }
+}

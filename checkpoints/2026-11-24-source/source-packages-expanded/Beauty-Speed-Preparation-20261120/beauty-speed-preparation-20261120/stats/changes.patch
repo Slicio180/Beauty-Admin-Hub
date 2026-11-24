@@ -1,0 +1,16 @@
+--- baseline/HubTestPools.gs
++++ candidate/HubTestPools.gs
+@@ -286,10 +286,9 @@
+     const league=beautyHubTransferFetch_(('league/get?lgid='+(typeof beautyHubLeagueId_==='function'?beautyHubLeagueId_():'lg_M2wQ_4189')+''),auth).league;
+     if(league?.lgid!==(''+(typeof beautyHubLeagueId_==='function'?beautyHubLeagueId_():'lg_M2wQ_4189')+'')||typeof league.title!=='string')throw Error('league');
+     const profiles=identities||beautyPoolProfiles_(auth);
+-    diagnostic='SCORE_TOTALS';
+-    const stats=beautyHubTransferFetch_(('league/stats?lgid='+(typeof beautyHubLeagueId_==='function'?beautyHubLeagueId_():'lg_M2wQ_4189')+'&kind=stats_list'),auth).stats;
+-    diagnostic='RANKING_POINTS';
+-    const ranking=beautyHubTransferFetch_(('league/stats?lgid='+(typeof beautyHubLeagueId_==='function'?beautyHubLeagueId_():'lg_M2wQ_4189')+'&kind=rank_list'),auth).stats;
++    diagnostic='STATISTICS_BATCH';
++    const [scoreData,rankingData]=beautySpeedStatsReads_(auth);
++    const stats=scoreData.stats,ranking=rankingData.stats;
+     diagnostic='VALIDATE_STATISTICS';
+     const qualified=beautyPoolNormalizeStats_(profiles,stats,ranking);p.deleteProperty(('BEAUTY_LEAGUE_STATS_'+(typeof beautyHubScopeId_==='function'?beautyHubScopeId_():'lg_M2wQ_4189')+'_FAILED'));
+     return {...beautyPoolLastGood_({leagueId:league.lgid,title:league.title,fetchedAt:new Date().toISOString(),method:'3 × total score / total darts; full precision for seeding, 2 decimals for display',profiles:qualified}),fresh:true};

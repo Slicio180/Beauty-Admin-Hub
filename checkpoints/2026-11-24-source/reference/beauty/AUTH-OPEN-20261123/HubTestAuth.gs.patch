@@ -1,0 +1,18 @@
+--- native-baseline/HubTestAuth.gs
++++ candidate/HubTestAuth.gs
+@@ -127,7 +127,14 @@
+   try{
+     if(!input||typeof input!=='object'||Array.isArray(input))beautyHubAuthError_('AUTH_INVALID');
+     if(action==='login'&&Object.keys(input).length===1&&typeof input.idToken==='string')return beautyHubAuthLogin_(input.idToken);
+-    if(!['touch','logout'].includes(action)||Object.keys(input).length!==1||typeof input.token!=='string')beautyHubAuthError_('AUTH_INVALID');
++    if(!['check','touch','logout'].includes(action)||Object.keys(input).length!==1||typeof input.token!=='string')beautyHubAuthError_('AUTH_INVALID');
++    // Opening the Hub validates the existing session without renewing it.
++    // Event recovery must not block this read; expiry, epoch, allowlist and
++    // TEST/context checks still run on the server for this and later requests.
++    if(action==='check'){
++      const record=beautyHubAuthRequire_(input.token);
++      return {success:true,expiresAt:record.expires};
++    }
+     return beautyHubAuthLocked_(()=>{
+       if(action==='logout'){
+         const key=beautyHubAuthKey_(input.token),record=beautyHubAuthLoad_(key);

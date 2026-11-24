@@ -1,0 +1,200 @@
+--- a/LiveRegister.js
++++ b/LiveRegister.js
+@@ -71,6 +71,48 @@
+   if(rows.length>19999||rows.some(r=>!Array.isArray(r)||r.length>width))throw Error('Sheet exceeds reviewed size.');
+   return rows.map(r=>Array.from({length:width},(_,i)=>String(r[i]??'')));
+ }
++
++/* Read related registration views together. Fresh per call; never cached across a write. */
++function beautyLiveRegistrationDisplayRows_(width) {
++  if(![1,3].includes(width))throw Error('Invalid display read width.');
++  SpreadsheetApp.flush();
++  const ranges=["'TONIGHT''S PLAYERS'!A2:"+String.fromCharCode(64+width),"'PLAYER STATUS DATA'!A2:F"];
++  const data=beautyLiveSheetsRead_('/values:batchGet?'+ranges.map(r=>'ranges='+encodeURIComponent(r)).join('&')+'&valueRenderOption=FORMATTED_VALUE');
++  if(!Array.isArray(data.valueRanges)||data.valueRanges.length!==2)throw Error('Incomplete registration read.');
++  return data.valueRanges.map((part,index)=>{
++    if(typeof part.range!=='string'||!part.range.startsWith(ranges[index])||!/^\d*$/.test(part.range.slice(ranges[index].length)))throw Error('Unexpected registration range.');
++    const expectedWidth=index===0?width:6,rows=part.values===undefined?[]:part.values;
++    if(!Array.isArray(rows)||rows.length>19999||rows.some(r=>!Array.isArray(r)||r.length>expectedWidth||r.some(v=>v!==null&&!['string','number','boolean'].includes(typeof v))))throw Error('Invalid registration rows.');
++    return rows.map(r=>Array.from({length:expectedWidth},(_,i)=>String(r[i]??'')));
++  });
++}
++
++/* Independent Nakka GETs share one fetch phase. Mutation requests are never batched. */
++function beautyLiveRegistrationApiReads_(paths) {
++  beautyLiveLoginGuard_();beautyContextAssert_();
++  const t=beautyLiveTarget_(),allowed=['tournament/get?tdid='+t.eventId,'tournament/entry/list?tdid='+t.eventId];
++  if(!beautyContextStandalone_())allowed.push('league/entry/list?lgid='+t.leagueId);
++  if(!Array.isArray(paths)||paths.length<1||paths.length>3||new Set(paths).size!==paths.length||paths.some(path=>!allowed.includes(path)))throw Error('Invalid read targets.');
++  const p=PropertiesService.getScriptProperties(),user=p.getProperty('N01_API_USER'),password=p.getProperty('N01_API_PASSWORD');
++  if(!user||!password)throw Error('Nakka credentials missing.');
++  const responses=UrlFetchApp.fetchAll(paths.map(path=>({url:'https://push.n01darts.com/api/v1/'+path,method:'get',headers:{Authorization:'Basic '+Utilities.base64Encode(user+':'+password)},muteHttpExceptions:true,followRedirects:false})));
++  beautyContextAssert_();
++  if(!Array.isArray(responses)||responses.length!==paths.length)throw Error('Incomplete Nakka read.');
++  return responses.map(response=>{
++    if(response.getResponseCode()!==200)throw Error('Nakka request failed.');
++    const data=JSON.parse(response.getContentText());
++    if(!data||data.result!==0)throw Error('Nakka did not confirm request.');
++    return data;
++  });
++}
++function beautyLiveRegistrationLists_() {
++  const t=beautyLiveTarget_(),standalone=beautyContextStandalone_();
++  const paths=standalone?['tournament/entry/list?tdid='+t.eventId]:['league/entry/list?lgid='+t.leagueId,'tournament/entry/list?tdid='+t.eventId];
++  const reads=beautyLiveRegistrationApiReads_(paths);
++  if(reads.some(data=>!Array.isArray(data.list)))throw Error('Incomplete Nakka list.');
++  return {league:standalone?[]:reads[0].list,event:reads[standalone?0:1].list};
++}
++
+ function beautyLiveRegistrationSheets_() {
+   const ss=SpreadsheetApp.openById(beautyLiveTarget_().sheetId);
+   if(ss.getId()!==beautyLiveTarget_().sheetId)throw Error('Wrong sheet.');
+@@ -85,6 +127,7 @@
+   if(out.tonight.getRange(2,3,99,1).getFormulas().some(r=>r[0]))throw Error('Status formulas found.');
+   const names=beautyLiveRegistrationRows_(out.tonight,2);
+   if(names.slice(99).some(r=>r.some(Boolean)))throw Error('Registration display capacity reached.');
++  out.registrationRoster=names; // This request's already-validated roster; worker revalidates later.
+   return out;
+ }
+ function beautyLiveRegistrationApi_(path, payload) {
+@@ -130,20 +173,18 @@
+ function beautyLiveRegistrationSync_(s,player) {
+   const key=beautyLiveRegistrationKey_;
+   for(let pass=0;pass<5;pass++){
+-    SpreadsheetApp.flush();if(pass)Utilities.sleep(1000);
+-    const displayRows=beautyLiveRegistrationRows_(s.tonight,1);
++    if(pass)Utilities.sleep(1000);
++    const [displayRows,snapshot]=beautyLiveRegistrationDisplayRows_(1);
+     const names=Array.from({length:99},(_,i)=>displayRows[i]?.[0]||'');
+     if(names.filter(n=>key(n)===key(player)).length!==1)continue;
+     const map=new Map();
+-    const snapshot=beautyLiveRegistrationRows_(s.store,6);
+     for(const r of snapshot)if(key(r[0])){
+       if(map.has(key(r[0])))throw Error('Duplicate status rows.');map.set(key(r[0]),['IN','OUT','STANDBY'].includes(r[2])?r[2]:'');
+     }
+     const values=names.map(n=>[map.get(key(n))||'']);
+-    s.tonight.getRange(2,3,99,1).setValues(values);SpreadsheetApp.flush();
+-    const readback=beautyLiveRegistrationRows_(s.tonight,3);
++    s.tonight.getRange(2,3,99,1).setValues(values);
++    const [readback,current]=beautyLiveRegistrationDisplayRows_(3);
+     const after=Array.from({length:99},(_,i)=>readback[i]||['','','']);
+-    const current=beautyLiveRegistrationRows_(s.store,6);
+     if(JSON.stringify(current)!==JSON.stringify(snapshot))continue;
+     if(after.every((r,i)=>r[0]===names[i]&&r[2]===values[i][0])&&current.every(r=>!key(r[0])||map.get(key(r[0]))===(['IN','OUT','STANDBY'].includes(r[2])?r[2]:'')))return;
+   }
+--- a/LiveRegistrationQueue.js
++++ b/LiveRegistrationQueue.js
+@@ -53,7 +53,7 @@
+  try{beautyLiveRegistrationEvent_(true);}catch(e){return {success:false,code:e.code==='EVENT_REGISTRATION_CLOSED'?e.code:'EVENT_CHECK_UNAVAILABLE',error:e.code==='EVENT_REGISTRATION_CLOSED'?'Registration is closed. Nothing was saved.':'The event could not be checked. Nothing was saved.'};}
+  input={...input};if(input.selectedName==='MITT NAMN FINNS INTE I LISTAN'&&!input.identityChoice)input.newName=String(input.newName||'').toLocaleLowerCase('sv-SE').replace(/(^|[\s-])\p{L}/gu,c=>c.toLocaleUpperCase('sv-SE'));
+  let master,tonight,resolved;
+- try{const s=beautyLiveRegistrationSheets_();master=beautyLiveRegistrationRows_(s.master,1).map(r=>r[0]).filter(Boolean);tonight=beautyLiveRegistrationRows_(s.tonight,2).map(r=>r[0]||r[1]).filter(Boolean);resolved=BeautyLiveNameResolution_.resolve(input,master,tonight);}catch(e){return {success:false,code:'QUEUE_CHECK_FAILED',error:'Registration lists could not be checked. No request was accepted.'};}
++ try{const s=beautyLiveRegistrationSheets_();master=beautyLiveRegistrationRows_(s.master,1).map(r=>r[0]).filter(Boolean);tonight=s.registrationRoster.map(r=>r[0]||r[1]).filter(Boolean);resolved=BeautyLiveNameResolution_.resolve(input,master,tonight);}catch(e){return {success:false,code:'QUEUE_CHECK_FAILED',error:'Registration lists could not be checked. No request was accepted.'};}
+  const lock=LockService.getScriptLock();if(!lock.tryLock(5000))return {success:false,code:'BUSY',error:'Queue is busy. No new request was accepted. Try again shortly.'};
+  let job;
+  try{
+@@ -127,7 +127,8 @@
+  const names=()=>beautyLiveRegistrationRows_(s.master,1).map(r=>r[0]).filter(n=>key(n)&&n!=='MITT NAMN FINNS INTE I LISTAN');
+  const statusRows=()=>beautyLiveRegistrationRows_(s.store,6).map((r,i)=>({r,row:i+2})).filter(v=>key(v.r[0])===key(j.player));
+  const existingNames=names().filter(n=>key(n)===key(j.player));if(existingNames.length>1||!j.isNew&&existingNames.length!==1||j.isNew&&!j.steps.master&&existingNames.length)throw Error('Master identity changed before processing.');
+- const leagueBefore=beautyLiveRegistrationList_('league').filter(r=>key(r.name)===key(j.player)),entriesBefore=beautyLiveRegistrationList_('event').filter(r=>key(r.name)===key(j.player)||leagueBefore.length===1&&r.lpid&&String(r.lpid)===String(leagueBefore[0].lpid));
++ const providerLists=beautyLiveRegistrationLists_();
++ const leagueBefore=providerLists.league.filter(r=>key(r.name)===key(j.player)),entriesBefore=providerLists.event.filter(r=>key(r.name)===key(j.player)||leagueBefore.length===1&&r.lpid&&String(r.lpid)===String(leagueBefore[0].lpid));
+  if(leagueBefore.length>1||entriesBefore.length>1||leagueBefore.length===1&&!leagueBefore[0].lpid||entriesBefore.length&&(!entriesBefore[0].tpid||key(entriesBefore[0].name)!==key(j.player)||j.event.mode==='league'&&(!leagueBefore.length||entriesBefore[0].lpid&&String(entriesBefore[0].lpid)!==String(leagueBefore[0].lpid))))throw Error('Nakka identity needs review before saving.');
+  if(j.responseSerial===undefined){
+   const old=statusRows();if(old.length>1||old[0]&&s.store.getRange(old[0].row,1,1,6).getFormulas()[0].some(Boolean))throw Error('Status identity/formula needs review.');
+--- a/LiveRemove.js
++++ b/LiveRemove.js
+@@ -8,20 +8,51 @@
+   throw Error('LAYOUT');
+ }
+ function beautyLiveRemoveDateValid_(value){return value===beautyLiveTarget_().date;}
++
++/* Keep native typed values/date objects and number formats. Fetch the five display/formula grids together. */
++function beautyLiveRemoveGrid_(specs) {
++  const ranges=specs.map(s=>"'"+s.title.replace(/'/g,"''")+"'!A1:"+String.fromCharCode(64+s.width)+s.rows);
++  const fields='spreadsheetId,sheets(properties(sheetId,title),data(startRow,startColumn,rowData(values(formattedValue,userEnteredValue))))';
++  const data=beautyLiveSheetsRead_('?'+ranges.map(r=>'ranges='+encodeURIComponent(r)).join('&')+'&fields='+encodeURIComponent(fields));
++  if(data.spreadsheetId!==beautyLiveTarget_().sheetId||!Array.isArray(data.sheets)||data.sheets.length!==specs.length)throw Error('LAYOUT');
++  const seen=new Set(),result={};
++  for(const sheet of data.sheets){
++    const spec=specs.find(s=>s.id===sheet.properties?.sheetId&&s.title===sheet.properties?.title);
++    if(!spec||seen.has(spec.id)||!Array.isArray(sheet.data)||sheet.data.length!==1)throw Error('LAYOUT');seen.add(spec.id);
++    const block=sheet.data[0],rows=block.rowData===undefined?[]:block.rowData;
++    if((block.startRow||0)!==0||(block.startColumn||0)!==0||!Array.isArray(rows)||rows.length>spec.rows)throw Error('LAYOUT');
++    const display=[],formulas=[];
++    for(let r=0;r<spec.rows;r++){
++      const cells=rows[r]?.values===undefined?[]:rows[r].values;
++      if(!Array.isArray(cells)||cells.length>spec.width)throw Error('LAYOUT');
++      const shown=[],entered=[];
++      for(let c=0;c<spec.width;c++){
++        const cell=cells[c]||{},value=cell.formattedValue===undefined?'':cell.formattedValue,formula=cell.userEnteredValue?.formulaValue===undefined?'':cell.userEnteredValue.formulaValue;
++        if(typeof value!=='string'||typeof formula!=='string')throw Error('LAYOUT');shown.push(value);entered.push(formula);
++      }
++      display.push(shown);formulas.push(entered);
++    }
++    result[spec.title]={display,formulas};
++  }
++  return result;
++}
++
+ function beautyLiveRemoveSnapshot_(ss) {
+   if(ss.getId()!==beautyLiveTarget_().sheetId||ss.getSpreadsheetLocale()!=='en_GB'||ss.getSpreadsheetTimeZone()!=='Africa/Ceuta')throw Error('LAYOUT');
+   const titles=['Control','PLAYER STATUS DATA',"TONIGHT'S PLAYERS","PLAYER'S MASTER LIST",'Form responses 2'];
+   const widths=[2,6,6,1,6],limits=[10,1000,1000,10000,10000];
+   const headers=[['START DATE','LAST RESET'],['PLAYER','OLD NAME','STATUS','FOTO&VIDEO','MEDDELANDE','WHERE FROM'],['PLAYERS','NEW PLAYERS','STATUS','FOTO&VIDEO','MEDDELANDE','WHERE FROM'],['PLAYERS'],['Timestamp','VÄLJ DITT NAMN','Skriv ditt fullständiga namn','Foto- och videomedgivande','Meddelande','WHERE FROM']];
+-  const snap={};
++  const snap={},specs=[];
+   for(let i=0;i<titles.length;i++){
+     const sh=ss.getSheetByName(titles[i]);if(!sh||sh.getLastRow()>limits[i]||sh.getLastColumn()>widths[i])throw Error('LAYOUT');
+     const n=titles[i]==="TONIGHT'S PLAYERS"?Math.min(1000,sh.getMaxRows()):Math.max(2,sh.getLastRow());
+     if(titles[i]==="TONIGHT'S PLAYERS"&&n<100)throw Error('LAYOUT');
+     const r=sh.getRange(1,1,n,widths[i]);
+-    snap[titles[i]]={values:r.getValues(),display:r.getDisplayValues(),formulas:r.getFormulas(),formats:r.getNumberFormats(),id:sh.getSheetId()};
+-    if(JSON.stringify(snap[titles[i]].display[0])!==JSON.stringify(headers[i]))throw Error('LAYOUT');
++    snap[titles[i]]={values:r.getValues(),display:null,formulas:null,formats:r.getNumberFormats(),id:sh.getSheetId()};
++    specs.push({title:titles[i],width:widths[i],rows:n,id:sh.getSheetId()});
+   }
++  const grids=beautyLiveRemoveGrid_(specs);
++  for(let i=0;i<titles.length;i++){snap[titles[i]].display=grids[titles[i]].display;snap[titles[i]].formulas=grids[titles[i]].formulas;if(JSON.stringify(snap[titles[i]].display[0])!==JSON.stringify(headers[i]))throw Error('LAYOUT');}
+   const t=snap["TONIGHT'S PLAYERS"];
+   if(t.display.slice(100).some(r=>r[0]||r[1])||t.formulas.slice(1).some(r=>r[2])||snap.Control.formulas[1].some(Boolean)||snap['PLAYER STATUS DATA'].formulas.some(r=>r.some(Boolean)))throw Error('LAYOUT');
+   const expected="=IFERROR(SORT(UNIQUE(FILTER({IF('Form responses 2'!B2:B=\"MITT NAMN FINNS INTE I LISTAN\",'Form responses 2'!C2:C,'Form responses 2'!B2:B),IF('Form responses 2'!B2:B=\"MITT NAMN FINNS INTE I LISTAN\",'Form responses 2'!C2:C,\"\")},IF('Form responses 2'!B2:B=\"MITT NAMN FINNS INTE I LISTAN\",'Form responses 2'!C2:C,'Form responses 2'!B2:B)<>\"\",'Form responses 2'!A2:A>=Control!B2,'Form responses 2'!A2:A<Control!A2+1)),1,TRUE),\"\")";
+@@ -40,14 +71,25 @@
+   });
+ }
+ function beautyLiveRemoveReads_(authorization,includeLeague){
+-  const t=beautyLiveTarget_(),result=[beautyLiveRegistrationApi_('tournament/get?tdid='+t.eventId),beautyLiveRegistrationApi_('tournament/entry/list?tdid='+t.eventId)];
+-  if(includeLeague&&!beautyContextStandalone_())result.push(beautyLiveRegistrationApi_('league/entry/list?lgid='+t.leagueId));return result;
++  const t=beautyLiveTarget_(),paths=['tournament/get?tdid='+t.eventId,'tournament/entry/list?tdid='+t.eventId];
++  if(includeLeague&&!beautyContextStandalone_())paths.push('league/entry/list?lgid='+t.leagueId);
++  return beautyLiveRemoveMeasure_('nakka-reads',()=>beautyLiveRegistrationApiReads_(paths));
+ }
+ function beautyLiveRemoveFetch_(path,authorization,payload){
+   if(path!=='tournament/entry/update'||payload.tdid!==beautyLiveTarget_().eventId||Object.keys(payload).sort().join(',')!=='remove,tdid'||!Array.isArray(payload.remove)||payload.remove.length!==1||!/^[A-Za-z0-9]{4}$/.test(payload.remove[0]))throw Error('TARGET');
+   return beautyLiveRegistrationApi_(path,payload);
+ }
+-function beautyLiveRemoveMeasure_(name,run){return run();}
++var beautyLiveRemoveTiming_=null;
++function beautyLiveRemoveMeasure_(name,run){
++  const started=Date.now();try{return run();}finally{if(beautyLiveRemoveTiming_){const phase=beautyLiveRemoveTiming_[name]||(beautyLiveRemoveTiming_[name]={calls:0,totalMs:0});phase.calls++;phase.totalMs+=Date.now()-started;}}
++}
++function beautyLiveRemove_(action,input,token){
++  const prior=beautyLiveRemoveTiming_,phases={};beautyLiveRemoveTiming_=phases;const started=Date.now();let result;
++  try{return result=beautyLiveRemoveWork_(action,input,token);}finally{
++    beautyLiveRemoveTiming_=prior;
++    try{console.log(JSON.stringify({kind:'BEAUTY_REMOVAL_TIMING',action:['preview','save'].includes(action)?action:'invalid',totalMs:Date.now()-started,success:result?.success===true,phases}));}catch(ignored){}
++  }
++}
+ function beautyLiveRemovalSetup_(){
+   beautyLiveLoginGuard_();beautyLiveRemoveSnapshot_(SpreadsheetApp.openById(beautyLiveTarget_().sheetId));beautyLiveRegistrationEvent_();
+   console.log(JSON.stringify({check:'LIVE_REMOVAL_SETUP',result:'READY_FOR_REMOVAL_REVIEW',writesPerformed:false}));
+@@ -106,7 +148,7 @@
+   return {ss,state};
+ }
+ 
+-function beautyLiveRemove_(action,input,token) {
++function beautyLiveRemoveWork_(action,input,token) {
+   beautyLiveLoginGuard_();
+   try{beautyHubAuthRequire_(token);}catch(e){return {success:false,code:'AUTH_REQUIRED',error:'Sign in to continue.'};}
+   const fail=(code,journal,backup)=>({success:false,code,error:{INVALID_REMOVE:'Invalid removal request. Reload and review again.',REMOVE_DISABLED:'Removal is disabled.',REMOVE_BUSY:'Another operation is running. Review again shortly.',REMOVE_STALE:'The event or player data changed. Review a new removal.',REMOVE_IDENTITY:'A unique registration and league identity could not be verified. Review the player manually.',REMOVE_TARGET:'Removal is limited to the selected, pre-start LIVE event.',REMOVE_BRACKET:'This player is placed in a bracket. Review the bracket in Nakka before removal.',REMOVE_REVIEW:'A previous removal needs review. No retry was sent.',REMOVE_UNCERTAIN:'Removal may be partly saved. Do not repeat it. Inspect Nakka and the Hub using the recovery reference.',REMOVE_FAILED:'Removal could not be checked. Nothing was deliberately retried.'}[code]||'Removal needs review.',...(journal?{journal}:{}),...(backup?{backup}:{})});

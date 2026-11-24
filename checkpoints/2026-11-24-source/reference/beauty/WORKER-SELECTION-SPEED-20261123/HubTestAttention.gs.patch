@@ -1,0 +1,16 @@
+--- baseline/HubTestAttention.gs
++++ candidate/HubTestAttention.gs
+@@ -305,7 +305,12 @@
+ 
+ var beautyRegistrationRecoveryActive_=null;
+ function beautyRegistrationRecoveryPrefix_(){return 'BEAUTY_REGISTRATION_RECOVERY_V1_'+beautyHubTransferHash_({sheet:SHEET_ID,event:beautyHubTransferTarget_(),date:beautyHubNakkaDate_().date})+'_';}
+-function beautyRegistrationRecoveryKey_(name){return beautyRegistrationRecoveryPrefix_()+beautyHubTransferHash_(BeautyNameResolution.key(name));}
++function beautyRegistrationRecoveryKey_(name,prefix){
++ // Only private worker selection supplies its already resolved namespace. All
++ // operation reads/writes omit it and resolve the current event as before.
++ if(prefix!==undefined&&(typeof prefix!=='string'||!/^BEAUTY_REGISTRATION_RECOVERY_V1_[A-Za-z0-9_-]{43}_$/.test(prefix)))throw Error('REGISTRATION_CONTEXT_CHANGED');
++ return (prefix===undefined?beautyRegistrationRecoveryPrefix_():prefix)+beautyHubTransferHash_(BeautyNameResolution.key(name));
++}
+ function beautyRegistrationRecoveryWrite_(r){const p=PropertiesService.getScriptProperties(),raw=JSON.stringify(r);if(Utilities.newBlob(raw).getBytes().length>8500)throw Error('REGISTRATION_RECEIPT_SIZE');p.setProperty(beautyRegistrationRecoveryKey_(r.name),raw);if(p.getProperty(beautyRegistrationRecoveryKey_(r.name))!==raw)throw Error('REGISTRATION_RECEIPT_READBACK');}
+ function beautyRegistrationRecoveryBegin_(sheet,decision,recordedAt,selectedName,newName,consent,message,source){
+  beautyHubTestGuard_();const raw=PropertiesService.getScriptProperties().getProperty(beautyRegistrationRecoveryKey_(decision.player));let old;

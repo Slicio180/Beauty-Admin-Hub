@@ -1,0 +1,18 @@
+--- baseline/HubTestAttention.gs
++++ candidate/HubTestAttention.gs
+@@ -178,6 +178,7 @@
+   TEST_TARGET_ONLY:['The selected event is not available for registration transfers.','Check the selected event, date and whether registration is still open.'],
+   NAKKA_UNAVAILABLE:['Nakka cannot currently be reached.','The saved registration is retained. Beauty will check the connection again.'],
+   RECOVERY_REPLY_UNKNOWN:['The recovery reply was not confirmed.','Beauty will inspect the saved entry. Do not register again.'],
++  BACKGROUND_RETRY_EXHAUSTED:['Automatic recovery reached its retry limit after an interrupted check.','Open this player’s Recovery report. After the cause is resolved, choose Check after correction. Do not register the player again.'],
+   RECOVERY_UNAVAILABLE:['The result could not be checked.','The saved registration is retained. Copy the report if the problem persists.']
+  };
+  const message=text[code]||['Beauty has not verified this player’s registration in Nakka.','Review the saved result before making another change.'];
+@@ -214,6 +215,7 @@
+   if(closedIssue)code='EVENT_REGISTRATION_CLOSED';
+   if(broken){code='RECOVERY_HISTORY_UNREADABLE';tone='red';}
+   else if(closedIssue)tone=row.status==='IN'?'red':'neutral';
++  else if(record?.state==='NEEDS_HELP'&&record.code==='BACKGROUND_RETRY_EXHAUSTED'){code=record.code;tone='red';}
+   else if(issue){const eligible=beautyPlayerRecoveryPolicy_(code).automatic&&['IN','PENDING'].includes(row.status);tone=record?.state==='CHECKING'&&Date.now()-Date.parse(record.updatedAt)<360000?'orange':eligible&&(!record||record.state==='VERIFIED'||retryable)?'orange':'red';}
+   else if(freshClear&&['IN','PENDING'].includes(row.status))tone='green';
+   else if(record?.state==='CHECKING'){tone=Date.now()-Date.parse(record.updatedAt)<360000?'orange':'red';if(tone==='red')code='RECOVERY_REPLY_UNKNOWN';}

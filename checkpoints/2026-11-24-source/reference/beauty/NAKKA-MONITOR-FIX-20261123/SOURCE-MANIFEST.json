@@ -1,0 +1,22 @@
+{
+  "HubTest.html": {
+    "baseline": {
+      "sha256": "4c67cba7e50afb7420c6dde0aeac29629429456690bfe37b09c850bed47775ee",
+      "bytes": 1208617
+    },
+    "candidate": {
+      "sha256": "16379b9612cb7c980dbbb6f7a407d993145622cc7fb33924466724db308ada81",
+      "bytes": 1211084
+    }
+  },
+  "HubTestAttention.gs": {
+    "baseline": {
+      "sha256": "b058508c929d789072c4a0b9d2a0612cd14f32f408ced7f640d97a41ad528f8d",
+      "bytes": 40869
+    },
+    "candidate": {
+      "sha256": "41066c43196aec49a9fbc8bbdfbc7740c992221f719ef5b35267d777578d16a6",
+      "bytes": 41584
+    }
+  }
+}

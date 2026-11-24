@@ -1,0 +1,36 @@
+--- baseline/HubTestAttention.gs
++++ candidate/HubTestAttention.gs
+@@ -378,24 +378,29 @@
+   let r;try{r=JSON.parse(raw);}catch(e){throw Error('REGISTRATION_RECEIPT_UNREADABLE');}
+   if(!r||r.name!==name||!['INTENT','REVIEW','COMPLETE'].includes(r.state))throw Error('REGISTRATION_RECEIPT_UNREADABLE');
+   const ss=beautyRegistrationRecoverySource_(r),key=BeautyNameResolution.key,read=title=>{const sh=ss.getSheetByName(title);if(!sh)throw Error('REGISTRATION_SHEET_MISSING');return sh.getLastRow()<2?[]:sh.getRange(2,1,sh.getLastRow()-1,6).getDisplayValues();};
+-  const stored=read('PLAYER STATUS DATA').filter(x=>key(x[0])===key(name)),shown=read("TONIGHT'S PLAYERS").filter(x=>key(x[0]||x[1])===key(name));
++  const stored=read('PLAYER STATUS DATA').filter(x=>key(x[0])===key(name)),displayRows=read("TONIGHT'S PLAYERS");
++  let shown=displayRows.filter(x=>key(x[0]||x[1])===key(name));
+   if(stored.length>1||shown.length!==1)throw Error('REGISTRATION_DISPLAY_REVIEW');
+   if(!['JA, JAG GODKÄNNER','NEJ, JAG GODKÄNNER INTE'].includes(r.consent))throw Error('REGISTRATION_CONSENT_REVIEW');
+   const consent=r.consent==='JA, JAG GODKÄNNER'?'JA':'NEJ';
+   const projectionMatches=rows=>rows.length===1&&rows[0][2]==='IN'&&rows[0][3]===consent&&rows[0][4]===r.message&&rows[0][5]===r.source;
+-  // Recheck COMPLETE receipts without repairing or overwriting current fields.
++  // An absent display lookup may be restored; saved player fields are never changed here.
++  const displayRow=displayRows.findIndex(x=>key(x[0]||x[1])===key(name))+2;
++  const formulaRepair=beautyTestDisplayLookupRepair_(ss,name,displayRow,authorize);
++  if(formulaRepair.repairedCells.length)shown=read("TONIGHT'S PLAYERS").filter(x=>key(x[0]||x[1])===key(name));
++  // Recheck COMPLETE receipts without overwriting current source fields.
+   if(r.state==='COMPLETE'){
+     if(!projectionMatches(stored)||!projectionMatches(shown))throw Error('REGISTRATION_DISPLAY_REVIEW');
+     if(read(MASTER_SHEET).filter(x=>key(x[0])===key(name)).length!==1)throw Error('REGISTRATION_MASTER_CHANGED');
+     beautyRegistrationRecoverySource_(r);
+-    return {success:true,registrationVerified:true,changed:false};
++    return {success:true,registrationVerified:true,changed:formulaRepair.repairedCells.length>0};
+   }
+   if(stored.length&&([stored[0][2]].some(v=>v&&!['IN'].includes(v))||[3,4,5].some((i)=>stored[0][i]!==''&&stored[0][i]!==[consent,r.message,r.source][i-3])))throw Error('REGISTRATION_STATUS_CHANGED');
+   const masters=read(MASTER_SHEET).filter(x=>key(x[0])===key(name));if(masters.length>1)throw Error('REGISTRATION_IDENTITY_CONFLICT');
+   authorize();
+   if(!masters.length){if(r.existingPlayer)throw Error('REGISTRATION_MASTER_CHANGED');addPlayerToMasterList_(name);}
+   // Only fill absent or matching fields. Never append the response a second time.
+-  authorize();updatePlayerStatusData_(name,r.consent,r.message,r.source);syncTonightStatusDisplay_(name);
++  authorize();updatePlayerStatusData_(name,r.consent,r.message,r.source);syncTonightStatusDisplay_(name,authorize);
+   SpreadsheetApp.flush();authorize();beautyRegistrationRecoverySource_(r);
+   const after=read('PLAYER STATUS DATA').filter(x=>key(x[0])===key(name)),visible=read("TONIGHT'S PLAYERS").filter(x=>key(x[0]||x[1])===key(name));
+   if(!projectionMatches(after)||!projectionMatches(visible))throw Error('REGISTRATION_DISPLAY_REVIEW');

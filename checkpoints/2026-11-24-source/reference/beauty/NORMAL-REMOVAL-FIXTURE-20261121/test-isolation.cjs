@@ -1,0 +1,22 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert/strict');
+let active,script='1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N',checks=0;
+const ctx={ScriptApp:{getScriptId:()=>script},beautyContextRead_:()=>active};
+vm.createContext(ctx);vm.runInContext(fs.readFileSync(__dirname+'/BeautyTestIsolation.gs','utf8'),ctx);
+const dest=ctx.beautyTestApprovedDestinations_();assert.equal(dest.length,2);checks++;
+const full=a=>({...a,version:1,mode:'league'}), deny=fn=>{assert.throws(fn);checks++;},allow=fn=>{fn();checks++;};
+for(const d of dest){active=full(d);allow(()=>ctx.beautyTestDestinationGuard_(active));for(const field of ['sheetId','leagueId','eventId','date'])deny(()=>ctx.beautyTestDestinationGuard_({...active,[field]:'unexpected'}));}
+active=full(dest[1]);
+for(const field of ['sheetId','eventId','date'])deny(()=>ctx.beautyTestDestinationGuard_({...active,[field]:dest[0][field]}));
+for(const change of [{sheetId:'1qeV90AYjC73BLMah347JWIee5-PIGFY9d-gzmyvcpyM'},{leagueId:'lg_tM2v_3523'},{eventId:'t_yIw0_7809'},{eventId:'t_jBaQ_2877'},{sheetId:'1FvoMpJT78hFJmBIjY_SlLUd8BfOgG30vUR15Cvf_QnY'},{mode:'tournament'},{version:2}])deny(()=>ctx.beautyTestDestinationGuard_({...active,...change}));
+script='wrong-project';deny(()=>ctx.beautyTestDestinationGuard_(active));script='1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N';
+allow(()=>ctx.beautyTestNakkaMutationGuard_('tournament/entry/update',{tdid:active.eventId}));
+deny(()=>ctx.beautyTestNakkaMutationGuard_('tournament/entry/update',{tdid:dest[0].eventId}));
+deny(()=>ctx.beautyTestNakkaMutationGuard_('tournament/update',{tdid:active.eventId,set:{t_date:0}}));
+deny(()=>ctx.beautyTestNakkaMutationGuard_('tournament/delete',{tdid:active.eventId}));
+allow(()=>ctx.beautyTestNakkaReadGuard_('tournament/entry/list?tdid='+active.eventId));
+deny(()=>ctx.beautyTestNakkaReadGuard_('tournament/entry/list?tdid='+dest[0].eventId));
+const sheet=id=>({getName:()=>"PLAYER'S MASTER LIST",getParent:()=>({getId:()=>id})});
+allow(()=>ctx.beautyTestMasterSheetGuard_(sheet('1SIj4F8_WfWaeDVsdagRw8AoLsz0XsjhtdIn_OOxoDnU')));
+deny(()=>ctx.beautyTestMasterSheetGuard_(sheet(active.sheetId)));
+const result={result:'PASS',assertions:checks,scope:'Exact two tuples, cross-binding, production/recovery exclusions, request guards and master routing'};
+fs.writeFileSync(__dirname+'/isolation-tests.json',JSON.stringify(result,null,2)+'\n');console.log(result);

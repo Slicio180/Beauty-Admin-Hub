@@ -1,0 +1,18 @@
+{
+  "baseline/HubTestBackgroundRecovery.gs": {
+    "bytes": 21968,
+    "sha256": "785e2e358922c59bfacdbdb861241668b6f4006a409c4f53637c60cc6ee70413"
+  },
+  "candidate/HubTestBackgroundRecovery.gs": {
+    "bytes": 22881,
+    "sha256": "5fb07393d76bc0dff09e99674b0420d8a5bb49f840d088bc95bafd3ef52b51f6"
+  },
+  "baseline/HubTestAttention.gs": {
+    "bytes": 41584,
+    "sha256": "41066c43196aec49a9fbc8bbdfbc7740c992221f719ef5b35267d777578d16a6"
+  },
+  "candidate/HubTestAttention.gs": {
+    "bytes": 41943,
+    "sha256": "2fa41d6471805ef6e898416fc6e9d0be596a701010fea53f807ca42992fbcd44"
+  }
+}

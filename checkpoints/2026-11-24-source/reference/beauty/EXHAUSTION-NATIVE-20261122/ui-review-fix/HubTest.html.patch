@@ -1,0 +1,25 @@
+--- baseline/HubTest.html
++++ candidate/HubTest.html
+@@ -7870,11 +7870,12 @@
+   mark.className='beauty-simple-mark warning';mark.textContent='!';dialog.dataset.tone=p?.tone||'red';dialog.setAttribute('aria-busy',String(busy));
+   report.textContent=(p?reportText(p):'Player: '+selected+'\nPlayer no longer in the current result.')+(notice?'\nLatest check: '+notice:'')+(g?'\nGuidance: '+JSON.stringify(g,(key,value)=>key==='ticket'?undefined:value,null,2):'');
+   for(const text of g?.steps||[]){const li=document.createElement('li');li.textContent=text;steps.append(li);}
+-  if(busy&&!notice&&p?.code!=='EVENT_REGISTRATION_CLOSED'){status.textContent='Checking…';mark.className='beauty-simple-mark checking';mark.textContent='';detail.hidden=true;history.hidden=true;return;}
++  if(busy&&!notice&&!['EVENT_REGISTRATION_CLOSED','BACKGROUND_RETRY_EXHAUSTED'].includes(p?.code)){status.textContent='Checking…';mark.className='beauty-simple-mark checking';mark.textContent='';detail.hidden=true;history.hidden=true;return;}
+   if(p?.tone==='green'&&!notice&&(!providerPaused||p.operation==='removal')){title.hidden=true;status.textContent=p.operation==='removal'?'Removal verified':'Issue solved';mark.className='beauty-simple-mark success';mark.textContent='✓';detail.hidden=true;history.hidden=true;return;}
+   if(!p){detail.textContent='This player is no longer on the current list. Review the saved issue.';addButton('Resolve issue',()=>goToPlayer(selected));}
+   else if(p.code==='EVENT_REGISTRATION_CLOSED'){detail.textContent=shortReasons.EVENT_REGISTRATION_CLOSED;addButton('Check current entry',()=>run('review',{player:p.name}));addButton('Review attendance',()=>goToPlayer(p.name));}
+   else if(p.operation==='removal'||/^REMOVE_/.test(p.code)){detail.textContent=g?.problem||'Check the saved removal. Any later player changes will be preserved.';addButton('Check after correction',()=>run('review',{player:p.name}));}
++  else if(p.code==='BACKGROUND_RETRY_EXHAUSTED'){status.textContent='Automatic retries stopped';detail.textContent=(p.problem||'Automatic recovery reached its retry limit after an interrupted check.')+' '+(p.next||'Review the cause, then choose Check after correction. Do not register the player again.');const retry=addButton('Check after correction',()=>run('review',{player:p.name}));retry.disabled=busy;}
+   else if(notice||providerPaused){detail.textContent=busy?'Still waiting for a reply.':'The current result could not be confirmed.';const retry=addButton('Resolve issue',()=>run('read'));retry.disabled=busy;}
+   else if(p.tone==='unknown'||p.tone==='orange'){status.textContent='Checking…';mark.className='beauty-simple-mark checking';mark.textContent='';detail.hidden=true;history.hidden=true;return;}
+   else if(p.tone==='neutral'){detail.textContent='Check this player’s IN / OUT status.';addButton('Resolve issue',()=>goToPlayer(p.name));}
+@@ -7892,7 +7893,7 @@
+   if(g?.event?.id&&/^t_[A-Za-z0-9_]+$/.test(g.event.id)){const a=document.createElement('a');a.href='https://n01darts.com/n01/league/season.php?id='+encodeURIComponent(g.event.id);a.target='_blank';a.rel='noopener noreferrer';a.textContent='Open event in Nakka';history.append(a);}
+   addButton('Copy report',async()=>{try{await navigator.clipboard.writeText(report.textContent);}catch(e){history.open=true;}},history);
+  }
+- function open(name){const target=state?.players.find(p=>p.name===name);if(!target||!(['red','orange'].includes(target.tone)||(target.tone==='green'&&target.history?.length)))return;selected=name;notice='';history.open=false;if(guidance?.player!==name)guidance=null;if(!dialog.open)dialog.showModal();renderDialog();const p=state?.players.find(p=>p.name===name);if(p?.tone==='red'&&!guidance&&!busy)run('review',{player:name});}
++ function open(name){const target=state?.players.find(p=>p.name===name);if(!target||!(['red','orange'].includes(target.tone)||(target.tone==='green'&&target.history?.length)))return;selected=name;notice='';history.open=false;if(guidance?.player!==name)guidance=null;if(!dialog.open)dialog.showModal();renderDialog();const p=state?.players.find(p=>p.name===name);if(p?.tone==='red'&&p.code!=='BACKGROUND_RETRY_EXHAUSTED'&&!guidance&&!busy)run('review',{player:name});}
+  function paintCell(cell){
+   const name=cell.dataset.beautyHealthPlayer,p=state?.players.find(p=>p.name===name);let badge=cell.querySelector('.beauty-player-recovery-badge');
+   const visible=p&&['red','orange'].includes(p.tone);

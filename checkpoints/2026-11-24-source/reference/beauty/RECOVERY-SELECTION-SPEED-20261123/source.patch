@@ -1,0 +1,74 @@
+--- baseline/HubTestAttention.gs
++++ candidate/HubTestAttention.gs
+@@ -1,8 +1,11 @@
+ /* Staff-visible, durable TEST attention records. Nakka checks are GET-only.
+  * These records never replace, delete or bypass transfer/creation journals.
+  */
+-function beautyHubAttentionKey_(date,name) {
+-  return ('BEAUTY_TEST_ATTENTION_'+(typeof beautyHubEventScopeId_==='function'?beautyHubEventScopeId_():'lg_M2wQ_4189')+'_')+date+'_'+beautyHubTransferHash_(name.normalize('NFC').trim().replace(/\s+/g,' ').toLocaleLowerCase('sv-SE'));
++function beautyHubAttentionKey_(date,name,scopeId) {
++  // Only private worker selection supplies its checked event namespace.
++  // Ordinary reads/writes continue resolving the current event on every call.
++  if(scopeId!==undefined&&(typeof scopeId!=='string'||!/^t_[\w]{1,80}$/.test(scopeId)))throw Error('REGISTRATION_CONTEXT_CHANGED');
++  return ('BEAUTY_TEST_ATTENTION_'+(scopeId===undefined?(typeof beautyHubEventScopeId_==='function'?beautyHubEventScopeId_():'lg_M2wQ_4189'):scopeId)+'_')+date+'_'+beautyHubTransferHash_(name.normalize('NFC').trim().replace(/\s+/g,' ').toLocaleLowerCase('sv-SE'));
+ }
+ function beautyHubAttentionRemember_(name,date,result) {
+   // Called only with the canonical committed registration or guarded transfer
+@@ -154,7 +157,7 @@
+  * Hub checks use staff authentication. The separately guarded TEST clock worker
+  * reuses these receipts without creating an interactive staff session.
+  */
+-function beautyPlayerRecoveryKey_(name,date){return 'BEAUTY_PLAYER_RECOVERY_V1_'+beautyHubTransferHash_(beautyHubAttentionKey_(date,name));}
++function beautyPlayerRecoveryKey_(name,date,scopeId){return 'BEAUTY_PLAYER_RECOVERY_V1_'+beautyHubTransferHash_(beautyHubAttentionKey_(date,name,scopeId));}
+ function beautyPlayerRecoveryPolicy_(code){
+  const automatic=['REGISTRATION_DISPLAY_PENDING','MISSING_EVENT_ENTRY','TRANSFER_BUSY','STALE_TRANSFER','TRANSFER_UNCERTAIN','TRANSFER_REVIEW_REQUIRED','ENTRY_UNCONFIRMED','TRANSFER_FAILED','NAKKA_UNAVAILABLE','AUTO_EXCEPTION','AUTO_STARTED'];
+  const transient=['TRANSFER_BUSY','BUSY','STALE_TRANSFER','NAKKA_UNAVAILABLE','CHECK_UNAVAILABLE'];
+@@ -196,8 +199,13 @@
+ }
+ function beautyPlayerRecoveryLoad_(name,date){
+  const raw=PropertiesService.getScriptProperties().getProperty(beautyPlayerRecoveryKey_(name,date));
++ return beautyPlayerRecoveryDecode_(raw,name,date);
++}
++function beautyPlayerRecoveryDecode_(raw,name,date,eventId){
++ // Pure selection decoding may use the already checked fixed event; ordinary
++ // loads omit it and retain the same fresh target lookup and short-circuit order.
+  if(!raw)return null;let r;try{r=JSON.parse(raw);}catch(e){throw Error('RECOVERY_HISTORY_UNREADABLE');}
+- if(r.version!==1||r.name!==name||r.date!==date||r.eventId!==beautyHubTransferTarget_()||!Array.isArray(r.history)||!['CHECKING','NEEDS_HELP','VERIFIED'].includes(r.state))throw Error('RECOVERY_HISTORY_UNREADABLE');return r;
++ if(r.version!==1||r.name!==name||r.date!==date||r.eventId!==(eventId===undefined?beautyHubTransferTarget_():eventId)||!Array.isArray(r.history)||!['CHECKING','NEEDS_HELP','VERIFIED'].includes(r.state))throw Error('RECOVERY_HISTORY_UNREADABLE');return r;
+ }
+ function beautyPlayerRecoverySave_(r,code,state,source){
+  const p=PropertiesService.getScriptProperties(),key=beautyPlayerRecoveryKey_(r.name,r.date);r.state=state;r.code=String(code||'RECOVERY_UNAVAILABLE').replace(/[^A-Z_]/g,'').slice(0,60);r.updatedAt=new Date().toISOString();
+--- baseline/HubTestBackgroundRecovery.gs
++++ candidate/HubTestBackgroundRecovery.gs
+@@ -200,7 +200,12 @@
+     const r=beautyBackgroundReceiptValidate_(raw,raw.name,context),age=now-Date.parse(r.recordedAt);
+     if(age<60000)continue; // let the original synchronous registration finish
+     if(removalHistory.some(x=>x.receipt.player===r.name&&(x.receipt.state==='ATTEMPTED'||Date.parse(x.receipt.recordedUTC)>=Date.parse(r.recordedAt))))continue;
+-    const recovery=beautyPlayerRecoveryLoad_(r.name,context.date),w=recovery?.worker;
++    // Selection only: reuse the property batch and its already checked event.
++    // The chosen receipt/recovery records are reread before any claim below.
++    const recoveryKey=beautyPlayerRecoveryKey_(r.name,context.date,context.eventId);
++    const recovery=typeof beautyPlayerRecoveryDecode_==='function'?
++      beautyPlayerRecoveryDecode_(snapshot[recoveryKey]??null,r.name,context.date,context.eventId):
++      beautyPlayerRecoveryLoad_(r.name,context.date),w=recovery?.worker;
+     const attempts=Math.max(w?.attempts||0,recovery?.autoAttempts||0);
+     beautyBackgroundNeed_(Number.isInteger(attempts)&&attempts>=0,'BACKGROUND_HISTORY_REVIEW');
+     if(recovery?.state==='CHECKING'&&now-Date.parse(recovery.updatedAt)<c.leaseMs)continue;
+@@ -222,6 +227,8 @@
+   if(selected&&selected.operation!=='removal'){
+     const key=beautyRegistrationRecoveryKey_(selected.name);
+     beautyBackgroundNeed_(p.getProperty(key)===snapshot[key],'BACKGROUND_SELECTION_CHANGED');
++    const recoveryKey=beautyPlayerRecoveryKey_(selected.name,context.date);
++    beautyBackgroundNeed_((p.getProperty(recoveryKey)??null)===(snapshot[recoveryKey]??null),'BACKGROUND_SELECTION_CHANGED');
+   }
+   return work;
+ }
+@@ -457,7 +464,7 @@
+     run={state:'RUNNING',owner:Utilities.getUuid(),triggerUid:event.triggerUid,context,
+       startedAt:new Date().toISOString(),leaseUntil:Date.now()+c.leaseMs,operation:recheck?'registration-recheck':item.operation,player:item.name,
+       timing:{clockStartedAt:new Date(clockStarted).toISOString(),authorityMs:lockStarted-clockStarted,lockWaitMs:lockAcquired-lockStarted,
+-        lockedSetupMs:selectionStarted-lockAcquired,selectionMs:selectedAt-selectionStarted,selectionMode:'batched-keys-v2',workerMode:'verified-recheck-defer-v4'}};
++        lockedSetupMs:selectionStarted-lockAcquired,selectionMs:selectedAt-selectionStarted,selectionMode:'batched-recovery-v3',workerMode:'verified-recheck-defer-v4'}};
+     const claimedRunRaw=beautyBackgroundSave_(c.runKey,run);
+     beautyBackgroundInvocation_={owner:run.owner,triggerUid:event.triggerUid,context,player:item.name,operation:run.operation,
+       expires:run.leaseUntil,lock,configRaw:p.getProperty(c.key)};

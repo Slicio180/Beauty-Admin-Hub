@@ -1,0 +1,57 @@
+{
+  "status": "NATIVE_SIGN_IN_DIALOG_PASS_EXHAUSTION_FIXTURE_RETIRED",
+  "date": "2026-11-23",
+  "timezone": "Europe/Stockholm",
+  "installed": {
+    "status": "INSTALLED_EXACT_READBACK_NATIVE_SIGN_IN_PENDING",
+    "checkedUTC": "2026-11-23T10:02:14.856Z",
+    "project": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+    "files": [
+      {
+        "file": "HubTestAuth.gs",
+        "bytes": 9768,
+        "sha256": "7eef79c073f733d390d4503eb57707a255f7a4498aae4829827f3fe123aaa6ce",
+        "matchedAfterEditorReload": true
+      },
+      {
+        "file": "HubTest.html",
+        "bytes": 1208617,
+        "sha256": "4c67cba7e50afb7420c6dde0aeac29629429456690bfe37b09c850bed47775ee",
+        "matchedAfterEditorReload": true
+      }
+    ],
+    "testGuardUnchanged": true,
+    "workerOrTriggerChanged": false,
+    "liveChanged": false,
+    "nativeSignIn": "PENDING"
+  },
+  "local_checks": 20,
+  "native_sign_in": "PASS_ONE_ACTUAL_LOGIN",
+  "handbook_sequence": 128,
+  "handover_section": 59,
+  "next": "**Next action:** Leave synthetic12 archived and continue with a bounded read-only diagnosis of the remaining original-TEST Nakka-check warning, which is still shown while the dashboard says Nakka event verified and the health indicator is OK. Capture which check fails and its matching execution before proposing a correction; do not clear the alert merely to hide it. Preserve05 and all legitimate later edits, the six-player roster, original/alternate saved draws and existing trigger. Sign-in/dialog/archive acceptance is closed; do not repeat those fixtures. Monday work remains TEST-only: no LIVE promotion, SEND/START, date or roster changes, reset/reseed/replay or speed-package installation. Long worker runtimes, logout contention and broader recovery/device coverage remain separate unfinished work.",
+  "speed_package_installed": false,
+  "monday_live_changed": false,
+  "native_acceptance": {
+    "status": "NATIVE_SIGN_IN_DIALOG_PASS_EXHAUSTION_FIXTURE_RETIRED",
+    "date": "2026-11-23",
+    "timezone": "Europe/Stockholm",
+    "handover_section": 59,
+    "handbook_sequence": 128,
+    "native_sign_in": "PASS_ONE_ACTUAL_LOGIN",
+    "native_dialog": "PASS_RECORDED_PROVIDER_PAUSE",
+    "archive": "RETIRED",
+    "active_fixture_keys_absent": true,
+    "protected_state_unchanged": true,
+    "fixture_provenance": "SYNTHETIC_SEEDED_EXPIRED_CLAIM",
+    "source_changes": 0,
+    "sheet_writes": 0,
+    "provider_writes": 0,
+    "trigger_writes": 0,
+    "needs_attention": 1,
+    "remaining_warning": "Nakka could not be checked. Saved alerts are retained; automatic checks will continue.",
+    "next": "**Next action:** Leave synthetic12 archived and continue with a bounded read-only diagnosis of the remaining original-TEST Nakka-check warning, which is still shown while the dashboard says Nakka event verified and the health indicator is OK. Capture which check fails and its matching execution before proposing a correction; do not clear the alert merely to hide it. Preserve05 and all legitimate later edits, the six-player roster, original/alternate saved draws and existing trigger. Sign-in/dialog/archive acceptance is closed; do not repeat those fixtures. Monday work remains TEST-only: no LIVE promotion, SEND/START, date or roster changes, reset/reseed/replay or speed-package installation. Long worker runtimes, logout contention and broader recovery/device coverage remain separate unfinished work.",
+    "monday_live_changed": false,
+    "speed_package_installed": false
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "copiedFilesVerified": 882,
+  "allPublishedBytesMatchPrivateSources": true,
+  "frozenPrivateApplicationFilesVerified": 33,
+  "unchangedPublicReleaseFiles": 31,
+  "privateHistoricalReleaseFiles": 2,
+  "excludedCandidateFiles": 150,
+  "newApplicationTestsRun": 0,
+  "reason": "Source backup only; no application changes or native workflow replay",
+  "liveChanged": false,
+  "errors": []
+}

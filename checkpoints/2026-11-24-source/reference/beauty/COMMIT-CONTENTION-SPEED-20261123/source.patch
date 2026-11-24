@@ -1,0 +1,97 @@
+--- baseline/HubTestBackgroundRecovery.gs
++++ candidate/HubTestBackgroundRecovery.gs
+@@ -402,7 +402,10 @@
+     const reacquireStarted=Date.now();
+     if(!i.lock.tryLock(1000)){
+       timing.commitLockWaitMs=Date.now()-reacquireStarted;
+-      finish({verified:false,code:'BACKGROUND_RECHECK_COMMIT_BUSY',committed:false,lastVerifiedRetained:true});return;
++      // No player, provider or shared-run writes follow this completion signal.
++      // A later clock must hold ScriptLock and match this exact claim to retire it.
++      const deferredSignal=beautyBackgroundRecheckSignal_();
++      finish({verified:false,code:'BACKGROUND_RECHECK_COMMIT_BUSY',committed:false,lastVerifiedRetained:true,deferredSignal});return;
+     }
+     reacquiredAt=Date.now();timing.commitLockWaitMs=reacquiredAt-reacquireStarted;
+     localCheck('commit');
+@@ -445,15 +448,16 @@
+   try {
+     need(beautyBackgroundEqual_(beautyBackgroundReadConfig_(),config),'BACKGROUND_AUTHORITY_CHANGED');
+     const context=beautyBackgroundScope_();need(beautyBackgroundEqual_(context,config.context),'BACKGROUND_CONTEXT_CHANGED');
+-    const previous=JSON.parse(p.getProperty(c.runKey)||'null');
+-    if(previous?.state==='RUNNING'&&Date.now()<previous.leaseUntil)return;
++    const previousRaw=p.getProperty(c.runKey),previous=JSON.parse(previousRaw||'null');
++    if(previous?.state==='RUNNING'&&Date.now()<previous.leaseUntil&&
++      !beautyBackgroundRecheckRetire_(previousRaw,context,config,lock))return;
+     const selectionStarted=Date.now(),items=beautyBackgroundCandidates_(selectionStarted),selectedAt=Date.now(),item=items[0];
+     if(!item){if(!previous||Date.now()-Date.parse(previous.finishedAt||previous.startedAt)>=300000)beautyBackgroundSave_(c.runKey,{state:'IDLE',triggerUid:event.triggerUid,finishedAt:new Date().toISOString()});return;}
+     const recheck=item.operation==='registration'?beautyBackgroundVerifiedPrepare_(item.name,context,lock):null;
+     run={state:'RUNNING',owner:Utilities.getUuid(),triggerUid:event.triggerUid,context,
+       startedAt:new Date().toISOString(),leaseUntil:Date.now()+c.leaseMs,operation:recheck?'registration-recheck':item.operation,player:item.name,
+       timing:{clockStartedAt:new Date(clockStarted).toISOString(),authorityMs:lockStarted-clockStarted,lockWaitMs:lockAcquired-lockStarted,
+-        lockedSetupMs:selectionStarted-lockAcquired,selectionMs:selectedAt-selectionStarted,selectionMode:'batched-keys-v2',workerMode:'verified-recheck-sheets-v3'}};
++        lockedSetupMs:selectionStarted-lockAcquired,selectionMs:selectedAt-selectionStarted,selectionMode:'batched-keys-v2',workerMode:'verified-recheck-defer-v4'}};
+     const claimedRunRaw=beautyBackgroundSave_(c.runKey,run);
+     beautyBackgroundInvocation_={owner:run.owner,triggerUid:event.triggerUid,context,player:item.name,operation:run.operation,
+       expires:run.leaseUntil,lock,configRaw:p.getProperty(c.key)};
+@@ -470,3 +474,62 @@
+     else beautyBackgroundSave_(c.runKey,{state:'PAUSED_CHECK',code,triggerUid:event.triggerUid,finishedAt:new Date().toISOString()});
+   }finally{beautyBackgroundInvocation_=null;beautyHubAutoLock_=null;if(lock.hasLock()){try{SpreadsheetApp.flush();}finally{lock.releaseLock();}}}
+ }
++
++// A cache hint only: eviction or any failure preserves the existing lease fallback.
++// It contains hashes/times, never player cells, credentials or provider responses.
++function beautyBackgroundRecheckSignalKey_(owner) {
++  beautyBackgroundNeed_(typeof owner==='string'&&/^[A-Za-z0-9_-]{1,80}$/.test(owner),'BACKGROUND_CLAIM_REQUIRED');
++  return 'BEAUTY_RECHECK_FINISHED_V1_'+owner;
++}
++function beautyBackgroundRecheckSignal_() {
++  try {
++    const i=beautyBackgroundInvocation_;
++    if(!i||i.operation!=='registration-recheck'||i.lock.hasLock()||Date.now()>=i.expires||
++      typeof i.recheckRunRaw!=='string'||typeof i.configRaw!=='string')return false;
++    const r=JSON.parse(i.recheckRunRaw);
++    if(r.state!=='RUNNING'||r.operation!==i.operation||r.owner!==i.owner||r.player!==i.player||
++      r.triggerUid!==i.triggerUid||r.leaseUntil!==i.expires||
++      r.timing?.workerMode!=='verified-recheck-defer-v4'||!beautyBackgroundEqual_(r.context,i.context))return false;
++    const key=beautyBackgroundRecheckSignalKey_(i.owner),cache=CacheService.getScriptCache();
++    const raw=JSON.stringify({version:1,reason:'COMMIT_BUSY',runHash:beautyHubTransferHash_(i.recheckRunRaw),
++      configHash:beautyHubTransferHash_(i.configRaw),finishedAt:new Date().toISOString()});
++    cache.put(key,raw,600);return cache.get(key)===raw;
++  }catch(ignore){return false;}
++}
++function beautyBackgroundRecheckRetire_(previousRaw,context,config,lock) {
++  const c=beautyBackgroundConfig_(),p=PropertiesService.getScriptProperties();let previous,marker,key,configRaw;
++  try {
++    if(!lock?.hasLock()||ScriptApp.getScriptId()!==c.scriptId||
++      Session.getEffectiveUser().getEmail().toLowerCase()!==c.owner||config?.state!=='ENABLED')return false;
++    previous=JSON.parse(previousRaw||'null');
++    if(previous?.state!=='RUNNING'||previous.operation!=='registration-recheck'||
++      previous.timing?.workerMode!=='verified-recheck-defer-v4'||previous.triggerUid!==config.triggerUid||
++      !beautyBackgroundEqual_(previous.context,context)||!Number.isFinite(previous.leaseUntil)||
++      Date.now()>=previous.leaseUntil)return false;
++    key=beautyBackgroundRecheckSignalKey_(previous.owner);
++    marker=JSON.parse(CacheService.getScriptCache().get(key)||'null');
++    if(!marker||Object.keys(marker).sort().join(',')!=='configHash,finishedAt,reason,runHash,version'||
++      marker.version!==1||marker.reason!=='COMMIT_BUSY'||marker.runHash!==beautyHubTransferHash_(previousRaw)||
++      typeof marker.finishedAt!=='string')return false;
++    const ended=Date.parse(marker.finishedAt),started=Date.parse(previous.startedAt);
++    if(!Number.isFinite(ended)||!Number.isFinite(started)||ended<started||ended>Date.now()||ended>=previous.leaseUntil)return false;
++    configRaw=p.getProperty(c.key);
++    if(marker.configHash!==beautyHubTransferHash_(configRaw)||!beautyBackgroundEqual_(JSON.parse(configRaw),config)||
++      !beautyBackgroundEqual_(beautyBackgroundScope_(),context))return false;
++    // Re-read after context services. A stale/changed claim never grants authority.
++    if(!lock.hasLock()||Date.now()>=previous.leaseUntil||p.getProperty(c.runKey)!==previousRaw||
++      p.getProperty(c.key)!==configRaw||Session.getEffectiveUser().getEmail().toLowerCase()!==c.owner)return false;
++  }catch(ignore){return false;}
++  const finishedAt=new Date().toISOString(),retired={...previous,state:'FINISHED',finishedAt,
++    result:{operation:'registration-recheck',player:previous.player,verified:false,committed:false,
++      code:'BACKGROUND_RECHECK_DEFERRED',lastVerifiedRetained:true,nakkaWrites:0},
++    deferral:{reason:'COMMIT_BUSY',reportedAt:marker.finishedAt,retiredAt:finishedAt}};
++  // Only the locked terminal run record changes. Player state and provider work
++  // are untouched; ordinary selection and all fresh guards run again afterward.
++  try{beautyBackgroundSave_(c.runKey,retired);}catch(ignore){return false;}
++  try{CacheService.getScriptCache().remove(key);}catch(ignore){}
++  console.log(JSON.stringify({type:'BEAUTY_BACKGROUND_RECHECK_RELEASED',owner:previous.owner,
++    triggerUid:previous.triggerUid,reportedAt:marker.finishedAt,retiredAt:finishedAt,
++    delayMs:Date.now()-Date.parse(marker.finishedAt),leaseUnchanged:true,nakkaWrites:0}));
++  return true;
++}

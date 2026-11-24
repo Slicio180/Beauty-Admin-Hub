@@ -1,0 +1,105 @@
+--- baseline/HubTestBackgroundRecovery.gs
++++ candidate/HubTestBackgroundRecovery.gs
+@@ -301,14 +301,22 @@
+   return beautyHubTransferHash_(Object.entries(all).filter(([key])=>key.startsWith(prefix)).sort(([a],[b])=>a.localeCompare(b)));
+ }
+ function beautyBackgroundVerifiedGuard_(s) {
+-  const i=beautyBackgroundInvocation_,need=beautyBackgroundNeed_;
++  const i=beautyBackgroundInvocation_,need=beautyBackgroundNeed_,c=beautyBackgroundConfig_();
+   need(i?.operation==='registration-recheck'&&i.player===s.name,'BACKGROUND_CLAIM_REQUIRED');
+-  beautyBackgroundRequire_(s.name); // still requires the actual ScriptLock
++  // Read-only authority has the same actual-lock, owner, lease and live context
++  // requirements as the ordinary guard. Batch its saved records once per guard;
++  // never reuse this snapshot across a Sheet read or the unlocked provider phase.
++  need(i.lock?.hasLock()&&Date.now()<i.expires,'BACKGROUND_CLAIM_REQUIRED');
++  need(Session.getEffectiveUser().getEmail().toLowerCase()===c.owner,'BACKGROUND_OWNER_REQUIRED');
++  need(beautyBackgroundEqual_(beautyBackgroundScope_(),i.context),'BACKGROUND_CONTEXT_CHANGED');
+   need(beautyBackgroundEqual_(i.context,s.context),'BACKGROUND_CONTEXT_CHANGED');
+-  const p=PropertiesService.getScriptProperties();
+-  need(p.getProperty(beautyBackgroundConfig_().runKey)===i.recheckRunRaw,'BACKGROUND_CLAIM_LOST');
+-  need(beautyBackgroundVerifiedTransfers_(p.getProperties(),s.transferPrefix)===s.transferSetHash,'BACKGROUND_RECHECK_CHANGED');
+-  for(const key of Object.keys(s.raw))need(p.getProperty(key)===s.raw[key],'BACKGROUND_RECHECK_CHANGED');
++  const all=PropertiesService.getScriptProperties().getProperties();
++  need(all[c.key]===i.configRaw,'BACKGROUND_AUTHORITY_CHANGED');
++  const runRaw=all[c.runKey]??null,run=JSON.parse(runRaw||'null');
++  need(run?.state==='RUNNING'&&run.owner===i.owner&&run.triggerUid===i.triggerUid&&
++    typeof i.recheckRunRaw==='string'&&runRaw===i.recheckRunRaw,'BACKGROUND_CLAIM_LOST');
++  need(beautyBackgroundVerifiedTransfers_(all,s.transferPrefix)===s.transferSetHash,'BACKGROUND_RECHECK_CHANGED');
++  for(const key of Object.keys(s.raw))need((all[key]??null)===s.raw[key],'BACKGROUND_RECHECK_CHANGED');
+   need(!beautyRemovalRecoveryList_().some(x=>x.receipt.player===s.name&&
+     (x.receipt.state==='ATTEMPTED'||Date.parse(x.receipt.recordedUTC)>=Date.parse(s.receipt.recordedAt))),'BACKGROUND_REMOVAL_PENDING');
+ }
+@@ -355,8 +363,9 @@
+   const codeOf=e=>/^(BACKGROUND|REGISTRATION)_[A-Z_]+$/.test(e.message)?e.message:'BACKGROUND_RECHECK_UNAVAILABLE';
+   const owned=()=>{
+     if(!i.lock.hasLock()||Date.now()>=i.expires||p.getProperty(c.key)!==i.configRaw||
+-      Session.getEffectiveUser().getEmail().toLowerCase()!==c.owner||p.getProperty(c.runKey)!==i.recheckRunRaw)return false;
+-    const latest=JSON.parse(p.getProperty(c.runKey)||'null');
++      Session.getEffectiveUser().getEmail().toLowerCase()!==c.owner)return false;
++    const raw=p.getProperty(c.runKey);if(raw!==i.recheckRunRaw)return false;
++    const latest=JSON.parse(raw||'null');
+     return latest?.state==='RUNNING'&&latest.owner===i.owner&&latest.triggerUid===i.triggerUid&&
+       beautyBackgroundEqual_(beautyBackgroundScope_(),i.context);
+   };
+@@ -365,12 +374,20 @@
+     timing.providerUnlockedMs=releasedAt===null?0:(reacquiredAt??Date.now())-releasedAt;
+     timing.beforeResultSaveMs=Date.now()-clockStarted;
+     run.state='FINISHED';run.finishedAt=new Date().toISOString();run.result={operation:'registration-recheck',player:s.name,nakkaWrites:0,...result};
++    const saveStarted=Date.now();
+     if(owned())beautyBackgroundSave_(c.runKey,run);
+     else run.result={...run.result,committed:false};
++    timing.resultSaveMs=Date.now()-saveStarted; // terminal log only; no extra write
+     console.log(JSON.stringify({type:'BEAUTY_BACKGROUND_RESULT',...run}));
+   };
++  const measure=(field,fn)=>{const start=Date.now();try{return fn();}finally{timing[field]=(timing[field]||0)+Date.now()-start;}};
++  const localCheck=phase=>{
++    measure(phase+'GuardMs',()=>beautyBackgroundVerifiedGuard_(s));
++    measure(phase+'SheetsMs',()=>beautyBackgroundVerifiedLocal_(s));
++    measure(phase+'GuardMs',()=>beautyBackgroundVerifiedGuard_(s));
++  };
+   try {
+-    beautyBackgroundVerifiedGuard_(s);beautyBackgroundVerifiedLocal_(s);beautyBackgroundVerifiedGuard_(s);
++    localCheck('prepare');
+     // The durable run is the read-only claim. The previous VERIFIED player
+     // record is retained until a fresh commit; a terminated read cannot strand
+     // the player in CHECKING or consume a repair attempt.
+@@ -386,7 +403,8 @@
+       finish({verified:false,code:'BACKGROUND_RECHECK_COMMIT_BUSY',committed:false,lastVerifiedRetained:true});return;
+     }
+     reacquiredAt=Date.now();timing.commitLockWaitMs=reacquiredAt-reacquireStarted;
+-    beautyBackgroundVerifiedGuard_(s);beautyBackgroundVerifiedLocal_(s);beautyBackgroundVerifiedGuard_(s);
++    localCheck('commit');
++    const playerSaveStarted=Date.now();
+     const record=s.record;
+     record.worker={...(record.worker||{}),nextAt:Date.now()+300000,
+       lastRecheck:{at:new Date().toISOString(),code:readFailure||decision.code,owner:i.owner}};
+@@ -394,11 +412,13 @@
+       // Keep the last successful timestamp/history and attention bytes. A failed
+       // GET supplies no new verification. Delay another ordinary recheck five minutes.
+       beautyBackgroundSave_(s.keys.recoveryKey,record);
++      timing.playerSaveMs=Date.now()-playerSaveStarted;
+       timing.lockedCommitMs=Date.now()-reacquiredAt;
+       finish({verified:false,code:readFailure,committed:true,lastVerifiedRetained:true});return;
+     }
+     if(!beautyHubAttentionRemember_(s.name,s.context.date,decision.verified?{entryConfirmed:true}:{code:decision.code}))throw Error('BACKGROUND_RECHECK_ATTENTION_UNCERTAIN');
+     beautyPlayerRecoverySave_(record,decision.code,decision.verified?'VERIFIED':'NEEDS_HELP','background-recheck');
++    timing.playerSaveMs=Date.now()-playerSaveStarted;
+     timing.lockedCommitMs=Date.now()-reacquiredAt;
+     finish({...decision,committed:true,attempts:0});
+   }catch(e){
+@@ -431,12 +451,12 @@
+     run={state:'RUNNING',owner:Utilities.getUuid(),triggerUid:event.triggerUid,context,
+       startedAt:new Date().toISOString(),leaseUntil:Date.now()+c.leaseMs,operation:recheck?'registration-recheck':item.operation,player:item.name,
+       timing:{clockStartedAt:new Date(clockStarted).toISOString(),authorityMs:lockStarted-clockStarted,lockWaitMs:lockAcquired-lockStarted,
+-        lockedSetupMs:selectionStarted-lockAcquired,selectionMs:selectedAt-selectionStarted,selectionMode:'batched-keys-v2',workerMode:'verified-recheck-v1'}};
+-    beautyBackgroundSave_(c.runKey,run);
++        lockedSetupMs:selectionStarted-lockAcquired,selectionMs:selectedAt-selectionStarted,selectionMode:'batched-keys-v2',workerMode:'verified-recheck-batched-v2'}};
++    const claimedRunRaw=beautyBackgroundSave_(c.runKey,run);
+     beautyBackgroundInvocation_={owner:run.owner,triggerUid:event.triggerUid,context,player:item.name,operation:run.operation,
+       expires:run.leaseUntil,lock,configRaw:p.getProperty(c.key)};
+     operationStarted=Date.now();run.timing.claimSetupMs=operationStarted-selectedAt;
+-    if(recheck){beautyBackgroundInvocation_.recheckRunRaw=p.getProperty(c.runKey);beautyBackgroundVerifiedRun_(recheck,run,clockStarted,operationStarted);return;}
++    if(recheck){beautyBackgroundInvocation_.recheckRunRaw=claimedRunRaw;beautyBackgroundVerifiedRun_(recheck,run,clockStarted,operationStarted);return;}
+     const result=item.operation==='registration-review'?beautyBackgroundExhaustedRun_(item):item.operation==='removal'?beautyBackgroundRemovalRun_(item):beautyBackgroundRegistrationRun_(item.name);
+     run.timing.operationMs=Date.now()-operationStarted;
+     need(beautyBackgroundEqual_(beautyBackgroundScope_(),context)&&p.getProperty(c.key)===beautyBackgroundInvocation_.configRaw,'BACKGROUND_CONTEXT_CHANGED');

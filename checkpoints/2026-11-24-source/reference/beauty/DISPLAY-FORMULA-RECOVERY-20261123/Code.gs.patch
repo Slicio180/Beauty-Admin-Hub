@@ -1,0 +1,25 @@
+--- baseline/Code.gs
++++ candidate/Code.gs
+@@ -2950,7 +2950,8 @@
+ */
+ 
+ function syncTonightStatusDisplay_(
+-  waitForPlayerName
++  waitForPlayerName,
++  authorizeDisplayRepair
+ ) {
+ 
+   const ss =
+@@ -3142,6 +3143,12 @@
+     BUILD COLUMN C IN CURRENT PLAYER ORDER
+     ====================================================
+     */
++
++    // Restore only an absent lookup for this unique current player.
++    if (target) {
++      const matches = names.map((name,index)=>({name,index})).filter(x=>x.name.toLocaleLowerCase('sv')===target);
++      if (matches.length === 1) beautyTestDisplayLookupRepair_(ss, waitForPlayerName, matches[0].index + 2, authorizeDisplayRepair);
++    }
+ 
+     const statusValues =
+       names.map(

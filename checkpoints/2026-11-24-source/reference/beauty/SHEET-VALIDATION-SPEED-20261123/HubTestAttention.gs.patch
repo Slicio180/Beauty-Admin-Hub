@@ -1,0 +1,44 @@
+--- baseline/HubTestAttention.gs
++++ candidate/HubTestAttention.gs
+@@ -318,18 +318,33 @@
+  const r={version:1,name:decision.player,date:beautyHubNakkaDate_().date,eventId:beautyHubTransferTarget_(),sheetId:SHEET_ID,context:beautyContextToken_(),state:'INTENT',row:sheet.getLastRow()+1,recordedAt:recordedAt.toISOString(),selectedName,newName,consent,message,source,existingPlayer:!decision.isNew};
+  beautyRegistrationRecoveryWrite_(r);beautyRegistrationRecoveryActive_=r;
+ }
+-function beautyRegistrationRecoverySource_(r){
+- beautyHubTestGuard_();if(r.version!==1||r.sheetId!==SHEET_ID||r.eventId!==beautyHubTransferTarget_()||r.date!==beautyHubNakkaDate_().date||r.context!==beautyContextToken_()||!Number.isInteger(r.row)||r.row<2)throw Error('REGISTRATION_CONTEXT_CHANGED');
+- const ss=beautyHubSpreadsheet_(),sh=ss.getSheetByName(RESPONSE_SHEET),v=sh.getRange(r.row,1,1,6).getValues()[0];
++function beautyRegistrationRecoverySource_(r,measure){
++ // Optional private observer records only fixed step labels and durations.
++ // The same short-circuit checks and fresh service reads run for every caller.
++ const step=typeof measure==='function'?measure:((label,fn)=>fn());
++ step('identityMs',()=>beautyHubTestGuard_());
++ if(r.version!==1||r.sheetId!==SHEET_ID||r.eventId!==step('targetMs',()=>beautyHubTransferTarget_())||
++    r.date!==step('dateMs',()=>beautyHubNakkaDate_().date)||r.context!==step('contextMs',()=>beautyContextToken_())||
++    !Number.isInteger(r.row)||r.row<2)throw Error('REGISTRATION_CONTEXT_CHANGED');
++ const ss=step('workbookMs',()=>beautyHubSpreadsheet_());
++ const sh=step('responseSheetMs',()=>ss.getSheetByName(RESPONSE_SHEET));
++ const range=step('responseRangeMs',()=>sh.getRange(r.row,1,1,6));
++ const v=step('responseReadMs',()=>range.getValues())[0];
+  if(!(v[0] instanceof Date)||v[0].toISOString()!==r.recordedAt||JSON.stringify(v.slice(1))!==JSON.stringify([r.selectedName,r.selectedName===NEW_PLAYER_OPTION?r.newName:'',r.consent,r.message,r.source]))throw Error('REGISTRATION_SOURCE_UNVERIFIED');return ss;
+ }
+-function beautyRegistrationProjectionVerified_(r,ss){
+- const key=BeautyNameResolution.key;
+- const rows=title=>{const sh=ss.getSheetByName(title);if(!sh)throw Error('REGISTRATION_SHEET_MISSING');const last=sh.getLastRow();if(!Number.isInteger(last)||last<1||last>10000)throw Error('REGISTRATION_LAYOUT_REVIEW');return last<2?[]:sh.getRange(2,1,last-1,6).getDisplayValues();};
++function beautyRegistrationProjectionVerified_(r,ss,measure){
++ const key=BeautyNameResolution.key,step=typeof measure==='function'?measure:((label,fn)=>fn());
++ const rows=(title,label)=>{
++  const sh=step(label+'SheetMs',()=>ss.getSheetByName(title));if(!sh)throw Error('REGISTRATION_SHEET_MISSING');
++  const last=step(label+'BoundsMs',()=>sh.getLastRow());if(!Number.isInteger(last)||last<1||last>10000)throw Error('REGISTRATION_LAYOUT_REVIEW');
++  if(last<2)return [];
++  const range=step(label+'RangeMs',()=>sh.getRange(2,1,last-1,6));
++  return step(label+'ReadMs',()=>range.getDisplayValues());
++ };
+  if(!['JA, JAG GODKÄNNER','NEJ, JAG GODKÄNNER INTE'].includes(r.consent))throw Error('REGISTRATION_CONSENT_REVIEW');
+- if(rows(MASTER_SHEET).filter(x=>key(x[0])===key(r.name)).length!==1)throw Error('REGISTRATION_MASTER_CHANGED');
++ if(rows(MASTER_SHEET,'master').filter(x=>key(x[0])===key(r.name)).length!==1)throw Error('REGISTRATION_MASTER_CHANGED');
+  const expected=['IN',r.consent==='JA, JAG GODKÄNNER'?'JA':'NEJ',r.message,r.source];
+- for(const title of ['PLAYER STATUS DATA',"TONIGHT'S PLAYERS"]){const found=rows(title).filter(x=>key(x[0]||x[1])===key(r.name));if(found.length!==1||JSON.stringify(found[0].slice(2,6))!==JSON.stringify(expected))throw Error('REGISTRATION_DISPLAY_REVIEW');}
++ for(const [title,label] of [['PLAYER STATUS DATA','status'],["TONIGHT'S PLAYERS",'display']]){const found=rows(title,label).filter(x=>key(x[0]||x[1])===key(r.name));if(found.length!==1||JSON.stringify(found[0].slice(2,6))!==JSON.stringify(expected))throw Error('REGISTRATION_DISPLAY_REVIEW');}
+  return true;
+ }
+ function beautyRegistrationRecoveryFinish_(){const r=beautyRegistrationRecoveryActive_;if(!r)return;const ss=beautyRegistrationRecoverySource_(r);beautyRegistrationProjectionVerified_(r,ss);beautyRegistrationRecoverySource_(r);r.state='COMPLETE';r.completedAt=new Date().toISOString();beautyRegistrationRecoveryWrite_(r);beautyRegistrationRecoveryActive_=null;}

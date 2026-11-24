@@ -1,0 +1,121 @@
+{
+  "status": "INSTALLED_TEST_ORDINARY_CLOCK_VERIFIED_EXHAUSTED_NATIVE_PENDING",
+  "recorded_date": "2026-11-22",
+  "project_id": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "context": {
+    "version": 1,
+    "mode": "league",
+    "leagueId": "lg_M2wQ_4189",
+    "eventId": "t_GgaQ_0921",
+    "date": "2026-11-21",
+    "title": "Beauty TEST Removal Recovery 2026-11-21",
+    "sheetId": "1N0kp0f2kOQETylULYI685JDZH3bVKq9lG_NhoAba8lk",
+    "revision": "ac044ca8097c46e2b672c5917627fa2a"
+  },
+  "clock_uid": "9153037705028829184",
+  "local_checks": 63,
+  "targeted_checks": 35,
+  "existing_worker_checks": 28,
+  "files": {
+    "HubTestBackgroundRecovery.gs": {
+      "baseline": {
+        "path": "baseline/HubTestBackgroundRecovery.gs",
+        "sha256": "68da45c5b1609b35a05d76c008ed98a0c882b930ace1eb72cc91b1189643c34d"
+      },
+      "candidate": {
+        "path": "candidate/HubTestBackgroundRecovery.gs",
+        "sha256": "785e2e358922c59bfacdbdb861241668b6f4006a409c4f53637c60cc6ee70413"
+      },
+      "installed_readback": {
+        "path": "installed-readback/HubTestBackgroundRecovery.gs",
+        "sha256": "785e2e358922c59bfacdbdb861241668b6f4006a409c4f53637c60cc6ee70413"
+      }
+    },
+    "HubTestAttention.gs": {
+      "baseline": {
+        "path": "baseline/HubTestAttention.gs",
+        "sha256": "db143093a16e88125ed05e9ae16fc2efcc8d1d86e76f76526d227683db2c5fdd"
+      },
+      "candidate": {
+        "path": "candidate/HubTestAttention.gs",
+        "sha256": "b058508c929d789072c4a0b9d2a0612cd14f32f408ced7f640d97a41ad528f8d"
+      },
+      "installed_readback": {
+        "path": "installed-readback/HubTestAttention.gs",
+        "sha256": "b058508c929d789072c4a0b9d2a0612cd14f32f408ced7f640d97a41ad528f8d"
+      }
+    }
+  },
+  "source_saved_readback": "2026-11-22T18:58:42.016Z",
+  "native_ordinary_run": {
+    "observedAtUTC": "2026-11-22T19:01:46.534Z",
+    "execution": {
+      "function": "beautyBackgroundClock_",
+      "type": "Time-driven",
+      "startStockholm": "2026-11-22 19:59:09",
+      "durationSeconds": 76.007,
+      "status": "Completed"
+    },
+    "result": {
+      "type": "BEAUTY_BACKGROUND_RESULT",
+      "state": "FINISHED",
+      "owner": "28085f68-2fe6-40fa-ab0e-a93c60b133fc",
+      "triggerUid": "9153037705028829184",
+      "context": {
+        "version": 1,
+        "mode": "league",
+        "leagueId": "lg_M2wQ_4189",
+        "eventId": "t_GgaQ_0921",
+        "date": "2026-11-21",
+        "title": "Beauty TEST Removal Recovery 2026-11-21",
+        "sheetId": "1N0kp0f2kOQETylULYI685JDZH3bVKq9lG_NhoAba8lk",
+        "revision": "ac044ca8097c46e2b672c5917627fa2a"
+      },
+      "startedAt": "2026-11-22T18:59:34.854Z",
+      "leaseUntil": 1795374574855,
+      "operation": "registration",
+      "player": "Beauty Test Pool 22 Nov 02",
+      "timing": {
+        "clockStartedAt": "2026-11-22T18:59:14.252Z",
+        "authorityMs": 258,
+        "lockWaitMs": 87,
+        "lockedSetupMs": 478,
+        "selectionMs": 19778,
+        "claimSetupMs": 255,
+        "operationMs": 48892,
+        "beforeResultSaveMs": 70257
+      },
+      "finishedAt": "2026-11-22T19:00:24.509Z",
+      "result": {
+        "operation": "registration",
+        "player": "Beauty Test Pool 22 Nov 02",
+        "verified": true,
+        "code": "ENTRY_CONFIRMED",
+        "attempts": 1
+      }
+    },
+    "exhaustedBranchExercised": false,
+    "closedHubTrial": false
+  },
+  "exhausted_branch_native_acceptance": "PENDING",
+  "native_fixture_created": false,
+  "final_preservation_observed_utc": "2026-11-22T19:02:36.851Z",
+  "final_preservation_fields": [
+    "context",
+    "fixture",
+    "registration",
+    "event",
+    "hubPlayers",
+    "identities",
+    "entries",
+    "transfer",
+    "currentPreservation"
+  ],
+  "speed_candidate_installed": false,
+  "long_script_lock_retained": true,
+  "trigger_config_changed": false,
+  "live_changed": false,
+  "alternate_changed": false,
+  "public_github_changed": false,
+  "next": "NATIVE-ACCEPTANCE-PLAN.md"
+}

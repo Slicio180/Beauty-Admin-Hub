@@ -1,0 +1,27 @@
+{
+  "status": "INSTALLED_AND_READBACK_VERIFIED",
+  "filename": "BeautyPoolFourBoardFixture20261122.gs",
+  "sha256": "e9a96c76c165c712a9d32f0e5c5b7e1cfe6464999a16a6328312c1aeada018c2",
+  "local_checks": 29,
+  "native_backup": "VERIFIED",
+  "native_four_player": "PASS",
+  "release_source": false,
+  "existing_core_source_changed": false,
+  "worker_trigger_changed": false,
+  "previous_fixture_sha256": "8375ac8187a1d667ee6676a93d176e74e40680664376f722f075ea8e17e7caf5",
+  "attendance_cleanup": "PASS",
+  "baseline_restoration": "PASS",
+  "final_observed_utc": "2026-11-22T13:26:03.754Z",
+  "native_evidence": "evidence/native-final.json",
+  "remaining": [
+    "Native alternate-format fixture selection/setup and acceptance",
+    "Four-player fresh-login and wider device coverage",
+    "Long runtime and lock contention; separate speed work uninstalled",
+    "Exhausted stale-claim handling and closed-Hub competition-results reconciliation"
+  ],
+  "ordinary_timeout_followup": {
+    "result": "AUTOMATIC_RETRY_VERIFIED",
+    "evidence": "../ORDINARY-TIMEOUT-20261122/NATIVE-RECOVERY-VERIFIED.json",
+    "runtime_and_speed_still_open": true
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "status": "TEST_DIALOG_FIX_INSTALLED_NATIVE_DIALOG_AND_ARCHIVAL_PENDING_AUTH",
+  "date": "2026-11-22",
+  "handbook_sequence": 124,
+  "handover_section": 55,
+  "hub_html": {
+    "observedAtUTC": "2026-11-22T19:54:46.268Z",
+    "project": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+    "file": "HubTest.html",
+    "baselineSha256": "5c812887a2731019a2fb4f8038a830d288291f5422cf36c258b498ea3f138edf",
+    "installedSha256": "1de54c0a200972408b435934c49c465ca83d171f719e6e7993a71d12232219a8",
+    "bytes": 1208622,
+    "afterReloadExact": true,
+    "onlyRecoveryScriptChanged": true,
+    "renderedAcceptance": "PENDING_RELOAD_SIGN_IN"
+  },
+  "helper": {
+    "name": "BeautyExhaustionFixture20261122.gs",
+    "sha256": "ff349d40c16b1e574cbe8dfc73cac40797161fd2bbac5140d4ef87e5c3091710",
+    "bytes": 15347,
+    "matchedAfterReload": true,
+    "checkedUTC": "2026-11-22T20:06:26.467Z"
+  },
+  "local_dialog_checks": 10,
+  "local_fixture_checks": 36,
+  "native_preservation": {
+    "code": "TERMINAL_VERIFIED_ATTENTION_REFRESHED",
+    "markerState": "CAPTURED",
+    "recoverySame": true,
+    "registrationSame": true,
+    "protectedSame": true,
+    "proof": {
+      "name": "Beauty Test Exhaustion 22 Nov 12",
+      "status": "PENDING",
+      "tone": "red",
+      "code": "BACKGROUND_RETRY_EXHAUSTED",
+      "problem": "Automatic recovery reached its retry limit after an interrupted check.",
+      "next": "Open this player’s Recovery report. After the cause is resolved, choose Check after correction. Do not register the player again.",
+      "autoEligible": false
+    },
+    "archivePerformed": false
+  },
+  "native_dialog": "PENDING_AUTHENTICATION",
+  "native_archive": "NOT_RUN",
+  "fixture_state": "CAPTURED",
+  "original_capture_unchanged": true,
+  "alert_refresh": "HUB_IDENTITY_REVIEW",
+  "core_worker_changed": false,
+  "core_attention_changed": false,
+  "triggers_changed": false,
+  "live_changed": false,
+  "alternate_changed": false,
+  "speed_installed": false,
+  "next": "**Next action:** Sign into the reloaded original TEST Hub, then open Recovery and Beauty Test Exhaustion 22 Nov 12. On the installed dialog fix, opening that item must show Automatic retries stopped, the retry-limit explanation, advice not to register again, and Check after correction without starting a review. Do not click that action for this property-only fixture. Compare the native read-only result before/after opening: terminal recovery, ownership, history and registration bytes must remain unchanged. The helper should report TERMINAL_VERIFIED_ATTENTION_REFRESHED for the normal identity-review alert while retaining the original capture. Then run the guarded beautyRetireExhaustionFixture20261122, confirm RETIRED with the protected state unchanged, and verify synthetic12 disappears from the active Recovery list. The complete archive and worker before-image remain; the guarded Restore function reinstates only the terminal fixture. Confirm the editor’s selected function in a fresh observation before pressing Run. Do not reseed, reset attempts/leases, replay06/09/10/11 or change the clock. Preserve original/C drafts, previous receipts and the separate speed package. Investigate long-lock/runtime cost afterward. Native A/B final-source and device checks remain separate. No SEND, START, LIVE promotion, public GitHub or speed installation."
+}

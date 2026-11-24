@@ -1,0 +1,124 @@
+--- baseline/BeautyTestIsolation.gs
++++ candidate/BeautyTestIsolation.gs
+@@ -0,0 +1,52 @@
++/* PREPARED ONLY. No destinations are approved yet. Do not install as a working release.
++ * Approval is a source-reviewed exact tuple, never inferred from a saved selection,
++ * a name containing TEST, or mutable connection/catalog properties.
++ */
++function beautyTestApprovedDestinations_() {
++  return [];
++}
++function beautyTestDestinationGuard_(context) {
++  const fail=()=>{throw Error('TEST isolation: destination is not independently verified. No operation allowed.');};
++  if(ScriptApp.getScriptId()!=='1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N')fail();
++  if(!context || context.version!==1 || context.mode!=='league' ||
++     typeof context.sheetId!=='string' || typeof context.leagueId!=='string' ||
++     typeof context.eventId!=='string' || typeof context.date!=='string')fail();
++  // Known production resources remain forbidden even if accidentally allowlisted.
++  if(context.sheetId==='1qeV90AYjC73BLMah347JWIee5-PIGFY9d-gzmyvcpyM' ||
++     context.leagueId==='lg_tM2v_3523' || context.eventId==='t_yIw0_7809')fail();
++  const approved=beautyTestApprovedDestinations_();
++  if(!Array.isArray(approved) || !approved.some(a=>a &&
++      ['sheetId','leagueId','eventId','date'].every(k=>
++        typeof a[k]==='string' && a[k].length>0 && a[k]===context[k])))fail();
++  return true;
++}
++/* Guard the request itself, not merely the selected screen context.
++ * This covers the shared Hub POST gateway only. Direct/diagnostic adapters
++ * still require review; GET endpoints are not certified by this guard.
++ */
++function beautyTestNakkaMutationGuard_(path,payload) {
++  const endpoints={
++    'league/entry/update':'lgid',
++    'tournament/entry/update':'tdid',
++    'tournament/update':'tdid',
++    'tournament/assign/update':'tdid',
++    'league/schedule/generate':'tdid'
++  };
++  const fail=()=>{throw Error('TEST isolation: Nakka write destination or operation is not approved.');};
++  if(!payload){
++    if(typeof path!=='string' || /^(?:league\/entry\/update|tournament\/(?:entry\/update|update|assign\/update|create)|league\/schedule\/generate)(?:\?|$)/.test(path))fail();
++    return;
++  }
++  if(typeof path!=='string' || !Object.prototype.hasOwnProperty.call(endpoints,path) ||
++     typeof payload!=='object' || Array.isArray(payload))fail();
++  const c=beautyContextRead_();
++  beautyTestDestinationGuard_(c);
++  const field=endpoints[path],expected=field==='tdid'?c.eventId:c.leagueId;
++  if(!Object.prototype.hasOwnProperty.call(payload,field) || payload[field]!==expected)fail();
++  for(const [key,value] of [['tdid',c.eventId],['lgid',c.leagueId]]){
++    if(Object.prototype.hasOwnProperty.call(payload,key) && payload[key]!==value)fail();
++  }
++  // A tournament update must not move the event to another league or date.
++  if(path==='tournament/update' && payload.set &&
++     ['tdid','lgid','t_date'].some(k=>Object.prototype.hasOwnProperty.call(payload.set,k)))fail();
++}
+--- baseline/Code.gs
++++ candidate/Code.gs
+@@ -1313,6 +1313,7 @@
+ */
+ 
+ function originalSyncMasterListToGoogleForm_() {
++  throw Error("TEST isolation: legacy external-data operation is disabled.");
+ 
+   const spreadsheet =
+     beautyHubSpreadsheet_();
+@@ -1797,6 +1798,7 @@
+ */
+ 
+ function importPlayersToMasterList_() {
++  throw Error("TEST isolation: legacy external-data operation is disabled.");
+ 
+   const spreadsheet =
+     beautyHubSpreadsheet_();
+@@ -1878,6 +1880,7 @@
+ function originalRegisterPlayerWithN01_(
+   playerName
+ ) {
++  throw Error("TEST isolation: legacy external-data operation is disabled.");
+ 
+   const EVENT_ID =
+     getN01EventIdFromControlDate_();
+--- baseline/HubEventContext.gs
++++ candidate/HubEventContext.gs
+@@ -6,10 +6,11 @@
+ function beautyHubBaseSheet_(){return '1SIj4F8_WfWaeDVsdagRw8AoLsz0XsjhtdIn_OOxoDnU';}
+ function beautyContextRead_(){
+  const raw=PropertiesService.getScriptProperties().getProperty('BEAUTY_EVENT_CONTEXT_V1');
+- if(!raw)return null;
++ if(!raw){beautyTestDestinationGuard_(null);return null;}
+  const c=JSON.parse(raw);
+  if(c.version!==1||!['league','tournament'].includes(c.mode)||!/^[-\w]{20,150}$/.test(c.sheetId)||!/^[-\w]{32}$/.test(c.revision)||!/^20\d\d-\d\d-\d\d$/.test(c.date)||c.mode==='league'&&!/^lg_[\w]{1,80}$/.test(c.leagueId)||c.mode==='tournament'&&c.leagueId!=='')throw Error('Invalid saved event context.');
+  if(c.eventId&&!/^t_[\w]{1,80}$/.test(c.eventId))throw Error('Invalid saved event.');
++ beautyTestDestinationGuard_(c);
+  return c;
+ }
+ function beautyHubWorkspaceId_(){const c=beautyContextRead_();beautyContextPinned_=c?.revision||'legacy';return c?.sheetId||beautyHubBaseSheet_();}
+@@ -98,6 +99,8 @@
+  return {id:c.eventId,title:c.title,date:c.date};
+ }
+ function beautyContextCreateWorkspace_(c){
++ // This staging candidate permits no automatic workbook creation or reuse.
++ throw Error("TEST isolation: automatic workspace activation is disabled pending destination verification.");
+  const props=PropertiesService.getScriptProperties(),key='BEAUTY_EVENT_WORKBOOK_'+(c.eventId||c.leagueId+'_'+c.date);
+  const existing=props.getProperty(key);if(existing){const sheet=SpreadsheetApp.openById(existing);if(Utilities.formatDate(sheet.getSheetByName('Control').getRange('A2').getValue(),'Europe/Berlin','yyyy-MM-dd')!==c.date)throw Error('Saved event workspace date changed. Review before reopening.');return existing;}
+  const source=SpreadsheetApp.openById(beautyHubBaseSheet_()),ss=SpreadsheetApp.create('Beauty TEST · '+c.title+' · '+c.date);
+--- baseline/HubTestBridge.gs
++++ candidate/HubTestBridge.gs
+@@ -1,5 +1,6 @@
+ /* Owner-only Identity TEST. Never deploy this bridge into a live project. */
+ function beautyHubTestGuard_() {
++  beautyTestDestinationGuard_(beautyContextRead_());
+   if(typeof beautyContextAssert_==='function')beautyContextAssert_();
+   if (ScriptApp.getScriptId() !== '1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N' ||
+       BEAUTY_IDENTITY_APPROVED_SCRIPT_ !== '1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N' ||
+--- baseline/HubTestNakkaTransfer.gs
++++ candidate/HubTestNakkaTransfer.gs
+@@ -63,6 +63,7 @@
+   });
+ }
+ function beautyHubTransferFetch_(path,authorization,payload) {
++  beautyTestNakkaMutationGuard_(path,payload);
+   if(typeof beautyContextAssert_==='function')beautyContextAssert_();
+   const options={method:payload?'post':'get',headers:{Authorization:authorization},muteHttpExceptions:true,followRedirects:false};
+   if(payload){options.contentType='application/json';options.payload=JSON.stringify(payload);}

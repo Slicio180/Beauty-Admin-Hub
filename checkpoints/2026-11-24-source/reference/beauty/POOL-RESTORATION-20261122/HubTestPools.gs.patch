@@ -1,0 +1,185 @@
+--- baseline/HubTestPools.gs
++++ candidate/HubTestPools.gs
+@@ -201,7 +201,7 @@
+  * API contract: https://push.n01darts.com/api/v1/n01_api_manual_en.html
+  * Pool reviews have no timer; authenticated sessions and live event checks still apply. A provider write is never retried.
+  */
+-function beautyPoolError_(message){const e=Error(message);e.name='BeautyPoolError';throw e;}
++function beautyPoolError_(message,code){const e=Error(message);e.name='BeautyPoolError';if(code)e.code=code;throw e;}
+ function beautyPoolKey_(s){return s.normalize('NFC').trim().replace(/\s+/g,' ').toLocaleLowerCase('sv-SE');}
+ function beautyPoolCopy_(v){return JSON.parse(JSON.stringify(v));}
+ function beautyPoolHash_(v){const canonical=x=>Array.isArray(x)?x.map(canonical):x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,canonical(x[k])])):x;return beautyHubTransferHash_(canonical(v));}
+@@ -420,6 +420,54 @@
+   sheet.getRange(1,1,rows.length,2).setValues(rows);SpreadsheetApp.flush();
+   if(!beautyPoolEqual_(sheet.getRange(1,1,rows.length,2).getValues(),rows))beautyPoolError_('Pool recovery snapshot could not be verified.');return name;
+ }
++// Unsent drafts are tied to the complete selected context, including its revision.
++function beautyPoolDraftContext_(){
++  const c=beautyContextRead_();
++  if(!c||!c.revision||c.sheetId!==SHEET_ID||c.eventId!==beautyHubActiveTestTarget_().id||c.date!==beautyHubNakkaDate_().date)beautyPoolError_('Select and verify the TEST event before planning.');
++  return beautyPoolCopy_(c);
++}
++function beautyPoolDraftUnapprove_(r){const next={...r,ready:false};delete next.version;delete next.formatMode;delete next.boardPlan;return next;}
++function beautyPoolDraftMappingIdentity_(rows){
++  if(!Array.isArray(rows))beautyPoolError_('Saved player identities need review.');
++  const ids=new Set();return rows.map(p=>{
++    if(!p||typeof p.id!=='string'||ids.has(p.id)||typeof p.name!=='string'||typeof p.lpid!=='string'||typeof p.tpid!=='string')beautyPoolError_('Saved player identities need review.');
++    ids.add(p.id);return {id:p.id,name:p.name,lpid:p.lpid,tpid:p.tpid,linkExposed:!!p.linkExposed};
++  }).sort((a,b)=>a.id<b.id?-1:a.id>b.id?1:0);
++}
++function beautyPoolDraftChoices_(value,draw,initial=false){
++  const object=v=>v&&typeof v==='object'&&!Array.isArray(v),keys=(v,list)=>object(v)&&Object.keys(v).sort().join(',')===list;
++  if(!keys(value,'boardChoices,boards,cardLabels,format,plannedBoards,preferredSize,scheme')||![3,4].includes(value.preferredSize)||!['preferredPlan','perBoard'].includes(value.scheme)||!['preserve','top2-rest','top2-bottom2'].includes(value.format)||typeof value.boards!=='string'||value.boards.length>1000)beautyPoolError_('Invalid saved pool settings.');
++  const available=value.boards.trim()?BeautyPoolBoards.parseBoards(value.boards):[];
++  if(!Array.isArray(value.plannedBoards)||!beautyPoolEqual_(value.plannedBoards,available))beautyPoolError_('Selected boards and the draft board list differ.');
++  const result=beautyPoolCopy_(value),ids=draw.pools.map(p=>String(p.id));
++  if(!object(result.boardChoices)||!object(result.cardLabels)||Object.keys(result.boardChoices).some(id=>!ids.includes(id))||Object.keys(result.cardLabels).some(id=>!ids.includes(id)))beautyPoolError_('Unknown pool in saved choices.');
++  if(initial){
++    if(Object.keys(result.boardChoices).length||Object.keys(result.cardLabels).length||!available.length)beautyPoolError_('New draws require available boards and new board choices.');
++    const plan=BeautyPoolBoards.defaults(draw.pools,available);
++    for(const a of plan.assignments){result.boardChoices[a.poolId]={count:a.boards.length,boards:a.boards};result.cardLabels[a.poolId]={board:a.boards[0],group:plan.assignments.filter(b=>b.startWave<a.startWave&&b.boards.includes(a.boards[0])).length+1};}
++  }
++  if(Object.keys(result.boardChoices).length!==ids.length||Object.keys(result.cardLabels).length!==ids.length)beautyPoolError_('Save choices for every pool.');
++  const labels=new Set();
++  for(const pool of draw.pools){
++    const c=result.boardChoices[pool.id],label=result.cardLabels[pool.id];
++    // Zero is an explicit unfinished selection, never a board sent to Nakka.
++    if(!keys(c,'boards,count')||!(pool.capacity===4?[0,1,2]:[1]).includes(c.count)||!Array.isArray(c.boards)||c.boards.length>2||c.boards.some(n=>!Number.isInteger(n)||n!==0&&!available.includes(n)))beautyPoolError_('Invalid board choices. Choose available boards.');
++    if(!object(label)||!['board,group','board,group,manualGroup'].includes(Object.keys(label).sort().join(','))||!Number.isInteger(label.board)||label.board!==0&&!available.includes(label.board)||!Number.isInteger(label.group)||label.group<1||label.group>1000||label.manualGroup!==undefined&&typeof label.manualGroup!=='boolean')beautyPoolError_('Invalid saved Board / Group label.');
++    const key=label.board+':'+label.group;if(label.board&&labels.has(key))beautyPoolError_('Board / Group labels must be unique.');labels.add(key);
++  }
++  result.boards=available.join(', ');
++  if(JSON.stringify(result).length>30000)beautyPoolError_('Saved pool choices are too large.');return result;
++}
++function beautyPoolDraftValidate_(r,context,roster,event,stats){
++  if(r.schema!==2||!beautyPoolEqual_(r.context,context))beautyPoolError_('Saved draft belongs to an older or different event selection. It is retained for review.');
++  BeautyPoolSeeding.check(r.draw);
++  if(r.date!==roster.date||r.draw.eventDate!==roster.date||r.rosterSignature!==roster.signature||BeautyPoolSeeding.rosterSignature(r.draw.roster)!==roster.signature)beautyPoolError_('The IN roster or event date changed. Saved draw retained; review before an explicit new draw.');
++  if(beautyPoolHash_(event)!==r.eventHash)beautyPoolError_('Nakka event changed since the draw. Saved draw retained for review.');
++  const mappings=beautyPoolMappings_(roster,stats,beautyPoolEntries_(event),r.mappings.map(p=>({id:p.id,lpid:p.lpid,tpid:p.tpid})));
++  if(!beautyPoolEqual_(beautyPoolDraftMappingIdentity_(mappings),beautyPoolDraftMappingIdentity_(r.mappings)))beautyPoolError_('Provider player identities changed. Saved draw retained for review.');
++  beautyPoolDraftChoices_(r.draftChoices,r.draw);
++  return mappings;
++}
+ function beautyHubPool_(action,input){
+   beautyHubTestGuard_();const lock=LockService.getScriptLock();if(!lock.tryLock(5000))return {success:false,error:'Another TEST operation is running. Wait before reviewing.'};
+   let attempted=false,journalKey=('BEAUTY_POOL_SEND_'+beautyHubActiveTestTarget_().id),audit='',journal;
+@@ -430,32 +478,47 @@
+     const session=beautyPoolHash_(account.sessionBinding||beautyHubRequestToken_),auth=beautyPoolAuth_(),cache=CacheService.getScriptCache();
+     if(['poolcontrol','poolqualifyprepare','poolqualifysave'].includes(action))return beautyTournamentControl_(action,input,account,session,auth,cache);
+     if(['poolstartprepare','poolstart','poolboardplan'].includes(action))return beautyPoolStart_(action,input,account,session,auth,cache);
+-    const fields={poolload:['refresh'],pooldraw:['bindings','reviewed','sizes'],pooladjust:['change','ticket'],poolprepare:['ticket'],poolsave:['confirmed','ticket']}[action];
++    const fields={poolload:['refresh'],pooldraw:['bindings','reviewed','sizes','choices','draftTicket'],pooldraftchoices:['ticket','choices'],pooladjust:['change','ticket'],poolprepare:['ticket'],poolsave:['confirmed','ticket']}[action];
+     if(action==='poolprepare'&&Object.prototype.hasOwnProperty.call(input||{},'format'))fields.push('format');
+     if(action==='poolprepare'&&Object.prototype.hasOwnProperty.call(input||{},'boardPlan'))fields.push('boardPlan');
+     if(!fields||!input||Object.keys(input).sort().join(',')!==fields.sort().join(',')||Object.values(input).some(v=>typeof v!=='string'||v.length>40000)||input.sizes?.length>400||input.change?.length>1000)beautyPoolError_('Invalid Pool Planner request.');
+     // One durable draft per event and staff member. Publish verified shards before
+     // replacing the pointer; cache eviction and elapsed review time cannot erase it.
+     const draftKey='BEAUTY_POOL_DRAFT_'+beautyPoolHash_([beautyHubActiveTestTarget_().id,account.uid]);
+-    const draftPointer=()=>JSON.parse(props.getProperty(draftKey)||'null');
+-    const cleanDraft=p=>{if(p)for(let i=0;i<p.n;i++)props.deleteProperty(draftKey+'_'+p.ticket+'_'+i);};
+-    const ticketRead=()=>{
+-      const p=draftPointer();if(!/^[a-f0-9]{32}$/.test(input.ticket)||!p||p.ticket!==input.ticket||!Number.isInteger(p.n)||p.n<1||p.n>50)beautyPoolError_('Pool review unavailable or replaced. Generate and review a new preview.');
++    const context=beautyPoolDraftContext_();
++    const draftPointer=()=>{
++      const raw=props.getProperty(draftKey);if(!raw)return null;
++      let p;try{p=JSON.parse(raw);}catch(e){beautyPoolError_('Saved pool pointer is unreadable. Draft retained for review.');}
++      if(!p||!/^[a-f0-9]{32}$/.test(p.ticket)||!Number.isInteger(p.n)||p.n<1||p.n>50||typeof p.hash!=='string')beautyPoolError_('Saved pool pointer is invalid. Draft retained for review.');return p;
++    };
++    const cleanDraft=p=>{if(p)for(let i=0;i<p.n;i++)try{props.deleteProperty(draftKey+'_'+p.ticket+'_'+i);}catch(e){/* Orphan cleanup must not turn a committed save into a failed acknowledgement. */}};
++    const storedRead=p=>{
+       let text='';for(let i=0;i<p.n;i++){const part=props.getProperty(draftKey+'_'+p.ticket+'_'+i);if(part===null)beautyPoolError_('Pool review storage is incomplete. Nothing was sent.');text+=part;}
+       if(beautyPoolHash_(text)!==p.hash)beautyPoolError_('Pool review storage check failed. Nothing was sent.');
+-      const r=JSON.parse(text);if(r.uid!==account.uid||r.session!==session||r.target!==beautyHubActiveTestTarget_().id)beautyPoolError_('Pool review belongs to another session or event. Review again.');return r;
++      let r;try{r=JSON.parse(text);}catch(e){beautyPoolError_('Pool review storage is unreadable. Nothing was sent.');}
++      if(!r||r.uid!==account.uid||r.target!==beautyHubActiveTestTarget_().id)beautyPoolError_('Saved draw belongs to another organiser or event.');return r;
++    };
++    const ticketRead=()=>{
++      const p=draftPointer();if(!/^[a-f0-9]{32}$/.test(input.ticket)||!p||p.ticket!==input.ticket)beautyPoolError_('Pool review was replaced. Reopen the planner to load its saved draw.','POOL_DRAFT_REPLACED');
++      const r=storedRead(p);if(r.session!==session||r.schema!==2||!beautyPoolEqual_(r.context,context))beautyPoolError_('Pool review belongs to another session or event. Reopen the planner.');return r;
+     };
+     const ticketWrite=r=>{
++      if(!beautyPoolEqual_(beautyPoolDraftContext_(),context))beautyPoolError_('Selected event changed. Draft retained.');
+       const old=draftPointer(),ticket=Utilities.getUuid().replace(/-/g,'');
+-      r={...r,uid:account.uid,session,target:beautyHubActiveTestTarget_().id};delete r.expires;
++      r={...r,schema:2,context,uid:account.uid,session,target:beautyHubActiveTestTarget_().id};delete r.expires;
+       const text=JSON.stringify(r),n=Math.ceil(text.length/1800);if(n>50)beautyPoolError_('Draw too large.');
+       const next={ticket,n,hash:beautyPoolHash_(text)};
+       try{
+         for(let i=0;i<n;i++){const key=draftKey+'_'+ticket+'_'+i,part=text.slice(i*1800,(i+1)*1800);props.setProperty(key,part);if(props.getProperty(key)!==part)throw Error('draft storage');}
+         props.setProperty(draftKey,JSON.stringify(next));if(props.getProperty(draftKey)!==JSON.stringify(next))throw Error('draft pointer');
+-      }catch(e){if(old)props.setProperty(draftKey,JSON.stringify(old));else props.deleteProperty(draftKey);cleanDraft(next);beautyPoolError_('Pool review could not be saved. Previous draw retained; nothing sent.');}
++      }catch(e){
++        // Never erase old shards, including when the storage service itself is unavailable.
++        try{if(old)props.setProperty(draftKey,JSON.stringify(old));else props.deleteProperty(draftKey);}catch(rollbackError){beautyPoolError_('Pool save could not be confirmed. Both draft copies retained; reopen for review.');}
++        cleanDraft(next);beautyPoolError_('Pool review could not be saved. Previous draw retained; nothing sent.');
++      }
+       cleanDraft(old);return ticket;
+     };
++    const responseDraft=(r,ticket)=>({draw:r.draw,mappings:r.mappings,draftChoices:r.draftChoices,requiresRedraw:!!r.requiresRedraw,ticket});
+     if(action==='poolload'||action==='pooldraw'){
+       if(action==='poolload'&&!['true','false'].includes(input.refresh))beautyPoolError_('Invalid refresh.');
+       if(props.getProperty(journalKey)){
+@@ -466,22 +529,42 @@
+       if(action==='poolload'&&event.rr_setting?.round_robin!==1&&event.lg_setting?.league!==1)return {success:true,knockoutOnly:true,stats:null,mappings:[],event:{id:event.tdid,title:event.title,date:beautyPoolRoster_().date,url:(typeof beautyContextStandalone_==='function'&&beautyContextStandalone_()?'https://n01darts.com/n01/tournament/comp.php?id=':'https://n01darts.com/n01/league/season.php?id=')+encodeURIComponent(event.tdid)},stages:[['t','Slutspel 1'],['s2','Slutspel 2']].filter(([k])=>event[k+'_setting']?.tournament===1).map(([k,title])=>({title,slots:event[k+'_setting'].t_player_count})),message:'Slutspel only. Assign players to the bracket and start in Nakka Control. No pools are needed.'};
+       const stats=beautyPoolStats_(auth,action==='poolload'&&input.refresh==='true'),roster=beautyPoolRoster_(),entries=beautyPoolEntries_(event);
+       const bindings=action==='pooldraw'?JSON.parse(input.bindings):null,mappings=beautyPoolMappings_(roster,stats,entries,bindings);
+-      if(action==='poolload')return {success:true,stats,roster,mappings,event:{id:event.tdid,title:event.title,date:roster.date},stages:{stage1:event.t_setting?.tournament===1,stage2:event.s2_setting?.tournament===1},formatPreset:event.t_setting?.tournament!==1&&event.s2_setting?.tournament!==1?'preserve':props.getProperty('BEAUTY_POOL_FORMAT_PRESET')||'top2-rest',journal:props.getProperty(journalKey)?'A previous pool send is recorded. Sending again is blocked.':''};
++      if(action==='poolload'){
++        let restoredDraft=null,draftIssue='',draftTicket='';
++        try{
++          const p=draftPointer();draftTicket=p?.ticket||'';
++          if(p){const r=storedRead(p);beautyPoolDraftValidate_(r,context,roster,event,stats);restoredDraft=responseDraft(r,ticketWrite(beautyPoolDraftUnapprove_(r)));draftTicket=restoredDraft.ticket;}
++        }catch(e){draftIssue=e.name==='BeautyPoolError'?e.message:'Saved draft could not be checked. It is retained; review before continuing.';}
++        return {success:true,stats,roster,mappings,event:{id:event.tdid,title:event.title,date:roster.date},stages:{stage1:event.t_setting?.tournament===1,stage2:event.s2_setting?.tournament===1},formatPreset:event.t_setting?.tournament!==1&&event.s2_setting?.tournament!==1?'preserve':props.getProperty('BEAUTY_POOL_FORMAT_PRESET')||'top2-rest',restoredDraft,draftIssue,draftTicket};
++      }
++      const previous=draftPointer();
++      if(input.draftTicket!==(previous?.ticket||''))beautyPoolError_('Another tab saved or restored a draw. Reopen before generating a replacement.');
++      if(previous)storedRead(previous); // Explicit redraw never silently replaces corrupt evidence.
+       if(!stats.fresh||!beautyPoolStatsTimeFresh_(stats))beautyPoolError_('Fresh statistics required. Refresh and review again.');
+       if(input.reviewed!=='true')beautyPoolError_('Review the league and event identities before drawing.');
+       const draw=BeautyPoolSeeding.draw({players:mappings,sizes:JSON.parse(input.sizes),seed:parseInt(Utilities.getUuid().replace(/-/g,'').slice(0,8),16),eventDate:roster.date,frozenAt:new Date().toISOString(),source:{leagueId:stats.leagueId,fetchedAt:stats.fetchedAt}});
+-      const frozen={draw,mappings:mappings.map(p=>({id:p.id,name:p.name,lpid:p.lpid,tpid:p.tpid,linkExposed:p.linkExposed})),rosterSignature:roster.signature,date:roster.date,eventHash:beautyPoolHash_(event),statsHash:beautyPoolHash_(stats.profiles)};
+-      return {success:true,draw,ticket:ticketWrite(frozen),mappings:frozen.mappings};
+-    }
++      const draftChoices=beautyPoolDraftChoices_(JSON.parse(input.choices),draw,true);
++      const frozen={draw,draftChoices,drawSettings:{preferredSize:draftChoices.preferredSize,scheme:draftChoices.scheme},mappings:mappings.map(p=>({id:p.id,name:p.name,lpid:p.lpid,tpid:p.tpid,linkExposed:p.linkExposed})),rosterSignature:roster.signature,date:roster.date,eventHash:beautyPoolHash_(event),statsHash:beautyPoolHash_(stats.profiles)};
++      return {success:true,...responseDraft(frozen,ticketWrite(frozen))};
++    }
++    if(props.getProperty(journalKey))beautyPoolError_('A previous pool send is recorded. Inspect its audit; sending again is blocked.');
+     const frozen=ticketRead(),roster=beautyPoolRoster_();
+-    if(roster.signature!==frozen.rosterSignature||roster.date!==frozen.date)beautyPoolError_('The IN roster or event date changed. Generate and review a new draw.');
++    if(roster.signature!==frozen.rosterSignature||roster.date!==frozen.date)beautyPoolError_('The IN roster or event date changed. Saved draw retained for review.');
++    if(action==='pooldraftchoices'){
++      BeautyPoolSeeding.check(frozen.draw);
++      const draftChoices=beautyPoolDraftChoices_(JSON.parse(input.choices),frozen.draw),requiresRedraw=draftChoices.preferredSize!==frozen.drawSettings?.preferredSize||draftChoices.scheme!==frozen.drawSettings?.scheme;
++      const saved={...beautyPoolDraftUnapprove_(frozen),draftChoices,requiresRedraw};
++      return {success:true,...responseDraft(saved,ticketWrite(saved)),message:'Pool choices saved. Review again before sending.'};
++    }
++    const event=beautyPoolEvent_(auth),schedule=beautyPoolSchedule_(auth,event);beautyPoolBlankEvent_(event,schedule);
++    if(beautyPoolHash_(event)!==frozen.eventHash)beautyPoolError_('Nakka event changed since the draw. Saved draw retained for review.');
+     if(action==='pooladjust'){
+-      const adjusted=BeautyPoolSeeding.adjust(frozen.draw,JSON.parse(input.change));
+-      return {success:true,draw:adjusted,ticket:ticketWrite({...frozen,draw:adjusted,ready:false}),mappings:frozen.mappings};
+-    }
+-    if(props.getProperty(journalKey))beautyPoolError_('A previous pool send is recorded. Inspect its audit; sending again is blocked.');
+-    const event=beautyPoolEvent_(auth),schedule=beautyPoolSchedule_(auth,event);beautyPoolBlankEvent_(event,schedule);
+-    if(beautyPoolHash_(event)!==frozen.eventHash)beautyPoolError_('Nakka event changed since the draw. Generate and review a new draw.');
++      if(frozen.requiresRedraw)beautyPoolError_('Draw settings changed. Generate a new preview before swapping.');
++      beautyPoolDraftValidate_(frozen,context,roster,event,beautyPoolStats_(auth,false));
++      const adjusted={...beautyPoolDraftUnapprove_(frozen),draw:BeautyPoolSeeding.adjust(frozen.draw,JSON.parse(input.change))};
++      return {success:true,...responseDraft(adjusted,ticketWrite(adjusted))};
++    }
++    if(frozen.requiresRedraw)beautyPoolError_('Draw settings changed. Generate and review a new preview.');
+     // Refresh age without redrawing. Only identical profiles can reuse this draw.
+     let stats=beautyPoolStats_(auth,false);
+     if(!stats.fresh||!beautyPoolStatsTimeFresh_(stats))stats=beautyPoolStats_(auth,true);
+@@ -526,7 +609,7 @@
+     if(format)try{props.setProperty('BEAUTY_POOL_FORMAT_PRESET',format.mode);}catch(e){}
+     return {success:true,readbackVerified:true,audit,receipt,format,message:(format?'TEST knockout format and qualifier rules verified. ':'')+(beautyPoolMode_(event)==='rr'?'Native Round Robin groups and placement-state readback verified. ':'TEST groups and every round-robin match pairing verified. ')+'Entries and other event settings preserved. Event remains pre-start.'};
+   }catch(e){
+-    return {success:false,error:attempted?'The send may be partially saved. Do not retry. Inspect TEST groups, match cards and the audit before any further change.':(e.name==='BeautyPoolError'?e.message:'Pool Planner could not be checked. Nothing was sent.'),...(audit?{audit}:{}),uncertain:attempted};
++    return {success:false,error:attempted?'The send may be partially saved. Do not retry. Inspect TEST groups, match cards and the audit before any further change.':(e.name==='BeautyPoolError'?e.message:'Pool Planner could not be checked. Nothing was sent.'),...(!attempted&&e.name==='BeautyPoolError'&&e.code==='POOL_DRAFT_REPLACED'?{code:e.code}:{}),...(audit?{audit}:{}),uncertain:attempted};
+   }finally{lock.releaseLock();}
+ }
+ 

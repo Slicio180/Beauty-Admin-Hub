@@ -1,0 +1,29 @@
+{
+  "review": "Resolved flagged fields before publishing to a separate backup branch",
+  "destinationBranch": "checkpoint/2026-11-24-source",
+  "defaultBranchChangedByCodePush": false,
+  "publicationAuthorization": "Owner approved public source with internal project identifiers and credential-handling logic on 23 November 2026; resumed this save on 24 November 2026. Actual credentials and private player records remain excluded.",
+  "emailFindings": {
+    "distinctAddresses": 9,
+    "ownerAddressCount": 1,
+    "otherAddresses": "Reserved example/test/invalid addresses used in local tests",
+    "ownerAddressUse": "Owner identity guard in background-worker code and its tests; already visible in this repository commit author metadata",
+    "passwordOrToken": false
+  },
+  "firebaseFindings": {
+    "distinctClientConfigurations": 2,
+    "purpose": "Firebase Authentication client project configuration for TEST and LIVE",
+    "serverCredentialsIncluded": false,
+    "documentation": "https://firebase.google.com/docs/projects/api-keys",
+    "restrictionsChanged": false
+  },
+  "excludedFromPublicRelease": [
+    "BeautyRestoreOriginal.gs",
+    "LiveRegistrationRecovery.gs"
+  ],
+  "sourcePreservation": "31 public release files are byte-identical; all 33 original application files preserved privately; no source redaction or rebuild",
+  "scope": "GitHub backup only; no LIVE, Google, Nakka, credential or trigger changes",
+  "additionalSafetyCorrection": "Native acceptance adapters, session-bound fixture tooling and private diagnostics are retained privately. 882 copied source/test/manifest files remain; no included application/test bytes have changed.",
+  "publishedSourceAndMetadataFiles": 882,
+  "ownerExplicitApproval": "Owner approved exact 916-file checkpoint 5b9c2c2. Subsequent changes only omit private fixture/diagnostic copies and update publication documentation; no additional source content is introduced."
+}

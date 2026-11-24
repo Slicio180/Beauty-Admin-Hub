@@ -1,0 +1,42 @@
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'..'),checks=[];
+function fixture(source='candidate'){
+ const props={'BEAUTY_HUB_ADMIN_UIDS':'test_admin','event-record':'untouched'},cache={},calls=[],now=Date.parse('2026-11-22T20:00:00Z');
+ let serial=0,busy=false,held=false,hook=()=>{};
+ const response={code:200,users:[{localId:'test_admin',email:'synthetic@example.invalid',validSince:0}]};
+ const c={Date:class extends Date{constructor(...a){super(...(a.length?a:[now]));}static now(){return now;}},console:{log:()=>{}},JSON,Object,Array,Number,String,Math,Error,
+  beautyHubTestGuard_:()=>{},beautyContextAssert_:()=>{},
+  PropertiesService:{getScriptProperties:()=>({getProperty:k=>props[k]??null,getProperties:()=>({...props}),setProperty(k,v){hook('beforeProperty',k,v);props[k]=v;calls.push({op:'property',key:k});hook('afterProperty',k,v);},deleteProperty(k){delete props[k];calls.push({op:'deleteProperty',key:k});}})},
+  CacheService:{getScriptCache:()=>({get:k=>cache[k]??null,put(k,v){hook('beforeCache',k,v);cache[k]=v;calls.push({op:'cache',key:k});hook('afterCache',k,v);},remove(k){delete cache[k];calls.push({op:'deleteCache',key:k});}})},
+  LockService:{getScriptLock:()=>({tryLock(ms){calls.push({op:'lock',ms});if(busy||held)return false;held=true;return true;},releaseLock(){held=false;calls.push({op:'release'});}})},
+  Utilities:{getUuid:()=> (++serial).toString(16).padStart(32,'0'),base64DecodeWebSafe:s=>Buffer.from(s,'base64url'),newBlob:b=>({getDataAsString:()=>Buffer.from(b).toString('utf8')})},
+  UrlFetchApp:{fetch(url,options){calls.push({op:'lookup',options});return{getResponseCode:()=>response.code,getContentText:()=>JSON.stringify({users:response.users})};}}
+ };
+ vm.createContext(c);vm.runInContext(fs.readFileSync(path.join(root,source,'HubTestAuth.gs'),'utf8'),c);
+ const token=(changes={})=> ['header',Buffer.from(JSON.stringify({aud:'beauty-admin-hub-test',iss:'https://securetoken.google.com/beauty-admin-hub-test',sub:'test_admin',exp:now/1000+3600,iat:now/1000,auth_time:now/1000,...changes})).toString('base64url'),'synthetic_signature'].join('.');
+ const login=(idToken=token())=>c.beautyHubAuth('login',{idToken});
+ return {c,props,cache,calls,now,response,token,login,setBusy:v=>busy=v,hook:f=>hook=f,epoch:()=>{props.BEAUTY_HUB_AUTH_EPOCH_test_admin='revoked';},sessions:()=>Object.keys(props).filter(k=>k.startsWith('beauty-hub-session:'))};
+}
+function test(name,fn){try{fn();checks.push(name);}catch(e){console.error(name);throw e;}}
+function denied(f,code,token){const r=f.login(token);assert.equal(r.success,false);assert.equal(r.code,code);assert.equal(f.sessions().length,0);}
+test('Installed baseline reproduces AUTH_BUSY while event work owns ScriptLock',()=>{const f=fixture('baseline');f.setBusy(true);denied(f,'AUTH_BUSY');assert.equal(f.calls.filter(x=>x.op==='lock').length,1);});
+test('Candidate creates and validates a six-hour session while event lock stays busy',()=>{const f=fixture();f.setBusy(true);const r=f.login();assert.equal(r.success,true);assert.equal(r.expiresAt-f.now,6*60*60*1000);assert.equal(f.c.beautyHubAuthRequire_(r.token).uid,'test_admin');assert.equal(f.calls.filter(x=>x.op==='lock'||x.op==='release').length,0);assert.equal(f.props['event-record'],'untouched');});
+for(const [name,claims,code]of [
+ ['wrong project',{aud:'other'},'AUTH_TOKEN_PROJECT'],['wrong issuer',{iss:'other'},'AUTH_TOKEN_PROJECT'],['tenant',{firebase:{tenant:'other'}},'AUTH_TOKEN_PROJECT'],
+ ['expired token',{exp:0},'AUTH_TOKEN_TIME'],['old authentication',{auth_time:0},'AUTH_TOKEN_TIME'],['future token',{iat:9999999999},'AUTH_TOKEN_TIME']
+])test('Unchanged token check rejects '+name,()=>{const f=fixture();denied(f,code,f.token(claims));assert.equal(f.calls.filter(x=>x.op==='lookup').length,0);});
+test('Malformed token never reaches provider or session creation',()=>{const f=fixture();denied(f,'AUTH_TOKEN_FORMAT','invalid');assert.equal(f.calls.length,0);});
+test('Unverified Firebase token cannot create a session',()=>{const f=fixture();f.response.code=400;denied(f,'AUTH_VERIFY_HTTP_400');});
+for(const [name,changes]of Object.entries({mismatchedUid:{localId:'other'},disabled:{disabled:true},tenant:{tenantId:'other'},revokedToken:{validSince:9999999999}}))test('Unchanged provider check rejects '+name,()=>{const f=fixture();Object.assign(f.response.users[0],changes);denied(f,'AUTH_DENIED');});
+test('No configured administrators fails closed',()=>{const f=fixture();f.props.BEAUTY_HUB_ADMIN_UIDS='';denied(f,'AUTH_SETUP');});
+for(const phase of ['beforeProperty','afterProperty','beforeCache','afterCache'])test('Logout racing at '+phase+' prevents returning a usable session',()=>{const f=fixture();let once=true;f.hook((op,k)=>{if(once&&op===phase&&k.startsWith('beauty-hub-session:')){once=false;f.epoch();}});denied(f,'AUTH_REQUIRED');assert.equal(Object.keys(f.cache).length,0);assert.equal(f.props.BEAUTY_HUB_AUTH_EPOCH_test_admin,'revoked');});
+test('Logout after login completion immediately invalidates that session',()=>{const f=fixture(),r=f.login();f.epoch();assert.throws(()=>f.c.beautyHubAuthRequire_(r.token),/AUTH_REQUIRED/);});
+test('Allowlist removal during insertion fails closed and cleans only the new session',()=>{const f=fixture();f.hook((op,k)=>{if(op==='afterCache'&&k.startsWith('beauty-hub-session:'))f.props.BEAUTY_HUB_ADMIN_UIDS='other';});denied(f,'AUTH_REQUIRED');assert.equal(f.props['event-record'],'untouched');});
+test('A partial storage failure cleans the new session and returns no token',()=>{const f=fixture();f.hook(op=>{if(op==='beforeCache')throw Error('cache unavailable');});denied(f,'AUTH_UNAVAILABLE');assert.equal(f.props['event-record'],'untouched');});
+test('An existing session key is never overwritten',()=>{const f=fixture();f.c.Utilities.getUuid=()=> 'a'.repeat(32);const key='beauty-hub-session:bhs_'+'a'.repeat(64);f.props[key]='existing bytes';const r=f.login();assert.equal(r.code,'AUTH_UNAVAILABLE');assert.equal(f.props[key],'existing bytes');assert.equal(f.calls.filter(x=>x.op==='property'||x.op==='cache').length,0);});
+test('Concurrent login insertions preserve distinct valid sessions without event locking',()=>{const f=fixture();let nested,once=true;f.hook((op,k)=>{if(once&&op==='beforeProperty'&&k.startsWith('beauty-hub-session:')){once=false;nested=f.login();}});const first=f.login();assert.equal(first.success,true);assert.equal(nested.success,true);assert.notEqual(first.token,nested.token);assert.equal(f.sessions().length,2);for(const r of [first,nested])assert.equal(f.c.beautyHubAuthRequire_(r.token).uid,'test_admin');assert.equal(f.calls.filter(x=>x.op==='lock').length,0);});
+test('Pruning keeps valid sessions and event records while removing only expired sessions',()=>{const f=fixture(),old=f.login(),oldKey='beauty-hub-session:'+old.token;f.props['beauty-hub-session:expired']=JSON.stringify({uid:'test_admin',epoch:'0',expires:0});f.login();assert(f.props[oldKey]);assert.equal(f.props['beauty-hub-session:expired'],undefined);assert.equal(f.props['event-record'],'untouched');});
+test('Touch and logout retain their existing lock and epoch rules',()=>{const f=fixture(),a=f.login(),b=f.login();f.setBusy(true);assert.equal(f.c.beautyHubAuth('touch',{token:a.token}).code,'AUTH_BUSY');f.setBusy(false);assert.equal(f.c.beautyHubAuth('touch',{token:a.token}).success,true);assert.equal(f.c.beautyHubAuth('logout',{token:a.token}).success,true);assert.throws(()=>f.c.beautyHubAuthRequire_(b.token),/AUTH_REQUIRED/);});
+test('Every source byte outside login session creation is unchanged',()=>{const a=fs.readFileSync(path.join(root,'baseline/HubTestAuth.gs'),'utf8'),b=fs.readFileSync(path.join(root,'candidate/HubTestAuth.gs'),'utf8');const start=a.indexOf('  return beautyHubAuthLocked_(()=>{',a.indexOf('function beautyHubAuthLogin_'));const end=a.indexOf('\n}\n',start);const bs=b.indexOf('  // Login creates');const be=b.indexOf('\n}\n',bs);assert.equal(a.slice(0,start),b.slice(0,bs));assert.equal(a.slice(end),b.slice(be));});
+const report={result:'PASS',checks:checks.length,details:checks,scope:'Actual complete authentication source with simulated Apps Script/Firebase services and synthetic tokens. Native sign-in pending.',recordedUTC:new Date().toISOString()};
+fs.writeFileSync(path.join(root,'evidence/local-checks.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));

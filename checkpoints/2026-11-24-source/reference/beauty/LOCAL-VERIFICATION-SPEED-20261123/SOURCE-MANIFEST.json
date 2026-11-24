@@ -1,0 +1,34 @@
+{
+  "baseline/BeautyTestIsolation.gs": {
+    "bytes": 4990,
+    "sha256": "1dfa3772ac05dc5afe4e89d6ef48e5e99a4498662561e1f8f6d1d2ab8c584f61"
+  },
+  "baseline/HubEventContext.gs": {
+    "bytes": 16400,
+    "sha256": "5498f307a31ed446f7ee801d76d964bd91a0a59fe97a2d3438819f115626f79e"
+  },
+  "baseline/HubTestAttention.gs": {
+    "bytes": 41943,
+    "sha256": "2fa41d6471805ef6e898416fc6e9d0be596a701010fea53f807ca42992fbcd44"
+  },
+  "baseline/HubTestBackgroundRecovery.gs": {
+    "bytes": 34035,
+    "sha256": "689f1c6ab1733787090ce1e2e90499767d4392705b1fa9ab51c1c5f536306e5c"
+  },
+  "baseline/HubTestNakkaTransfer.gs": {
+    "bytes": 27804,
+    "sha256": "256faf6e85460cfc92617d456cbb88bfe3b64159c068f682a301240c8fb59fdc"
+  },
+  "candidate/HubTestAttention.gs": {
+    "bytes": 41943,
+    "sha256": "2fa41d6471805ef6e898416fc6e9d0be596a701010fea53f807ca42992fbcd44"
+  },
+  "candidate/HubTestBackgroundRecovery.gs": {
+    "bytes": 35223,
+    "sha256": "036c3c21b624be53df5013f224d6d455e773e9e2aae68cf224d2629e721a8cc8"
+  },
+  "installed-readback/HubTestBackgroundRecovery.gs": {
+    "bytes": 35223,
+    "sha256": "036c3c21b624be53df5013f224d6d455e773e9e2aae68cf224d2629e721a8cc8"
+  }
+}

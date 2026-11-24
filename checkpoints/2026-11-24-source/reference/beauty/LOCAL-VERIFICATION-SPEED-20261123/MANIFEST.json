@@ -1,0 +1,194 @@
+{
+  "HubTestBackgroundRecovery.patch": {
+    "bytes": 7995,
+    "sha256": "977b58f2cd341eae4703652da90ee23afffee1deb2e669e9c17a20c25c446553"
+  },
+  "PROCEDURE.md": {
+    "bytes": 2389,
+    "sha256": "c7a75568ec22c99b56154d19c5d582378a1429a247651ea2cb19294e83e0597e"
+  },
+  "README.md": {
+    "bytes": 4901,
+    "sha256": "dbcf9ef3e140a1285c71776237823beb0cca350470488004b36f57fe8b82349c"
+  },
+  "SOURCE-MANIFEST.json": {
+    "bytes": 1183,
+    "sha256": "c6260dc37c2e6dee6a2b52be0bf3e362f05eaed964ffba0872b1fc4f271ea616"
+  },
+  "baseline/BeautyTestIsolation.gs": {
+    "bytes": 4990,
+    "sha256": "1dfa3772ac05dc5afe4e89d6ef48e5e99a4498662561e1f8f6d1d2ab8c584f61"
+  },
+  "baseline/HubEventContext.gs": {
+    "bytes": 16400,
+    "sha256": "5498f307a31ed446f7ee801d76d964bd91a0a59fe97a2d3438819f115626f79e"
+  },
+  "baseline/HubTestAttention.gs": {
+    "bytes": 41943,
+    "sha256": "2fa41d6471805ef6e898416fc6e9d0be596a701010fea53f807ca42992fbcd44"
+  },
+  "baseline/HubTestBackgroundRecovery.gs": {
+    "bytes": 34035,
+    "sha256": "689f1c6ab1733787090ce1e2e90499767d4392705b1fa9ab51c1c5f536306e5c"
+  },
+  "baseline/HubTestNakkaTransfer.gs": {
+    "bytes": 27804,
+    "sha256": "256faf6e85460cfc92617d456cbb88bfe3b64159c068f682a301240c8fb59fdc"
+  },
+  "candidate/HubTestAttention.gs": {
+    "bytes": 41943,
+    "sha256": "2fa41d6471805ef6e898416fc6e9d0be596a701010fea53f807ca42992fbcd44"
+  },
+  "candidate/HubTestBackgroundRecovery.gs": {
+    "bytes": 35223,
+    "sha256": "036c3c21b624be53df5013f224d6d455e773e9e2aae68cf224d2629e721a8cc8"
+  },
+  "checkpoint-records/before/Beauty-Complete-Handover-20261121.md": {
+    "bytes": 385966,
+    "sha256": "292c2ff1b37416605da7d05711750c8dfb353f3df76036ca399a7ee821daf36c"
+  },
+  "checkpoint-records/before/Manual/Beauty-Operator-Handbook-Draft.md": {
+    "bytes": 170526,
+    "sha256": "bedf1535775b39ca058ce99688c76840f176721ae6b72e31171cdd053b959d08"
+  },
+  "checkpoint-records/before/Manual/HANDBOOK-CHECKPOINT.json": {
+    "bytes": 397,
+    "sha256": "deb5c0e12ec12f2c27f71637f5b0929ca0e6027c1f1a23ddef0f2d13d21f906f"
+  },
+  "checkpoint-records/before/SOURCE-PACKAGES.json": {
+    "bytes": 147580,
+    "sha256": "20cd3aa7fa42fce4dcb293cd4b42284d6b2940c4017e3a2ac601c03c19d3f73d"
+  },
+  "checkpoint-records/before/START-HERE.md": {
+    "bytes": 2109,
+    "sha256": "8e19f934d5165e23e120c008d6178ddd0076b906437ce161dccbed8450b1e7c8"
+  },
+  "checkpoint-records/checkpoint-text.json": {
+    "bytes": 1948,
+    "sha256": "82604e7527fa16b2481c696ad4011f96604f2aafcd736a73a00970f9362f1e9d"
+  },
+  "checkpoint-records/handbook-after.json": {
+    "bytes": 415079,
+    "sha256": "6e32de1f3f37519c110c11454a51b393e90e30929e1dcd31faefd5be865292ef"
+  },
+  "checkpoint-records/handbook-before.json": {
+    "bytes": 412363,
+    "sha256": "647233a18c9011ce0319b30acc6a41617b7a278ede9db1c096be6cdc3ac70728"
+  },
+  "checkpoint-records/handbook-checks.json": {
+    "bytes": 128,
+    "sha256": "052d08805fc3b6e56925f11c1cdad2203549313d013506c9b5335828b587962e"
+  },
+  "checkpoint-records/handbook-edit-receipt.json": {
+    "bytes": 3269,
+    "sha256": "29da687ce4e7011d79631f15a3bd4d0c1eb9723895448423cdf75a78167c88df"
+  },
+  "checkpoint-records/reconcile_native.py": {
+    "bytes": 4101,
+    "sha256": "308af14648e2c7e8a3e3f6531aa4b4be71dd8bf17c48ffe9c3f008cdce4003af"
+  },
+  "checkpoint-records/record_checkpoint.py": {
+    "bytes": 10853,
+    "sha256": "58c064e6935815739da9de5f620ae47645b19d14bfd870590215d7373cee96a3"
+  },
+  "evidence/baseline-source.json": {
+    "bytes": 442,
+    "sha256": "be09332cb23e0da04fe570d87031114a3b09b3ea95f40c1b25592f91e6cf0a6f"
+  },
+  "evidence/before-recovery.txt": {
+    "bytes": 2976,
+    "sha256": "a6bd43ab5ec25cd10b44b3a615dd57804992bfbe1126e2b1b3570fe773bccc53"
+  },
+  "evidence/checkpoint-validation.json": {
+    "bytes": 294,
+    "sha256": "7e217f4a1832189ea0fd4ddf1e930815168cc2bb98008ffead7fb372aad9126e"
+  },
+  "evidence/claim-regression.json": {
+    "bytes": 3139,
+    "sha256": "1f495697facfce33698e6cf7ad5f8dc128c3d2ef97fc52f6ed47e5a9b666f87e"
+  },
+  "evidence/final-dashboard.txt": {
+    "bytes": 7952,
+    "sha256": "ec72653252382b2947fe5df49dac2d33ea542cb3674000b2beff477a9bda4f08"
+  },
+  "evidence/final-observation.json": {
+    "bytes": 1400,
+    "sha256": "0f0899434f17017ec3faf5ea23cbc0dc4bdf5306873bb0d3ca44975c4d768cae"
+  },
+  "evidence/final-recovery.txt": {
+    "bytes": 3015,
+    "sha256": "63de05e5785fb0fdf1b601c809b8f81ae3edea928785957b5e0fc6a579e5c29d"
+  },
+  "evidence/legacy-worker.json": {
+    "bytes": 3348,
+    "sha256": "d8732f898c7f718602533125f6bb6fdb18a21739b1fb857e6e81803888254a5e"
+  },
+  "evidence/local-validation.json": {
+    "bytes": 806,
+    "sha256": "e42fcbf76fa06329e2f00b26e9977628339f464480c1d7e1dc7d261d4245ee61"
+  },
+  "evidence/local-verification-tests.json": {
+    "bytes": 5018,
+    "sha256": "262780450f03cb9c8d23190c1c8b8622c7e7fcbfe353a6c77136a1e2449449bf"
+  },
+  "evidence/native-1417-1419.txt": {
+    "bytes": 42136,
+    "sha256": "93d6cf4e42fdb2516072b6539c61897bdb89ccf44bec24ec19e0a87508af73d4"
+  },
+  "evidence/native-1417.txt": {
+    "bytes": 32031,
+    "sha256": "902639c34c7bba8f9ea650d644b4ca36655b0a93067debea9ef62b7b9976ee28"
+  },
+  "evidence/native-1419-1422.txt": {
+    "bytes": 40517,
+    "sha256": "ef507046d057f5abe897ff08e599ddd960e32f6b44a573029cea69275e462622"
+  },
+  "evidence/native-acceptance.json": {
+    "bytes": 14325,
+    "sha256": "3d8392306b14acb481fb607eb204b8ae518d4c291aea85577e13c14ec5f6b08f"
+  },
+  "evidence/native-before-1413-1415.txt": {
+    "bytes": 46265,
+    "sha256": "d2ec855edd4ac42c9544e35bea4ad236ed1cf7d25344ab72c220ee359ddba38c"
+  },
+  "evidence/native-observations.json": {
+    "bytes": 11213,
+    "sha256": "1c459a74571eb11af864ba90a3f7224872d8deb21d60fdb67c4443f6a438e7e7"
+  },
+  "evidence/recheck-tests.json": {
+    "bytes": 6434,
+    "sha256": "0c4e5abb95ec44965b7f89bb00dcc38f14fc32e90b93ede7fcdca9d2edf37063"
+  },
+  "installed-readback/HubTestBackgroundRecovery.gs": {
+    "bytes": 35223,
+    "sha256": "036c3c21b624be53df5013f224d6d455e773e9e2aae68cf224d2629e721a8cc8"
+  },
+  "installed-readback/result.json": {
+    "bytes": 256,
+    "sha256": "9d89b9f26804ab87e5c6601f1d3b48b89bf496f856db46751ba1c5a827c0b882"
+  },
+  "tests/local-verification.cjs": {
+    "bytes": 8291,
+    "sha256": "abf418e4799abbe5efd39f03dcda8e5df9ace5d912e801bc0e63180b80740f8f"
+  },
+  "tests/recheck-fixture.cjs": {
+    "bytes": 4973,
+    "sha256": "9c5fcd97ccc3b07e8a1ca3867416cbae1d539c7ba05daaf58e81315a96f27253"
+  },
+  "tests/recheck.cjs": {
+    "bytes": 14590,
+    "sha256": "fe45c4c1a067cf4844a82d4a78aeaf2a840c9797730430236062a7d3d8080af1"
+  },
+  "tests/regression/candidate.cjs": {
+    "bytes": 13066,
+    "sha256": "33d8e2ad316b385741d1015ad4fe8a919d5ffa5d0437426b54ab84a1d5ee3db7"
+  },
+  "tests/regression/fixture.cjs": {
+    "bytes": 4911,
+    "sha256": "38795df7a8ada0e112c6f347332b072c73ba763d3454e372021dc2a0e75e3cc5"
+  },
+  "tests/regression/legacy-worker.cjs": {
+    "bytes": 15788,
+    "sha256": "4a3060bba77ee115157a31e7a2b5ff468cf72e021cd3bfc8615c05837059ac56"
+  }
+}

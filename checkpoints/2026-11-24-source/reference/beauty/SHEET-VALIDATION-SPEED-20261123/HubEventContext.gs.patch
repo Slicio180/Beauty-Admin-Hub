@@ -1,0 +1,27 @@
+--- baseline/HubEventContext.gs
++++ candidate/HubEventContext.gs
+@@ -27,14 +27,20 @@
+  if((required||input._context!==undefined)&&input._context!==expected)throw Error('The selected event changed. Reload before continuing.');
+  const clean=Object.assign({},input);delete clean._context;return clean;
+ }
++// Invocation-local connection only, like the event-workbook handle in Code.gs.
++// Every caller still checks its current destination and reads current cells.
++// No cell values, Sheet objects or context snapshots are retained here.
++var beautyContextMasterHandle_=null;
+ function beautyContextMasterWorkbook_(ss){
+  const context=beautyContextRead_();beautyTestDestinationGuard_(context);
+- const baseId=beautyHubBaseSheet_();
++ const baseId=beautyHubBaseSheet_(),sheetId=ss?ss.getId():null;
+  if(baseId!=='1SIj4F8_WfWaeDVsdagRw8AoLsz0XsjhtdIn_OOxoDnU'||
+-    !ss||![context.sheetId,baseId].includes(ss.getId()))
++    !ss||![context.sheetId,baseId].includes(sheetId))
+   throw Error('TEST isolation: master workbook destination is not approved.');
+- if(ss.getId()===beautyHubBaseSheet_())return ss;
+- const base=SpreadsheetApp.openById(beautyHubBaseSheet_());
++ if(sheetId===baseId)return ss;
++ if(!beautyContextMasterHandle_)beautyContextMasterHandle_=SpreadsheetApp.openById(baseId);
++ const base=beautyContextMasterHandle_;
++ if(base.getId()!==baseId)throw Error('TEST isolation: master workbook destination is not approved.');
+  return new Proxy(ss,{get(target,key){
+   if(key==='getSheetByName')return name=>name==="PLAYER'S MASTER LIST"?base.getSheetByName(name):target.getSheetByName(name);
+   const value=target[key];return typeof value==='function'?value.bind(target):value;

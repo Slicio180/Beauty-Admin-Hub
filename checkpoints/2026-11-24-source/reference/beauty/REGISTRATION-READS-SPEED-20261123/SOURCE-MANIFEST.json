@@ -1,0 +1,119 @@
+{
+  "baseline": {
+    "BeautyTestIsolation.gs": {
+      "bytes": 4990,
+      "sha256": "1dfa3772ac05dc5afe4e89d6ef48e5e99a4498662561e1f8f6d1d2ab8c584f61"
+    },
+    "Code.gs": {
+      "bytes": 70543,
+      "sha256": "203ed1a0cec082d9b39f688b8903942d131863bbe6fd84733c6563e729dee120"
+    },
+    "HubEventContext.gs": {
+      "bytes": 16849,
+      "sha256": "b7c67b0de2f26d94f2b47da7c970e9386ffbec22b8a05f62fee53c599a3b9400"
+    },
+    "HubTest.html": {
+      "bytes": 1211084,
+      "sha256": "16379b9612cb7c980dbbb6f7a407d993145622cc7fb33924466724db308ada81"
+    },
+    "HubTestAttention.gs": {
+      "bytes": 43329,
+      "sha256": "e43c5c45d4129ccceba5c898a772df36bcb0df2d1e458ffce987659eb2f60548"
+    },
+    "HubTestAutoRegister.gs": {
+      "bytes": 28561,
+      "sha256": "2aae09891261d81660f333b81f9138d07db3cf9b22a19c53c9f0dc5a450d2950"
+    },
+    "HubTestBackgroundRecovery.gs": {
+      "bytes": 40643,
+      "sha256": "502db4b6ae9ccbe6d80f94bbe754bfe160ce9997be0a787fd43e2635b1db85ac"
+    },
+    "HubTestBridge.gs": {
+      "bytes": 5132,
+      "sha256": "233333b6c7b53b927be9775a3e3272bdf5edb9ae1425acbc573336d636c0b00b"
+    },
+    "HubTestNakkaEvent.gs": {
+      "bytes": 46784,
+      "sha256": "cffc71598978c6cc3f6f4bfb487a68402a70bb00f1d0ecb86aa3b96991136db1"
+    },
+    "HubTestNakkaTransfer.gs": {
+      "bytes": 27804,
+      "sha256": "256faf6e85460cfc92617d456cbb88bfe3b64159c068f682a301240c8fb59fdc"
+    },
+    "HubTestRemovalRecovery.gs": {
+      "bytes": 19951,
+      "sha256": "073bfaf56f62432cf19e499eaa000c952017223006ed43e51202e953b288dd7e"
+    },
+    "HubTestRemove.gs": {
+      "bytes": 17741,
+      "sha256": "1b050a0021fe70c1f371a591216b916f09d9f7840908759d3178aca856396c28"
+    },
+    "HubTestStatus.gs": {
+      "bytes": 4856,
+      "sha256": "77d9ce35d5abc6f0b885c32c55da99ee60bac8b919b13c3e5b23e3ce1372655e"
+    }
+  },
+  "candidate": {
+    "BeautyTestIsolation.gs": {
+      "bytes": 4990,
+      "sha256": "1dfa3772ac05dc5afe4e89d6ef48e5e99a4498662561e1f8f6d1d2ab8c584f61"
+    },
+    "Code.gs": {
+      "bytes": 70543,
+      "sha256": "203ed1a0cec082d9b39f688b8903942d131863bbe6fd84733c6563e729dee120"
+    },
+    "HubEventContext.gs": {
+      "bytes": 17089,
+      "sha256": "0083d069164503d6b5cc313413e46252ea7875487040e1fa7b2e8200597a34cf"
+    },
+    "HubTest.html": {
+      "bytes": 1246968,
+      "sha256": "6c55e06b5005e5d9811c7c86e5432ce832b97338373aa5b14c3d7781d1e9881f"
+    },
+    "HubTestAttention.gs": {
+      "bytes": 43329,
+      "sha256": "e43c5c45d4129ccceba5c898a772df36bcb0df2d1e458ffce987659eb2f60548"
+    },
+    "HubTestAutoRegister.gs": {
+      "bytes": 28561,
+      "sha256": "2aae09891261d81660f333b81f9138d07db3cf9b22a19c53c9f0dc5a450d2950"
+    },
+    "HubTestBackgroundRecovery.gs": {
+      "bytes": 40643,
+      "sha256": "502db4b6ae9ccbe6d80f94bbe754bfe160ce9997be0a787fd43e2635b1db85ac"
+    },
+    "HubTestBridge.gs": {
+      "bytes": 5132,
+      "sha256": "233333b6c7b53b927be9775a3e3272bdf5edb9ae1425acbc573336d636c0b00b"
+    },
+    "HubTestNakkaEvent.gs": {
+      "bytes": 46784,
+      "sha256": "cffc71598978c6cc3f6f4bfb487a68402a70bb00f1d0ecb86aa3b96991136db1"
+    },
+    "HubTestNakkaTransfer.gs": {
+      "bytes": 28985,
+      "sha256": "9e58e8c9098c1e1af5555d15e745e58ae1a316fb330b861d2ff56d145ce45a3d"
+    },
+    "HubTestRemovalRecovery.gs": {
+      "bytes": 19951,
+      "sha256": "073bfaf56f62432cf19e499eaa000c952017223006ed43e51202e953b288dd7e"
+    },
+    "HubTestRemove.gs": {
+      "bytes": 17944,
+      "sha256": "285a0d84ec19f593a320e9e641f0d14c0a72bbea97162d9f92f7f503aaf9cc77"
+    },
+    "HubTestStatus.gs": {
+      "bytes": 4856,
+      "sha256": "77d9ce35d5abc6f0b885c32c55da99ee60bac8b919b13c3e5b23e3ce1372655e"
+    }
+  },
+  "changedFiles": [
+    "HubEventContext.gs",
+    "HubTest.html",
+    "HubTestNakkaTransfer.gs",
+    "HubTestRemove.gs"
+  ],
+  "status": "INSTALLED_EXACT_NATIVE_PENDING_STAFF_SIGNIN",
+  "localChecks": 69,
+  "nativeReadback": "PASS_4_FILES"
+}

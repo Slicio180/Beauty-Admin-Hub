@@ -1,0 +1,390 @@
+{
+  "status": "SHORT_VIEWPORT_CSS_NATIVE_DESKTOP_PASS",
+  "projectId": "1NpfK9Lbk834hqN0rD66b3XFtoASM3wAS-NPd9Sy1SaUAB400Pc256evO",
+  "workbookId": "1YN1VoPCAMA0swtnHaGYjqkHpGjlcYCApu-DVL5hRtZo",
+  "local_tests": 152,
+  "native_preflight": "PASS_2026-11-22_15:40:35_Europe_Stockholm",
+  "new_event": {
+    "id": "t_DsKC_9692",
+    "title": "Beauty TEST Alternate Formats 2026-11-22",
+    "date": "2026-11-22",
+    "leagueId": "lg_M2wQ_4189",
+    "status": 20,
+    "private": true,
+    "entriesLocked": true,
+    "entries": 8,
+    "groups": {
+      "count": 2,
+      "capacity": 4
+    },
+    "stage1": {
+      "enabled": true,
+      "slots": 4,
+      "legs": 2
+    },
+    "stage2": {
+      "enabled": true,
+      "slots": 4,
+      "legs": 2,
+      "third_place": false
+    },
+    "playDataEmpty": true,
+    "entries_at_initial_empty_verification": 0,
+    "current_verification": "Native C fresh review at18:22:21 Stockholm:8 IN,2 pools,3 boards,12 RR pairings; each knockout4/4/0; third place off; unchecked and SEND disabled. Exact saved draw restored after full reload and same-owner sign-in. No SEND/START."
+  },
+  "context": {
+    "version": 1,
+    "mode": "league",
+    "sheetId": "1YN1VoPCAMA0swtnHaGYjqkHpGjlcYCApu-DVL5hRtZo",
+    "leagueId": "lg_M2wQ_4189",
+    "eventId": "t_DsKC_9692",
+    "date": "2026-11-22",
+    "title": "Beauty TEST Alternate Formats 2026-11-22",
+    "revision": "1de23ec9b24644c89ada63329fc91e64"
+  },
+  "new_trigger_count": 0,
+  "saved_readbacks": {
+    "BeautyAlternatePreflight20261122.gs": "ede156d1989acb576abe7de156f809daa295f02eb7f13ef06533be7e5da28a8f",
+    "Code.gs": "285de0a8ee689967fef7b087de1733958c78fce268d8bf3cf8b2de26f16ac867",
+    "BeautyAlternateNakkaRead20261122.gs": "6a485ef844bfc61bef85185b0387b06441eb8d012951ca4268591032cd7af148",
+    "HubTestBridge.gs": "d0902a7dc359cc4907ade51cf0c234fa2336d13b9bda3c82ce76f491608e83a4",
+    "HubEventContext.gs": "0bd0b54c3c5a7f560392499c4892e6884e5460eb5994beedb793d2f75adf424d",
+    "BeautyTestIsolation.gs": "1a4ff7ad67bdfe489252f9e95bd252bedf67336ee8dfab3aa21d4d6e63754d30",
+    "BeautyAlternateFixture20261122.gs": "324a12ac5afb894dac0d4bd44798d8e61598abe23549da8149e8ec0e79a71261",
+    "BeautyAlternateCaseB20261122.gs": "70a53ec9d618de6060bd6a6b09c2b93b5eafff747e641ab24b1c6827ba21e78f",
+    "BeautyAlternateCaseC20261122.gs": "6778e79c8d6162c418508eefa145b99558735cba8e6a77c97198961ab31ecff7",
+    "HubTestPools.gs": "3f41286018feec8747b9d516d36d8fb22e81410367ba666ac756d699ca26c465",
+    "HubTest.html": "844585c07a85da1d7c2c3d0bc0fda39d45d9dd8cc562d6b6963b948fb4bccaa1"
+  },
+  "copied_accepted_source": {
+    "HubTestPools.gs": "658f09656ae3e5e1bec185a4754fc9df51338b204234f102768069d960022785",
+    "HubTest.html": "5c812887a2731019a2fb4f8038a830d288291f5422cf36c258b498ea3f138edf",
+    "HubTestBridge.gs": "233333b6c7b53b927be9775a3e3272bdf5edb9ae1425acbc573336d636c0b00b",
+    "HubTestBackgroundRecovery.gs": "68da45c5b1609b35a05d76c008ed98a0c882b930ace1eb72cc91b1189643c34d"
+  },
+  "live_changed": false,
+  "github_published": false,
+  "native_preflight_evidence": "evidence/native-foundation-result.json",
+  "local_test_groups": {
+    "foundation": 23,
+    "nakka_read": 15,
+    "temporary_copy": 10,
+    "fixture": 25,
+    "binding": 16,
+    "case_b": 27,
+    "case_c": 36
+  },
+  "provider_connection": "PASS_2026-11-22_15:40:36_Europe_Stockholm",
+  "credential_transfer": "EXPLICITLY_APPROVED_AND_COMPLETE",
+  "provider_connection_evidence": "evidence/native-connection-result.json",
+  "destination_property_keys": [
+    "N01_API_USER",
+    "N01_API_PASSWORD"
+  ],
+  "temporary_transfer": {
+    "source_project": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+    "helper_saved_sha256": "deb8db943436fb2a7411e91e8f15f20b58c3210163ee69fa8cdd783fe946ce60",
+    "prepared": "15:38:16",
+    "properties_cleaned": "15:40:12",
+    "helper_removed_and_verified_after_reload": true,
+    "original_api_settings_changed": false,
+    "existing_source_files_edited": false,
+    "evidence": "evidence/temporary-helper-cleanup.json"
+  },
+  "persistent_source_changes_in_new_project": [
+    "Code.gs",
+    "BeautyAlternatePreflight20261122.gs",
+    "BeautyAlternateNakkaRead20261122.gs",
+    "HubTestBridge.gs",
+    "HubEventContext.gs",
+    "BeautyTestIsolation.gs",
+    "BeautyAlternateFixture20261122.gs",
+    "BeautyAlternateCaseB20261122.gs",
+    "BeautyAlternateCaseC20261122.gs",
+    "HubTestPools.gs",
+    "HubTest.html"
+  ],
+  "event_master_workbook": "1YN1VoPCAMA0swtnHaGYjqkHpGjlcYCApu-DVL5hRtZo",
+  "fixture_creation": "PASS_2026-11-22_15:54:45_Europe_Stockholm",
+  "fixture_independent_read": "PASS_2026-11-22_15:56:06_Europe_Stockholm",
+  "fixture_activation": "PASS_2026-11-22_16:00:35_Europe_Stockholm",
+  "fixture_persisted_active_read": "PASS_2026-11-22_16:01:30_Europe_Stockholm",
+  "provisioning_journal": "BEAUTY_ALTERNATE_FIXTURE_20261122_V1",
+  "event_workbook_mapping": "BEAUTY_EVENT_WORKBOOK_t_DsKC_9692",
+  "binding_baseline_sha256": {
+    "BeautyTestIsolation.gs": "1dfa3772ac05dc5afe4e89d6ef48e5e99a4498662561e1f8f6d1d2ab8c584f61",
+    "Code.gs": "6a832dc06676fad166c737f39e7d2ea5486387557cc535b45e7b76efdb13aca7",
+    "HubEventContext.gs": "5498f307a31ed446f7ee801d76d964bd91a0a59fe97a2d3438819f115626f79e",
+    "HubTestBridge.gs": "233333b6c7b53b927be9775a3e3272bdf5edb9ae1425acbc573336d636c0b00b"
+  },
+  "binding_saved_readback_sha256": {
+    "Code.gs": "285de0a8ee689967fef7b087de1733958c78fce268d8bf3cf8b2de26f16ac867",
+    "HubTestBridge.gs": "d0902a7dc359cc4907ade51cf0c234fa2336d13b9bda3c82ce76f491608e83a4",
+    "HubEventContext.gs": "0bd0b54c3c5a7f560392499c4892e6884e5460eb5994beedb793d2f75adf424d",
+    "BeautyTestIsolation.gs": "1a4ff7ad67bdfe489252f9e95bd252bedf67336ee8dfab3aa21d4d6e63754d30"
+  },
+  "head_hub": "https://script.google.com/macros/s/AKfycbySBPCWFkJLjRuvCzoRJcEAwkmjiSZHS2vChqC0aA/dev?page=hub",
+  "head_hub_state": "SIGNED_IN_C_REVIEW_UNCHECKED_ZOOM_100",
+  "native_alternate_restoration_pass": true,
+  "original_project_changed_by_event_binding_checkpoint": false,
+  "rollback": "Preserve case A backup BEAUTY_ALTERNATE_CASE_B_20261122_V1_BASELINE and shards, terminal VERIFIED B receipt, accepted B backup BEAUTY_ALTERNATE_CASE_C_20261122_V1_BASELINE and shards, terminal VERIFIED C receipt, all eight registrations/entries, ACTIVE provisioning journal and current context/mapping. The C format backup preceded07/08 registration; its workbook/event hashes describe that pre-registration boundary, not current eight-player content. C's reader intentionally pins six players and must not be replayed now. No automatic rollback runner exists. Provider rollback requires a fresh conditional review of current state and a plan preserving07/08; do not delete players or reset journals to match an old backup. Removing a helper never restores provider settings. For the roster-change correction, retain the two pre-edit source files and exact installed readbacks under case-c/roster-rejection-fix; rollback only those two Alternate Format TEST files if required after source verification. The original TEST project has not received this correction. The current C draw is seed2325507431, preserved in CASE-C-EXPECTED.json and native receipts; retain it unchanged for any further device comparison. Cases A/B acceptance remains evidence for the earlier source only. Never redraw to hide a restoration mismatch. Separate speed candidates remain uninstalled and gains unmeasured. The bounded native roster-rejection regression passed at18:01:45 Stockholm with all eight players returned IN and the exact original C draw retained. Do not repeat08 OUT/IN or rearm this check. The case C swap/board/format and approval-clearance checks passed in the same session at18:09:59. Fresh-document/same-owner restoration passed all twelve comparisons at18:22:21 Stockholm after the deliberate full reload. Retain the exact installed source hashes and fresh-login receipt; do not infer wider device or LIVE acceptance. No source or provider-format change was made during these native checks. For the later short-window CSS correction, preserve case-c/responsive/baseline/HubTest.html (SHA2562d7eb6dcd7c0a7c21c6568723205a7d3fd3892e3301cca56b0de60113c703bff), the four-line diff, candidate and installed readback (SHA256844585c07a85da1d7c2c3d0bc0fda39d45d9dd8cc562d6b6963b948fb4bccaa1). If rollback is necessary, verify the current source before restoring only that HTML file in Alternate Format TEST. Do not touch HubTestPools.gs, provider settings, entries, draft or journals. JavaScript is unchanged. Native desktop reflow and post-CSS C restoration passed at18:56:11 Stockholm; actual phone/tablet and full-release coverage remain open. The pre-fix desktop-zoom check changed no draw or approval data; actual device coverage remains unverified. Keep the successful post-CSS receipt alongside the earlier sign-in-blocked receipt rather than overwriting it. The user resolved sign-in, but its earlier failure cause remains unknown. Current native acceptance is limited to the recorded desktop zoom, draw preservation and review conditions; A/B source coverage and original TEST remain separate.",
+  "bootstrap_saved_readbacks_historical": {
+    "BeautyAlternatePreflight20261122.gs": "ede156d1989acb576abe7de156f809daa295f02eb7f13ef06533be7e5da28a8f",
+    "Code.gs": "6a832dc06676fad166c737f39e7d2ea5486387557cc535b45e7b76efdb13aca7",
+    "BeautyAlternateNakkaRead20261122.gs": "6a485ef844bfc61bef85185b0387b06441eb8d012951ca4268591032cd7af148"
+  },
+  "copied_accepted_source_note": "Original copy fingerprints are historical; HubTestBridge.gs now has the exact new binding listed in saved_readbacks.",
+  "case_a": {
+    "same_session_pass": true,
+    "fresh_same_owner_login_pass": true,
+    "pending": null,
+    "evidence": "evidence/case-a-same-session.json",
+    "expected": "CASE-A-EXPECTED.json",
+    "recorded_utc": "2026-11-22T15:35:59.250Z",
+    "source_changed": false,
+    "fresh_login_evidence": "evidence/case-a-fresh-login.json",
+    "accepted_at_utc": "2026-11-22T15:45:13.492Z"
+  },
+  "source_changed_by_case_a_checkpoint": false,
+  "new_trigger_count_last_verified": "2026-11-22_17:36:17_Europe_Stockholm",
+  "synthetic_roster": [
+    {
+      "name": "Beauty Test Alternate 22 Nov 01",
+      "status": "IN",
+      "consent": "NO",
+      "source": "HUB",
+      "lpid": "UJcG",
+      "tpid": "MrPx"
+    },
+    {
+      "name": "Beauty Test Alternate 22 Nov 02",
+      "status": "IN",
+      "consent": "NO",
+      "source": "HUB",
+      "lpid": "ZnaO",
+      "tpid": "f5XN"
+    },
+    {
+      "name": "Beauty Test Alternate 22 Nov 03",
+      "status": "IN",
+      "consent": "NO",
+      "source": "HUB",
+      "lpid": "93AC",
+      "tpid": "qxE9"
+    },
+    {
+      "name": "Beauty Test Alternate 22 Nov 04",
+      "status": "IN",
+      "consent": "NO",
+      "source": "HUB",
+      "lpid": "YbK2",
+      "tpid": "Vao0"
+    },
+    {
+      "name": "Beauty Test Alternate 22 Nov 05",
+      "status": "IN",
+      "consent": "NO",
+      "source": "HUB",
+      "lpid": "uKhC",
+      "tpid": "8QT8"
+    },
+    {
+      "name": "Beauty Test Alternate 22 Nov 06",
+      "status": "IN",
+      "consent": "NO",
+      "source": "HUB",
+      "lpid": "NL0T",
+      "tpid": "hqrO"
+    },
+    {
+      "name": "Beauty Test Alternate 22 Nov 07",
+      "status": "IN",
+      "consent": "NO",
+      "source": "HUB",
+      "lpid": "39aG",
+      "tpid": "XKIf"
+    },
+    {
+      "name": "Beauty Test Alternate 22 Nov 08",
+      "status": "IN",
+      "consent": "NO",
+      "source": "HUB",
+      "lpid": "2flo",
+      "tpid": "mQgb"
+    }
+  ],
+  "native_alternate_restoration_scope": "HISTORICAL_A_B_PRE_CORRECTION_AND_C_CURRENT_SAME_SESSION_FRESH_LOGIN",
+  "full_alternate_matrix_pass": false,
+  "local_tests_note": "116 prior preparation/helper checks retained;36 new C helper checks passed. Separate roster-rejection fix suite reran76 checks (40 server,29 client,7 board), including8 new checks. These are local checks, not native acceptance.",
+  "case_b": {
+    "provider_change": "VERIFIED",
+    "provider_writes": 1,
+    "same_session_pass": true,
+    "fresh_same_owner_login_pass": true,
+    "fresh_same_owner_login_status": "PASS",
+    "helper_sha256": "70a53ec9d618de6060bd6a6b09c2b93b5eafff747e641ab24b1c6827ba21e78f",
+    "test_instrumentation_excluded_from_release": true,
+    "pool_engine_changed": false,
+    "hub_html_changed": false,
+    "expected": "case-b/CASE-B-EXPECTED.json",
+    "evidence": "case-b/evidence/case-b-same-session.json",
+    "pending_evidence": "case-b/evidence/case-b-reload-pending.json (historical, superseded by fresh-login PASS)",
+    "baseline_property": "BEAUTY_ALTERNATE_CASE_B_20261122_V1_BASELINE",
+    "journal_property": "BEAUTY_ALTERNATE_CASE_B_20261122_V1",
+    "journal_state": "VERIFIED",
+    "case_a_backup_retained": true,
+    "sheet_hash": "EsU7F4GjRCi1IBmqJYGAirP7yEuvlevRL7A1us6Bc-s",
+    "event_hash": "-6E4Z8BxqQf8iygaZKLQ9Tl9nwRjAUujtOhlS8dkhMs",
+    "fresh_login_evidence": "case-b/evidence/case-b-fresh-login.json",
+    "accepted_at_utc": "2026-11-22T16:20:51.398Z",
+    "fresh_login_source_changed": false,
+    "fresh_login_provider_changed": false
+  },
+  "accepted_source_scope_note": "Current HTML844585c… and unchanged pool server3f412860… have scoped native desktop reflow and exact C restoration/review acceptance. Historical A/B source coverage and the original TEST four-player scenario remain distinct. Actual phone/tablet and full-release acceptance remain open. A later user photo confirms the visible portrait C state only. Touch/scroll, landscape, device-side review and model/browser remain open; source identity is not proven by that image. Current-source A/B local regression now passes18 checks with recorded snapshots; simulated services/DOM only. Native final-source acceptance remains distinct.",
+  "case_c": {
+    "provider_change": "VERIFIED",
+    "provider_writes": 1,
+    "group_capacity": 4,
+    "stage1_slots": 4,
+    "stage2_slots": 4,
+    "helper_sha256": "6778e79c8d6162c418508eefa145b99558735cba8e6a77c97198961ab31ecff7",
+    "helper_local_checks": 36,
+    "test_instrumentation_excluded_from_release": true,
+    "baseline_property": "BEAUTY_ALTERNATE_CASE_C_20261122_V1_BASELINE",
+    "journal_property": "BEAUTY_ALTERNATE_CASE_C_20261122_V1",
+    "journal_state": "VERIFIED",
+    "case_b_backup_retained": true,
+    "case_a_and_b_protected_hash": "m1kL7ZhcO-BWgFrIBRYqag_LR88TCqjUXluM4vxOAEM",
+    "pre_registration_sheet_hash": "EsU7F4GjRCi1IBmqJYGAirP7yEuvlevRL7A1us6Bc-s",
+    "pre_registration_event_hash": "Akxz21ItWoowWRIYMW-qSsAc8dECO-BlXIrU8XGZsHg",
+    "registrations_added_once": [
+      "Beauty Test Alternate 22 Nov 07",
+      "Beauty Test Alternate 22 Nov 08"
+    ],
+    "new_draw_generated": true,
+    "same_session_pass": true,
+    "fresh_same_owner_login_pass": true,
+    "native_acceptance": "PASS_RECORDED_SAME_SESSION_AND_FRESH_DOCUMENT_CONDITIONS",
+    "evidence": "case-c/evidence/checkpoint.json",
+    "old_reader": "Pins six-player pre-registration state; do not rerun against eight.",
+    "roster_rejection_fix": {
+      "status": "INSTALLED_NATIVE_ROSTER_CHANGE_REGRESSION_PASS",
+      "source_files": {
+        "HubTestPools.gs": "3f41286018feec8747b9d516d36d8fb22e81410367ba666ac756d699ca26c465",
+        "HubTest.html": "2d7eb6dcd7c0a7c21c6568723205a7d3fd3892e3301cca56b0de60113c703bff"
+      },
+      "local_checks": 76,
+      "local_suite_breakdown": {
+        "server": 40,
+        "client": 29,
+        "board-summary": 7
+      },
+      "native_acceptance": "PASS_BOUNDED_ROSTER_CHANGE",
+      "installed_project": "Alternate Format TEST only",
+      "baseline": "case-c/baseline",
+      "evidence": "case-c/roster-rejection-fix/evidence/installed.json",
+      "native_finished_at": "2026-11-22T17:01:45.003Z",
+      "native_checks": 7,
+      "native_evidence": "case-c/evidence/roster-regression.json",
+      "all_eight_statuses_restored": true,
+      "original_C_draw_restored": true
+    },
+    "seed": 2325507431,
+    "frozen_at": "2026-11-22T16:58:16.619Z",
+    "statistics_at": "2026-11-22T16:57:31.614Z",
+    "same_session_at": "2026-11-22T17:09:59.481Z",
+    "same_session_evidence": "case-c/evidence/native/same-session.json",
+    "fresh_same_owner_login_status": "PASS",
+    "expected": "case-c/CASE-C-EXPECTED.json",
+    "pending_evidence": "case-c/evidence/native/reload-pending.json (historical; superseded by fresh-login PASS)",
+    "accepted_at_utc": "2026-11-22T17:22:21.807Z",
+    "fresh_login_checks": 12,
+    "fresh_login_evidence": "case-c/evidence/native/fresh-login.json",
+    "fresh_login_source_changed": false,
+    "fresh_login_provider_changed": false,
+    "post_css_restoration": {
+      "status": "PASS_SCOPED_DESKTOP",
+      "accepted_at_utc": "2026-11-22T17:56:11.577Z",
+      "html_sha256": "844585c07a85da1d7c2c3d0bc0fda39d45d9dd8cc562d6b6963b948fb4bccaa1",
+      "evidence": "case-c/responsive/evidence/acceptance.json",
+      "original_expected_unchanged": true
+    }
+  },
+  "native_checks_this_checkpoint": {
+    "recorded_comparisons": 20,
+    "rendered_controls_per_profile": 46,
+    "zoom_profiles": [
+      "100%",
+      "200%",
+      "300%",
+      "returned100%"
+    ],
+    "actual_device_acceptance": false
+  },
+  "native_source_changed_this_checkpoint": false,
+  "native_current_candidate_acceptance": "PASS_SCOPED_DESKTOP_REFLOW_AND_C_RESTORATION",
+  "responsive_header": {
+    "status": "PASS_SCOPED_DESKTOP_ZOOM_AND_C_RESTORATION",
+    "installed_at_utc": "2026-11-22T17:36:44.532Z",
+    "file": "HubTest.html",
+    "baseline_sha256": "2d7eb6dcd7c0a7c21c6568723205a7d3fd3892e3301cca56b0de60113c703bff",
+    "installed_sha256": "844585c07a85da1d7c2c3d0bc0fda39d45d9dd8cc562d6b6963b948fb4bccaa1",
+    "javascript_unchanged": true,
+    "scope": "Alternate Format TEST only",
+    "condition": "max-height:600px",
+    "change": "body.pool-workspace-active .hub-masthead position:static",
+    "native_acceptance": "PASS_SCOPED_DESKTOP",
+    "actual_device_acceptance": false,
+    "evidence_root": "case-c/responsive/",
+    "prior_C_evidence_preserved": true,
+    "rollback": "Restore only responsive/baseline/HubTest.html after checking current source; preserve pool server, draft and provider data.",
+    "signin_blocker": {
+      "observed_at_utc": "2026-11-22T17:45:07.970Z",
+      "evidence": "case-c/responsive/evidence/signin-blocked.json",
+      "cause": "UNKNOWN",
+      "automatic_retry": false,
+      "credential_values_inspected": false,
+      "resolved_by_user": true,
+      "resolution_observed_at_utc": "2026-11-22T17:56:11.577Z"
+    },
+    "accepted_at_utc": "2026-11-22T17:56:11.577Z",
+    "comparisons": 20,
+    "rendered_controls_per_profile": 46,
+    "acceptance_evidence": "case-c/responsive/evidence/acceptance.json",
+    "portrait_photo": {
+      "status": "CONFIRMED_VISIBLE_PORTRAIT_STATE_ONLY",
+      "evidence": "case-c/responsive/evidence/portrait-photo.json",
+      "actual_device_full_acceptance": false,
+      "source_changed": false,
+      "data_changed": false
+    }
+  },
+  "portrait_photo": {
+    "status": "CONFIRMED_VISIBLE_PORTRAIT_STATE_ONLY",
+    "evidence": "case-c/responsive/evidence/portrait-photo.json",
+    "actual_device_full_acceptance": false,
+    "source_changed": false,
+    "data_changed": false
+  },
+  "current_source_ab": {
+    "status": "PASS_LOCAL_CURRENT_SOURCE_AB",
+    "checks": 18,
+    "recorded_at_utc": "2026-11-22T18:32:59.728Z",
+    "sources": {
+      "server": {
+        "path": "case-c/roster-rejection-fix/installed-readback/HubTestPools.gs",
+        "sha256": "3f41286018feec8747b9d516d36d8fb22e81410367ba666ac756d699ca26c465"
+      },
+      "html": {
+        "path": "case-c/responsive/installed-readback/HubTest.html",
+        "sha256": "844585c07a85da1d7c2c3d0bc0fda39d45d9dd8cc562d6b6963b948fb4bccaa1"
+      }
+    },
+    "evidence": "current-source-ab/evidence/results.json",
+    "native_acceptance_rerun": false,
+    "application_source_changed": false,
+    "remote_calls": 0,
+    "generated_draws": 0,
+    "next_workstream": "ordinary worker runtime and exhausted expired claims"
+  }
+}

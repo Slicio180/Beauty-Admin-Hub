@@ -1,0 +1,26 @@
+--- baseline/Code.gs
++++ candidate/Code.gs
+@@ -1313,6 +1313,7 @@
+ */
+ 
+ function originalSyncMasterListToGoogleForm_() {
++  throw Error("TEST isolation: legacy external-data operation is disabled.");
+ 
+   const spreadsheet =
+     beautyHubSpreadsheet_();
+@@ -1797,6 +1798,7 @@
+ */
+ 
+ function importPlayersToMasterList_() {
++  throw Error("TEST isolation: legacy external-data operation is disabled.");
+ 
+   const spreadsheet =
+     beautyHubSpreadsheet_();
+@@ -1878,6 +1880,7 @@
+ function originalRegisterPlayerWithN01_(
+   playerName
+ ) {
++  throw Error("TEST isolation: legacy external-data operation is disabled.");
+ 
+   const EVENT_ID =
+     getN01EventIdFromControlDate_();

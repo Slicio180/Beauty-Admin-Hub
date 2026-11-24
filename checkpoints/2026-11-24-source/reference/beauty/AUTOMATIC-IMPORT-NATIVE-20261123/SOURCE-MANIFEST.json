@@ -1,0 +1,63 @@
+{
+  "checkpoint": 75,
+  "status": "DISPOSABLE_NATIVE_CORE_IMPORT_PASS",
+  "scriptId": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "fixture": {
+    "eventId": "t_Q2uO_8370",
+    "sheetId": "1XSEloziLS60J0w6MdP3CkJ7VZlrtFLwfPYIlXp0fUNA"
+  },
+  "files": [
+    {
+      "file": "HubTestNakkaImport.gs",
+      "bytes": 18403,
+      "sha256": "c461d8bd28010f22d583b7724f5ba94eee3afddc302832c91880f666be14a324",
+      "exact_native_readback": true
+    },
+    {
+      "file": "BeautyImportAcceptance20261123.gs",
+      "bytes": 27521,
+      "sha256": "e3417f03bc7296d7d6eee03736ce26ca808effb587bc4b44fb8aa4c7d207fd4e",
+      "exact_native_readback": true
+    },
+    {
+      "file": "BeautyConsentLinkAcceptance20261123.gs",
+      "bytes": 11640,
+      "sha256": "41ddd1844d9cda42ef28d0871b26c7abac437feac2107837c72026cef12de387",
+      "exact_native_readback": true
+    }
+  ],
+  "local_checks": 84,
+  "native_adapter_scope": "Separate exact-target fixture adapter; normal worker source and selected context unchanged",
+  "normal_worker_sha256": "7b81eb02e784d5e141f30b69d42edbb9995a394efaa8f0ed6e9773aa063d7e8e",
+  "live_changed": false,
+  "clock_changes": 0,
+  "provider_write_requests_setup": 2,
+  "provider_writes_automatic_phase": 0,
+  "master_writes": 0,
+  "consent_sheet_acceptance": {
+    "result": "PASS_NATIVE_CONSENT_SHEET_ROUNDTRIP",
+    "liveReadOnlyAudit": {
+      "observedAt": "2026-11-23T19:48:03.415Z",
+      "displayedPlayersMatched": 19,
+      "formulaRange": "TONIGHT'S PLAYERS!D2:D40"
+    },
+    "exactLiveFunctionEmbedded": true,
+    "fixtureOnly": true,
+    "hubSaveToSheetJA": true,
+    "directSheetNoToDisplay": true,
+    "staleSaveRefusedWithoutOverwrite": true,
+    "automaticImporterPreservedJA": true,
+    "restoredNA": true,
+    "originalResponsePreserved": true,
+    "originalTestStateUnchanged": true,
+    "sheetReloadObserved": true,
+    "ordinaryHubUiAcceptance": false,
+    "liveWrites": 0,
+    "limitations": [
+      "Ordinary Hub click, authentication and full Hub reload were not exercised.",
+      "Current LIVE source was read, not changed or redeployed.",
+      "Cause of the earlier missing consent display formula remains separate investigation.",
+      "A repeated already-verified request returns its stored receipt; that path was not exercised after a later consent change."
+    ]
+  }
+}

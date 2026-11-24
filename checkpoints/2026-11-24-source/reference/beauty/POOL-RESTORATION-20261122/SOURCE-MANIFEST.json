@@ -1,0 +1,72 @@
+{
+  "status": "INSTALLED_TEST_SOURCE_VERIFIED_BOUNDED_NATIVE_ACCEPTANCE",
+  "verifiedUTC": "2026-11-22T11:04:06.738777+00:00",
+  "project": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "files": [
+    {
+      "file": "HubTestPools.gs",
+      "baseline_sha256": "a41fd9e48b6318b1b8a32ced3b3d77d598024150a0ed8ab642eadba08260517b",
+      "candidate_sha256": "658f09656ae3e5e1bec185a4754fc9df51338b204234f102768069d960022785",
+      "candidate_bytes": 80675,
+      "installed_readback_sha256": "658f09656ae3e5e1bec185a4754fc9df51338b204234f102768069d960022785"
+    },
+    {
+      "file": "HubTestBridge.gs",
+      "baseline_sha256": "80a5b7112caf623838b0b28424c082433c78c3c8a4eb8d24f52d754cba1138c3",
+      "candidate_sha256": "233333b6c7b53b927be9775a3e3272bdf5edb9ae1425acbc573336d636c0b00b",
+      "candidate_bytes": 5132,
+      "installed_readback_sha256": "233333b6c7b53b927be9775a3e3272bdf5edb9ae1425acbc573336d636c0b00b"
+    },
+    {
+      "file": "HubTest.html",
+      "baseline_sha256": "e0e3312813fe04d1cffdc23c8e5204faf2539957ca7cf9ae079cbe878057ec50",
+      "candidate_sha256": "5c812887a2731019a2fb4f8038a830d288291f5422cf36c258b498ea3f138edf",
+      "candidate_bytes": 1208134,
+      "installed_readback_sha256": "5c812887a2731019a2fb4f8038a830d288291f5422cf36c258b498ea3f138edf"
+    }
+  ],
+  "local_checks": 68,
+  "native_installation": "FRESH_RELOAD_READBACK_MATCHED",
+  "native_acceptance": "SIX_PLAYER_AND_FOUR_PLAYER_TWO_BOARD_RESTORATION_PASS",
+  "installedReadbackRecordedUTC": "2026-11-22T11:53:18.107008+00:00",
+  "native_acceptance_blocker": null,
+  "nativeHubObservedUTC": "2026-11-22T12:36:12.394Z",
+  "native_acceptance_source_html_sha256": "5c812887a2731019a2fb4f8038a830d288291f5422cf36c258b498ea3f138edf",
+  "native_followup_html_sha256": "5c812887a2731019a2fb4f8038a830d288291f5422cf36c258b498ea3f138edf",
+  "native_followup_status": "STALE_REJECTION_NAVIGATION_NATIVE_PASS",
+  "nativeHubObservedDate": "2026-11-22",
+  "timezone": "Europe/Stockholm",
+  "native_acceptance_source_server_sha256": "658f09656ae3e5e1bec185a4754fc9df51338b204234f102768069d960022785",
+  "native_followup_server_sha256": "658f09656ae3e5e1bec185a4754fc9df51338b204234f102768069d960022785",
+  "latest_two_file_readback_recordedUTC": "2026-11-22T12:11:28.635899+00:00",
+  "latest_two_file_readback": [
+    "HubTestPools.gs",
+    "HubTest.html"
+  ],
+  "native_acceptance_evidence": "NATIVE-STALE-RECOVERY-20261122.json",
+  "previous_native_acceptance": {
+    "native_acceptance": "FRESH_LOGIN_RESTORATION_DISPLAY_FIXES_AND_STALE_REJECTION_PASSED_NAVIGATION_FIX_PENDING",
+    "native_acceptance_evidence": "NATIVE-RELOGIN-20261122.json",
+    "native_acceptance_source_html_sha256": "babe6b541c5edfb45a165c0401710b7ee8cdaa9467bd0fefe4e43f8207803e90",
+    "native_acceptance_source_server_sha256": "95bb2cdc98b3d6000a2da3e753e63e12073685be10957ae92688a162ab4322eb"
+  },
+  "native_acceptance_recordedUTC": "2026-11-22T12:29:22.735683+00:00",
+  "native_remaining": [
+    "Native alternate-format fixture selection/setup and acceptance",
+    "Four-player fresh-login and wider device coverage",
+    "Long runtime and lock contention; separate speed work uninstalled",
+    "Exhausted stale-claim handling and closed-Hub competition-results reconciliation"
+  ],
+  "native_approval_acceptance": {
+    "status": "PASS",
+    "evidence": "NATIVE-APPROVAL-CLEARANCE-20261122.json",
+    "scope": "Native same-session navigation: checked confirmation removed; fresh review unchecked with send disabled; final saved draw unapproved. No stale send was submitted.",
+    "recordedUTC": "2026-11-22T12:37:23.135631+00:00"
+  },
+  "native_four_player_evidence": "../POOL-FOUR-BOARD-20261122/evidence/native-final.json",
+  "ordinary_timeout_followup": {
+    "result": "AUTOMATIC_RETRY_VERIFIED",
+    "evidence": "../ORDINARY-TIMEOUT-20261122/NATIVE-RECOVERY-VERIFIED.json",
+    "runtime_and_speed_still_open": true
+  }
+}

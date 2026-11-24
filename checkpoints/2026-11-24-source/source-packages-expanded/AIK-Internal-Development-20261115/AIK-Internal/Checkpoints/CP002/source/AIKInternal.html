@@ -1,0 +1,66 @@
+<style>
+#aikInternal{color:#fff;background:#050505;border:1px solid #ffd700;border-radius:18px;width:min(900px,92vw);max-height:88vh;padding:28px;font:18px/1.45 'AIK Condensed',Arial,sans-serif}
+#aikInternal::backdrop{background:#000c}#aikInternal h2,#aikInternal h3{color:#ffd700}#aikInternal button{background:#000;color:#ffd700;border:1px solid #ffd700;border-radius:8px;padding:10px 16px;margin:5px;cursor:pointer}#aikInternal button:active{background:#ffd700;color:#000}#aikInternal button:disabled{opacity:.5;cursor:wait}#aikInternal input,#aikInternal select{background:#141414;color:#fff;border:1px solid #777;padding:10px;max-width:100%;font:inherit}#aikInternal label{display:block;margin:10px 0}#aikInternal .aik-roster{max-height:240px;overflow:auto;border-block:1px solid #555;padding:10px}#aikInternal .aik-roster label{display:inline-block;width:46%;min-width:220px}#aikInternal :focus-visible{outline:3px solid #fff;outline-offset:3px}#aikInternal [role=alert]{color:#ffc56c}
+</style>
+<script>
+(()=>{
+'use strict';let dialog,busy=false,state,opener,epoch=0,message;
+const el=(tag,text,parent)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;parent?.append(n);return n;};
+const button=(text,fn,parent=dialog)=>{const b=el('button',text,parent);b.type='button';b.onclick=()=>{if(!busy)fn();};return b;};
+function field(text,type,value='',parent=dialog){const l=el('label',text+' ',parent),n=el('input',undefined,l);n.type=type;n.value=value;return n;}
+function close(){if(busy)return;epoch++;dialog.close();dialog.remove();dialog=null;opener?.focus();}
+function frame(title){dialog.replaceChildren();button('Stäng AIK Internt',close);el('h2',title,dialog);el('p',window.AikInternalClient?.mode==='preview'?'LOKAL FÖRHANDSVISNING · Endast testnamn · Allt rensas vid omladdning · Ingen Google/Nakka-anslutning':'AIK INTERNT · TEST · Separat spelarlista · Nakka-turneringar',dialog);message=el('p','',dialog);message.setAttribute('role','alert');}
+async function call(action,input={}){
+ const client=window.AikInternalClient,turn=epoch;if(!client?.valid())throw Error('AIK-session saknas.');
+ busy=true;dialog.querySelectorAll('button,input,select').forEach(n=>n.disabled=true);message.textContent='Arbetar…';
+ try{const r=await client.request(action,input);
+ if(!dialog||turn!==epoch)return;if(!client.valid()){busy=false;close();return;}
+ state=r;home();
+ }catch(e){if(dialog&&turn===epoch){if(!client.valid()){busy=false;close();return;}message.textContent=e.message+' Vid osäkert sparresultat: läs in listan igen innan du försöker på nytt.';}}
+ finally{busy=false;if(dialog)dialog.querySelectorAll('button,input,select').forEach(n=>n.disabled=false);}
+}
+function home(){
+ frame('AIK Internt');
+ if(!state.configured){el('p',window.AikInternalClient.mode==='preview'?'Skapa en tom testlista i denna sida. Ingen riktig arbetsbok skapas.':'Skapa en egen tom arbetsbok för AIK:s interna spelare och tävlingar.',dialog);button(window.AikInternalClient.mode==='preview'?'Skapa lokal testlista':'Skapa AIK-arbetsbok (TEST)',()=>call('setup'));return;}
+ el('p',state.players.length+' spelare i AIK:s egen masterlista',dialog);
+ const names=el('ul',undefined,dialog);state.players.forEach(p=>el('li',p.name,names));
+ const name=field('Ny AIK-spelare','text');name.maxLength=100;button('Lägg till spelare',()=>call('addPlayer',{name:name.value}));
+ button('Ny intern tävling',edit);button('Läs in igen',()=>call('read'));
+ el('h3','Sparade tävlingsutkast',dialog);
+ if(!state.events.length)el('p','Inga tävlingar sparade ännu.',dialog);
+ for(const event of state.events){const box=el('details',undefined,dialog);el('summary',event.title+' · '+event.date+' · '+(event.format==='doubles'?'Dubbel':'Singel'),box);el('p','UTKAST — inte skickat till Nakka',box);event.entries.forEach(team=>el('p',team.map(p=>p.name).join(' + '),box));if(event.tournamentUrl)el('p','Nakka-adress sparad, ännu inte verifierad: '+event.tournamentUrl,box);}
+}
+function edit(){
+ frame('Ny intern tävling');
+ const title=field('Tävlingsnamn','text');title.maxLength=100;
+ const date=field('Datum','date',new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Stockholm'}).format(new Date()));
+ const kindLabel=el('label','Tävlingstyp ',dialog),kind=el('select',undefined,kindLabel);
+ for(const [value,label] of [['km','KM'],['cup','Annan intern cup']]){const o=el('option',label,kind);o.value=value;}
+ const formatLabel=el('label','Spelform ',dialog),format=el('select',undefined,formatLabel);
+ for(const [value,label] of [['singles','Singel'],['doubles','Dubbel']]){const o=el('option',label,format);o.value=value;}
+ const url=field('Nakka-turneringens adress (valfritt i utkast)','url');url.placeholder='https://n01darts.com/n01/tournament/comp.php?id=t_…';
+ el('h3','Välj deltagare från AIK-listan',dialog);
+ const roster=el('div',undefined,dialog);roster.className='aik-roster';
+ const chosen=new Set(),pairs=[];const pairing=el('div',undefined,dialog);let requestId=crypto.randomUUID();
+ function changed(){requestId=crypto.randomUUID();pairs.length=0;renderPairs();}
+ for(const p of state.players.filter(p=>p.active)){const label=el('label',undefined,roster),check=el('input',undefined,label);check.type='checkbox';label.append(document.createTextNode(' '+p.name));check.onchange=()=>{check.checked?chosen.add(p.id):chosen.delete(p.id);changed();};}
+ function renderPairs(){pairing.replaceChildren();if(format.value!=='doubles')return;
+ el('h3','Dubbelpar',pairing);const used=new Set(pairs.flat()),remaining=[...chosen].filter(id=>!used.has(id));
+ for(const pair of pairs)el('p',pair.map(id=>state.players.find(p=>p.id===id).name).join(' + '),pairing);
+ el('p',remaining.length+' valda spelare kvar att para ihop',pairing);
+ if(remaining.length>=2){const selectors=[0,1].map((_,i)=>{const label=el('label','Spelare '+(i+1)+' ',pairing),s=el('select',undefined,label);remaining.forEach(id=>{const o=el('option',state.players.find(p=>p.id===id).name,s);o.value=id;});s.selectedIndex=i;return s;});button('Lägg till paret',()=>{if(selectors[0].value===selectors[1].value){message.textContent='Välj två olika spelare.';return;}pairs.push(selectors.map(s=>s.value));requestId=crypto.randomUUID();renderPairs();},pairing);}
+ button('Återställ par',changed,pairing);
+ }
+ format.onchange=changed;
+ [title,date,kind,url].forEach(n=>n.addEventListener('change',()=>requestId=crypto.randomUUID()));
+ button('Tillbaka',home);
+ button('Spara tävlingsutkast',()=>{
+ if(format.value==='doubles'&&pairs.flat().length!==chosen.size){message.textContent='Alla valda spelare måste ingå i ett dubbelpar.';return;}
+ call('saveDraft',{requestId,title:title.value,date:date.value,kind:kind.value,format:format.value,tournamentUrl:url.value,entries:format.value==='doubles'?pairs:[...chosen].map(id=>[id])});
+ });
+ el('p','Detta steg sparar deltagarlistan. Start och överföring till Nakka kopplas in efter separat TEST-verifiering.',dialog);
+}
+setInterval(()=>{if(dialog){try{if(!window.AikInternalClient?.valid())throw Error('AIK-session saknas.');}catch(e){busy=false;close();}}},1000);
+window.BeautyAikInternal={open(){if(dialog)return;if(!window.AikInternalClient?.valid())throw Error('AIK-session saknas.');opener=document.activeElement;dialog=el('dialog');dialog.id='aikInternal';dialog.setAttribute('aria-label','AIK Internt');dialog.addEventListener('cancel',e=>{e.preventDefault();close();});document.body.append(dialog);frame('AIK Internt');dialog.showModal();call('read');}};
+})();
+</script>

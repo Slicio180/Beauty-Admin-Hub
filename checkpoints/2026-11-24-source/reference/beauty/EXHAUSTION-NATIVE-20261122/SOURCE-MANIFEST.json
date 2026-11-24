@@ -1,0 +1,144 @@
+{
+  "status": "TEST_DIALOG_FIX_INSTALLED_NATIVE_DIALOG_AND_ARCHIVAL_PENDING_AUTH",
+  "date": "2026-11-22",
+  "project_id": "1toxHCexOm5xyillytqPLBidiv62PePvrX4EQROvWeTZddfjrUJGMem6N",
+  "context": {
+    "version": 1,
+    "mode": "league",
+    "leagueId": "lg_M2wQ_4189",
+    "eventId": "t_GgaQ_0921",
+    "date": "2026-11-21",
+    "title": "Beauty TEST Removal Recovery 2026-11-21",
+    "sheetId": "1N0kp0f2kOQETylULYI685JDZH3bVKq9lG_NhoAba8lk",
+    "revision": "ac044ca8097c46e2b672c5917627fa2a"
+  },
+  "clock_uid": "9153037705028829184",
+  "helper": {
+    "name": "BeautyExhaustionFixture20261122.gs",
+    "sha256": "ff349d40c16b1e574cbe8dfc73cac40797161fd2bbac5140d4ef87e5c3091710",
+    "bytes": 15347,
+    "matchedAfterReload": true,
+    "checkedUTC": "2026-11-22T20:06:26.467Z"
+  },
+  "unchanged_source": [
+    {
+      "name": "HubTestBackgroundRecovery.gs",
+      "sha256": "785e2e358922c59bfacdbdb861241668b6f4006a409c4f53637c60cc6ee70413",
+      "bytes": 21968
+    },
+    {
+      "name": "HubTestAttention.gs",
+      "sha256": "b058508c929d789072c4a0b9d2a0612cd14f32f408ced7f640d97a41ad528f8d",
+      "bytes": 40869
+    },
+    {
+      "name": "BeautyPoolFourBoardFixture20261122.gs",
+      "sha256": "e9a96c76c165c712a9d32f0e5c5b7e1cfe6464999a16a6328312c1aeada018c2",
+      "bytes": 15798
+    }
+  ],
+  "local_checks": 36,
+  "seed_provenance": "SYNTHETIC SEEDED EXPIRED CLAIM",
+  "real_timeouts_induced": 0,
+  "native_clock": {
+    "observedAtUTC": "2026-11-22T19:38:40.713Z",
+    "execution": "Head\tbeautyBackgroundClock_\tTime-driven\t22 Nov 2026, 20:31:09\t10.262 s\t\nCompleted\n\n",
+    "result": {
+      "type": "BEAUTY_BACKGROUND_RESULT",
+      "state": "FINISHED",
+      "owner": "fde59ea7-ca9e-4517-8040-2794a6162890",
+      "triggerUid": "9153037705028829184",
+      "context": {
+        "version": 1,
+        "mode": "league",
+        "leagueId": "lg_M2wQ_4189",
+        "eventId": "t_GgaQ_0921",
+        "date": "2026-11-21",
+        "title": "Beauty TEST Removal Recovery 2026-11-21",
+        "sheetId": "1N0kp0f2kOQETylULYI685JDZH3bVKq9lG_NhoAba8lk",
+        "revision": "ac044ca8097c46e2b672c5917627fa2a"
+      },
+      "startedAt": "2026-11-22T19:31:18.135Z",
+      "leaseUntil": 1795376478146,
+      "operation": "registration-review",
+      "player": "Beauty Test Exhaustion 22 Nov 12",
+      "timing": {
+        "clockStartedAt": "2026-11-22T19:31:12.293Z",
+        "authorityMs": 90,
+        "lockWaitMs": 94,
+        "lockedSetupMs": 112,
+        "selectionMs": 5545,
+        "claimSetupMs": 56,
+        "operationMs": 1174,
+        "beforeResultSaveMs": 7115
+      },
+      "finishedAt": "2026-11-22T19:31:19.408Z",
+      "result": {
+        "operation": "registration-review",
+        "player": "Beauty Test Exhaustion 22 Nov 12",
+        "verified": false,
+        "code": "BACKGROUND_RETRY_EXHAUSTED",
+        "attempts": 3,
+        "requiresReview": true,
+        "backup": "BEAUTY_BACKGROUND_EXHAUSTED_V1_a2hif9E-UPstEP-m4dfPbG060Ldjv3Z3fRAfsjxIt70",
+        "nakkaWrites": 0
+      }
+    },
+    "provenance": "SYNTHETIC SEEDED EXPIRED CLAIM",
+    "realTimeoutsInduced": 0
+  },
+  "native_server_guidance": "PASS",
+  "native_rendered_guidance": "PENDING_AUTHENTICATION",
+  "fixture_state": "CAPTURED",
+  "archived": false,
+  "protected_state_match": true,
+  "later_tick_no_replay": true,
+  "source_sheets_or_provider_mutated_by_fixture": false,
+  "ordinary_timeout_before_seed": {
+    "observedAtUTC": "2026-11-22T19:24:36.602Z",
+    "execution": "Head\tbeautyBackgroundClock_\tTime-driven\t22 Nov 2026, 20:17:09\t361.81 s\t\nTimed out\n\n",
+    "cloudLogs": "Cloud logs\n22 Nov 2026, 20:23:11\tError\tExceeded maximum execution time\nREFRESH",
+    "lastRun": {
+      "state": "RUNNING",
+      "owner": "1887e97c-de91-413a-9f1f-d20d0f0b1c4a",
+      "triggerUid": "9153037705028829184",
+      "context": {
+        "version": 1,
+        "mode": "league",
+        "leagueId": "lg_M2wQ_4189",
+        "eventId": "t_GgaQ_0921",
+        "date": "2026-11-21",
+        "title": "Beauty TEST Removal Recovery 2026-11-21",
+        "sheetId": "1N0kp0f2kOQETylULYI685JDZH3bVKq9lG_NhoAba8lk",
+        "revision": "ac044ca8097c46e2b672c5917627fa2a"
+      },
+      "startedAt": "2026-11-22T19:19:38.462Z",
+      "leaseUntil": 1795375778463,
+      "operation": "registration",
+      "player": "Beauty Test Pool 22 Nov 01",
+      "timing": {
+        "clockStartedAt": "2026-11-22T19:17:15.377Z",
+        "authorityMs": 984,
+        "lockWaitMs": 406,
+        "lockedSetupMs": 1597,
+        "selectionMs": 139911
+      }
+    },
+    "inducedByExhaustionFixture": false
+  },
+  "live_changed": false,
+  "alternate_changed": false,
+  "speed_installed": false,
+  "trigger_config_changed": false,
+  "public_github_changed": false,
+  "next": "**Next action:** Sign into the reloaded original TEST Hub, then open Recovery and Beauty Test Exhaustion 22 Nov 12. On the installed dialog fix, opening that item must show Automatic retries stopped, the retry-limit explanation, advice not to register again, and Check after correction without starting a review. Do not click that action for this property-only fixture. Compare the native read-only result before/after opening: terminal recovery, ownership, history and registration bytes must remain unchanged. The helper should report TERMINAL_VERIFIED_ATTENTION_REFRESHED for the normal identity-review alert while retaining the original capture. Then run the guarded beautyRetireExhaustionFixture20261122, confirm RETIRED with the protected state unchanged, and verify synthetic12 disappears from the active Recovery list. The complete archive and worker before-image remain; the guarded Restore function reinstates only the terminal fixture. Confirm the editor’s selected function in a fresh observation before pressing Run. Do not reseed, reset attempts/leases, replay06/09/10/11 or change the clock. Preserve original/C drafts, previous receipts and the separate speed package. Investigate long-lock/runtime cost afterward. Native A/B final-source and device checks remain separate. No SEND, START, LIVE promotion, public GitHub or speed installation.",
+  "initial_helper": {
+    "name": "BeautyExhaustionFixture20261122.gs",
+    "sha256": "a320511d3243aa5a98234d5e9afbd8c1540f56f3bc771f687a49b4e8d9ecd3ab",
+    "bytes": 13849,
+    "afterReloadMatch": true
+  },
+  "native_alert_refresh": "HUB_IDENTITY_REVIEW",
+  "original_capture_unchanged": true,
+  "ui_review_fix": "ui-review-fix/SOURCE-MANIFEST.json"
+}

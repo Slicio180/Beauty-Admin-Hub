@@ -1,0 +1,26 @@
+{
+  "status": "NATIVE_PREVIEWS_SEARCH_PASS_WRAP_FIX_EXACT_NATIVE_PENDING",
+  "changedFiles": [
+    "HubTest.html"
+  ],
+  "localChecks": 21,
+  "baseline": {
+    "bytes": 1246968,
+    "sha256": "6c55e06b5005e5d9811c7c86e5432ce832b97338373aa5b14c3d7781d1e9881f"
+  },
+  "candidate": {
+    "bytes": 1246982,
+    "sha256": "f7e584e21eb40c2225c7d4a12157ae7c28cf786d02d4dfcc6095d93729ac074a"
+  },
+  "nativeReadback": {
+    "result": "PASS",
+    "file": "HubTest.html",
+    "bytes": 1246982,
+    "sha256": "f7e584e21eb40c2225c7d4a12157ae7c28cf786d02d4dfcc6095d93729ac074a",
+    "exact": true,
+    "readAtUTC": "2026-11-23T16:40:29.397Z",
+    "runUsed": false,
+    "deploymentUsed": false
+  },
+  "change": "One scoped CSS flex rule; unrelated source byte-exact."
+}

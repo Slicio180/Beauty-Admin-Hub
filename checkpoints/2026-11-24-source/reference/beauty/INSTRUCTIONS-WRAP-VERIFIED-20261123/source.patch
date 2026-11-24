@@ -1,0 +1,54 @@
+--- baseline/Code.gs
++++ candidate/Code.gs
+@@ -2752,46 +2752,11 @@
+             consent || ''
+           ).trim();
+ 
+-  sheet
+-    .getRange(
+-      playerRow,
+-      4
+-    )
+-    .setValue(
+-      consentDisplay
+-    );
+-
+-
+-  /*
+-  ======================================================
+-  MEDDELANDE
+-  ======================================================
+-
+-  Stored in COLUMN E.
+-
+-  ======================================================
+-  */
+-
+-  sheet
+-    .getRange(
+-      playerRow,
+-      5
+-    )
+-    .setValue(
+-      message || ''
+-    );
+-/*
+-F = WHERE FROM
+-*/
+-
+-sheet
+-  .getRange(
+-    playerRow,
+-    6
+-  )
+-  .setValue(
+-    source || ''
+-  );
++  // Save the three adjacent registration fields together. The status and
++  // correction-memory columns are deliberately outside this write.
++  sheet.getRange(playerRow, 4, 1, 3).setValues([[
++    consentDisplay, message || '', source || ''
++  ]]);
+   SpreadsheetApp.flush();
+ }
+ 

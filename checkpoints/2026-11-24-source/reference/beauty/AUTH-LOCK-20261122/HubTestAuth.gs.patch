@@ -1,0 +1,27 @@
+--- native-baseline/HubTestAuth.gs
++++ candidate/HubTestAuth.gs
+@@ -81,11 +81,19 @@
+   const token='bhs_'+Utilities.getUuid().replace(/-/g,'')+Utilities.getUuid().replace(/-/g,'');
+   const now=Date.now(),record={uid:account.localId,email:account.email,created:now,active:now,
+     expires:now+BEAUTY_HUB_AUTH_MAX_MS_};
+-  return beautyHubAuthLocked_(()=>{
+-    record.epoch=beautyHubAuthEpoch_(record.uid);
+-    beautyHubAuthPrune_();beautyHubAuthStore_(beautyHubAuthKey_(token),record);
+-    return {success:true,authorized:true,token,email:record.email,expiresAt:record.expires,idleMs:BEAUTY_HUB_AUTH_IDLE_MS_};
+-  });
++  // Login creates a fresh unpredictable key; it does not update an existing
++  // session or the revocation epoch. Event work must not block this insertion.
++  // If logout races with the write, the epoch check fails closed. Every later
++  // authenticated request also rechecks that epoch and the admin allowlist.
++  const key=beautyHubAuthKey_(token);
++  if(PropertiesService.getScriptProperties().getProperty(key)!==null||CacheService.getScriptCache().get(key)!==null)beautyHubAuthError_('AUTH_UNAVAILABLE');
++  record.epoch=beautyHubAuthEpoch_(record.uid);
++  beautyHubAuthPrune_();
++  try{
++    beautyHubAuthStore_(key,record);
++    if(record.epoch!==beautyHubAuthEpoch_(record.uid)||!beautyHubAuthAllowed_().includes(record.uid))beautyHubAuthError_('AUTH_REQUIRED');
++  }catch(e){beautyHubAuthForget_(key);throw e;}
++  return {success:true,authorized:true,token,email:record.email,expiresAt:record.expires,idleMs:BEAUTY_HUB_AUTH_IDLE_MS_};
+ }
+ /* Run manually from the TEST editor. It uses fixed test strings and one fake
+  * token, and logs only booleans/status codes; never inspects a real login. */

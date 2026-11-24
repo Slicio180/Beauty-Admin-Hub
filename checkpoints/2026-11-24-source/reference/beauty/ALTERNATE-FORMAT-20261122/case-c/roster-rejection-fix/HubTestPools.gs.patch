@@ -1,0 +1,20 @@
+--- before/HubTestPools.gs
++++ candidate/HubTestPools.gs
+@@ -549,7 +549,7 @@
+     }
+     if(props.getProperty(journalKey))beautyPoolError_('A previous pool send is recorded. Inspect its audit; sending again is blocked.');
+     const frozen=ticketRead(),roster=beautyPoolRoster_();
+-    if(roster.signature!==frozen.rosterSignature||roster.date!==frozen.date)beautyPoolError_('The IN roster or event date changed. Saved draw retained for review.');
++    if(roster.signature!==frozen.rosterSignature||roster.date!==frozen.date)beautyPoolError_('The IN roster or event date changed. These choices were rejected. Reopen the planner; the saved draw is retained for an explicit new draw.','POOL_DRAFT_ROSTER_CHANGED');
+     if(action==='pooldraftchoices'){
+       BeautyPoolSeeding.check(frozen.draw);
+       const draftChoices=beautyPoolDraftChoices_(JSON.parse(input.choices),frozen.draw),requiresRedraw=draftChoices.preferredSize!==frozen.drawSettings?.preferredSize||draftChoices.scheme!==frozen.drawSettings?.scheme;
+@@ -609,7 +609,7 @@
+     if(format)try{props.setProperty('BEAUTY_POOL_FORMAT_PRESET',format.mode);}catch(e){}
+     return {success:true,readbackVerified:true,audit,receipt,format,message:(format?'TEST knockout format and qualifier rules verified. ':'')+(beautyPoolMode_(event)==='rr'?'Native Round Robin groups and placement-state readback verified. ':'TEST groups and every round-robin match pairing verified. ')+'Entries and other event settings preserved. Event remains pre-start.'};
+   }catch(e){
+-    return {success:false,error:attempted?'The send may be partially saved. Do not retry. Inspect TEST groups, match cards and the audit before any further change.':(e.name==='BeautyPoolError'?e.message:'Pool Planner could not be checked. Nothing was sent.'),...(!attempted&&e.name==='BeautyPoolError'&&e.code==='POOL_DRAFT_REPLACED'?{code:e.code}:{}),...(audit?{audit}:{}),uncertain:attempted};
++    return {success:false,error:attempted?'The send may be partially saved. Do not retry. Inspect TEST groups, match cards and the audit before any further change.':(e.name==='BeautyPoolError'?e.message:'Pool Planner could not be checked. Nothing was sent.'),...(!attempted&&e.name==='BeautyPoolError'&&['POOL_DRAFT_REPLACED','POOL_DRAFT_ROSTER_CHANGED'].includes(e.code)?{code:e.code}:{}),...(audit?{audit}:{}),uncertain:attempted};
+   }finally{lock.releaseLock();}
+ }
+ 
