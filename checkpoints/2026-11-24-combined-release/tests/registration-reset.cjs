@@ -1,0 +1,17 @@
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'..'),checks=[];
+for(const file of ['Kiosk.html','RemoteRegistration.html']){
+ const html=fs.readFileSync(path.join(root,'application',file),'utf8'),start=html.indexOf('let nextPlayerTimer=null;'),end=html.indexOf('function showError(message)',start);assert(start>=0&&end>start);
+ const nodes={},timers=new Map(),radios=[{checked:true},{checked:false}];let serial=0,loads=0;
+ const el=id=>nodes[id]??=( {value:'previous entry',textContent:'',style:{},classList:{remove(){}},parentElement:{after(){}},setAttribute(){}} );
+ const heading=el('heading'),context={document:{getElementById:el,querySelector:()=>heading,querySelectorAll:()=>radios,createElement:()=>el('registrationOutcome')},window:{scrollTo(){}},allPlayers:[],renderPlayerList(){},hideError(){},loadPlayers(){loads++;},clearTimeout:id=>timers.delete(id),setTimeout:(fn,delay)=>{const id=++serial;timers.set(id,{fn,delay});return id;}};
+ vm.createContext(context);vm.runInContext(html.slice(start,end),context);
+ function check(label,run){run();checks.push(file+': '+label);}
+ check('An uncertain response stays visible and does not claim a confirmed Nakka place',()=>{context.showSuccess('Player',{},{});assert.equal(timers.size,0);assert.equal(heading.textContent,'ANMÄLAN MOTTAGEN');assert.match(el('registrationOutcome').textContent,/Be arrangören kontrollera/);});
+ check('A confirmed response has one five-second return timer',()=>{context.showSuccess('Player',{entryConfirmed:true},{});assert.equal(timers.size,1);assert.equal([...timers.values()][0].delay,5000);assert.equal(heading.textContent,'DU ÄR ANMÄLD');});
+ check('Manual next-player action cancels the previous timer and clears private form fields',()=>{context.nextPlayer();assert.equal(timers.size,0);for(const id of ['playerName','playerSearch','newPlayerName','message'])assert.equal(el(id).value,'');assert(radios.every(r=>!r.checked));assert.equal(el('registrationScreen').style.display,'block');assert.equal(loads,1);});
+ check('A subsequent player cannot be reset by the prior response timer',()=>{el('message').value='next player draft';assert.equal(timers.size,0);assert.equal(el('message').value,'next player draft');context.showSuccess('Second',{entryConfirmed:true},{});context.showSuccess('Second',{entryConfirmed:true},{});assert.equal(timers.size,1);});
+ check('A later uncertain response cancels the earlier confirmed-response timer',()=>{context.showSuccess('Second',{},{});assert.equal(timers.size,0);});
+ check('An accepted queue receipt resets once without claiming Nakka confirmation',()=>{context.showSuccess('Queued',{}, {accepted:true,queued:true,queueState:'QUEUED'});assert.equal(timers.size,1);assert.equal(heading.textContent,'ANMÄLAN MOTTAGEN');assert.match(el('registrationOutcome').textContent,/ännu inte bekräftad/);const timer=[...timers.values()][0];timer.fn();assert.equal(timers.size,0);assert.equal(el('successScreen').style.display,'none');assert.equal(loads,2);});
+}
+const result={result:'PASS',checks:checks.length,details:checks,scope:'Actual kiosk and mobile success/reset handlers, simulated clock and form DOM.'};fs.writeFileSync(path.join(root,'evidence/registration-reset-tests.json'),JSON.stringify(result,null,2));console.log(JSON.stringify({result:result.result,checks:result.checks}));

@@ -1,0 +1,16 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),path=require('node:path');
+const root=path.resolve(__dirname,'..'),checks=[];let project='1pHzX3a0Od9mbzOq-N3bM-imvHGOjxHEpc3Bae1dthYb3llFMBSi0ZndZ';
+const c={ScriptApp:{getScriptId:()=>project},Set,Error};vm.createContext(c);vm.runInContext(fs.readFileSync(path.join(root,'application/BeautyReleaseEnvironment.gs'),'utf8'),c);
+const guard=c.beautyReleaseProviderGuard_,t=c.beautyReleaseEnvironment_().base;
+function test(name,fn){fn();checks.push(name);}
+test('TEST binds the fresh workbook and event',()=>{assert.equal(t.sheetId,'1Z2tBVyAsVt0X-yYPhCsgwuFWdKdOLtIN6-mTWee-dIE');assert.equal(t.eventId,'t_dx55_3500');assert.equal(c.beautyReleaseFormId_(),'1oMzrWm0IylBizzAmku2w1FU4DS9sJPpIj5BdJzHeA_Q');});
+test('Old fixtures and production cannot be read through TEST provider adapter',()=>{for(const id of ['t_Q2uO_8370','t_U5gv_5703'])assert.throws(()=>guard('tournament/get?tdid='+id));});
+test('Exact selected-event provider read is allowed',()=>guard('tournament/get?tdid='+t.eventId));
+test('Synthetic league member may be added only to TEST league',()=>{const body={lgid:t.leagueId,add:[{name:'Beauty Combined Alpha'}]};guard('league/entry/update',body);assert.throws(()=>guard('league/entry/update',{...body,lgid:'lg_tM2v_3523'}));});
+test('League removals, real names and hidden fields are rejected',()=>{for(const b of [{lgid:t.leagueId,remove:['ABCD']},{lgid:t.leagueId,add:[{name:'Real Person'}]},{lgid:t.leagueId,add:[{name:'Beauty Combined Alpha',lpid:'ABCD'}]}])assert.throws(()=>guard('league/entry/update',b));});
+test('Synthetic registration and reviewed removal remain available only in fresh TEST',()=>{guard('tournament/entry/update',{tdid:t.eventId,add:[{name:'Beauty Combined Alpha',lpid:'ABCD'}]});guard('tournament/entry/update',{tdid:t.eventId,remove:['ABCD']});assert.throws(()=>guard('tournament/entry/update',{tdid:'t_Q2uO_8370',remove:['ABCD']}));});
+test('TEST cannot create another event, change privacy, rename or retarget its event',()=>{assert.throws(()=>guard('tournament/create',{set:{}}));for(const k of ['title','private','lgid','t_date'])assert.throws(()=>guard('tournament/update',{tdid:t.eventId,set:{[k]:'changed'}}));});
+test('Planner writes remain restricted to the fixed event',()=>{guard('tournament/update',{tdid:t.eventId,expect_update_time:123,set:{rr_setting:{robin_count:2}}});assert.throws(()=>guard('tournament/update',{tdid:'t_Q2uO_8370',set:{status:30}}));});
+test('Unconfigured project fails closed',()=>{project='unknown';assert.throws(c.beautyReleaseEnvironment_);});
+test('LIVE retains the original base, Form and unrestricted existing provider behavior',()=>{project='1EU9dCgJ5NIhFjJ474gjX07WGQmouXCzSs4mRVKpZESwahVyR_DcenOo4';const live=c.beautyReleaseEnvironment_();assert.equal(live.test,false);assert.equal(live.base.sheetId,'1qeV90AYjC73BLMah347JWIee5-PIGFY9d-gzmyvcpyM');assert.equal(c.beautyReleaseFormId_(),'1UxEr_KeHzhispG7Zu6E74Hh29OIqD6XxwR4UFwYEFOQ');guard('tournament/create',{set:{}});});
+fs.writeFileSync(path.join(root,'evidence/environment-tests.json'),JSON.stringify({result:'PASS',checks:checks.length,details:checks},null,2));console.log(JSON.stringify({result:'PASS',checks:checks.length}));

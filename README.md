@@ -1,18 +1,15 @@
-# Beauty — current saved status
+# Beauty — current release and saved source
 
-Updated 24 November 2026. The interrupted GitHub source checkpoint is now published: **882 source, test, patch and manifest files**, preserved unchanged from the private checkpoint 80 continuation package and its source packages.
+Updated 24 November 2026. Start with the [assembled release checkpoint](checkpoints/2026-11-24-combined-release/README.md).
 
-- [Start with the current source checkpoint](checkpoints/2026-11-24-source/README.md)
-- [Current handover and next action](checkpoints/2026-11-24-source/HANDOVER.md)
-- [Current status and remaining work](checkpoints/2026-11-24-status/STATUS.md)
-- [Consent/formula acceptance](checkpoints/2026-11-24-status/ACCEPTANCE.md)
-- [Published source inventory](checkpoints/2026-11-24-source/SOURCE-INVENTORY.json)
-- [Exact release publication coverage](checkpoints/2026-11-24-source/RELEASE-PUBLIC-COVERAGE.json)
+The fixed ten-item release combines sign-in, monitoring, recovery reports, background recovery, Nakka-to-Hub import, pool preservation, searchable instructions, display preservation, performance components and registration safeguards on LIVE v43. It is installed in the isolated combined TEST project; 323 local behavior checks pass. Native registration, import, recovery, removal and pool restoration checks passed. The eight-player pools and both knockout formats were sent once and verified in Nakka. Final start/readback, immutable freeze and LIVE promotion are tracked in the checkpoint.
 
-The scoped consent/formula application passed TEST, including full Hub reload persistence. The complete 33-file application remains frozen in the owner's private backup. This public checkpoint includes 31 unchanged application files; two historical recovery files containing captured player/account context remain private, with their exact hashes recorded. Use the complete private artifact for any approved LIVE promotion.
+**LIVE remains v43. This GitHub save does not deploy the combined release.** All 34 current LIVE files were independently compared with v43 and matched; LIVE has zero triggers before this release.
 
-**The latest recorded LIVE version is 42. LIVE deployment approval and promotion remain separate and pending.** This save changes GitHub source/documentation only. The broader recovery, speed, import, pool/device and branch-reconciliation work remains unfinished.
+- [Current acceptance and remaining release steps](checkpoints/2026-11-24-combined-release/ACCEPTANCE.md)
+- [Public source coverage and exact private-file hashes](checkpoints/2026-11-24-combined-release/PUBLIC-COVERAGE.json)
+- [Earlier 908-file source checkpoint](checkpoints/2026-11-24-source/README.md)
 
-The owner approved publication of internal project identifiers and credential-handling code. Actual credentials, private registration records, consent/messages and account-bearing historical fixtures remain excluded. The previous publication block is resolved within that approved scope; it did not authorize a LIVE release.
+The complete 37-file application is retained privately. This public checkpoint contains 35 unchanged application files plus the intended LIVE manifest; two historical recovery files containing captured player/account context remain private. Native fixtures, registration/consent/message records and actual credentials are excluded. The owner approved the existing owner identifier, Firebase client configuration and Google project IDs. Use the complete private artifact for deployment, preserving the accepted application bytes exactly.
 
-Existing development branches and older application folders are preserved. The older root application folders must not be mistaken for this accepted release. Begin with the dated checkpoint above.
+Earlier folders and development branches are preserved. They are historical material and must not be substituted for the accepted release.
