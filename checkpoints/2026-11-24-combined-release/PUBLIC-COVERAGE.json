@@ -232,5 +232,11 @@
       "bytes": 874,
       "published": true
     }
-  ]
+  ],
+  "frozenTestVersion": 2,
+  "immutableTestReadback": "38/38 matched; helper excluded",
+  "liveHeadReadback": "38/38 matched; application bytes identical to TEST",
+  "runningLiveVersion": 43,
+  "liveBackgroundTriggers": 0,
+  "remainingReleaseGate": "Actual Google LIVE OAuth consent, existing-URL deployment, one owner clock and deployed verification"
 }

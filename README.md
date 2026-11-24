@@ -2,9 +2,9 @@
 
 Updated 24 November 2026. Start with the [assembled release checkpoint](checkpoints/2026-11-24-combined-release/README.md).
 
-The fixed ten-item release combines sign-in, monitoring, recovery reports, background recovery, Nakka-to-Hub import, pool preservation, searchable instructions, display preservation, performance components and registration safeguards on LIVE v43. It is installed in the isolated combined TEST project; 323 local behavior checks pass. Native registration, import, recovery, removal and pool restoration checks passed. The eight-player pools and both knockout formats were sent once and verified in Nakka. Final start/readback, immutable freeze and LIVE promotion are tracked in the checkpoint.
+The fixed ten-item release combines sign-in, monitoring, recovery reports, background recovery, Nakka-to-Hub import, pool preservation, searchable instructions, display preservation, performance components and registration safeguards on LIVE v43. It is frozen in private TEST version 2; 323 local behavior checks pass. Native registration, import, recovery, removal and pool restoration checks passed. The eight-player pools and both knockout formats were sent once and verified in Nakka. The one-time Start is verified and the native Hub shows the competition running. All 38 immutable TEST files and all 38 staged LIVE files were read back; all 37 application files are byte-for-byte identical. Google now requires the new LIVE permission grant before the existing-URL deployment and one owner background clock can be completed.
 
-**LIVE remains v43. This GitHub save does not deploy the combined release.** All 34 current LIVE files were independently compared with v43 and matched; LIVE has zero triggers before this release.
+**LIVE remains v43. This GitHub save does not deploy the combined release.** Before staging, all 34 LIVE files matched v43. The new 38-file source is saved in the LIVE editor; the deployed URL still serves v43 and LIVE still has zero triggers.
 
 - [Current acceptance and remaining release steps](checkpoints/2026-11-24-combined-release/ACCEPTANCE.md)
 - [Public source coverage and exact private-file hashes](checkpoints/2026-11-24-combined-release/PUBLIC-COVERAGE.json)
