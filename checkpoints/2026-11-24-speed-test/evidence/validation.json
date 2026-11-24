@@ -1,0 +1,173 @@
+{
+  "local": {
+    "result": "PASS",
+    "suites": 23,
+    "distinctChecks": 431,
+    "baseChecks": 343,
+    "queueRegressionChecks": 25,
+    "newSpeedQueueChecks": 47,
+    "newSheetsChecks": 16,
+    "experimentalRemovalChecksExcluded": 15,
+    "removalByteIdenticalToV45": true
+  },
+  "publicSubsetDistinctChecks": 88,
+  "native": {
+    "scope": "Private TEST pilot, not production or physical-device timing",
+    "groups": [
+      {
+        "mode": "Baseline",
+        "category": "Existing",
+        "receipt": {
+          "n": 10,
+          "medianMs": 31325.0,
+          "minMs": 22927,
+          "maxMs": 34175
+        },
+        "completion": {
+          "n": 10,
+          "medianMs": 31033.5,
+          "minMs": 23148,
+          "maxMs": 95159
+        },
+        "reviewAtAck": 1,
+        "queuedAtAck": 0
+      },
+      {
+        "mode": "Baseline",
+        "category": "New",
+        "receipt": {
+          "n": 10,
+          "medianMs": 29206.5,
+          "minMs": 7639,
+          "maxMs": 35267
+        },
+        "completion": {
+          "n": 10,
+          "medianMs": 29687.5,
+          "minMs": 23069,
+          "maxMs": 39610
+        },
+        "reviewAtAck": 1,
+        "queuedAtAck": 0
+      },
+      {
+        "mode": "Candidate",
+        "category": "Existing",
+        "receipt": {
+          "n": 10,
+          "medianMs": 4345.5,
+          "minMs": 2471,
+          "maxMs": 5696
+        },
+        "completion": {
+          "n": 10,
+          "medianMs": 32663.5,
+          "minMs": 19012,
+          "maxMs": 94486
+        },
+        "reviewAtAck": 0,
+        "queuedAtAck": 10
+      },
+      {
+        "mode": "Candidate",
+        "category": "New",
+        "receipt": {
+          "n": 10,
+          "medianMs": 3226.0,
+          "minMs": 2757,
+          "maxMs": 4929
+        },
+        "completion": {
+          "n": 10,
+          "medianMs": 26117.0,
+          "minMs": 23914,
+          "maxMs": 37166
+        },
+        "reviewAtAck": 0,
+        "queuedAtAck": 10
+      }
+    ],
+    "browserReceipts": [
+      {
+        "surface": "KIOSK",
+        "clickToVisibleReceiptMs": 6624,
+        "method": "CUA click to visible receipt; includes automation overhead"
+      },
+      {
+        "surface": "MOBIL",
+        "clickToVisibleReceiptMs": 7037,
+        "method": "CUA click to visible receipt; includes automation overhead"
+      }
+    ],
+    "finalIntegrity": {
+      "result": "PASS",
+      "check": "SPEED_FINAL_INTEGRITY",
+      "registrations": 45,
+      "queueComplete": 45,
+      "responsesUnique": 45,
+      "masterUnique": 45,
+      "statusExact": 45,
+      "displayExact": 45,
+      "nakkaEntriesUnique": 45,
+      "consentMessageSourceExact": true,
+      "newNamePaths": 20,
+      "originalEntriesPreserved": 8,
+      "originalPoolSettingsPreserved": true,
+      "backupFormMatchesMaster": true,
+      "liveWrites": 0
+    },
+    "backgroundWithoutClient": {
+      "result": "PASS",
+      "jobs": 3,
+      "sameOwnerTrigger": true
+    },
+    "projection": {
+      "pairs": 5,
+      "allExactPreservation": true,
+      "baselineMedianMs": 3092,
+      "candidateMedianMs": 3134,
+      "fasterPairs": 3,
+      "claim": "Fewer requests; no demonstrated elapsed-time improvement"
+    },
+    "hubNativeUi": {
+      "result": "PASS",
+      "testVersion": 4,
+      "normalStaffSignIn": true,
+      "singleSubmission": true,
+      "newPlayer": true,
+      "status": "IN",
+      "consent": "NEJ",
+      "messageVerified": true,
+      "source": "HUB",
+      "oneNewResponseMasterStatusDisplayRow": true,
+      "allPriorRowsPreservedInFiveBoundedRanges": true,
+      "controlUnchanged": true,
+      "priorEventPlayersPreserved": 53,
+      "hubPlayers": 54,
+      "nakkaPlayers": 54,
+      "matchedNames": 54,
+      "hubOnly": 0,
+      "nakkaOnly": 0,
+      "duplicates": 0,
+      "pendingJobs": 0,
+      "playerAlerts": 0,
+      "exactReceiptLatencyMeasured": false,
+      "timingNote": "The initial selector wait expired. A later observation saw the saved receipt; the 40.886 s observation bound includes tool/model gaps and is not a measured receipt latency.",
+      "scope": "Additional normal Hub UI and connector readback check; separate from the earlier 45-request native integrity harness."
+    },
+    "liveChanged": false,
+    "limitations": [
+      "Sequential small samples with variable Google/Nakka latency, not a randomized production load test.",
+      "Browser kiosk/mobile receipts were measured while three background requests were draining; their final completion was later.",
+      "One confirmed Sheets HTTP429 in baseline new-player run; saved request recovered. Other failures must not be assigned the same cause without evidence.",
+      "Earlier candidate busy continuation and final-read recovery cases are included, not discarded."
+    ],
+    "totalSpeedRequestsCheckedAcrossTwoScopes": 46
+  },
+  "immutableTestReadback": {
+    "version": 4,
+    "files": 38,
+    "exact": true
+  },
+  "liveChanged": false
+}

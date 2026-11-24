@@ -1,0 +1,23 @@
+{
+  "result": "PASS",
+  "checks": 16,
+  "details": [
+    "Current registration verification is equivalent with two calls instead of four",
+    "Fresh post-write read sees changed source and retries rather than accepting its old snapshot",
+    "A single concurrent source edit is reread on the next pass",
+    "Malformed batch wrong-sheet fails before a write",
+    "Malformed batch missing-range fails before a write",
+    "Malformed batch wrong-order fails before a write",
+    "Malformed batch wrong-dimension fails before a write",
+    "Malformed batch missing-range-label fails before a write",
+    "Malformed batch null-values fails before a write",
+    "Malformed batch extra-column fails before a write",
+    "Malformed batch object-cell fails before a write",
+    "Malformed batch changed-context fails before a write",
+    "Repeated status identities still block display mutation",
+    "A missing player is never invented to speed up verification",
+    "Wrong workbook and master-list batches are rejected locally",
+    "Empty cells retain rectangular string padding"
+  ],
+  "scope": "Actual baseline/candidate display verification with synthetic Sheets responses; request counts, not elapsed-time claims."
+}

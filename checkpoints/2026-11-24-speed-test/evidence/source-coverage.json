@@ -1,0 +1,237 @@
+{
+  "applicationIdentity": "b344bc4af5530e8f6c890a468e6db9e0059843dc03cae661668059e5362409ad",
+  "applicationFiles": 37,
+  "publishedApplicationFiles": 35,
+  "manifestFiles": 1,
+  "excludedReason": "Two unchanged historical recovery files contain captured private player/account context. Complete deployment source remains in the owner private backup.",
+  "files": [
+    {
+      "file": "BeautyBackground.gs",
+      "bytes": 9781,
+      "sha256": "697bfd555823721051c5ca2748249913ad057760c6ef60ee8026b8af33833297",
+      "published": true
+    },
+    {
+      "file": "BeautyDisplayFormulaRecovery.gs",
+      "bytes": 3967,
+      "sha256": "81418fa2e3c23cc8ce92f84ac3b7429892f45e6868b7059ea180be2cc2a940ce",
+      "published": true
+    },
+    {
+      "file": "BeautyInboundAdapter.gs",
+      "bytes": 7444,
+      "sha256": "86432807aa16ac1635924a1507c1e9d4a7d1b13d4d83a853a795c69ef340232d",
+      "published": true
+    },
+    {
+      "file": "BeautyInboundCore.gs",
+      "bytes": 8737,
+      "sha256": "a278cff26f12db10bfb75707a18b53fbfb46a5dbbeb6f6be6874e3bc8b70e70e",
+      "published": true
+    },
+    {
+      "file": "BeautyRecoveryInventory.gs",
+      "bytes": 4237,
+      "sha256": "408b079c59f80dc8e0069c3b58541a81420cb67313fad3f96313586b06c1d5bb",
+      "published": true
+    },
+    {
+      "file": "BeautyReleaseEnvironment.gs",
+      "bytes": 3745,
+      "sha256": "2adc5ac9825776fa862ffe6da719785ffee0d47f9fc0ee5d81d57f75db1274f7",
+      "published": true
+    },
+    {
+      "file": "BeautyRemovalReconcile.gs",
+      "bytes": 12367,
+      "sha256": "a342257be556b400770536e116fa8e1c729d2ac0bb93674a542b477bbe6898e9",
+      "published": true
+    },
+    {
+      "file": "BeautyRestoreOriginal.gs",
+      "bytes": 16210,
+      "sha256": "983bd54ed8d99b756795a839c0cfa6bd5495e60ab429e9b050affe134b02f612",
+      "published": false
+    },
+    {
+      "file": "Kiosk.html",
+      "bytes": 770053,
+      "sha256": "6b25a66c8048fd15c5cbdf4ff47b39fc16b82a249bfc859de91f787006ff23f7",
+      "published": true
+    },
+    {
+      "file": "LiveCast.gs",
+      "bytes": 8275,
+      "sha256": "3970f2134ec8ec3d967624f33bc01ef2a1a0a7fff7a4731bc524a5d2e277846e",
+      "published": true
+    },
+    {
+      "file": "LiveCastView.html",
+      "bytes": 1056189,
+      "sha256": "be3f9a2b083d5e5c89ae28f43e903532c4e3e093f867231cfc3f96a0deb370c7",
+      "published": true
+    },
+    {
+      "file": "LiveConsent.gs",
+      "bytes": 5734,
+      "sha256": "dccb00e601b36c73d32ee476f3a361fe9cc22c7ea1fa19c3e8f888812405e1c6",
+      "published": true
+    },
+    {
+      "file": "LiveEventContext.gs",
+      "bytes": 13408,
+      "sha256": "b9e57d4fcb87c0963619a1be0f346a03b5a1508abfe881e22504b8eb29957ed5",
+      "published": true
+    },
+    {
+      "file": "LiveEventCreate.gs",
+      "bytes": 11289,
+      "sha256": "784a05c9283dcf9adec32ca86c7b4a83f2fb9446acb5151b65fbe89b806d02cb",
+      "published": true
+    },
+    {
+      "file": "LiveEventSwitch.gs",
+      "bytes": 19658,
+      "sha256": "285349d8f9d8bc9e9767f990f7b299439e5fb5ff9cfa1dd840ded5f43a41af36",
+      "published": true
+    },
+    {
+      "file": "LiveHub.gs",
+      "bytes": 8941,
+      "sha256": "a715d277a8d9439db49fa2c43ca69a872eeb71b40df6bf230b93be97dce9f1d0",
+      "published": true
+    },
+    {
+      "file": "LiveHubView.html",
+      "bytes": 1190703,
+      "sha256": "3a8cdd3053aeb8e6ef6ff0a278b8d09a01d9602adde50b20ada26b07203275e0",
+      "published": true
+    },
+    {
+      "file": "LiveLayoutCheck.gs",
+      "bytes": 488,
+      "sha256": "71c86aaf8272abebfe795a4f44068633e3d995b214756ed805b558b6d52cafad",
+      "published": true
+    },
+    {
+      "file": "LiveLogin.html",
+      "bytes": 44680,
+      "sha256": "efc378c6a3ce0cf795bcf07a00f9653b96def4fd3fcd01d7ea5a9b6eb2fd326f",
+      "published": true
+    },
+    {
+      "file": "LiveLoginAuth.gs",
+      "bytes": 8048,
+      "sha256": "884c2154ff8882190fc8b4812807134eb9a2bf39a61837a4331c27addef2c975",
+      "published": true
+    },
+    {
+      "file": "LiveLoginEntry.gs",
+      "bytes": 1389,
+      "sha256": "8185710860dcf402d3223ccc6ca2711abe2afa3101b4a50954ab2964c30233a5",
+      "published": true
+    },
+    {
+      "file": "LiveNakkaCheck.gs",
+      "bytes": 3042,
+      "sha256": "21de747341ce56ada28f4126a2883bab3c6ea91015c18c07bed0be96f1842d45",
+      "published": true
+    },
+    {
+      "file": "LiveNakkaMonitor.gs",
+      "bytes": 5580,
+      "sha256": "4f5c8f3492cb78588eb9b37fb7d43aa39aae562efc8008be3cf7c44e489636ae",
+      "published": true
+    },
+    {
+      "file": "LivePlanner.gs",
+      "bytes": 103123,
+      "sha256": "fed2aad32a23cb49f3eab419342ced544778350192b1577e59a03f02493fc321",
+      "published": true
+    },
+    {
+      "file": "LivePlayerRecovery.gs",
+      "bytes": 31114,
+      "sha256": "ec2f49a469adcc09a13d27fa3fdd877fa6f0c1304fb107e195b4f7554770faa3",
+      "published": true
+    },
+    {
+      "file": "LivePlayerRegistration.gs",
+      "bytes": 3059,
+      "sha256": "9fec0a49b48fff98cb1d494f8634c3f8d40bac762f78e23453ee48e2efbd98aa",
+      "published": true
+    },
+    {
+      "file": "LivePreflight.gs",
+      "bytes": 4366,
+      "sha256": "4b74d1fbb27ee2daff19456681c7ce155e472f3d406fa8397fb65bc4fd89153c",
+      "published": true
+    },
+    {
+      "file": "LivePublicRegistration.gs",
+      "bytes": 1893,
+      "sha256": "0831a14675bed3542b09aef92354fa7e19f74002fa5edcb4d38a5872aae42b10",
+      "published": true
+    },
+    {
+      "file": "LiveRecovery.gs",
+      "bytes": 28107,
+      "sha256": "be324da5b27394e1dcd37fcc988329d31c66b0e9e41fe22f3fbdab1c26d667d6",
+      "published": true
+    },
+    {
+      "file": "LiveRegister.gs",
+      "bytes": 24710,
+      "sha256": "8b625d4318d1cc4e03c6a1cf56d9f9bfadac55e791aa98f3f3b22bcb3f25eeee",
+      "published": true
+    },
+    {
+      "file": "LiveRegistrationQueue.gs",
+      "bytes": 25646,
+      "sha256": "27526fb2cef072dcb658f21d393a19a0e8fa882e2189e10c576ad8d5f67a4204",
+      "published": true
+    },
+    {
+      "file": "LiveRegistrationRecovery.gs",
+      "bytes": 5869,
+      "sha256": "5d06dc8e04b63428c0e7779b91a2c65d8f933c47e9bf95bfcae2bf171268e5cb",
+      "published": false
+    },
+    {
+      "file": "LiveRemove.gs",
+      "bytes": 20204,
+      "sha256": "8f284031630a27e2a3e90f8313c24c9b21c924560ba680550ff257893b7622bd",
+      "published": true
+    },
+    {
+      "file": "LiveStatus.gs",
+      "bytes": 7273,
+      "sha256": "4ad72c36f499d640c4e7e475eac33b0b588212d9fa8914616b68d6ec58a78f8d",
+      "published": true
+    },
+    {
+      "file": "LiveWorkbookHistory.gs",
+      "bytes": 7188,
+      "sha256": "073e88a5851a2f7537146457ca6220caf989226fc9b43fc54ee30b4b2ee69394",
+      "published": true
+    },
+    {
+      "file": "RemoteRegistration.html",
+      "bytes": 803638,
+      "sha256": "7ff5674aec21f9d2c363524ff8e051d9a1ae73948096e197c2932fa35fece9e1",
+      "published": true
+    },
+    {
+      "file": "appsscript.json",
+      "bytes": 633,
+      "sha256": "eddfbd46be17293a0320b7ffdab7a41f937c85e0db583e6fe916a5663d0d49f2",
+      "published": true
+    },
+    {
+      "file": "eautyQueueStorageCheck.gs",
+      "bytes": 874,
+      "sha256": "0b6a686906d2abd7f3abc0546443855fc44285f55aa72571c5b026936a53c0fd",
+      "published": true
+    }
+  ]
+}
