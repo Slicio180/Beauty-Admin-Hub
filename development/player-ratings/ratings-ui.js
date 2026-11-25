@@ -7,12 +7,12 @@
   let token;try{token=auth.token();}catch(e){return;}if(!context)return;
   const generation=auth.generation(),dialog=document.createElement('dialog');openDialog=dialog;dialog.className='message-popup';dialog.setAttribute('aria-label','Player averages');
   const add=(tag,text)=>{const n=document.createElement(tag);if(text)n.textContent=text;dialog.appendChild(n);return n;};
-  add('h2','Player averages / Spelarsnitt');
+  add('h2','Player averages');
   add('p','Staff estimates stay active until the player has played in a completed event and final statistics are verified. Register first; wait for the Nakka identity to appear here.');
-  const label=add('label','Player / Spelare '),select=document.createElement('select');label.appendChild(select);
-  const valueLabel=add('label','Estimated three-dart average / Uppskattat snitt '),value=document.createElement('input');value.type='number';value.min='0.01';value.max='180';value.step='0.01';valueLabel.appendChild(value);
+  const label=add('label','Player '),select=document.createElement('select');label.appendChild(select);
+  const valueLabel=add('label','Estimated three-dart average '),value=document.createElement('input');value.type='number';value.min='0.01';value.max='180';value.step='0.01';valueLabel.appendChild(value);
   const detail=add('p'),status=add('p');status.setAttribute('role','status');
-  const save=add('button','Save estimate / Spara'),clear=add('button','Mark unrated / Utan snitt'),reload=add('button','Reload / Läs in igen'),close=add('button','Close / Stäng');
+  const save=add('button','Save estimate'),clear=add('button','Mark unrated'),reload=add('button','Reload'),close=add('button','Close');
   let players=[],busy=false,closed=false;
   const valid=()=>!closed&&auth.isCurrent(generation)&&window.beautyHubData?.eventContext===context;
   function dismiss(){closed=true;dialog.close();dialog.remove();openDialog=null;document.removeEventListener('beauty-hub-locked',dismiss);}

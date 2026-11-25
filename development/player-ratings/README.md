@@ -4,7 +4,7 @@
 
 ## Operator workflow (proposed, pending native TEST)
 
-In Tonight's Players, choose **PLAYER AVERAGES / SPELARSNITT**, beside Register Player. Select the player, enter a three-dart estimate greater than zero and at most 180, then Save estimate. Players registering through any route are available after Nakka registration has established their league player ID. This first candidate uses a separate editor after registration; it does not add an estimate field to the registration submission.
+In Tonight's Players, choose **PLAYER AVERAGES**, beside Register Player. Select the player, enter a three-dart estimate greater than zero and at most 180, then Save estimate. Players registering through any route are available after Nakka registration has established their league player ID. This first candidate uses a separate editor after registration; it does not add an estimate field to the registration submission.
 
 The editor displays Estimated, Unrated or Nakka. Mark unrated clears the estimate while retaining the first-event gate. Estimates remain staff-only; public kiosk/mobile forms and registration endpoints are unchanged. An established verified player cannot be assigned a replacement estimate. A late estimate requires matching current open-event and aggregate totals; native provider consistency must be verified before release.
 
@@ -53,3 +53,9 @@ Browser test `tests/ui.cjs` is written but **NOT RUN successfully**. The local C
 This is an overlay, not a full deployment bundle. Prepare the complete private v46 artifact, overlay the generated application files (including the new BeautyPlayerRatings.gs), verify the installed TEST baseline, then test with synthetic players only. Keep TEST's fixed workbook/event restrictions: only the fixed event's tournament/stats GET was added to its read allowlist.
 
 Required before release: native Sheets persistence/auth; actual provider score/identity schema; completed/nonparticipant/withdrawal scenarios; switch/retry behavior; UI checks; registration timing regression; Internal integration if universal availability is required. Retire no production estimate on an unverified adapter. Do not move to LIVE until the exact candidate is accepted.
+
+## English interface update
+
+Owner requested English throughout Hub on 25 November. Player averages and pool-method controls now use English only. The Instructions sidebar label, initial chapter view, search controls and sign-out reset default to English; The language selector is removed; language selection is deferred. No LIVE installation was performed.
+
+English-only follow-up: removed Swedish manual chapters and the manual language selector, translated remaining knockout/board labels and backend planner messages. Player/event names, Swedish alphabetical sorting and stored provider/consent identifiers retain their original data.
