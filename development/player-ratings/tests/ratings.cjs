@@ -1,0 +1,42 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),path=require('node:path');
+const root=path.resolve(__dirname,'..'),source=fs.readFileSync(root+'/application/BeautyPlayerRatings.gs','utf8');
+let checks=0;const test=(name,f)=>{f();checks++;console.log('PASS '+name);};
+function fixture(){
+ let rows=null,eventStatus=20,score=0,darts=0,statsAvailable=true,context='ctx',authorized=true;
+ const sheet={getDataRange:()=>({getValues:()=>rows}),appendRow:r=>rows.push(r),getLastRow:()=>rows.length,getRange:(r,c)=>({getValue:()=>rows[r-1][c-1]})};
+ const scope={sheetId:'test-sheet',leagueId:'lg_test',eventId:'t_test',mode:'league'};
+ const p={};const c=vm.createContext({Date,JSON,console,beautyHubRequestToken_:null,beautyLiveLoginGuard_(){},beautyContextAssert_(){},beautyReleaseContextGuard_(){},beautyLiveTarget_:()=>scope,beautyContextToken_:()=>context,beautyHubAuthRequire_:t=>{if(!authorized||t!=='staff')throw Error('Sign in');return {uid:'staff'};},beautyCombinedBackgroundRequire_(){},beautyPoolProfiles_:()=>[{lpid:'AAAA',name:'Synthetic'}],SpreadsheetApp:{openById:()=>({getSheetByName:()=>rows?sheet:null,insertSheet:()=>{rows=[];return sheet;}}),flush(){}},PropertiesService:{getScriptProperties:()=>({getProperty:k=>p[k]??null,setProperty:(k,v)=>p[k]=v})},LockService:{getScriptLock:()=>({tryLock:()=>true,releaseLock(){}})},beautyLiveRegistrationApi_:url=>{
+  if(!statsAvailable)throw Error('Unavailable');
+  if(url.startsWith('league/stats'))return {stats:{AAAA:{score,darts,a:0,acnt:0}}};
+  if(url.startsWith('tournament/get'))return {tournament:{tdid:'t_test',lgid:'lg_test',status:eventStatus,updateTime:123,team_games:0,entry_list:[{tpid:'BBBB',lpid:'AAAA'}]}};
+  if(url.startsWith('tournament/stats'))return {stats:{BBBB:{score,darts,a:0,acnt:0}}};throw Error(url);
+ }});vm.runInContext(source,c);
+ return {c,rows:()=>rows,scope,set:(s,d,status)=>{score=s;darts=d;eventStatus=status;},outage:()=>statsAvailable=false,deny:()=>authorized=false,changeContext:()=>context='changed',read:()=>c.beautyRatingsService_('list',{_context:'ctx'},'staff'),save:(estimate,version=0)=>c.beautyRatingsService_('save',{_context:'ctx',lpid:'AAAA',estimate,version},'staff')};
+}
+const f=fixture(),core=f.c.BeautyRatingCore,record={state:'PROVISIONAL',leagueId:'lg_test',lpid:'AAAA',estimate:45,events:['t_test']};
+const evidence={eventId:'t_test',leagueId:'lg_test',lpid:'AAAA',status:40,participated:true,score:501,darts:30,revision:1};
+test('estimate overrides first-dart live average',()=>assert.equal(core.effective(record,120).average,45));
+test('missing estimate remains unrated during first event',()=>assert.equal(core.effective({...record,estimate:null},120).average,null));
+for(const [name,e] of [['running',{status:30}],['no play',{participated:false}],['no darts',{darts:0}],['wrong player',{lpid:'CCCC'}],['wrong league',{leagueId:'other'}],['invalid totals',{score:9000}],['unknown status',{status:null}]])test(name+' cannot retire estimate',()=>assert.equal(core.completed(record,{...evidence,...e},100000).state,'PROVISIONAL'));
+test('completion requires stable final sample and interval',()=>{let r=core.completed(record,evidence,100000);assert.equal(r.state,'PROVISIONAL');assert.equal(core.completed(r,evidence,159999).state,'PROVISIONAL');r=core.completed(r,evidence,160000);assert.equal(r.state,'VERIFIED');assert.equal(r.finalAverage,50.1);assert.equal(r.estimate,45);assert.equal(core.completed(r,evidence,300000),r);});
+test('changed statistics reset confirmation',()=>{const r=core.completed(record,evidence,100000);assert.equal(core.completed(r,{...evidence,score:510},170000).state,'PROVISIONAL');});
+test('reopened event invalidates confirmation',()=>{const r=core.completed(record,evidence,100000);assert.equal(core.completed(r,{...evidence,status:30},170000).confirmation,null);});
+test('staff saves estimate in dedicated sheet',()=>{assert.equal(f.save(45).success,true);assert.equal(f.rows()[0][0],'BEAUTY_PLAYER_RATINGS_V1');assert.equal(f.read().players[0].source,'ESTIMATED');});
+test('live stats never replace saved estimate',()=>{f.set(501,15,30);assert.equal(f.read().players[0].average,45);});
+test('stale editor cannot overwrite',()=>{assert.equal(f.save(50,0).success,false);assert.equal(f.read().players[0].average,45);});
+test('mark unrated preserves lifecycle and history',()=>{assert.equal(f.save(null,1).success,true);assert.equal(f.read().players[0].average,null);assert.equal(f.rows().length,3);});
+test('outage retains saved history',()=>{const old=JSON.stringify(f.rows());f.outage();assert.equal(f.read().success,false);assert.equal(JSON.stringify(f.rows()),old);});
+test('unauthenticated action cannot create sheet',()=>{const x=fixture();x.deny();assert.equal(x.save(40).success,false);assert.equal(x.rows(),null);});
+test('changed context cannot save',()=>{const x=fixture();x.changeContext();assert.equal(x.save(40).success,false);assert.equal(x.rows(),null);});
+test('bad estimate cannot create sheet',()=>{for(const value of [0,-1,181,NaN,Infinity,'45']){const x=fixture();assert.equal(x.save(value).success,false);assert.equal(x.rows(),null);}});
+test('unknown player rejected',()=>{const x=fixture();assert.equal(x.c.beautyRatingsService_('save',{_context:'ctx',lpid:'ZZZZ',estimate:40,version:0},'staff').success,false);});
+test('client cannot supply verification or workbook',()=>{const x=fixture();assert.equal(x.c.beautyRatingsService_('save',{_context:'ctx',lpid:'AAAA',estimate:40,version:0,sheetId:'other',state:'VERIFIED'},'staff').success,false);});
+test('completed established results cannot be overwritten',()=>{const x=fixture();x.set(501,30,40);assert.equal(x.save(40).success,false);});
+test('late estimate allowed when all darts are from current open event',()=>{const x=fixture();x.set(501,30,30);assert.equal(x.save(45).success,true);});
+test('standalone Internal is explicitly isolated',()=>{const x=fixture();x.scope.mode='tournament';assert.equal(x.save(45).success,false);assert.equal(x.rows(),null);});
+test('common pool resolver uses saved estimate and provenance',()=>{const x=fixture();x.save(45);const s=x.c.beautyRatingsApply_({profiles:[{lpid:'AAAA',average:100,name:'Synthetic'}]});assert.equal(s.profiles[0].average,45);assert.equal(s.identityProfiles[0].source,'ESTIMATED');});
+test('background transitions only after two completed samples and blocks future edits',()=>{const x=fixture();x.save(45);x.set(501,30,40);let now=1000000;x.c.Date=class extends Date{static now(){return now;}};assert.equal(x.c.beautyRatingsBackground_().state,'PROVISIONAL');now+=120001;assert.equal(x.c.beautyRatingsBackground_().state,'VERIFIED');assert.equal(x.read().players[0].source,'NAKKA');assert.equal(x.read().players[0].average,50.1);assert.equal(x.save(80,3).success,false);const n=x.rows().length;now+=120001;x.c.beautyRatingsBackground_();assert.equal(x.rows().length,n);});
+test('background outage does not remove estimate',()=>{const x=fixture();x.save(45);const old=JSON.stringify(x.rows());x.outage();assert.throws(()=>x.c.beautyRatingsBackground_());assert.equal(JSON.stringify(x.rows()),old);});
+test('final verification keeps estimate audit',()=>{const x=fixture();x.save(45);x.set(501,30,40);let now=1000000;x.c.Date=class extends Date{static now(){return now;}};x.c.beautyRatingsBackground_();now+=120001;x.c.beautyRatingsBackground_();const r=JSON.parse(x.rows().at(-1)[1]);assert.equal(r.estimate,45);assert.equal(r.firstCompletedEvent,'t_test');});
+test('all candidate scripts parse',()=>{for(const file of fs.readdirSync(root+'/application')){const s=fs.readFileSync(root+'/application/'+file,'utf8');if(file.endsWith('.gs'))new vm.Script(s);if(file.endsWith('.html'))for(const m of s.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g))new vm.Script(m[1]);}});
+console.log(checks+' rating checks passed');

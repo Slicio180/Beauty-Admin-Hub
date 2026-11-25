@@ -1,0 +1,318 @@
+--- application/LivePlanner.gs
++++ application/LivePlanner.gs
+@@ -79,7 +79,7 @@
+       if(!p||typeof p.id!=='string'||!p.id||p.id.length>120||ids.has(p.id)||typeof p.name!=='string'||!p.name.trim()||p.name.length>120||!['IN','OUT','STANDBY'].includes(p.status))fail('Missing or ambiguous player identity or status.');
+       ids.add(p.id);
+       if(p.average!==null&&(typeof p.average!=='number'||!Number.isFinite(p.average)||p.average<0||p.average>180))fail('An average must be a verified number or explicitly missing.');
+-      return {id:p.id,name:p.name,status:p.status,average:p.average};
++      return {id:p.id,name:p.name,status:p.status,average:p.average,...(p.ratingSource?{ratingSource:p.ratingSource}:{})};
+     });
+   }
+   const compareId=(a,b)=>a.id<b.id?-1:a.id>b.id?1:0;
+@@ -119,13 +119,15 @@
+   }
+   function warnings(draw){
+     const counts=draw.pools.map(g=>summary(g).unseeded),messages=[];
+-    if(Math.max(...counts)-Math.min(...counts)>1)messages.push('Manual changes have made the unseeded distribution uneven.');
++    if(draw.drawMode!=='random'&&Math.max(...counts)-Math.min(...counts)>1)messages.push('Manual changes have made the unseeded distribution uneven.');
+     const first=new Set(draw.firstSeeds),repeated=draw.pools.some(g=>g.players.filter(p=>first.has(p.id)).length>1);
+     if(repeated)messages.push('Manual changes have put first-round seeds together.');
+     if(draw.roster.some(p=>p.average===null))messages.push('Pool strength uses known averages only; unseeded players are not treated as zero.');
+     return messages;
+   }
+   function draw(options){
++    const drawMode=options?.drawMode===undefined?'fair':options.drawMode;
++    if(!['fair','similar','random'].includes(drawMode))fail('Unknown pool draw method.');
+     const all=validatePlayers(options?.players),roster=all.filter(p=>p.status==='IN');
+     if(roster.length<3||roster.length>101)fail('Seeded draws support 3–101 IN players.');
+     const sizes=options.sizes;
+@@ -141,6 +143,7 @@
+       group.unseededQuota++;
+     }
+     const seededCapacity=pools.map(g=>g.capacity-g.unseededQuota),firstSeeds=[];
++    if(drawMode==='fair'){
+     let placed=0,round=0;
+     while(placed<known.length){
+       const indices=pools.map((_,i)=>i);if(round%2)indices.reverse();
+@@ -169,9 +172,14 @@
+       if(!best)break;
+       const {a,b,x,y,delta}=best;[pools[a].players[x],pools[b].players[y]]=[pools[b].players[y],pools[a].players[x]];means[a].sum+=delta;means[b].sum-=delta;
+     }
+-    let index=0;for(const group of pools)for(let i=0;i<group.unseededQuota;i++)group.players.push(unknown[index++]);
++    }else if(drawMode==='similar'){
++      let next=0;for(const group of pools)while(group.players.length<seededCapacity[group.id])group.players.push(known[next++]);
++    }else{
++      let next=0;for(const group of pools)while(group.players.length<group.capacity)group.players.push(order[next++]);
++    }
++    let index=0;if(drawMode!=='random')for(const group of pools)for(let i=0;i<group.unseededQuota;i++)group.players.push(unknown[index++]);
+     const result={version:1,eventDate:options.eventDate,frozenAt:options.frozenAt,source:{leagueId:options.source.leagueId,fetchedAt:options.source.fetchedAt},seed:options.seed,
+-      method:'seeded snake with protected first-round seeds and bounded mean balancing',unseededPolicy:'even counts, no invented averages',
++      drawMode,method:drawMode==='fair'?'seeded snake with protected first-round seeds and bounded mean balancing':drawMode==='similar'?'adjacent verified averages':'seeded random shuffle independent of averages',unseededPolicy:drawMode==='random'?'random placement, no invented averages':'even counts, no invented averages',
+       roster:roster.slice().sort(compareId).map(copy),rosterSignature:rosterSignature(all),firstSeeds,pools:pools.map(g=>({id:g.id,name:g.name,capacity:g.capacity,players:g.players.map(copy)})),manualChanges:[]};
+     check(result);return result;
+   }
+@@ -338,7 +346,7 @@
+   if(stats.fresh&&!beautyPoolEqual_(identities,(stats.profiles||[]).map(p=>({lpid:p.lpid,name:p.name})))){
+     stats.fresh=false;stats.message='League identities changed. Refresh statistics before generating a draw.';
+   }
+-  return {...stats,identityProfiles};
++  return beautyRatingsApply_({...stats,identityProfiles});
+ }
+ function beautyPoolStatsTimeFresh_(stats,now=Date.now()){const at=Date.parse(stats?.fetchedAt);return Number.isFinite(at)&&at<=now&&now-at<300000;}
+ function beautyPoolStatsRun_(auth,force,identities){
+@@ -417,7 +425,7 @@
+     const profile=league.find(q=>q.lpid===b.lpid),entry=event.find(q=>q.tpid===b.tpid);
+     if(b.lpid&&(!profile||usedLeague.has(b.lpid))||b.tpid&&(!entry||usedEvent.has(b.tpid))||entry?.lpid&&entry.lpid!==b.lpid)beautyPoolError_('Conflicting or repeated identity mapping.');
+     if(b.lpid)usedLeague.add(b.lpid);if(b.tpid)usedEvent.add(b.tpid);
+-    return {...p,lpid:b.lpid,tpid:b.tpid,average:profile?.average??null,reason:profile?.reason||(!profile?'League identity unresolved':''),leagueCandidates:league,eventCandidates:event,linkExposed:!!entry?.lpid};
++    return {...p,lpid:b.lpid,tpid:b.tpid,average:profile?.average??null,ratingSource:profile?.source||'UNRATED',reason:profile?.reason||(!profile?'League identity unresolved':''),leagueCandidates:league,eventCandidates:event,linkExposed:!!entry?.lpid};
+   });
+ }
+ // Event format is frozen into final approval; no provider write during preview.
+@@ -500,7 +508,8 @@
+ }
+ function beautyPoolDraftChoices_(value,draw,initial=false){
+   const object=v=>v&&typeof v==='object'&&!Array.isArray(v),keys=(v,list)=>object(v)&&Object.keys(v).sort().join(',')===list;
+-  if(!keys(value,'boardChoices,boards,cardLabels,format,plannedBoards,preferredSize,scheme')||![3,4].includes(value.preferredSize)||!['preferredPlan','perBoard'].includes(value.scheme)||!['preserve','top2-rest','top2-bottom2'].includes(value.format)||typeof value.boards!=='string'||value.boards.length>1000)beautyPoolError_('Invalid saved pool settings.');
++  if(object(value)&&!Object.prototype.hasOwnProperty.call(value,'drawMode'))value={...value,drawMode:'fair'};
++  if(!keys(value,'boardChoices,boards,cardLabels,drawMode,format,plannedBoards,preferredSize,scheme')||!['fair','similar','random'].includes(value.drawMode)||![3,4].includes(value.preferredSize)||!['preferredPlan','perBoard'].includes(value.scheme)||!['preserve','top2-rest','top2-bottom2'].includes(value.format)||typeof value.boards!=='string'||value.boards.length>1000)beautyPoolError_('Invalid saved pool settings.');
+   const available=value.boards.trim()?BeautyPoolBoards.parseBoards(value.boards):[];
+   if(!Array.isArray(value.plannedBoards)||!beautyPoolEqual_(value.plannedBoards,available))beautyPoolError_('Selected boards and the draft board list differ.');
+   const result=beautyPoolCopy_(value),ids=draw.pools.map(p=>String(p.id));
+@@ -606,9 +615,9 @@
+       if(previous)storedRead(previous); // Explicit redraw never silently replaces corrupt evidence.
+       if(!stats.fresh||!beautyPoolStatsTimeFresh_(stats))beautyPoolError_('Fresh statistics required. Refresh and review again.');
+       if(input.reviewed!=='true')beautyPoolError_('Review the league and event identities before drawing.');
+-      const draw=BeautyPoolSeeding.draw({players:mappings,sizes:JSON.parse(input.sizes),seed:parseInt(Utilities.getUuid().replace(/-/g,'').slice(0,8),16),eventDate:roster.date,frozenAt:new Date().toISOString(),source:{leagueId:stats.leagueId,fetchedAt:stats.fetchedAt}});
++      const draw=BeautyPoolSeeding.draw({drawMode:JSON.parse(input.choices).drawMode,players:mappings,sizes:JSON.parse(input.sizes),seed:parseInt(Utilities.getUuid().replace(/-/g,'').slice(0,8),16),eventDate:roster.date,frozenAt:new Date().toISOString(),source:{leagueId:stats.leagueId,fetchedAt:stats.fetchedAt}});
+       const draftChoices=beautyPoolDraftChoices_(JSON.parse(input.choices),draw,true);
+-      const frozen={draw,draftChoices,drawSettings:{preferredSize:draftChoices.preferredSize,scheme:draftChoices.scheme},mappings:mappings.map(p=>({id:p.id,name:p.name,lpid:p.lpid,tpid:p.tpid,linkExposed:p.linkExposed})),rosterSignature:roster.signature,date:roster.date,eventHash:beautyPoolHash_(event),statsHash:beautyPoolHash_(stats.profiles)};
++      const frozen={draw,draftChoices,drawSettings:{drawMode:draw.drawMode,preferredSize:draftChoices.preferredSize,scheme:draftChoices.scheme},mappings:mappings.map(p=>({id:p.id,name:p.name,lpid:p.lpid,tpid:p.tpid,linkExposed:p.linkExposed})),rosterSignature:roster.signature,date:roster.date,eventHash:beautyPoolHash_(event),statsHash:beautyPoolHash_(stats.profiles)};
+       return {success:true,...responseDraft(frozen,ticketWrite(frozen))};
+     }
+     if(props.getProperty(journalKey))beautyPoolError_('A previous pool send is recorded. Inspect its audit; sending again is blocked.');
+@@ -616,7 +625,7 @@
+     if(roster.signature!==frozen.rosterSignature||roster.date!==frozen.date)beautyPoolError_('The IN roster or event date changed. These choices were rejected. Reopen the planner; the saved draw is retained for an explicit new draw.','POOL_DRAFT_ROSTER_CHANGED');
+     if(action==='pooldraftchoices'){
+       BeautyPoolSeeding.check(frozen.draw);
+-      const draftChoices=beautyPoolDraftChoices_(JSON.parse(input.choices),frozen.draw),requiresRedraw=draftChoices.preferredSize!==frozen.drawSettings?.preferredSize||draftChoices.scheme!==frozen.drawSettings?.scheme;
++      const draftChoices=beautyPoolDraftChoices_(JSON.parse(input.choices),frozen.draw),requiresRedraw=draftChoices.drawMode!==(frozen.drawSettings?.drawMode||'fair')||draftChoices.preferredSize!==frozen.drawSettings?.preferredSize||draftChoices.scheme!==frozen.drawSettings?.scheme;
+       const saved={...beautyPoolDraftUnapprove_(frozen),draftChoices,requiresRedraw};
+       return {success:true,...responseDraft(saved,ticketWrite(saved)),message:'Pool choices saved. Review again before sending.'};
+     }
+--- application/LiveHubView.html
++++ application/LiveHubView.html
+@@ -2873,6 +2873,7 @@
+         <div class="summary-card summary-in"><svg class="hub-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m7 12 3 3 7-7"/></svg><div><span>PLAYERS IN</span><strong id="inPlayerCount">0</strong></div></div><div class="summary-card summary-new" title="New players registered for the selected event"><div><span>NEW PLAYERS</span><strong id="newPlayerCount">0</strong></div></div>
+         <div id="attentionCard" class="summary-card summary-attention"><button type="button" id="attentionTile" class="attention-card-button" aria-label="Open Nakka troubleshooting"><span>NEEDS ATTENTION</span><strong id="attentionCount">0</strong></button></div>
+ <button id="registerPlayerButton" type="button">+ REGISTER PLAYER</button>
++<button id="playerAveragesButton" type="button">PLAYER AVERAGES / SPELARSNITT</button>
+       </section>
+       <p id="attentionStatus" class="attention-status sr-only" role="status">Player attention check pending.</p>
+ 
+@@ -3353,7 +3354,7 @@
+       if(!p||typeof p.id!=='string'||!p.id||p.id.length>120||ids.has(p.id)||typeof p.name!=='string'||!p.name.trim()||p.name.length>120||!['IN','OUT','STANDBY'].includes(p.status))fail('Missing or ambiguous player identity or status.');
+       ids.add(p.id);
+       if(p.average!==null&&(typeof p.average!=='number'||!Number.isFinite(p.average)||p.average<0||p.average>180))fail('An average must be a verified number or explicitly missing.');
+-      return {id:p.id,name:p.name,status:p.status,average:p.average};
++      return {id:p.id,name:p.name,status:p.status,average:p.average,...(p.ratingSource?{ratingSource:p.ratingSource}:{})};
+     });
+   }
+   const compareId=(a,b)=>a.id<b.id?-1:a.id>b.id?1:0;
+@@ -3393,13 +3394,15 @@
+   }
+   function warnings(draw){
+     const counts=draw.pools.map(g=>summary(g).unseeded),messages=[];
+-    if(Math.max(...counts)-Math.min(...counts)>1)messages.push('Manual changes have made the unseeded distribution uneven.');
++    if(draw.drawMode!=='random'&&Math.max(...counts)-Math.min(...counts)>1)messages.push('Manual changes have made the unseeded distribution uneven.');
+     const first=new Set(draw.firstSeeds),repeated=draw.pools.some(g=>g.players.filter(p=>first.has(p.id)).length>1);
+     if(repeated)messages.push('Manual changes have put first-round seeds together.');
+     if(draw.roster.some(p=>p.average===null))messages.push('Pool strength uses known averages only; unseeded players are not treated as zero.');
+     return messages;
+   }
+   function draw(options){
++    const drawMode=options?.drawMode===undefined?'fair':options.drawMode;
++    if(!['fair','similar','random'].includes(drawMode))fail('Unknown pool draw method.');
+     const all=validatePlayers(options?.players),roster=all.filter(p=>p.status==='IN');
+     if(roster.length<3||roster.length>101)fail('Seeded draws support 3–101 IN players.');
+     const sizes=options.sizes;
+@@ -3415,6 +3418,7 @@
+       group.unseededQuota++;
+     }
+     const seededCapacity=pools.map(g=>g.capacity-g.unseededQuota),firstSeeds=[];
++    if(drawMode==='fair'){
+     let placed=0,round=0;
+     while(placed<known.length){
+       const indices=pools.map((_,i)=>i);if(round%2)indices.reverse();
+@@ -3443,9 +3447,14 @@
+       if(!best)break;
+       const {a,b,x,y,delta}=best;[pools[a].players[x],pools[b].players[y]]=[pools[b].players[y],pools[a].players[x]];means[a].sum+=delta;means[b].sum-=delta;
+     }
+-    let index=0;for(const group of pools)for(let i=0;i<group.unseededQuota;i++)group.players.push(unknown[index++]);
++    }else if(drawMode==='similar'){
++      let next=0;for(const group of pools)while(group.players.length<seededCapacity[group.id])group.players.push(known[next++]);
++    }else{
++      let next=0;for(const group of pools)while(group.players.length<group.capacity)group.players.push(order[next++]);
++    }
++    let index=0;if(drawMode!=='random')for(const group of pools)for(let i=0;i<group.unseededQuota;i++)group.players.push(unknown[index++]);
+     const result={version:1,eventDate:options.eventDate,frozenAt:options.frozenAt,source:{leagueId:options.source.leagueId,fetchedAt:options.source.fetchedAt},seed:options.seed,
+-      method:'seeded snake with protected first-round seeds and bounded mean balancing',unseededPolicy:'even counts, no invented averages',
++      drawMode,method:drawMode==='fair'?'seeded snake with protected first-round seeds and bounded mean balancing':drawMode==='similar'?'adjacent verified averages':'seeded random shuffle independent of averages',unseededPolicy:drawMode==='random'?'random placement, no invented averages':'even counts, no invented averages',
+       roster:roster.slice().sort(compareId).map(copy),rosterSignature:rosterSignature(all),firstSeeds,pools:pools.map(g=>({id:g.id,name:g.name,capacity:g.capacity,players:g.players.map(copy)})),manualChanges:[]};
+     check(result);return result;
+   }
+@@ -3706,7 +3715,7 @@
+  // Save acknowledgements belong to this draw object, ticket, event and login generation.
+  function clearChoices(){if(choicesTimer!==null)root.clearTimeout(choicesTimer);choicesTimer=null;pendingChoices=null;lastSavedChoices='';}
+  function draftChoices(initial=false){
+-  const boards=selectedBoardsSafe();return {boards:host.querySelector('[data-boards]').value,plannedBoards:boards,preferredSize:Number(host.querySelector('[data-size]').value),scheme:panel.querySelector('[data-draw-scheme]').value,
++  const boards=selectedBoardsSafe();return {drawMode:panel.querySelector('[data-draw-method]').value,boards:host.querySelector('[data-boards]').value,plannedBoards:boards,preferredSize:Number(host.querySelector('[data-size]').value),scheme:panel.querySelector('[data-draw-scheme]').value,
+    format:panel.querySelector('[data-event-format]')?.value||root.beautyPoolFormatChoice||state?.formatPreset||'preserve',
+    boardChoices:initial?{}:JSON.parse(JSON.stringify(boardChoices)),cardLabels:initial?{}:JSON.parse(JSON.stringify(cardLabels))};
+  }
+@@ -3745,7 +3754,7 @@
+  }
+  function applyDraft(result){
+   clearChoices();frozen=result;approval=null;startReview=null;invalid=!!result.requiresRedraw;invalidReason=invalid?'Draw settings changed. Generate a new preview to apply them.':'';
+-  const c=result.draftChoices;host.querySelector('[data-boards]').value=c.boards;host.querySelector('[data-size]').value=String(c.preferredSize);panel.querySelector('[data-draw-scheme]').value=c.scheme;
++  const c=result.draftChoices;panel.querySelector('[data-draw-method]').value=c.drawMode||result.draw.drawMode||'fair';host.querySelector('[data-boards]').value=c.boards;host.querySelector('[data-size]').value=String(c.preferredSize);panel.querySelector('[data-draw-scheme]').value=c.scheme;
+   plannedBoards=c.plannedBoards.slice();boardChoices=JSON.parse(JSON.stringify(c.boardChoices));cardLabels=JSON.parse(JSON.stringify(c.cardLabels));root.beautyPoolFormatChoice=c.format;
+   swapped=(result.draw.manualChanges||[]).flatMap(c=>[c.playerId,c.swapWith]).filter(Boolean);lastSavedChoices=JSON.stringify(c);lastRoster=fingerprint(root.beautyHubData);if(state)state.draftTicket=result.ticket;
+  }
+@@ -3812,7 +3821,7 @@
+   el('p',needsReview?'Missing identities can be planned as Unseeded. Sending stays blocked.':'Confirm the proposed league and event identities below.',reviewCard);
+   el('p','Names propose matches. Check the LPID and event entry ID in Nakka. If Nakka does not expose the saved league link, this records your review; it does not prove that hidden link. Missing averages remain Unseeded.',details);
+   const wrap=section('div','pool-review-table-wrap',details),table=el('table',null,wrap),head=el('tr',null,el('thead',null,table));['Player','League identity (LPID)','Event entry (TPID)','Overall average'].forEach(t=>el('th',t,head));const body=el('tbody',null,table);
+-  for(const p of state.mappings.slice().sort((a,b)=>Number(!b.lpid||!b.tpid)-Number(!a.lpid||!a.tpid)||a.name.localeCompare(b.name,'sv'))){const row=el('tr',null,body);row.dataset.binding=p.id;el('td',p.name,row);select(el('td',null,row),'lpid',p.leagueCandidates,'lpid',p.lpid);select(el('td',null,row),'tpid',p.eventCandidates,'tpid',p.tpid);const avg=numeric('td',averageLabel(p.average),row);if(p.reason)el('small',p.reason,avg);}
++  for(const p of state.mappings.slice().sort((a,b)=>Number(!b.lpid||!b.tpid)-Number(!a.lpid||!a.tpid)||a.name.localeCompare(b.name,'sv'))){const row=el('tr',null,body);row.dataset.binding=p.id;el('td',p.name,row);select(el('td',null,row),'lpid',p.leagueCandidates,'lpid',p.lpid);select(el('td',null,row),'tpid',p.eventCandidates,'tpid',p.tpid);const avg=numeric('td',averageLabel(p.average)+(p.ratingSource==='ESTIMATED'?' · Estimated':''),row);if(p.reason)el('small',p.reason,avg);}
+   const confirm=el('dialog',null,box);confirm.className='pool-preview-confirm';confirm.dataset.previewConfirm='';confirm.setAttribute('aria-labelledby','poolPreviewConfirmTitle');
+   const confirmTitle=el('h3','Generate pool preview',confirm);confirmTitle.id='poolPreviewConfirmTitle';
+   el('p','This creates a Hub preview only. No Nakka changes will be sent. Generating a new preview replaces your saved unsent draw. Cancel to keep it.',confirm);
+@@ -3833,7 +3842,7 @@
+   if(!frozen){el('p','Generate a preview after reviewing player identities. No Nakka changes are sent by previewing or swapping.',box).className='pool-empty';return;}
+   const statsTitle=panel.querySelector('[data-fresh]');if(statsTitle)statsTitle.textContent='League averages frozen for this preview';
+   let allocation;try{allocation=root.BeautyPoolBoards.defaults(frozen.draw.pools,plannedBoards||selectedBoards());seedBoardChoices(frozen.draw.pools,allocation);if(invalidReason==='Choose available boards for the saved draw.'){invalid=false;invalidReason='';}}catch(e){invalid=true;invalidReason='Choose available boards for the saved draw.';approval=null;}
+-  const draw=frozen.draw,heading=section('div','pool-preview-heading',utility);el('h3','Group overview',heading);el('p','Frozen '+draw.frozenAt+' · Statistics '+draw.source.fetchedAt+' · Draw seed '+draw.seed,heading);
++  const draw=frozen.draw,heading=section('div','pool-preview-heading',utility);el('h3','Group overview',heading);el('p','Draw method: '+({fair:'Equal / Fair',similar:'Similar strength',random:'Random'}[draw.drawMode||'fair']),heading);el('p','Frozen '+draw.frozenAt+' · Statistics '+draw.source.fetchedAt+' · Draw seed '+draw.seed,heading);
+   if(invalid)el('p','REVIEW INVALIDATED — '+(invalidReason||'Preview is no longer active. Generate a new draw before sending.'),utility).className='pool-invalid';
+   const warnings=BeautyPoolSeeding.warnings(draw);if(warnings.length){const details=el('details',null,utility);details.className='pool-draw-notes';el('summary','Draw notes · '+warnings.length,details);warnings.forEach(t=>el('p',t,details));}
+   const settings=section('div','pool-preview-tools',utility),label=el('label',null,settings),colours=el('input',null,label);colours.type='checkbox';colours.checked=!!root.beautyPoolColours;label.appendChild(document.createTextNode(' Show seeding colours'));
+@@ -3864,7 +3873,7 @@
+     const list=el('ol',null,card);
+     for(const p of pool.players){const li=el('li',null,list);if(colours.checked)li.className='pool-band-'+BeautyPoolSeeding.band(p.average,thresholds);
+      const name=button(null,li,()=>openSwap(p));el('span',p.name,name);name.className='pool-player-name';name.dataset.swapPlayer=p.id;name.dataset.blocked=String(invalid||!hubAvailable);if(swapped.includes(p.id))name.dataset.swapped='true';
+-     const value=el('span',p.average===null?'—':averageLabel(p.average),name);value.setAttribute('aria-label',p.average===null?'Unseeded':'Average '+averageLabel(p.average));value.className=p.average===null?'pool-unseeded':'pool-number';}
++     const value=el('span',p.average===null?'—':averageLabel(p.average)+(p.ratingSource==='ESTIMATED'?' · Estimated':''),name);value.setAttribute('aria-label',p.average===null?'Unseeded':'Average '+averageLabel(p.average)+(p.ratingSource==='ESTIMATED'?' · Estimated':''));value.className=p.average===null?'pool-unseeded':'pool-number';}
+    }
+ 
+   }
+@@ -3890,7 +3899,7 @@
+   button('DOWNLOAD BOARD PLAN',utility,()=>{
+    const plan=root.BeautyPoolBoards.matchPlan(draw.pools,selectedBoards(),boardInput(draw.pools).choices);
+    const lines=['AIK DART · HUB BOARD PLAN',draw.eventDate,'PLANNED — NOT SENT TO NAKKA',''];
+-   for(const [i,pool]of draw.pools.entries()){const a=plan.assignments.find(a=>a.poolId===pool.id);lines.push('Pool '+(i+1)+' · Bana '+a.boards.join(' + ')+' · Rows '+a.startWave+'–'+a.endWave,...pool.players.map(p=>p.name+' · '+averageLabel(p.average)),'');}
++   for(const [i,pool]of draw.pools.entries()){const a=plan.assignments.find(a=>a.poolId===pool.id);lines.push('Pool '+(i+1)+' · Bana '+a.boards.join(' + ')+' · Rows '+a.startWave+'–'+a.endWave,...pool.players.map(p=>p.name+' · '+averageLabel(p.average)+(p.ratingSource==='ESTIMATED'?' · Estimated':'')),'');}
+    const url=URL.createObjectURL(new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'})),link=el('a',null,utility);link.href=url;link.download='Beauty-Board-Plan-'+draw.eventDate+'.txt';link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+   });
+   queueNote(draw.pools,utility);
+@@ -4055,6 +4064,9 @@
+   [3,4].forEach(n=>{const b=button(String(n),choices,()=>{size.value=String(n);settingsChanged('draw');});b.dataset.sizeChoice=String(n);b.setAttribute('aria-label',n+' players per pool');});
+   const boardsLabel=el('label','BOARDS',setup),boards=el('input',null,boardsLabel);boards.type='text';boards.maxLength=1000;boards.setAttribute('aria-label','Selected boards');boards.dataset.boards='';
+   const arrangement=el('label',null,setup);arrangement.hidden=true;const scheme=el('select',null,arrangement);scheme.dataset.drawScheme='';for(const [v,t]of [['preferredPlan','Preferred format'],['perBoard','One pool per dartboard']])el('option',t,scheme).value=v;
++  const methodLabel=el('label','Pool draw / Poollottning ',setup),method=el('select',null,methodLabel);method.dataset.drawMethod='';
++  for(const [value,label] of [['fair','Equal / Fair — Jämna grupper'],['similar','Similar strength — Liknande snitt'],['random','Random — Slumpmässigt']])el('option',label,method).value=value;
++  method.value='fair';method.addEventListener('change',()=>settingsChanged('draw'));
+   const draw=button('GENERATE PREVIEW',setup,()=>{const confirm=panel.querySelector('[data-preview-confirm]');if(!confirm)return;panel.querySelector('[data-mapping-reviewed]').checked=false;const proceed=panel.querySelector('[data-confirm-generate]');proceed.dataset.blocked='true';disable();message('Review the player identity acknowledgement in the popup.');confirm.showModal();});draw.dataset.generate='';draw.dataset.blocked='true';
+   const schemeTile=section('div','pool-scheme-tile',setup),boardSummary=section('div','pool-board-summary',schemeTile),poolSummary=section('div','pool-pools-summary',schemeTile);
+   el('span','BOARDS',boardSummary).className='label';const needed=numeric('strong','—',boardSummary);needed.className='pool-number pool-needed-number';needed.dataset.boardsNeeded='';needed.setAttribute('title','Boards used by this plan; pools may share a board.');
+@@ -6977,5 +6989,45 @@
+ })();
+ 
+ </script>
++<script>
++/* Hub-only authenticated editor. No public registration endpoint or arbitrary target. */
++(function(){
++ let openDialog=null;
++ function open(){
++  if(openDialog)return;
++  const auth=window.BeautyHubAuth,context=window.beautyHubData?.eventContext;
++  let token;try{token=auth.token();}catch(e){return;}if(!context)return;
++  const generation=auth.generation(),dialog=document.createElement('dialog');openDialog=dialog;dialog.className='message-popup';dialog.setAttribute('aria-label','Player averages');
++  const add=(tag,text)=>{const n=document.createElement(tag);if(text)n.textContent=text;dialog.appendChild(n);return n;};
++  add('h2','Player averages / Spelarsnitt');
++  add('p','Staff estimates stay active until the player has played in a completed event and final statistics are verified. Register first; wait for the Nakka identity to appear here.');
++  const label=add('label','Player / Spelare '),select=document.createElement('select');label.appendChild(select);
++  const valueLabel=add('label','Estimated three-dart average / Uppskattat snitt '),value=document.createElement('input');value.type='number';value.min='0.01';value.max='180';value.step='0.01';valueLabel.appendChild(value);
++  const detail=add('p'),status=add('p');status.setAttribute('role','status');
++  const save=add('button','Save estimate / Spara'),clear=add('button','Mark unrated / Utan snitt'),reload=add('button','Reload / Läs in igen'),close=add('button','Close / Stäng');
++  let players=[],busy=false,closed=false;
++  const valid=()=>!closed&&auth.isCurrent(generation)&&window.beautyHubData?.eventContext===context;
++  function dismiss(){closed=true;dialog.close();dialog.remove();openDialog=null;document.removeEventListener('beauty-hub-locked',dismiss);}
++  close.onclick=dismiss;dialog.addEventListener('cancel',e=>{e.preventDefault();dismiss();});document.addEventListener('beauty-hub-locked',dismiss);
++  function show(){const p=players.find(p=>p.id===select.value);value.value=p?.estimate??'';detail.textContent=p?`${p.name}: ${p.average??'—'} · ${p.source}${p.firstCompletedEvent?' · First completed event verified':''}`:'No verified player identity available yet.';save.disabled=clear.disabled=value.disabled=busy||!p?.editable;select.disabled=reload.disabled=busy;}
++  async function request(action,input={}){
++   if(!valid()){status.textContent='Event or session changed. Close and reopen.';save.disabled=clear.disabled=true;return;}
++   busy=true;show();status.textContent='Checking…';
++   try{const r=await new Promise((resolve,reject)=>{let settled=false;const finish=(e,v)=>{if(settled)return;settled=true;clearTimeout(timer);e?reject(e):resolve(v);};const timer=setTimeout(()=>finish(Error('Reply unavailable. Reload before saving again.')),60000);google.script.run.withSuccessHandler(r=>finish(null,r)).withFailureHandler(()=>finish(Error('Reply unavailable. Reload before saving again.'))).beautyHubTest('ratings:'+action,{_context:context,...input},token);});
++    if(!valid())return;if(!r?.success)throw Error(r?.error||'Could not verify the saved average.');
++    if(r.context!==context)throw Error('Event changed.');
++    const selected=select.value;players=r.players;select.replaceChildren();for(const p of players){const o=document.createElement('option');o.value=p.id;o.textContent=p.name;select.appendChild(o);}if(players.some(p=>p.id===selected))select.value=selected;
++    status.textContent=action==='save'?'Saved. Reopen Pool Planner to refresh averages. Existing draws keep their frozen averages.':'Loaded.';
++   }catch(e){if(valid()){status.textContent=e.message;players=[];select.replaceChildren();}}finally{busy=false;if(valid())show();}
++  }
++  function submit(estimate){const p=players.find(p=>p.id===select.value);if(busy||!p)return;if(estimate!==null&&(!Number.isFinite(estimate)||estimate<=0||estimate>180)){status.textContent='Enter an average greater than 0 and no more than 180.';return;}request('save',{lpid:p.id,version:p.version,estimate});}
++  select.onchange=show;save.onclick=()=>submit(value.value.trim()?Number(value.value):NaN);clear.onclick=()=>submit(null);reload.onclick=()=>request('list');
++  document.body.appendChild(dialog);dialog.showModal();request('list');
++ }
++ document.getElementById('playerAveragesButton')?.addEventListener('click',open);
++ window.BeautyPlayerAverages=Object.freeze({open});
++})();
++
++</script>
+ </body>
+ </html>
+--- application/LiveHub.gs
++++ application/LiveHub.gs
+@@ -31,8 +31,10 @@
+   // Reuse the existing authenticated statistics refresh; no Nakka call on dashboard polling.
+   let snapshot=null;try{if(beautyLiveTarget_().mode==='league')snapshot=beautyCastSnapshot_();}catch(e){}
+   const verified=!!snapshot?.fresh;
++  let ratingProfiles=[];if(snapshot&&beautyLiveTarget_().mode==='league')ratingProfiles=beautyRatingsApply_(snapshot).profiles;
+   for(const player of players){
+     const name=key(player.player||player.newPlayer),matches=verified?snapshot.profiles.filter(p=>key(p.name)===name):[];
++    const ratings=ratingProfiles.filter(p=>key(p.name)===name);if(ratings.length===1){player.effectiveAverage=ratings[0].average;player.averageSource=ratings[0].source;}
+     player.registrationOrder=player.whereFrom==='NAKKA'?null:times.has(name)?times.get(name):null;
+     player.rankingPoints=matches.length===1&&Number.isFinite(matches[0].points)?matches[0].points:null;
+   }
+@@ -55,6 +57,7 @@
+   if(typeof action==='string'&&action.startsWith('eventCreate:'))return beautyLiveEventCreateService_(action.slice(12),input,token);
+   if(typeof action==='string'&&action.startsWith('context:'))return beautyLiveContextService_(action.slice(8),input,token);
+   try{beautyContextAssert_();}catch(e){return {success:false,code:'EVENT_REVIEW_REQUIRED',error:e.message};}
++  if(typeof action==='string'&&action.startsWith('ratings:'))return beautyRatingsService_(action.slice(8),input,token);
+   if(typeof action==='string'&&action.startsWith('playerRecovery:'))return beautyLivePlayerRecoveryService_(action.slice(15),input,token);
+   if(typeof action==='string'&&action.startsWith('recovery:'))return beautyRecoveryService_(action.slice(9),input,token);
+   if(typeof action==='string'&&action.startsWith('queue:'))return beautyQueueService_(action.slice(6),input,token);
+--- application/BeautyBackground.gs
++++ application/BeautyBackground.gs
+@@ -113,6 +113,10 @@
+     run.result={kind:'import',...beautyLiveInboundScan_()};
+    }else run.result={kind:'idle'};
+   }
++  if(context.mode==='league'&&['idle','import'].includes(run.result?.kind)){
++   if(lock){lock.releaseLock();lock=null;}
++   try{run.ratings=beautyRatingsBackground_();}catch(e){run.ratings={state:'RETRY',message:'Rating verification unavailable; estimates retained.'};}
++  }
+   beautyCombinedBackgroundRequire_();run.state='FINISHED';run.finishedAt=new Date().toISOString();beautyBackgroundSave_(BEAUTY_BACKGROUND_RUN_,run);
+  }catch(error){
+   if(run&&beautyCombinedWorker_&&p.getProperty(BEAUTY_BACKGROUND_RUN_)===beautyCombinedWorker_.raw){
+--- application/BeautyReleaseEnvironment.gs
++++ application/BeautyReleaseEnvironment.gs
+@@ -18,7 +18,7 @@
+ function beautyReleaseProviderGuard_(path,payload){
+  const environment=beautyReleaseEnvironment_();if(!environment.test)return;
+  const t=environment.base;
+- const reads=new Set(['league/get?lgid='+t.leagueId,'league/entry/list?lgid='+t.leagueId,'league/stats?lgid='+t.leagueId+'&kind=stats_list','league/stats?lgid='+t.leagueId+'&kind=rank_list','tournament/get?tdid='+t.eventId,'tournament/entry/list?tdid='+t.eventId,'league/schedule/get?tdid='+t.eventId,'tournament/standings?tdid='+t.eventId,'tournament/end_group?tdid='+t.eventId]);
++ const reads=new Set(['league/get?lgid='+t.leagueId,'league/entry/list?lgid='+t.leagueId,'league/stats?lgid='+t.leagueId+'&kind=stats_list','league/stats?lgid='+t.leagueId+'&kind=rank_list','tournament/get?tdid='+t.eventId,'tournament/stats?tdid='+t.eventId+'&kind=stats_list','tournament/entry/list?tdid='+t.eventId,'league/schedule/get?tdid='+t.eventId,'tournament/standings?tdid='+t.eventId,'tournament/end_group?tdid='+t.eventId]);
+  const fail=()=>{throw Error('Release TEST permits only its fixed private Nakka event, TEST league and synthetic players.');};
+  if(payload===undefined||payload===null){if(!reads.has(path))fail();return;}
+  if(typeof payload!=='object'||Array.isArray(payload))fail();
