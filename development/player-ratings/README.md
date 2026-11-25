@@ -1,6 +1,6 @@
 # Hub provisional player averages — PR001, 25 November 2026
 
-**Development candidate only. Not installed in Google TEST or LIVE.** Builds on the closed v46 source and includes the PD001 pool method changes. No production workbook, player record, Nakka data or trigger was changed while developing this candidate.
+**Installed in private Google TEST v5 on 25 November 2026. Native acceptance pending; not installed in LIVE.** Builds on the closed v46 source and includes the PD001 pool method changes. No production workbook, player record, Nakka data or trigger was changed while developing this candidate.
 
 ## Operator workflow (proposed, pending native TEST)
 
