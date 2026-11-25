@@ -1,0 +1,12 @@
+{
+  ".gitignore": "c90b5e4e1f69c819918322951af242f69370dff8d19c9780c70ed8b522d04fb5",
+  "README.md": "25bec11f23f5764980fb106bcfbb3b8920973b827ad4917787bec4808ef481a3",
+  "aik-internal/AIKInternal.html": "b93f28b289a8fac261b8c636839df39df7b23866265913a40e8d1c70023331ac",
+  "aik-internal/PoolPlanner.js": "f8be9ef67035c029f985961662e9e359056dfa220ed65d4b56bfb7855cd0ff6b",
+  "application/LiveHubView.html": "7bc4419ac1bc9fd3773cc1bc1befea65222e07c106f60d364a5dceac6b522c68",
+  "application/LivePlanner.gs": "585d372d6540d4aeab735e9a299a77f990dc3170812f99ac3b09768c8e70ea3a",
+  "candidate.patch": "f58e1d1664e172c8f1e7c96a22f2203c7f147136b0e7f277ef0812ea53efd365",
+  "prepare.py": "210bff71a35b90671383a8535fee2e3513a52abc4c43157d766f341cfeac3b15",
+  "tests/draw.cjs": "9e0ea4a9c7b5736d3d0934226ef248805e789eb85df116ae847e15beb76b7d28",
+  "tests/internal-regression.cjs": "3d9528184701499e1c9f55674c826600c07eae7f7010a9f0dfd56bc7e31d0e9d"
+}

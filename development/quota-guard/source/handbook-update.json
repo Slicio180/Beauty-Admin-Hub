@@ -1,0 +1,26 @@
+{
+  "chapter": {
+    "id": "system-status",
+    "keywords": "system status quota allowance requests google limit cooldown reset connection usage budget paused",
+    "en": {
+      "title": "System Status and paused requests",
+      "intro": "Open System Status to see the requests recorded by this Beauty project and whether it has paused requests. Open Details only when you need more information.",
+      "steps": [
+        "If requests are paused, wait before trying again. Repeated refreshes or registrations will not restore the allowance.",
+        "A Google daily-limit message does not mean your password is wrong. There is no need to reset your password for this error.",
+        "A TEST request-limit message refers to Beauty’s own TEST safeguard. It is separate from Google’s account allowance.",
+        "After a correction, open the original player issue and use Check after correction when offered. Do not submit the player again."
+      ],
+      "notes": [
+        "The recorded count covers this project only. It is not Google’s remaining balance and does not include other projects using the same account. No recorded requests does not mean the full allowance is available.",
+        "A retry time means Beauty may try again; it is not a confirmed Google reset time. Recheck due does not prove that Google has recovered.",
+        "Opening this card reads saved status. It does not run an external connection test or automatically restart paused TEST background work."
+      ]
+    }
+  },
+  "notes": {
+    "recovery": "Last registration check describes the recorded failure, which may already have been corrected. A correct-looking status or a matching name in Nakka does not verify every part of registration. Check after correction verifies the original request before the issue can be cleared.",
+    "nakka": "Automatic list comparisons run every two minutes while signed in and the Hub is visible. Manual comparisons and checks after relevant player changes can run sooner. If the event is busy or changing, the comparison waits for its normal schedule; the last verified result is retained.",
+    "live": "If an update fails, the last good list or competition view is retained with a connection or stale-data warning. Treat it as a previous snapshot. Player-list retries slow down during repeated failures and return to their normal interval after success. Update now does not start a second player-list request while one is still pending."
+  }
+}

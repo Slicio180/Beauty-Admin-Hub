@@ -1,0 +1,20 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert/strict'),path=require('path');
+const candidate=process.argv[2],source=fs.readFileSync(path.join(candidate,'BeautyQuota.gs'),'utf8');
+let props={},writes=0,fetches=0,now=1000000000,authorized=false;
+const c=vm.createContext({Date:{now:()=>now},PropertiesService:{getScriptProperties:()=>({getProperty:k=>props[k]||null,setProperty:()=>writes++})},beautyReleaseEnvironment_:()=>({test:true}),beautyLiveLoginGuard_(){},beautyHubAuthSessionRequire_:()=>{if(!authorized)throw Error('unauthorized')},UrlFetchApp:{fetch:()=>fetches++}});vm.runInContext(source,c);vm.runInContext(fs.readFileSync(path.join(candidate,'LiveHub.gs'),'utf8'),c);
+assert.equal(c.beautyHubTest('quota',{},'bad').code,'AUTH_REQUIRED');authorized=true;
+assert.equal(c.beautyHubTest('quota',{},'staff').measured,false);
+props.BEAUTY_FETCH_USAGE_V1=JSON.stringify({version:1,buckets:[{hour:now,count:12}],blockedUntil:now+60000,lastQuotaErrorAt:now});
+assert.equal(c.beautyHubTest('quota',{},'staff').state,'COOLDOWN');now+=60001;assert.equal(c.beautyQuotaStatus_().state,'RECHECK_DUE');
+props.BEAUTY_FETCH_USAGE_V1=JSON.stringify({version:1,buckets:[{hour:now,count:2000}],blockedUntil:0});assert.equal(c.beautyQuotaStatus_().state,'TEST_LIMIT');assert.equal(writes,0);assert.equal(fetches,0);
+console.log('PASS authenticated status route, no fetches/writes, empty meter, cooldown, recheck, TEST limit');
+(async()=>{
+ const nodes={},events={},docEvents={};for(const id of ['beautyUsageState','beautyUsageCount','beautyUsageMessage','beautyUsageDetail','systemStatusNavButton'])nodes[id]={textContent:'',addEventListener:(event,f)=>events[event]=f};
+ let generation=1,calls=0,result={success:true,state:'COUNTING',measured:true,attempted:12,test:true,testBudget:2000,checkedAt:now,backgroundState:'PAUSED'},pending;
+ const b=vm.createContext({Date,document:{getElementById:id=>nodes[id],addEventListener:(event,f)=>docEvents[event]=f},BeautyHubAuth:{generation:()=>generation,token:()=> 'token',isCurrent:g=>g===generation},BeautyHubServices:{quota:async()=>{calls++;return result}}});
+ const html=fs.readFileSync(path.join(candidate,'LiveHubView.html'),'utf8'),start=html.indexOf('/* One property-only read');vm.runInContext(html.slice(start,html.indexOf('/* Navigation only.',start)),b);
+ assert.equal(calls,0);await events.click();assert.equal(calls,1);assert(nodes.beautyUsageCount.textContent.includes('12'));assert(nodes.beautyUsageMessage.textContent.includes('not Google'));
+ result={...result,state:'COOLDOWN',blockedUntil:now+30000};await events.click();assert.equal(nodes.beautyUsageState.textContent,'Requests paused');
+ b.BeautyHubServices.quota=()=>new Promise(r=>pending=r);const task=events.click();generation++;docEvents['beauty-hub-locked']();pending(result);await task;assert.equal(nodes.beautyUsageCount.textContent,'');assert.equal(nodes.beautyUsageState.textContent,'Sign in to view usage.');
+ b.BeautyHubServices.quota=async()=>{throw Error('offline')};await events.click();assert(nodes.beautyUsageState.textContent.includes('unavailable'));console.log('PASS card opens on demand, renders usage/cooldown, clears on sign-out, rejects stale replies and handles failure');
+})().catch(e=>{console.error(e);process.exitCode=1});

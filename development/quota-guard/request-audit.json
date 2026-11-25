@@ -1,0 +1,72 @@
+[
+  {
+    "file": "BeautyRestoreOriginal.gs",
+    "line": 12,
+    "method": "fetch"
+  },
+  {
+    "file": "LiveEventSwitch.gs",
+    "line": 10,
+    "method": "fetch"
+  },
+  {
+    "file": "LiveEventSwitch.gs",
+    "line": 19,
+    "method": "fetch"
+  },
+  {
+    "file": "LiveEventSwitch.gs",
+    "line": 25,
+    "method": "fetch"
+  },
+  {
+    "file": "LiveEventSwitch.gs",
+    "line": 139,
+    "method": "fetch"
+  },
+  {
+    "file": "LiveHub.gs",
+    "line": 3,
+    "method": "fetch"
+  },
+  {
+    "file": "LiveHub.gs",
+    "line": 47,
+    "method": "fetch"
+  },
+  {
+    "file": "LiveLoginAuth.gs",
+    "line": 65,
+    "method": "fetch"
+  },
+  {
+    "file": "LiveNakkaCheck.gs",
+    "line": 15,
+    "method": "fetch"
+  },
+  {
+    "file": "LivePreflight.gs",
+    "line": 22,
+    "method": "fetch"
+  },
+  {
+    "file": "LivePreflight.gs",
+    "line": 94,
+    "method": "fetch"
+  },
+  {
+    "file": "LiveRegister.gs",
+    "line": 116,
+    "method": "fetch"
+  },
+  {
+    "file": "LiveRegister.gs",
+    "line": 145,
+    "method": "fetch"
+  },
+  {
+    "file": "LiveRemove.gs",
+    "line": 49,
+    "method": "fetchAll"
+  }
+]

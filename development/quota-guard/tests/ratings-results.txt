@@ -1,0 +1,31 @@
+PASS estimate overrides first-dart live average
+PASS missing estimate remains unrated during first event
+PASS running cannot retire estimate
+PASS no play cannot retire estimate
+PASS no darts cannot retire estimate
+PASS wrong player cannot retire estimate
+PASS wrong league cannot retire estimate
+PASS invalid totals cannot retire estimate
+PASS unknown status cannot retire estimate
+PASS completion requires stable final sample and interval
+PASS changed statistics reset confirmation
+PASS reopened event invalidates confirmation
+PASS staff saves estimate in dedicated sheet
+PASS live stats never replace saved estimate
+PASS stale editor cannot overwrite
+PASS mark unrated preserves lifecycle and history
+PASS outage retains saved history
+PASS unauthenticated action cannot create sheet
+PASS changed context cannot save
+PASS bad estimate cannot create sheet
+PASS unknown player rejected
+PASS client cannot supply verification or workbook
+PASS completed established results cannot be overwritten
+PASS late estimate allowed when all darts are from current open event
+PASS standalone Internal is explicitly isolated
+PASS common pool resolver uses saved estimate and provenance
+PASS background transitions only after two completed samples and blocks future edits
+PASS background outage does not remove estimate
+PASS final verification keeps estimate audit
+PASS all candidate scripts parse
+30 rating checks passed

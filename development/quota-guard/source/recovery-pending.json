@@ -1,0 +1,14 @@
+[
+  [
+    "else if(p.tone==='unknown'||p.tone==='orange'){status.textContent='Checking…';mark.className='beauty-simple-mark checking';mark.textContent='';detail.hidden=true;history.hidden=true;return;}",
+    "else if(p.tone==='unknown'||p.tone==='orange'){status.textContent='Check pending';detail.textContent=p.problem||'The saved request is awaiting verification. Do not register the player again.';const refresh=addButton('Check saved status',()=>run('read'));refresh.disabled=busy;}"
+  ],
+  [
+    "detail.textContent=busy?'Still waiting for a reply.':'The current result could not be confirmed.';const retry=addButton('Resolve issue',()=>run('read'));",
+    "detail.textContent=notice||(busy?'Still waiting for a reply.':'The current result could not be confirmed.');const retry=addButton('Check saved status',()=>run('read'));"
+  ],
+  [
+    "detail.textContent=shortReasons[p.code]||'The Nakka entry could not be confirmed.';",
+    "detail.textContent=p.problem||shortReasons[p.code]||'The Nakka entry could not be confirmed.';"
+  ]
+]

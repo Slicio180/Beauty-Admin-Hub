@@ -1,0 +1,20 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert/strict');
+const source=fs.readFileSync(process.argv[2]+'/LiveRegistrationQueue.gs','utf8');
+let now='2026-11-25T21:00:00Z',target={date:'2026-11-24',revision:'test',eventId:'event',mode:'league'},jobs=[],saved=[],props={},released=0;
+class Clock extends Date{constructor(v){super(arguments.length?v:now)}static now(){return Date.parse(now)}}
+const formatDate=(date,zone,format)=>{const p=Object.fromEntries(new Intl.DateTimeFormat('sv-SE',{timeZone:zone,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).formatToParts(date).map(x=>[x.type,x.value]));const day=p.year+'-'+p.month+'-'+p.day;return format==='yyyy-MM-dd'?day:day+'T'+p.hour+':'+p.minute+':'+p.second};
+const c=vm.createContext({Date:Clock,console:{log(){}},Utilities:{formatDate,getUuid:()=> 'a'.repeat(32),newBlob:s=>({getBytes:()=>Buffer.from(s)})},PropertiesService:{getScriptProperties:()=>({getProperties:()=>props,getProperty:k=>props[k]||null})},LockService:{getScriptLock:()=>({tryLock:()=>true,releaseLock:()=>released++})},beautyLiveLoginGuard_(){},beautyLiveRegistrationActor_:()=>({uid:'staff',source:'HUB'}),beautyLiveTarget_:()=>target,beautyLiveRegistrationKey_:s=>s.toLowerCase(),beautyLiveRegistrationEvent_(){},beautyLiveRegistrationSheets_:()=>({master:{},tonightRows:[]}),beautyLiveRegistrationRows_:()=>[],BeautyLiveNameResolution_:{resolve:()=>({success:true,player:'Test Player',isNew:true})},beautyContextAssert_(){}});
+vm.runInContext(source,c);c.beautyQueueRead_=()=>jobs;c.beautyQueueHash_=JSON.stringify;c.beautyQueueLegacyBlock_=()=>{};c.beautyQueueCapacity_=()=>{};c.beautyQueueSave_=j=>{saved.push(j);props['BEAUTY_REG_JOB_'+j.id]=JSON.stringify(j)};c.beautyQueueBackgroundReady_=()=>true;
+const input=()=>({eventDate:target.date,selectedName:'Test Player',consent:'NEJ, JAG GODKÄNNER INTE'});
+let r=c.beautyQueueAcceptWork_(input(),'staff');assert.equal(r.code,'QUEUE_EVENT_DATE_PASSED');assert.match(r.error,/organiser.*correct event/);assert.equal(saved.length,0);assert.equal(released,1);
+for(const date of ['2026-11-25','2026-11-30']){target.date=date;r=c.beautyQueueAcceptWork_(input(),'staff');assert.equal(r.accepted,true);assert.equal(saved.at(-1).createdAt,new Clock().toISOString());}
+// Stockholm has already crossed midnight although UTC has not.
+now='2026-11-25T23:05:00Z';target.date='2026-11-25';const before=saved.length;assert.equal(c.beautyQueueAcceptWork_(input(),'staff').code,'QUEUE_EVENT_DATE_PASSED');assert.equal(saved.length,before);
+const replay={...saved[0],event:{...saved[0].event,revision:target.revision},fingerprint:JSON.stringify([target.revision,'HUB',input()]),uid:'staff',state:'REVIEW'};jobs=[replay];r=c.beautyQueueAcceptWork_(input(),'staff');assert.equal(r.queueState,'REVIEW');assert.equal(r.queueId,replay.id);assert.equal(saved.length,before);
+jobs=[{...replay,fingerprint:'different'}];assert.equal(c.beautyQueueAcceptWork_(input(),'staff').code,'PLAYER_QUEUED');assert.equal(saved.length,before);
+// Real worker preflight uses acceptance time, not processing time, across midnight.
+let response;c.beautyQueueAssertWorker_=()=>{};c.beautyLiveRegistrationList_=()=>[];c.beautyLiveRegistrationSheets_=()=>({master:{},store:{}});c.beautyQueueStep_=(j,name,read,write)=>{assert.equal(name,'response');write();throw Error('captured')};c.beautyLiveRegistrationAppend_=(range,row)=>{response=row};
+const job={player:'Test Player',isNew:true,event:{mode:'league'},steps:{},input:input(),source:'HUB',createdAt:'2026-11-25T22:59:00Z'};
+assert.throws(()=>c.beautyQueueRun_(job),/captured/);assert.equal(Math.floor(response[0]),Math.floor((Date.parse('2026-11-25T23:59:00Z')-Date.UTC(1899,11,30))/86400000));
+job.createdAt='invalid';delete job.responseSerial;assert.throws(()=>c.beautyQueueRun_(job),/acceptance time needs review/);
+console.log('PASS stale event zero new writes, current/future acceptance, Stockholm midnight, saved replay, existing request precedence and delayed-worker timestamp');

@@ -1,0 +1,2 @@
+PASS authenticated status route, no fetches/writes, empty meter, cooldown, recheck, TEST limit
+PASS card opens on demand, renders usage/cooldown, clears on sign-out, rejects stale replies and handles failure

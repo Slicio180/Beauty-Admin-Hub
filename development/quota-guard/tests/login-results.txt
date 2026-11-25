@@ -1,0 +1,7 @@
+PASS Service invoked too many times for one day: urlfetch. -> AUTH_QUOTA_PAUSED
+PASS URL_FETCH_COOLDOWN -> AUTH_QUOTA_PAUSED
+PASS TEST_FETCH_BUDGET_EXHAUSTED -> AUTH_TEST_BUDGET
+PASS Network unavailable -> AUTH_VERIFY_CONNECTION
+PASS QUOTA_METER_BUSY -> AUTH_VERIFY_CONNECTION
+PASS Authorization required scope -> AUTH_VERIFY_PERMISSION
+PASS real browser RPC messages distinguish quota, TEST budget, connection, access and HTTP failures; success unchanged

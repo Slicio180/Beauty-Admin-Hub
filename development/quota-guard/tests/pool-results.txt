@@ -1,0 +1,1 @@
+PASS: 108 Hub draw scenarios, legacy Fair equivalence, browser/server parity, script syntax, saved choices, swaps, and Internal singles/doubles.

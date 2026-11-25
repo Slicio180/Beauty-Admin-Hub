@@ -1,0 +1,16 @@
+PASS single and batch count requests, preserve responses
+PASS daily failure opens shared cooldown without replaying writes
+PASS ordinary failure does not claim quota exhaustion or retry
+PASS TEST budget rejects whole batch before making requests
+PASS LIVE has no TEST request cap
+PASS rolling counts expire conservatively
+PASS no requests if metering lock unavailable
+PASS caller-owned lock is never released
+PASS meter releases only its own lock on failure
+PASS meter stores no URL credentials or body and reports unknown global balance
+PASS TEST worker requires explicit unexpired two-hour lease
+PASS expired TEST clock exits before reading event or queue; live reaches normal work
+PASS health display cache shares reads, preserves timestamp, isolates context and expires
+PASS all installed fetch sites use meter; entire candidate parses
+14 synchronous checks passed
+PASS dashboard exponential backoff, five-minute cap, manual refresh, success reset, last-good retention, in-flight deduplication and stale session suppression

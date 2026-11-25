@@ -1,0 +1,14 @@
+[
+  [
+    "  beautyQueueLegacyBlock_(resolved.player);",
+    "  const acceptedTime=new Date(),registrationDay=Utilities.formatDate(acceptedTime,'Europe/Stockholm','yyyy-MM-dd');\n  if(registrationDay>t.date)return {success:false,code:'QUEUE_EVENT_DATE_PASSED',error:'The selected event date has passed. Ask the organiser to select the correct event before registering. No new request was accepted.'};\n  beautyQueueLegacyBlock_(resolved.player);"
+  ],
+  [
+    "createdAt:new Date().toISOString(),dispatch:",
+    "createdAt:acceptedTime.toISOString(),dispatch:"
+  ],
+  [
+    "const wall=Utilities.formatDate(new Date(),'Europe/Berlin',\"yyyy-MM-dd'T'HH:mm:ss\");",
+    "// Retain the accepted date if a queued request is processed after midnight.\n  const acceptedTime=new Date(j.createdAt);if(!Number.isFinite(acceptedTime.getTime()))throw Error('Registration acceptance time needs review.');\n  const wall=Utilities.formatDate(acceptedTime,'Europe/Stockholm',\"yyyy-MM-dd'T'HH:mm:ss\");"
+  ]
+]
