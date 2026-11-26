@@ -1,0 +1,89 @@
+--- a/LiveHubView.html
++++ b/LiveHubView.html
+@@ -3233,14 +3233,25 @@
+   const response = data => ({ ok: true, json: async () => data?.success === false && data.error ? { ...data, error: data.code?.startsWith('QUEUE_')||data.code==='PLAYER_QUEUED'?data.error:errors[data.code] || 'The LIVE operation could not be completed. Reload and check the result.' } : data });
+   let queue = Promise.resolve(),epoch=0,eventContext='legacy';
+   const reads=new Set(),inflight=new Map();
++  let registrationNoticeRevision=0;
++  const removedRegistrationNotices=new Map();
++  const registrationNoticeKey=(player,date,context)=>JSON.stringify([player,date,context]);
++  function registrationRemoved(player,date,context) {
++    if(context!==eventContext)return;
++    removedRegistrationNotices.set(registrationNoticeKey(player,date,context),++registrationNoticeRevision);
++    const notice=document.getElementById('hubRegistrationResult');
++    if(notice&&notice.dataset.player===player&&notice.dataset.eventDate===date&&notice.dataset.eventContext===context)notice.remove();
++  }
+   function updateEventContext(next) {
+     if(next&&next!==eventContext){
+       document.getElementById('hubRegistrationResult')?.remove();
+       eventContext=next;
++      removedRegistrationNotices.clear();
+     }
+   }
+-  function registrationSaved(result,generation,context=eventContext) {
++  function registrationSaved(result,generation,context=eventContext,startedRevision=registrationNoticeRevision) {
+     if(!BeautyHubAuth.isCurrent(generation)||context!==eventContext)return;
++    if((removedRegistrationNotices.get(registrationNoticeKey(result.player,result.registrationEventDate,context))||0)>startedRevision)return;
+     const header=document.getElementById('registerPlayerButton')?.parentElement;
+     if(!header)return;
+     document.getElementById('hubRegistrationResult')?.remove();
+@@ -3326,7 +3337,7 @@
+     return response(await rpc(page === 'hubdata' ? 'read' : page === 'eventcontrol' ? 'eventload' : page === 'hubstatus' ? 'status' : page === 'eventprepare' ? 'eventprepare' : page === 'eventsave' ? 'eventsave' : 'register', input));
+   }
+   async function context(action,input={}){const data=await rpc('context:'+action,input);if(!data?.success)throw Error(data?.error||'Event selection unavailable.');updateEventContext(data.context);return data;}
+-  return Object.freeze({ endpoint, mode, statusWrites: true, request, registrationSaved, context, quota:()=>rpc('quota',{}), queue:(action,input={})=>rpcNow('queue:'+action,{...input,_context:input._context||eventContext},{token:BeautyHubAuth.token(),generation:BeautyHubAuth.generation()}), recovery:(action,input={})=>rpcNow('recovery:'+action,{...input,_context:input._context||eventContext},{token:BeautyHubAuth.token(),generation:BeautyHubAuth.generation()}), consent:input=>rpc('consent',input) });
++  return Object.freeze({ endpoint, mode, statusWrites: true, request, registrationSaved, registrationRemoved, registrationNoticeRevision:()=>registrationNoticeRevision, context, quota:()=>rpc('quota',{}), queue:(action,input={})=>rpcNow('queue:'+action,{...input,_context:input._context||eventContext},{token:BeautyHubAuth.token(),generation:BeautyHubAuth.generation()}), recovery:(action,input={})=>rpcNow('recovery:'+action,{...input,_context:input._context||eventContext},{token:BeautyHubAuth.token(),generation:BeautyHubAuth.generation()}), consent:input=>rpc('consent',input) });
+ })();
+ 
+ // LIVE player opener: server verifies the signed-in session and fixed event.
+@@ -4786,8 +4797,8 @@
+   if(nav) {
+     const live = BeautyHubServices.mode === 'test';
+     nav.setAttribute('data-health', live ? 'ok' : 'waiting');
+-    nav.setAttribute('title', live ? 'Google Sheets — LIVE connected — status review' : 'Google Sheets — offline demo; no connection checked');
+-    nav.setAttribute('aria-label', 'System Status — ' + (live ? 'LIVE connected — status review' : 'offline demo'));
++    nav.setAttribute('title', live ? 'Google Sheets — connected — status review' : 'Google Sheets — offline demo; no connection checked');
++    nav.setAttribute('aria-label', 'System Status — ' + (live ? 'connected — status review' : 'offline demo'));
+   }
+ 
+ 
+@@ -4813,12 +4824,12 @@
+ 
+   if (text) {
+     text.textContent =
+-      'LIVE CONNECTED';
++      'CONNECTED';
+   }
+ 
+   if (message) {
+     message.textContent =
+-      'Live registration spreadsheet — status changes enabled';
++      'Selected event spreadsheet — status changes enabled';
+   }
+ }
+ 
+@@ -4892,6 +4903,7 @@
+   const registrationEventContext=window.beautyHubData?.eventContext||'legacy';
+   const registrationEventDate=BeautyHubServices.mode==='test'?(window.beautyHubData?.eventDate||''):'';
+   const registrationGeneration=BeautyHubServices.mode==='test'?BeautyHubAuth.generation():null;
++  const registrationNoticeRevision=BeautyHubServices.registrationNoticeRevision?.();
+ 
+   const overlay =
+     document.createElement('div');
+@@ -5703,7 +5715,7 @@
+ 
+       await loadBeautyHubData();
+ 
+-      BeautyHubServices.registrationSaved?.(result,registrationGeneration,registrationEventContext);
++      BeautyHubServices.registrationSaved?.(result,registrationGeneration,registrationEventContext,registrationNoticeRevision);
+ 
+ 
+     } catch (error) {
+@@ -6282,6 +6294,7 @@
+     try{
+      const started=Date.now(),result=await send('removesave',{...input,ticket:preview.ticket,confirmed:'true'});record('remove',result,started);if(!valid())return;
+      if(result.success&&result.readbackVerified&&sameEvent()){
++      BeautyHubServices.registrationRemoved?.(input.player,input.eventDate,context);
+       body.replaceChildren();panel.setAttribute('aria-busy','false');showMark(body,'success');heading('Removed');
+       // Keep the diagnostic available on demand without adding text to the success screen.
+       retainReport();
