@@ -1,0 +1,25 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert/strict');
+const root=process.argv[2];
+let config, test=true, triggers=[], broken=false;
+const now=Date.now();
+const c=vm.createContext({Date,PropertiesService:{getScriptProperties:()=>({getProperty:()=>broken?'invalid':JSON.stringify(config)})},ScriptApp:{getScriptId:()=> 'test-project',getProjectTriggers:()=>triggers},Session:{getEffectiveUser:()=>({getEmail:()=> 'owner@example.invalid'})},beautyReleaseEnvironment_:()=>({test})});
+vm.runInContext(fs.readFileSync(root+'/BeautyQuota.gs','utf8'),c);
+vm.runInContext(fs.readFileSync(root+'/LiveRegistrationQueue.gs','utf8'),c);
+const valid=()=>{config={state:'ENABLED',projectId:'test-project',owner:'owner@example.invalid',triggerUid:'clock',testExpiresAt:now+60000};triggers=[{getHandlerFunction:()=> 'beautyCombinedBackgroundClock',getUniqueId:()=> 'clock'}];test=true;broken=false;};
+let checks=0;
+function check(label,mutate,expected){valid();mutate();assert.equal(c.beautyQueueBackgroundReady_(),expected,label);checks++;}
+check('valid TEST worker',()=>{},true);
+check('expired TEST permission',()=>config.testExpiresAt=now-1,false);
+check('missing TEST expiry',()=>delete config.testExpiresAt,false);
+check('non-numeric expiry',()=>config.testExpiresAt=String(now+60000),false);
+check('paused worker',()=>config.state='PAUSED',false);
+check('missing configuration',()=>config=null,false);
+check('malformed configuration',()=>broken=true,false);
+check('wrong project',()=>config.projectId='other',false);
+check('wrong owner',()=>config.owner='other',false);
+check('no trigger',()=>triggers=[],false);
+check('duplicate triggers',()=>triggers.push(triggers[0]),false);
+check('wrong trigger identity',()=>config.triggerUid='other',false);
+check('LIVE does not need TEST expiry',()=>{test=false;delete config.testExpiresAt;},true);
+check('LIVE still requires enabled worker',()=>{test=false;config.state='PAUSED';},false);
+console.log('PASS '+checks+' worker eligibility cases using actual queue and quota functions');
