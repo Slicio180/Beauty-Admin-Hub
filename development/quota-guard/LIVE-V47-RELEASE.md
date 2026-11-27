@@ -1,3 +1,5 @@
+> Current deployed UI baseline: [LIVE v53](LIVE-V53-RELEASE.md), accepted by the owner on 27 November 2026. The v47 functional acceptance record below is retained for history.
+
 # Beauty Hub LIVE v47 — 27 November 2026
 
 Version 47 is deployed at the existing LIVE URL. Final signed-in Hub acceptance passed on 27 November at approximately 18:17 Stockholm. Runtime release acceptance is complete. Publication of these release notes was approved by the owner.
